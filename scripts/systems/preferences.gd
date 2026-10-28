@@ -1,14 +1,14 @@
 extends Node
 signal changed
 var sensitivity := 0.0024
-var fov := 72.0
+var fov := 68.0
 var volume := 0.7
 var effects_volume := 0.8
 var music_volume := 0.35
 var pixel_scale := 2
 var grain := 0.025
 var vhs := 0.0
-var camera_distance := 2.5
+var camera_distance := 2.2
 var fullscreen := false
 func _ready() -> void:
 	var c := ConfigFile.new()

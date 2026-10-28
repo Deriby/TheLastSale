@@ -10,7 +10,9 @@ func _ready() -> void:
 		body.set_meta("interaction", self)
 func prompt(player: Node3D) -> String:
 	match kind:
-		"crate": return "Pegar caixa" if player.carried == null else "Mãos ocupadas • Q para soltar"
+		"crate":
+			if player.carried!=null:return "Mãos ocupadas • Q para soltar"
+			return "Pegar caixa" if global_position.distance_to(player.global_position)<=.95 else "Aproxime-se para pegar a caixa"
 		"fridge":
 			if player.carried != null and Session.stage in [1,2] and Session.carried_id.begins_with("stock_"):
 				return "Colocar bebidas" if open else "Abrir geladeira"
@@ -22,10 +24,10 @@ func prompt(player: Node3D) -> String:
 		"switch": return "Acender luz" if not open else "Apagar luz"
 	return "Interagir"
 func activate(player: Node3D) -> bool:
-	if busy: return false
+	if busy or player.motion.action_active: return false
 	match kind:
 		"crate":
-			if player.carried != null:return false
+			if player.carried != null or global_position.distance_to(player.global_position)>.95:return false
 			player.pick_up(get_parent(),identity)
 			return true
 		"fridge":
@@ -33,8 +35,7 @@ func activate(player: Node3D) -> bool:
 				get_parent().toggle();open=get_parent().opened
 				return true
 			if Session.deliver(Session.carried_id):
-				player.consume_carried()
-				get_parent().replenish()
+				player.consume_carried(get_parent().to_global(Vector3(.12,.88,.10)),get_parent().replenish)
 				return true
 		"door":
 			open = not open

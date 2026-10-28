@@ -1,49 +1,50 @@
-# Validação — 28/10/2026
+# Validação — revisão 0.3 — 28/10/2026
 
 ## Ambiente
 
-Godot **4.4.1.stable.official.49a5bc7b6**, Linux x86_64. Runtime Compatibility / OpenGL 4.5 por Mesa llvmpipe em display virtual Xorg. Blender 4.3.2, renderização Cycles CPU. O arquivo do editor e os templates oficiais foram conferidos contra os SHA-512 publicados no release Godot 4.4.1; TLS permaneceu habilitado.
+Godot **4.4.1.stable.official.49a5bc7b6**, Linux x86_64. Runtime Compatibility / OpenGL 4.5 por Mesa llvmpipe em display virtual Xorg. Blender 4.3.2, renderização Cycles CPU. O editor e os templates oficiais foram conferidos contra os SHA-512 publicados no release Godot 4.4.1.
 
-Revisão 0.2: cenário reconstruído, 60 verificações e imagens comparativas em [depot_v02](depot_v02/README.md).
+Esta revisão substitui Felps pelo upload correto e trabalha os personagens e a câmera. As imagens e gravações estão em [characters_v03](characters_v03/README.md). A reconstrução anterior do cenário está em [depot_v02](depot_v02/README.md).
 
-## Integração executada
+## Integração
 
-Comando: `./tools/test.sh`. Resultado da revisão final do projeto: **60/60 verificações passaram**, saída 0, sem erro de GDScript ou avisos de objetos de áudio retidos na finalização. O teste roda em save isolado e percorre o fluxo real, não apenas a existência de arquivos.
+`./tools/test.sh`: **71/71 verificações passaram**, saída 0. O preset Linux QA exportado também executou **71/71**, saída 0. As duas execuções usam saves temporários e percorrem o fluxo real com física, sem erros de GDScript ou objetos retidos na finalização.
 
 Cobertura:
 
-- Cena principal e física do chão; seis rigs importados, materiais e texturas dos três protagonistas.
-- Entrada WASD, corrida comparada à caminhada, agachamento e colisão reduzida.
-- Eventos de roda e movimento de mouse encaminhados à viewport; não só atribuição de distância em script.
-- SpringArm bloqueado por parede e transição contínua até primeira pessoa/volta.
-- Alvo acessível sobre o balcão e tecla E iniciando o diálogo com Felps.
-- Porta bloqueando/desbloqueando passagem física.
-- Caixas presas ao ponto de transporte, duas reposições e colocação persistente no palete.
+- Cena principal, chão físico, seis rigs importados, materiais e texturas.
+- 23 clipes de Deryk importados, expansão da caixa torácica em repouso, base dos pés mais estreita e novo Felps com cabeça separada.
+- Entrada WASD, corrida, aceleração e colisão reduzida no agachamento.
+- Roda e movimento de mouse encaminhados à viewport.
+- SpringArm junto à parede, recolhimento lateral do ombro, volume da lente fora da parede e transição entre terceira/primeira pessoa com corpo visível.
+- Interação sobre o balcão e gestos de Felps enquanto fala.
+- Porta bloqueando e liberando passagem física.
+- Rejeição de alcance a caixas distantes; alcance inicial antes da fixação, transporte junto aos punhos, reposição visível e colocação persistente no palete.
 - Rejeição de caixa errada e bloqueio do aviso antes das condições narrativas.
-- Clientes atravessando a rua/loja com física, seleção, caixa, pagamento e saída; os sete estados do ciclo são observados, sem pular waypoints.
-- Aviso posterior às tarefas e às duas primeiras compras, diálogo, ruído e inspeção final.
-- Gravação/restauração do checkpoint, posição, caixas consumidas e pausa do relógio.
+- Clientes atravessando rua/loja, escolhendo bebida, pagando e saindo; observação dos sete estados sem pular waypoints.
+- Aviso, diálogo, ruído e inspeção final condicionados à progressão.
+- Gravação/restauração de checkpoint, posição, caixas e produtos; pausa do relógio narrativo.
 
-Os clientes foram simulados com tempo acelerado no teste; a velocidade normal permanece no jogo. A geometria de câmera foi conferida por física e imagens; isso não substitui um playtest extensivo de todos os cantos do mapa.
+Os clientes são simulados com tempo acelerado no teste; a velocidade normal permanece no jogo. A câmera foi conferida por física e por capturas. Isso não substitui um playtest extensivo de cada canto do mapa.
 
-## Revisão dos assets
+## Rigs e movimentos
 
-`tools/validate_rigs.py` reimportou os GLBs exportados no Blender, aplicou idle, caminhada, corrida, agachamento e transporte, verificou coordenadas finitas e limites de deformação e gerou folhas de poses. As folhas foram inspecionadas visualmente para os três protagonistas. Pesos sem vértices não vinculados: zero. A revisão não certifica todas as poses possíveis nem todos os clipes solicitados para a campanha; animações procedurais ainda pedem acabamento e contato fino dos pés/mãos.
+`tools/rig_characters.py` deriva Deryk e Felps a partir dos originais, mantendo UVs e a identidade dos modelos. Os dois têm 19 ossos, pesos normalizados sem vértices sem influência, duas malhas de renderização (cabeça/corpo), aproximadamente 12 mil triângulos e texturas de cor 1024². Enemy e os três clientes mantêm os assets anteriores.
 
-SHA-256 dos três GLBs originais comparado com os uploads: arquivos idênticos, registrados em `original_checksums.json`. As fotografias e o briefing também foram preservados.
+`tools/validate_rigs.py` reimporta os GLBs, verifica deformações finitas e limites de volume e renderiza repouso, caminhada, corrida, agachamento e transporte. As folhas finais foram inspecionadas para Deryk, Felps e Enemy. Dados: `rig_report.json` e `rig_validation.json`.
 
-Capturas reais desta versão em `screens/`: menu, entrada, área de vendas, vista da frente, estoque e clientes. `screens/rig_Dery.png`, `rig_Felps.png` e `rig_Enemy.png` mostram, da esquerda para a direita, idle, caminhada, corrida, agachamento e transporte.
+`tools/measure_motion.py` amostra 41 instantes de 13 clipes em cada um dos dois protagonistas: 1.066 poses. Todas as deformações amostradas são finitas. A maior penetração da sola foi 7,4 mm; o maior afastamento do piso durante apoio amostrado foi 11,2 mm. O limite de regressão de penetração é 12 mm. São medidas em piso plano, sem certificar todo giro ou terreno. Resultados por clipe em `characters_v03/motion_metrics.json`.
 
-## Exportação
+`tests/motion_review.tscn` gravou 38 segundos do controlador real, com os modelos se deslocando sobre piso marcado. A revisão também capturou Felps no caixa, transporte, primeira pessoa e corredor no jogo completo. Vídeo e GIFs estão em `characters_v03`; a execução gráfica final não apresentou erros de script.
 
-Preset **Windows Desktop**, Godot 4.4.1, x86_64: exportação release de `.exe` + `.pck`. O PCK inclui `resources/warning.json`, cenas, scripts, modelos, texturas e sons; ferramentas, testes e originais de alta resolução ficam fora do pacote Windows.
+SHA-256 dos originais ativos em `original_checksums.json`. Deryk e Enemy permanecem idênticos aos uploads anteriores. O novo Felps é idêntico ao upload desta revisão; o Felps substituído permanece integralmente arquivado. Histórico em `characters_v03/source_history.json`.
 
-Um segundo preset **Linux QA** inclui a suíte de integração para conferir os recursos empacotados, além da execução a partir do projeto. O resultado dessa execução é registrado em `packed_test_result.txt`.
+## Exportação e repetição
 
-O executável Windows **não foi executado** nesta máquina Linux. Não foram medidos FPS de hardware real, validada compatibilidade Windows 7/8 ou realizada publicação do ambiente. O driver virtual emitiu aviso de ausência de controle de V-Sync; isso não é erro de GDScript. A importação headless inicial também emitiu avisos de thumbnails do renderer dummy; a revisão gráfica posterior carregou os assets.
+Preset Windows Desktop, Godot 4.4.1, x86_64: release de `.exe` + `.pck`. O pacote inclui recursos de movimento e diálogo, cenas, scripts, modelos, texturas e sons. Ferramentas, testes, documentos e originais de alta resolução ficam fora do Windows.
 
-## Repetição e registros
+O preset Linux QA inclui a suíte para verificar os recursos empacotados. Registros finais: `test_result.txt` (projeto) e `packed_test_result.txt` (Linux exportado). O ZIP Windows e seu SHA-256 estão em `downloads/windows`.
 
-`tools/setup_cloud.sh` foi executado após a instalação e novamente usado para preparar as exportações. A importação é repetível; não regenera nem sobrescreve modelos originais. `tools/test.sh` guarda saves apenas em um diretório temporário removido ao final. Nenhuma credencial extra é necessária.
+O executável Windows **não foi executado nesta máquina Linux**. Não foram medidos FPS de hardware real ou validados Windows 7/8. O display virtual avisa que não permite controlar V-Sync. No sandbox, o editor headless também registra falha ao abrir seus listeners de depuração; a exportação termina e o pacote Linux passa na integração. Esses registros não são erros de GDScript do jogo.
 
-Registros da execução final do projeto em `test_result.txt`; da exportação Linux em `packed_test_result.txt`; informações quantitativas dos rigs em `rig_report.json` e `rig_validation.json`.
+`tools/setup_cloud.sh` prepara importação e templates; não regenera originais. `tools/test.sh` remove os saves temporários ao terminar. As animações são procedurais e ainda pedem acabamento artístico em dedos, giros, contatos e atendimento; não há rig facial ou captura de movimento.

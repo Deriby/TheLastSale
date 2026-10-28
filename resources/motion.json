@@ -1,0 +1,46 @@
+{
+  "durations": {
+    "idle": 8,
+    "idle_shift": 6,
+    "idle_look": 5,
+    "idle_adjust": 4,
+    "idle_tired": 4,
+    "walk": 1,
+    "walk_back": 1,
+    "strafe_left": 1,
+    "strafe_right": 1,
+    "run": 1,
+    "crouch_idle": 6,
+    "crouch_walk": 1,
+    "carry": 6,
+    "carry_walk": 1,
+    "pickup": 1.25,
+    "place": 1.0,
+    "put_down": 1.25,
+    "talk": 5,
+    "cashier": 6,
+    "cashier_idle": 7,
+    "look": 5,
+    "startled": 1.4,
+    "attack": 1.1
+  },
+  "strides": {
+    "walk": 1.12,
+    "walk_back": 0.8,
+    "strafe_left": 0.82,
+    "strafe_right": 0.82,
+    "run": 2.35,
+    "crouch_walk": 0.62,
+    "carry_walk": 0.86
+  },
+  "oneshots": [
+    "attack",
+    "idle_adjust",
+    "idle_look",
+    "idle_shift",
+    "pickup",
+    "place",
+    "put_down",
+    "startled"
+  ]
+}

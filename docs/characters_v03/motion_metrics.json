@@ -1,0 +1,162 @@
+{
+  "Dery": {
+    "idle": {
+      "maximum_sole_penetration_m": 0.0,
+      "lowest_support_sole_m": -0.0,
+      "highest_support_sole_m": 0.00036,
+      "finite": true
+    },
+    "idle_shift": {
+      "maximum_sole_penetration_m": 0.0,
+      "lowest_support_sole_m": -0.0,
+      "highest_support_sole_m": 0.00036,
+      "finite": true
+    },
+    "idle_look": {
+      "maximum_sole_penetration_m": 0.0,
+      "lowest_support_sole_m": -0.0,
+      "highest_support_sole_m": 0.00036,
+      "finite": true
+    },
+    "walk": {
+      "maximum_sole_penetration_m": 0.00406,
+      "lowest_support_sole_m": -0.00406,
+      "highest_support_sole_m": 0.00626,
+      "finite": true
+    },
+    "run": {
+      "maximum_sole_penetration_m": 0.0074,
+      "lowest_support_sole_m": -0.0074,
+      "highest_support_sole_m": 0.00406,
+      "finite": true
+    },
+    "carry": {
+      "maximum_sole_penetration_m": 0.0,
+      "lowest_support_sole_m": -0.0,
+      "highest_support_sole_m": 0.00036,
+      "finite": true
+    },
+    "carry_walk": {
+      "maximum_sole_penetration_m": 0.00088,
+      "lowest_support_sole_m": -0.00088,
+      "highest_support_sole_m": 0.00746,
+      "finite": true
+    },
+    "crouch_idle": {
+      "maximum_sole_penetration_m": 0.0,
+      "lowest_support_sole_m": -0.0,
+      "highest_support_sole_m": 0.00036,
+      "finite": true
+    },
+    "crouch_walk": {
+      "maximum_sole_penetration_m": 0.00089,
+      "lowest_support_sole_m": -0.00089,
+      "highest_support_sole_m": 0.00542,
+      "finite": true
+    },
+    "pickup": {
+      "maximum_sole_penetration_m": 0.00358,
+      "lowest_support_sole_m": -0.00358,
+      "highest_support_sole_m": 0.00036,
+      "finite": true
+    },
+    "put_down": {
+      "maximum_sole_penetration_m": 0.00361,
+      "lowest_support_sole_m": -0.00361,
+      "highest_support_sole_m": 0.00036,
+      "finite": true
+    },
+    "cashier": {
+      "maximum_sole_penetration_m": 0.0,
+      "lowest_support_sole_m": -0.0,
+      "highest_support_sole_m": 0.00036,
+      "finite": true
+    },
+    "talk": {
+      "maximum_sole_penetration_m": 0.0,
+      "lowest_support_sole_m": -0.0,
+      "highest_support_sole_m": 0.00036,
+      "finite": true
+    }
+  },
+  "Felps": {
+    "idle": {
+      "maximum_sole_penetration_m": 0.0,
+      "lowest_support_sole_m": -0.0,
+      "highest_support_sole_m": 0.0,
+      "finite": true
+    },
+    "idle_shift": {
+      "maximum_sole_penetration_m": 0.0,
+      "lowest_support_sole_m": -0.0,
+      "highest_support_sole_m": 0.0,
+      "finite": true
+    },
+    "idle_look": {
+      "maximum_sole_penetration_m": 0.0,
+      "lowest_support_sole_m": -0.0,
+      "highest_support_sole_m": -0.0,
+      "finite": true
+    },
+    "walk": {
+      "maximum_sole_penetration_m": 0.00616,
+      "lowest_support_sole_m": -0.00616,
+      "highest_support_sole_m": 0.0112,
+      "finite": true
+    },
+    "run": {
+      "maximum_sole_penetration_m": 0.00569,
+      "lowest_support_sole_m": -0.00569,
+      "highest_support_sole_m": 0.00175,
+      "finite": true
+    },
+    "carry": {
+      "maximum_sole_penetration_m": 0.0,
+      "lowest_support_sole_m": -0.0,
+      "highest_support_sole_m": -0.0,
+      "finite": true
+    },
+    "carry_walk": {
+      "maximum_sole_penetration_m": 0.00122,
+      "lowest_support_sole_m": -0.00122,
+      "highest_support_sole_m": 0.00746,
+      "finite": true
+    },
+    "crouch_idle": {
+      "maximum_sole_penetration_m": 0.0,
+      "lowest_support_sole_m": -0.0,
+      "highest_support_sole_m": -0.0,
+      "finite": true
+    },
+    "crouch_walk": {
+      "maximum_sole_penetration_m": 0.0008,
+      "lowest_support_sole_m": -0.0008,
+      "highest_support_sole_m": 0.00543,
+      "finite": true
+    },
+    "pickup": {
+      "maximum_sole_penetration_m": 0.00362,
+      "lowest_support_sole_m": -0.00362,
+      "highest_support_sole_m": -0.0,
+      "finite": true
+    },
+    "put_down": {
+      "maximum_sole_penetration_m": 0.0036,
+      "lowest_support_sole_m": -0.0036,
+      "highest_support_sole_m": -0.0,
+      "finite": true
+    },
+    "cashier": {
+      "maximum_sole_penetration_m": 0.0,
+      "lowest_support_sole_m": -0.0,
+      "highest_support_sole_m": 0.0,
+      "finite": true
+    },
+    "talk": {
+      "maximum_sole_penetration_m": 0.0,
+      "lowest_support_sole_m": -0.0,
+      "highest_support_sole_m": -0.0,
+      "finite": true
+    }
+  }
+}

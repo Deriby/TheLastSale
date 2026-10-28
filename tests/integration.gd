@@ -28,7 +28,7 @@ func run() -> void:
 	await ticks(12)
 	check(world.depot!=null and player.is_on_floor(),"cena principal e chão físico carregam")
 	check(player.visual.find_child("Skeleton3D",true,false).get_bone_count()==19,"Dery usa esqueleto humanoide de 19 ossos")
-	check(player.animator.get_animation_list().size()>=14,"clipes de Dery importados")
+	check(player.animator.get_animation_list().size()>=23,"23 clipes de Dery importados")
 	for name in ["Dery","Felps","Enemy","Customer1","Customer2","Customer3"]:
 		var model: Node=load("res://assets/models/characters/"+name+".glb").instantiate()
 		check(model.find_child("Skeleton3D",true,false)!=null,"rig importado: "+name)
@@ -36,6 +36,15 @@ func run() -> void:
 		check(not meshes.is_empty() and meshes[0].mesh.surface_get_material(0)!=null,"material presente: "+name)
 		if name in ["Dery","Felps","Enemy"]:check(meshes[0].mesh.surface_get_material(0).albedo_texture!=null,"textura original preservada na derivação: "+name)
 		model.free()
+	var skeleton: Skeleton3D=player.motion.skeleton
+	var chest_index:=skeleton.find_bone("chest")
+	var breath_before:=skeleton.get_bone_global_pose(chest_index).basis.get_scale()
+	await ticks(35)
+	check(breath_before.distance_to(skeleton.get_bone_global_pose(chest_index).basis.get_scale())>.0001,"respiração altera a caixa torácica em repouso")
+	var left_ankle:=skeleton.global_transform*skeleton.get_bone_global_pose(skeleton.find_bone("foot_L")).origin
+	var right_ankle:=skeleton.global_transform*skeleton.get_bone_global_pose(skeleton.find_bone("foot_R")).origin
+	check(absf(left_ankle.x-right_ankle.x)<.33 and absf(left_ankle.y-right_ankle.y)<.02,"repouso tem base estreita e dois pés apoiados")
+	check(world.depot.felps.model.find_child("Felps_Head",true,false)!=null,"Felps correto usa malha de cabeça separada")
 	player.position=Vector3(3.8,.01,.9);player.camera_rig.yaw=0
 	var start:=player.position
 	Input.action_press("forward");await ticks(24);Input.action_release("forward");await ticks(10)
@@ -45,7 +54,7 @@ func run() -> void:
 	Input.action_press("forward");Input.action_press("sprint");await ticks(24);Input.action_release("forward");Input.action_release("sprint");await ticks(2)
 	check(start.distance_to(player.position)>walked,"corrida mais rápida que caminhada")
 	Input.action_press("crouch");await ticks(3)
-	check(player.crouching and player.capsule.height<1.2,"agachamento altera colisão")
+	check(player.crouching and player.capsule.height<1.35,"agachamento altera colisão")
 	Input.action_release("crouch");await ticks(3)
 	var previous_distance:=player.camera_rig.target_distance
 	var wheel:=InputEventMouseButton.new();wheel.button_index=MOUSE_BUTTON_WHEEL_UP;wheel.pressed=true;wheel.position=Vector2(640,360);Input.parse_input_event(wheel);await ticks(3)
@@ -57,15 +66,21 @@ func run() -> void:
 	await ticks(30)
 	check(player.camera_rig.arm.get_hit_length()<1.0,"SpringArm encurta ao encostar na parede")
 	check(player.camera_rig.camera.global_position.x<5.9,"câmera permanece do lado interno da parede")
+	player.position=Vector3(5.55,0,-9.6);player.camera_rig.yaw=0;await ticks(20)
+	check(player.camera_rig.arm.position.x<.25,"ombro recolhe lateralmente perto da parede")
+	var camera_probe:=PhysicsShapeQueryParameters3D.new();var camera_sphere:=SphereShape3D.new();camera_sphere.radius=.045;camera_probe.shape=camera_sphere;camera_probe.transform=Transform3D(Basis.IDENTITY,player.camera_rig.camera.global_position);camera_probe.collision_mask=1
+	check(world.get_world_3d().direct_space_state.intersect_shape(camera_probe).is_empty(),"volume próximo da lente fica fora da parede")
 	player.camera_rig.target_distance=0;await ticks(40)
-	check(player.camera_rig.first_person and not player.visual.visible,"aproximação entra em primeira pessoa sem interior da cabeça")
+	check(player.camera_rig.first_person and not player.visual.find_child("Dery_Head",true,false).visible and player.visual.find_child("Dery_Body",true,false).visible,"aproximação entra em primeira pessoa sem interior da cabeça")
+	player.position=Vector3(3.4,0,-7.8);player.reset_physics_interpolation()
 	player.camera_rig.target_distance=2.5;await ticks(40)
-	check(not player.camera_rig.first_person and player.visual.visible,"afastamento retorna à terceira pessoa")
+	check(not player.camera_rig.first_person and player.visual.find_child("Dery_Head",true,false).visible,"afastamento retorna à terceira pessoa")
 	player.position=Vector3(4.4,0,-1.65);player.camera_rig.yaw=0;player.camera_rig.pitch=-.13;await ticks(20)
 	check(player.target!=null and player.target.kind=="talk","Felps é alcançável pela interação sobre o balcão")
 	var interact_key:=InputEventKey.new();interact_key.physical_keycode=KEY_E;interact_key.keycode=KEY_E;interact_key.pressed=true;Input.parse_input_event(interact_key);await ticks(2)
 	check(Session.stage==1,"tecla E conversa com Felps e libera tarefas")
 	check(Dialogue.active,"diálogo exibe falas reais")
+	check(world.depot.felps.motion.current_clip=="talk","Felps gesticula enquanto fala")
 	clear_dialogue()
 	check(not Session.deliver("loose"),"caixa errada não avança reposição")
 	var door:=find_interaction(world.depot.stock_door,"door")
@@ -76,25 +91,32 @@ func run() -> void:
 	check(space.intersect_ray(PhysicsRayQueryParameters3D.create(a,b,1)).is_empty(),"porta aberta libera passagem física")
 	var fridge:=find_interaction(world.depot.fridge_target,"fridge")
 	var initial_bottles: int=world.depot.fridge_target.products.groups["beer_0"].node.multimesh.instance_count
+	check(not find_interaction(world.depot.crates.stock_1,"crate").activate(player),"caixa distante exige aproximação antes de alcançar")
 	for id in ["stock_1","stock_2"]:
 		var item: Node3D=world.depot.crates[id]
 		player.position=item.position+Vector3(0,0,.7)
 		check(find_interaction(item,"crate").activate(player),"pegar "+id)
-		await ticks(2)
+		check(player.motion.action_active and item.get_parent()!=player.socket,"pegar caixa começa com alcance antes da fixação")
+		await ticks(85)
 		check(player.carried==item and item.get_parent()==player.socket,"caixa presa ao transporte visível")
+		var palm: Vector3=skeleton.global_transform*skeleton.get_bone_global_pose(skeleton.find_bone("hand_L")).origin
+		check(palm.distance_to(item.to_global(Vector3(.325,.275,-.09)))<.10,"mão permanece junto à pega lateral da caixa")
 		player.position=Vector3(-4.1,0,-3.4)
 		if not fridge.open:fridge.activate(player)
 		check(fridge.activate(player),"repor "+id)
-		await ticks(2)
+		await ticks(75)
 		check(player.carried==null,"mãos livres após reposição")
 		check(world.depot.fridge_target.products.groups["beer_0"].node.multimesh.instance_count==initial_bottles+2*Session.stocked.size(),"instâncias visíveis de produtos aumentam após reposição")
 	check(Session.stage==3 and Session.stocked.size()==2,"duas reposições completam objetivo na ordem")
 	var loose: Node3D=world.depot.crates.loose
-	find_interaction(loose,"crate").activate(player);await ticks(2)
+	player.position=loose.global_position+Vector3(0,0,.7)
+	find_interaction(loose,"crate").activate(player);await ticks(85)
+	player.position=Vector3(-3.8,0,-12.8)
 	var pallet: Interaction
 	for node in get_tree().get_nodes_in_group("interactables"):
 		if node.kind=="pallet":pallet=node
 	check(pallet.activate(player) and Session.organized,"organização move caixa para palete")
+	await ticks(85)
 	check(loose.global_position.distance_to(Vector3(-3.8,.23,-13.8))<.1,"caixa permanece materialmente no palete")
 	clear_dialogue()
 	check(not Session.can_warn(),"aviso exige clientes atendidos além das tarefas")

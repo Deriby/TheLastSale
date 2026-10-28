@@ -77,15 +77,7 @@ func build_stock() -> void:
 	Geo.sign_text(old_door,"SEM ACESSO",Vector3(0,1.65,.08),22)
 	interact(old_door,"note")
 func build_staff() -> void:
-	felps=Node3D.new();felps.name="Felps";add_child(felps);felps.position=Vector3(4.4,0,-3.9)
-	var model: Node3D=load("res://assets/models/characters/Felps.glb").instantiate();felps.add_child(model)
-	var ap: AnimationPlayer=model.find_child("AnimationPlayer",true,false)
-	if ap:
-		for key in ap.get_animation_list():
-			if key.contains("cashier"):
-				ap.get_animation(key).loop_mode=Animation.LOOP_LINEAR;ap.play(key)
-	var body:=StaticBody3D.new();felps.add_child(body)
-	var col:=CollisionShape3D.new();var shape:=CapsuleShape3D.new();shape.height=1.75;shape.radius=.25;col.shape=shape;col.position.y=.87;body.add_child(col)
+	felps=FelpsActor.new();felps.name="Felps";add_child(felps);felps.position=Vector3(4.4,0,-3.47)
 	var talk:=interact(felps,"talk")
 	for collider in counter.find_children("*","CollisionObject3D",true,false):collider.set_meta("interaction",talk)
 func restore_state(player: DepotPlayer) -> void:
@@ -94,5 +86,5 @@ func restore_state(player: DepotPlayer) -> void:
 			crates[id].queue_free()
 		elif id=="loose" and Session.organized:
 			crates[id].position=Vector3(-3.8,.23,-13.8)
-		elif id==Session.carried_id:player.pick_up(crates[id],id)
+		elif id==Session.carried_id:player.pick_up(crates[id],id,true)
 	for i in Session.stocked.size():fridge_target.replenish(i)

@@ -22,7 +22,7 @@ func _ready() -> void:
 	street=Street.new();street.name="Street";add_child(street)
 	depot=Depot.new();depot.name="Depot";add_child(depot)
 	navigation=AisleNavigation.new();navigation.configure(depot.blockers+street.blockers)
-	player=DepotPlayer.new();player.name="Dery";add_child(player);player.position=navigation.nearest_walkable(Session.saved_position)
+	player=DepotPlayer.new();player.name="Dery";add_child(player);player.position=navigation.nearest_walkable(Session.saved_position);player.reset_physics_interpolation();player.camera_rig.reset_follow()
 	sound=Soundscape.new();add_child(sound)
 	depot.restore_state(player)
 	Session.event_triggered.connect(on_event)
@@ -33,7 +33,7 @@ func _ready() -> void:
 	if anim:
 		for key in anim.get_animation_list():
 			if key.contains("idle"):anim.get_animation(key).loop_mode=Animation.LOOP_LINEAR;anim.play(key)
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if not active:return
 	Session.world_seconds+=delta
 	if customer==null and Session.stage>0 and Session.stage<6 and not Dialogue.active:

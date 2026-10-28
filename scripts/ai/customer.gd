@@ -15,6 +15,7 @@ var product: MeshInstance3D
 var destination:=Vector3.ZERO
 var blocked_time:=0.0
 func _ready() -> void:
+	add_to_group("customers")
 	collision_layer=2;collision_mask=1|2
 	var col:=CollisionShape3D.new();var shape:=CapsuleShape3D.new();shape.radius=.25;shape.height=1.7;col.shape=shape;col.position.y=.85;add_child(col)
 	visual=load("res://assets/models/characters/Customer%d.glb"%(appearance%3+1)).instantiate();add_child(visual)

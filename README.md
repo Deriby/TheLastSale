@@ -2,15 +2,23 @@
 
 Demonstração jogável em **Godot 4.4.1 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP. Esta entrega estabelece a primeira base e uma rotina narrativa curta; não é a campanha de 1h30–2h30.
 
-## Revisão 0.2 — interior do depósito
+## Revisão 0.3 — Deryk, Felps e câmera
 
-A reconstrução do interior recebeu gôndolas abastecidas por categoria, geladeiras contínuas com portas e produtos recuados, expositores, engradados azuis, caixa detalhado, treliças e luminárias suspensas. [Veja as imagens de antes/depois e a relação com as fotos](docs/depot_v02/README.md). A câmera, os personagens e a rua continuam na base anterior.
+O Felps foi substituído pelo modelo correto enviado nesta revisão e recebeu rig. Deryk e Felps agora têm postura de repouso com braços próximos do corpo, respiração, transferência de peso, pequenos olhares e gestos. Caminhada e corrida acompanham a distância percorrida; pegar e transportar caixas usa as mãos animadas. A câmera recolhe o ombro perto das paredes e permite ver o corpo em primeira pessoa.
+
+[Veja as gravações, comparação de poses e notas da etapa 2](docs/characters_v03/README.md).
+
+![Deryk e Felps — revisão 0.3](docs/characters_v03/idle.png)
+
+## Revisão anterior — interior do depósito
+
+A reconstrução 0.2 do interior recebeu gôndolas abastecidas por categoria, geladeiras contínuas com portas e produtos recuados, expositores, engradados azuis, caixa detalhado, treliças e luminárias suspensas. [Veja as imagens de antes/depois e a relação com as fotos](docs/depot_v02/README.md).
 
 ![Interior do depósito — revisão 0.2](docs/depot_v02/entrance.png)
 
 ## Jogar
 
-**[Baixar o jogo para Windows x64 (ZIP, 34 MB)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/windows/A_Ultima_Venda_Windows_x64.zip)**
+**[Baixar o jogo 0.3 para Windows x64 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/windows/A_Ultima_Venda_Windows_x64.zip)**
 
 O pacote está versionado neste repositório em [`downloads/windows`](downloads/windows). Extraia o ZIP antes de abrir o jogo. A verificação SHA-256 está ao lado do arquivo.
 
@@ -52,14 +60,15 @@ Os objetivos e legendas orientam o percurso. A ordem narrativa depende de tarefa
 - Trecho de rua com calçadas, casas, portões, postes/fios e carros; noite com luzes econômicas e atmosfera sonora original sintetizada.
 - Dery com CharacterBody3D, aceleração, corrida, agachamento e câmera de ombro com SpringArm e transição de distância.
 - Os três modelos enviados preservados integralmente em `assets/models/originals/`; derivados animados em `assets/models/characters/`.
-- Rigs básicos de 19 ossos, pesos normalizados, textura reduzida para 512² e 14 clipes procedurais por personagem. Não equivalem a todas as animações específicas da campanha.
+- Deryk e Felps: rigs de 19 ossos, pesos revisados, texturas 1024², cabeça separada para primeira pessoa e 23 clipes procedurais cada. Enemy mantém a derivação anterior, com 14 clipes e textura 512².
+- Respiração, variações de repouso, olhar contextual de Felps, passada ajustada ao deslocamento real e correção curta dos pés para desníveis. Caixas acompanham os punhos; pegar exige aproximação e tem alcance antes da fixação.
 - Felps no caixa e três clientes modulares originais, com A* local, colisões e ciclo de compra completo.
 - Duas reposições, organização do estoque, conversas, cliente preocupado e ruído final condicionado à progressão.
 - Menu, pausa, legendas, objetivos, checkpoint/continuar e configurações persistentes. Resolução interna ajustável, dithering, granulação, VHS e interface em resolução plena.
 
 ## Organização
 
-`scenes/main` contém a entrada; `scenes/world/props` contém cenas reutilizáveis. `scripts/world` constrói os módulos do cenário; `scripts/player` e `scripts/camera` cuidam de controle e visão; `scripts/interactions` mantém os comportamentos contextuais; `scripts/ai` contém navegação e clientes; `scripts/systems` mantém sessão, diálogo, som, preferências e interface. O diálogo do aviso é configurável em `resources/warning.json`.
+`scenes/main` contém a entrada; `scenes/world/props` contém cenas reutilizáveis. `scripts/world` constrói os módulos do cenário; `scripts/player`, `scripts/animation` e `scripts/camera` cuidam de controle, movimento e visão; `scripts/interactions` mantém os comportamentos contextuais; `scripts/ai` contém navegação e clientes; `scripts/systems` mantém sessão, diálogo, som, preferências e interface. O diálogo do aviso é configurável em `resources/warning.json`.
 
 `Session` publica sinais de ações/progressão e grava checkpoints JSON versionados. `Dialogue` usa fila, avanço automático/manual e sinais de apresentação, deixando o jogador se mover. A navegação usa grade A* de 25 cm com obstáculos inflados pelo raio dos personagens; não depende de um bake de editor. Camadas: 1 cenário, 2 personagens, 3 reservada para interação.
 
@@ -67,7 +76,7 @@ Os objetivos e legendas orientam o percurso. A ordem narrativa depende de tarefa
 
 As referências e aproximações estão em [docs/REFERENCIAS.md](docs/REFERENCIAS.md). O estoque, a posição exata do caixa, profundidades e medidas não foram medidos. Não se afirma uma réplica arquitetônica exata.
 
-As animações são uma base procedural revisada, ainda precisam de direção artística, contato fino dos pés/mãos e clipes específicos (morte, dano, atendimento detalhado). Os clientes têm diversidade básica de roupa/cabelo/pele, mas pedem acabamento artístico para aproximar o detalhe dos protagonistas. Não há dublagem, trilha final licenciada ou física livre de empilhamento.
+As animações receberam a primeira revisão da etapa 2. Ainda precisam de acabamento artístico nas curvas, dedos, contato durante giros e atendimento; não há captura de movimento, animação facial, sincronização labial ou todos os clipes da campanha (morte, dano). A correção dos pés cobre pequenos desníveis, sem planejamento de passos sobre obstáculos. Os clientes mantêm seus rigs anteriores. Não há dublagem, trilha final licenciada ou física livre de empilhamento.
 
 O Enemy está importado e rigado, mas **a IA de perseguição, esconderijos, câmeras de segurança, alternância de protagonistas e demais capítulos não foram implementados**. A porta antiga continua fechada; o ruído final é a conclusão desta demonstração. O save é de checkpoint: caixas soltas sem conclusão de objetivo retornam às posições iniciais; a caixa carregada e tarefas concluídas são restauradas.
 
@@ -77,9 +86,11 @@ Não foram medidos 60 FPS em PCs modestos nem testados binários em Windows real
 
 - `./tools/test.sh`: integração headless, isolando os saves em diretório temporário.
 - `./tools/godot.sh --audio-driver Dummy res://tests/visual_review.tscn`: capturas em `/tmp` com display configurado.
-- `blender -b -t 4 --python tools/rig_characters.py -- "$PWD"`: regenera os três derivados, sem sobrescrever originais.
+- `blender -b -t 4 --python tools/rig_characters.py -- "$PWD"`: regenera Deryk e o Felps correto com os movimentos de `tools/humanoid_motion.py`, sem sobrescrever originais. `tools/rig_characters_legacy.py` regenera apenas Enemy.
 - `blender -b -t 4 --python tools/make_customers.py -- "$PWD"`: regenera os clientes originais.
 - `blender -b -t 4 --python tools/validate_rigs.py -- "$PWD"`: verifica poses exportadas e gera folhas de revisão em `/tmp/rig-review`.
+- `blender -b -t 4 --python tools/measure_motion.py -- "$PWD"`: amostra as solas em 13 clipes por protagonista e registra contato com o chão.
+- `./tools/godot.sh --fixed-fps 30 --write-movie /tmp/motion.avi res://tests/motion_review.tscn`: grava 38 segundos de movimento com display disponível.
 - `python tools/make_depot_textures.py`: regenera a arte original dos produtos e superfícies do depósito (Python com Pillow).
 - `python tools/make_textures.py`: regenera texturas e sons originais determinísticos.
 
