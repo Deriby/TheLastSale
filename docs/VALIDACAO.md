@@ -1,14 +1,14 @@
-# Validação — revisão 0.4.0 — 28/10/2026
+# Validação — revisão 0.5.0 — 28/10/2026
 
 ## Ambiente
 
 Godot **4.4.1.stable.official.49a5bc7b6**, Linux x86_64. Runtime Compatibility / OpenGL 4.5 por Mesa llvmpipe em display virtual Xorg. Blender 4.3.2, renderização Cycles CPU. O editor e os templates oficiais foram conferidos contra os SHA-512 publicados no release Godot 4.4.1.
 
-Esta revisão reconstrói a fachada, os imóveis vizinhos e o perfil físico da rua a partir das sete capturas externas fornecidas. Imagens do pacote exportado, referências e passeio de câmera estão em [exterior_v04](exterior_v04/README.md). Os rigs e a correção dos equipamentos da revisão 0.3.1 foram mantidos; seu registro está em [fixes_v031](fixes_v031/README.md). O registro do novo Felps está em [characters_v03](characters_v03/README.md), e a reconstrução do interior em [depot_v02](depot_v02/README.md).
+Esta revisão corrige o balcão e as vistas internas pelas quatro novas fotos, acrescenta detalhes de trabalho e da rua e introduz neblina no horizonte. Imagens e passeio com áudio em [scene_v05](scene_v05/README.md). O exterior anterior está em [exterior_v04](exterior_v04/README.md). Os rigs e a correção dos equipamentos da revisão 0.3.1 foram mantidos; seu registro está em [fixes_v031](fixes_v031/README.md). O registro do novo Felps está em [characters_v03](characters_v03/README.md), e a reconstrução do interior em [depot_v02](depot_v02/README.md).
 
 ## Integração
 
-`./tools/test.sh`: **78/78 verificações passaram**, saída 0. O preset Linux QA exportado também executou **78/78**, saída 0, iniciado fora da pasta do projeto com `--main-pack` apontando ao PCK exportado. As duas execuções usam saves temporários e percorrem o fluxo real com física, sem erros de GDScript ou objetos retidos na finalização.
+`./tools/test.sh`: **81/81 verificações passaram**, saída 0. O preset Linux QA exportado também executou **81/81**, saída 0, iniciado fora da pasta do projeto com `--main-pack` apontando ao PCK exportado. As duas execuções usam saves temporários e percorrem o fluxo real com física, sem erros de GDScript ou objetos retidos na finalização.
 
 Cobertura:
 
@@ -26,12 +26,13 @@ Cobertura:
 - Aviso, diálogo, ruído e inspeção final condicionados à progressão.
 - Gravação/restauração de checkpoint, posição, caixas e produtos; pausa do relógio narrativo.
 - Checkpoint antigo na calçada exterior ajustado à nova altura do terreno.
+- Movimento físico pelo espaço antes ocupado pelo caixa da direita, atendimento de todos os clientes junto ao balcão esquerdo e restauração de checkpoint dentro da área dos móveis novos, com consulta física confirmando que o personagem fica livre de interseções.
 
 Os clientes são simulados com tempo acelerado no teste; a velocidade normal permanece no jogo. A câmera foi conferida por física e por capturas. Isso não substitui um playtest extensivo de cada canto do mapa.
 
 ## Rigs e movimentos
 
-Os assets de personagens não foram alterados na 0.4.0. Os testes de integração acima foram repetidos; as medições Blender e gravações desta seção são o registro da revisão 0.3.1.
+Os assets de personagens não foram alterados na 0.5.0. Felps apenas inicia com seu clipe de trabalho existente e fica orientado ao novo balcão. Os testes de integração acima foram repetidos; as medições Blender e gravações desta seção são o registro da revisão 0.3.1.
 
 `tools/rig_characters.py` deriva Deryk e Felps a partir dos originais, mantendo UVs e a identidade dos modelos. Os dois têm 21 ossos, com cintura e peito superior articulados, pesos normalizados sem vértices sem influência, duas malhas de renderização (cabeça/corpo), aproximadamente 12 mil triângulos e texturas de cor 1024². Enemy e os três clientes mantêm os assets anteriores.
 
@@ -47,7 +48,7 @@ SHA-256 dos originais ativos em `original_checksums.json`. Deryk e Enemy permane
 
 O relato do usuário é em Windows 7 / Radeon R7 200 series. As malhas estáticas agrupadas substituem MultiMesh em todas as geladeiras, gôndolas, produtos e demais lotes de cenário. São renderizadas sem interpolação física, com limites de visibilidade calculados pela geometria final. Repor bebidas atualiza apenas o grupo que mudou.
 
-`tests/retail_render_review.tscn` compara o cenário renderizado com malhas individuais, incluindo pausa e recarga. Na 0.4.0 foi repetido no pacote Linux exportado, a 144 quadros por segundo de simulação, com **3.570 malhas independentes**. Foram 59 pixels diferentes em 230.400, ou **0,0256%**, abaixo do limite de 1% com diferença de cor acima de 20/255. Capturas e registro em [exterior_v04](exterior_v04/README.md). Os testes anteriores a 30 e 144 estão preservados em `fixes_v031`. As capturas foram inspecionadas; os equipamentos aparecem completos. Não se trata de uma medição de desempenho da R7.
+`tests/retail_render_review.tscn` compara o cenário renderizado com malhas individuais, incluindo pausa e recarga. Na 0.5.0 foi repetido no pacote Linux exportado, a 144 quadros por segundo de simulação, com **3.956 malhas independentes**. Em resolução Nítida foram 12 pixels diferentes em 921.600 (**0,00130%**); em Retrô, 4 em 230.400 (**0,00174%**). Ambos ficam abaixo do limite de 1% com diferença de cor acima de 20/255. Registros em [scene_v05](scene_v05/README.md). Os resultados anteriores estão preservados em `fixes_v031` e `exterior_v04`. As capturas foram inspecionadas; os equipamentos aparecem completos. Não se trata de uma medição de desempenho da R7.
 
 A falha integral da captura enviada não foi reproduzida em Mesa llvmpipe. A correção retira o caminho de instancing dos objetos afetados. O pacote Windows continua sem execução em Windows real; não se certifica compatibilidade oficial com Windows 7.
 
@@ -57,6 +58,10 @@ A falha integral da captura enviada não foi reproduzida em Mesa llvmpipe. A cor
 
 Foram conferidos o anexo baixo, as duas entradas principais, a continuidade de parede/cobertura, o mural e os imóveis distintos dos dois lados da rua. Texturas distantes usam mipmaps, mantendo o filtro de baixa resolução. Postes, fios e detalhes arquitetônicos usam malhas estáticas agrupadas por material, sem MultiMesh. As dimensões e partes não fotografadas são aproximações descritas em [REFERENCIAS.md](REFERENCIAS.md).
 
+Na 0.5.0, `tests/scene_review.tscn` captura 13 vistas do pacote: balcão do cliente/funcionário, tampo, gaveta, interior/rua, salão, fachada, subida/descida e comparação com/sem neblina junto ao limite. A neblina é de profundidade em Compatibility, de 22 a 68 m; o chão continua até ±160 m, além do trecho explorável. A comparação foi inspecionada para verificar o desaparecimento gradual dos volumes distantes.
+
+`tests/scene_walkthrough.tscn` grava 30 segundos do cenário em execução com câmera de revisão, ventilador, rotina de Felps e sons ambientes originais. O vídeo não simula entrada do jogador. A qualidade inicial usa a resolução da janela; os modos Retrô e Econômica continuam selecionáveis, e configurações anteriores são preservadas. Detalhes, imagens e fontes em `scene_v05`.
+
 ## Exportação e repetição
 
 Preset Windows Desktop, Godot 4.4.1, x86_64: release de `.exe` + `.pck`. O pacote inclui recursos de movimento e diálogo, cenas, scripts, modelos, texturas e sons. Ferramentas, testes, documentos e originais de alta resolução ficam fora do Windows.
@@ -65,6 +70,6 @@ O preset Linux QA inclui a suíte para verificar os recursos empacotados. Regist
 
 O executável Windows **não foi executado nesta máquina Linux**. Não foram medidos FPS de hardware real ou validados Windows 7/8. O display virtual avisa que não permite controlar V-Sync. No sandbox, o editor headless também registra falha ao abrir seus listeners de depuração; a exportação termina e o pacote Linux passa na integração. Esses registros não são erros de GDScript do jogo.
 
-O log de integração do projeto contém um aviso de interpolação ao atualizar a caixa já colocada no palete fora do passo físico. A posição persistente e o restante do fluxo passaram; o aviso não é uma falha de script. Não se atribui esse aviso ao defeito visual relatado na R7.
+O log de integração do projeto contém avisos de interpolação em caixas e na dobradiça de uma geladeira durante atualizações/cargas fora do passo físico. Posições persistentes, portas e restante do fluxo passaram; os avisos não são falhas de script. Não se atribuem esses avisos ao defeito visual relatado na R7.
 
 `tools/setup_cloud.sh` prepara importação e templates; não regenera originais. `tools/test.sh` remove os saves temporários ao terminar. As animações são procedurais e ainda pedem acabamento artístico em dedos, giros, contatos e atendimento; não há rig facial ou captura de movimento.

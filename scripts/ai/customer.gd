@@ -53,8 +53,8 @@ func _physics_process(delta: float) -> void:
 	match state:
 		State.ENTERING:state=State.BROWSING;go_to(Vector3(0,0,-5.2))
 		State.BROWSING:visual.rotation.y=PI/2;state=State.SELECTING_PRODUCT;wait=3.5
-		State.SELECTING_PRODUCT:product.visible=true;state=State.GOING_TO_CHECKOUT;go_to(Vector3(3.5,0,-1.7))
-		State.GOING_TO_CHECKOUT:visual.rotation.y=PI;state=State.WAITING;checked_out.emit(self);wait=1.5
+		State.SELECTING_PRODUCT:product.visible=true;state=State.GOING_TO_CHECKOUT;go_to(CheckoutFixture.CUSTOMER_POSITION)
+		State.GOING_TO_CHECKOUT:visual.rotation.y=-PI/2;state=State.WAITING;checked_out.emit(self);wait=1.5
 		State.WAITING:
 			if warned and Dialogue.active:wait=.5
 			else:state=State.PAYING;wait=2.0

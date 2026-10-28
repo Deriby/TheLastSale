@@ -1,0 +1,6 @@
+Fonte solicitada: https://maps.app.goo.gl/PGtYSqukn4xXtTvB9
+Tentativa: 28/10/2026, usando curl -I -L --max-time 20.
+Resultado observado: HTTP/1.1 403 Forbidden; CONNECT tunnel failed, response 403.
+Não houve navegação adicional no Maps.
+Fontes visuais usadas: sete capturas de Street View e sete fotos internas
+em docs/reference_photos.zip, mais quatro fotos anexadas à conversa.

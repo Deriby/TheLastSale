@@ -8,11 +8,14 @@ void fragment() {
  vec2 uv=SCREEN_UV;
  uv.x+=sin(uv.y*180.0+TIME*2.0)*vhs*0.0015;
  vec3 color=texture(screen_texture,uv).rgb;
+ float lightness=dot(color,vec3(.2126,.7152,.0722));
+ color=mix(vec3(lightness),color,.92);
+ color*=mix(vec3(.94,.98,1.02),vec3(1.025,1.005,.965),smoothstep(.04,.72,lightness));
  float noise=hash(floor(FRAGCOORD.xy)+floor(TIME*18.0));
  color+=(noise-.5)*grain;
  float dither=mod(floor(FRAGCOORD.x)+mod(floor(FRAGCOORD.y),2.0)*2.0,4.0)/4.0;
- color=floor(color*47.0+dither)/47.0;
- color*=1.0-.20*pow(length((SCREEN_UV-.5)*1.1),1.5);
+ color=floor(color*95.0+dither)/95.0;
+ color*=1.0-.25*pow(length((SCREEN_UV-.5)*1.1),1.5);
  color*=1.0-vhs*.06*sin(FRAGCOORD.y*3.14);
  COLOR=vec4(color,1.0);
 }

@@ -89,10 +89,7 @@ func build_services() -> void:
 		Geo.beam(self,Vector3(x,2.8,-.45),Vector3(x,2.8,-10.8),.025,conduit)
 		Geo.beam(self,Vector3(x,2.8,-9),Vector3(x,5.35,-9),.025,conduit)
 		Geo.box(self,Vector3(x,2.8,-9),Vector3(.04,.12,.12),conduit,false)
-	# TV and cable on the wall, as photographed. The display stays off at night.
-	var tv:=Geo.box(self,Vector3(-5.83,3.1,-6.6),Vector3(.09,.63,1.1),Geo.material(Color("202d29")),false)
-	Geo.box(self,Vector3(-5.775,3.1,-6.6),Vector3(.008,.55,1.0),Geo.material(Color("2e3e39")),false)
-	Geo.beam(self,Vector3(-5.8,3.4,-6.6),Vector3(-5.8,4.05,-6.6),.014,Geo.material(Color("3b4940")))
+	# The photographed wall television and its cable are built by ShopDetails.
 	Geo.box(self,Vector3(5.85,2.8,-.95),Vector3(.04,1.0,.72),Geo.material(Color("597e83"),"",.12),false)
 	for y in range(8):Geo.box(self,Vector3(5.80,2.37+y*.12,-.95),Vector3(.06,.035,.78),conduit,false)
 	RetailDetails.panel(self,Vector3(5.865,2.5,-5.1),Vector2(.76,1.14),"poster",-PI/2)

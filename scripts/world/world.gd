@@ -13,12 +13,18 @@ var warning_started:=false
 var noise_pending:=false
 var enemy_visual: Node3D
 func _ready() -> void:
-	var env:=WorldEnvironment.new();env.environment=Environment.new()
-	env.environment.background_mode=Environment.BG_COLOR;env.environment.background_color=Color("101c2a")
-	env.environment.ambient_light_source=Environment.AMBIENT_SOURCE_COLOR;env.environment.ambient_light_color=Color("a3b0c6");env.environment.ambient_light_energy=.38
+	var env:=WorldEnvironment.new();env.name="Atmosphere";env.environment=Environment.new()
+	env.environment.background_mode=Environment.BG_COLOR;env.environment.background_color=Color("1b2329")
+	env.environment.ambient_light_source=Environment.AMBIENT_SOURCE_COLOR;env.environment.ambient_light_color=Color("a7b1b6");env.environment.ambient_light_energy=.27
 	env.environment.tonemap_mode=Environment.TONE_MAPPER_FILMIC
+	# Depth fog is supported by Compatibility; keep the entire shop clear.
+	# Street geometry continues well beyond the opaque part of the fog.
+	env.environment.fog_enabled=true;env.environment.fog_mode=Environment.FOG_MODE_DEPTH
+	env.environment.fog_light_color=Color("1b2329");env.environment.fog_light_energy=1.0
+	env.environment.fog_depth_begin=22.0;env.environment.fog_depth_end=68.0;env.environment.fog_depth_curve=1.35
+	env.environment.fog_sky_affect=1.0;env.environment.fog_sun_scatter=0.0
 	add_child(env)
-	var moon:=DirectionalLight3D.new();add_child(moon);moon.rotation_degrees=Vector3(-43,-24,0);moon.light_color=Color("8a9db8");moon.light_energy=.35
+	var moon:=DirectionalLight3D.new();add_child(moon);moon.rotation_degrees=Vector3(-43,-24,0);moon.light_color=Color("9baebb");moon.light_energy=.22
 	street=Street.new();street.name="Street";add_child(street)
 	depot=Depot.new();depot.name="Depot";add_child(depot)
 	navigation=AisleNavigation.new();navigation.configure(depot.blockers+street.blockers,Street.surface_height)
@@ -55,7 +61,7 @@ func spawn_customer(warning: bool) -> void:
 	customer.checked_out.connect(on_checkout)
 	customer.departed.connect(on_departure)
 func on_checkout(who: Customer) -> void:
-	sound.play_at("register",Vector3(4,1,-2.8))
+	sound.play_at("register",CheckoutFixture.POSITION+Vector3.UP)
 	if who.warned and Session.can_warn():
 		warning_started=true
 		Session.stage=5;Session.changed.emit()

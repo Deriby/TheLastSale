@@ -40,6 +40,11 @@ static func car(parent: Node3D,at: Vector3,color: Color,angle:=0.0) -> void:
 			var wheel:=Geo.cylinder(root,Vector3(x,.34,side*.79),.31,.20,StreetDetail.material(Color("202927")));wheel.rotation.x=PI/2
 			var hub:=Geo.cylinder(root,Vector3(x,.34,side*.90),.17,.015,StreetDetail.material(Color("8a8f82")));hub.rotation.x=PI/2
 	for x in [-1.87,1.87]:batch.add_box(Vector3(x,.43,0),Vector3(.10,.13,1.48),StreetDetail.material(Color("595f57")))
+	for side in [-1,1]:
+		batch.add_box(Vector3(.60,.97,side*.85),Vector3(.17,.10,.14),paint)
+		batch.add_box(Vector3(side*1.93,.56,0),Vector3(.012,.12,.38),StreetDetail.material(Color("b3baac")))
+		for i in 4:batch.add_box(Vector3(side*1.94,.56,-.11+i*.07),Vector3(.013,.04,.025),StreetDetail.material(Color("4d574f")))
+	for z in [-.25,.25]:StreetDetail.beam(batch,Vector3(.82,.94,z),Vector3(.68,1.12,z+.14),.012,StreetDetail.material(Color("39423e")))
 	for z in [-.55,.55]:
 		batch.add_box(Vector3(1.887,.76,z),Vector3(.022,.18,.29),StreetDetail.material(Color("d0c7a3")))
 		batch.add_box(Vector3(-1.887,.76,z),Vector3(.022,.18,.24),StreetDetail.material(Color("995649")))
@@ -56,7 +61,7 @@ static func pole(parent: Node3D,at: Vector3,arm_side: float) -> void:
 	for x in [-.77,-.26,.26,.77]:
 		for y in [8.85,8.92]:batch.add_box(Vector3(x,y,0),Vector3(.12,.05,.11),StreetDetail.material(Color("747466")))
 	batch.add_box(Vector3(.16,5.90,0),Vector3(.23,.5,.20),StreetDetail.material(Color("454d48")))
-	var light:=Geo.light(root,Vector3(0,7.82,arm_side*1.65),Color("e8c081"),2.3,11.0);light.omni_attenuation=1.1
+	var light:=Geo.light(root,Vector3(0,7.82,arm_side*1.65),Color("ebca94"),3.1,14.0);light.omni_attenuation=1.1
 	batch.flush()
 static func handcart(parent: Node3D,at: Vector3) -> void:
 	var root:=Node3D.new();root.name="GasShopHandcart";parent.add_child(root);root.position=at;root.rotation.z=-.12

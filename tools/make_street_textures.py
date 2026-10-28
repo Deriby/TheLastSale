@@ -60,7 +60,7 @@ letters=Image.new('RGBA',(450,240));ld=ImageDraw.Draw(letters);ld.text((225,113)
 letters=letters.crop(letters.getbbox()).resize((300,320),Image.Resampling.LANCZOS);im.alpha_composite(letters,(234,205));save(im,'ja_mural')
 im=Image.new('RGBA',(64,64));d=ImageDraw.Draw(im);d.ellipse((4,3,61,60),fill=(45,156,93));d.ellipse((16,13,48,45),outline='white',width=3);d.polygon([(19,38),(15,49),(28,42)],fill='white');d.arc((23,20,42,36),45,230,fill='white',width=4);save(im,'contact_icon')
 im=Image.new('RGB',(512,192),(206,205,176));d=ImageDraw.Draw(im);d.rectangle((0,130,512,192),fill=(55,89,65));d.text((256,38),'DEPÓSITO DE GÁS',font=font(29),anchor='mm',fill=(68,82,68));d.text((256,91),'CASSIANO',font=font(68),anchor='mm',fill=(65,86,66));d.text((256,160),'GÁS • ÁGUA • ENTREGA',font=font(23),anchor='mm',fill=(216,213,174));save(im,'cassiano')
-im=Image.new('RGB',(768,160),(44,103,72));d=ImageDraw.Draw(im);d.rectangle((5,5,762,154),outline=(215,202,130),width=4);d.text((384,58),'MERCEARIA E QUITANDA',font=font(43),anchor='mm',fill=(236,224,156));d.text((384,112),'FRUTAS • VERDURAS • CONVENIÊNCIA',font=font(21),anchor='mm',fill=(225,230,207))
+im=Image.new('RGB',(768,160),(44,103,72));d=ImageDraw.Draw(im);d.rectangle((5,5,762,154),outline=(215,202,130),width=4);d.text((384,58),'CASSIANO',font=font(62),anchor='mm',fill=(236,224,156));d.text((384,112),'MERCEARIA • QUITANDA',font=font(23),anchor='mm',fill=(225,230,207))
 for x in [50,715]:
  for j in range(5):d.ellipse((x-20+j%2*14,42+j*13,x+3+j%2*14,66+j*13),fill=[(210,151,49),(179,73,43),(141,163,61)][j%3])
 save(im,'market_sign')

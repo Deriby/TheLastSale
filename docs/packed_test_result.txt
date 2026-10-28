@@ -2,6 +2,7 @@ Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
 
 PASS menu inicial pausa o mundo
 PASS cena principal e chão físico carregam
+PASS antigo caixa da direita está livre para circulação real
 PASS rua tem declive físico contínuo entre os lados do quarteirão
 PASS balizadores da fachada têm colisão física
 PASS jogador desce o meio-fio e entra na rua sem cair pelo chão
@@ -67,6 +68,7 @@ PASS caixa permanece materialmente no palete
 PASS aviso exige clientes atendidos além das tarefas
 PASS clientes atravessam loja, compram e saem
 PASS máquina de estados dos clientes executa o ciclo completo
+PASS todos os clientes são atendidos junto ao novo balcão esquerdo
 PASS aviso ocorre somente depois da rotina e da visita
 PASS ruído posterior tem reação narrativa
 PASS inspeção do ruído conclui a demonstração
@@ -77,5 +79,6 @@ PASS continuar não duplica caixas já repostas
 PASS continuar restaura produtos na malha da geladeira
 PASS checkpoint antigo dentro da gôndola migra para corredor próximo
 PASS checkpoint antigo na rua acompanha a nova cota do terreno
+PASS checkpoint antigo no novo balcão restaura personagem fora dos móveis
 PASS pausa congela o relógio narrativo
-RESULT 78/78 passed; failures=[]
+RESULT 81/81 passed; failures=[]

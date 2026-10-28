@@ -16,7 +16,7 @@ func _ready() -> void:
 	position.y=1.58
 	arm=SpringArm3D.new();probe=SphereShape3D.new();probe.radius=.18;arm.shape=probe;arm.margin=.10;arm.collision_mask=1
 	add_child(arm)
-	camera=Camera3D.new();camera.near=.055;camera.current=true;arm.add_child(camera)
+	camera=Camera3D.new();camera.near=.055;camera.far=110;camera.current=true;arm.add_child(camera)
 	arm.add_excluded_object(get_parent().get_rid())
 	target_distance=Preferences.camera_distance;distance=target_distance;arm.spring_length=distance;camera.position.z=distance;arm.position.x=shoulder
 func handle_input(event: InputEvent) -> void:

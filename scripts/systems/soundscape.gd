@@ -4,11 +4,15 @@ var hum: AudioStreamPlayer3D
 var radio: AudioStreamPlayer3D
 var night: AudioStreamPlayer3D
 var effect: AudioStreamPlayer3D
+var ambience: AudioStreamPlayer3D
+var ambient_wait:=18.0
+var ambient_index:=0
 func _ready() -> void:
 	hum=loop_sound("hum",Vector3(-4,1,-6),-17,14)
-	radio=loop_sound("radio",Vector3(4,1.3,-3.7),-9,12)
+	radio=loop_sound("radio",Vector3(-5.4,1.7,-2.7),-13,9)
 	night=loop_sound("night",Vector3(0,1,7),-15,30)
 	effect=AudioStreamPlayer3D.new();add_child(effect);effect.max_distance=20
+	ambience=AudioStreamPlayer3D.new();add_child(ambience);ambience.max_distance=48
 	Preferences.changed.connect(refresh)
 	refresh()
 func loop_sound(id: String,at: Vector3,db: float,distance_value: float) -> AudioStreamPlayer3D:
@@ -17,15 +21,27 @@ func loop_sound(id: String,at: Vector3,db: float,distance_value: float) -> Audio
 	stream.loop_mode=AudioStreamWAV.LOOP_FORWARD;stream.loop_end=stream.data.size()/2
 	p.stream=stream;p.play();return p
 func refresh() -> void:
-	radio.volume_db=-9+linear_to_db(maxf(Preferences.music_volume,.001))
+	radio.volume_db=-13+linear_to_db(maxf(Preferences.music_volume,.001))
 	hum.volume_db=-17+linear_to_db(maxf(Preferences.effects_volume,.001))
 	night.volume_db=-15+linear_to_db(maxf(Preferences.effects_volume,.001))
+func _process(delta: float) -> void:
+	var player:=get_tree().get_first_node_in_group("player") as Node3D
+	if player!=null:
+		var inside:=smoothstep(-.5,3.0,player.global_position.z)
+		night.volume_db=-24+inside*9+linear_to_db(maxf(Preferences.effects_volume,.001))
+	ambient_wait-=delta
+	if ambient_wait>0:return
+	ambient_index+=1;ambient_wait=22.0+(ambient_index%3)*7.0
+	var traffic:=ambient_index%3!=0
+	ambience.position=Vector3(-24 if ambient_index%2 else 25,1,7) if traffic else Vector3(-5,1,-8)
+	ambience.stream=load("res://assets/audio/"+("distant_traffic" if traffic else "store_settle")+".wav")
+	ambience.volume_db=(-11 if traffic else -22)+linear_to_db(maxf(Preferences.effects_volume,.001));ambience.play()
 func play_at(id: String,at: Vector3) -> void:
 	effect.global_position=at;effect.stream=load("res://assets/audio/"+id+".wav");effect.volume_db=linear_to_db(maxf(Preferences.effects_volume,.001))-5;effect.play()
 func unease() -> void:
 	create_tween().tween_property(radio,"volume_db",-50.0,4)
 func stop_all() -> void:
-	for player in [hum,radio,night,effect]:
+	for player in [hum,radio,night,effect,ambience]:
 		if is_instance_valid(player):
 			player.stop()
 			player.stream=null

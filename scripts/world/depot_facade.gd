@@ -13,8 +13,9 @@ func _ready() -> void:
 	var details:=PropBatch.new();details.name="FacadeDetails";add_child(details)
 	for x in [-6.0,-2.1]:solid(Vector3(x,2.1,0),Vector3(.28,4.2,.35),render)
 	solid(Vector3(-4.05,4.25,0),Vector3(4.16,.45,.38),render)
-	solid(Vector3(-4.05,2.0,-.025),Vector3(3.65,4.0,.12),dark)
-	StreetDetail.panel(self,Vector3(-4.05,2.0,.042),Vector2(3.65,4.0),"shutter")
+	# Open the annex during the shift: the left cashier must see the street.
+	details.add_box(Vector3(-4.05,4.0,-.025),Vector3(3.65,.35,.36),dark)
+	for y in [3.86,3.93,4.0,4.07,4.14]:details.add_box(Vector3(-4.05,y,.17),Vector3(3.65,.018,.025),StreetDetail.material(Color("5b6261")))
 	for x in [2.1,6.0]:solid(Vector3(x,1.9,0),Vector3(.3,3.8,.35),render)
 	solid(Vector3(2.25,5.15,0),Vector3(8.7,2.7,.35),render)
 	solid(Vector3(6.36,1.9,0),Vector3(.64,3.8,.35),render)
@@ -37,4 +38,7 @@ func _ready() -> void:
 		StreetDetail.rotated_box(details,at,Vector3(.23,.29,.08),Vector3(-.35,0,.12),dark)
 		var light:=SpotLight3D.new();add_child(light);light.position=at+Vector3(0,-.06,.06);light.look_at_from_position(light.position,Vector3(2,4.9,.20))
 		light.light_color=Color("e2dfc9");light.light_energy=1.05;light.spot_range=7;light.spot_angle=65;light.shadow_enabled=false
+	for x in [-3.9,.1]:
+		var spill:=SpotLight3D.new();spill.name="EntranceLightSpill";add_child(spill);spill.position=Vector3(x,3.3,-.12);spill.look_at_from_position(spill.position,Vector3(x,0,3.3))
+		spill.light_color=Color("e7eee3");spill.light_energy=1.1;spill.spot_range=7.5;spill.spot_angle=62
 	details.flush()

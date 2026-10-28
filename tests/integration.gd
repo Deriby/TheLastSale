@@ -6,6 +6,7 @@ var app: Node
 var world: ShiftWorld
 var player: DepotPlayer
 var served_states: Dictionary = {}
+var checkout_positions_valid:=true
 func check(condition: bool,description: String) -> void:
 	checks+=1
 	print("PASS " if condition else "FAIL ",description)
@@ -27,6 +28,9 @@ func run() -> void:
 	world=app.world;player=world.player
 	await ticks(12)
 	check(world.depot!=null and player.is_on_floor(),"cena principal e chão físico carregam")
+	player.position=Vector3(4.2,.01,-2.0);player.velocity=Vector3.ZERO;player.camera_rig.yaw=0;player.reset_physics_interpolation()
+	Input.action_press("forward");await ticks(75);Input.action_release("forward");await ticks(10)
+	check(player.is_on_floor() and player.position.z< -3.3,"antigo caixa da direita está livre para circulação real")
 	var street_space:=world.get_world_3d().direct_space_state
 	var lower:=street_space.intersect_ray(PhysicsRayQueryParameters3D.create(Vector3(-20,4,6.5),Vector3(-20,-3,6.5),1))
 	var upper:=street_space.intersect_ray(PhysicsRayQueryParameters3D.create(Vector3(20,4,6.5),Vector3(20,-3,6.5),1))
@@ -99,7 +103,7 @@ func run() -> void:
 	player.position=Vector3(3.4,0,-7.8);player.reset_physics_interpolation()
 	player.camera_rig.target_distance=2.5;await ticks(40)
 	check(not player.camera_rig.first_person and player.visual.find_child("Dery_Head",true,false).visible,"afastamento retorna à terceira pessoa")
-	player.position=Vector3(4.4,0,-1.65);player.camera_rig.yaw=0;player.camera_rig.pitch=-.13;await ticks(20)
+	player.position=CheckoutFixture.CUSTOMER_POSITION;player.velocity=Vector3.ZERO;player.camera_rig.yaw=PI/2;player.camera_rig.pitch=-.13;player.reset_physics_interpolation();await ticks(30)
 	check(player.target!=null and player.target.kind=="talk","Felps é alcançável pela interação sobre o balcão")
 	var interact_key:=InputEventKey.new();interact_key.physical_keycode=KEY_E;interact_key.keycode=KEY_E;interact_key.pressed=true;Input.parse_input_event(interact_key);await ticks(2)
 	check(Session.stage==1,"tecla E conversa com Felps e libera tarefas")
@@ -125,7 +129,7 @@ func run() -> void:
 		check(player.carried==item and item.get_parent()==player.socket,"caixa presa ao transporte visível")
 		var palm: Vector3=skeleton.global_transform*skeleton.get_bone_global_pose(skeleton.find_bone("hand_L")).origin
 		check(palm.distance_to(item.to_global(Vector3(.325,.275,-.09)))<.10,"mão permanece junto à pega lateral da caixa")
-		player.position=Vector3(-4.1,0,-3.4)
+		player.position=world.depot.fridge_target.global_position+Vector3(1.35,0,0)
 		if not fridge.open:fridge.activate(player)
 		check(fridge.activate(player),"repor "+id)
 		await ticks(75)
@@ -151,12 +155,14 @@ func run() -> void:
 		await get_tree().physics_frame
 		if world.customer!=null:
 			served_states[world.customer.state]=true
+			if world.customer.state in [Customer.State.WAITING,Customer.State.PAYING] and world.customer.global_position.distance_to(CheckoutFixture.CUSTOMER_POSITION)>.4:checkout_positions_valid=false
 		if Dialogue.active and world.customer!=null and world.customer.state==Customer.State.WAITING:
 			clear_dialogue()
 		if Session.warning_delivered:break
 	Engine.time_scale=1
 	check(Session.customers_served>=3,"clientes atravessam loja, compram e saem")
 	check(served_states.size()>=7,"máquina de estados dos clientes executa o ciclo completo")
+	check(checkout_positions_valid,"todos os clientes são atendidos junto ao novo balcão esquerdo")
 	check(Session.warning_delivered and Session.stage==6,"aviso ocorre somente depois da rotina e da visita")
 	clear_dialogue()
 	player.position=Vector3(4,0,-6);await ticks(3)
@@ -177,6 +183,12 @@ func run() -> void:
 	await get_tree().process_frame
 	app.start_saved();world=app.world;player=world.player;await ticks(15)
 	check(player.is_on_floor() and player.position.y>.4,"checkpoint antigo na rua acompanha a nova cota do terreno")
+	Session.save_shift(Vector3(-4.25,0,-2.8))
+	await get_tree().process_frame
+	app.start_saved();world=app.world;player=world.player;await ticks(15)
+	var restored_probe:=PhysicsShapeQueryParameters3D.new();var restored_capsule:=CapsuleShape3D.new();restored_capsule.radius=.24;restored_capsule.height=1.68
+	restored_probe.shape=restored_capsule;restored_probe.transform=Transform3D(Basis.IDENTITY,player.global_position+Vector3.UP*.87);restored_probe.collision_mask=1
+	check(player.is_on_floor() and world.get_world_3d().direct_space_state.intersect_shape(restored_probe).is_empty(),"checkpoint antigo no novo balcão restaura personagem fora dos móveis")
 	app.interface.set_paused(true);var frozen:=Session.world_seconds;await ticks(3)
 	check(Session.world_seconds==frozen,"pausa congela o relógio narrativo")
 	app.interface.set_paused(false)

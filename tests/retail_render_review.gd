@@ -43,6 +43,7 @@ func review() -> void:
 	await get_tree().physics_frame
 	var args:=OS.get_cmdline_user_args()
 	if not args.is_empty():prefix=args[0]+"_"
+	if prefix.contains("legacy"):Preferences.pixel_scale=2
 	app=load("res://scenes/main/main.tscn").instantiate();app.process_mode=Node.PROCESS_MODE_PAUSABLE;add_child(app)
 	view();await capture("menu")
 	await get_tree().physics_frame

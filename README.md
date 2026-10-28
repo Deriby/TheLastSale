@@ -2,7 +2,17 @@
 
 Demonstração jogável em **Godot 4.4.1 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP. Esta entrega estabelece a primeira base e uma rotina narrativa curta; não é a campanha de 1h30–2h30.
 
-## Revisão 0.4.0 — exterior e vizinhança
+## Revisão 0.5.0 — balcão, detalhes e atmosfera
+
+O caixa foi corrigido pelas novas fotos: fica à esquerda de quem entra, com a bancada no sentido da profundidade da loja e o funcionário junto à parede. Há monitor, teclado, leitor com luz vermelha, maquininha amarela, gaveta, impressora, aviso sobre o tampo e bebidas atrás de Felps. Clientes atendem no novo ponto; checkpoints antigos são ajustados se estiverem dentro dos móveis.
+
+O interior ganhou freezer de gelo, copos térmicos, ganchos de salgadinhos, ferragens das portas e ventilador em movimento. A visão de dentro para fora foi revisada, incluindo carros e o comércio CASSIANO em frente. A rua continua dentro de uma neblina distante; a loja iluminada contrasta com o bairro escuro, com granulação leve e sons ambientes originais. A resolução inicial usa a janela inteira; os modos Retrô e Econômica continuam disponíveis.
+
+[Veja as vistas do funcionário e do cliente, a neblina e o vídeo com som](docs/scene_v05/README.md).
+
+![Caixa e visão de dentro para fora — 0.5.0](docs/scene_v05/inside_out.png)
+
+## Revisão anterior 0.4.0 — exterior e vizinhança
 
 A fachada agora acompanha as capturas do Street View: anexo mais baixo, duas entradas principais, mural JA, pilares de proteção e janela lateral. Do outro lado aparecem as casas cinza, amarela e salmão; ao lado, o depósito de gás e o sobrado. A rua recebeu declive físico, asfalto sem faixa, calçadas, postes e fiação. As medidas são estimadas a partir das imagens.
 
@@ -34,9 +44,9 @@ A reconstrução 0.2 do interior recebeu gôndolas abastecidas por categoria, ge
 
 ## Jogar
 
-**[Baixar o jogo 0.4.0 para Windows x64 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/windows/A_Ultima_Venda_Windows_x64.zip)**
+**[Baixar o jogo 0.5.0 para Windows x64 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/windows/A_Ultima_Venda_Windows_x64.zip)**
 
-O pacote está versionado neste repositório em [`downloads/windows`](downloads/windows). Extraia o ZIP em uma pasta nova antes de abrir o jogo. O menu mostra **Demonstração 0.4.0**. A verificação SHA-256 está ao lado do arquivo.
+O pacote está versionado neste repositório em [`downloads/windows`](downloads/windows). Extraia o ZIP em uma pasta nova antes de abrir o jogo. O menu mostra **Demonstração 0.5.0**. A verificação SHA-256 está ao lado do arquivo. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida** se sua configuração antiga estiver em Retrô.
 
 **Windows:** extraia o pacote Windows e mantenha `A_Ultima_Venda.exe` junto de `A_Ultima_Venda.pck`. Abra o executável e escolha **Iniciar expediente**. O binário foi exportado nesta sessão Linux; sua execução no Windows ainda precisa de validação.
 
@@ -61,7 +71,7 @@ A Godot 4.4 tem Windows 10 como requisito oficial mínimo. **Windows 7/8 não s�
 
 ## Percurso da demonstração
 
-1. Entre pelo vão aberto e converse com Felps no caixa à direita.
+1. Entre pelo vão aberto e converse com Felps no balcão à esquerda, junto à parede.
 2. Vá pelo corredor da direita até a porta **Estoque**, nos fundos; abra com E.
 3. Pegue uma caixa de retornáveis e leve até a primeira geladeira da parede esquerda. Abra com E; use E novamente para repor. Repita com a segunda caixa.
 4. Guarde a caixa solta no palete marcado **Devoluções**, no estoque.
@@ -110,6 +120,9 @@ Não foram medidos 60 FPS em PCs modestos nem testados binários em Windows real
 - `./tools/godot.sh --fixed-fps 144 res://tests/retail_render_review.tscn`: compara as malhas agrupadas com uma referência de objetos individuais, incluindo pausa e recarga. Requer display.
 - `python tools/make_depot_textures.py`: regenera a arte original dos produtos e superfícies do depósito (Python com Pillow).
 - `python tools/make_street_textures.py`: regenera as superfícies, mural e placas do exterior (Python com Pillow).
+- `python tools/make_scene_details.py`: regenera a arte do caixa, copos, bebidas e pequenos detalhes, além de dois sons ambientes originais (Python com Pillow).
+- `./tools/godot.sh --fixed-fps 60 res://tests/scene_review.tscn -- scene`: captura as vistas do balcão, interior, rua e a comparação de neblina em `/tmp/scene_*.png`. Requer display.
+- `./tools/godot.sh --fixed-fps 30 --write-movie /tmp/scene.avi res://tests/scene_walkthrough.tscn`: grava o passeio de câmera de 30 segundos com som ambiente do jogo.
 - `./tools/godot.sh --fixed-fps 60 res://tests/exterior_review.tscn -- exterior`: captura o exterior à noite e com iluminação diurna de comparação em `/tmp/exterior_*.png`. Requer display; a cena normal continua noturna.
 - `./tools/godot.sh --fixed-fps 30 --write-movie /tmp/exterior.avi res://tests/exterior_walkthrough.tscn`: grava o passeio de câmera de 32 segundos pelo cenário noturno.
 - `python tools/make_textures.py`: regenera texturas e sons originais determinísticos.

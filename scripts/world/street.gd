@@ -21,6 +21,7 @@ func _ready() -> void:
 	physics_interpolation_mode=Node.PHYSICS_INTERPOLATION_MODE_OFF
 	details=PropBatch.new();details.name="StreetDetails";add_child(details)
 	build_ground();build_frontages();build_utilities();build_wear();build_limits();details.flush()
+	add_child(StreetAccents.new())
 func ground_strip(x0: float,x1: float,z0: float,z1: float,offset0: float,offset1: float,mat: Material) -> void:
 	var points:=PackedVector3Array([Vector3(x0,grade(x0)+offset0,z0),Vector3(x1,grade(x1)+offset0,z0),Vector3(x1,grade(x1)+offset1,z1),Vector3(x0,grade(x0)+offset1,z1)])
 	var normal: Vector3=(points[3]-points[0]).cross(points[1]-points[0]).normalized()
@@ -36,7 +37,7 @@ func build_ground() -> void:
 	var pavement:=StreetDetail.material(Color("c3bfae"),"sidewalk",.7)
 	var curb:=StreetDetail.material(Color("bebda8"),"render")
 	# Shared grade knots keep the storefront apron flat and the street continuous downhill.
-	for pair in [Vector2(-64,-6),Vector2(-6,6),Vector2(6,64)]:
+	for pair in [Vector2(-160,-6),Vector2(-6,6),Vector2(6,160)]:
 		ground_strip(pair.x,pair.y,0,NEAR_CURB,0,0,pavement)
 		ground_strip(pair.x,pair.y,NEAR_CURB,ROAD_START,0,-.14,curb)
 		ground_strip(pair.x,pair.y,ROAD_START,ROAD_END,-.14,-.14,asphalt)
@@ -81,13 +82,17 @@ func build_frontages() -> void:
 	for x in [-51,-44,-37,-30,30,37,44,51]:
 		StreetBuildings.create(self,"DistantFrontage",x,FAR_FRONT,grade(x),true,"green" if int(absf(x))%2 else "default")
 		StreetBuildings.create(self,"DistantSideFrontage",x,0,grade(x),false,"default")
+	for x in [-133,-121,-109,-97,-85,-73,-61,61,73,85,97,109,121,133]:
+		for z in [0.0,FAR_FRONT]:
+			var block:=Geo.box(self,Vector3(x,grade(x)+1.8,z+(-3 if z==0 else 3)),Vector3(12,3.6,6),StreetDetail.material(Color("8e998e"),"render"),false)
+			block.name="FoggedDistantBlock"
 	StreetFurniture.tree(self,Vector3(.15,grade(.15),12.08),3.6)
 	blockers.append(Rect2(.03,11.96,.24,.24))
 	StreetFurniture.tree(self,Vector3(-8.1,grade(-8.1),14.2),4.0)
 	StreetFurniture.handcart(self,Vector3(8.0,grade(8.0),.65))
-	StreetFurniture.car(self,Vector3(-18.5,surface_height(-18.5,9.55),9.55),Color("444d4b"),PI)
-	StreetFurniture.car(self,Vector3(21.7,surface_height(21.7,3.5),3.5),Color("b5b6a8"))
-	blockers.append(Rect2(-20.4,8.70,3.8,1.7));blockers.append(Rect2(19.8,2.65,3.8,1.7))
+	StreetFurniture.car(self,Vector3(10.4,surface_height(10.4,9.55),9.55),Color("4b5554"),PI)
+	StreetFurniture.car(self,Vector3(3.0,surface_height(3.0,9.55),9.55),Color("909c9b"))
+	blockers.append(Rect2(8.5,8.70,3.8,1.7));blockers.append(Rect2(1.1,8.70,3.8,1.7))
 	# Sparse plants by the grey house, not a regular row of invented avenue trees.
 	for x in [1.1,1.3,1.5]:
 		Geo.cylinder(self,Vector3(x,grade(x)+.13,12.05),.13,.26,StreetDetail.material(Color("9d7961")),.17)
@@ -114,7 +119,7 @@ func wire_span(a: Vector3,b: Vector3,sag: float,mat: Material) -> void:
 func build_wear() -> void:
 	var rng:=RandomNumberGenerator.new();rng.seed=558
 	for i in 26:
-		var x:=rng.randf_range(-35,35);var z:=rng.randf_range(2.9,10.15);var radius:=rng.randf_range(.18,1.1)
+		var x:=rng.randf_range(-35,35);var z:=rng.randf_range(2.9,10.15);var radius:=rng.randf_range(.18,.65)
 		var st:=SurfaceTool.new();st.begin(Mesh.PRIMITIVE_TRIANGLES)
 		var center:=Vector3(x,surface_height(x,z)+.004,z)
 		var ring: Array[Vector3]=[]
@@ -122,7 +127,7 @@ func build_wear() -> void:
 			var angle:=j*TAU/8;var p:=Vector3(x+sin(angle)*radius*rng.randf_range(.6,1.2),0,z+cos(angle)*radius*.45);p.y=surface_height(p.x,p.z)+.004;ring.append(p)
 		for j in 8:
 			for p in [center,ring[(j+1)%8],ring[j]]:st.set_normal(Vector3.UP);st.add_vertex(p)
-		var node:=MeshInstance3D.new();node.mesh=st.commit();node.material_override=StreetDetail.material(Color("b7beb5") if i%3 else Color("d3ccc0"),"asphalt");add_child(node)
+		var node:=MeshInstance3D.new();node.mesh=st.commit();node.material_override=StreetDetail.material(Color("d1d5cf") if i%3 else Color("ededdf"),"asphalt");add_child(node)
 	for x in [-5.2,-2.2,7.6,12.1,-13.0]:
 		var z:=2.30 if x>0 else 11.1
 		StreetDetail.rotated_box(details,Vector3(x,surface_height(x,z)+.012,z),Vector3(.12,.008,.20),Vector3(0,x*.42,0),StreetDetail.material(Color("b1b2a0")))
