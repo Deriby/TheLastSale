@@ -1,0 +1,74 @@
+{
+  "Dery": {
+    "vertices": 12071,
+    "triangles": 12000,
+    "bones": 19,
+    "unweighted": 0,
+    "clips": [
+      "idle",
+      "walk",
+      "run",
+      "crouch_idle",
+      "crouch_walk",
+      "carry",
+      "carry_walk",
+      "pickup",
+      "place",
+      "talk",
+      "cashier",
+      "look",
+      "startled",
+      "attack"
+    ],
+    "height_m": 1.78,
+    "source_height": 1.1205590963363647
+  },
+  "Felps": {
+    "vertices": 13015,
+    "triangles": 11965,
+    "bones": 19,
+    "unweighted": 0,
+    "clips": [
+      "idle",
+      "walk",
+      "run",
+      "crouch_idle",
+      "crouch_walk",
+      "carry",
+      "carry_walk",
+      "pickup",
+      "place",
+      "talk",
+      "cashier",
+      "look",
+      "startled",
+      "attack"
+    ],
+    "height_m": 1.78,
+    "source_height": 1.1126971244812012
+  },
+  "Enemy": {
+    "vertices": 13071,
+    "triangles": 11992,
+    "bones": 19,
+    "unweighted": 0,
+    "clips": [
+      "idle",
+      "walk",
+      "run",
+      "crouch_idle",
+      "crouch_walk",
+      "carry",
+      "carry_walk",
+      "pickup",
+      "place",
+      "talk",
+      "cashier",
+      "look",
+      "startled",
+      "attack"
+    ],
+    "height_m": 1.78,
+    "source_height": 1.123448133468628
+  }
+}
