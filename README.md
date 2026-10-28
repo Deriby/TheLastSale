@@ -2,7 +2,15 @@
 
 Demonstração jogável em **Godot 4.4.1 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP. Esta entrega estabelece a primeira base e uma rotina narrativa curta; não é a campanha de 1h30–2h30.
 
-## Revisão 0.3.1 — postura, tronco e correção das prateleiras
+## Revisão 0.4.0 — exterior e vizinhança
+
+A fachada agora acompanha as capturas do Street View: anexo mais baixo, duas entradas principais, mural JA, pilares de proteção e janela lateral. Do outro lado aparecem as casas cinza, amarela e salmão; ao lado, o depósito de gás e o sobrado. A rua recebeu declive físico, asfalto sem faixa, calçadas, postes e fiação. As medidas são estimadas a partir das imagens.
+
+[Veja referências, antes/depois e o passeio pelo exterior](docs/exterior_v04/README.md).
+
+![Exterior do depósito — revisão 0.4.0 à noite](docs/exterior_v04/night_front.png)
+
+## Revisão anterior 0.3.1 — postura, tronco e correção das prateleiras
 
 Os cotovelos e punhos foram reposicionados conforme a referência enviada, com braços proporcionais e mãos abaixo do quadril. Deryk e Felps agora usam 21 ossos, incluindo cintura e peito superior, com pesos e movimento próprios no tronco. Geladeiras, prateleiras e produtos passaram a usar malhas estáticas agrupadas por material, sem desenho por instâncias da GPU, para contornar a falha relatada no Windows 7 / Radeon R7 200.
 
@@ -26,9 +34,9 @@ A reconstrução 0.2 do interior recebeu gôndolas abastecidas por categoria, ge
 
 ## Jogar
 
-**[Baixar o jogo 0.3.1 para Windows x64 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/windows/A_Ultima_Venda_Windows_x64.zip)**
+**[Baixar o jogo 0.4.0 para Windows x64 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/windows/A_Ultima_Venda_Windows_x64.zip)**
 
-O pacote está versionado neste repositório em [`downloads/windows`](downloads/windows). Extraia o ZIP em uma pasta nova antes de abrir o jogo. O menu mostra **Demonstração 0.3.1**. A verificação SHA-256 está ao lado do arquivo.
+O pacote está versionado neste repositório em [`downloads/windows`](downloads/windows). Extraia o ZIP em uma pasta nova antes de abrir o jogo. O menu mostra **Demonstração 0.4.0**. A verificação SHA-256 está ao lado do arquivo.
 
 **Windows:** extraia o pacote Windows e mantenha `A_Ultima_Venda.exe` junto de `A_Ultima_Venda.pck`. Abra o executável e escolha **Iniciar expediente**. O binário foi exportado nesta sessão Linux; sua execução no Windows ainda precisa de validação.
 
@@ -65,7 +73,7 @@ Os objetivos e legendas orientam o percurso. A ordem narrativa depende de tarefa
 ## Entregue
 
 - Depósito modular com gôndolas, garrafas e equipamentos em malhas estáticas agrupadas por material, geladeiras, caixa, paletes, caixas transportáveis, portas, telhado e estrutura metálica.
-- Trecho de rua com calçadas, casas, portões, postes/fios e carros; noite com luzes econômicas e atmosfera sonora original sintetizada.
+- Exterior baseado nas sete capturas do Street View: fachada JA em dois níveis, comércios vizinhos, casas distintas em frente, rua com declive físico, calçadas e meios-fios transitáveis, postes/fios e carros; noite com luzes econômicas e atmosfera sonora original sintetizada.
 - Dery com CharacterBody3D, aceleração, corrida, agachamento e câmera de ombro com SpringArm e transição de distância.
 - Os três modelos enviados preservados integralmente em `assets/models/originals/`; derivados animados em `assets/models/characters/`.
 - Deryk e Felps: rigs de 21 ossos, cintura e peito superior articulados, proporções e pesos revisados, texturas 1024², cabeça separada para primeira pessoa e 23 clipes procedurais cada. Enemy mantém a derivação anterior, com 19 ossos, 14 clipes e textura 512².
@@ -101,6 +109,9 @@ Não foram medidos 60 FPS em PCs modestos nem testados binários em Windows real
 - `./tools/godot.sh --fixed-fps 30 --write-movie /tmp/motion.avi res://tests/motion_review.tscn`: grava 38 segundos de movimento com display disponível.
 - `./tools/godot.sh --fixed-fps 144 res://tests/retail_render_review.tscn`: compara as malhas agrupadas com uma referência de objetos individuais, incluindo pausa e recarga. Requer display.
 - `python tools/make_depot_textures.py`: regenera a arte original dos produtos e superfícies do depósito (Python com Pillow).
+- `python tools/make_street_textures.py`: regenera as superfícies, mural e placas do exterior (Python com Pillow).
+- `./tools/godot.sh --fixed-fps 60 res://tests/exterior_review.tscn -- exterior`: captura o exterior à noite e com iluminação diurna de comparação em `/tmp/exterior_*.png`. Requer display; a cena normal continua noturna.
+- `./tools/godot.sh --fixed-fps 30 --write-movie /tmp/exterior.avi res://tests/exterior_walkthrough.tscn`: grava o passeio de câmera de 32 segundos pelo cenário noturno.
 - `python tools/make_textures.py`: regenera texturas e sons originais determinísticos.
 
 Para exportar, instale os templates oficiais 4.4.1 no editor e use o preset **Windows Desktop**. Os originais e ferramentas ficam fora do pacote de jogo. Resultados e limites dos testes: [docs/VALIDACAO.md](docs/VALIDACAO.md).

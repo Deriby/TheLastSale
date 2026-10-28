@@ -2,6 +2,10 @@ Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
 
 PASS menu inicial pausa o mundo
 PASS cena principal e chão físico carregam
+PASS rua tem declive físico contínuo entre os lados do quarteirão
+PASS balizadores da fachada têm colisão física
+PASS jogador desce o meio-fio e entra na rua sem cair pelo chão
+PASS jogador sobe à calçada oposta sem ficar preso no meio-fio
 PASS Dery usa 21 ossos com cintura e peito superior articulados
 PASS 23 clipes de Dery importados
 PASS rig importado: Dery
@@ -59,6 +63,8 @@ PASS mãos livres após reposição
 PASS malha visível recebe novos produtos após reposição
 PASS duas reposições completam objetivo na ordem
 PASS organização move caixa para palete
+WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@1536/loose/@MeshInstance3D@2946" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
 PASS caixa permanece materialmente no palete
 PASS aviso exige clientes atendidos além das tarefas
 PASS clientes atravessam loja, compram e saem
@@ -68,11 +74,10 @@ PASS ruído posterior tem reação narrativa
 PASS inspeção do ruído conclui a demonstração
 PASS salvamento grava checkpoint
 PASS checkpoint restaura progressão e tarefas
-WARNING: [Physics interpolation] Non-interpolated instance triggered from physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@2623/Depot/@Node3D@3794/Products/@MeshInstance3D@3795" (possibly benign).
-     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:966)
 PASS continuar restaura posição no mundo
 PASS continuar não duplica caixas já repostas
 PASS continuar restaura produtos na malha da geladeira
 PASS checkpoint antigo dentro da gôndola migra para corredor próximo
+PASS checkpoint antigo na rua acompanha a nova cota do terreno
 PASS pausa congela o relógio narrativo
-RESULT 73/73 passed; failures=[]
+RESULT 78/78 passed; failures=[]

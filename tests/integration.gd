@@ -27,6 +27,19 @@ func run() -> void:
 	world=app.world;player=world.player
 	await ticks(12)
 	check(world.depot!=null and player.is_on_floor(),"cena principal e chão físico carregam")
+	var street_space:=world.get_world_3d().direct_space_state
+	var lower:=street_space.intersect_ray(PhysicsRayQueryParameters3D.create(Vector3(-20,4,6.5),Vector3(-20,-3,6.5),1))
+	var upper:=street_space.intersect_ray(PhysicsRayQueryParameters3D.create(Vector3(20,4,6.5),Vector3(20,-3,6.5),1))
+	check(not lower.is_empty() and not upper.is_empty() and upper.position.y-lower.position.y>.8,"rua tem declive físico contínuo entre os lados do quarteirão")
+	var post:=street_space.intersect_ray(PhysicsRayQueryParameters3D.create(Vector3(.78,.5,1.3),Vector3(.78,.5,.2),1))
+	check(not post.is_empty(),"balizadores da fachada têm colisão física")
+	player.position=Vector3(-1.8,.02,1.8);player.velocity=Vector3.ZERO;player.camera_rig.yaw=PI;player.reset_physics_interpolation()
+	Input.action_press("forward");await ticks(75);Input.action_release("forward");await ticks(10)
+	check(player.position.z>3.1 and player.is_on_floor() and player.position.y<-.08,"jogador desce o meio-fio e entra na rua sem cair pelo chão")
+	player.position=Vector3(-1.8,-.12,9.8);player.velocity=Vector3.ZERO;player.reset_physics_interpolation()
+	Input.action_press("forward");await ticks(75);Input.action_release("forward");await ticks(10)
+	check(player.position.z>11.0 and player.is_on_floor() and player.position.y>-.03,"jogador sobe à calçada oposta sem ficar preso no meio-fio")
+	player.position=Vector3(3.8,.01,1.8);player.velocity=Vector3.ZERO;player.camera_rig.yaw=0;player.reset_physics_interpolation();await ticks(12)
 	check(player.visual.find_child("Skeleton3D",true,false).get_bone_count()==21,"Dery usa 21 ossos com cintura e peito superior articulados")
 	check(player.animator.get_animation_list().size()>=23,"23 clipes de Dery importados")
 	for name in ["Dery","Felps","Enemy","Customer1","Customer2","Customer3"]:
@@ -153,12 +166,17 @@ func run() -> void:
 	check(Session.save_shift(Vector3(0,0,-4))==OK,"salvamento grava checkpoint")
 	Session.new_shift();check(Session.load_shift() and Session.stage==7 and Session.stocked.size()==2,"checkpoint restaura progressão e tarefas")
 	clear_dialogue()
+	await get_tree().process_frame
 	app.start_saved();world=app.world;player=world.player;await ticks(5)
 	check(player.position.distance_to(Vector3(0,0,-4))<.3,"continuar restaura posição no mundo")
 	check(not is_instance_valid(world.depot.crates.stock_1),"continuar não duplica caixas já repostas")
 	check(world.depot.fridge_target.products.groups["beer_0"].baked_count==initial_bottles+4,"continuar restaura produtos na malha da geladeira")
 	var migrated:=world.navigation.nearest_walkable(Vector3(1,0,-4))
 	check(migrated.distance_to(Vector3(1,0,-4))>.3 and migrated.distance_to(Vector3(1,0,-4))<2,"checkpoint antigo dentro da gôndola migra para corredor próximo")
+	Session.save_shift(Vector3(20,0,1.8))
+	await get_tree().process_frame
+	app.start_saved();world=app.world;player=world.player;await ticks(15)
+	check(player.is_on_floor() and player.position.y>.4,"checkpoint antigo na rua acompanha a nova cota do terreno")
 	app.interface.set_paused(true);var frozen:=Session.world_seconds;await ticks(3)
 	check(Session.world_seconds==frozen,"pausa congela o relógio narrativo")
 	app.interface.set_paused(false)

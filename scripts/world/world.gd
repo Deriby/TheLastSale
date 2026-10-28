@@ -21,7 +21,7 @@ func _ready() -> void:
 	var moon:=DirectionalLight3D.new();add_child(moon);moon.rotation_degrees=Vector3(-43,-24,0);moon.light_color=Color("8a9db8");moon.light_energy=.35
 	street=Street.new();street.name="Street";add_child(street)
 	depot=Depot.new();depot.name="Depot";add_child(depot)
-	navigation=AisleNavigation.new();navigation.configure(depot.blockers+street.blockers)
+	navigation=AisleNavigation.new();navigation.configure(depot.blockers+street.blockers,Street.surface_height)
 	player=DepotPlayer.new();player.name="Dery";add_child(player);player.position=navigation.nearest_walkable(Session.saved_position);player.reset_physics_interpolation();player.camera_rig.reset_follow()
 	sound=Soundscape.new();add_child(sound)
 	depot.restore_state(player)
@@ -49,7 +49,7 @@ func _physics_process(delta: float) -> void:
 			tween.tween_property(light,"light_energy",float(light.get_meta("normal_energy",1.8)),.22)
 func spawn_customer(warning: bool) -> void:
 	customer=Customer.new();customer.navigation=navigation;customer.warned=warning;customer.appearance=Session.customers_served%3
-	add_child(customer);customer.global_position=Vector3(-18,0,1.8)
+	add_child(customer);customer.global_position=Vector3(-18,Street.surface_height(-18,1.8)+.01,1.8);customer.reset_physics_interpolation()
 	# _ready initially computes from local origin; recompute after spawn position.
 	customer.go_to(Vector3(0,0,-1.5))
 	customer.checked_out.connect(on_checkout)
