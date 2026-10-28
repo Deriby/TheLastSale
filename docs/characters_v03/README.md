@@ -1,5 +1,7 @@
 # Revisão 0.3 — personagens e câmera
 
+Registro da versão 0.3. A [correção 0.3.1](../fixes_v031/README.md) revisa novamente os braços, acrescenta rig no tronco e corrige a renderização do cenário.
+
 Primeira passagem da etapa **2. Melhorar Dery e a câmera**, incluindo o novo Felps fornecido em 28/10/2026.
 
 ## Notas incorporadas à etapa 2

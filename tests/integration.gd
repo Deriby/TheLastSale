@@ -27,7 +27,7 @@ func run() -> void:
 	world=app.world;player=world.player
 	await ticks(12)
 	check(world.depot!=null and player.is_on_floor(),"cena principal e chão físico carregam")
-	check(player.visual.find_child("Skeleton3D",true,false).get_bone_count()==19,"Dery usa esqueleto humanoide de 19 ossos")
+	check(player.visual.find_child("Skeleton3D",true,false).get_bone_count()==21,"Dery usa 21 ossos com cintura e peito superior articulados")
 	check(player.animator.get_animation_list().size()>=23,"23 clipes de Dery importados")
 	for name in ["Dery","Felps","Enemy","Customer1","Customer2","Customer3"]:
 		var model: Node=load("res://assets/models/characters/"+name+".glb").instantiate()
@@ -39,8 +39,19 @@ func run() -> void:
 	var skeleton: Skeleton3D=player.motion.skeleton
 	var chest_index:=skeleton.find_bone("chest")
 	var breath_before:=skeleton.get_bone_global_pose(chest_index).basis.get_scale()
+	var waist_before:=skeleton.get_bone_pose_rotation(skeleton.find_bone("waist"))
+	var upper_before:=skeleton.get_bone_pose_rotation(skeleton.find_bone("upper_chest"))
 	await ticks(35)
 	check(breath_before.distance_to(skeleton.get_bone_global_pose(chest_index).basis.get_scale())>.0001,"respiração altera a caixa torácica em repouso")
+	check(waist_before.angle_to(skeleton.get_bone_pose_rotation(skeleton.find_bone("waist")))>.001 and upper_before.angle_to(skeleton.get_bone_pose_rotation(skeleton.find_bone("upper_chest")))>.001,"cintura e peito superior articulam separadamente em repouso")
+	var arms_relaxed:=true
+	for side in ["L","R"]:
+		var arm: Vector3=skeleton.global_transform*skeleton.get_bone_global_pose(skeleton.find_bone("arm_"+side)).origin
+		var elbow: Vector3=skeleton.global_transform*skeleton.get_bone_global_pose(skeleton.find_bone("forearm_"+side)).origin
+		var wrist: Vector3=skeleton.global_transform*skeleton.get_bone_global_pose(skeleton.find_bone("hand_"+side)).origin
+		var hip: Vector3=skeleton.global_transform*skeleton.get_bone_global_pose(skeleton.find_bone("thigh_"+side)).origin
+		arms_relaxed=arms_relaxed and wrist.y<hip.y-.04 and elbow.y<arm.y-.20
+	check(arms_relaxed,"cotovelos baixos e punhos abaixo do quadril no repouso")
 	var left_ankle:=skeleton.global_transform*skeleton.get_bone_global_pose(skeleton.find_bone("foot_L")).origin
 	var right_ankle:=skeleton.global_transform*skeleton.get_bone_global_pose(skeleton.find_bone("foot_R")).origin
 	check(absf(left_ankle.x-right_ankle.x)<.33 and absf(left_ankle.y-right_ankle.y)<.02,"repouso tem base estreita e dois pés apoiados")
@@ -90,7 +101,7 @@ func run() -> void:
 	door.activate(player);await ticks(40)
 	check(space.intersect_ray(PhysicsRayQueryParameters3D.create(a,b,1)).is_empty(),"porta aberta libera passagem física")
 	var fridge:=find_interaction(world.depot.fridge_target,"fridge")
-	var initial_bottles: int=world.depot.fridge_target.products.groups["beer_0"].node.multimesh.instance_count
+	var initial_bottles: int=world.depot.fridge_target.products.groups["beer_0"].baked_count
 	check(not find_interaction(world.depot.crates.stock_1,"crate").activate(player),"caixa distante exige aproximação antes de alcançar")
 	for id in ["stock_1","stock_2"]:
 		var item: Node3D=world.depot.crates[id]
@@ -106,7 +117,7 @@ func run() -> void:
 		check(fridge.activate(player),"repor "+id)
 		await ticks(75)
 		check(player.carried==null,"mãos livres após reposição")
-		check(world.depot.fridge_target.products.groups["beer_0"].node.multimesh.instance_count==initial_bottles+2*Session.stocked.size(),"instâncias visíveis de produtos aumentam após reposição")
+		check(world.depot.fridge_target.products.groups["beer_0"].baked_count==initial_bottles+2*Session.stocked.size(),"malha visível recebe novos produtos após reposição")
 	check(Session.stage==3 and Session.stocked.size()==2,"duas reposições completam objetivo na ordem")
 	var loose: Node3D=world.depot.crates.loose
 	player.position=loose.global_position+Vector3(0,0,.7)
@@ -145,7 +156,7 @@ func run() -> void:
 	app.start_saved();world=app.world;player=world.player;await ticks(5)
 	check(player.position.distance_to(Vector3(0,0,-4))<.3,"continuar restaura posição no mundo")
 	check(not is_instance_valid(world.depot.crates.stock_1),"continuar não duplica caixas já repostas")
-	check(world.depot.fridge_target.products.groups["beer_0"].node.multimesh.instance_count==initial_bottles+4,"continuar restaura as instâncias de produtos da geladeira")
+	check(world.depot.fridge_target.products.groups["beer_0"].baked_count==initial_bottles+4,"continuar restaura produtos na malha da geladeira")
 	var migrated:=world.navigation.nearest_walkable(Vector3(1,0,-4))
 	check(migrated.distance_to(Vector3(1,0,-4))>.3 and migrated.distance_to(Vector3(1,0,-4))<2,"checkpoint antigo dentro da gôndola migra para corredor próximo")
 	app.interface.set_paused(true);var frozen:=Session.world_seconds;await ticks(3)

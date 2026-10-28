@@ -60,8 +60,11 @@ class Motion:
   root_delta=Vector((sway,hip_y,hip-.872))
   self.pose={}
   self.pose['pelvis']=Matrix.Translation(self.rest['pelvis'].translation+root_delta)@(rot(y=.012*math.sin(phase),z=.025*math.sin(phase) if moving else .006*breath)@self.rest['pelvis'].to_quaternion()).to_matrix().to_4x4()
-  self.fk('spine',rot(x=lean*.55,y=-.008*breath,z=-.025*math.sin(phase) if moving else 0))
-  self.fk('chest',rot(x=lean*.45+.006*breath,y=.005*breath,z=-.025*math.sin(phase) if moving else .008*math.sin(phase)))
+  # Independent lumbar/thoracic joints: weight transfer, counter-rotation and breathing.
+  self.fk('waist',rot(x=lean*.30+.006*breath,y=-.010*math.sin(phase),z=-.012*math.sin(phase) if moving else .008*math.sin(phase)))
+  self.fk('spine',rot(x=lean*.30+.008*breath,y=.008*math.sin(phase),z=-.025*math.sin(phase) if moving else -.006*math.sin(phase)))
+  self.fk('chest',rot(x=lean*.25+.010*breath,y=.006*breath,z=-.025*math.sin(phase) if moving else .008*math.sin(phase)))
+  self.fk('upper_chest',rot(x=lean*.15-.006*breath,y=-.004*breath,z=-.015*math.sin(phase) if moving else -.004*math.sin(phase)))
   self.fk('neck',rot(x=-lean*.18))
   head_yaw=.035*math.sin(phase*.5)*math.sin(math.pi*t)**2
   if clip in ['idle_look','look']:head_yaw=.32*math.sin(phase)*math.sin(math.pi*t)**2
@@ -70,6 +73,7 @@ class Motion:
   # Breathing expands the rib cage gently without scaling the entire character.
   chest_scale=1+.004*breath*(1.6 if clip=='idle_tired' else 1)
   self.pose['chest']@=Matrix.Diagonal((chest_scale,1.0,chest_scale,1))
+  self.pose['upper_chest']@=Matrix.Diagonal((1+.004*breath,1,1+.003*breath,1))
   for side,sg in [('L',1),('R',-1)]:
    self.fk('shoulder_'+side,rot(x=.008*breath,y=sg*.012*math.sin(phase+.3)))
    # Feet remain on their authored support plane; knees bend toward the front.
@@ -108,16 +112,20 @@ class Motion:
    foot_q=rot(x=toe_pitch,z=-sg*.055)@self.rest['foot_'+side].to_quaternion()
    self.pose['foot_'+side]=Matrix.Translation(end)@foot_q.to_matrix().to_4x4()
    # Wrists define the arm pose; elbows use a restrained outward/backward pole.
-   hand=Vector((sg*.275,-.045,.925))+root_delta*.45
+   shoulder=self.child_head('arm_'+side)
+   l1=(self.rest['forearm_'+side].translation-self.rest['arm_'+side].translation).length
+   l2=(self.rest['hand_'+side].translation-self.rest['forearm_'+side].translation).length
+   hand=Vector((sg*.245+root_delta.x*.45,-.015,shoulder.z-(l1+l2)*.98))
+   if crouch:hand=Vector((sg*.26,-.26,.54))
    if moving and not carrying:
     swing=math.sin(phase+(0 if side=='L' else math.pi))
     if running:hand=Vector((sg*.25,swing*.20,.98+max(0,-swing)*.13))
     elif not crouch:hand.y+=swing*.105;hand.z+=.02*math.cos(phase*2)
-    else:hand=Vector((sg*.27,-.18,.74))
+    else:hand=Vector((sg*.26,-.26,.54))
    if carrying:hand=Vector((sg*.335,-.26,1.07))+Vector((sway,0,.004*breath+(.008*math.cos(phase*2) if moving else 0)))
    if clip in ['pickup','put_down']:
     u=t if clip=='pickup' else 1-t
-    if u<.45:hand=Vector((sg*mix(.275,.335,smooth(u/.36)),mix(-.045,-.43,smooth(u/.36)),mix(.925,.43,smooth(u/.36))))
+    if u<.45:hand=Vector((sg*mix(.245,.335,smooth(u/.36)),mix(-.015,-.43,smooth(u/.36)),mix(.77,.43,smooth(u/.36))))
     else:hand=Vector((sg*.335,mix(-.43,-.26,smooth((u-.48)/.46)),mix(.43,1.07,smooth((u-.48)/.46))))
    if clip=='place':hand=Vector((sg*.335,-.26-.11*reach,1.07+.07*reach))
    if clip in ['cashier','cashier_idle']:
@@ -127,10 +135,7 @@ class Motion:
    if clip=='idle_adjust' and side=='R':
     amount=math.sin(math.pi*t)**2;hand=hand.lerp(Vector((-.18,-.13,.99)),amount)
    hand+=Vector((.002*breath,-.003*breath,.003*breath))
-   shoulder=self.child_head('arm_'+side)
-   l1=(self.rest['forearm_'+side].translation-self.rest['arm_'+side].translation).length
-   l2=(self.rest['hand_'+side].translation-self.rest['forearm_'+side].translation).length
-   pole=shoulder+Vector((sg*.12,.45,-.30))
+   pole=shoulder+Vector((sg*.05,.30,-.25))
    elbow,wrist=ik(shoulder,hand,l1,l2,pole)
    self.segment('arm_'+side,shoulder,elbow);self.segment('forearm_'+side,elbow,wrist)
    hand_dir=Vector((0,-1,-.08)) if carrying or clip in ['pickup','put_down','place','cashier','cashier_idle'] else wrist-elbow

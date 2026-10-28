@@ -46,7 +46,7 @@ func _process(delta: float) -> void:
 		boxes[i].visible=carrying
 	var focus: Vector3=(actors[0].position+actors[1].position)*.5
 	camera.position=focus+Vector3(1.3,1.25,4.7);camera.look_at(focus+Vector3.UP*.93)
-	label.text="0.3 • DERYK / FELPS\n"+title
+	label.text="0.3.1 • DERYK / FELPS\n"+title
 	if frame==90:call_deferred("capture","idle")
 	if frame==610:call_deferred("capture","carry")
 	if frame==790:call_deferred("capture","living")

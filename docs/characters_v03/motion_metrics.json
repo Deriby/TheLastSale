@@ -95,7 +95,7 @@
     "idle_look": {
       "maximum_sole_penetration_m": 0.0,
       "lowest_support_sole_m": -0.0,
-      "highest_support_sole_m": -0.0,
+      "highest_support_sole_m": 0.0,
       "finite": true
     },
     "walk": {
@@ -113,13 +113,13 @@
     "carry": {
       "maximum_sole_penetration_m": 0.0,
       "lowest_support_sole_m": -0.0,
-      "highest_support_sole_m": -0.0,
+      "highest_support_sole_m": 0.0,
       "finite": true
     },
     "carry_walk": {
-      "maximum_sole_penetration_m": 0.00122,
-      "lowest_support_sole_m": -0.00122,
-      "highest_support_sole_m": 0.00746,
+      "maximum_sole_penetration_m": 0.00121,
+      "lowest_support_sole_m": -0.00121,
+      "highest_support_sole_m": 0.00747,
       "finite": true
     },
     "crouch_idle": {
@@ -155,7 +155,7 @@
     "talk": {
       "maximum_sole_penetration_m": 0.0,
       "lowest_support_sole_m": -0.0,
-      "highest_support_sole_m": -0.0,
+      "highest_support_sole_m": 0.0,
       "finite": true
     }
   }

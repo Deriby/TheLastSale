@@ -1,0 +1,52 @@
+{
+  "DERYK 0.3.1": {
+    "L": {
+      "shoulder_height_m": 1.2771,
+      "elbow_height_m": 1.0011,
+      "wrist_height_m": 0.7454,
+      "elbow_flexion_deg": 24.06,
+      "upper_arm_m": 0.2798,
+      "forearm_m": 0.2656
+    },
+    "R": {
+      "shoulder_height_m": 1.2811,
+      "elbow_height_m": 1.0058,
+      "wrist_height_m": 0.7495,
+      "elbow_flexion_deg": 23.47,
+      "upper_arm_m": 0.2798,
+      "forearm_m": 0.2656
+    },
+    "torso_bones": [
+      "pelvis",
+      "waist",
+      "spine",
+      "chest",
+      "upper_chest"
+    ]
+  },
+  "FELPS 0.3.1": {
+    "L": {
+      "shoulder_height_m": 1.3063,
+      "elbow_height_m": 1.0315,
+      "wrist_height_m": 0.7798,
+      "elbow_flexion_deg": 24.73,
+      "upper_arm_m": 0.2799,
+      "forearm_m": 0.2602
+    },
+    "R": {
+      "shoulder_height_m": 1.3104,
+      "elbow_height_m": 1.0362,
+      "wrist_height_m": 0.7839,
+      "elbow_flexion_deg": 23.97,
+      "upper_arm_m": 0.2799,
+      "forearm_m": 0.2602
+    },
+    "torso_bones": [
+      "pelvis",
+      "waist",
+      "spine",
+      "chest",
+      "upper_chest"
+    ]
+  }
+}

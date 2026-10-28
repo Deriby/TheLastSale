@@ -1,19 +1,19 @@
-# Validação — revisão 0.3 — 28/10/2026
+# Validação — revisão 0.3.1 — 28/10/2026
 
 ## Ambiente
 
 Godot **4.4.1.stable.official.49a5bc7b6**, Linux x86_64. Runtime Compatibility / OpenGL 4.5 por Mesa llvmpipe em display virtual Xorg. Blender 4.3.2, renderização Cycles CPU. O editor e os templates oficiais foram conferidos contra os SHA-512 publicados no release Godot 4.4.1.
 
-Esta revisão substitui Felps pelo upload correto e trabalha os personagens e a câmera. As imagens e gravações estão em [characters_v03](characters_v03/README.md). A reconstrução anterior do cenário está em [depot_v02](depot_v02/README.md).
+Esta revisão corrige braços e pesos conforme a referência do usuário, acrescenta articulações no tronco e substitui o desenho por instâncias das geladeiras/prateleiras por malhas estáticas comuns. Imagens e gravações em [fixes_v031](fixes_v031/README.md). O registro anterior do novo Felps está em [characters_v03](characters_v03/README.md). A reconstrução anterior do cenário está em [depot_v02](depot_v02/README.md).
 
 ## Integração
 
-`./tools/test.sh`: **71/71 verificações passaram**, saída 0. O preset Linux QA exportado também executou **71/71**, saída 0. As duas execuções usam saves temporários e percorrem o fluxo real com física, sem erros de GDScript ou objetos retidos na finalização.
+`./tools/test.sh`: **73/73 verificações passaram**, saída 0. O preset Linux QA exportado também executou **73/73**, saída 0. As duas execuções usam saves temporários e percorrem o fluxo real com física, sem erros de GDScript ou objetos retidos na finalização.
 
 Cobertura:
 
 - Cena principal, chão físico, seis rigs importados, materiais e texturas.
-- 23 clipes de Deryk importados, expansão da caixa torácica em repouso, base dos pés mais estreita e novo Felps com cabeça separada.
+- 23 clipes de Deryk importados, expansão da caixa torácica em repouso, base dos pés mais estreita e novo Felps com cabeça separada; cotovelos baixos, punhos abaixo do quadril e cintura/peito superior movendo-se separadamente.
 - Entrada WASD, corrida, aceleração e colisão reduzida no agachamento.
 - Roda e movimento de mouse encaminhados à viewport.
 - SpringArm junto à parede, recolhimento lateral do ombro, volume da lente fora da parede e transição entre terceira/primeira pessoa com corpo visível.
@@ -29,15 +29,23 @@ Os clientes são simulados com tempo acelerado no teste; a velocidade normal per
 
 ## Rigs e movimentos
 
-`tools/rig_characters.py` deriva Deryk e Felps a partir dos originais, mantendo UVs e a identidade dos modelos. Os dois têm 19 ossos, pesos normalizados sem vértices sem influência, duas malhas de renderização (cabeça/corpo), aproximadamente 12 mil triângulos e texturas de cor 1024². Enemy e os três clientes mantêm os assets anteriores.
+`tools/rig_characters.py` deriva Deryk e Felps a partir dos originais, mantendo UVs e a identidade dos modelos. Os dois têm 21 ossos, com cintura e peito superior articulados, pesos normalizados sem vértices sem influência, duas malhas de renderização (cabeça/corpo), aproximadamente 12 mil triângulos e texturas de cor 1024². Enemy e os três clientes mantêm os assets anteriores.
 
-`tools/validate_rigs.py` reimporta os GLBs, verifica deformações finitas e limites de volume e renderiza repouso, caminhada, corrida, agachamento e transporte. As folhas finais foram inspecionadas para Deryk, Felps e Enemy. Dados: `rig_report.json` e `rig_validation.json`.
+`tools/validate_rigs.py` reimporta os GLBs, verifica deformações finitas e limites de volume e renderiza repouso, caminhada, corrida, agachamento e transporte. As folhas finais foram inspecionadas para Deryk, Felps e Enemy. Dados: `rig_report.json` e `rig_validation.json`. `tools/review_anatomy.py` também mede os braços exportados e produz a comparação com os ossos reais em `fixes_v031/anatomy_bones.png`.
 
 `tools/measure_motion.py` amostra 41 instantes de 13 clipes em cada um dos dois protagonistas: 1.066 poses. Todas as deformações amostradas são finitas. A maior penetração da sola foi 7,4 mm; o maior afastamento do piso durante apoio amostrado foi 11,2 mm. O limite de regressão de penetração é 12 mm. São medidas em piso plano, sem certificar todo giro ou terreno. Resultados por clipe em `characters_v03/motion_metrics.json`.
 
-`tests/motion_review.tscn` gravou 38 segundos do controlador real, com os modelos se deslocando sobre piso marcado. A revisão também capturou Felps no caixa, transporte, primeira pessoa e corredor no jogo completo. Vídeo e GIFs estão em `characters_v03`; a execução gráfica final não apresentou erros de script.
+`tests/motion_review.tscn` gravou 38 segundos do controlador real, com os modelos se deslocando sobre piso marcado. A revisão também capturou Felps no caixa, transporte, primeira pessoa e corredor no jogo completo. Vídeo e GIFs atuais estão em `fixes_v031`; a execução gráfica final não apresentou erros de script.
 
 SHA-256 dos originais ativos em `original_checksums.json`. Deryk e Enemy permanecem idênticos aos uploads anteriores. O novo Felps é idêntico ao upload desta revisão; o Felps substituído permanece integralmente arquivado. Histórico em `characters_v03/source_history.json`.
+
+## Renderização dos equipamentos
+
+O relato do usuário é em Windows 7 / Radeon R7 200 series. As malhas estáticas agrupadas substituem MultiMesh em todas as geladeiras, gôndolas, produtos e demais lotes de cenário. São renderizadas sem interpolação física, com limites de visibilidade calculados pela geometria final. Repor bebidas atualiza apenas o grupo que mudou.
+
+`tests/retail_render_review.tscn` compara o cenário renderizado com uma referência de 2.030 malhas individuais, a 30 e 144 quadros por segundo de simulação, incluindo pausa e recarga. O limite é 1% dos pixels com diferença de cor acima de 20/255. Os registros finais em `fixes_v031` informam os resultados. As capturas foram inspecionadas; o cenário aparece completo. Não se trata de uma medição de desempenho da R7.
+
+A falha integral da captura enviada não foi reproduzida em Mesa llvmpipe. A correção retira o caminho de instancing dos objetos afetados. O pacote Windows continua sem execução em Windows real; não se certifica compatibilidade oficial com Windows 7.
 
 ## Exportação e repetição
 

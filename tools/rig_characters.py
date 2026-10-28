@@ -2,7 +2,7 @@
 blender -b -t 4 --python tools/rig_characters.py -- /absolute/project/root
 Enemy and the independent customer rigs are intentionally unchanged.
 """
-import bpy,sys,math,json,bmesh,hashlib
+import bpy,sys,math,json,bmesh,hashlib,statistics
 from pathlib import Path
 from mathutils import Vector
 sys.path.insert(0,str(Path(__file__).resolve().parent))
@@ -20,6 +20,25 @@ for name in ['Dery','Felps']:
  floor=min(v.co.z for v in mesh.data.vertices);height=max(v.co.z for v in mesh.data.vertices)-floor
  for v in mesh.data.vertices:v.co.z-=floor;v.co*=1.78/height
  dec=mesh.modifiers.new('Preserve silhouette runtime budget','DECIMATE');dec.ratio=.24;bpy.ops.object.modifier_apply(modifier=dec.name)
+ # The generated T-pose has a short forearm and the old wrist was inside the palm.
+ # Fit anatomical joints first; extend the derived arms without changing the upload/UVs.
+ source_coords=[v.co.copy() for v in mesh.data.vertices]
+ def arm_x(x):
+  if x<=.21:return x
+  if x<=.395:return .21+(x-.21)*(.11/.185)
+  if x<=.46:return .32+(x-.395)*(.17/.065)
+  if x<=.59:return .49+(x-.46)*(.26/.13)
+  return .75+(x-.59)*.85
+ def arm_point(side,x):
+  points=[p for p in source_coords if abs(abs(p.x)-x)<.018 and 1.15<p.z<1.48]
+  return Vector((side*arm_x(x),statistics.median(p.y for p in points),statistics.median(p.z for p in points)))
+ for v in mesh.data.vertices:
+  ax=abs(v.co.x)
+  if 1.12<v.co.z<1.495:
+   # Keep a short sleeve instead of stretching the T-pose sleeve down to the elbow.
+   fit=1-.22*smooth((ax-.23)/.075)*(1-smooth((ax-.385)/.035))
+   v.co.y=.04+(v.co.y-.04)*fit;v.co.z=1.32+(v.co.z-1.32)*fit
+   v.co.x=math.copysign(arm_x(ax),v.co.x)
  for mat in mesh.data.materials:
   bs=next(n for n in mat.node_tree.nodes if n.type=='BSDF_PRINCIPLED')
   for inp in ['Normal','Metallic','Roughness']:
@@ -33,13 +52,18 @@ for name in ['Dery','Felps']:
   q=rig.data.edit_bones.new(n);q.head=Vector(a)*1.78;q.tail=Vector(b)*1.78
   if parent:q.parent=bones[parent]
   bones[n]=q
- bone('pelvis',(0,0,.45),(0,0,.53));bone('spine',(0,0,.53),(0,0,.65),'pelvis');bone('chest',(0,0,.65),(0,0,.77),'spine')
- bone('neck',(0,0,.77),(0,0,.84),'chest');bone('head',(0,0,.84),(0,0,.98),'neck')
+ bone('pelvis',(0,0,.45),(0,0,.51));bone('waist',(0,0,.51),(0,0,.58),'pelvis')
+ bone('spine',(0,0,.58),(0,0,.65),'waist');bone('chest',(0,0,.65),(0,0,.71),'spine')
+ bone('upper_chest',(0,0,.71),(0,0,.77),'chest')
+ bone('neck',(0,0,.77),(0,0,.84),'upper_chest');bone('head',(0,0,.84),(0,0,.98),'neck')
  for side,sg in [('L',1),('R',-1)]:
-  bone('shoulder_'+side,(0,0,.76),(sg*.145,0,.755),'chest')
-  bone('arm_'+side,(sg*.145,0,.755),(sg*.287,0,.75),'shoulder_'+side)
-  bone('forearm_'+side,(sg*.287,0,.75),(sg*.39,0,.745),'arm_'+side)
-  bone('hand_'+side,(sg*.39,0,.745),(sg*.44,0,.745),'forearm_'+side)
+  shoulder=arm_point(sg,.21)/1.78;elbow=arm_point(sg,.46)/1.78;wrist=arm_point(sg,.59)/1.78;fingers=arm_point(sg,.72)/1.78
+  # The shoulder band overlaps dense torso vertices; its surface median is not a joint.
+  shoulder.y=elbow.y;shoulder.z=elbow.z
+  bone('shoulder_'+side,(0,0,.76),shoulder,'upper_chest')
+  bone('arm_'+side,shoulder,elbow,'shoulder_'+side)
+  bone('forearm_'+side,elbow,wrist,'arm_'+side)
+  bone('hand_'+side,wrist,fingers,'forearm_'+side)
   bone('thigh_'+side,(sg*.085,0,.49),(sg*.105,0,.28),'pelvis')
   bone('shin_'+side,(sg*.105,0,.28),(sg*.12,0,.075),'thigh_'+side)
   bone('foot_'+side,(sg*.12,0,.075),(sg*.12,-.09,.04),'shin_'+side)
@@ -51,18 +75,21 @@ for name in ['Dery','Felps']:
   if t>0:groups[n2].add([v.index],t,'REPLACE')
  def between(v,axis,lo,hi,n1,n2):blend(v,n1,n2,(axis-lo)/(hi-lo))
  for v in mesh.data.vertices:
-  x,y,z=v.co/1.78;side='L' if x>0 else 'R';ax=abs(x)
-  if .63<z<.84 and ax>.12:
-   if ax<.205:between(v,ax,.12,.205,'chest','arm_'+side)
-   elif ax<.315:between(v,ax,.265,.315,'arm_'+side,'forearm_'+side)
-   else:between(v,ax,.36,.405,'forearm_'+side,'hand_'+side)
+  x,y,z=source_coords[v.index]/1.78;side='L' if x>0 else 'R';ax=abs(x)*1.78
+  if .63<z<.84 and ax>.19:
+   if ax<.31:between(v,ax,.19,.31,'upper_chest','arm_'+side)
+   elif ax<.51:between(v,ax,.425,.495,'arm_'+side,'forearm_'+side)
+   else:between(v,ax,.555,.615,'forearm_'+side,'hand_'+side)
   elif z<.49:
    if z>.415:between(v,z,.415,.495,'thigh_'+side,'pelvis')
    elif z>.225:between(v,z,.225,.315,'shin_'+side,'thigh_'+side)
    else:between(v,z,.075,.115,'foot_'+side,'shin_'+side)
-  elif z<.65:between(v,z,.50,.65,'pelvis','spine')
-  elif z<.77:between(v,z,.65,.76,'spine','chest')
-  elif z<.85:between(v,z,.77,.85,'neck','head')
+  elif z<.54:between(v,z,.49,.54,'pelvis','waist')
+  elif z<.615:between(v,z,.55,.615,'waist','spine')
+  elif z<.685:between(v,z,.615,.685,'spine','chest')
+  elif z<.77:between(v,z,.685,.755,'chest','upper_chest')
+  elif z<.805:between(v,z,.77,.805,'upper_chest','neck')
+  elif z<.86:between(v,z,.805,.86,'neck','head')
   else:groups['head'].add([v.index],1,'REPLACE')
  assert all(v.groups and abs(sum(g.weight for g in v.groups)-1)<1e-5 for v in mesh.data.vertices)
  mod=mesh.modifiers.new('Humanoid skin','ARMATURE');mod.object=rig;mesh.parent=rig;mesh.name=name+'_Body'

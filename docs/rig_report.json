@@ -2,7 +2,7 @@
   "Dery": {
     "vertices": 12213,
     "triangles": 12000,
-    "bones": 19,
+    "bones": 21,
     "unweighted": 0,
     "clips": [
       "idle",
@@ -38,7 +38,7 @@
   "Felps": {
     "vertices": 11611,
     "triangles": 12000,
-    "bones": 19,
+    "bones": 21,
     "unweighted": 0,
     "clips": [
       "idle",

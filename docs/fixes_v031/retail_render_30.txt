@@ -1,0 +1,294 @@
+WorkerThreadPool: 5 threads, 1 max low-priority.
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+TextServer: Added interface "Dummy"
+TextServer: Added interface "ICU / HarfBuzz / Graphite (Built-in)"
+JoypadLinux: udev enabled and loaded successfully.
+Xshape 1.1 detected.
+Xinerama 1.1 detected.
+Xrandr 1.6 detected.
+Xrender 0.11 detected.
+Xinput 2.2 detected.
+XInput: Refreshing devices.
+XInput: No touch devices found.
+Detecting GPUs, set DRI_PRIME in the environment to override GPU detection logic.
+Only one GPU found, using default.
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:360)
+XcursorGetTheme could not get cursor theme
+Failed loading custom cursor: crossed_circle
+ScreenSaver: DBus 1.16.2 detected.
+PortalDesktop: DBus 1.16.2 detected.
+Using "default" pen tablet driver...
+Shader 'CanvasSdfShaderGLES3' SHA256: e1fc4015d45db07fce0346b99c312728ab006030520ec796da1461e1428345c5
+Shader 'SkeletonShaderGLES3' SHA256: e42116215ed2a92dea7085176e3b3f1089edcb71a3405ab67073ce8e77114587
+Shader 'ParticlesShaderGLES3' SHA256: ffb4401639aafac71f9f113685cb6db157587dac2f1a352495327188f37419b2
+Shader 'ParticlesCopyShaderGLES3' SHA256: 9899e9a2ef961a3d8b457619edf04eca325601701531cee383193a6c83ec1a13
+Shader 'CopyShaderGLES3' SHA256: dbe7ebad1989310ea48c4fa461ad02433653e0347193b18e3cbaacc5a84ce4c1
+Shader 'CubemapFilterShaderGLES3' SHA256: 017276394727d66a84d83b8b9d67287226d828c938b0adde3d2f699f78cf1582
+Shader 'GlowShaderGLES3' SHA256: 427cfd9bd0cc4045ecaa4bc4f23055a2a40660411d8e1663897a7c2cd3c80665
+Shader 'PostShaderGLES3' SHA256: 0261dc65bbd27a029b2da5e7f7b8b8f8e1b18d769a1049417d13ba3b3fa5cc3d
+Shader 'FeedShaderGLES3' SHA256: 9c5f15371d9ed62661ff3bb3ecc28f82cb15be9a4be89518b1f6fd8d372fbe4b
+Shader 'CanvasShaderGLES3' SHA256: fe08472ea3b0a4bb3b879c53d2338e756aa130590224b671cc5a1882f1f5df2c
+Shader 'CanvasOcclusionShaderGLES3' SHA256: 6baa8caaecef40c331cf27f156879d8ca7d8bf94ec84f8168903490f61264d2d
+Shader 'SceneShaderGLES3' SHA256: 7225318e6ab0e02839cf4bc97e49fbecd25fe7e5cd27dc384199254e5ec97d20
+Shader 'SkyShaderGLES3' SHA256: 5183ccdd5c4e877cf8a9af7b01a7f5b5f46b730b312b0a0b853fa9135f000937
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+TextServer: Primary interface set to: "ICU / HarfBuzz / Graphite (Built-in)".
+CORE API HASH: 4052744068
+EDITOR API HASH: 910296392
+Loading resource: res://scripts/systems/session.gd
+Loading resource: res://scripts/systems/dialogue.gd
+Loading resource: res://scripts/systems/preferences.gd
+Loaded system CA certificates
+Loading resource: res://tests/retail_render_review.tscn
+Loading resource: res://tests/retail_render_review.gd
+Loading resource: res://scenes/main/main.tscn
+Loading resource: res://scripts/systems/main.gd
+Loading resource: res://shaders/retro.gdshader
+Loading resource: res://assets/textures/asphalt.png
+Loading resource: res://.godot/imported/asphalt.png-65d02f885e1f46967698c29c730c68ed.ctex
+Loading resource: res://assets/textures/concrete.png
+Loading resource: res://.godot/imported/concrete.png-8a358c51f81529195a3aed05934b1218.ctex
+Loading resource: res://assets/textures/plaster.png
+Loading resource: res://.godot/imported/plaster.png-339724dd3d7eafcd67e7771599555b99.ctex
+Loading resource: res://assets/textures/metal.png
+Loading resource: res://.godot/imported/metal.png-a72f9c7f956f4d02b133075ae81d5989.ctex
+Loading resource: res://assets/textures/depot/wall.png
+Loading resource: res://.godot/imported/wall.png-7220d8eb92d49c089e7fd0bc6742060f.ctex
+Loading resource: res://assets/textures/depot/floor.png
+Loading resource: res://.godot/imported/floor.png-4090ebc462ccfd41f42740482ab4d20a.ctex
+Loading resource: res://assets/textures/depot/roof.png
+Loading resource: res://.godot/imported/roof.png-d42ccf2e3a4201714e663340be378128.ctex
+Loading resource: res://assets/textures/depot/poster.png
+Loading resource: res://.godot/imported/poster.png-7865dc66caf9043ea482b18035b11976.ctex
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://assets/textures/depot/price.png
+Loading resource: res://.godot/imported/price.png-0fc797e4d660799a1cf27e1af6595b0d.ctex
+Loading resource: res://assets/textures/depot/snack_0.png
+Loading resource: res://.godot/imported/snack_0.png-e788b19f60e65e66da161a636bb72eed.ctex
+Loading resource: res://assets/textures/depot/snack_1.png
+Loading resource: res://.godot/imported/snack_1.png-95dbc3b92dc838aaa4a82495247e2066.ctex
+Loading resource: res://assets/textures/depot/snack_2.png
+Loading resource: res://.godot/imported/snack_2.png-8ccf584d50375b849fccc06dfc49867a.ctex
+Loading resource: res://assets/textures/depot/snack_3.png
+Loading resource: res://.godot/imported/snack_3.png-f2076656a4cde180480f5b85d90d4490.ctex
+Loading resource: res://assets/textures/depot/snack_4.png
+Loading resource: res://.godot/imported/snack_4.png-cf3b6ee26e5dd4311c9991d447ab8d03.ctex
+Loading resource: res://assets/textures/depot/snack_5.png
+Loading resource: res://.godot/imported/snack_5.png-b5c9a4a474c9529b1a1ae53a8858f4b0.ctex
+Loading resource: res://assets/textures/depot/can_0.png
+Loading resource: res://.godot/imported/can_0.png-34c9e055bd990e921a43c9b607ba707f.ctex
+Loading resource: res://assets/textures/depot/can_1.png
+Loading resource: res://.godot/imported/can_1.png-6fe2baff7d2dbb29ee53c8c10b27bb6d.ctex
+Loading resource: res://assets/textures/depot/can_2.png
+Loading resource: res://.godot/imported/can_2.png-5485acce8df95ddb37a6da3be3de3b62.ctex
+Loading resource: res://assets/textures/depot/contact.png
+Loading resource: res://.godot/imported/contact.png-44d327f6a0cac0122d18525bf941081b.ctex
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://assets/textures/depot/beer_0.png
+Loading resource: res://.godot/imported/beer_0.png-261a4d88e7c1b6cb7aa1e3f5fff88485.ctex
+Loading resource: res://assets/textures/depot/beer_1.png
+Loading resource: res://.godot/imported/beer_1.png-f50983756e31eec30a5654fee76f6aa0.ctex
+Loading resource: res://assets/textures/depot/water.png
+Loading resource: res://.godot/imported/water.png-7a2b447f74e2b892bc8756931afd6bc9.ctex
+Loading resource: res://assets/textures/depot/spirits.png
+Loading resource: res://.godot/imported/spirits.png-1a444a5bae5dc596a27f9693665d1ab1.ctex
+Loading resource: res://assets/textures/depot/soda_0.png
+Loading resource: res://.godot/imported/soda_0.png-188aeb4cbd83efba252862b637dd2262.ctex
+Loading resource: res://assets/textures/depot/soda_1.png
+Loading resource: res://.godot/imported/soda_1.png-de3ca87e8e6697dc543cd005a8bfe245.ctex
+Loading resource: res://assets/textures/depot/soda_2.png
+Loading resource: res://.godot/imported/soda_2.png-3d683ce146e5ec4d9bdaeecea72f3a6f.ctex
+Loading resource: res://scenes/world/props/endcap.tscn
+Loading resource: res://assets/textures/depot/toy_0.png
+Loading resource: res://.godot/imported/toy_0.png-d26a2ae5b28f35ffe7dc49cd58f31181.ctex
+Loading resource: res://assets/textures/depot/toy_1.png
+Loading resource: res://.godot/imported/toy_1.png-416e0afc51a22824af1e4412a2b11422.ctex
+Loading resource: res://assets/textures/depot/toy_2.png
+Loading resource: res://.godot/imported/toy_2.png-ed89b918bd18caf3b7ab9305ee096013.ctex
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/endcap.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://assets/textures/depot/beer_banner.png
+Loading resource: res://.godot/imported/beer_banner.png-74858d0fc9a987e411a716a332d678a7.ctex
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://assets/textures/depot/soda_banner.png
+Loading resource: res://.godot/imported/soda_banner.png-b19f956356d85a6308ab9f2007f1fa0d.ctex
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://assets/textures/depot/water_banner.png
+Loading resource: res://.godot/imported/water_banner.png-02caff2d713832b1955f6221a8bbaa65.ctex
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://assets/textures/depot/counter.png
+Loading resource: res://.godot/imported/counter.png-cf20a1791dcef9778442d4f6340275b6.ctex
+Loading resource: res://assets/textures/depot/register_screen.png
+Loading resource: res://.godot/imported/register_screen.png-72c6e4f1d347cd42d33cfd3cff8e6ed2.ctex
+Loading resource: res://assets/textures/depot/pix_sign.png
+Loading resource: res://.godot/imported/pix_sign.png-60bc709252a97d28241a2d8b27a412a7.ctex
+Loading resource: res://scenes/world/props/freezer.tscn
+Loading resource: res://scenes/world/props/pallet.tscn
+Loading resource: res://assets/textures/depot/wood.png
+Loading resource: res://.godot/imported/wood.png-20ed358e078e185f071d03ec48fc6c39.ctex
+Loading resource: res://scenes/world/props/pallet.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://assets/textures/depot/carton.png
+Loading resource: res://.godot/imported/carton.png-b1c685856af98e691d84575bee1bb323.ctex
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://assets/models/characters/Felps.glb
+Loading resource: res://.godot/imported/Felps.glb-20b515bccbcd2351cccbdf387185350b.scn
+Loading resource: res://assets/models/characters/Felps_texture_pbr_20250901.png
+Loading resource: res://.godot/imported/Felps_texture_pbr_20250901.png-734b6d26452378a8f318eda18013c338.s3tc.ctex
+Loading resource: res://assets/models/characters/Dery.glb
+Loading resource: res://.godot/imported/Dery.glb-8ab9ded77c29e345b13938a0b6bbfd8c.scn
+Loading resource: res://assets/models/characters/Dery_texture_pbr_20250901.png
+Loading resource: res://.godot/imported/Dery_texture_pbr_20250901.png-bd0a6019d1cc1716bd5eb53b4ebb9afc.s3tc.ctex
+Loading resource: res://assets/audio/step.wav
+Loading resource: res://.godot/imported/step.wav-7c1afa4d3561f9fd67ecf320728c68cf.sample
+Loading resource: res://assets/audio/hum.wav
+Loading resource: res://.godot/imported/hum.wav-3e8cb3ba3785f99343e3a053b39d59c0.sample
+Loading resource: res://assets/audio/radio.wav
+Loading resource: res://.godot/imported/radio.wav-7a878d7f142b03f7325c024c723436a0.sample
+Loading resource: res://assets/audio/night.wav
+Loading resource: res://.godot/imported/night.wav-515e56f117c74b063fb7ace7e49233b9.sample
+Loading resource: res://assets/models/characters/Enemy.glb
+Loading resource: res://.godot/imported/Enemy.glb-6fd530bbebbce3f332ec1943c265ad31.scn
+Loading resource: res://assets/models/characters/Enemy_texture_pbr_20250901.png
+Loading resource: res://.godot/imported/Enemy_texture_pbr_20250901.png-38f392ece3192e39894bee3b32a8e65e.s3tc.ctex
+CAPTURE menu alpha=0.0
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/endcap.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/endcap.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/freezer.tscn
+Loading resource: res://scenes/world/props/pallet.tscn
+Loading resource: res://scenes/world/props/pallet.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://assets/models/characters/Felps.glb
+Loading resource: res://.godot/imported/Felps.glb-20b515bccbcd2351cccbdf387185350b.scn
+Loading resource: res://assets/models/characters/Felps_texture_pbr_20250901.png
+Loading resource: res://.godot/imported/Felps_texture_pbr_20250901.png-734b6d26452378a8f318eda18013c338.s3tc.ctex
+Loading resource: res://assets/models/characters/Dery.glb
+Loading resource: res://.godot/imported/Dery.glb-8ab9ded77c29e345b13938a0b6bbfd8c.scn
+Loading resource: res://assets/models/characters/Dery_texture_pbr_20250901.png
+Loading resource: res://.godot/imported/Dery_texture_pbr_20250901.png-bd0a6019d1cc1716bd5eb53b4ebb9afc.s3tc.ctex
+Loading resource: res://assets/audio/step.wav
+Loading resource: res://.godot/imported/step.wav-7c1afa4d3561f9fd67ecf320728c68cf.sample
+Loading resource: res://assets/audio/hum.wav
+Loading resource: res://.godot/imported/hum.wav-3e8cb3ba3785f99343e3a053b39d59c0.sample
+Loading resource: res://assets/audio/radio.wav
+Loading resource: res://.godot/imported/radio.wav-7a878d7f142b03f7325c024c723436a0.sample
+Loading resource: res://assets/audio/night.wav
+Loading resource: res://.godot/imported/night.wav-515e56f117c74b063fb7ace7e49233b9.sample
+Loading resource: res://assets/models/characters/Enemy.glb
+Loading resource: res://.godot/imported/Enemy.glb-6fd530bbebbce3f332ec1943c265ad31.scn
+Loading resource: res://assets/models/characters/Enemy_texture_pbr_20250901.png
+Loading resource: res://.godot/imported/Enemy_texture_pbr_20250901.png-38f392ece3192e39894bee3b32a8e65e.s3tc.ctex
+CAPTURE running alpha=0.0
+CAPTURE paused alpha=0.0
+REFERENCE independent meshes: 2030
+CAPTURE reference alpha=0.0
+RENDER_RESULT {"different_pixels":78,"limit":0.01,"pixels":230400,"ratio":0.000338541666666667}
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/endcap.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/endcap.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/freezer.tscn
+Loading resource: res://scenes/world/props/pallet.tscn
+Loading resource: res://scenes/world/props/pallet.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://assets/models/characters/Felps.glb
+Loading resource: res://.godot/imported/Felps.glb-20b515bccbcd2351cccbdf387185350b.scn
+Loading resource: res://assets/models/characters/Felps_texture_pbr_20250901.png
+Loading resource: res://.godot/imported/Felps_texture_pbr_20250901.png-734b6d26452378a8f318eda18013c338.s3tc.ctex
+Loading resource: res://assets/models/characters/Dery.glb
+Loading resource: res://.godot/imported/Dery.glb-8ab9ded77c29e345b13938a0b6bbfd8c.scn
+Loading resource: res://assets/models/characters/Dery_texture_pbr_20250901.png
+Loading resource: res://.godot/imported/Dery_texture_pbr_20250901.png-bd0a6019d1cc1716bd5eb53b4ebb9afc.s3tc.ctex
+Loading resource: res://assets/audio/step.wav
+Loading resource: res://.godot/imported/step.wav-7c1afa4d3561f9fd67ecf320728c68cf.sample
+Loading resource: res://assets/audio/hum.wav
+Loading resource: res://.godot/imported/hum.wav-3e8cb3ba3785f99343e3a053b39d59c0.sample
+Loading resource: res://assets/audio/radio.wav
+Loading resource: res://.godot/imported/radio.wav-7a878d7f142b03f7325c024c723436a0.sample
+Loading resource: res://assets/audio/night.wav
+Loading resource: res://.godot/imported/night.wav-515e56f117c74b063fb7ace7e49233b9.sample
+Loading resource: res://assets/models/characters/Enemy.glb
+Loading resource: res://.godot/imported/Enemy.glb-6fd530bbebbce3f332ec1943c265ad31.scn
+Loading resource: res://assets/models/characters/Enemy_texture_pbr_20250901.png
+Loading resource: res://.godot/imported/Enemy_texture_pbr_20250901.png-38f392ece3192e39894bee3b32a8e65e.s3tc.ctex
+CAPTURE reload alpha=0.0
+XR: Clearing primary interface
+XR: Removed interface "Native mobile"
+XR: Removed interface "OpenXR"
