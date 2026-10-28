@@ -6,24 +6,27 @@ static func tree(parent: Node3D,at: Vector3,height:=3.8) -> void:
 	Geo.cylinder(root,Vector3(0,height*.30,0),.065,height*.60,bark)
 	RetailDetails.collision(root,Vector3(0,height*.30,0),Vector3(.13,height*.60,.13))
 	var batch:=PropBatch.new();root.add_child(batch)
+	var wind:=FoliageWind.new()
+	for color in [Color("667454"),Color("4d6347"),Color("7a8258")]:
+		var mat:=ShaderMaterial.new();mat.shader=load("res://shaders/foliage.gdshader");mat.set_shader_parameter("leaf_color",color);mat.set_shader_parameter("leaf_texture",load("res://assets/textures/mood/leaves.png"));wind.materials.append(mat)
 	for i in 5:
 		var angle:=i*2.4
 		var end:=Vector3(sin(angle)*.6,height*(.68+i*.045),cos(angle)*.45)
 		StreetDetail.beam(batch,Vector3(0,height*.43,0),end,.04,bark)
-	for i in 15:
+	var leaf_mesh:=QuadMesh.new();leaf_mesh.size=Vector2(1.2,1.0)
+	for i in 23:
 		var angle:=i*2.4
-		var pos:=Vector3(sin(angle)*(.3+(i%3)*.25),height*.68+sin(i*1.7)*.55,cos(angle)*.65)
-		StreetDetail.leaf(batch,pos,Vector3(.53,.65,.48),StreetDetail.material([Color("667454"),Color("4d6347"),Color("7a8258")][i%3]))
-	batch.flush()
+		var pos:=Vector3(sin(angle)*(.24+(i%4)*.18),height*.68+sin(i*1.7)*.67,cos(angle)*.63)
+		for crossed in 2:
+			var basis:=Basis.from_euler(Vector3(.25*sin(i),angle+crossed*PI/2,.18*cos(i)))
+			batch.add_instance("leaf_cards_"+str(i%3),leaf_mesh,wind.materials[i%3],Transform3D(basis,pos))
+	batch.flush();root.add_child(wind)
 static func car(parent: Node3D,at: Vector3,color: Color,angle:=0.0) -> void:
 	var root:=Node3D.new();root.name="ParkedCompact";parent.add_child(root);root.position=at;root.rotation.y=angle
-	var batch:=PropBatch.new();root.add_child(batch);var paint:=StreetDetail.material(color)
-	batch.add_box(Vector3(0,.58,0),Vector3(3.70,.62,1.56),paint)
-	batch.add_box(Vector3(1.24,.89,0),Vector3(1.2,.10,1.5),paint)
-	batch.add_box(Vector3(-1.42,.9,0),Vector3(.7,.08,1.48),paint)
+	var batch:=PropBatch.new();root.add_child(batch);var paint:=NeighborhoodCar.body(root,color)
 	batch.add_box(Vector3(-.12,1.43,0),Vector3(1.28,.08,1.35),paint)
 	var glass:=StreetDetail.material(Color("435353"))
-	glass.cull_mode=BaseMaterial3D.CULL_DISABLED
+	glass.cull_mode=BaseMaterial3D.CULL_DISABLED;glass.roughness=.22;glass.metallic=.08
 	var front: Array[Vector3]=[Vector3(.80,.91,-.70),Vector3(.80,.91,.70),Vector3(.48,1.4,.65),Vector3(.48,1.4,-.65)]
 	var rear: Array[Vector3]=[Vector3(-1.1,.94,.70),Vector3(-1.1,.94,-.70),Vector3(-.72,1.4,-.65),Vector3(-.72,1.4,.65)]
 	for face in [front,rear]:
@@ -39,6 +42,7 @@ static func car(parent: Node3D,at: Vector3,color: Color,angle:=0.0) -> void:
 		for x in [-1.17,1.15]:
 			var wheel:=Geo.cylinder(root,Vector3(x,.34,side*.79),.31,.20,StreetDetail.material(Color("202927")));wheel.rotation.x=PI/2
 			var hub:=Geo.cylinder(root,Vector3(x,.34,side*.90),.17,.015,StreetDetail.material(Color("8a8f82")));hub.rotation.x=PI/2
+			for i in 5:StreetDetail.beam(batch,Vector3(x,.34,side*.914),Vector3(x+sin(i*TAU/5)*.145,.34+cos(i*TAU/5)*.145,side*.914),.020,StreetDetail.material(Color("b1b5a6")))
 	for x in [-1.87,1.87]:batch.add_box(Vector3(x,.43,0),Vector3(.10,.13,1.48),StreetDetail.material(Color("595f57")))
 	for side in [-1,1]:
 		batch.add_box(Vector3(.60,.97,side*.85),Vector3(.17,.10,.14),paint)
@@ -61,7 +65,13 @@ static func pole(parent: Node3D,at: Vector3,arm_side: float) -> void:
 	for x in [-.77,-.26,.26,.77]:
 		for y in [8.85,8.92]:batch.add_box(Vector3(x,y,0),Vector3(.12,.05,.11),StreetDetail.material(Color("747466")))
 	batch.add_box(Vector3(.16,5.90,0),Vector3(.23,.5,.20),StreetDetail.material(Color("454d48")))
-	var light:=Geo.light(root,Vector3(0,7.82,arm_side*1.65),Color("ebca94"),3.1,14.0);light.omni_attenuation=1.1
+	var light:=SpotLight3D.new();light.name="StreetLamp";root.add_child(light);light.position=Vector3(0,7.98,arm_side*1.65)
+	light.look_at_from_position(light.global_position,root.to_global(Vector3(0,-.10,arm_side*3.0)))
+	light.light_color=Color("f2c68f");light.light_energy=6.0;light.spot_range=16;light.spot_angle=40;light.spot_attenuation=.7
+	light.shadow_enabled=at.x<10;light.shadow_bias=.035;light.shadow_normal_bias=.7
+	light.light_cull_mask=3
+	light.set_meta("mood_shadow",at.x<10);light.set_meta("unstable_lamp",at.x>10)
+	NeighborhoodLights.halo(root,Vector3(0,7.95,arm_side*1.65),1.0)
 	batch.flush()
 static func handcart(parent: Node3D,at: Vector3) -> void:
 	var root:=Node3D.new();root.name="GasShopHandcart";parent.add_child(root);root.position=at;root.rotation.z=-.12

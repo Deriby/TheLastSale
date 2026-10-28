@@ -47,3 +47,11 @@ O leito da rua tem 7,8 m, meios-fios de 14 cm com chanfro transitável e declive
 Ventilador, parte dos conduítes, pequenos desgastes, caixas de serviço e sons de tráfego são complementos para dar vida ao cenário. A noite usa contraste entre loja e rua, cor mais contida, granulação leve e neblina de profundidade, seguindo a direção de terror cotidiano solicitada. Não se copiam mapas, interfaces ou áudio de Fears to Fathom.
 
 A neblina começa a 22 m e fica opaca a 68 m da câmera; solo e volumes simplificados continuam muito além disso. Ela não amplia o trecho explorável e não cobre os corredores próximos. As posições dos dois carros foram aproximadas da frente da loja a partir da vista interna; não se afirma levantamento exato.
+
+## Revisão 0.6.0
+
+[Comparação da noite e caminhada](mood_v06/README.md). A disposição do balcão, fachadas e imóveis foi preservada da revisão anterior. A nova iluminação noturna é uma interpretação artística: as fontes das fotografias diurnas não determinam temperaturas, intensidades, janelas acesas ou intervalos dos postes. Há áreas iluminadas pelos postes e portas, sombras dos objetos e janelas com cortinas. O céu é um panorama original gerado, com horizonte de iluminação urbana e nuvens discretas.
+
+Carros compactos receberam painéis inclinados e recortes das rodas; não reproduzem uma marca/modelo exatos. Folhas recortadas com movimento substituem volumes sólidos da copa. Reboco, piso cerâmico, asfalto e calçada usam nova arte procedural original. O bairro, proporções e trechos não fotografados continuam aproximados.
+
+A neblina normal agora começa a 20 m e termina a 65 m, com intensificação lenta apenas à distância após o aviso narrativo existente. Uma luminária distante tem uma falha breve ocasional. Sons discretos de ar e reator elétrico são síntese original; os passos têm contatos diferentes dentro e fora da loja. A direção continua sendo terror cotidiano inspirado na referência pedida, com circulação e tarefas legíveis.

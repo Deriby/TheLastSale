@@ -31,6 +31,7 @@ func run() -> void:
 	player.position=Vector3(4.2,.01,-2.0);player.velocity=Vector3.ZERO;player.camera_rig.yaw=0;player.reset_physics_interpolation()
 	Input.action_press("forward");await ticks(75);Input.action_release("forward");await ticks(10)
 	check(player.is_on_floor() and player.position.z< -3.3,"antigo caixa da direita está livre para circulação real")
+	check(player.foot_audio.stream==player.tile_step,"passos no salão usam contato seco de piso cerâmico")
 	var street_space:=world.get_world_3d().direct_space_state
 	var lower:=street_space.intersect_ray(PhysicsRayQueryParameters3D.create(Vector3(-20,4,6.5),Vector3(-20,-3,6.5),1))
 	var upper:=street_space.intersect_ray(PhysicsRayQueryParameters3D.create(Vector3(20,4,6.5),Vector3(20,-3,6.5),1))
@@ -40,6 +41,7 @@ func run() -> void:
 	player.position=Vector3(-1.8,.02,1.8);player.velocity=Vector3.ZERO;player.camera_rig.yaw=PI;player.reset_physics_interpolation()
 	Input.action_press("forward");await ticks(75);Input.action_release("forward");await ticks(10)
 	check(player.position.z>3.1 and player.is_on_floor() and player.position.y<-.08,"jogador desce o meio-fio e entra na rua sem cair pelo chão")
+	check(player.foot_audio.stream==player.asphalt_step,"passos na rua trocam para contato de asfalto")
 	player.position=Vector3(-1.8,-.12,9.8);player.velocity=Vector3.ZERO;player.reset_physics_interpolation()
 	Input.action_press("forward");await ticks(75);Input.action_release("forward");await ticks(10)
 	check(player.position.z>11.0 and player.is_on_floor() and player.position.y>-.03,"jogador sobe à calçada oposta sem ficar preso no meio-fio")
@@ -99,10 +101,10 @@ func run() -> void:
 	var camera_probe:=PhysicsShapeQueryParameters3D.new();var camera_sphere:=SphereShape3D.new();camera_sphere.radius=.045;camera_probe.shape=camera_sphere;camera_probe.transform=Transform3D(Basis.IDENTITY,player.camera_rig.camera.global_position);camera_probe.collision_mask=1
 	check(world.get_world_3d().direct_space_state.intersect_shape(camera_probe).is_empty(),"volume próximo da lente fica fora da parede")
 	player.camera_rig.target_distance=0;await ticks(40)
-	check(player.camera_rig.first_person and not player.visual.find_child("Dery_Head",true,false).visible and player.visual.find_child("Dery_Body",true,false).visible,"aproximação entra em primeira pessoa sem interior da cabeça")
+	check(player.camera_rig.first_person and player.visual.find_child("Dery_Head",true,false).cast_shadow==GeometryInstance3D.SHADOW_CASTING_SETTING_SHADOWS_ONLY and player.visual.find_child("Dery_Body",true,false).visible,"aproximação entra em primeira pessoa com corpo visível e cabeça apenas na sombra")
 	player.position=Vector3(3.4,0,-7.8);player.reset_physics_interpolation()
 	player.camera_rig.target_distance=2.5;await ticks(40)
-	check(not player.camera_rig.first_person and player.visual.find_child("Dery_Head",true,false).visible,"afastamento retorna à terceira pessoa")
+	check(not player.camera_rig.first_person and player.visual.find_child("Dery_Head",true,false).visible and player.visual.find_child("Dery_Head",true,false).cast_shadow==GeometryInstance3D.SHADOW_CASTING_SETTING_ON,"afastamento retorna à terceira pessoa")
 	player.position=CheckoutFixture.CUSTOMER_POSITION;player.velocity=Vector3.ZERO;player.camera_rig.yaw=PI/2;player.camera_rig.pitch=-.13;player.reset_physics_interpolation();await ticks(30)
 	check(player.target!=null and player.target.kind=="talk","Felps é alcançável pela interação sobre o balcão")
 	var interact_key:=InputEventKey.new();interact_key.physical_keycode=KEY_E;interact_key.keycode=KEY_E;interact_key.pressed=true;Input.parse_input_event(interact_key);await ticks(2)

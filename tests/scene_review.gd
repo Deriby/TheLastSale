@@ -15,10 +15,15 @@ func shot(id: String,at: Vector3,target: Vector3,fov:=70.0,staff:=true) -> void:
 func review() -> void:
 	var args:=OS.get_cmdline_user_args()
 	if not args.is_empty():prefix=args[0]
+	if prefix.contains("economic"):Preferences.pixel_scale=3
 	await get_tree().physics_frame
 	app=load("res://scenes/main/main.tscn").instantiate();app.process_mode=Node.PROCESS_MODE_PAUSABLE;add_child(app)
 	app.interface.root.hide();app.world.player.hide()
 	camera=Camera3D.new();camera.physics_interpolation_mode=Node.PHYSICS_INTERPOLATION_MODE_OFF;camera.far=110;app.world.add_child(camera);camera.current=true
+	var shadow_count:=0
+	for light in app.world.find_children("*","Light3D",true,false):
+		if light.shadow_enabled:shadow_count+=1
+	print("QUALITY scale=",Preferences.pixel_scale," shadowed_lights=",shadow_count)
 	await shot("customer",Vector3(-2.85,1.67,-1.8),Vector3(-4.5,1.25,-2.85),67)
 	await shot("employee",Vector3(-5.13,1.68,-2.50),Vector3(-1.0,1.3,-5.4),76,false)
 	await shot("worktop",Vector3(-5.14,1.68,-3.18),Vector3(-4.22,1.16,-2.80),64,false)
@@ -29,15 +34,19 @@ func review() -> void:
 	await shot("front",Vector3(.4,2.15,8.1),Vector3(.4,3.1,0),61)
 	await shot("downhill",Vector3(-1,1.9,6.6),Vector3(-50,-.2,6.6),65)
 	await shot("uphill",Vector3(0,1.9,6.6),Vector3(50,2.3,6.6),65)
+	await shot("opposite",Vector3(1,1.8,2.2),Vector3(1,1.6,13),72)
+	await shot("car",Vector3(6.5,1.55,6.6),Vector3(3,1.0,9.55),55)
+	await shot("porch",Vector3(6.8,1.75,8),Vector3(8.8,1.7,12.4),62)
 	await shot("edge_fog",Vector3(-27,1.9+Street.grade(-27),6.6),Vector3(-130,Street.grade(-130)+1.7,6.6),68)
 	var env: Environment=app.world.get_node("Atmosphere").environment
 	env.fog_enabled=false
 	await shot("edge_clear",Vector3(-27,1.9+Street.grade(-27),6.6),Vector3(-130,Street.grade(-130)+1.7,6.6),68)
 	env.fog_enabled=true
 	# Reference lighting only; gameplay remains at night.
+	env.background_mode=Environment.BG_COLOR
 	env.background_color=Color("b8c8d1");env.ambient_light_color=Color("d5dde1");env.ambient_light_energy=.68;env.fog_light_color=Color("b8c8d1")
 	var sun: DirectionalLight3D=app.world.get_child(1);sun.light_color=Color("fff1d3");sun.light_energy=1.0;sun.rotation_degrees=Vector3(-52,-35,0)
-	for light in app.world.street.find_children("*","OmniLight3D",true,false):light.light_energy=0
+	for light in app.world.street.find_children("*","Light3D",true,false):light.light_energy=0
 	for light in app.world.depot.get_node("Architecture/Facade").find_children("*","SpotLight3D",true,false):light.light_energy=0
 	await shot("inside_out_day",Vector3(-4.95,1.72,-2.25),Vector3(3.4,1.95,10.5),78,false)
 	app.queue_free();await frames(20);await get_tree().create_timer(.2).timeout

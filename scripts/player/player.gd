@@ -15,6 +15,8 @@ var handling: BoxHandling
 var action_facing:=Vector3.ZERO
 var actual_speed:=0.0
 var foot_audio: AudioStreamPlayer3D
+var tile_step: AudioStream=preload("res://assets/audio/step_tile.wav")
+var asphalt_step: AudioStream=preload("res://assets/audio/step_asphalt.wav")
 var capsule: CapsuleShape3D
 var torch: SpotLight3D
 func _ready() -> void:
@@ -32,7 +34,7 @@ func _ready() -> void:
 	camera_rig=ShoulderCamera.new();add_child(camera_rig)
 	socket=Node3D.new();add_child(socket);socket.physics_interpolation_mode=Node.PHYSICS_INTERPOLATION_MODE_OFF
 	handling=BoxHandling.new();add_child(handling);handling.setup(self);motion.pose_updated.connect(handling.sync_grip)
-	foot_audio=AudioStreamPlayer3D.new();add_child(foot_audio);foot_audio.stream=load("res://assets/audio/step.wav");foot_audio.volume_db=-11
+	foot_audio=AudioStreamPlayer3D.new();add_child(foot_audio);foot_audio.stream=tile_step;foot_audio.volume_db=-11
 	torch=SpotLight3D.new();camera_rig.camera.add_child(torch);torch.position=Vector3(.15,-.12,0);torch.spot_range=12;torch.spot_angle=29;torch.light_energy=2.2;torch.light_color=Color("ece7c2");torch.visible=false
 	motion.pose_updated.connect(update_footsteps)
 	add_to_group("player")
@@ -75,6 +77,7 @@ func update_footsteps() -> void:
 		last_step_half=-1;return
 	var half:=int(fmod(animator.current_animation_position/maxf(.01,animator.current_animation_length),1)*2)
 	if last_step_half!=-1 and half!=last_step_half:
+		foot_audio.stream=asphalt_step if global_position.z>=0 else tile_step
 		foot_audio.volume_db=linear_to_db(maxf(Preferences.effects_volume,.001))-11;foot_audio.play()
 		made_noise.emit(global_position,8.0 if actual_speed>2.55 else 3.0)
 	last_step_half=half

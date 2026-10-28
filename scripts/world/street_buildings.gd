@@ -81,4 +81,9 @@ static func create(parent: Node3D,name: String,x: float,z: float,elevation: floa
 			StreetDetail.window(batch,Vector3(1.8,1.83,.08),Vector2(.9,.65))
 			batch.add_box(Vector3(0,3.17,0),Vector3(5.6,.12,.35),StreetDetail.material(c))
 	batch.add_box(Vector3(0,-.12,-.05),Vector3(5.6,.25,.35),StreetDetail.material(Color("858775")))
+	if kind=="yellow":
+		NeighborhoodLights.porch(root,Vector3(-.65,2.43,.62))
+		NeighborhoodLights.warm_window(root,Vector3(1.5,1.58,.126),Vector2(1.03,.8))
+	if kind=="two_storey":NeighborhoodLights.warm_window(root,Vector3(1.55,4.22,.106),Vector2(1.25,1.0))
+	if kind in ["gray","peach","industrial","cassiano"]:NeighborhoodLights.wall_wear(root,5.4 if kind!="peach" else 6.8)
 	batch.flush();return root

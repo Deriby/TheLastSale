@@ -3,9 +3,11 @@ Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
 PASS menu inicial pausa o mundo
 PASS cena principal e chão físico carregam
 PASS antigo caixa da direita está livre para circulação real
+PASS passos no salão usam contato seco de piso cerâmico
 PASS rua tem declive físico contínuo entre os lados do quarteirão
 PASS balizadores da fachada têm colisão física
 PASS jogador desce o meio-fio e entra na rua sem cair pelo chão
+PASS passos na rua trocam para contato de asfalto
 PASS jogador sobe à calçada oposta sem ficar preso no meio-fio
 PASS Dery usa 21 ossos com cintura e peito superior articulados
 PASS 23 clipes de Dery importados
@@ -38,7 +40,7 @@ PASS SpringArm encurta ao encostar na parede
 PASS câmera permanece do lado interno da parede
 PASS ombro recolhe lateralmente perto da parede
 PASS volume próximo da lente fica fora da parede
-PASS aproximação entra em primeira pessoa sem interior da cabeça
+PASS aproximação entra em primeira pessoa com corpo visível e cabeça apenas na sombra
 PASS afastamento retorna à terceira pessoa
 PASS Felps é alcançável pela interação sobre o balcão
 PASS tecla E conversa com Felps e libera tarefas
@@ -60,7 +62,7 @@ PASS pegar caixa começa com alcance antes da fixação
 PASS caixa presa ao transporte visível
 PASS mão permanece junto à pega lateral da caixa
 PASS repor stock_2
-WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@1682/stock_2/@MeshInstance3D@3230" (possibly benign).
+WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@1786/stock_2/@MeshInstance3D@3437" (possibly benign).
      at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
 PASS mãos livres após reposição
 PASS malha visível recebe novos produtos após reposição
@@ -81,8 +83,8 @@ PASS continuar não duplica caixas já repostas
 PASS continuar restaura produtos na malha da geladeira
 PASS checkpoint antigo dentro da gôndola migra para corredor próximo
 PASS checkpoint antigo na rua acompanha a nova cota do terreno
-WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@6647/Depot/@Node3D@7949/DoorHinge/@MeshInstance3D@7968" (possibly benign).
+WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@7063/Depot/@Node3D@8468/@MeshInstance3D@8480" (possibly benign).
      at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
 PASS checkpoint antigo no novo balcão restaura personagem fora dos móveis
 PASS pausa congela o relógio narrativo
-RESULT 81/81 passed; failures=[]
+RESULT 83/83 passed; failures=[]

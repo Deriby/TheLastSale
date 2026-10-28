@@ -62,6 +62,7 @@ func locomotion(delta: float,speed: float,crouch: bool,carrying: bool,tired: boo
 func look_at_position(at: Vector3,enabled := true) -> void:
 	attention.target_global=at;attention.following=enabled
 func set_first_person(value: bool,hide_body := false) -> void:
-	# Hide only the separate head in first person. At severe camera compression hide both.
+	# Keep a complete shadow while hiding geometry from the camera's own view.
 	for mesh in skeleton.find_children("*","MeshInstance3D",true,false):
-		mesh.visible=not hide_body and (not value or not mesh.name.contains("Head"))
+		mesh.visible=true
+		mesh.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_SHADOWS_ONLY if hide_body or value and mesh.name.contains("Head") else GeometryInstance3D.SHADOW_CASTING_SETTING_ON

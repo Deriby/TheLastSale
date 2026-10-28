@@ -69,5 +69,6 @@ static func light(parent: Node3D,pos: Vector3,color: Color,energy: float,radius:
 	l.light_color = color
 	l.light_energy = energy
 	l.omni_range = radius
+	l.light_cull_mask = 1
 	l.shadow_enabled = false
 	return l

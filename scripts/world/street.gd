@@ -22,6 +22,8 @@ func _ready() -> void:
 	details=PropBatch.new();details.name="StreetDetails";add_child(details)
 	build_ground();build_frontages();build_utilities();build_wear();build_limits();details.flush()
 	add_child(StreetAccents.new())
+	# Outdoor geometry has its own light layer; indoor fill must not reach the road.
+	for mesh in find_children("*","MeshInstance3D",true,false):mesh.layers=2
 func ground_strip(x0: float,x1: float,z0: float,z1: float,offset0: float,offset1: float,mat: Material) -> void:
 	var points:=PackedVector3Array([Vector3(x0,grade(x0)+offset0,z0),Vector3(x1,grade(x1)+offset0,z0),Vector3(x1,grade(x1)+offset1,z1),Vector3(x0,grade(x0)+offset1,z1)])
 	var normal: Vector3=(points[3]-points[0]).cross(points[1]-points[0]).normalized()
@@ -33,11 +35,14 @@ func ground_strip(x0: float,x1: float,z0: float,z1: float,offset0: float,offset1
 	for p in points:volume.append(p-Vector3.UP*.25)
 	shape.points=volume;collision.shape=shape;body.add_child(collision)
 func build_ground() -> void:
-	var asphalt:=StreetDetail.material(Color.WHITE,"asphalt",.45)
-	var pavement:=StreetDetail.material(Color("c3bfae"),"sidewalk",.7)
+	var asphalt:=StreetDetail.material(Color.WHITE,"asphalt",.45);asphalt.roughness=.81
+	var pavement:=StreetDetail.material(Color("d0ccbc"),"sidewalk",.7)
 	var curb:=StreetDetail.material(Color("bebda8"),"render")
 	# Shared grade knots keep the storefront apron flat and the street continuous downhill.
-	for pair in [Vector2(-160,-6),Vector2(-6,6),Vector2(6,160)]:
+	# Local pieces keep spot-light selection and contact shadows local to each block.
+	var sections: Array[Vector2]=[Vector2(-160,-42),Vector2(42,160)]
+	for x in range(-42,42,12):sections.append(Vector2(x,x+12))
+	for pair in sections:
 		ground_strip(pair.x,pair.y,0,NEAR_CURB,0,0,pavement)
 		ground_strip(pair.x,pair.y,NEAR_CURB,ROAD_START,0,-.14,curb)
 		ground_strip(pair.x,pair.y,ROAD_START,ROAD_END,-.14,-.14,asphalt)

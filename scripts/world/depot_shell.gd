@@ -14,8 +14,8 @@ func solid(at: Vector3,size: Vector3,mat: Material,nav := true) -> MeshInstance3
 func build_envelope() -> void:
 	var wall:=Geo.material(Color.WHITE,"res://assets/textures/depot/wall.png")
 	wall.uv1_scale=Vector3.ONE*.55
-	var floor_mat:=Geo.material(Color.WHITE,"res://assets/textures/depot/floor.png")
-	floor_mat.uv1_scale=Vector3.ONE/0.60;floor_mat.roughness=.72;floor_mat.texture_filter=BaseMaterial3D.TEXTURE_FILTER_NEAREST_WITH_MIPMAPS
+	var floor_mat:=Geo.material(Color.WHITE,"res://assets/textures/mood/tile.png")
+	floor_mat.uv1_scale=Vector3.ONE/0.60;floor_mat.roughness=.60;floor_mat.texture_filter=BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	solid(Vector3(0,-.14,-8.0),Vector3(12.2,.28,16.0),floor_mat,false)
 	solid(Vector3(6,2.8,-8),Vector3(.24,5.6,16),wall)
 	solid(Vector3(-6,2.2,-3),Vector3(.24,4.4,6),wall)
@@ -58,14 +58,15 @@ func build_roof() -> void:
 			Geo.cylinder(self,Vector3(x,(top_y+mid_y+.09)*.5,z),.009,top_y-mid_y-.09,steel)
 			Geo.cylinder(self,Vector3(x,mid_y,z),.255,.20,Geo.material(Color("adb9ad")),.07)
 			Geo.cylinder(self,Vector3(x,mid_y-.105,z),.226,.025,Geo.material(Color("e8eee0"),"",1.0))
-			var lamp:=Geo.light(self,Vector3(x,mid_y-.29,z),Color("e7eee3"),.85,6.3)
+			var lamp:=Geo.light(self,Vector3(x,mid_y-.29,z),Color("e7eee3"),.48,5.4)
 			lamp.omni_attenuation=1.2
-			lamp.set_meta("normal_energy",.85)
+			lamp.set_meta("normal_energy",.48)
 			if x<0 and z==-9.0:fluorescent=lamp
-			if z==-5.7:
+			if z==-5.7 or x<0 and z==-2.0:
 				var spot:=SpotLight3D.new();add_child(spot);spot.position=Vector3(x,mid_y-.32,z);spot.rotation.x=-PI/2
-				spot.light_color=Color("e7eee3");spot.light_energy=.5;spot.spot_range=6.8;spot.spot_angle=72
-				spot.shadow_enabled=true;spot.shadow_bias=.04
+				spot.light_color=Color("e9ead7");spot.light_energy=2.4;spot.spot_range=6.8;spot.spot_angle=48
+				spot.shadow_enabled=true;spot.shadow_bias=.035;spot.shadow_normal_bias=.65;spot.set_meta("mood_shadow",true)
+				spot.light_cull_mask=1
 func build_partition() -> void:
 	var wall:=Geo.material(Color.WHITE,"res://assets/textures/depot/wall.png")
 	# Fictitious stock/cold-room volume, made explicit in the reference notes.

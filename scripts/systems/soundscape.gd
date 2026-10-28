@@ -5,12 +5,14 @@ var radio: AudioStreamPlayer3D
 var night: AudioStreamPlayer3D
 var effect: AudioStreamPlayer3D
 var ambience: AudioStreamPlayer3D
+var ballast: AudioStreamPlayer3D
 var ambient_wait:=18.0
 var ambient_index:=0
 func _ready() -> void:
 	hum=loop_sound("hum",Vector3(-4,1,-6),-17,14)
 	radio=loop_sound("radio",Vector3(-5.4,1.7,-2.7),-13,9)
-	night=loop_sound("night",Vector3(0,1,7),-15,30)
+	night=loop_sound("neighborhood_air",Vector3(0,1,7),-11,38)
+	ballast=loop_sound("pole_ballast",Vector3(-7.25,6.8,3.4),-18,13)
 	effect=AudioStreamPlayer3D.new();add_child(effect);effect.max_distance=20
 	ambience=AudioStreamPlayer3D.new();add_child(ambience);ambience.max_distance=48
 	Preferences.changed.connect(refresh)
@@ -24,11 +26,13 @@ func refresh() -> void:
 	radio.volume_db=-13+linear_to_db(maxf(Preferences.music_volume,.001))
 	hum.volume_db=-17+linear_to_db(maxf(Preferences.effects_volume,.001))
 	night.volume_db=-15+linear_to_db(maxf(Preferences.effects_volume,.001))
+	ballast.volume_db=-18+linear_to_db(maxf(Preferences.effects_volume,.001))
 func _process(delta: float) -> void:
 	var player:=get_tree().get_first_node_in_group("player") as Node3D
 	if player!=null:
 		var inside:=smoothstep(-.5,3.0,player.global_position.z)
-		night.volume_db=-24+inside*9+linear_to_db(maxf(Preferences.effects_volume,.001))
+		night.volume_db=-21+inside*10+linear_to_db(maxf(Preferences.effects_volume,.001))
+		night.attenuation_filter_cutoff_hz=lerpf(1800,7500,inside)
 	ambient_wait-=delta
 	if ambient_wait>0:return
 	ambient_index+=1;ambient_wait=22.0+(ambient_index%3)*7.0
@@ -41,7 +45,7 @@ func play_at(id: String,at: Vector3) -> void:
 func unease() -> void:
 	create_tween().tween_property(radio,"volume_db",-50.0,4)
 func stop_all() -> void:
-	for player in [hum,radio,night,effect,ambience]:
+	for player in [hum,radio,night,effect,ambience,ballast]:
 		if is_instance_valid(player):
 			player.stop()
 			player.stream=null

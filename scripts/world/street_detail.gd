@@ -4,8 +4,10 @@ const ART:="res://assets/textures/street/"
 static var cube: BoxMesh
 static var sphere: SphereMesh
 static func material(color: Color,art: String="",scale_value:=.7) -> StandardMaterial3D:
-	var m:=Geo.material(color,ART+art+".png" if not art.is_empty() else "")
-	m.uv1_scale=Vector3.ONE*scale_value;m.texture_filter=BaseMaterial3D.TEXTURE_FILTER_NEAREST_WITH_MIPMAPS
+	var path:=ART+art+".png" if not art.is_empty() else ""
+	if art in ["asphalt","render","sidewalk"]:path="res://assets/textures/mood/"+{"asphalt":"asphalt","render":"plaster","sidewalk":"paving"}[art]+".png"
+	var m:=Geo.material(color,path)
+	m.uv1_scale=Vector3.ONE*scale_value;m.texture_filter=BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	return m
 static func panel(parent: Node3D,at: Vector3,size: Vector2,art: String,angle:=0.0,cutout:=false) -> MeshInstance3D:
 	var m:=StandardMaterial3D.new();m.albedo_texture=load(ART+art+".png");m.roughness=.95;m.texture_filter=BaseMaterial3D.TEXTURE_FILTER_NEAREST_WITH_MIPMAPS

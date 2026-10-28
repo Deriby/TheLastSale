@@ -1,8 +1,16 @@
 # A Última Venda — Depois do Fechamento
 
-Demonstração jogável em **Godot 4.4.1 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP. Esta entrega estabelece a primeira base e uma rotina narrativa curta; não é a campanha de 1h30–2h30.
+Demonstração jogável em **Godot 4.4.1 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP, com uma rotina narrativa curta. A campanha completa continua em desenvolvimento.
 
-## Revisão 0.5.0 — balcão, detalhes e atmosfera
+## Revisão 0.6.0 — noite, luzes e rua
+
+A iluminação agora tem sombras dos carros, árvores e personagens, trechos escuros entre os postes, janelas acesas e luz mais localizada dentro da loja. O céu noturno, os materiais do asfalto/calçada e a folhagem foram refeitos; os carros receberam carroceria com recortes das rodas. A copa das árvores se move suavemente, e o som dos passos muda entre o salão e a rua. A sombra do personagem continua completa em primeira pessoa.
+
+[Veja o antes/depois e a caminhada gravada com o controlador real](docs/mood_v06/README.md).
+
+![Visão do caixa para a rua — iluminação 0.6.0](docs/mood_v06/inside_out.png)
+
+## Revisão anterior 0.5.0 — balcão, detalhes e atmosfera
 
 O caixa foi corrigido pelas novas fotos: fica à esquerda de quem entra, com a bancada no sentido da profundidade da loja e o funcionário junto à parede. Há monitor, teclado, leitor com luz vermelha, maquininha amarela, gaveta, impressora, aviso sobre o tampo e bebidas atrás de Felps. Clientes atendem no novo ponto; checkpoints antigos são ajustados se estiverem dentro dos móveis.
 
@@ -44,9 +52,9 @@ A reconstrução 0.2 do interior recebeu gôndolas abastecidas por categoria, ge
 
 ## Jogar
 
-**[Baixar o jogo 0.5.0 para Windows x64 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/windows/A_Ultima_Venda_Windows_x64.zip)**
+**[Baixar o jogo 0.6.0 para Windows x64 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/windows/A_Ultima_Venda_Windows_x64.zip)**
 
-O pacote está versionado neste repositório em [`downloads/windows`](downloads/windows). Extraia o ZIP em uma pasta nova antes de abrir o jogo. O menu mostra **Demonstração 0.5.0**. A verificação SHA-256 está ao lado do arquivo. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida** se sua configuração antiga estiver em Retrô.
+O pacote está versionado neste repositório em [`downloads/windows`](downloads/windows). Extraia o ZIP em uma pasta nova antes de abrir o jogo. O menu mostra **Demonstração 0.6.0**. A verificação SHA-256 está ao lado do arquivo. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida** se sua configuração antiga estiver em Retrô. O modo **Econômica** reduz a resolução e desliga as sombras dinâmicas e o halo de câmera para diminuir o custo gráfico.
 
 **Windows:** extraia o pacote Windows e mantenha `A_Ultima_Venda.exe` junto de `A_Ultima_Venda.pck`. Abra o executável e escolha **Iniciar expediente**. O binário foi exportado nesta sessão Linux; sua execução no Windows ainda precisa de validação.
 
@@ -121,6 +129,8 @@ Não foram medidos 60 FPS em PCs modestos nem testados binários em Windows real
 - `python tools/make_depot_textures.py`: regenera a arte original dos produtos e superfícies do depósito (Python com Pillow).
 - `python tools/make_street_textures.py`: regenera as superfícies, mural e placas do exterior (Python com Pillow).
 - `python tools/make_scene_details.py`: regenera a arte do caixa, copos, bebidas e pequenos detalhes, além de dois sons ambientes originais (Python com Pillow).
+- `python tools/make_mood_assets.py`: regenera céu, superfícies, folhas e sons de ambiente/passos originais (Python com Pillow e NumPy).
+- `./tools/godot.sh --fixed-fps 30 --write-movie /tmp/walk.avi res://tests/mood_walkthrough.tscn`: grava um percurso automatizado de 34 segundos com o controlador, câmera de primeira pessoa, colisões e áudio do jogo; verifica saída, descida, retorno e entrada.
 - `./tools/godot.sh --fixed-fps 60 res://tests/scene_review.tscn -- scene`: captura as vistas do balcão, interior, rua e a comparação de neblina em `/tmp/scene_*.png`. Requer display.
 - `./tools/godot.sh --fixed-fps 30 --write-movie /tmp/scene.avi res://tests/scene_walkthrough.tscn`: grava o passeio de câmera de 30 segundos com som ambiente do jogo.
 - `./tools/godot.sh --fixed-fps 60 res://tests/exterior_review.tscn -- exterior`: captura o exterior à noite e com iluminação diurna de comparação em `/tmp/exterior_*.png`. Requer display; a cena normal continua noturna.

@@ -21,9 +21,10 @@ func review() -> void:
 	camera.fov=72
 	await shot("night_opposite",Vector3(1,1.8,2.2),Vector3(1,1.6,13))
 	var env: WorldEnvironment=app.world.get_child(0)
+	env.environment.background_mode=Environment.BG_COLOR
 	env.environment.background_color=Color("b8c8d1");env.environment.ambient_light_color=Color("d5dde1");env.environment.ambient_light_energy=.68
 	var sun: DirectionalLight3D=app.world.get_child(1);sun.light_color=Color("fff1d3");sun.light_energy=1.0;sun.rotation_degrees=Vector3(-52,-35,0)
-	for light in app.world.street.find_children("*","OmniLight3D",true,false):light.light_energy=0
+	for light in app.world.street.find_children("*","Light3D",true,false):light.light_energy=0
 	for light in app.world.depot.get_node("Architecture/Facade").find_children("*","SpotLight3D",true,false):light.light_energy=0
 	camera.fov=56
 	await shot("day_front",Vector3(.4,2.15,9.8),Vector3(.4,3.15,0))

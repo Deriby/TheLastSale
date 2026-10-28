@@ -3,9 +3,11 @@ Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
 PASS menu inicial pausa o mundo
 PASS cena principal e chão físico carregam
 PASS antigo caixa da direita está livre para circulação real
+PASS passos no salão usam contato seco de piso cerâmico
 PASS rua tem declive físico contínuo entre os lados do quarteirão
 PASS balizadores da fachada têm colisão física
 PASS jogador desce o meio-fio e entra na rua sem cair pelo chão
+PASS passos na rua trocam para contato de asfalto
 PASS jogador sobe à calçada oposta sem ficar preso no meio-fio
 PASS Dery usa 21 ossos com cintura e peito superior articulados
 PASS 23 clipes de Dery importados
@@ -38,7 +40,7 @@ PASS SpringArm encurta ao encostar na parede
 PASS câmera permanece do lado interno da parede
 PASS ombro recolhe lateralmente perto da parede
 PASS volume próximo da lente fica fora da parede
-PASS aproximação entra em primeira pessoa sem interior da cabeça
+PASS aproximação entra em primeira pessoa com corpo visível e cabeça apenas na sombra
 PASS afastamento retorna à terceira pessoa
 PASS Felps é alcançável pela interação sobre o balcão
 PASS tecla E conversa com Felps e libera tarefas
@@ -81,4 +83,4 @@ PASS checkpoint antigo dentro da gôndola migra para corredor próximo
 PASS checkpoint antigo na rua acompanha a nova cota do terreno
 PASS checkpoint antigo no novo balcão restaura personagem fora dos móveis
 PASS pausa congela o relógio narrativo
-RESULT 81/81 passed; failures=[]
+RESULT 83/83 passed; failures=[]

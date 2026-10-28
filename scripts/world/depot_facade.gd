@@ -38,7 +38,10 @@ func _ready() -> void:
 		StreetDetail.rotated_box(details,at,Vector3(.23,.29,.08),Vector3(-.35,0,.12),dark)
 		var light:=SpotLight3D.new();add_child(light);light.position=at+Vector3(0,-.06,.06);light.look_at_from_position(light.position,Vector3(2,4.9,.20))
 		light.light_color=Color("e2dfc9");light.light_energy=1.05;light.spot_range=7;light.spot_angle=65;light.shadow_enabled=false
+		light.light_cull_mask=4
 	for x in [-3.9,.1]:
 		var spill:=SpotLight3D.new();spill.name="EntranceLightSpill";add_child(spill);spill.position=Vector3(x,3.3,-.12);spill.look_at_from_position(spill.position,Vector3(x,0,3.3))
 		spill.light_color=Color("e7eee3");spill.light_energy=1.1;spill.spot_range=7.5;spill.spot_angle=62
+		spill.light_cull_mask=3
 	details.flush()
+	for mesh in find_children("*","MeshInstance3D",true,false):mesh.layers=5

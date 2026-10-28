@@ -1,0 +1,17 @@
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:360)
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+Movie Maker mode enabled, recording movie at 30 FPS...
+WALK crossed_curbs PASS [0.00000081339203, -0.13986328244209, 6.3319935798645]
+WALK downhill PASS [-12.2352542877197, -0.42012330889702, 6.46949338912964]
+WALK returned PASS [-0.13211598992348, -0.13908690214157, 6.46949338912964]
+WALK shop_entrance PASS [0.00538349151611, 0.00045764283277, 1.16616773605347]
+WALK_RESULT {"checks":4,"failures":[],"positions":{"crossed_curbs":[0.00000081339203461539,-0.139863282442093,6.3319935798645],"downhill":[-12.2352542877197,-0.420123308897018,6.46949338912964],"returned":[-0.132115989923477,-0.139086902141571,6.46949338912964],"shop_entrance":[0.00538349151611328,0.000457642832770944,1.16616773605347]}}
+----------------
+Done recording movie at path: /tmp/06-mood-walk.avi
+1050 frames at 30 FPS (movie length: 00.0:00.0:35.0), recorded in 00.0:02.0:38.0 (22% of real-time speed).
+CPU time: 60.87 seconds (average: 57.97 ms/frame)
+GPU time: 17.99 seconds (average: 17.13 ms/frame)
+----------------

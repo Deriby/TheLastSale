@@ -27,6 +27,7 @@ func reference_geometry() -> void:
 			for at in data.transforms:
 				var node:=MeshInstance3D.new();node.mesh=data.source_mesh;node.material_override=data.node.material_override;node.cast_shadow=data.node.cast_shadow
 				node.physics_interpolation_mode=Node.PHYSICS_INTERPOLATION_MODE_OFF
+				node.layers=data.node.layers
 				batch.add_child(node);node.transform=at;count+=1
 			data.node.hide()
 	print("REFERENCE independent meshes: ",count)
