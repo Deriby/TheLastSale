@@ -2,6 +2,12 @@
 
 Demonstração jogável em **Godot 4.4.1 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP. Esta entrega estabelece a primeira base e uma rotina narrativa curta; não é a campanha de 1h30–2h30.
 
+## Revisão 0.2 — interior do depósito
+
+A reconstrução do interior recebeu gôndolas abastecidas por categoria, geladeiras contínuas com portas e produtos recuados, expositores, engradados azuis, caixa detalhado, treliças e luminárias suspensas. [Veja as imagens de antes/depois e a relação com as fotos](docs/depot_v02/README.md). A câmera, os personagens e a rua continuam na base anterior.
+
+![Interior do depósito — revisão 0.2](docs/depot_v02/entrance.png)
+
 ## Jogar
 
 **[Baixar o jogo para Windows x64 (ZIP, 34 MB)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/windows/A_Ultima_Venda_Windows_x64.zip)**
@@ -74,6 +80,7 @@ Não foram medidos 60 FPS em PCs modestos nem testados binários em Windows real
 - `blender -b -t 4 --python tools/rig_characters.py -- "$PWD"`: regenera os três derivados, sem sobrescrever originais.
 - `blender -b -t 4 --python tools/make_customers.py -- "$PWD"`: regenera os clientes originais.
 - `blender -b -t 4 --python tools/validate_rigs.py -- "$PWD"`: verifica poses exportadas e gera folhas de revisão em `/tmp/rig-review`.
+- `python tools/make_depot_textures.py`: regenera a arte original dos produtos e superfícies do depósito (Python com Pillow).
 - `python tools/make_textures.py`: regenera texturas e sons originais determinísticos.
 
 Para exportar, instale os templates oficiais 4.4.1 no editor e use o preset **Windows Desktop**. Os originais e ferramentas ficam fora do pacote de jogo. Resultados e limites dos testes: [docs/VALIDACAO.md](docs/VALIDACAO.md).

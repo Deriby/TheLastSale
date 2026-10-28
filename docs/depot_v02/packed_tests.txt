@@ -1,0 +1,63 @@
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+PASS menu inicial pausa o mundo
+PASS cena principal e chão físico carregam
+PASS Dery usa esqueleto humanoide de 19 ossos
+PASS clipes de Dery importados
+PASS rig importado: Dery
+PASS material presente: Dery
+PASS textura original preservada na derivação: Dery
+PASS rig importado: Felps
+PASS material presente: Felps
+PASS textura original preservada na derivação: Felps
+PASS rig importado: Enemy
+PASS material presente: Enemy
+PASS textura original preservada na derivação: Enemy
+PASS rig importado: Customer1
+PASS material presente: Customer1
+PASS rig importado: Customer2
+PASS material presente: Customer2
+PASS rig importado: Customer3
+PASS material presente: Customer3
+PASS WASD move Dery com colisão real
+PASS corrida mais rápida que caminhada
+PASS agachamento altera colisão
+PASS roda do mouse chega à câmera pela viewport
+PASS movimento do mouse gira a câmera pela viewport
+PASS SpringArm encurta ao encostar na parede
+PASS câmera permanece do lado interno da parede
+PASS aproximação entra em primeira pessoa sem interior da cabeça
+PASS afastamento retorna à terceira pessoa
+PASS Felps é alcançável pela interação sobre o balcão
+PASS tecla E conversa com Felps e libera tarefas
+PASS diálogo exibe falas reais
+PASS caixa errada não avança reposição
+PASS porta fechada bloqueia passagem
+PASS porta aberta libera passagem física
+PASS pegar stock_1
+PASS caixa presa ao transporte visível
+PASS repor stock_1
+PASS mãos livres após reposição
+PASS instâncias visíveis de produtos aumentam após reposição
+PASS pegar stock_2
+PASS caixa presa ao transporte visível
+PASS repor stock_2
+PASS mãos livres após reposição
+PASS instâncias visíveis de produtos aumentam após reposição
+PASS duas reposições completam objetivo na ordem
+PASS organização move caixa para palete
+PASS caixa permanece materialmente no palete
+PASS aviso exige clientes atendidos além das tarefas
+PASS clientes atravessam loja, compram e saem
+PASS máquina de estados dos clientes executa o ciclo completo
+PASS aviso ocorre somente depois da rotina e da visita
+PASS ruído posterior tem reação narrativa
+PASS inspeção do ruído conclui a demonstração
+PASS salvamento grava checkpoint
+PASS checkpoint restaura progressão e tarefas
+PASS continuar restaura posição no mundo
+PASS continuar não duplica caixas já repostas
+PASS continuar restaura as instâncias de produtos da geladeira
+PASS checkpoint antigo dentro da gôndola migra para corredor próximo
+PASS pausa congela o relógio narrativo
+RESULT 60/60 passed; failures=[]

@@ -53,7 +53,7 @@ func run() -> void:
 	var previous_yaw:=player.camera_rig.yaw
 	var motion:=InputEventMouseMotion.new();motion.relative=Vector2(50,0);motion.position=Vector2(640,360);Input.parse_input_event(motion);await ticks(3)
 	check(player.camera_rig.yaw!=previous_yaw,"movimento do mouse gira a câmera pela viewport")
-	player.position=Vector3(5.45,0,-6.5);player.velocity=Vector3.ZERO;player.camera_rig.yaw=PI/2;player.camera_rig.target_distance=2.5
+	player.position=Vector3(5.45,0,-9.6);player.velocity=Vector3.ZERO;player.camera_rig.yaw=PI/2;player.camera_rig.target_distance=2.5
 	await ticks(30)
 	check(player.camera_rig.arm.get_hit_length()<1.0,"SpringArm encurta ao encostar na parede")
 	check(player.camera_rig.camera.global_position.x<5.9,"câmera permanece do lado interno da parede")
@@ -75,6 +75,7 @@ func run() -> void:
 	door.activate(player);await ticks(40)
 	check(space.intersect_ray(PhysicsRayQueryParameters3D.create(a,b,1)).is_empty(),"porta aberta libera passagem física")
 	var fridge:=find_interaction(world.depot.fridge_target,"fridge")
+	var initial_bottles: int=world.depot.fridge_target.products.groups["beer_0"].node.multimesh.instance_count
 	for id in ["stock_1","stock_2"]:
 		var item: Node3D=world.depot.crates[id]
 		player.position=item.position+Vector3(0,0,.7)
@@ -86,6 +87,7 @@ func run() -> void:
 		check(fridge.activate(player),"repor "+id)
 		await ticks(2)
 		check(player.carried==null,"mãos livres após reposição")
+		check(world.depot.fridge_target.products.groups["beer_0"].node.multimesh.instance_count==initial_bottles+2*Session.stocked.size(),"instâncias visíveis de produtos aumentam após reposição")
 	check(Session.stage==3 and Session.stocked.size()==2,"duas reposições completam objetivo na ordem")
 	var loose: Node3D=world.depot.crates.loose
 	find_interaction(loose,"crate").activate(player);await ticks(2)
@@ -115,12 +117,15 @@ func run() -> void:
 	check(Dialogue.active,"ruído posterior tem reação narrativa")
 	clear_dialogue()
 	check(find_interaction(world.depot.old_door,"note").activate(player) and Session.finale_seen,"inspeção do ruído conclui a demonstração")
-	check(Session.save_shift(Vector3(1,0,-4))==OK,"salvamento grava checkpoint")
+	check(Session.save_shift(Vector3(0,0,-4))==OK,"salvamento grava checkpoint")
 	Session.new_shift();check(Session.load_shift() and Session.stage==7 and Session.stocked.size()==2,"checkpoint restaura progressão e tarefas")
 	clear_dialogue()
 	app.start_saved();world=app.world;player=world.player;await ticks(5)
-	check(player.position.distance_to(Vector3(1,0,-4))<.3,"continuar restaura posição no mundo")
+	check(player.position.distance_to(Vector3(0,0,-4))<.3,"continuar restaura posição no mundo")
 	check(not is_instance_valid(world.depot.crates.stock_1),"continuar não duplica caixas já repostas")
+	check(world.depot.fridge_target.products.groups["beer_0"].node.multimesh.instance_count==initial_bottles+4,"continuar restaura as instâncias de produtos da geladeira")
+	var migrated:=world.navigation.nearest_walkable(Vector3(1,0,-4))
+	check(migrated.distance_to(Vector3(1,0,-4))>.3 and migrated.distance_to(Vector3(1,0,-4))<2,"checkpoint antigo dentro da gôndola migra para corredor próximo")
 	app.interface.set_paused(true);var frozen:=Session.world_seconds;await ticks(3)
 	check(Session.world_seconds==frozen,"pausa congela o relógio narrativo")
 	app.interface.set_paused(false)

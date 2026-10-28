@@ -34,7 +34,7 @@ func activate(player: Node3D) -> bool:
 				return true
 			if Session.deliver(Session.carried_id):
 				player.consume_carried()
-				get_parent().bottle(Vector3(.2,1.4,.48),Color("b69b37"))
+				get_parent().replenish()
 				return true
 		"door":
 			open = not open

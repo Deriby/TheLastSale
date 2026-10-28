@@ -4,9 +4,11 @@
 
 Godot **4.4.1.stable.official.49a5bc7b6**, Linux x86_64. Runtime Compatibility / OpenGL 4.5 por Mesa llvmpipe em display virtual Xorg. Blender 4.3.2, renderização Cycles CPU. O arquivo do editor e os templates oficiais foram conferidos contra os SHA-512 publicados no release Godot 4.4.1; TLS permaneceu habilitado.
 
+Revisão 0.2: cenário reconstruído, 60 verificações e imagens comparativas em [depot_v02](depot_v02/README.md).
+
 ## Integração executada
 
-Comando: `./tools/test.sh`. Resultado da revisão final do projeto: **56/56 verificações passaram**, saída 0, sem erro de GDScript ou avisos de objetos de áudio retidos na finalização. O teste roda em save isolado e percorre o fluxo real, não apenas a existência de arquivos.
+Comando: `./tools/test.sh`. Resultado da revisão final do projeto: **60/60 verificações passaram**, saída 0, sem erro de GDScript ou avisos de objetos de áudio retidos na finalização. O teste roda em save isolado e percorre o fluxo real, não apenas a existência de arquivos.
 
 Cobertura:
 

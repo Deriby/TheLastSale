@@ -23,3 +23,18 @@ func path(from: Vector3,to: Vector3) -> PackedVector3Array:
 	if not grid.is_in_boundsv(start) or not grid.is_in_boundsv(end):return result
 	for p in grid.get_point_path(start,end):result.append(Vector3(p.x,0,p.y))
 	return result
+
+func nearest_walkable(at: Vector3) -> Vector3:
+	# Geometry updates can put a checkpoint inside new furniture. Keep valid saves exact.
+	var origin:=Vector2i(roundi(at.x/CELL),roundi(at.z/CELL))
+	if grid.is_in_boundsv(origin) and not grid.is_point_solid(origin):return at
+	var best:=Vector3(3.8,0,1.8)
+	var best_distance:=INF
+	for x in range(origin.x-12,origin.x+13):
+		for z in range(origin.y-12,origin.y+13):
+			var point:=Vector2i(x,z)
+			if not grid.is_in_boundsv(point) or grid.is_point_solid(point):continue
+			var candidate:=Vector3(x*CELL,maxf(0,at.y),z*CELL)
+			var distance:=candidate.distance_squared_to(at)
+			if distance<best_distance:best_distance=distance;best=candidate
+	return best

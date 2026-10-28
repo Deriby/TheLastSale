@@ -26,3 +26,7 @@ As portas de venda estão abertas por se tratar do expediente, embora as captura
 Os originais GLB contêm uma malha/material principal cada, três imagens PBR de 4096², pose T e nenhum esqueleto. Alturas de importação no Blender: Dery 1,12056; Felps 1,11270; Enemy 1,12345 unidades. A conversão ajustou os três para cerca de 1,78 m, preservando proporções internas, UVs e aparência; originais não alterados. A escala humana exata fornecida não estava especificada.
 
 Derivados: aproximadamente 12 mil triângulos por protagonista, 19 ossos e texturas de cor 512², materiais ásperos sem normal map/metal excessivo. O orçamento é mais alto que um personagem de PS1 real para preservar os rostos fornecidos; a direção retrô vem também da resolução interna, filtragem e cenário. `original_checksums.json` identifica os originais; `rig_report.json` e `rig_validation.json` registram geometria e verificações.
+
+## Revisão 0.2
+
+As referências foram revisitadas para reconstruir a arquitetura do salão, as fileiras de equipamentos, a variedade de gôndolas e a exposição da entrada. Veja [a comparação e os limites](depot_v02/README.md). Parede com 5,6 m e cobertura com cumeeira aproximada de 6 m; o piso usa módulo de 60 cm como estimativa. A planta exata, caixa e estoque continuam sem medição.

@@ -22,7 +22,7 @@ func _ready() -> void:
 	street=Street.new();street.name="Street";add_child(street)
 	depot=Depot.new();depot.name="Depot";add_child(depot)
 	navigation=AisleNavigation.new();navigation.configure(depot.blockers+street.blockers)
-	player=DepotPlayer.new();player.name="Dery";add_child(player);player.position=Session.saved_position
+	player=DepotPlayer.new();player.name="Dery";add_child(player);player.position=navigation.nearest_walkable(Session.saved_position)
 	sound=Soundscape.new();add_child(sound)
 	depot.restore_state(player)
 	Session.event_triggered.connect(on_event)
@@ -46,7 +46,7 @@ func _process(delta: float) -> void:
 		var tween:=create_tween();var light:=depot.fluorescent
 		for i in 3:
 			tween.tween_property(light,"light_energy",.12,.1)
-			tween.tween_property(light,"light_energy",1.8,.22)
+			tween.tween_property(light,"light_energy",float(light.get_meta("normal_energy",1.8)),.22)
 func spawn_customer(warning: bool) -> void:
 	customer=Customer.new();customer.navigation=navigation;customer.warned=warning;customer.appearance=Session.customers_served%3
 	add_child(customer);customer.global_position=Vector3(-18,0,1.8)

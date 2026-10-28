@@ -38,10 +38,12 @@ PASS pegar stock_1
 PASS caixa presa ao transporte visível
 PASS repor stock_1
 PASS mãos livres após reposição
+PASS instâncias visíveis de produtos aumentam após reposição
 PASS pegar stock_2
 PASS caixa presa ao transporte visível
 PASS repor stock_2
 PASS mãos livres após reposição
+PASS instâncias visíveis de produtos aumentam após reposição
 PASS duas reposições completam objetivo na ordem
 PASS organização move caixa para palete
 PASS caixa permanece materialmente no palete
@@ -55,5 +57,7 @@ PASS salvamento grava checkpoint
 PASS checkpoint restaura progressão e tarefas
 PASS continuar restaura posição no mundo
 PASS continuar não duplica caixas já repostas
+PASS continuar restaura as instâncias de produtos da geladeira
+PASS checkpoint antigo dentro da gôndola migra para corredor próximo
 PASS pausa congela o relógio narrativo
-RESULT 56/56 passed; failures=[]
+RESULT 60/60 passed; failures=[]
