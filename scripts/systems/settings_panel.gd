@@ -3,10 +3,12 @@ extends PanelContainer
 signal closed
 var rows: VBoxContainer
 func _ready() -> void:
-	custom_minimum_size=Vector2(570,560)
+	custom_minimum_size=Vector2(570,minf(660,maxf(300,get_viewport_rect().size.y-70)))
 	var margin:=MarginContainer.new();add_child(margin)
 	for side in ["left","top","right","bottom"]:margin.add_theme_constant_override("margin_"+side,24)
-	rows=VBoxContainer.new();rows.add_theme_constant_override("separation",11);margin.add_child(rows)
+	var scroll:=ScrollContainer.new();scroll.name="SettingsScroll";margin.add_child(scroll)
+	scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;scroll.follow_focus=true
+	rows=VBoxContainer.new();rows.size_flags_horizontal=Control.SIZE_EXPAND_FILL;rows.add_theme_constant_override("separation",11);scroll.add_child(rows)
 	var heading:=Label.new();heading.text="CONFIGURAÇÕES";heading.add_theme_font_size_override("font_size",24);rows.add_child(heading)
 	add_slider("Volume geral","volume",0,1,.05)
 	add_slider("Música / rádio","music_volume",0,1,.05)
@@ -17,10 +19,15 @@ func _ready() -> void:
 	add_slider("Granulação","grain",0,.10,.005)
 	add_slider("Interferência VHS","vhs",0,1,.05)
 	var label:=Label.new();label.text="Resolução interna / qualidade";rows.add_child(label)
-	var select:=OptionButton.new();rows.add_child(select)
+	var select:=OptionButton.new();select.name="RenderQuality";rows.add_child(select)
 	select.add_item("Nítida — resolução da janela",1);select.add_item("Retrô — metade da resolução",2);select.add_item("Econômica — um terço",3)
-	select.select(Preferences.pixel_scale-1)
-	select.item_selected.connect(func(i):Preferences.pixel_scale=i+1;Preferences.save())
+	select.add_item("PS1 — 320×240 (4:3)",4)
+	select.select(3 if Preferences.ps1_mode else Preferences.pixel_scale-1)
+	select.item_selected.connect(func(i):
+		var mode:=select.get_item_id(i)
+		Preferences.ps1_mode=mode==4
+		Preferences.pixel_scale=2 if Preferences.ps1_mode else mode
+		Preferences.save())
 	var limit_label:=Label.new();limit_label.text="Limite de quadros";rows.add_child(limit_label)
 	var limit:=OptionButton.new();rows.add_child(limit)
 	limit.add_item("30 FPS",30);limit.add_item("60 FPS",60);limit.add_item("Sem limite",0)

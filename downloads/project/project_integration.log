@@ -6,6 +6,14 @@ PASS nova iluminação preserva o orçamento de cinco luzes com sombras
 PASS reflexo das geladeiras captura uma vez em resolução limitada
 PASS neblina distante preserva o primeiro plano e oculta o fim da rua
 PASS primeiro início aproveita o cenário já carregado no menu
+PASS PS1 renderiza em 320×240 sem reduzir a janela
+PASS imagem PS1 é ampliada e centralizada em 4:3
+PASS menu e HUD preservam a resolução e cabem na janela grande
+PASS preferência PS1 é salva para a próxima abertura
+PASS redimensionar a janela para 4:3 mantém 320×240 internos
+PASS janela larga mantém a imagem PS1 sem esticar os personagens
+PASS retorno a Nítida preenche a janela sem deixar barras antigas
+PASS troca de resolução preserva o mundo e o progresso do turno
 PASS assassino oculto não atualiza animações
 PASS assassino retoma processamento quando fica visível
 PASS cena principal e chão físico carregam
@@ -131,9 +139,9 @@ PASS continuar não duplica caixas já repostas
 PASS continuar restaura produtos na malha da geladeira
 PASS checkpoint antigo dentro da gôndola migra para corredor próximo
 PASS checkpoint antigo na rua acompanha a nova cota do terreno
-WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@6635/Depot/@Node3D@8331/DoorHinge/@MeshInstance3D@8348" (possibly benign).
+WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@6684/Depot/@Node3D@8407/@MeshInstance3D@8416" (possibly benign).
      at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
 PASS checkpoint antigo no novo balcão restaura personagem fora dos móveis
 PASS pausa congela o relógio narrativo
 PASS pausa congela a deriva da névoa e as variações de luz
-RESULT 132/132 passed; failures=[]
+RESULT 140/140 passed; failures=[]

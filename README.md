@@ -2,11 +2,19 @@
 
 Demonstração jogável em **Godot 4.4.1 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP, com uma rotina narrativa curta. A campanha completa continua em desenvolvimento.
 
-**[Baixar o projeto 0.14.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.14.0.zip)**
+**[Baixar o projeto 0.15.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.15.0.zip)**
 
 Extraia o ZIP, importe `project.godot` no Godot **4.4.1**, aguarde a importação dos modelos e pressione **F5**. O arquivo inclui os modelos animados, cenários, código e recursos usados no jogo. [Conteúdo e instruções do projeto](downloads/project/README.md).
 
-## Revisão 0.14.0 — iluminação e atmosfera noturna
+## Revisão 0.15.0 — PS1 em 320×240 com janela grande
+
+Em **Configurações → Resolução interna / qualidade**, escolha **PS1 — 320×240 (4:3)**. O cenário é renderizado em 320×240 e ampliado, mantendo a janela grande e os menus nítidos. Na janela padrão de 1280×720, a imagem ocupa 960×720 com barras laterais de 160 pixels. A preferência fica salva; os outros modos continuam disponíveis.
+
+O painel de Configurações também foi corrigido para caber na janela, com rolagem quando necessária. **140/140 verificações** passaram, incluindo redimensionar a janela e retornar a Nítida sem reconstruir o mundo. [Instruções, capturas e validação](docs/resolution_v015/README.md).
+
+![PS1 com cenário em baixa resolução e HUD legível](docs/resolution_v015/gameplay.png)
+
+## Revisão anterior 0.14.0 — iluminação e atmosfera noturna
 
 A iluminação do salão foi redistribuída para controlar os brancos estourados no piso, manter o caixa mais quente e deixar cantos e estoque mais escuros. As doze geladeiras têm iluminação restrita aos equipamentos e reflexos do salão capturados uma vez. O vermelho da fachada agora alcança a parede e a calçada; os postes formam áreas de luz mais localizadas. A névoa aumenta na distância, preservando o primeiro plano.
 
@@ -124,9 +132,9 @@ A reconstrução 0.2 do interior recebeu gôndolas abastecidas por categoria, ge
 
 ## Jogar
 
-**[Baixar o projeto Godot 0.14.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.14.0.zip)**
+**[Baixar o projeto Godot 0.15.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.15.0.zip)**
 
-O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **Demonstração 0.14.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
+O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **Demonstração 0.15.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
 
 O download atual é o projeto para o editor. O diretório `downloads/windows` guarda apenas a entrega anterior 0.9.0.
 

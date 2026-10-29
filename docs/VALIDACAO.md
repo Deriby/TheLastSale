@@ -1,4 +1,12 @@
-# Validação — revisão 0.14.0 — 29/10/2026
+# Validação — revisão 0.15.0 — 29/10/2026
+
+**140/140 verificações** passaram no projeto e no ZIP extraído com importação limpa. A galeria [resolution_v015](resolution_v015/README.md) mostra o cenário em 320×240 dentro de uma janela de 1280×720, com imagem de 960×720 em 4:3 e HUD/menu em resolução normal.
+
+As oito verificações novas cobrem seleção pelo painel real, resolução interna e janela separadas, proporção e centralização, interface dentro da janela, persistência da preferência, redimensionamento para 1280×960 e 1600×900, retorno a Nítida e preservação do mundo/progresso. O painel de Configurações tem altura limitada e rolagem, corrigindo a altura anterior de 1140 pixels na janela de 720 pixels.
+
+O fluxo existente de câmera, iluminação, portas, tarefas, clientes e checkpoints continua passando. A implementação mantém SubViewportContainer, ampliação com filtro de vizinho mais próximo e UI em CanvasLayer separado. A resolução base do projeto permanece em 1280×720. Sem correção do problema de largar a caixa nesta etapa. Registros do ZIP em [downloads/project](../downloads/project/README.md).
+
+## Registro anterior — revisão 0.14.0 — 29/10/2026
 
 **132/132 verificações** passaram no projeto e no ZIP extraído com importação limpa. A galeria [lighting_v014](lighting_v014/README.md) registra oito vistas fixas do salão, caixa, geladeiras, fachada, rua, estoque e horizonte, com comparação da 0.13.0 à 0.14.0. Há capturas diretas sem pós-processamento para medir os brancos saturados da vista de entrada.
 

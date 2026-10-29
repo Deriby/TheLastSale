@@ -7,6 +7,7 @@ var retro: ShaderMaterial
 var initial_world_pristine:=false
 func _ready() -> void:
 	Controls.install()
+	var background:=ColorRect.new();background.name="LetterboxBackground";add_child(background);background.color=Color.BLACK;background.mouse_filter=Control.MOUSE_FILTER_IGNORE;background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	screen=SubViewportContainer.new();add_child(screen);screen.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);screen.mouse_filter=Control.MOUSE_FILTER_IGNORE;screen.stretch=true;screen.stretch_shrink=Preferences.pixel_scale;screen.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
 	viewport=SubViewport.new();viewport.size=Vector2i(640,360);viewport.render_target_update_mode=SubViewport.UPDATE_ALWAYS;viewport.handle_input_locally=false;screen.add_child(viewport)
 	var layer:=CanvasLayer.new();layer.layer=2;add_child(layer)
@@ -15,7 +16,7 @@ func _ready() -> void:
 	interface=ShiftInterface.new();add_child(interface)
 	interface.new_game.connect(start_new)
 	interface.continue_game.connect(start_saved)
-	Preferences.changed.connect(apply_settings);apply_settings()
+	Preferences.changed.connect(apply_settings);get_viewport().size_changed.connect(update_render_size);apply_settings()
 	initial_world_pristine=Session.stage==0 and Session.stocked.is_empty() and not Session.organized and Session.carried_id.is_empty()
 	build_world()
 	get_tree().paused=true
@@ -23,12 +24,28 @@ func apply_settings() -> void:
 	SurfaceMaterials.apply_quality()
 	ProductLibrary.apply_quality()
 	CharacterModels.apply_quality()
-	if screen!=null:screen.stretch_shrink=Preferences.pixel_scale
+	update_render_size()
 	if viewport!=null:viewport.msaa_3d=Viewport.MSAA_2X if Preferences.pixel_scale==1 else Viewport.MSAA_DISABLED
 	if retro!=null:
 		retro.set_shader_parameter("grain",Preferences.grain);retro.set_shader_parameter("vhs",Preferences.vhs)
 		retro.set_shader_parameter("bloom_strength",.30 if Preferences.pixel_scale<3 else 0.0)
 		retro.set_shader_parameter("posterize",Preferences.pixel_scale>1)
+func update_render_size() -> void:
+	if screen==null or viewport==null:return
+	var available:=get_viewport().get_visible_rect().size
+	if available.x<=0 or available.y<=0:return
+	var bounds:=Vector4(0,0,1,1)
+	if Preferences.ps1_mode:
+		# Keep the 3D image at 320x240; the container enlarges it with nearest filtering.
+		var zoom:=maxi(1,floori(minf(available.x/320.0,available.y/240.0)))
+		screen.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
+		screen.stretch_shrink=zoom;screen.size=Vector2(320,240)*zoom
+		screen.position=((available-screen.size)*.5).floor()
+		bounds=Vector4(screen.position.x/available.x,screen.position.y/available.y,(screen.position.x+screen.size.x)/available.x,(screen.position.y+screen.size.y)/available.y)
+	else:
+		screen.stretch_shrink=Preferences.pixel_scale
+		screen.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	if retro!=null:retro.set_shader_parameter("game_bounds",bounds)
 func build_world() -> void:
 	if world!=null:
 		viewport.remove_child(world);world.free()

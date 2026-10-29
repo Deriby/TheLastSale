@@ -1,76 +1,47 @@
 {
   "format": "Godot editor project ZIP",
-  "version": "0.14.0",
+  "version": "0.15.0",
   "godot": "4.4.1",
-  "file": "TheLastSale_Godot_0.14.0.zip",
-  "bytes": 96241136,
-  "sha256": "a70f5ecb3a61d0e37a2876e8d858e02f8c82f1334bffbdde5070e6b313711f72",
+  "file": "TheLastSale_Godot_0.15.0.zip",
+  "bytes": 79496665,
+  "sha256": "b6fdb32dda0d6f7c59790ea70e66db29fdad88d503a371c38cbcb6627457dfeb",
   "crc_verified": true,
-  "files_verified_against_manifest": 660,
+  "files_verified_against_manifest": 639,
   "manifest_files_changed_by_import": 0,
   "clean_extraction_import_exit_code": 0,
   "import_script_errors": 0,
   "headless_import_texture_preview_messages": 14,
   "clean_extraction_integration": {
-    "passed": 132,
-    "total": 132,
+    "passed": 140,
+    "total": 140,
     "exit_code": 0,
     "runtime_errors": 0
   },
   "source_integration": {
-    "passed": 132,
-    "total": 132,
+    "passed": 140,
+    "total": 140,
     "exit_code": 0,
     "runtime_errors": 0
   },
+  "ps1_internal_resolution": [
+    320,
+    240
+  ],
+  "default_window_size": [
+    1280,
+    720
+  ],
+  "ps1_displayed_image_size": [
+    960,
+    720
+  ],
+  "ui_size": [
+    1280,
+    720
+  ],
   "default_frame_limit": 30,
   "native_radeon_r7_fps_measured": false,
-  "lighting_report": "docs/lighting_v014/validation.json",
-  "lighting": {
-    "before_light_nodes": 23,
-    "after_light_nodes": 37,
-    "shadow_lights_before": 5,
-    "shadow_lights_after": 5,
-    "cabinet_lights": 12,
-    "cabinet_light_mask": 16,
-    "neon_wall_lights": 2,
-    "additional_real_time_shadow_maps": 0,
-    "economic_shadow_lights": 0,
-    "economic_visible_cabinet_lights": 0
-  },
-  "reflection": {
-    "probe_count": 2,
-    "cabinet_update": "once",
-    "atlas_resolution": 128,
-    "atlas_slots": 4,
-    "cabinet_influence_mask": 16,
-    "disabled_in_economic": true
-  },
-  "structure": {
-    "indices": 1991532,
-    "mesh_buffer_bytes": 43887176,
-    "mesh_instances": 1328,
-    "mesh_resources": 1328,
-    "nodes": 2384,
-    "shadow_lights": 5,
-    "triangles": 666942,
-    "vertices": 696552
-  },
-  "raw_entrance_comparison": {
-    "before": {
-      "fully_clipped_pixels": 6765,
-      "pixel_count": 921600,
-      "fully_clipped_percent": 0.7340494791666666,
-      "right_aisle_floor_luma_median": 178.0798
-    },
-    "after": {
-      "fully_clipped_pixels": 1973,
-      "pixel_count": 921600,
-      "fully_clipped_percent": 0.21408420138888887,
-      "right_aisle_floor_luma_median": 97.7336
-    },
-    "method": "Fixed 1280x720 entrance camera, raw viewport before camera postprocess. Fully clipped means R,G,B all >=250/255. Floor sample is x950:1150,y520:650. This is an image comparison, not a hardware benchmark or a measure of every light in the game."
-  },
+  "resolution_report": "docs/resolution_v015/validation.json",
   "box_drop_issue": "Unchanged; recorded in docs/PENDENCIAS.md for the gameplay phase.",
-  "import_note": "Godot headless renderer emits 14 texture preview t=null messages during import; no script errors. Subsequent runtime integration has no errors. Interpolation warnings can occur when test fixtures are moved outside physics."
+  "import_note": "Headless import emits 14 known texture preview t=null messages; no script errors. Runtime integration has no errors."
 }

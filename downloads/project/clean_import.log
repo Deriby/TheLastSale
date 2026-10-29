@@ -8,7 +8,7 @@ first_scan_filesystem: begin: Project initialization steps: 5
 	first_scan_filesystem: step 4: Initializing plugins...
 	first_scan_filesystem: step 5: Starting file scan...
 first_scan_filesystem: end
-update_scripts_classes: begin: Registering global classes... steps: 69
+update_scripts_classes: begin: Registering global classes... steps: 70
 	update_scripts_classes: step 0: AisleNavigation
 	update_scripts_classes: step 1: Customer
 	update_scripts_classes: step 2: FamiliarNPC
@@ -78,6 +78,7 @@ update_scripts_classes: begin: Registering global classes... steps: 69
 	update_scripts_classes: step 66:
 	update_scripts_classes: step 67:
 	update_scripts_classes: step 68:
+	update_scripts_classes: step 69:
 update_scripts_classes: end
 _update_scan_actions: begin: Scanning actions... steps: 198
 	_update_scan_actions: step 0: crate.wav
@@ -656,7 +657,7 @@ preload_reimporting_scene: end
 	reimport: step 170: snack_4_orm.png
 	reimport: step 171: curtain.png
 	reimport: step 172: lamp_halo.png
-	reimport: step 176: plaster.png
+	reimport: step 173: leaves.png
 	reimport: step 177: tile.png
 	reimport: step 178: wall_base.png
 	reimport: step 179: asphalt.png
@@ -778,7 +779,7 @@ ERROR: Parameter "t" is null.
 import: end
 	reimport: step 198: Finalizing Asset Import...
 reimport: end
-update_script_paths_documentation: begin: Updating scripts documentation steps: 69
+update_script_paths_documentation: begin: Updating scripts documentation steps: 70
 	update_script_paths_documentation: step 0: aisle_navigation.gd
 	update_script_paths_documentation: step 1: customer.gd
 	update_script_paths_documentation: step 2: familiar_npc.gd
@@ -843,13 +844,14 @@ update_script_paths_documentation: begin: Updating scripts documentation steps: 
 	update_script_paths_documentation: step 61: motion_review.gd
 	update_script_paths_documentation: step 62: neighborhood_review.gd
 	update_script_paths_documentation: step 63: performance_review.gd
-	update_script_paths_documentation: step 64: retail_render_review.gd
-	update_script_paths_documentation: step 65: scene_review.gd
-	update_script_paths_documentation: step 66: scene_walkthrough.gd
-	update_script_paths_documentation: step 67: surface_finish_review.gd
-	update_script_paths_documentation: step 68: visual_review.gd
+	update_script_paths_documentation: step 64: resolution_review.gd
+	update_script_paths_documentation: step 65: retail_render_review.gd
+	update_script_paths_documentation: step 66: scene_review.gd
+	update_script_paths_documentation: step 67: scene_walkthrough.gd
+	update_script_paths_documentation: step 68: surface_finish_review.gd
+	update_script_paths_documentation: step 69: visual_review.gd
 update_script_paths_documentation: end
-update_scene_groups: begin: Updating Scene Groups steps: 40
+update_scene_groups: begin: Updating Scene Groups steps: 41
 	update_scene_groups: step 0: main.tscn
 	update_scene_groups: step 1: crate.tscn
 	update_scene_groups: step 2: endcap.tscn
@@ -871,25 +873,26 @@ update_scene_groups: begin: Updating Scene Groups steps: 40
 	update_scene_groups: step 18: motion_review.tscn
 	update_scene_groups: step 19: neighborhood_review.tscn
 	update_scene_groups: step 20: performance_review.tscn
-	update_scene_groups: step 21: retail_render_review.tscn
-	update_scene_groups: step 22: scene_review.tscn
-	update_scene_groups: step 23: scene_walkthrough.tscn
-	update_scene_groups: step 24: surface_finish_review.tscn
-	update_scene_groups: step 25: visual_review.tscn
-	update_scene_groups: step 26: Bryan.glb
-	update_scene_groups: step 27: Customer1.glb
-	update_scene_groups: step 28: Customer2.glb
-	update_scene_groups: step 29: Customer3.glb
-	update_scene_groups: step 30: Dery.glb
-	update_scene_groups: step 31: Enemy.glb
-	update_scene_groups: step 32: Felps.glb
-	update_scene_groups: step 33: Garota1.glb
-	update_scene_groups: step 34: Garota2.glb
-	update_scene_groups: step 35: Velha1.glb
-	update_scene_groups: step 36: Zirico.glb
-	update_scene_groups: step 37: hatchback.glb
-	update_scene_groups: step 38: sedan.glb
-	update_scene_groups: step 39: user_car.glb
+	update_scene_groups: step 21: resolution_review.tscn
+	update_scene_groups: step 22: retail_render_review.tscn
+	update_scene_groups: step 23: scene_review.tscn
+	update_scene_groups: step 24: scene_walkthrough.tscn
+	update_scene_groups: step 25: surface_finish_review.tscn
+	update_scene_groups: step 26: visual_review.tscn
+	update_scene_groups: step 27: Bryan.glb
+	update_scene_groups: step 28: Customer1.glb
+	update_scene_groups: step 29: Customer2.glb
+	update_scene_groups: step 30: Customer3.glb
+	update_scene_groups: step 31: Dery.glb
+	update_scene_groups: step 32: Enemy.glb
+	update_scene_groups: step 33: Felps.glb
+	update_scene_groups: step 34: Garota1.glb
+	update_scene_groups: step 35: Garota2.glb
+	update_scene_groups: step 36: Velha1.glb
+	update_scene_groups: step 37: Zirico.glb
+	update_scene_groups: step 38: hatchback.glb
+	update_scene_groups: step 39: sedan.glb
+	update_scene_groups: step 40: user_car.glb
 update_scene_groups: end
 reimport: begin: (Re)Importing Assets steps: 198
 	reimport: step 0: Executing post-reimport operations...

@@ -1,0 +1,55 @@
+{
+  "version": "0.15.0",
+  "godot": "4.4.1",
+  "source_integration": {
+    "passed": 140,
+    "total": 140,
+    "exit_code": 0,
+    "runtime_errors": 0
+  },
+  "render_exit_code": 0,
+  "internal_3d_resolution": [
+    320,
+    240
+  ],
+  "window_size": [
+    1280,
+    720
+  ],
+  "ui_size": [
+    1280,
+    720
+  ],
+  "displayed_image": {
+    "position": [
+      160,
+      0
+    ],
+    "size": [
+      960,
+      720
+    ],
+    "aspect": "4:3",
+    "logical_scale": 3
+  },
+  "tested_window_sizes": [
+    [
+      1280,
+      720
+    ],
+    [
+      1280,
+      960
+    ],
+    [
+      1600,
+      900
+    ]
+  ],
+  "mode_saved_in_preferences": true,
+  "settings_panel_bounded_with_scroll": true,
+  "lighting_preserved_from": "0.14.0",
+  "native_radeon_r7_fps_measured": false,
+  "default_frame_limit": 30,
+  "deferred_box_drop_issue": "Unchanged; recorded in docs/PENDENCIAS.md"
+}
