@@ -16,6 +16,7 @@ var identity:=""
 var product: MeshInstance3D
 var destination:=Vector3.ZERO
 var blocked_time:=0.0
+var service_started:=false
 func _ready() -> void:
 	add_to_group("customers")
 	collision_layer=2;collision_mask=1|2
@@ -78,7 +79,7 @@ func _physics_process(delta: float) -> void:
 		State.SELECTING_PRODUCT:product.visible=true;state=State.GOING_TO_CHECKOUT;go_to(CheckoutFixture.CUSTOMER_POSITION)
 		State.GOING_TO_CHECKOUT:visual.rotation.y=-PI/2;state=State.WAITING;checked_out.emit(self);wait=1.5
 		State.WAITING:
-			if warned and Dialogue.active:wait=.5
+			if not service_started or Dialogue.active:wait=.5
 			else:state=State.PAYING;wait=2.0
 		State.PAYING:state=State.EXITING;go_to(Vector3(19,0,1.9));Session.serve_customer()
 		State.EXITING:departed.emit(self);queue_free()

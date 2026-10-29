@@ -1,6 +1,6 @@
 class_name Interaction
 extends Node3D
-@export_enum("crate","fridge","door","pallet","talk","note","switch","familiar") var kind := "crate"
+@export_enum("crate","fridge","door","pallet","talk","note","switch","familiar","checkout") var kind := "crate"
 @export var identity := ""
 var open := false
 var busy := false
@@ -11,6 +11,7 @@ func _ready() -> void:
 func prompt(player: Node3D) -> String:
 	match kind:
 		"crate":
+			if player.identity!="Dery":return "[Tab] Deryk cuida das caixas e da reposição"
 			if player.carried!=null:return "Mãos ocupadas • Q para soltar"
 			return "Pegar caixa" if global_position.distance_to(player.global_position)<=.95 else "Aproxime-se para pegar a caixa"
 		"fridge":
@@ -19,15 +20,23 @@ func prompt(player: Node3D) -> String:
 			return "Fechar geladeira" if open else "Abrir geladeira"
 		"door": return "Fechar porta" if open else "Abrir porta do estoque"
 		"pallet": return "Guardar caixa no palete" if Session.carried_id == "loose" else "Palete • organizar após a reposição"
-		"talk": return "Conversar com Felps"
+		"talk": return "Conversar com "+("Deryk" if identity=="Dery" else "Felps")
+		"checkout":
+			var world:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
+			return "Atender cliente" if world!=null and world.can_checkout(player) else "Caixa • aguarde um cliente"
 		"familiar": return "Conversar com "+identity
 		"note": return "Examinar a porta antiga" if Session.stage != 6 else "Verificar o ruído"
 		"switch": return "Acender luz" if not open else "Apagar luz"
 	return "Interagir"
+func available_for(player: DepotPlayer) -> bool:
+	if kind=="checkout":return player.identity=="Felps"
+	if kind=="talk":return get_parent()!=player
+	return true
 func activate(player: Node3D) -> bool:
 	if busy or player.motion.action_active: return false
 	match kind:
 		"crate":
+			if player.identity!="Dery":return false
 			if player.carried != null or global_position.distance_to(player.global_position)>.95:return false
 			player.pick_up(get_parent(),identity)
 			return true
@@ -55,6 +64,9 @@ func activate(player: Node3D) -> bool:
 				Dialogue.play("greeting",[["Felps","Ô Dery, beleza? Tem duas caixas de retornável lá no estoque. Repõe a geladeira pra mim?"],["Dery","Já vou. Depois eu ajeito aquela caixa no caminho."],["Felps","Valeu! E deixa o corredor livre, hoje tá passando gente ainda."]])
 			else: Dialogue.play("smalltalk",[["Felps","Sextou, hein... pra quem não tá trabalhando."],["Dery","Nem me fala. Ainda falta chão até meia-noite."]])
 			return true
+		"checkout":
+			var world:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
+			return world!=null and world.try_checkout(player)
 		"familiar":
 			if Dialogue.active:return false
 			var lines: Array

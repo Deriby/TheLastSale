@@ -1,4 +1,14 @@
-# Validação — revisão 0.15.1 — 29/10/2026
+# Validação — revisão 0.16.0 — 29/10/2026
+
+**168/168 verificações** passaram no projeto e no ZIP extraído após importação limpa. [Capturas, controles e relatório](gameplay_v016/README.md).
+
+A suíte usa entrada real de Tab/E/Q, mantém dois protagonistas e uma câmera/controle ativos, verifica movimentos e câmeras independentes, restauração da visibilidade após primeira pessoa e bloqueio da troca durante pausa/diálogo/ações de caixa. Também confere posições visíveis dos comandos e legendas, soltura agendada por Q, apoio em pé, parede que bloqueia a colocação, nova coleta, troca com a caixa nas mãos do outro personagem, salvamento e carregamento das duas posições/objetos e migração de checkpoint versão 1.
+
+Os clientes percorrem os caminhos completos, aguardam atendimento de Felps no balcão por E, compram, saem e liberam a visita de aviso após as tarefas. A saída salva a contagem de atendimentos. O fluxo de câmera, iluminação, resoluções PS1/PS1/2, portas, reposição, organização, aviso e final da demonstração continua coberto.
+
+A correção do relato de largar caixas está registrada em [PENDENCIAS.md](PENDENCIAS.md). O atendimento detalhado com valores e formas de pagamento é a próxima etapa. Os modelos e materiais não foram alterados. O limite padrão continua em 30 FPS; desempenho nativo na Radeon R7 não foi medido. [Integridade do ZIP](../downloads/project/release_verification.json).
+
+## Registro anterior — revisão 0.15.1 — 29/10/2026
 
 **146/146 verificações** passaram no projeto e no ZIP extraído após importação limpa. A opção **PS1/2 — 640×480 (4:3)** foi adicionada ao painel real de Configurações, mantendo PS1 em 320×240, Nítida, Retrô e Econômica.
 

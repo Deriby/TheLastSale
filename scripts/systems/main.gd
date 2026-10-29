@@ -54,8 +54,13 @@ func build_world() -> void:
 	if world!=null:
 		viewport.remove_child(world);world.free()
 	world=ShiftWorld.new();viewport.add_child(world)
-	world.player.focused.connect(func(text):interface.prompt.text=text)
+	for actor in world.characters.values():actor.focused.connect(on_focused.bind(actor))
+	world.player_changed.connect(func(actor: DepotPlayer):interface.set_character(actor))
+	world.notice.connect(interface.show_notice)
+	interface.set_character(world.player,false)
 	world.restore_transient()
+func on_focused(text: String,actor: DepotPlayer) -> void:
+	if actor.controlled:interface.prompt.text=text
 func start_new() -> void:
 	Dialogue.clear();Session.new_shift()
 	if initial_world_pristine and is_instance_valid(world) and not world.active:
@@ -72,5 +77,7 @@ func start_saved() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if interface.paused or world==null:return
+	if event.is_action_pressed("switch_character"):
+		world.switch_player();get_viewport().set_input_as_handled();return
 	world.player.camera_rig.handle_input(event)
 	world.player.handle_input(event)

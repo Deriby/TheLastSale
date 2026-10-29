@@ -2,6 +2,13 @@ class_name DepotPlayer
 extends CharacterBody3D
 signal focused(text: String)
 signal made_noise(position_value: Vector3, strength: float)
+var identity:="Dery"
+var controlled:=true
+var carried_id:=""
+var drop_pending:=false
+var dialogue_speaker:=""
+var routine_time:=0.0
+var routine_index:=0
 var visual: Node3D
 var animator: AnimationPlayer
 var camera_rig: ShoulderCamera
@@ -26,7 +33,7 @@ func _ready() -> void:
 	capsule=CapsuleShape3D.new();capsule.radius=.26;capsule.height=1.74
 	col.shape=capsule;col.position.y=.87
 	add_child(col)
-	visual=CharacterModels.create("Dery")
+	visual=CharacterModels.create(identity)
 	add_child(visual)
 	visual.rotation.y=PI
 	animator=visual.find_child("AnimationPlayer",true,false)
@@ -37,19 +44,40 @@ func _ready() -> void:
 	foot_audio=AudioStreamPlayer3D.new();add_child(foot_audio);foot_audio.stream=tile_step;foot_audio.volume_db=-11
 	torch=SpotLight3D.new();camera_rig.camera.add_child(torch);torch.position=Vector3(.15,-.12,0);torch.spot_range=12;torch.spot_angle=29;torch.light_energy=2.2;torch.light_color=Color("ece7c2");torch.visible=false
 	motion.pose_updated.connect(update_footsteps)
-	add_to_group("player")
+	add_to_group("protagonists")
+	Dialogue.spoken.connect(on_spoken)
+	motion.action_finished.connect(finish_action)
+	set_controlled(controlled)
+func display_name() -> String:return "Deryk" if identity=="Dery" else "Felps"
+func set_controlled(value: bool) -> void:
+	controlled=value;velocity=Vector3.ZERO;actual_speed=0;target=null
+	if value:add_to_group("player")
+	else:
+		remove_from_group("player")
+		motion.set_first_person(false)
+	collision_layer=2 if value else 2|4
+	camera_rig.process_mode=Node.PROCESS_MODE_INHERIT if value else Node.PROCESS_MODE_DISABLED
+	camera_rig.camera.current=value
+	if value:camera_rig.reset_follow()
+func on_spoken(who: String,_text: String) -> void:
+	dialogue_speaker=who
+	if motion.action_active or handling.busy or carried!=null:return
+	if who==identity or identity=="Dery" and who=="Deryk":motion.play("talk",.28)
+	elif not who.is_empty():motion.play("cashier_idle" if identity=="Felps" else "idle",.28)
+func finish_action() -> void:
+	if drop_pending:call_deferred("drop_carried")
 func play_clip(clip: String) -> void:
 	motion.play(clip)
 func _physics_process(delta: float) -> void:
-	crouching=Input.is_action_pressed("crouch") and carried==null and not motion.action_active
+	if controlled and not Dialogue.active:crouching=Input.is_action_pressed("crouch") and carried==null and not motion.action_active
 	if not crouching and capsule.height<1.7:
 		var ray:=PhysicsRayQueryParameters3D.create(global_position+Vector3.UP*.9,global_position+Vector3.UP*1.8,1,[get_rid()])
 		if not get_world_3d().direct_space_state.intersect_ray(ray).is_empty():crouching=true
 	capsule.height=1.30 if crouching else 1.74
 	get_child(0).position.y=capsule.height*.5
-	var input:=Input.get_vector("left","right","forward","backward") if not motion.action_active else Vector2.ZERO
+	var input:=Input.get_vector("left","right","forward","backward") if controlled and not motion.action_active and not Dialogue.active else Vector2.ZERO
 	var direction:=Basis(Vector3.UP,camera_rig.yaw)*Vector3(input.x,0,input.y)
-	var running:=Input.is_action_pressed("sprint") and not crouching and carried==null and stamina>.05 and input.length()>.1
+	var running:=controlled and Input.is_action_pressed("sprint") and not crouching and carried==null and stamina>.05 and input.length()>.1
 	stamina=clampf(stamina+delta*(-.18 if running else .16),0,1)
 	var speed:=3.9 if running else (.85 if crouching else (1.15 if carried!=null else 1.55))
 	var acceleration:=10.0 if running else (8.0 if input.length()<.1 else 6.5)
@@ -60,7 +88,7 @@ func _physics_process(delta: float) -> void:
 	actual_speed=Vector2(global_position.x-before.x,global_position.z-before.z).length()/maxf(delta,.001)
 	if motion.action_active and action_facing.length()>.1:
 		visual.rotation.y=lerp_angle(visual.rotation.y,atan2(action_facing.x,action_facing.z),1-exp(-delta*10))
-	elif camera_rig.first_person:
+	elif controlled and camera_rig.first_person:
 		visual.rotation.y=lerp_angle(visual.rotation.y,camera_rig.yaw+PI,1-exp(-delta*16))
 	elif direction.length()>.05:
 		visual.rotation.y=lerp_angle(visual.rotation.y,atan2(direction.x,direction.z),1-exp(-delta*10))
@@ -68,9 +96,22 @@ func _physics_process(delta: float) -> void:
 	if camera_rig.first_person:
 		if input.y>.2:gait="walk_back"
 		elif absf(input.x)>.4 and absf(input.y)<.3:gait="strafe_left" if input.x<0 else "strafe_right"
-	motion.locomotion(delta,actual_speed,crouching,carried!=null,stamina<.35,gait)
-	motion.look_at_position(global_position-Basis(Vector3.UP,camera_rig.yaw).z*4+Vector3.UP*1.6,not motion.action_active)
-	update_focus()
+	if Dialogue.active and actual_speed<.1 and not motion.action_active and carried==null:
+		motion.play("talk" if dialogue_speaker in [identity,display_name()] else ("cashier_idle" if identity=="Felps" else "idle"),.28)
+	elif identity=="Felps" and actual_speed<.1 and carried==null and not motion.action_active and global_position.distance_to(CheckoutFixture.STAFF_POSITION)<1.2:
+		routine_time+=delta
+		if routine_time>6.5:routine_time=0;routine_index+=1
+		var routines: Array[String]=["cashier","cashier_idle","idle_shift","cashier_idle","idle_look"]
+		motion.play(routines[routine_index%routines.size()],.35)
+	else:motion.locomotion(delta,actual_speed,crouching,carried!=null,stamina<.35,gait)
+	if controlled:
+		motion.look_at_position(global_position-Basis(Vector3.UP,camera_rig.yaw).z*4+Vector3.UP*1.6,not motion.action_active)
+		update_focus();handling.update_preview(delta)
+	else:
+		handling.hide_preview()
+		var other:=get_tree().get_first_node_in_group("player") as Node3D
+		motion.look_at_position(other.global_position+Vector3.UP*1.6 if other!=null else Vector3.ZERO,other!=null and global_position.distance_to(other.global_position)<3)
+	if drop_pending and not motion.action_active and not handling.busy:drop_carried()
 var last_step_half:=-1
 func update_footsteps() -> void:
 	if animator==null or not motion.strides.has(motion.current_clip) or not is_on_floor() or actual_speed<.1:
@@ -83,6 +124,10 @@ func update_footsteps() -> void:
 	last_step_half=half
 func update_focus() -> void:
 	target=null
+	if identity=="Felps" and global_position.distance_to(CheckoutFixture.STAFF_POSITION)<1.4:
+		var world:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
+		if world!=null:
+			target=world.depot.checkout;focused.emit("[E]  "+target.prompt(self));return
 	var cam:=camera_rig.camera
 	var start:=cam.global_position
 	var end:=start-cam.global_basis.z*5.5
@@ -95,8 +140,8 @@ func update_focus() -> void:
 	if target==null:
 		var best:=0.67
 		for candidate in get_tree().get_nodes_in_group("interactables"):
-			if not candidate.is_inside_tree() or not candidate.get_parent().is_visible_in_tree() or candidate.get_parent()==carried:continue
-			var aim: Vector3=candidate.global_position+Vector3.UP*.7
+			if not candidate.is_inside_tree() or not candidate.get_parent().is_visible_in_tree() or candidate.get_parent() in [carried,self] or not candidate.available_for(self):continue
+			var aim: Vector3=candidate.global_position+Vector3.UP*(1.1 if candidate.kind in ["checkout","talk"] else .7)
 			if global_position.distance_to(candidate.global_position)>2.65:continue
 			var dot:=(-cam.global_basis.z).dot((aim-start).normalized())
 			if dot<best:continue
@@ -106,9 +151,11 @@ func update_focus() -> void:
 			best=dot;target=candidate
 	focused.emit("[E]  "+target.prompt(self) if target!=null else "")
 func handle_input(event: InputEvent) -> void:
-	if motion.action_active:return
+	if not controlled or Dialogue.active:return
+	if event.is_action_pressed("drop"):
+		drop_carried();return
+	if motion.action_active or handling.busy:return
 	if event.is_action_pressed("interact") and target!=null:target.activate(self)
-	if event.is_action_pressed("drop"):drop_carried()
 	if event.is_action_pressed("flashlight") and Session.stage>=6:torch.visible=not torch.visible
 func set_collision(node: Node,enabled: bool) -> void:
 	for c in node.find_children("*","CollisionShape3D",true,false):c.set_deferred("disabled",not enabled)
@@ -121,12 +168,8 @@ func place_carried(at: Vector3) -> void:
 	handling.place(at)
 func drop_carried() -> void:
 	if carried==null:return
-	var forward:=Basis(Vector3.UP,camera_rig.yaw)*Vector3.FORWARD
-	var desired:=global_position+forward*.9
-	var hit:=get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(global_position+Vector3.UP*.3,desired+Vector3.UP*.3,1,[get_rid()]))
-	if not hit.is_empty():return
-	# Snap to support below; an item cannot fall through the world or be lost.
-	var floor_hit:=get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(desired+Vector3.UP*1.8,desired-Vector3.UP*2,1,[get_rid()]))
-	if floor_hit.is_empty():return
-	desired.y=floor_hit.position.y
-	place_carried(desired)
+	if motion.action_active or handling.busy:drop_pending=true;return
+	drop_pending=false
+	var spot:=handling.placement()
+	if spot.valid:handling.place(spot.at,false,Callable(),spot.yaw)
+	else:handling.feedback.emit("Sem espaço para apoiar a caixa. Procure uma superfície livre.")

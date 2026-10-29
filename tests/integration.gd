@@ -13,6 +13,11 @@ func check(condition: bool,description: String) -> void:
 	if not condition:failures.append(description)
 func ticks(count: int) -> void:
 	for i in count:await get_tree().physics_frame
+func key_press(code: Key) -> void:
+	var event:=InputEventKey.new();event.physical_keycode=code;event.keycode=code;event.pressed=true
+	Input.parse_input_event(event);Input.flush_buffered_events();await ticks(3)
+	event=InputEventKey.new();event.physical_keycode=code;event.keycode=code;event.pressed=false
+	Input.parse_input_event(event);Input.flush_buffered_events();await ticks(2)
 func find_interaction(parent: Node,kind: String) -> Interaction:
 	for node in parent.get_children():
 		if node is Interaction and node.kind==kind:return node
@@ -96,6 +101,30 @@ func run() -> void:
 	check(not Preferences.ps1_mode and app.screen.scale==Vector2.ONE and app.viewport.size==Vector2i(get_viewport().get_visible_rect().size) and app.retro.get_shader_parameter("game_bounds")==Vector4(0,0,1,1),"retorno a Nítida preenche a janela sem deixar barras ou escala antigas")
 	check(world.get_instance_id()==loaded_world_id and Session.stage==0,"troca de resolução preserva o mundo e o progresso do turno")
 	app.interface.settings.closed.emit();app.interface.set_paused(false)
+	check(world.characters.size()==2 and get_tree().get_nodes_in_group("protagonists").size()==2 and get_tree().get_nodes_in_group("player").size()==1,"dois protagonistas físicos e apenas um controle ativo")
+	var hud_bounds:=Rect2(Vector2.ZERO,app.interface.root.size)
+	check(hud_bounds.encloses(app.interface.prompt.get_global_rect()) and hud_bounds.encloses(app.interface.carry_status.get_global_rect()) and hud_bounds.encloses(app.interface.notice_label.get_global_rect()),"comandos de interação, caixa e avisos ficam dentro da janela")
+	check(hud_bounds.encloses(app.interface.hud.get_node("Subtitles").get_global_rect()) and hud_bounds.encloses(app.interface.hud.get_node("ControlsHint").get_global_rect()),"legendas e lembrete de controles permanecem visíveis na parte inferior")
+	var dery_start:=player.global_position
+	player.camera_rig.yaw=.3;player.camera_rig.target_distance=1.8
+	await key_press(KEY_TAB)
+	var felps: DepotPlayer=world.characters.Felps
+	check(world.player==felps and felps.camera_rig.camera.current and not player.camera_rig.camera.current and app.interface.character_label.text.begins_with("FELPS"),"Tab entrega câmera, controle e HUD ao Felps")
+	felps.camera_rig.yaw=0
+	var felps_start:=felps.global_position
+	Input.action_press("forward");await ticks(24);Input.action_release("forward");await ticks(10)
+	check(felps.global_position.distance_to(felps_start)>.2 and Vector2(player.position.x,player.position.z).distance_to(Vector2(dery_start.x,dery_start.z))<.01,"WASD move só Felps enquanto Deryk mantém a posição")
+	felps.camera_rig.target_distance=0;await ticks(40)
+	check(felps.camera_rig.first_person and felps.visual.find_child("Felps_Head",true,false).cast_shadow==GeometryInstance3D.SHADOW_CASTING_SETTING_SHADOWS_ONLY,"Felps também tem primeira pessoa com corpo e cabeça ocultada apenas da própria câmera")
+	await key_press(KEY_TAB)
+	check(world.player==player and is_equal_approx(player.camera_rig.yaw,.3) and is_equal_approx(player.camera_rig.target_distance,1.8) and felps.visual.find_child("Felps_Head",true,false).cast_shadow==GeometryInstance3D.SHADOW_CASTING_SETTING_ON,"retornar a Deryk restaura sua câmera e a cabeça visível de Felps")
+	Dialogue.play("switch_test",[["Dery","Só um instante."]]);await key_press(KEY_TAB)
+	check(world.player==player,"troca fica bloqueada durante conversa")
+	clear_dialogue();app.interface.set_paused(true)
+	check(not world.switch_player(),"pausa bloqueia troca de personagem")
+	app.interface.set_paused(false)
+	felps.position=CheckoutFixture.STAFF_POSITION;felps.velocity=Vector3.ZERO;felps.visual.rotation.y=PI/2;felps.camera_rig.yaw=-PI/2;felps.camera_rig.target_distance=2.2;felps.reset_physics_interpolation()
+	player.camera_rig.yaw=0;player.camera_rig.target_distance=Preferences.camera_distance
 	check(world.enemy_visual.process_mode==Node.PROCESS_MODE_DISABLED,"assassino oculto não atualiza animações")
 	world.enemy_visual.show()
 	check(world.enemy_visual.process_mode==Node.PROCESS_MODE_INHERIT,"assassino retoma processamento quando fica visível")
@@ -311,6 +340,33 @@ func run() -> void:
 	var fridge:=find_interaction(world.depot.fridge_target,"fridge")
 	var initial_bottles: int=world.depot.fridge_target.products.groups["beer_0"].baked_count
 	check(not find_interaction(world.depot.crates.stock_1,"crate").activate(player),"caixa distante exige aproximação antes de alcançar")
+	var drop_item: Node3D=world.depot.crates.stock_1
+	player.position=drop_item.global_position+Vector3(0,0,.7);player.velocity=Vector3.ZERO;player.camera_rig.yaw=0;player.reset_physics_interpolation()
+	find_interaction(drop_item,"crate").activate(player)
+	await key_press(KEY_Q);await key_press(KEY_TAB)
+	check(player.drop_pending and world.player==player,"Q durante a pegada agenda a soltura e Tab aguarda a animação")
+	await ticks(160)
+	check(player.carried==null and not player.handling.busy and absf(drop_item.global_position.y)<.04 and absf(drop_item.global_rotation.x)<.01 and absf(drop_item.global_rotation.z)<.01,"soltura agendada apoia a caixa em pé no chão sem perder o objeto")
+	player.position=drop_item.global_position+Vector3(0,0,.7);player.velocity=Vector3.ZERO;player.reset_physics_interpolation()
+	check(find_interaction(drop_item,"crate").activate(player),"caixa largada pode ser pega novamente")
+	await ticks(90)
+	player.position=Vector3(0,0,-15.1);player.velocity=Vector3.ZERO;player.camera_rig.yaw=0;player.reset_physics_interpolation();await ticks(5)
+	check(not player.handling.placement().valid,"parede impede apoiar a caixa do outro lado")
+	await key_press(KEY_Q)
+	check(player.carried==drop_item and not app.interface.notice_label.text.is_empty(),"Q sem espaço preserva a caixa e avisa o jogador")
+	player.position=Vector3(0,0,-12.5);player.velocity=Vector3.ZERO;player.reset_physics_interpolation();await ticks(10)
+	check(player.handling.can_place and player.handling.preview.visible,"marca de colocação aparece verde sobre piso livre")
+	await key_press(KEY_TAB)
+	check(world.player==felps and player.carried==drop_item and drop_item.get_parent()==player.socket and Session.carried_id.is_empty(),"trocar para Felps mantém a caixa fisicamente com Deryk")
+	var held_position:=player.global_position
+	check(Session.save_shift(felps.global_position)==OK,"salvamento aceita Felps ativo enquanto Deryk segura caixa")
+	app.start_saved();world=app.world;felps=world.characters.Felps;player=world.characters.Dery;await ticks(12)
+	check(world.player==felps and player.carried==world.depot.crates.stock_1 and player.position.distance_to(held_position)<.1 and felps.position.distance_to(CheckoutFixture.STAFF_POSITION)<.1 and get_tree().get_nodes_in_group("protagonists").size()==2,"continuar restaura Felps no balcão, Deryk e sua caixa sem duplicar personagens")
+	await key_press(KEY_TAB);await key_press(KEY_Q);await ticks(100)
+	var floor_position: Vector3=world.depot.crates.stock_1.global_position
+	Session.save_shift(player.global_position);app.start_saved();world=app.world;player=world.player;felps=world.characters.Felps;await ticks(8)
+	check(player.carried==null and world.depot.crates.stock_1.global_position.distance_to(floor_position)<.02,"caixa apoiada conserva sua posição ao salvar e continuar")
+	skeleton=player.motion.skeleton;fridge=find_interaction(world.depot.fridge_target,"fridge")
 	for id in ["stock_1","stock_2"]:
 		var item: Node3D=world.depot.crates[id]
 		player.position=item.position+Vector3(0,0,.7)
@@ -342,16 +398,30 @@ func run() -> void:
 	player.position=Vector3(4.7,0,-8.5);player.velocity=Vector3.ZERO
 	# Simulate the actual complete routes. No waypoint skipping or teleporting customers.
 	Engine.time_scale=12
+	var waiting_ticks:=0
+	var checkout_gate_checked:=false
 	for i in 3000:
 		await get_tree().physics_frame
 		if world.customer!=null:
 			served_states[world.customer.state]=true
 			if world.customer.state in [Customer.State.WAITING,Customer.State.PAYING] and world.customer.global_position.distance_to(CheckoutFixture.CUSTOMER_POSITION)>.4:checkout_positions_valid=false
+			if world.customer.state==Customer.State.WAITING and not world.customer.service_started:
+				if not checkout_gate_checked:
+					waiting_ticks+=1
+					if waiting_ticks<60:continue
+					check(Session.customers_served==0 and not world.try_checkout(world.characters.Dery),"cliente aguarda atendimento e Deryk não conclui a venda no lugar de Felps")
+					checkout_gate_checked=true
+				if world.player.identity!="Felps":world.switch_player()
+				elif world.player.target!=null and world.player.target.kind=="checkout":
+					var service_key:=InputEventKey.new();service_key.physical_keycode=KEY_E;service_key.keycode=KEY_E;service_key.pressed=true;Input.parse_input_event(service_key);Input.flush_buffered_events()
+					service_key=InputEventKey.new();service_key.physical_keycode=KEY_E;service_key.keycode=KEY_E;service_key.pressed=false;Input.parse_input_event(service_key);Input.flush_buffered_events()
 		if Dialogue.active and world.customer!=null and world.customer.state==Customer.State.WAITING:
 			clear_dialogue()
 		if Session.warning_delivered:break
 	Engine.time_scale=1
 	check(Session.customers_served>=3,"clientes atravessam loja, compram e saem")
+	var served_checkpoint=JSON.parse_string(FileAccess.get_file_as_string(Session.SAVE_PATH))
+	check(served_checkpoint is Dictionary and int(served_checkpoint.get("customers",0))==Session.customers_served,"saída do cliente salva automaticamente o total de atendimentos concluídos")
 	var ambient_finished:=true
 	for friend in get_tree().get_nodes_in_group("familiar_npcs"):
 		if friend.motion.ambient_active:
@@ -362,6 +432,8 @@ func run() -> void:
 	check(checkout_positions_valid,"todos os clientes são atendidos junto ao novo balcão esquerdo")
 	check(Session.warning_delivered and Session.stage==6,"aviso ocorre somente depois da rotina e da visita")
 	clear_dialogue()
+	if world.player.identity!="Dery":world.switch_player()
+	player=world.player
 	player.position=Vector3(4,0,-6);await ticks(3)
 	check(Dialogue.active,"ruído posterior tem reação narrativa")
 	clear_dialogue()
@@ -391,6 +463,11 @@ func run() -> void:
 	check(Session.world_seconds==frozen,"pausa congela o relógio narrativo")
 	check(world.street.get_node("StreetHaze").time==frozen_haze and world.get_node("NightMood").time==frozen_light,"pausa congela a deriva da névoa e as variações de luz")
 	app.interface.set_paused(false)
+	clear_dialogue()
+	var legacy:={"version":1,"stage":1,"stocked":[],"organized":false,"customers":0,"position":[0,0,-12.5],"carried":"stock_1"}
+	var legacy_file:=FileAccess.open(Session.SAVE_PATH,FileAccess.WRITE);legacy_file.store_string(JSON.stringify(legacy));legacy_file.close()
+	app.start_saved();world=app.world;player=world.player;await ticks(8)
+	check(player.identity=="Dery" and player.carried_id=="stock_1" and player.carried==world.depot.crates.stock_1 and world.characters.Felps.position.distance_to(CheckoutFixture.STAFF_POSITION)<.1,"checkpoint antigo da versão 1 migra para a dupla preservando a caixa carregada")
 	print("RESULT ",checks-failures.size(),"/",checks," passed; failures=",failures)
 	app.queue_free()
 	await get_tree().process_frame

@@ -8,6 +8,8 @@ var fridge_target: Node3D
 var fluorescent: OmniLight3D
 var felps: Node3D
 var counter: Node3D
+var staff_talk: Interaction
+var checkout: Interaction
 var central_shelves: Array[DepotProp]=[]
 var rear_fridges: Array[DepotProp]=[]
 const SHELF_LENGTH:=2.10
@@ -62,7 +64,7 @@ func build_furniture() -> void:
 	blockers.append(CheckoutFixture.FOOTPRINT)
 	blockers.append(Rect2(-5.90,-3.70,.40,1.92))
 	blockers.append(Rect2(-5.81,-1.10,.73,.90))
-	blockers.append(Rect2(-5.38,-3.36,.52,.52))
+	# Felps now has a live CharacterBody3D; do not reserve his own position as furniture.
 	var detail:=ShopDetails.new();add_child(detail)
 	add_child(RetailFinish.new());blockers.append(Rect2(4.98,-4.45,.64,1.26))
 	blockers.append(Rect2(1.50,-.64,1.14,.54))
@@ -92,14 +94,20 @@ func build_stock() -> void:
 	Geo.sign_text(old_door,"SEM ACESSO",Vector3(0,1.65,.08),22)
 	interact(old_door,"note")
 func build_staff() -> void:
-	felps=FelpsActor.new();felps.name="Felps";felps.position=CheckoutFixture.STAFF_POSITION;felps.rotation.y=PI/2;add_child(felps)
-	var talk:=interact(felps,"talk")
-	for collider in counter.find_children("*","CollisionObject3D",true,false):collider.set_meta("interaction",talk)
+	felps=FelpsActor.new();felps.name="Felps";felps.position=CheckoutFixture.STAFF_POSITION;add_child(felps);felps.visual.rotation.y=PI/2
+	staff_talk=interact(felps,"talk","Felps");felps.set_meta("interaction",staff_talk)
+	checkout=interact(counter,"checkout")
+	set_counter_role("Dery")
+func set_counter_role(identity: String) -> void:
+	for collider in counter.find_children("*","CollisionObject3D",true,false):collider.set_meta("interaction",checkout if identity=="Felps" else staff_talk)
 func restore_state(player: DepotPlayer) -> void:
 	for id in crates:
 		if id in Session.stocked:
 			crates[id].queue_free()
 		elif id=="loose" and Session.organized:
 			crates[id].position=Vector3(-3.8,.23,-13.8)
-		elif id==Session.carried_id:player.pick_up(crates[id],id,true)
+		elif Session.crate_states.has(id):
+			var state: Dictionary=Session.crate_states[id]
+			crates[id].global_position=Session.read_position(state.get("position"),crates[id].global_position)
+			crates[id].rotation.y=float(state.get("yaw",0))
 	for i in Session.stocked.size():fridge_target.replenish(i)

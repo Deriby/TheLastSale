@@ -2,6 +2,10 @@ extends Node
 ## Persistent narrative state. Completion is driven by actions, never by time alone.
 signal changed
 signal event_triggered(id: String)
+signal saving
+var active_character:="Dery"
+var character_states: Dictionary={}
+var crate_states: Dictionary={}
 var stage := 0
 var stocked: Array[String] = []
 var organized := false
@@ -23,6 +27,7 @@ func new_shift() -> void:
 	world_seconds = 0.0
 	carried_id = ""
 	saved_position = Vector3(3.8, 0.1, 1.8)
+	active_character="Dery";character_states.clear();crate_states.clear()
 	changed.emit()
 func objective() -> String:
 	return OBJECTIVES[clampi(stage, 0, OBJECTIVES.size()-1)]
@@ -66,8 +71,10 @@ func end_slice() -> void:
 	changed.emit()
 	event_triggered.emit("finale")
 func save_shift(position_value: Vector3) -> Error:
+	saving.emit()
 	saved_position = position_value
-	var data := {"version":1,"stage":stage,"stocked":stocked,"organized":organized,"customers":customers_served,"warning":warning_delivered,"finale":finale_seen,"seconds":world_seconds,"position":[saved_position.x,saved_position.y,saved_position.z],"carried":carried_id}
+	if character_states.has(active_character):character_states[active_character].position=[position_value.x,position_value.y,position_value.z]
+	var data := {"version":2,"stage":stage,"stocked":stocked,"organized":organized,"customers":customers_served,"warning":warning_delivered,"finale":finale_seen,"seconds":world_seconds,"position":[saved_position.x,saved_position.y,saved_position.z],"carried":carried_id,"active_character":active_character,"characters":character_states,"crates":crate_states}
 	var f := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if f == null: return FileAccess.get_open_error()
 	f.store_string(JSON.stringify(data))
@@ -75,7 +82,7 @@ func save_shift(position_value: Vector3) -> Error:
 func load_shift() -> bool:
 	if not FileAccess.file_exists(SAVE_PATH): return false
 	var data = JSON.parse_string(FileAccess.get_file_as_string(SAVE_PATH))
-	if not data is Dictionary or data.get("version") != 1: return false
+	if not data is Dictionary or int(data.get("version",0)) not in [1,2]: return false
 	if not data.get("position") is Array or data.position.size() != 3: return false
 	stage = clampi(int(data.get("stage",0)),0,7)
 	stocked.assign(data.get("stocked", []))
@@ -86,5 +93,13 @@ func load_shift() -> bool:
 	world_seconds = float(data.get("seconds",0))
 	saved_position = Vector3(data.position[0],data.position[1],data.position[2])
 	carried_id = str(data.get("carried",""))
+	active_character="Felps" if data.get("active_character", "Dery")=="Felps" else "Dery"
+	character_states=data.get("characters",{}).duplicate(true) if data.get("characters",{}) is Dictionary else {}
+	crate_states=data.get("crates",{}).duplicate(true) if data.get("crates",{}) is Dictionary else {}
 	changed.emit()
 	return true
+func read_position(value: Variant,fallback: Vector3) -> Vector3:
+	if not value is Array or value.size()!=3:return fallback
+	for component in value:
+		if not (component is float or component is int) or not is_finite(float(component)):return fallback
+	return Vector3(float(value[0]),float(value[1]),float(value[2]))

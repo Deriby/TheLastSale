@@ -2,11 +2,19 @@
 
 Demonstração jogável em **Godot 4.4.1 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP, com uma rotina narrativa curta. A campanha completa continua em desenvolvimento.
 
-**[Baixar o projeto 0.15.1 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.15.1.zip)**
+**[Baixar o projeto 0.16.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.16.0.zip)**
 
 Extraia o ZIP, importe `project.godot` no Godot **4.4.1**, aguarde a importação dos modelos e pressione **F5**. O arquivo inclui os modelos animados, cenários, código e recursos usados no jogo. [Conteúdo e instruções do projeto](downloads/project/README.md).
 
-## Revisão 0.15.1 — PS1/2 em 640×480
+## Revisão 0.16.0 — dupla jogável, caixas e atendimento básico
+
+**Tab** alterna entre **Deryk**, responsável pelas caixas e reposição, e **Felps**, responsável pelo balcão. Os dois permanecem no cenário com seus próprios corpos, câmeras, posições e objetos. O cliente aguarda Felps usar **E** no caixa para começar o atendimento.
+
+**Q** apoia a caixa em uma superfície livre. O comando durante a pegada é aguardado e executado ao terminar a animação; uma marca verde/vermelha indica o espaço disponível. Paredes, outros objetos e falta de apoio impedem a colocação, preservando o objeto. Caixas colocadas ficam em pé e podem ser pegas novamente.
+
+O salvamento registra os dois personagens e as caixas soltas ou carregadas. Checkpoints antigos continuam aceitos. Também foram corrigidas as posições dos comandos, avisos e legendas na interface. PS1, PS1/2 e os demais modos gráficos foram mantidos. [Controles, capturas e validação](docs/gameplay_v016/README.md).
+
+## Revisão anterior 0.15.1 — PS1/2 em 640×480
 
 Em **Configurações → Resolução interna / qualidade**, escolha **PS1/2 — 640×480 (4:3)**. A opção oferece mais definição e ocupa a mesma área da janela que PS1 em 320×240, mantendo HUD e menus nítidos. A preferência fica salva; os dois modos continuam disponíveis.
 
@@ -140,9 +148,9 @@ A reconstrução 0.2 do interior recebeu gôndolas abastecidas por categoria, ge
 
 ## Jogar
 
-**[Baixar o projeto Godot 0.15.1 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.15.1.zip)**
+**[Baixar o projeto Godot 0.16.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.16.0.zip)**
 
-O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **Demonstração 0.15.1**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
+O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **Demonstração 0.16.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
 
 O download atual é o projeto para o editor. O diretório `downloads/windows` guarda apenas a entrega anterior 0.9.0.
 

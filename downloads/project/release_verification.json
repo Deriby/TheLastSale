@@ -1,52 +1,50 @@
 {
   "format": "Godot editor project ZIP",
-  "version": "0.15.1",
+  "version": "0.16.0",
   "godot": "4.4.1",
-  "file": "TheLastSale_Godot_0.15.1.zip",
-  "bytes": 80265058,
-  "sha256": "9d38d85fd315f2cb9a4ee1b3bf0f99549e8f7d13065ba3b18f4dc096af66eece",
+  "file": "TheLastSale_Godot_0.16.0.zip",
+  "bytes": 80534065,
+  "sha256": "95b39142d94d7006fa022fbddb184cbb744bf4c28e4477122a03e29a2ea1aaa0",
   "crc_verified": true,
-  "files_verified_against_manifest": 641,
+  "files_verified_against_manifest": 646,
   "manifest_files_changed_by_import": 0,
   "clean_extraction_import_exit_code": 0,
   "import_script_errors": 0,
   "headless_import_texture_preview_messages": 14,
   "clean_extraction_integration": {
-    "passed": 146,
-    "total": 146,
+    "passed": 168,
+    "total": 168,
     "exit_code": 0,
     "runtime_errors": 0
   },
   "source_integration": {
-    "passed": 146,
-    "total": 146,
+    "passed": 168,
+    "total": 168,
     "exit_code": 0,
     "runtime_errors": 0
   },
-  "ps1_internal_resolution": [
-    320,
-    240
+  "characters": [
+    "Dery",
+    "Felps"
   ],
-  "ps12_internal_resolution": [
-    640,
-    480
-  ],
-  "default_window_size": [
-    1280,
-    720
-  ],
-  "retro_displayed_image_size": [
-    960,
-    720
-  ],
-  "ui_size": [
-    1280,
-    720
-  ],
-  "assets_and_resources_unchanged_from_0_15_0": 414,
+  "active_controllers": 1,
+  "switch_key": "Tab",
+  "drop_key": "Q",
+  "checkout_key": "E",
+  "save_version": 2,
+  "legacy_save_version_1_verified": true,
+  "queued_drop_during_pickup_verified": true,
+  "inactive_character_holding_restored": true,
+  "cashier_staff_position_preserved_on_load": true,
+  "customer_requires_felps_service": true,
+  "completed_sales_autosaved": true,
+  "full_customer_routes_and_story_verified": true,
+  "ps1_and_ps12_preserved": true,
+  "assets_and_resources_unchanged_from_0_15_1": 414,
   "default_frame_limit": 30,
   "native_radeon_r7_fps_measured": false,
-  "resolution_report": "docs/resolution_v0151/validation.json",
-  "box_drop_issue": "Unchanged; recorded in docs/PENDENCIAS.md for the gameplay phase.",
+  "gameplay_report": "docs/gameplay_v016/validation.json",
+  "box_drop_issue": "Fixed and regression-tested in this release.",
+  "scope": "Controllable duo, safe crate handling and basic manual checkout; detailed payments and later gameplay phases remain planned.",
   "import_note": "Headless import emits 14 known texture preview t=null messages; no script errors. Runtime integration has no errors."
 }

@@ -1,0 +1,80 @@
+{
+  "version": "0.16.0",
+  "godot": "4.4.1",
+  "source_integration": {
+    "passed": 168,
+    "total": 168,
+    "exit_code": 0,
+    "runtime_errors": 0
+  },
+  "render_exit_code": 0,
+  "characters": [
+    "Dery",
+    "Felps"
+  ],
+  "active_controllers": 1,
+  "switch_key": "Tab",
+  "drop_key": "Q",
+  "checkout_key": "E",
+  "save_version": 2,
+  "legacy_save_versions": [
+    1
+  ],
+  "queued_drop_during_pickup_verified": true,
+  "blocked_drop_preserves_item": true,
+  "inactive_character_holding_restored": true,
+  "cashier_staff_position_preserved_on_load": true,
+  "customer_requires_felps_service": true,
+  "completed_sales_autosaved": true,
+  "full_customer_routes_and_story_verified": true,
+  "hud_and_subtitles_in_window": true,
+  "placement_preview_hz": 10,
+  "ps1_and_ps12_preserved": true,
+  "default_frame_limit": 30,
+  "native_radeon_r7_fps_measured": false,
+  "layout": {
+    "deryk_carry": {
+      "active_character": "Dery",
+      "active_controllers": 1,
+      "actor_position": "(0.0, 0.0, -12.2)",
+      "can_checkout": false,
+      "dery_holding": "stock_1",
+      "hud_rects": {
+        "hint": "[P: (570.0, 628.0), S: (680.0, 85.0)]",
+        "subtitles": "[P: (210.0, 587.0), S: (860.0, 125.0)]"
+      },
+      "preview_visible": true,
+      "prompt": "[E]  Mãos ocupadas • Q para soltar",
+      "protagonists": 2
+    },
+    "felps_checkout": {
+      "active_character": "Felps",
+      "active_controllers": 1,
+      "actor_position": "(-5.12, 0.0, -3.1)",
+      "can_checkout": true,
+      "dery_holding": "stock_1",
+      "hud_rects": {
+        "hint": "[P: (570.0, 628.0), S: (680.0, 85.0)]",
+        "subtitles": "[P: (210.0, 587.0), S: (860.0, 125.0)]"
+      },
+      "preview_visible": false,
+      "prompt": "[E]  Atender cliente",
+      "protagonists": 2
+    },
+    "felps_service": {
+      "active_character": "Felps",
+      "active_controllers": 1,
+      "actor_position": "(-5.12, 0.0, -3.1)",
+      "can_checkout": false,
+      "dery_holding": "stock_1",
+      "hud_rects": {
+        "hint": "[P: (570.0, 628.0), S: (680.0, 85.0)]",
+        "subtitles": "[P: (210.0, 587.0), S: (860.0, 125.0)]"
+      },
+      "preview_visible": false,
+      "prompt": "[E]  Caixa • aguarde um cliente",
+      "protagonists": 2
+    }
+  },
+  "editor_script_import_errors": 0
+}

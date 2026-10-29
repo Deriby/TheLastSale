@@ -1,0 +1,44 @@
+{
+	"deryk_carry": {
+		"active_character": "Dery",
+		"active_controllers": 1,
+		"actor_position": "(0.0, 0.0, -12.2)",
+		"can_checkout": false,
+		"dery_holding": "stock_1",
+		"hud_rects": {
+			"hint": "[P: (570.0, 628.0), S: (680.0, 85.0)]",
+			"subtitles": "[P: (210.0, 587.0), S: (860.0, 125.0)]"
+		},
+		"preview_visible": true,
+		"prompt": "[E]  Mãos ocupadas • Q para soltar",
+		"protagonists": 2
+	},
+	"felps_checkout": {
+		"active_character": "Felps",
+		"active_controllers": 1,
+		"actor_position": "(-5.12, 0.0, -3.1)",
+		"can_checkout": true,
+		"dery_holding": "stock_1",
+		"hud_rects": {
+			"hint": "[P: (570.0, 628.0), S: (680.0, 85.0)]",
+			"subtitles": "[P: (210.0, 587.0), S: (860.0, 125.0)]"
+		},
+		"preview_visible": false,
+		"prompt": "[E]  Atender cliente",
+		"protagonists": 2
+	},
+	"felps_service": {
+		"active_character": "Felps",
+		"active_controllers": 1,
+		"actor_position": "(-5.12, 0.0, -3.1)",
+		"can_checkout": false,
+		"dery_holding": "stock_1",
+		"hud_rects": {
+			"hint": "[P: (570.0, 628.0), S: (680.0, 85.0)]",
+			"subtitles": "[P: (210.0, 587.0), S: (860.0, 125.0)]"
+		},
+		"preview_visible": false,
+		"prompt": "[E]  Caixa • aguarde um cliente",
+		"protagonists": 2
+	}
+}

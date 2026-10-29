@@ -18,11 +18,18 @@ var buttons: VBoxContainer
 var message: Label
 var paused:=true
 var has_started:=false
+var character_label: Label
+var carry_status: Label
+var notice_label: Label
+var notice_remaining:=0.0
+var switch_fade: ColorRect
+var fade_tween: Tween
 func _ready() -> void:
 	process_mode=Node.PROCESS_MODE_ALWAYS
 	layer=5
 	root=Control.new();root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);root.mouse_filter=Control.MOUSE_FILTER_IGNORE;add_child(root)
 	root.theme=make_theme()
+	switch_fade=ColorRect.new();root.add_child(switch_fade);switch_fade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);switch_fade.color=Color(0,0,0,0);switch_fade.mouse_filter=Control.MOUSE_FILTER_IGNORE
 	build_hud();build_menu()
 	Session.changed.connect(update_objective)
 	Dialogue.spoken.connect(on_spoken)
@@ -43,16 +50,22 @@ func build_hud() -> void:
 	var top:=VBoxContainer.new();hud.add_child(top);top.position=Vector2(34,30);top.mouse_filter=Control.MOUSE_FILTER_IGNORE
 	label(top,"FRANCA / SEXTA-FEIRA",14).modulate=Color("c6b18b")
 	clock=label(top,"21:40",25)
+	character_label=label(top,"DERYK • REPOSIÇÃO   [TAB] FELPS",15);character_label.modulate=Color("c6b18b")
 	objective=label(top,"",18);objective.custom_minimum_size=Vector2(500,60);objective.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
 	var cross:=label(hud,"·",26);cross.set_anchors_and_offsets_preset(Control.PRESET_CENTER);cross.position-=Vector2(4,18)
-	prompt=label(hud,"",19);prompt.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM);prompt.position=Vector2(-360,-180);prompt.size=Vector2(720,38);prompt.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
-	var sub:=VBoxContainer.new();hud.add_child(sub);sub.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM);sub.position=Vector2(-430,-133);sub.size=Vector2(860,125);sub.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	prompt=label(hud,"",19);prompt.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM);anchored_rect(prompt,Rect2(-360,-180,720,38));prompt.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+	carry_status=label(hud,"",16);carry_status.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM);anchored_rect(carry_status,Rect2(-400,-218,800,32));carry_status.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+	notice_label=label(hud,"",17);notice_label.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT);anchored_rect(notice_label,Rect2(-480,32,450,100));notice_label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;notice_label.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
+	var sub:=VBoxContainer.new();sub.name="Subtitles";hud.add_child(sub);sub.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM);anchored_rect(sub,Rect2(-430,-133,860,125));sub.mouse_filter=Control.MOUSE_FILTER_IGNORE
 	speaker=label(sub,"",15);speaker.modulate=Color("c6b18b");speaker.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
 	subtitle=label(sub,"",21);subtitle.custom_minimum_size=Vector2(860,80);subtitle.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;subtitle.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
-	stamina=ProgressBar.new();hud.add_child(stamina);stamina.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT);stamina.position=Vector2(34,-45);stamina.size=Vector2(130,5);stamina.show_percentage=false;stamina.max_value=1
-	var hint:=label(hud,"WASD mover   SHIFT correr   CTRL agachar   E interagir   Q soltar\nMOUSE olhar   RODA aproximar / primeira pessoa   ESPAÇO avançar fala   ESC pausa",13)
-	hint.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT);hint.position=Vector2(-620,-52);hint.size=Vector2(590,45);hint.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT;hint.modulate=Color("babbaa")
+	stamina=ProgressBar.new();hud.add_child(stamina);stamina.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT);anchored_rect(stamina,Rect2(34,-45,130,5));stamina.show_percentage=false;stamina.max_value=1
+	var hint:=label(hud,"WASD mover   SHIFT correr   CTRL agachar   E interagir   Q apoiar   TAB trocar\nMOUSE olhar   RODA aproximar / primeira pessoa   ESPAÇO avançar fala   ESC pausa",13)
+	hint.name="ControlsHint";hint.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT);anchored_rect(hint,Rect2(-710,-92,680,85));hint.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT;hint.modulate=Color("babbaa")
 	hud.hide()
+func anchored_rect(control: Control,rect: Rect2) -> void:
+	control.offset_left=rect.position.x;control.offset_top=rect.position.y
+	control.offset_right=rect.end.x;control.offset_bottom=rect.end.y
 func build_menu() -> void:
 	menu=PanelContainer.new();root.add_child(menu);menu.position=Vector2(55,80);menu.size=Vector2(480,560)
 	var v:=VBoxContainer.new();menu.add_child(v);v.add_theme_constant_override("separation",13)
@@ -62,7 +75,7 @@ func build_menu() -> void:
 	message=label(v,"21h40. O bairro vai dormir.\nPra vocês, ainda é expediente.",18)
 	buttons=VBoxContainer.new();v.add_child(buttons);buttons.add_theme_constant_override("separation",9)
 	rebuild_buttons()
-	label(v,"Demonstração 0.15.1 • Capítulo 1\nFones de ouvido recomendados",13).modulate=Color("9ca58f")
+	label(v,"Demonstração 0.16.0 • Capítulo 1\nFones de ouvido recomendados",13).modulate=Color("9ca58f")
 func button(text: String,callback: Callable) -> Button:
 	var b:=Button.new();buttons.add_child(b);b.text=text;b.pressed.connect(callback);return b
 func rebuild_buttons() -> void:
@@ -76,6 +89,9 @@ func rebuild_buttons() -> void:
 func save_current() -> void:
 	var player:=get_tree().get_first_node_in_group("player") as DepotPlayer
 	if player!=null:
+		for actor in get_tree().get_nodes_in_group("protagonists"):
+			if actor.handling.busy or actor.motion.action_active:
+				message.text="Espere terminar de movimentar a caixa antes de salvar.";return
 		var err:=Session.save_shift(player.global_position)
 		message.text="Turno salvo." if err==OK else "Não foi possível salvar o turno."
 func set_paused(value: bool) -> void:
@@ -88,12 +104,30 @@ func set_paused(value: bool) -> void:
 func open_settings() -> void:
 	menu.hide();settings=SettingsPanel.new();root.add_child(settings);settings.position=Vector2(355,35)
 	settings.closed.connect(func():settings.queue_free();settings=null;menu.show())
-func update_objective() -> void:objective.text=Session.objective()
+func update_objective() -> void:
+	var player:=get_tree().get_first_node_in_group("player") as DepotPlayer
+	objective.text="Atenda os clientes no balcão. [Tab] Deryk cuida da reposição." if player!=null and player.identity=="Felps" and Session.stage in [1,2,3,4] else Session.objective()
 func on_spoken(who: String,text: String) -> void:
-	speaker.text=who;subtitle.text=text
+	speaker.text=who+"  •  [ESPAÇO] continuar" if not who.is_empty() else "";subtitle.text=text
+	hud.get_node("ControlsHint").visible=not Dialogue.active
+func set_character(actor: DepotPlayer,animate := true) -> void:
+	character_label.text="DERYK • REPOSIÇÃO   [TAB] FELPS" if actor.identity=="Dery" else "FELPS • ATENDIMENTO   [TAB] DERYK"
+	update_objective()
+	prompt.text="";carry_status.text=""
+	if animate and has_started and not paused:
+		if fade_tween!=null:fade_tween.kill()
+		switch_fade.color=Color(0,0,0,.85)
+		fade_tween=create_tween();fade_tween.tween_property(switch_fade,"color:a",0.0,.18)
+func show_notice(text: String) -> void:
+	notice_label.text=text;notice_remaining=4.0
 func _process(_delta: float) -> void:
 	var player:=get_tree().get_first_node_in_group("player") as DepotPlayer
-	if player!=null:stamina.value=player.stamina;stamina.visible=player.stamina<.98
+	if player!=null:
+		stamina.value=player.stamina;stamina.visible=player.stamina<.98
+		carry_status.text=("Preparando a caixa…" if player.handling.busy or player.motion.action_active else ("[Q] Apoiar caixa • marca verde: espaço livre" if player.handling.can_place else "Sem espaço para apoiar • procure uma superfície livre")) if player.carried!=null else ""
+	if not paused:
+		notice_remaining=maxf(0,notice_remaining-_delta)
+		if notice_remaining==0:notice_label.text=""
 	var minutes:=21*60+40+int(Session.world_seconds/8)
 	if Session.stage>=5:minutes=maxi(minutes,22*60+35)
 	clock.text="%02d:%02d"%[minutes/60%24,minutes%60]
