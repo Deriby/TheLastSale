@@ -1,22 +1,24 @@
 class_name StreetFurniture
 extends RefCounted
-static func tree(parent: Node3D,at: Vector3,height:=3.8) -> void:
+static func tree(parent: Node3D,at: Vector3,height:=3.8,variation:=0) -> void:
 	var root:=Node3D.new();root.name="StreetTree";parent.add_child(root);root.position=at
-	var bark:=StreetDetail.material(Color("777669"),"render")
-	Geo.cylinder(root,Vector3(0,height*.30,0),.065,height*.60,bark)
-	RetailDetails.collision(root,Vector3(0,height*.30,0),Vector3(.13,height*.60,.13))
+	var bark:=SurfaceMaterials.make("bark")
+	var trunk:=Geo.cylinder(root,Vector3(0,height*.30,0),.065,height*.60,bark);trunk.mesh.radial_segments=16
+	NeighborhoodProps.obstacle(root,Vector3(0,height*.30,0),Vector3(.13,height*.60,.13))
 	var batch:=PropBatch.new();root.add_child(batch)
 	var wind:=FoliageWind.new()
 	for color in [Color("667454"),Color("4d6347"),Color("7a8258")]:
 		var mat:=ShaderMaterial.new();mat.shader=load("res://shaders/foliage.gdshader");mat.set_shader_parameter("leaf_color",color);mat.set_shader_parameter("leaf_texture",load("res://assets/textures/mood/leaves.png"));wind.materials.append(mat)
+	var seed_angle:=fposmod(at.x*1.71+at.z*.43,TAU)
+	var crown_width: float=[1.0,.65,1.35][posmod(variation,3)]
 	for i in 5:
-		var angle:=i*2.4
-		var end:=Vector3(sin(angle)*.6,height*(.68+i*.045),cos(angle)*.45)
-		StreetDetail.beam(batch,Vector3(0,height*.43,0),end,.04,bark)
+		var angle:=i*2.4+seed_angle
+		var end:=Vector3(sin(angle)*.6*crown_width,height*(.68+i*.045),cos(angle)*.45*crown_width)
+		NeighborhoodProps.tube(batch,Vector3(0,height*.43,0),end,.021,bark)
 	var leaf_mesh:=QuadMesh.new();leaf_mesh.size=Vector2(1.2,1.0)
 	for i in 23:
-		var angle:=i*2.4
-		var pos:=Vector3(sin(angle)*(.24+(i%4)*.18),height*.68+sin(i*1.7)*.67,cos(angle)*.63)
+		var angle:=i*2.4+seed_angle
+		var pos:=Vector3(sin(angle)*(.24+(i%4)*.18)*crown_width,height*.68+sin(i*1.7+seed_angle)*(.8 if variation==1 else .67),cos(angle)*.63*crown_width)
 		for crossed in 2:
 			var basis:=Basis.from_euler(Vector3(.25*sin(i),angle+crossed*PI/2,.18*cos(i)))
 			batch.add_instance("leaf_cards_"+str(i%3),leaf_mesh,wind.materials[i%3],Transform3D(basis,pos))

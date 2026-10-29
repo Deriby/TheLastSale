@@ -1,0 +1,26 @@
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:360)
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+QUALITY scale=1 shadowed_lights=5 normal_maps=129
+CAPTURE inside_out
+CAPTURE downhill
+CAPTURE uphill
+CAPTURE opposite
+CAPTURE downhill_lots
+CAPTURE brick_garage
+CAPTURE courtyard
+CAPTURE corner_shop
+CAPTURE gas_shop
+CAPTURE tile_house
+CAPTURE skyline
+CAPTURE bicycle
+CAPTURE workshop
+CAPTURE lots_day
+CAPTURE garage_day
+CAPTURE courtyard_day
+CAPTURE tile_house_day
+CAPTURE opposite_day
+CAPTURE bicycle_day
+CAPTURE workshop_day

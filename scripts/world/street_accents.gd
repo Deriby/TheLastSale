@@ -15,20 +15,8 @@ func _ready() -> void:
 		for z in [1.05,11.5]:SceneDetail.decal(self,Vector3(x,Street.surface_height(x,z)+.009,z),Vector2(.80,.55),"cracks",x*.3)
 	for x in [-10.0,-3.0,6.2,15.0]:
 		for z in [2.38,10.73]:
-			for i in 4:
-				var p:=Vector3(x+i*.035,Street.surface_height(x,z)+.07,z)
-				StreetDetail.rotated_box(batch,p,Vector3(.013,.15,.012),Vector3(.18*i,0,.14*(i-2)),StreetDetail.material(Color("68775a")))
+			NeighborhoodProps.grass(batch,Vector3(x,Street.surface_height(x,z)+.005,z),x*.3)
 	# Meter boxes, service pipes, mail slots and doorstep patches on photographed fronts.
 	for frontage in get_parent().get_children():
-		if not frontage is Node3D or not (str(frontage.name).begins_with("Opposite") or frontage.name=="CassianoGasShop" or frontage.name=="UphillTwoStoreyHouse"):continue
-		var local:=PropBatch.new();local.name="FrontageServices";frontage.add_child(local)
-		var width:=5.4
-		var at_x:=width*.44
-		local.add_box(Vector3(at_x,1.47,.11),Vector3(.20,.28,.08),cement)
-		local.add_box(Vector3(at_x,1.5,.157),Vector3(.12,.09,.012),iron)
-		StreetDetail.beam(local,Vector3(at_x,1.62,.09),Vector3(at_x,3.1,.09),.018,iron)
-		local.add_box(Vector3(-at_x,.78,.09),Vector3(.23,.04,.02),iron)
-		StreetDetail.beam(local,Vector3(-at_x,2.72,.10),Vector3(-at_x,.12,.10),.045,StreetDetail.material(Color("a9af9d")))
-		local.add_box(Vector3(-at_x,.12,.17),Vector3(.065,.07,.18),StreetDetail.material(Color("9a9f8c")))
-		local.flush()
+		if frontage is Node3D and frontage.has_meta("frontage_kind"):NeighborhoodServices.add_to(frontage)
 	batch.flush()

@@ -1,18 +1,19 @@
-# Validação — revisão 0.8.0 — 29/10/2026
+# Validação — revisão 0.9.0 — 29/10/2026
 
 ## Ambiente
 
 Godot **4.4.1.stable.official.49a5bc7b6**, Linux x86_64. Runtime Compatibility / OpenGL 4.5 por Mesa llvmpipe em display virtual Xorg. Blender 4.3.2, renderização Cycles CPU. O editor e os templates oficiais foram conferidos contra os SHA-512 publicados no release Godot 4.4.1.
 
-Esta revisão trabalha os materiais de madeira, piso, paredes, rua, equipamentos e carros. Comparações, dados e registros em [materials_v08](materials_v08/README.md). O registro da cobertura e dos carros está em [finish_v07](finish_v07/README.md); a iluminação anterior em [mood_v06](mood_v06/README.md). Referências históricas do balcão e dos rigs permanecem nas galerias anteriores.
+Esta revisão diferencia os imóveis secundários da rua, modela detalhes residenciais/comerciais e acrescenta rampas e fechamentos de vãos. Comparações e registros em [neighborhood_v09](neighborhood_v09/README.md). Os materiais da etapa anterior estão em [materials_v08](materials_v08/README.md); a cobertura e os carros em [finish_v07](finish_v07/README.md).
 
 ## Integração
 
-Suíte `res://tests/integration.tscn`, também executada por `./tools/test.sh`: **88/88 verificações passaram**, saída 0. O preset Linux QA exportado também executou **88/88**, saída 0, iniciado fora da pasta do projeto com `--main-pack` apontando ao PCK exportado. As duas execuções usam saves temporários e percorrem o fluxo real com física, sem erros de GDScript ou objetos retidos na finalização.
+Suíte `res://tests/integration.tscn`, também executada por `./tools/test.sh`: **92/92 verificações passaram**, saída 0. O preset Linux QA exportado também executou **92/92**, saída 0, iniciado fora da pasta do projeto com `--main-pack` apontando ao PCK exportado. As duas execuções usam saves temporários e percorrem o fluxo real com física, sem erros de GDScript ou objetos retidos na finalização.
 
 Cobertura:
 
 - Cena principal, chão físico, seis rigs importados, materiais e texturas.
+- Duas rampas modeladas com colisão e altura de navegação; passagem real sobre a rampa oposta com contato no piso, ajuste de checkpoint e bloqueio do vão entre oficinas.
 - Declive contínuo por raycasts físicos, colisão dos pilares frontais e movimento real do jogador descendo um meio-fio e subindo o outro sem ficar preso ou cair pelo chão.
 - 23 clipes de Deryk importados, expansão da caixa torácica em repouso, base dos pés mais estreita e novo Felps com cabeça separada; cotovelos baixos, punhos abaixo do quadril e cintura/peito superior movendo-se separadamente.
 - Entrada WASD, corrida, aceleração e colisão reduzida no agachamento.
@@ -34,7 +35,7 @@ Os clientes são simulados com tempo acelerado no teste; a velocidade normal per
 
 ## Rigs e movimentos
 
-Os assets de personagens não foram alterados na 0.8.0. A cabeça de Deryk usa desenho apenas na sombra em primeira pessoa, para preservar a sombra completa sem aparecer dentro da câmera; a visibilidade normal retorna em terceira pessoa. Felps mantém o clipe de trabalho existente e a orientação ao balcão esquerdo. Os testes de integração acima foram repetidos; as medições Blender e gravações desta seção são o registro da revisão 0.3.1.
+Os assets de personagens não foram alterados na 0.9.0. A cabeça de Deryk usa desenho apenas na sombra em primeira pessoa, para preservar a sombra completa sem aparecer dentro da câmera; a visibilidade normal retorna em terceira pessoa. Felps mantém o clipe de trabalho existente e a orientação ao balcão esquerdo. Os testes de integração acima foram repetidos; as medições Blender e gravações desta seção são o registro da revisão 0.3.1.
 
 `tools/rig_characters.py` deriva Deryk e Felps a partir dos originais, mantendo UVs e a identidade dos modelos. Os dois têm 21 ossos, com cintura e peito superior articulados, pesos normalizados sem vértices sem influência, duas malhas de renderização (cabeça/corpo), aproximadamente 12 mil triângulos e texturas de cor 1024². Enemy e os três clientes mantêm os assets anteriores.
 
@@ -50,7 +51,7 @@ SHA-256 dos originais ativos em `original_checksums.json`. Deryk e Enemy permane
 
 O relato do usuário é em Windows 7 / Radeon R7 200 series. As malhas estáticas agrupadas substituem MultiMesh em todas as geladeiras, gôndolas, produtos e demais lotes de cenário. São renderizadas sem interpolação física, com limites de visibilidade calculados pela geometria final. Repor bebidas atualiza apenas o grupo que mudou.
 
-`tests/retail_render_review.tscn` compara o cenário renderizado com malhas individuais, incluindo pausa e recarga. Na 0.8.0 foi repetido no pacote Linux exportado, a 144 quadros por segundo de simulação, com **6.927 malhas independentes**. Em Nítida foram 294 pixels diferentes em 921.600 (**0,03190%**); em Retrô, 90 em 230.400 (**0,03906%**). Ambos ficam abaixo do limite de 1% com diferença de cor acima de 20/255. Registros em [materials_v08](materials_v08/README.md). As capturas foram inspecionadas; os equipamentos aparecem completos. A comparação inclui os novos materiais e as UVs da bancada. Não se trata de uma medição de desempenho da R7.
+`tests/retail_render_review.tscn` compara o cenário renderizado com malhas individuais, incluindo pausa e recarga. Na 0.9.0 foi repetido no pacote Linux exportado, a 144 quadros por segundo de simulação, com **8.491 malhas independentes**. Em Nítida foram 20 pixels diferentes em 921.600 (**0,00217%**); em Retrô, 3 em 230.400 (**0,00130%**). Ambos ficam abaixo do limite de 1% com diferença de cor acima de 20/255. Registros em [neighborhood_v09](neighborhood_v09/README.md). As capturas foram inspecionadas; os equipamentos e a rua aparecem completos. Não se trata de uma medição de desempenho da R7.
 
 A falha integral da captura enviada não foi reproduzida em Mesa llvmpipe. A correção retira o caminho de instancing dos objetos afetados. O pacote Windows continua sem execução em Windows real; não se certifica compatibilidade oficial com Windows 7.
 
@@ -74,15 +75,25 @@ A copa usa folhas recortadas e movimento leve que respeita a pausa. Os novos car
 
 Uma sonda de reflexão estática captura rua e fachada, excluindo carros e personagens para evitar autorreflexos. A luz dos postes alcança a camada dos carros. As novas luzes vermelhas usam apenas as camadas de rua e veículos, evitando disputar o limite de luzes dos objetos internos em Compatibility. A névoa local usa seis planos transparentes com recorte espacial antes do interior; a névoa de profundidade vai de 8 a 85 m. Não há MultiMesh ou neblina volumétrica. Sombras, letreiro ABERTO, luz vermelha/branca, telhas curvas e os fechamentos da cobertura foram inspecionados nas capturas. As luzes noturnas são interpretação artística; não houve medição fotométrica do local.
 
-## Materiais — 0.8.0
+## Materiais — 0.8.0 e ampliação 0.9.0
 
-`tools/make_surface_materials.py` gera 12 conjuntos autorais com 36 mapas. Albedo descreve a cor da superfície; normal descreve o relevo fino; ORM reúne oclusão em R, rugosidade em G e metalização em B. Mipmaps são gerados em todos eles, e os mapas normais têm importação própria. Dados de tamanho, escala e rugosidade em [surface_report.json](surface_report.json).
+A revisão 0.8.0 introduziu 12 conjuntos autorais com 36 mapas. Na 0.9.0, `tools/make_surface_materials.py` acrescenta tijolo, azulejo e casca de árvore, totalizando 15 conjuntos e 45 mapas. Albedo descreve a cor da superfície; normal descreve o relevo fino; ORM reúne oclusão em R, rugosidade em G e metalização em B. Mipmaps são gerados em todos eles, e os mapas normais têm importação própria. Dados de tamanho, escala e rugosidade em [surface_report.json](surface_report.json).
 
 `SurfaceMaterials` mantém escala e acabamento por perfil, com cores independentes. A bancada recebeu UVs métricas e tangentes recalculadas, conservando suas dimensões e colisões. As outras superfícies usam projeção no espaço do mundo, que permanece coerente entre as malhas agrupadas e as referências independentes. A comparação gráfica abaixo verifica esse caminho.
 
 `tests/material_review.tscn` captura 11 enquadramentos: madeira, cerâmica, parede, asfalto e calçada próximos, visão do balcão para a rua, fachada, carro e três vistas diurnas de comparação. A versão anterior foi capturada antes de aplicar os materiais, com as mesmas câmeras e luzes. As capturas atuais vêm do pacote Linux exportado. O teste em Econômica começa em Nítida e emite o sinal real de mudança de preferência depois de construir o cenário, verificando a troca nos materiais existentes. Nítida registra 60 materiais próprios, com 57 normal maps ativos e cinco luzes com sombras; após a troca, os normal maps ativos e as luzes com sombras passam a zero. Registros em `materials_v08`.
 
-A gravação de caminhada em `finish_v07` é o registro da 0.7.0; não foi regravada para a revisão de materiais. Os controles, a rotina dos clientes, o contato com o terreno e o restante do fluxo foram novamente exercitados pela integração da 0.8.0.
+A gravação de caminhada em `finish_v07` é o registro da 0.7.0; não foi regravada na 0.8.0/0.9.0. Os controles, a rotina dos clientes, o contato com o terreno e o restante do fluxo foram novamente exercitados pela integração da 0.9.0.
+
+## Rua — 0.9.0
+
+`NeighborhoodFrontages` constrói seis fachadas secundárias com paredes segmentadas, aberturas recuadas, coberturas distintas, portões com cinco desenhos e pisos de quintal. A largura física do anexo de oficina foi ajustada ao lote de 5,5 m, substituindo o volume anterior de 9 m. Os imóveis próximos reconhecíveis nas referências foram preservados. `NeighborhoodServices` ajusta os acessórios a cada frente, e `NeighborhoodProps` modela bicicleta, antenas, parabólicas, tanque, vasos e botijões.
+
+Obstáculos novos na calçada registram sua projeção de colisão na navegação; pisos/rampas continuam transitáveis. `Street.surface_height` descreve as transições das rampas e é compartilhado pela navegação e pela restauração de posições. A integração percorre uma das rampas pelo controlador real, amostrando o contato do personagem com o piso, e confere fisicamente o fechamento entre oficinas.
+
+`tests/neighborhood_review.tscn` registra 20 vistas noturnas/diurnas do pacote, incluindo os novos lotes, portões, bicicleta, oficina, comércio de gás, vista do balcão e casas fotografadas. A revisão Econômica repete três vistas representativas. As capturas diurnas usam a luz de comparação da ferramenta; o jogo permanece à noite. As imagens de antes são da 0.8.0 com as mesmas câmeras. Fontes e aproximações em [REFERENCIAS.md](REFERENCIAS.md).
+
+A geometria estática permanece em malhas comuns agrupadas por material, sem MultiMesh. Os lotes distantes usam geometria simplificada; as árvores reutilizam o shader de folhas e o movimento que respeita a pausa. Não foram adicionadas luzes de rua nesta revisão. A sonda de reflexão local passou a usar `reflection_mask=8`, influenciando apenas os carros; a máscara de captura continua em 6. A revisão diurna/noturna confirmou o desaparecimento da faixa de ambientação nas fachadas.
 
 ## Exportação e repetição
 

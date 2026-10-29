@@ -190,5 +190,53 @@
       0.261
     ],
     "metallic": 0.03
+  },
+  {
+    "surface": "brick",
+    "pixels": [
+      1024,
+      1024
+    ],
+    "repeat_m": [
+      2.4,
+      2.4
+    ],
+    "roughness_range": [
+      0.851,
+      0.987
+    ],
+    "metallic": 0
+  },
+  {
+    "surface": "azulejo",
+    "pixels": [
+      512,
+      512
+    ],
+    "repeat_m": [
+      0.6,
+      0.6
+    ],
+    "roughness_range": [
+      0.308,
+      0.876
+    ],
+    "metallic": 0
+  },
+  {
+    "surface": "bark",
+    "pixels": [
+      512,
+      512
+    ],
+    "repeat_m": [
+      1,
+      1
+    ],
+    "roughness_range": [
+      0.914,
+      0.969
+    ],
+    "metallic": 0
   }
 ]

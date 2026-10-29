@@ -10,7 +10,8 @@ static func roof(root: Node3D,batch: PropBatch,width: float,depth: float,eaves: 
 	StreetDetail.beam(batch,Vector3(0,eaves+rise,.26),Vector3(half+.10,eaves,.26),.065,StreetDetail.material(Color("ac7653")))
 	RoofTiles.add_to(batch,width,depth,eaves,rise)
 static func create(parent: Node3D,name: String,x: float,z: float,elevation: float,opposite: bool,kind: String) -> Node3D:
-	var root:=Node3D.new();root.name=name;parent.add_child(root);root.position=Vector3(x,elevation,z)
+	if NeighborhoodFrontages.TYPES.has(kind):return NeighborhoodFrontages.create(parent,name,x,z,elevation,opposite,kind)
+	var root:=Node3D.new();root.name=name;root.set_meta("frontage_kind",kind);parent.add_child(root);root.position=Vector3(x,elevation,z)
 	if opposite:root.rotation.y=PI
 	var batch:=PropBatch.new();root.add_child(batch)
 	var cream:=StreetDetail.material(Color("e0dac0"),"cream")

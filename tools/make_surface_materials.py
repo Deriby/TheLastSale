@@ -143,6 +143,34 @@ for index,name in enumerate(['painted_metal','steel','plastic','rubber','carpain
         rough=np.clip(.14+np.maximum(0,cloud)*.06+scratches*.04,.12,.29);metal=.03;span=(1.4,1.4)
     export(name,rgb,height,rough,span,metal=metal)
 
+for index,name in enumerate(['brick','azulejo','bark']):
+    w=h=1024 if name=='brick' else 512;rng=np.random.default_rng(90910+index)
+    xx,yy=np.meshgrid(np.arange(w)/w,np.arange(h)/h)
+    fine=noise(w,h,180,180,rng);cloud=noise(w,h,8,8,rng)
+    if name=='brick':
+        row=np.floor(yy*24).astype(int);u=np.mod(xx*10+(row%2)*.5,1);v=np.mod(yy*24,1)
+        edge=np.minimum(np.minimum(u,1-u)*.24,np.minimum(v,1-v)*.10)
+        mortar=np.clip((.004-edge)/.0025,0,1)
+        variation=rng.normal(0,10,(24,11))[row%24,np.floor((xx*10+(row%2)*.5)%11).astype(int)]
+        shade=variation+cloud*3+fine*2
+        rgb=np.stack((151+shade,93+shade*.65,65+shade*.45),2)
+        rgb=rgb*(1-mortar[:,:,None])+np.array([151,148,134])*mortar[:,:,None]
+        height=fine*.00015-mortar*.003;rough=np.clip(.89+cloud*.015+mortar*.06,.79,.99);span=(2.4,2.4);ao=1-mortar*.15
+    elif name=='azulejo':
+        row=np.floor(yy*4).astype(int);col=np.floor(xx*4).astype(int)
+        edge=np.minimum.reduce([np.mod(xx*4,1),1-np.mod(xx*4,1),np.mod(yy*4,1),1-np.mod(yy*4,1)])
+        grout=np.clip((.019-edge)/.013,0,1);blue=(row+col)%2
+        rgb=np.stack((219-blue*106+cloud*2,222-blue*68+cloud*2,213-blue*39+cloud*2),2)
+        rgb=rgb*(1-grout[:,:,None])+np.array([156,165,156])*grout[:,:,None]
+        height=fine*.000012-grout*.0009;rough=np.clip(.36+cloud*.018+grout*.45,.27,.90);span=(.6,.6);ao=1-grout*.08
+    else:
+        fibers=noise(w,h,68,4,rng)+noise(w,h,190,15,rng)*.2
+        fissure=np.maximum(0,-fibers-.55)
+        shade=fibers*8+cloud*4-fissure*12
+        rgb=np.stack((122+shade,113+shade*.92,94+shade*.8),2)
+        height=fibers*.00065-fissure*.0014;rough=np.clip(.94+cloud*.012,.87,.99);span=(1,1);ao=1-np.clip(fissure,0,1)*.14
+    export(name,rgb,height,rough,span,ao=ao)
+
 for metadata in OUT.glob('*.png.import'):
     text=metadata.read_text().replace('mipmaps/generate=false','mipmaps/generate=true')
     target='1' if metadata.name.endswith('_normal.png.import') else '2'

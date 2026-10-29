@@ -3,7 +3,7 @@ extends RefCounted
 ## Metric original surface maps. Cache includes scale/tint; settings never leak
 ## between independent fixtures. Shared Geo cache already has scene QA cleanup.
 const ART:="res://assets/textures/surfaces/"
-const METERS:={"wood":2.4,"ceramic":2.4,"wall":2.8,"plaster":2.8,"asphalt":4.0,"paving":2.0,"painted_metal":.85,"steel":.6,"plastic":.6,"rubber":.5,"carpaint":1.2,"glass":1.4}
+const METERS:={"wood":2.4,"ceramic":2.4,"wall":2.8,"plaster":2.8,"asphalt":4.0,"paving":2.0,"painted_metal":.85,"steel":.6,"plastic":.6,"rubber":.5,"carpaint":1.2,"glass":1.4,"brick":2.4,"azulejo":.6,"bark":1.0}
 static func make(id: String,tint:=Color.WHITE,two_sided:=false) -> StandardMaterial3D:
 	var key:="surface:"+id+str(tint)+str(two_sided)
 	if Geo.materials.has(key):return Geo.materials[key]

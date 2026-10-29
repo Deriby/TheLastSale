@@ -77,3 +77,17 @@ São 12 conjuntos com albedo, normal e acabamento ORM: madeira, cerâmica, pared
 A bancada tem coordenadas UV na escala de 2,4 × 1,2 m, com os veios seguindo seu comprimento. O atlas cerâmico cobre 2,4 × 2,4 m com 16 peças de cerca de 60 cm. As outras superfícies usam projeção em coordenadas do mundo para conservar a escala ao agrupar malhas. As dimensões e colisões do mobiliário foram preservadas.
 
 A pintura dos carros recebeu verniz e metalização mais contidos; pneus, aros e vidro têm respostas próprias. Os modelos GLB não foram remodelados. Nítida e Retrô usam relevo fino e oclusão das texturas. Econômica desliga esses dois efeitos e a filtragem anisotrópica dos novos materiais; cor, rugosidade e metalização permanecem. A troca é aplicada aos materiais existentes durante a partida.
+
+## Revisão 0.9.0 — variedade da rua
+
+As capturas externas fornecidas foram revisitadas, incluindo a vista das casas cinza, salmão e amarela em frente ao depósito. A disposição desses imóveis, do JA, do CASSIANO e do sobrado foi conservada. [Comparações e detalhes](neighborhood_v09/README.md).
+
+Os seis imóveis secundários que repetiam fachadas genéricas receberam projetos autorais distintos, compatíveis com a escala aproximada da rua de Franca: garagem com tijolo aparente, casa com jardim frontal, comércio fechado com toldo, frente com azulejos, quintal recuado e anexo de oficina. As partes pouco legíveis nas capturas continuam sendo interpretação artística. O pequeno comércio de consertos e os números dos imóveis novos são fictícios; não se afirma reprodução desses estabelecimentos ou endereços reais.
+
+Medidores, interfone, caixa de correspondência e descida de água têm posições ajustadas às paredes/pilares de cada frente. Antenas, duas parabólicas, uma caixa-d'água apoiada, bicicleta e gaiola de botijões complementam a cena. A bicicleta acompanha a inclinação da rua; vasos junto à calçada e a gaiola são apoiados na altura local do terreno. As copas variam em altura/largura, usando o movimento de vento já existente. Uma árvore foi retirada da interseção com uma garagem e reposicionada no vão lateral.
+
+As duas rampas de garagem são aproximações de cenografia com colisão: lado oposto em x≈−10,1 m e lado do depósito em x≈23,2 m. A altura de navegação/checkpoints acompanha o topo dessas rampas, com transição lateral. Fechamentos visíveis protegem os vãos junto ao limite do piso das calçadas. O trecho explorável conserva os limites anteriores; os lotes distantes têm quatro variações simplificadas de volume/cobertura para compor a perspectiva.
+
+Tijolo, azulejo e casca de árvore acrescentam três conjuntos de materiais originais ao gerador, totalizando 15 conjuntos e 45 mapas. A iluminação e a névoa mantêm a direção noturna existente; as novas janelas usam acabamento luminoso, sem acrescentar focos de luz à rua. Dimensões, materiais e detalhes não foram levantados fisicamente no local.
+
+A revisão das imagens identificou uma faixa de claridade na borda da sonda local dos carros. Sua máscara de influência foi limitada aos veículos, mantendo a captura de fachadas/rua para os reflexos. Isso corrige a transição de iluminação dos imóveis sem acrescentar luminárias.

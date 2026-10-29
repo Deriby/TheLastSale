@@ -14,6 +14,10 @@ PASS balizadores da fachada têm colisão física
 PASS jogador desce o meio-fio e entra na rua sem cair pelo chão
 PASS passos na rua trocam para contato de asfalto
 PASS jogador sobe à calçada oposta sem ficar preso no meio-fio
+PASS rampa de garagem tem piso físico coerente com a altura de navegação
+PASS jogador atravessa a nova rampa com contato no piso sem cair ou travar
+PASS checkpoint na rampa acompanha o piso inclinado
+PASS fechamento físico protege o vão entre as oficinas junto à borda da calçada
 PASS Dery usa 21 ossos com cintura e peito superior articulados
 PASS 23 clipes de Dery importados
 PASS rig importado: Dery
@@ -88,4 +92,4 @@ PASS checkpoint antigo dentro da gôndola migra para corredor próximo
 PASS checkpoint antigo na rua acompanha a nova cota do terreno
 PASS checkpoint antigo no novo balcão restaura personagem fora dos móveis
 PASS pausa congela o relógio narrativo
-RESULT 88/88 passed; failures=[]
+RESULT 92/92 passed; failures=[]

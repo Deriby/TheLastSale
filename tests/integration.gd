@@ -63,6 +63,21 @@ func run() -> void:
 	player.position=Vector3(-1.8,-.12,9.8);player.velocity=Vector3.ZERO;player.reset_physics_interpolation()
 	Input.action_press("forward");await ticks(75);Input.action_release("forward");await ticks(10)
 	check(player.position.z>11.0 and player.is_on_floor() and player.position.y>-.03,"jogador sobe à calçada oposta sem ficar preso no meio-fio")
+	var apron:=street_space.intersect_ray(PhysicsRayQueryParameters3D.create(Vector3(-10.1,2,10.4),Vector3(-10.1,-2,10.4),1))
+	check(not apron.is_empty() and absf(apron.position.y-Street.surface_height(-10.1,10.4))<.015,"rampa de garagem tem piso físico coerente com a altura de navegação")
+	player.position=Vector3(-10.1,Street.surface_height(-10.1,9.7)+.03,9.7);player.velocity=Vector3.ZERO;player.camera_rig.yaw=PI;player.reset_physics_interpolation()
+	var ramp_contact:=false;var ramp_error:=0.0
+	Input.action_press("forward")
+	for i in 70:
+		await ticks(1)
+		if player.is_on_floor() and player.position.z>10.15 and player.position.z<10.60:
+			ramp_contact=true;ramp_error=maxf(ramp_error,absf(player.position.y-Street.surface_height(player.position.x,player.position.z)))
+	Input.action_release("forward");await ticks(8)
+	check(player.is_on_floor() and player.position.z>11.0 and ramp_contact and ramp_error<.04,"jogador atravessa a nova rampa com contato no piso sem cair ou travar")
+	var ramp_save:=world.navigation.nearest_walkable(Vector3(-10.1,-.6,10.4))
+	check(absf(ramp_save.y-Street.surface_height(ramp_save.x,ramp_save.z)-.01)<.015,"checkpoint na rampa acompanha o piso inclinado")
+	var alley:=street_space.intersect_ray(PhysicsRayQueryParameters3D.create(Vector3(-18,Street.grade(-18)+.8,.8),Vector3(-18,Street.grade(-18)+.8,-.8),1))
+	check(not alley.is_empty(),"fechamento físico protege o vão entre as oficinas junto à borda da calçada")
 	player.position=Vector3(3.8,.01,1.8);player.velocity=Vector3.ZERO;player.camera_rig.yaw=0;player.reset_physics_interpolation();await ticks(12)
 	check(player.visual.find_child("Skeleton3D",true,false).get_bone_count()==21,"Dery usa 21 ossos com cintura e peito superior articulados")
 	check(player.animator.get_animation_list().size()>=23,"23 clipes de Dery importados")
