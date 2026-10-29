@@ -1,149 +1,5 @@
 [
   {
-    "surface": "wood",
-    "pixels": [
-      2048,
-      1024
-    ],
-    "repeat_m": [
-      2.4,
-      1.2
-    ],
-    "roughness_range": [
-      0.312,
-      0.69
-    ],
-    "metallic": 0
-  },
-  {
-    "surface": "ceramic",
-    "pixels": [
-      1024,
-      1024
-    ],
-    "repeat_m": [
-      2.4,
-      2.4
-    ],
-    "roughness_range": [
-      0.405,
-      0.877
-    ],
-    "metallic": 0
-  },
-  {
-    "surface": "wall",
-    "pixels": [
-      1024,
-      1024
-    ],
-    "repeat_m": [
-      2.8,
-      2.8
-    ],
-    "roughness_range": [
-      0.868,
-      0.99
-    ],
-    "metallic": 0
-  },
-  {
-    "surface": "plaster",
-    "pixels": [
-      1024,
-      1024
-    ],
-    "repeat_m": [
-      2.8,
-      2.8
-    ],
-    "roughness_range": [
-      0.869,
-      0.99
-    ],
-    "metallic": 0
-  },
-  {
-    "surface": "asphalt",
-    "pixels": [
-      1024,
-      1024
-    ],
-    "repeat_m": [
-      4,
-      4
-    ],
-    "roughness_range": [
-      0.812,
-      0.954
-    ],
-    "metallic": 0
-  },
-  {
-    "surface": "paving",
-    "pixels": [
-      1024,
-      1024
-    ],
-    "repeat_m": [
-      2.0,
-      2.0
-    ],
-    "roughness_range": [
-      0.837,
-      0.962
-    ],
-    "metallic": 0
-  },
-  {
-    "surface": "painted_metal",
-    "pixels": [
-      512,
-      512
-    ],
-    "repeat_m": [
-      0.85,
-      0.85
-    ],
-    "roughness_range": [
-      0.447,
-      0.687
-    ],
-    "metallic": 0.08
-  },
-  {
-    "surface": "steel",
-    "pixels": [
-      512,
-      512
-    ],
-    "repeat_m": [
-      0.6,
-      0.6
-    ],
-    "roughness_range": [
-      0.23,
-      0.551
-    ],
-    "metallic": 0.82
-  },
-  {
-    "surface": "plastic",
-    "pixels": [
-      512,
-      512
-    ],
-    "repeat_m": [
-      0.6,
-      0.6
-    ],
-    "roughness_range": [
-      0.546,
-      0.73
-    ],
-    "metallic": 0
-  },
-  {
     "surface": "rubber",
     "pixels": [
       512,
@@ -174,22 +30,6 @@
       0.387
     ],
     "metallic": 0.32
-  },
-  {
-    "surface": "glass",
-    "pixels": [
-      512,
-      512
-    ],
-    "repeat_m": [
-      1.4,
-      1.4
-    ],
-    "roughness_range": [
-      0.14,
-      0.261
-    ],
-    "metallic": 0.03
   },
   {
     "surface": "brick",
@@ -238,5 +78,185 @@
       0.969
     ],
     "metallic": 0
+  },
+  {
+    "surface": "pallet_wood",
+    "pixels": [
+      1024,
+      512
+    ],
+    "repeat_m": [
+      2.4,
+      1.2
+    ],
+    "roughness_range": [
+      0.79,
+      0.949
+    ],
+    "metallic": 0
+  },
+  {
+    "surface": "ceramic",
+    "pixels": [
+      1024,
+      1024
+    ],
+    "repeat_m": [
+      2.4,
+      2.4
+    ],
+    "roughness_range": [
+      0.345,
+      0.955
+    ],
+    "metallic": 0
+  },
+  {
+    "surface": "wall",
+    "pixels": [
+      1024,
+      1024
+    ],
+    "repeat_m": [
+      2.8,
+      2.8
+    ],
+    "roughness_range": [
+      0.888,
+      0.99
+    ],
+    "metallic": 0
+  },
+  {
+    "surface": "painted_metal",
+    "pixels": [
+      512,
+      512
+    ],
+    "repeat_m": [
+      0.85,
+      0.85
+    ],
+    "roughness_range": [
+      0.309,
+      0.625
+    ],
+    "metallic": 0
+  },
+  {
+    "surface": "steel",
+    "pixels": [
+      512,
+      512
+    ],
+    "repeat_m": [
+      0.6,
+      0.6
+    ],
+    "roughness_range": [
+      0.171,
+      0.515
+    ],
+    "metallic": 0.94
+  },
+  {
+    "surface": "plastic",
+    "pixels": [
+      512,
+      512
+    ],
+    "repeat_m": [
+      0.6,
+      0.6
+    ],
+    "roughness_range": [
+      0.48,
+      0.689
+    ],
+    "metallic": 0
+  },
+  {
+    "surface": "glass",
+    "pixels": [
+      512,
+      512
+    ],
+    "repeat_m": [
+      1.4,
+      1.4
+    ],
+    "roughness_range": [
+      0.1,
+      0.319
+    ],
+    "metallic": 0
+  },
+  {
+    "surface": "wood",
+    "pixels": [
+      1024,
+      1024
+    ],
+    "repeat_m": [
+      2.4,
+      1.2
+    ],
+    "roughness_range": [
+      0.31,
+      0.431
+    ],
+    "metallic": 0,
+    "source": "Poly Haven / wood_table_001 / CC0-1.0"
+  },
+  {
+    "surface": "plaster",
+    "pixels": [
+      1024,
+      1024
+    ],
+    "repeat_m": [
+      2.0,
+      2.0
+    ],
+    "roughness_range": [
+      0.871,
+      0.969
+    ],
+    "metallic": 0,
+    "source": "Poly Haven / painted_plaster_wall / CC0-1.0"
+  },
+  {
+    "surface": "asphalt",
+    "pixels": [
+      1024,
+      1024
+    ],
+    "repeat_m": [
+      3.0,
+      3.0
+    ],
+    "roughness_range": [
+      0.65,
+      0.97
+    ],
+    "metallic": 0,
+    "source": "Poly Haven / asphalt_02 / CC0-1.0"
+  },
+  {
+    "surface": "paving",
+    "pixels": [
+      1024,
+      1024
+    ],
+    "repeat_m": [
+      2.0,
+      2.0
+    ],
+    "roughness_range": [
+      0.65,
+      0.757
+    ],
+    "metallic": 0,
+    "source": "Poly Haven / concrete_floor_02 / CC0-1.0"
   }
 ]

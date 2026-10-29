@@ -91,3 +91,7 @@ As duas rampas de garagem são aproximações de cenografia com colisão: lado o
 Tijolo, azulejo e casca de árvore acrescentam três conjuntos de materiais originais ao gerador, totalizando 15 conjuntos e 45 mapas. A iluminação e a névoa mantêm a direção noturna existente; as novas janelas usam acabamento luminoso, sem acrescentar focos de luz à rua. Dimensões, materiais e detalhes não foram levantados fisicamente no local.
 
 A revisão das imagens identificou uma faixa de claridade na borda da sonda local dos carros. Sua máscara de influência foi limitada aos veículos, mantendo a captura de fachadas/rua para os reflexos. Isso corrige a transição de iluminação dos imóveis sem acrescentar luminárias.
+
+## Revisão 0.13.0 — acabamento dos materiais
+
+As fotos do depósito e do balcão orientam a madeira marrom envernizada, o piso claro acetinado, as gôndolas pintadas e a diferença de brilho entre vidro, PET, rótulos e embalagens. Madeira, reboco externo, asfalto e concreto usam bases CC0 da Poly Haven, com paleta e escala adaptadas; créditos, arquivos de origem e hashes estão em `resources/material_sources`. As fotografias do autor não foram recortadas para texturas. Os demais acabamentos e a arte das embalagens são procedurais/originais. A comparação preserva as mesmas luzes e câmeras da 0.12.0. [Galeria e dados](materials_v013/README.md).

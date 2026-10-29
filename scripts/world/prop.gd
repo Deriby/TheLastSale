@@ -101,14 +101,14 @@ func toggle() -> void:
 	opened=not opened
 	create_tween().tween_property(hinge,"rotation:y",-1.35 if opened else 0.0,.4)
 func make_crate() -> void:
-	var cardboard:=Geo.material(Color.WHITE,"res://assets/textures/depot/carton.png")
+	var cardboard:=ProductLibrary.material("carton")
 	Geo.box(self,Vector3(0,.23,0),Vector3(.65,.46,.44),cardboard)
 	RetailDetails.panel(self,Vector3(0,.23,.223),Vector2(.59,.39),"carton")
 	for x in [-.31,.31]:Geo.box(self,Vector3(x,.455,0),Vector3(.005,.009,.42),Geo.material(Color("7b633c")),false)
 func make_pallet() -> void:
-	var wood:=Geo.material(Color.WHITE,"res://assets/textures/depot/wood.png")
-	for x in [-.6,0,.6]:products.add_box(Vector3(x,.08,0),Vector3(.12,.16,1.1),wood)
-	for z in [-.5,-.25,0,.25,.5]:products.add_box(Vector3(0,.18,z),Vector3(1.4,.07,.15),wood)
+	var wood:=SurfaceMaterials.make("pallet_wood")
+	for x in [-.6,0,.6]:SurfaceMaterials.wood_box(products,Vector3(x,.08,0),Vector3(.12,.16,1.1),wood)
+	for z in [-.5,-.25,0,.25,.5]:SurfaceMaterials.wood_box(products,Vector3(0,.18,z),Vector3(1.4,.07,.15),wood)
 	RetailDetails.shadow(self,Vector3(0,.006,0),Vector2(1.6,1.3))
 func make_endcap() -> void:
 	var steel:=Geo.material(Color("313e36"))

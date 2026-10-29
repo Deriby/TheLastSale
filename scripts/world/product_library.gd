@@ -5,20 +5,37 @@ extends RefCounted
 static var meshes: Dictionary = {}
 static var materials: Dictionary = {}
 const ART := "res://assets/textures/depot/"
+const FINISH_IDS: Array[String]=["beer_0","beer_1","soda_0","soda_1","soda_2","water","can_0","can_1","can_2","spirits","snack_0","snack_1","snack_2","snack_3","snack_4","snack_5","carton"]
 static func material(id: String, emission := 0.0, alpha := 1.0) -> StandardMaterial3D:
 	var key:=id+str(emission)+str(alpha)
 	if materials.has(key):return materials[key]
 	var m:=StandardMaterial3D.new()
 	m.albedo_texture=load((SceneDetail.ART if id.begins_with("cup_") or id.begins_with("spirits_") else ART)+id+".png")
 	m.albedo_color=Color(1,1,1,alpha)
-	m.texture_filter=BaseMaterial3D.TEXTURE_FILTER_NEAREST
+	m.texture_filter=BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	m.roughness=.83
+	if id in FINISH_IDS:
+		m.set_meta("retail_finish",id)
+		m.roughness_texture_channel=BaseMaterial3D.TEXTURE_CHANNEL_GREEN
+		m.metallic_texture_channel=BaseMaterial3D.TEXTURE_CHANNEL_BLUE
+		quality(m)
 	m.cull_mode=BaseMaterial3D.CULL_DISABLED
 	if emission>0:
 		m.emission_enabled=true;m.emission=Color.WHITE;m.emission_texture=m.albedo_texture;m.emission_energy_multiplier=emission
 	if alpha<1:m.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA
 	materials[key]=m
 	return m
+static func quality(mat: StandardMaterial3D) -> void:
+	var id: String=mat.get_meta("retail_finish","")
+	if id.is_empty():return
+	var detailed:=Preferences.pixel_scale<3
+	var orm: Texture2D=load(ART+id+"_orm.png") if detailed else null
+	mat.roughness_texture=orm;mat.metallic_texture=orm
+	mat.roughness=1 if detailed else (.90 if id=="carton" else .44)
+	mat.metallic=1 if detailed else (.30 if id.begins_with("can") else 0.0)
+	mat.texture_filter=BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC if detailed else BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+static func apply_quality() -> void:
+	for mat in materials.values():quality(mat)
 static func mesh(id: String) -> ArrayMesh:
 	if meshes.has(id):return meshes[id]
 	var result: ArrayMesh

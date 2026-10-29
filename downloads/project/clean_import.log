@@ -8,7 +8,7 @@ first_scan_filesystem: begin: Project initialization steps: 5
 	first_scan_filesystem: step 4: Initializing plugins...
 	first_scan_filesystem: step 5: Starting file scan...
 first_scan_filesystem: end
-update_scripts_classes: begin: Registering global classes... steps: 67
+update_scripts_classes: begin: Registering global classes... steps: 68
 	update_scripts_classes: step 0: AisleNavigation
 	update_scripts_classes: step 1: Customer
 	update_scripts_classes: step 2: FamiliarNPC
@@ -76,8 +76,9 @@ update_scripts_classes: begin: Registering global classes... steps: 67
 	update_scripts_classes: step 64:
 	update_scripts_classes: step 65:
 	update_scripts_classes: step 66:
+	update_scripts_classes: step 67:
 update_scripts_classes: end
-_update_scan_actions: begin: Scanning actions... steps: 178
+_update_scan_actions: begin: Scanning actions... steps: 198
 	_update_scan_actions: step 0: crate.wav
 	_update_scan_actions: step 1: distant_traffic.wav
 	_update_scan_actions: step 2: hum.wav
@@ -128,136 +129,156 @@ _update_scan_actions: begin: Scanning actions... steps: 178
 	_update_scan_actions: step 47: user_car_texture_pbr_20250901_metallic-texture_pbr_20250901_roughness.png
 	_update_scan_actions: step 48: user_car_texture_pbr_20250901_normal.png
 	_update_scan_actions: step 49: beer_0.png
-	_update_scan_actions: step 50: beer_1.png
-	_update_scan_actions: step 51: beer_banner.png
-	_update_scan_actions: step 52: can_0.png
-	_update_scan_actions: step 53: can_1.png
-	_update_scan_actions: step 54: can_2.png
-	_update_scan_actions: step 55: carton.png
-	_update_scan_actions: step 56: contact.png
-	_update_scan_actions: step 57: counter.png
-	_update_scan_actions: step 58: floor.png
-	_update_scan_actions: step 59: pix_sign.png
-	_update_scan_actions: step 60: poster.png
-	_update_scan_actions: step 61: price.png
-	_update_scan_actions: step 62: register_screen.png
-	_update_scan_actions: step 63: roof.png
-	_update_scan_actions: step 64: snack_0.png
-	_update_scan_actions: step 65: snack_1.png
-	_update_scan_actions: step 66: snack_2.png
-	_update_scan_actions: step 67: snack_3.png
-	_update_scan_actions: step 68: snack_4.png
-	_update_scan_actions: step 69: snack_5.png
-	_update_scan_actions: step 70: soda_0.png
-	_update_scan_actions: step 71: soda_1.png
-	_update_scan_actions: step 72: soda_2.png
-	_update_scan_actions: step 73: soda_banner.png
-	_update_scan_actions: step 74: spirits.png
-	_update_scan_actions: step 75: toy_0.png
-	_update_scan_actions: step 76: toy_1.png
-	_update_scan_actions: step 77: toy_2.png
-	_update_scan_actions: step 78: wall.png
-	_update_scan_actions: step 79: water.png
-	_update_scan_actions: step 80: water_banner.png
-	_update_scan_actions: step 81: wood.png
-	_update_scan_actions: step 82: charcoal.png
-	_update_scan_actions: step 83: counter_notice.png
-	_update_scan_actions: step 84: cracks.png
-	_update_scan_actions: step 85: cup_0.png
-	_update_scan_actions: step 86: cup_1.png
-	_update_scan_actions: step 87: cup_2.png
-	_update_scan_actions: step 88: cup_3.png
-	_update_scan_actions: step 89: cup_4.png
-	_update_scan_actions: step 90: cup_offer.png
-	_update_scan_actions: step 91: floor_wear.png
-	_update_scan_actions: step 92: ice_freezer.png
-	_update_scan_actions: step 93: payment_screen.png
-	_update_scan_actions: step 94: pos_screen.png
-	_update_scan_actions: step 95: spirits_0.png
-	_update_scan_actions: step 96: spirits_1.png
-	_update_scan_actions: step 97: spirits_2.png
-	_update_scan_actions: step 98: tv_screen.png
-	_update_scan_actions: step 99: worktop.png
-	_update_scan_actions: step 100: charcoal_bag.png
-	_update_scan_actions: step 101: cold_sign.png
-	_update_scan_actions: step 102: haze_noise.png
-	_update_scan_actions: step 103: ice_offer.png
-	_update_scan_actions: step 104: open_sign.png
-	_update_scan_actions: step 105: plastic_film.png
-	_update_scan_actions: step 106: asphalt.png
-	_update_scan_actions: step 107: curtain.png
-	_update_scan_actions: step 108: lamp_halo.png
-	_update_scan_actions: step 109: leaves.png
-	_update_scan_actions: step 110: night_sky.png
-	_update_scan_actions: step 111: paving.png
-	_update_scan_actions: step 112: plaster.png
-	_update_scan_actions: step 113: tile.png
-	_update_scan_actions: step 114: wall_base.png
-	_update_scan_actions: step 115: asphalt.png
-	_update_scan_actions: step 116: cassiano.png
-	_update_scan_actions: step 117: contact_icon.png
-	_update_scan_actions: step 118: cream.png
-	_update_scan_actions: step 119: gate.png
-	_update_scan_actions: step 120: ja_mural.png
-	_update_scan_actions: step 121: market_sign.png
-	_update_scan_actions: step 122: render.png
-	_update_scan_actions: step 123: shutter.png
-	_update_scan_actions: step 124: sidewalk.png
-	_update_scan_actions: step 125: stained.png
-	_update_scan_actions: step 126: terracotta.png
-	_update_scan_actions: step 127: asphalt_albedo.png
-	_update_scan_actions: step 128: asphalt_normal.png
-	_update_scan_actions: step 129: asphalt_orm.png
-	_update_scan_actions: step 130: azulejo_albedo.png
-	_update_scan_actions: step 131: azulejo_normal.png
-	_update_scan_actions: step 132: azulejo_orm.png
-	_update_scan_actions: step 133: bark_albedo.png
-	_update_scan_actions: step 134: bark_normal.png
-	_update_scan_actions: step 135: bark_orm.png
-	_update_scan_actions: step 136: brick_albedo.png
-	_update_scan_actions: step 137: brick_normal.png
-	_update_scan_actions: step 138: brick_orm.png
-	_update_scan_actions: step 139: carpaint_albedo.png
-	_update_scan_actions: step 140: carpaint_normal.png
-	_update_scan_actions: step 141: carpaint_orm.png
-	_update_scan_actions: step 142: ceramic_albedo.png
-	_update_scan_actions: step 143: ceramic_normal.png
-	_update_scan_actions: step 144: ceramic_orm.png
-	_update_scan_actions: step 145: glass_albedo.png
-	_update_scan_actions: step 146: glass_normal.png
-	_update_scan_actions: step 147: glass_orm.png
-	_update_scan_actions: step 148: painted_metal_albedo.png
-	_update_scan_actions: step 149: painted_metal_normal.png
-	_update_scan_actions: step 150: painted_metal_orm.png
-	_update_scan_actions: step 151: paving_albedo.png
-	_update_scan_actions: step 152: paving_normal.png
-	_update_scan_actions: step 153: paving_orm.png
-	_update_scan_actions: step 154: plaster_albedo.png
-	_update_scan_actions: step 155: plaster_normal.png
-	_update_scan_actions: step 156: plaster_orm.png
-	_update_scan_actions: step 157: plastic_albedo.png
-	_update_scan_actions: step 158: plastic_normal.png
-	_update_scan_actions: step 159: plastic_orm.png
-	_update_scan_actions: step 160: rubber_albedo.png
-	_update_scan_actions: step 161: rubber_normal.png
-	_update_scan_actions: step 162: rubber_orm.png
-	_update_scan_actions: step 163: steel_albedo.png
-	_update_scan_actions: step 164: steel_normal.png
-	_update_scan_actions: step 165: steel_orm.png
-	_update_scan_actions: step 166: wall_albedo.png
-	_update_scan_actions: step 167: wall_normal.png
-	_update_scan_actions: step 168: wall_orm.png
-	_update_scan_actions: step 169: wood_albedo.png
-	_update_scan_actions: step 170: wood_normal.png
-	_update_scan_actions: step 171: wood_orm.png
-	_update_scan_actions: step 172: asphalt.png
-	_update_scan_actions: step 173: cardboard.png
-	_update_scan_actions: step 174: concrete.png
-	_update_scan_actions: step 175: metal.png
-	_update_scan_actions: step 176: plaster.png
-	_update_scan_actions: step 177: tile.png
+	_update_scan_actions: step 50: beer_0_orm.png
+	_update_scan_actions: step 51: beer_1.png
+	_update_scan_actions: step 52: beer_1_orm.png
+	_update_scan_actions: step 53: beer_banner.png
+	_update_scan_actions: step 54: can_0.png
+	_update_scan_actions: step 55: can_0_orm.png
+	_update_scan_actions: step 56: can_1.png
+	_update_scan_actions: step 57: can_1_orm.png
+	_update_scan_actions: step 58: can_2.png
+	_update_scan_actions: step 59: can_2_orm.png
+	_update_scan_actions: step 60: carton.png
+	_update_scan_actions: step 61: carton_orm.png
+	_update_scan_actions: step 62: contact.png
+	_update_scan_actions: step 63: counter.png
+	_update_scan_actions: step 64: floor.png
+	_update_scan_actions: step 65: pix_sign.png
+	_update_scan_actions: step 66: poster.png
+	_update_scan_actions: step 67: price.png
+	_update_scan_actions: step 68: register_screen.png
+	_update_scan_actions: step 69: roof.png
+	_update_scan_actions: step 70: snack_0.png
+	_update_scan_actions: step 71: snack_0_orm.png
+	_update_scan_actions: step 72: snack_1.png
+	_update_scan_actions: step 73: snack_1_orm.png
+	_update_scan_actions: step 74: snack_2.png
+	_update_scan_actions: step 75: snack_2_orm.png
+	_update_scan_actions: step 76: snack_3.png
+	_update_scan_actions: step 77: snack_3_orm.png
+	_update_scan_actions: step 78: snack_4.png
+	_update_scan_actions: step 79: snack_4_orm.png
+	_update_scan_actions: step 80: snack_5.png
+	_update_scan_actions: step 81: snack_5_orm.png
+	_update_scan_actions: step 82: soda_0.png
+	_update_scan_actions: step 83: soda_0_orm.png
+	_update_scan_actions: step 84: soda_1.png
+	_update_scan_actions: step 85: soda_1_orm.png
+	_update_scan_actions: step 86: soda_2.png
+	_update_scan_actions: step 87: soda_2_orm.png
+	_update_scan_actions: step 88: soda_banner.png
+	_update_scan_actions: step 89: spirits.png
+	_update_scan_actions: step 90: spirits_orm.png
+	_update_scan_actions: step 91: toy_0.png
+	_update_scan_actions: step 92: toy_1.png
+	_update_scan_actions: step 93: toy_2.png
+	_update_scan_actions: step 94: wall.png
+	_update_scan_actions: step 95: water.png
+	_update_scan_actions: step 96: water_banner.png
+	_update_scan_actions: step 97: water_orm.png
+	_update_scan_actions: step 98: wood.png
+	_update_scan_actions: step 99: charcoal.png
+	_update_scan_actions: step 100: counter_notice.png
+	_update_scan_actions: step 101: cracks.png
+	_update_scan_actions: step 102: cup_0.png
+	_update_scan_actions: step 103: cup_1.png
+	_update_scan_actions: step 104: cup_2.png
+	_update_scan_actions: step 105: cup_3.png
+	_update_scan_actions: step 106: cup_4.png
+	_update_scan_actions: step 107: cup_offer.png
+	_update_scan_actions: step 108: floor_wear.png
+	_update_scan_actions: step 109: ice_freezer.png
+	_update_scan_actions: step 110: payment_screen.png
+	_update_scan_actions: step 111: pos_screen.png
+	_update_scan_actions: step 112: spirits_0.png
+	_update_scan_actions: step 113: spirits_1.png
+	_update_scan_actions: step 114: spirits_2.png
+	_update_scan_actions: step 115: tv_screen.png
+	_update_scan_actions: step 116: worktop.png
+	_update_scan_actions: step 117: charcoal_bag.png
+	_update_scan_actions: step 118: cold_sign.png
+	_update_scan_actions: step 119: haze_noise.png
+	_update_scan_actions: step 120: ice_offer.png
+	_update_scan_actions: step 121: open_sign.png
+	_update_scan_actions: step 122: plastic_film.png
+	_update_scan_actions: step 123: asphalt.png
+	_update_scan_actions: step 124: curtain.png
+	_update_scan_actions: step 125: lamp_halo.png
+	_update_scan_actions: step 126: leaves.png
+	_update_scan_actions: step 127: night_sky.png
+	_update_scan_actions: step 128: paving.png
+	_update_scan_actions: step 129: plaster.png
+	_update_scan_actions: step 130: tile.png
+	_update_scan_actions: step 131: wall_base.png
+	_update_scan_actions: step 132: asphalt.png
+	_update_scan_actions: step 133: cassiano.png
+	_update_scan_actions: step 134: contact_icon.png
+	_update_scan_actions: step 135: cream.png
+	_update_scan_actions: step 136: gate.png
+	_update_scan_actions: step 137: ja_mural.png
+	_update_scan_actions: step 138: market_sign.png
+	_update_scan_actions: step 139: render.png
+	_update_scan_actions: step 140: shutter.png
+	_update_scan_actions: step 141: sidewalk.png
+	_update_scan_actions: step 142: stained.png
+	_update_scan_actions: step 143: terracotta.png
+	_update_scan_actions: step 144: asphalt_albedo.png
+	_update_scan_actions: step 145: asphalt_normal.png
+	_update_scan_actions: step 146: asphalt_orm.png
+	_update_scan_actions: step 147: azulejo_albedo.png
+	_update_scan_actions: step 148: azulejo_normal.png
+	_update_scan_actions: step 149: azulejo_orm.png
+	_update_scan_actions: step 150: bark_albedo.png
+	_update_scan_actions: step 151: bark_normal.png
+	_update_scan_actions: step 152: bark_orm.png
+	_update_scan_actions: step 153: brick_albedo.png
+	_update_scan_actions: step 154: brick_normal.png
+	_update_scan_actions: step 155: brick_orm.png
+	_update_scan_actions: step 156: carpaint_albedo.png
+	_update_scan_actions: step 157: carpaint_normal.png
+	_update_scan_actions: step 158: carpaint_orm.png
+	_update_scan_actions: step 159: ceramic_albedo.png
+	_update_scan_actions: step 160: ceramic_normal.png
+	_update_scan_actions: step 161: ceramic_orm.png
+	_update_scan_actions: step 162: glass_albedo.png
+	_update_scan_actions: step 163: glass_normal.png
+	_update_scan_actions: step 164: glass_orm.png
+	_update_scan_actions: step 165: painted_metal_albedo.png
+	_update_scan_actions: step 166: painted_metal_normal.png
+	_update_scan_actions: step 167: painted_metal_orm.png
+	_update_scan_actions: step 168: pallet_wood_albedo.png
+	_update_scan_actions: step 169: pallet_wood_normal.png
+	_update_scan_actions: step 170: pallet_wood_orm.png
+	_update_scan_actions: step 171: paving_albedo.png
+	_update_scan_actions: step 172: paving_normal.png
+	_update_scan_actions: step 173: paving_orm.png
+	_update_scan_actions: step 174: plaster_albedo.png
+	_update_scan_actions: step 175: plaster_normal.png
+	_update_scan_actions: step 176: plaster_orm.png
+	_update_scan_actions: step 177: plastic_albedo.png
+	_update_scan_actions: step 178: plastic_normal.png
+	_update_scan_actions: step 179: plastic_orm.png
+	_update_scan_actions: step 180: rubber_albedo.png
+	_update_scan_actions: step 181: rubber_normal.png
+	_update_scan_actions: step 182: rubber_orm.png
+	_update_scan_actions: step 183: steel_albedo.png
+	_update_scan_actions: step 184: steel_normal.png
+	_update_scan_actions: step 185: steel_orm.png
+	_update_scan_actions: step 186: wall_albedo.png
+	_update_scan_actions: step 187: wall_normal.png
+	_update_scan_actions: step 188: wall_orm.png
+	_update_scan_actions: step 189: wood_albedo.png
+	_update_scan_actions: step 190: wood_normal.png
+	_update_scan_actions: step 191: wood_orm.png
+	_update_scan_actions: step 192: asphalt.png
+	_update_scan_actions: step 193: cardboard.png
+	_update_scan_actions: step 194: concrete.png
+	_update_scan_actions: step 195: metal.png
+	_update_scan_actions: step 196: plaster.png
+	_update_scan_actions: step 197: tile.png
 _update_scan_actions: end
-reimport: begin: (Re)Importing Assets steps: 178
+reimport: begin: (Re)Importing Assets steps: 198
 	reimport: step 0: Preparing files to reimport...
 	reimport: step 1: Preparing files to reimport...
 	reimport: step 2: Preparing files to reimport...
@@ -436,175 +457,215 @@ reimport: begin: (Re)Importing Assets steps: 178
 	reimport: step 175: Preparing files to reimport...
 	reimport: step 176: Preparing files to reimport...
 	reimport: step 177: Preparing files to reimport...
+	reimport: step 178: Preparing files to reimport...
+	reimport: step 179: Preparing files to reimport...
+	reimport: step 180: Preparing files to reimport...
+	reimport: step 181: Preparing files to reimport...
+	reimport: step 182: Preparing files to reimport...
+	reimport: step 183: Preparing files to reimport...
+	reimport: step 184: Preparing files to reimport...
+	reimport: step 185: Preparing files to reimport...
+	reimport: step 186: Preparing files to reimport...
+	reimport: step 187: Preparing files to reimport...
+	reimport: step 188: Preparing files to reimport...
+	reimport: step 189: Preparing files to reimport...
+	reimport: step 190: Preparing files to reimport...
+	reimport: step 191: Preparing files to reimport...
+	reimport: step 192: Preparing files to reimport...
+	reimport: step 193: Preparing files to reimport...
+	reimport: step 194: Preparing files to reimport...
+	reimport: step 195: Preparing files to reimport...
+	reimport: step 196: Preparing files to reimport...
+	reimport: step 197: Preparing files to reimport...
 	reimport: step 0: Executing pre-reimport operations...
 preload_reimporting_scene: begin: Preparing scenes for reload steps: 1
 	preload_reimporting_scene: step 0: Analyzing scene [empty]
 	preload_reimporting_scene: step 1: Preparation done.
 preload_reimporting_scene: end
-	reimport: step 0: paving.png
-	reimport: step 1: plaster.png
-	reimport: step 2: tile.png
-	reimport: step 3: wall_base.png
-	reimport: step 4: asphalt.png
-	reimport: step 5: cassiano.png
-	reimport: step 6: contact_icon.png
-	reimport: step 7: cream.png
-	reimport: step 8: gate.png
-	reimport: step 9: ja_mural.png
-	reimport: step 10: market_sign.png
-	reimport: step 11: render.png
-	reimport: step 12: shutter.png
-	reimport: step 13: sidewalk.png
-	reimport: step 14: stained.png
-	reimport: step 15: terracotta.png
-	reimport: step 16: asphalt_albedo.png
-	reimport: step 17: asphalt_normal.png
-	reimport: step 18: asphalt_orm.png
-	reimport: step 19: azulejo_albedo.png
-	reimport: step 20: azulejo_normal.png
-	reimport: step 21: azulejo_orm.png
-	reimport: step 22: cup_4.png
-	reimport: step 23: cup_offer.png
-	reimport: step 24: floor_wear.png
-	reimport: step 25: ice_freezer.png
-	reimport: step 26: payment_screen.png
-	reimport: step 27: pos_screen.png
-	reimport: step 28: spirits_0.png
-	reimport: step 29: spirits_1.png
-	reimport: step 30: spirits_2.png
-	reimport: step 31: tv_screen.png
-	reimport: step 32: worktop.png
-	reimport: step 33: charcoal_bag.png
-	reimport: step 34: cold_sign.png
-	reimport: step 35: haze_noise.png
-	reimport: step 36: ice_offer.png
-	reimport: step 37: open_sign.png
-	reimport: step 38: plastic_film.png
-	reimport: step 39: asphalt.png
-	reimport: step 40: curtain.png
-	reimport: step 41: lamp_halo.png
-	reimport: step 42: leaves.png
-	reimport: step 43: night_sky.png
-	reimport: step 44: plaster_orm.png
-	reimport: step 45: plastic_albedo.png
-	reimport: step 46: plastic_normal.png
-	reimport: step 47: plastic_orm.png
-	reimport: step 48: rubber_albedo.png
-	reimport: step 49: rubber_normal.png
-	reimport: step 50: rubber_orm.png
-	reimport: step 51: steel_albedo.png
-	reimport: step 52: steel_normal.png
-	reimport: step 53: steel_orm.png
-	reimport: step 54: wall_albedo.png
-	reimport: step 55: wall_normal.png
-	reimport: step 56: wall_orm.png
-	reimport: step 57: wood_albedo.png
-	reimport: step 58: wood_normal.png
-	reimport: step 59: wood_orm.png
-	reimport: step 60: asphalt.png
-	reimport: step 62: concrete.png
-	reimport: step 63: metal.png
-	reimport: step 64: plaster.png
-	reimport: step 65: tile.png
-	reimport: step 66: bark_albedo.png
-	reimport: step 67: bark_normal.png
-	reimport: step 68: bark_orm.png
-	reimport: step 69: brick_albedo.png
-	reimport: step 70: brick_normal.png
-	reimport: step 71: brick_orm.png
-	reimport: step 72: carpaint_albedo.png
-	reimport: step 73: carpaint_normal.png
-	reimport: step 74: carpaint_orm.png
-	reimport: step 75: ceramic_albedo.png
-	reimport: step 76: ceramic_normal.png
-	reimport: step 77: ceramic_orm.png
-	reimport: step 78: glass_albedo.png
-	reimport: step 79: glass_normal.png
-	reimport: step 80: glass_orm.png
-	reimport: step 81: painted_metal_albedo.png
-	reimport: step 82: painted_metal_normal.png
-	reimport: step 83: painted_metal_orm.png
-	reimport: step 84: paving_albedo.png
-	reimport: step 85: paving_normal.png
-	reimport: step 86: paving_orm.png
-	reimport: step 87: plaster_albedo.png
-	reimport: step 88: plaster_normal.png
-	reimport: step 89: counter.png
-	reimport: step 90: contact.png
-	reimport: step 91: carton.png
-	reimport: step 92: can_2.png
-	reimport: step 93: can_1.png
-	reimport: step 94: can_0.png
-	reimport: step 95: beer_banner.png
-	reimport: step 96: beer_1.png
-	reimport: step 97: beer_0.png
-	reimport: step 98: user_car_texture_pbr_20250901_normal.png
-	reimport: step 99: user_car_texture_pbr_20250901_metallic-texture_pbr_20250901_roughness.png
+	reimport: step 0: curtain.png
+	reimport: step 1: lamp_halo.png
+	reimport: step 2: leaves.png
+	reimport: step 3: night_sky.png
+	reimport: step 4: paving.png
+	reimport: step 5: plaster.png
+	reimport: step 6: tile.png
+	reimport: step 7: wall_base.png
+	reimport: step 8: asphalt.png
+	reimport: step 9: cassiano.png
+	reimport: step 10: contact_icon.png
+	reimport: step 11: cream.png
+	reimport: step 12: gate.png
+	reimport: step 13: ja_mural.png
+	reimport: step 14: market_sign.png
+	reimport: step 15: render.png
+	reimport: step 16: shutter.png
+	reimport: step 17: sidewalk.png
+	reimport: step 18: stained.png
+	reimport: step 19: terracotta.png
+	reimport: step 20: asphalt_albedo.png
+	reimport: step 21: asphalt_normal.png
+	reimport: step 22: asphalt_orm.png
+	reimport: step 23: azulejo_albedo.png
+	reimport: step 24: charcoal.png
+	reimport: step 25: counter_notice.png
+	reimport: step 26: cracks.png
+	reimport: step 27: cup_0.png
+	reimport: step 28: cup_1.png
+	reimport: step 29: cup_2.png
+	reimport: step 30: cup_3.png
+	reimport: step 31: cup_4.png
+	reimport: step 32: cup_offer.png
+	reimport: step 33: floor_wear.png
+	reimport: step 34: ice_freezer.png
+	reimport: step 35: payment_screen.png
+	reimport: step 36: pos_screen.png
+	reimport: step 37: spirits_0.png
+	reimport: step 38: spirits_1.png
+	reimport: step 39: spirits_2.png
+	reimport: step 40: tv_screen.png
+	reimport: step 41: worktop.png
+	reimport: step 42: charcoal_bag.png
+	reimport: step 43: cold_sign.png
+	reimport: step 44: haze_noise.png
+	reimport: step 45: ice_offer.png
+	reimport: step 46: open_sign.png
+	reimport: step 47: plastic_film.png
+	reimport: step 48: asphalt.png
+	reimport: step 49: paving_orm.png
+	reimport: step 50: plaster_albedo.png
+	reimport: step 51: plaster_normal.png
+	reimport: step 52: plaster_orm.png
+	reimport: step 53: plastic_albedo.png
+	reimport: step 54: plastic_normal.png
+	reimport: step 55: plastic_orm.png
+	reimport: step 56: rubber_albedo.png
+	reimport: step 57: rubber_normal.png
+	reimport: step 58: rubber_orm.png
+	reimport: step 59: steel_albedo.png
+	reimport: step 60: steel_normal.png
+	reimport: step 61: steel_orm.png
+	reimport: step 62: wall_albedo.png
+	reimport: step 63: wall_normal.png
+	reimport: step 64: wall_orm.png
+	reimport: step 65: wood_albedo.png
+	reimport: step 66: wood_normal.png
+	reimport: step 67: wood_orm.png
+	reimport: step 68: asphalt.png
+	reimport: step 69: cardboard.png
+	reimport: step 70: concrete.png
+	reimport: step 71: metal.png
+	reimport: step 72: plaster.png
+	reimport: step 73: tile.png
+	reimport: step 74: azulejo_normal.png
+	reimport: step 75: azulejo_orm.png
+	reimport: step 76: bark_albedo.png
+	reimport: step 77: bark_normal.png
+	reimport: step 78: bark_orm.png
+	reimport: step 79: brick_albedo.png
+	reimport: step 80: brick_normal.png
+	reimport: step 81: brick_orm.png
+	reimport: step 82: carpaint_albedo.png
+	reimport: step 83: carpaint_normal.png
+	reimport: step 84: carpaint_orm.png
+	reimport: step 85: ceramic_albedo.png
+	reimport: step 86: ceramic_normal.png
+	reimport: step 87: ceramic_orm.png
+	reimport: step 88: glass_albedo.png
+	reimport: step 89: glass_normal.png
+	reimport: step 90: glass_orm.png
+	reimport: step 91: painted_metal_albedo.png
+	reimport: step 92: painted_metal_normal.png
+	reimport: step 93: painted_metal_orm.png
+	reimport: step 94: pallet_wood_albedo.png
+	reimport: step 95: pallet_wood_normal.png
+	reimport: step 96: pallet_wood_orm.png
+	reimport: step 97: paving_albedo.png
+	reimport: step 98: paving_normal.png
+	reimport: step 99: Zirico_Material_Normal.png
 	reimport: step 100: user_car_texture_pbr_20250901.png
-	reimport: step 101: Zirico_Material_Normal.png
-	reimport: step 102: Zirico_Material_Diffuse.png
-	reimport: step 103: Velha1_Material_Normal.png
-	reimport: step 104: Velha1_Material_Diffuse.png
-	reimport: step 105: Garota2_Material_Normal.png
-	reimport: step 106: Garota2_Material_Diffuse.png
-	reimport: step 107: Garota1_Material_Normal.png
-	reimport: step 108: Garota1_Material_Diffuse.png
-	reimport: step 109: Felps_texture_pbr_20250901.png
-	reimport: step 110: Felps_Material_Normal.png
-	reimport: step 111: Felps_Material_Diffuse.png
-	reimport: step 112: Enemy_texture_pbr_20250901.png
-	reimport: step 113: Enemy_Material_Normal.png
-	reimport: step 114: Enemy_Material_Diffuse.png
-	reimport: step 115: Dery_texture_pbr_20250901.png
-	reimport: step 116: Dery_Material_Normal.png
-	reimport: step 117: Dery_Material_Diffuse.png
+	reimport: step 101: user_car_texture_pbr_20250901_metallic-texture_pbr_20250901_roughness.png
+	reimport: step 102: user_car_texture_pbr_20250901_normal.png
+	reimport: step 103: beer_0.png
+	reimport: step 104: beer_0_orm.png
+	reimport: step 105: beer_1.png
+	reimport: step 106: beer_1_orm.png
+	reimport: step 107: beer_banner.png
+	reimport: step 108: can_0.png
+	reimport: step 109: can_0_orm.png
+	reimport: step 110: can_1.png
+	reimport: step 111: can_1_orm.png
+	reimport: step 112: can_2.png
+	reimport: step 113: can_2_orm.png
+	reimport: step 114: carton.png
+	reimport: step 115: carton_orm.png
+	reimport: step 116: contact.png
+	reimport: step 117: Bryan_Material_Diffuse.png
 	reimport: step 118: Bryan_Material_Normal.png
-	reimport: step 119: Bryan_Material_Diffuse.png
-	reimport: step 120: soda_2.png
-	reimport: step 121: soda_banner.png
-	reimport: step 122: spirits.png
-	reimport: step 123: toy_0.png
-	reimport: step 124: toy_1.png
-	reimport: step 125: toy_2.png
-	reimport: step 126: wall.png
-	reimport: step 127: water.png
-	reimport: step 128: water_banner.png
-	reimport: step 129: wood.png
-	reimport: step 130: charcoal.png
-	reimport: step 131: counter_notice.png
-	reimport: step 132: cracks.png
-	reimport: step 133: cup_0.png
-	reimport: step 134: cup_1.png
-	reimport: step 135: cup_2.png
-	reimport: step 136: cup_3.png
-	reimport: step 137: register_screen.png
-	reimport: step 138: roof.png
-	reimport: step 139: snack_0.png
-	reimport: step 140: snack_1.png
-	reimport: step 141: price.png
-	reimport: step 142: snack_2.png
-	reimport: step 143: snack_3.png
-	reimport: step 144: snack_4.png
-	reimport: step 145: poster.png
-	reimport: step 146: snack_5.png
-	reimport: step 147: pix_sign.png
-	reimport: step 148: soda_0.png
-	reimport: step 149: soda_1.png
-	reimport: step 150: floor.png
-	reimport: step 151: paving.png
-	reimport: step 152: plaster.png
-	reimport: step 153: tile.png
-	reimport: step 154: wall_base.png
-	reimport: step 155: asphalt.png
-	reimport: step 156: cassiano.png
-	reimport: step 157: contact_icon.png
-	reimport: step 158: cream.png
-	reimport: step 159: gate.png
-	reimport: step 160: ja_mural.png
-	reimport: step 161: market_sign.png
-	reimport: step 162: render.png
-	reimport: step 163: shutter.png
-	reimport: step 164: Bryan.glb
+	reimport: step 119: Dery_Material_Diffuse.png
+	reimport: step 120: Dery_Material_Normal.png
+	reimport: step 121: Dery_texture_pbr_20250901.png
+	reimport: step 122: Enemy_Material_Diffuse.png
+	reimport: step 123: Enemy_Material_Normal.png
+	reimport: step 124: Enemy_texture_pbr_20250901.png
+	reimport: step 125: Felps_Material_Diffuse.png
+	reimport: step 126: Felps_Material_Normal.png
+	reimport: step 127: Felps_texture_pbr_20250901.png
+	reimport: step 128: Garota1_Material_Diffuse.png
+	reimport: step 129: Garota1_Material_Normal.png
+	reimport: step 130: Garota2_Material_Diffuse.png
+	reimport: step 131: Garota2_Material_Normal.png
+	reimport: step 132: Velha1_Material_Diffuse.png
+	reimport: step 133: Velha1_Material_Normal.png
+	reimport: step 134: Zirico_Material_Diffuse.png
+	reimport: step 135: snack_5.png
+	reimport: step 136: snack_5_orm.png
+	reimport: step 137: soda_0.png
+	reimport: step 138: soda_0_orm.png
+	reimport: step 139: soda_1.png
+	reimport: step 140: soda_1_orm.png
+	reimport: step 141: soda_2.png
+	reimport: step 142: soda_2_orm.png
+	reimport: step 143: soda_banner.png
+	reimport: step 144: spirits.png
+	reimport: step 145: spirits_orm.png
+	reimport: step 146: toy_0.png
+	reimport: step 147: toy_1.png
+	reimport: step 148: toy_2.png
+	reimport: step 149: wall.png
+	reimport: step 150: water.png
+	reimport: step 151: water_banner.png
+	reimport: step 152: water_orm.png
+	reimport: step 153: wood.png
+	reimport: step 154: counter.png
+	reimport: step 155: floor.png
+	reimport: step 156: pix_sign.png
+	reimport: step 157: poster.png
+	reimport: step 158: price.png
+	reimport: step 159: register_screen.png
+	reimport: step 160: roof.png
+	reimport: step 161: snack_0.png
+	reimport: step 162: snack_0_orm.png
+	reimport: step 163: snack_1.png
+	reimport: step 164: snack_1_orm.png
+	reimport: step 165: snack_2.png
+	reimport: step 166: snack_2_orm.png
+	reimport: step 167: snack_3.png
+	reimport: step 168: snack_3_orm.png
+	reimport: step 169: snack_4.png
+	reimport: step 170: snack_4_orm.png
+	reimport: step 171: curtain.png
+	reimport: step 172: lamp_halo.png
+	reimport: step 173: leaves.png
+	reimport: step 174: night_sky.png
+	reimport: step 175: paving.png
+	reimport: step 176: plaster.png
+	reimport: step 177: tile.png
+	reimport: step 179: asphalt.png
+	reimport: step 180: cassiano.png
+	reimport: step 181: contact_icon.png
+	reimport: step 182: cream.png
+	reimport: step 183: gate.png
+	reimport: step 184: Bryan.glb
 import: begin: Import Scene steps: 104
 	import: step 0: Importing Scene...
 	import: step 2: Running Custom Script...
@@ -612,7 +673,7 @@ import: begin: Import Scene steps: 104
 ERROR: Parameter "t" is null.
    at: texture_2d_get (servers/rendering/dummy/storage/texture_storage.h:107)
 import: end
-	reimport: step 165: Customer1.glb
+	reimport: step 185: Customer1.glb
 import: begin: Import Scene steps: 104
 	import: step 0: Importing Scene...
 	import: step 2: Running Custom Script...
@@ -620,7 +681,7 @@ import: begin: Import Scene steps: 104
 ERROR: Parameter "t" is null.
    at: texture_2d_get (servers/rendering/dummy/storage/texture_storage.h:107)
 import: end
-	reimport: step 166: Customer2.glb
+	reimport: step 186: Customer2.glb
 import: begin: Import Scene steps: 104
 	import: step 0: Importing Scene...
 	import: step 2: Running Custom Script...
@@ -628,7 +689,7 @@ import: begin: Import Scene steps: 104
 ERROR: Parameter "t" is null.
    at: texture_2d_get (servers/rendering/dummy/storage/texture_storage.h:107)
 import: end
-	reimport: step 167: Customer3.glb
+	reimport: step 187: Customer3.glb
 import: begin: Import Scene steps: 104
 	import: step 0: Importing Scene...
 	import: step 2: Running Custom Script...
@@ -636,7 +697,7 @@ import: begin: Import Scene steps: 104
 ERROR: Parameter "t" is null.
    at: texture_2d_get (servers/rendering/dummy/storage/texture_storage.h:107)
 import: end
-	reimport: step 168: Dery.glb
+	reimport: step 188: Dery.glb
 import: begin: Import Scene steps: 104
 	import: step 0: Importing Scene...
 	import: step 2: Running Custom Script...
@@ -644,7 +705,7 @@ import: begin: Import Scene steps: 104
 ERROR: Parameter "t" is null.
    at: texture_2d_get (servers/rendering/dummy/storage/texture_storage.h:107)
 import: end
-	reimport: step 169: Enemy.glb
+	reimport: step 189: Enemy.glb
 import: begin: Import Scene steps: 104
 	import: step 0: Importing Scene...
 	import: step 2: Running Custom Script...
@@ -652,7 +713,7 @@ import: begin: Import Scene steps: 104
 ERROR: Parameter "t" is null.
    at: texture_2d_get (servers/rendering/dummy/storage/texture_storage.h:107)
 import: end
-	reimport: step 170: Felps.glb
+	reimport: step 190: Felps.glb
 import: begin: Import Scene steps: 104
 	import: step 0: Importing Scene...
 	import: step 2: Running Custom Script...
@@ -660,7 +721,7 @@ import: begin: Import Scene steps: 104
 ERROR: Parameter "t" is null.
    at: texture_2d_get (servers/rendering/dummy/storage/texture_storage.h:107)
 import: end
-	reimport: step 171: Garota1.glb
+	reimport: step 191: Garota1.glb
 import: begin: Import Scene steps: 104
 	import: step 0: Importing Scene...
 	import: step 2: Running Custom Script...
@@ -668,7 +729,7 @@ import: begin: Import Scene steps: 104
 ERROR: Parameter "t" is null.
    at: texture_2d_get (servers/rendering/dummy/storage/texture_storage.h:107)
 import: end
-	reimport: step 172: Garota2.glb
+	reimport: step 192: Garota2.glb
 import: begin: Import Scene steps: 104
 	import: step 0: Importing Scene...
 	import: step 2: Running Custom Script...
@@ -676,7 +737,7 @@ import: begin: Import Scene steps: 104
 ERROR: Parameter "t" is null.
    at: texture_2d_get (servers/rendering/dummy/storage/texture_storage.h:107)
 import: end
-	reimport: step 173: Velha1.glb
+	reimport: step 193: Velha1.glb
 import: begin: Import Scene steps: 104
 	import: step 0: Importing Scene...
 	import: step 2: Running Custom Script...
@@ -684,7 +745,7 @@ import: begin: Import Scene steps: 104
 ERROR: Parameter "t" is null.
    at: texture_2d_get (servers/rendering/dummy/storage/texture_storage.h:107)
 import: end
-	reimport: step 174: Zirico.glb
+	reimport: step 194: Zirico.glb
 import: begin: Import Scene steps: 104
 	import: step 0: Importing Scene...
 	import: step 2: Running Custom Script...
@@ -692,7 +753,7 @@ import: begin: Import Scene steps: 104
 ERROR: Parameter "t" is null.
    at: texture_2d_get (servers/rendering/dummy/storage/texture_storage.h:107)
 import: end
-	reimport: step 175: hatchback.glb
+	reimport: step 195: hatchback.glb
 import: begin: Import Scene steps: 104
 	import: step 0: Importing Scene...
 	import: step 2: Running Custom Script...
@@ -700,7 +761,7 @@ import: begin: Import Scene steps: 104
 ERROR: Parameter "t" is null.
    at: texture_2d_get (servers/rendering/dummy/storage/texture_storage.h:107)
 import: end
-	reimport: step 176: sedan.glb
+	reimport: step 196: sedan.glb
 import: begin: Import Scene steps: 104
 	import: step 0: Importing Scene...
 	import: step 2: Running Custom Script...
@@ -708,7 +769,7 @@ import: begin: Import Scene steps: 104
 ERROR: Parameter "t" is null.
    at: texture_2d_get (servers/rendering/dummy/storage/texture_storage.h:107)
 import: end
-	reimport: step 177: user_car.glb
+	reimport: step 197: user_car.glb
 import: begin: Import Scene steps: 104
 	import: step 0: Importing Scene...
 	import: step 2: Running Custom Script...
@@ -716,9 +777,9 @@ import: begin: Import Scene steps: 104
 ERROR: Parameter "t" is null.
    at: texture_2d_get (servers/rendering/dummy/storage/texture_storage.h:107)
 import: end
-	reimport: step 178: Finalizing Asset Import...
+	reimport: step 198: Finalizing Asset Import...
 reimport: end
-update_script_paths_documentation: begin: Updating scripts documentation steps: 67
+update_script_paths_documentation: begin: Updating scripts documentation steps: 68
 	update_script_paths_documentation: step 0: aisle_navigation.gd
 	update_script_paths_documentation: step 1: customer.gd
 	update_script_paths_documentation: step 2: familiar_npc.gd
@@ -785,9 +846,10 @@ update_script_paths_documentation: begin: Updating scripts documentation steps: 
 	update_script_paths_documentation: step 63: retail_render_review.gd
 	update_script_paths_documentation: step 64: scene_review.gd
 	update_script_paths_documentation: step 65: scene_walkthrough.gd
-	update_script_paths_documentation: step 66: visual_review.gd
+	update_script_paths_documentation: step 66: surface_finish_review.gd
+	update_script_paths_documentation: step 67: visual_review.gd
 update_script_paths_documentation: end
-update_scene_groups: begin: Updating Scene Groups steps: 38
+update_scene_groups: begin: Updating Scene Groups steps: 39
 	update_scene_groups: step 0: main.tscn
 	update_scene_groups: step 1: crate.tscn
 	update_scene_groups: step 2: endcap.tscn
@@ -811,23 +873,24 @@ update_scene_groups: begin: Updating Scene Groups steps: 38
 	update_scene_groups: step 20: retail_render_review.tscn
 	update_scene_groups: step 21: scene_review.tscn
 	update_scene_groups: step 22: scene_walkthrough.tscn
-	update_scene_groups: step 23: visual_review.tscn
-	update_scene_groups: step 24: Bryan.glb
-	update_scene_groups: step 25: Customer1.glb
-	update_scene_groups: step 26: Customer2.glb
-	update_scene_groups: step 27: Customer3.glb
-	update_scene_groups: step 28: Dery.glb
-	update_scene_groups: step 29: Enemy.glb
-	update_scene_groups: step 30: Felps.glb
-	update_scene_groups: step 31: Garota1.glb
-	update_scene_groups: step 32: Garota2.glb
-	update_scene_groups: step 33: Velha1.glb
-	update_scene_groups: step 34: Zirico.glb
-	update_scene_groups: step 35: hatchback.glb
-	update_scene_groups: step 36: sedan.glb
-	update_scene_groups: step 37: user_car.glb
+	update_scene_groups: step 23: surface_finish_review.tscn
+	update_scene_groups: step 24: visual_review.tscn
+	update_scene_groups: step 25: Bryan.glb
+	update_scene_groups: step 26: Customer1.glb
+	update_scene_groups: step 27: Customer2.glb
+	update_scene_groups: step 28: Customer3.glb
+	update_scene_groups: step 29: Dery.glb
+	update_scene_groups: step 30: Enemy.glb
+	update_scene_groups: step 31: Felps.glb
+	update_scene_groups: step 32: Garota1.glb
+	update_scene_groups: step 33: Garota2.glb
+	update_scene_groups: step 34: Velha1.glb
+	update_scene_groups: step 35: Zirico.glb
+	update_scene_groups: step 36: hatchback.glb
+	update_scene_groups: step 37: sedan.glb
+	update_scene_groups: step 38: user_car.glb
 update_scene_groups: end
-reimport: begin: (Re)Importing Assets steps: 178
+reimport: begin: (Re)Importing Assets steps: 198
 	reimport: step 0: Executing post-reimport operations...
 reimport: end
 loading_editor_layout: begin: Loading editor steps: 5

@@ -1,0 +1,715 @@
+{
+  "version": "0.13.0",
+  "godot": "4.4.1",
+  "device": "Linux / Mesa llvmpipe / Compatibility",
+  "integration": {
+    "passed": 125,
+    "total": 125,
+    "exit_code": 0,
+    "runtime_errors": 0
+  },
+  "surface_profiles": 16,
+  "retail_profiles": 17,
+  "lighting_changed": false,
+  "structure_before": {
+    "mesh_instances": 1314,
+    "vertices": 696552,
+    "triangles": 666942,
+    "mesh_buffer_bytes": 43887176,
+    "shadow_lights": 5
+  },
+  "structure_after": {
+    "indices": 1991532,
+    "mesh_buffer_bytes": 43887176,
+    "mesh_instances": 1328,
+    "mesh_resources": 1328,
+    "nodes": 2369,
+    "shadow_lights": 5,
+    "triangles": 666942,
+    "vertices": 696552
+  },
+  "texture_data_estimate": {
+    "method": "PNG dimensions times stored color channels, base level only. Not measured VRAM; excludes mip levels, model textures, render targets and source JPGs.",
+    "before_base_level_bytes": 95207424,
+    "after_base_level_bytes": 106364928
+  },
+  "texture_files": [
+    {
+      "file": "assets/textures/surfaces/asphalt_albedo.png",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/asphalt_normal.png",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/asphalt_orm.png",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/azulejo_albedo.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/azulejo_normal.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/azulejo_orm.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/bark_albedo.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/bark_normal.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/bark_orm.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/brick_albedo.png",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/brick_normal.png",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/brick_orm.png",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/carpaint_albedo.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/carpaint_normal.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/carpaint_orm.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/ceramic_albedo.png",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/ceramic_normal.png",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/ceramic_orm.png",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/glass_albedo.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/glass_normal.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/glass_orm.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/painted_metal_albedo.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/painted_metal_normal.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/painted_metal_orm.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/pallet_wood_albedo.png",
+      "pixels": [
+        1024,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/pallet_wood_normal.png",
+      "pixels": [
+        1024,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/pallet_wood_orm.png",
+      "pixels": [
+        1024,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/paving_albedo.png",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/paving_normal.png",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/paving_orm.png",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/plaster_albedo.png",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/plaster_normal.png",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/plaster_orm.png",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/plastic_albedo.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/plastic_normal.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/plastic_orm.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/rubber_albedo.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/rubber_normal.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/rubber_orm.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/steel_albedo.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/steel_normal.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/steel_orm.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/wall_albedo.png",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/wall_normal.png",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/wall_orm.png",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/wood_albedo.png",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/wood_normal.png",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/surfaces/wood_orm.png",
+      "pixels": [
+        1024,
+        1024
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/beer_0.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/beer_0_orm.png",
+      "pixels": [
+        256,
+        256
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/beer_1.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/beer_1_orm.png",
+      "pixels": [
+        256,
+        256
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/soda_0.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/soda_0_orm.png",
+      "pixels": [
+        256,
+        256
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/soda_1.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/soda_1_orm.png",
+      "pixels": [
+        256,
+        256
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/soda_2.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/soda_2_orm.png",
+      "pixels": [
+        256,
+        256
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/water.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/water_orm.png",
+      "pixels": [
+        256,
+        256
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/can_0.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/can_0_orm.png",
+      "pixels": [
+        256,
+        256
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/can_1.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/can_1_orm.png",
+      "pixels": [
+        256,
+        256
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/can_2.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/can_2_orm.png",
+      "pixels": [
+        256,
+        256
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/spirits.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/spirits_orm.png",
+      "pixels": [
+        256,
+        256
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/carton.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/carton_orm.png",
+      "pixels": [
+        256,
+        256
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/snack_0.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/snack_0_orm.png",
+      "pixels": [
+        256,
+        256
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/snack_1.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/snack_1_orm.png",
+      "pixels": [
+        256,
+        256
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/snack_2.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/snack_2_orm.png",
+      "pixels": [
+        256,
+        256
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/snack_3.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/snack_3_orm.png",
+      "pixels": [
+        256,
+        256
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/snack_4.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/snack_4_orm.png",
+      "pixels": [
+        256,
+        256
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/snack_5.png",
+      "pixels": [
+        512,
+        512
+      ],
+      "channels": 3
+    },
+    {
+      "file": "assets/textures/depot/snack_5_orm.png",
+      "pixels": [
+        256,
+        256
+      ],
+      "channels": 3
+    }
+  ],
+  "normal_maps_on_products": false,
+  "extra_transparent_bottle_shells": false,
+  "default_frame_limit": 30,
+  "native_radeon_r7_fps_measured": false,
+  "sources": "resources/material_sources/sources.json",
+  "deferred_box_drop_issue": "Unchanged; recorded in docs/PENDENCIAS.md",
+  "render_review": {
+    "hd_exit_code": 0,
+    "economic_exit_code": 0,
+    "hd_captures": 6,
+    "economic_captures": 3,
+    "hd_resolution": [
+      1280,
+      720
+    ],
+    "economic_resolution": [
+      426,
+      240
+    ],
+    "fixed_cameras_and_lights": true
+  }
+}

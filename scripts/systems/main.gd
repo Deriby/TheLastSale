@@ -21,6 +21,7 @@ func _ready() -> void:
 	get_tree().paused=true
 func apply_settings() -> void:
 	SurfaceMaterials.apply_quality()
+	ProductLibrary.apply_quality()
 	CharacterModels.apply_quality()
 	if screen!=null:screen.stretch_shrink=Preferences.pixel_scale
 	if viewport!=null:viewport.msaa_3d=Viewport.MSAA_2X if Preferences.pixel_scale==1 else Viewport.MSAA_DISABLED

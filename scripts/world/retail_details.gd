@@ -32,7 +32,7 @@ static func plastic_crate(parent: Node3D,at: Vector3,color: Color,stack_count :=
 static func display_pallet(parent: Node3D,at: Vector3) -> Node3D:
 	var root:=Node3D.new();root.name="BeverageDisplay";parent.add_child(root);root.position=at;root.add_to_group("beverage_displays")
 	var batch:=PropBatch.new();batch.name="CratesAndPallet";root.add_child(batch)
-	var wood:=SurfaceMaterials.make("wood",Color("aaa18d"));var plastic:=SurfaceMaterials.make("plastic",Color("28527e"))
+	var wood:=SurfaceMaterials.make("pallet_wood");var plastic:=SurfaceMaterials.make("plastic",Color("28527e"))
 	# Skids, nine support blocks, rails and deck meet physically at each layer.
 	for x in [-.51,0,.51]:
 		SurfaceMaterials.wood_box(batch,Vector3(x,.018,0),Vector3(.14,.036,.86),wood)

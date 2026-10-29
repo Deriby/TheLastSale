@@ -1,5 +1,5 @@
-"""Metric, tileable original PBR surfaces; palette/scale guided by depot photos.
-Python + Pillow + NumPy. Does not modify photos, models or the earlier texture sets.
+"""Metric PBR surfaces: procedural finishes and bundled CC0 scans from Poly Haven.
+Python + Pillow + NumPy. Palette/scale guided by depot photos; photos stay unchanged.
 Albedo contains surface color only. ORM = occlusion/red, roughness/green, metal/blue.
 """
 from pathlib import Path
@@ -54,6 +54,7 @@ def export(name,rgb,height,rough,span,metal=0,ao=None):
     for suffix,array in [('albedo',rgb/255),('normal',normal),('orm',orm)]:
         assert np.isfinite(array).all(),(name,suffix)
         Image.fromarray(np.uint8(np.clip(array*255,0,255))).save(OUT/(name+'_'+suffix+'.png'))
+    reports[:]=[record for record in reports if record['surface']!=name]
     reports.append({'surface':name,'pixels':[w,h],'repeat_m':list(span),'roughness_range':[round(float(rough.min()),3),round(float(rough.max()),3)],'metallic':metal})
 
 # The photographed counter is worn varnished brown wood, not regular sine bands.
@@ -171,10 +172,14 @@ for index,name in enumerate(['brick','azulejo','bark']):
         height=fibers*.00065-fissure*.0014;rough=np.clip(.94+cloud*.012,.87,.99);span=(1,1);ao=1-np.clip(fissure,0,1)*.14
     export(name,rgb,height,rough,span,ao=ao)
 
+from refine_materials import refine_surfaces, refine_retail
+refine_surfaces(globals())
+refine_retail(ROOT,noise)
+
 for metadata in OUT.glob('*.png.import'):
     text=metadata.read_text().replace('mipmaps/generate=false','mipmaps/generate=true')
     target='1' if metadata.name.endswith('_normal.png.import') else '2'
     for old in ['0','1','2']:text=text.replace('compress/normal_map='+old,'compress/normal_map='+target)
     metadata.write_text(text)
 (ROOT/'docs/surface_report.json').write_text(json.dumps(reports,indent=2)+'\n')
-print('Original PBR surfaces:',len(reports),'| maps:',len(list(OUT.glob('*.png'))))
+print('PBR surface profiles:',len(reports),'| maps:',len(list(OUT.glob('*.png'))))

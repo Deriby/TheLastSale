@@ -2,11 +2,19 @@
 
 Demonstração jogável em **Godot 4.4.1 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP, com uma rotina narrativa curta. A campanha completa continua em desenvolvimento.
 
-**[Baixar o projeto 0.12.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.12.0.zip)**
+**[Baixar o projeto 0.13.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.13.0.zip)**
 
 Extraia o ZIP, importe `project.godot` no Godot **4.4.1**, aguarde a importação dos modelos e pressione **F5**. O arquivo inclui os modelos animados, cenários, código e recursos usados no jogo. [Conteúdo e instruções do projeto](downloads/project/README.md).
 
-## Revisão 0.12.0 — sombras, teto e circulação
+## Revisão 0.13.0 — materiais e embalagens
+
+Madeira, reboco, asfalto e concreto usam bases de superfícies reais CC0, ajustadas às cores e à escala do depósito. A bancada tem grão irregular e verniz; os paletes usam madeira crua. Piso, pintura, aço, plástico e vidro têm acabamentos distintos. Garrafas, latas e salgadinhos receberam arte mais definida e mapas que separam brilho do corpo, rótulo e tampa, com filtragem para a distância.
+
+[Veja as comparações com as mesmas câmeras e luzes](docs/materials_v013/README.md). O modo Econômica desliga mapas de acabamento e camada de verniz; o limite padrão continua em 30 FPS. **125/125 verificações** passaram no projeto e no ZIP extraído. FPS na Radeon R7 ainda precisa de medição no computador alvo.
+
+![Bancada e acabamentos — 0.13.0](docs/materials_v013/counter_after.png)
+
+## Revisão anterior 0.12.0 — sombras, teto e circulação
 
 A fiação não projeta sombras, e as faixas de autossombra no asfalto foram corrigidas. A cobertura baixa do lado esquerdo segue até os fundos. O expositor agora tem oito engradados com garrafas apoiadas, sobre um palete estruturado. As gôndolas foram encurtadas e reposicionadas: há cerca de 2,10 m até as geladeiras fechadas e 1,12 m livres com as portas abertas. Use **E** para abrir/fechar qualquer geladeira das duas fileiras.
 
@@ -108,9 +116,9 @@ A reconstrução 0.2 do interior recebeu gôndolas abastecidas por categoria, ge
 
 ## Jogar
 
-**[Baixar o projeto Godot 0.12.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.12.0.zip)**
+**[Baixar o projeto Godot 0.13.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.13.0.zip)**
 
-O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **Demonstração 0.12.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
+O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **Demonstração 0.13.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
 
 O download atual é o projeto para o editor. O diretório `downloads/windows` guarda apenas a entrega anterior 0.9.0.
 
@@ -194,4 +202,4 @@ Não foram medidos 60 FPS em PCs modestos nem testados binários em Windows real
 
 Para exportar, instale os templates oficiais 4.4.1 no editor e use o preset **Windows Desktop**. Os originais e ferramentas ficam fora do pacote de jogo. Resultados e limites dos testes: [docs/VALIDACAO.md](docs/VALIDACAO.md).
 
-Os modelos e fotografias são fornecidos pelo usuário. A publicação deste projeto foi solicitada pelo autor; nenhuma licença geral de reutilização por terceiros foi definida. Os sons e assets ambientais procedurais foram criados para esta entrega, sem conteúdo de outros jogos.
+Os modelos e fotografias são fornecidos pelo usuário. A publicação deste projeto foi solicitada pelo autor; nenhuma licença geral de reutilização por terceiros foi definida. Os sons, modelos ambientais procedurais e artes de embalagens foram criados para esta entrega. As bases de quatro materiais são CC0, da Poly Haven; [fontes, autores e hashes](resources/material_sources/LICENSE.md).

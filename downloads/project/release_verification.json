@@ -1,30 +1,47 @@
 {
   "format": "Godot editor project ZIP",
-  "version": "0.12.0",
+  "version": "0.13.0",
   "godot": "4.4.1",
-  "file": "TheLastSale_Godot_0.12.0.zip",
-  "bytes": 95062762,
-  "sha256": "c66d253177fcbcaf881c9a87bc1fb98e4398acf37ab1ce05cf98570c163231d7",
+  "file": "TheLastSale_Godot_0.13.0.zip",
+  "bytes": 88223417,
+  "sha256": "cc5fd309c3578e8fde57eb71a8e03b9add22df40dea4b99728dd1d31a6522a0d",
   "crc_verified": true,
-  "files_verified_against_manifest": 623,
+  "files_verified_against_manifest": 648,
+  "manifest_files_changed_by_import": 0,
   "clean_extraction_import_exit_code": 0,
   "import_script_errors": 0,
   "headless_import_texture_preview_messages": 14,
   "clean_extraction_integration": {
-    "passed": 119,
-    "total": 119,
+    "passed": 125,
+    "total": 125,
     "exit_code": 0,
     "runtime_errors": 0
   },
   "source_integration": {
-    "passed": 119,
-    "total": 119,
+    "passed": 125,
+    "total": 125,
     "exit_code": 0,
     "runtime_errors": 0
   },
   "default_frame_limit": 30,
   "native_radeon_r7_fps_measured": false,
-  "scene_report": "docs/layout_v012/validation.json",
-  "box_drop_issue": "Recorded only in docs/PENDENCIAS.md; correction deferred to gameplay phase.",
-  "import_note": "Godot headless renderer emits 14 texture preview t=null messages during import; no script errors. Subsequent runtime integration has no errors. Physics interpolation warnings can occur when test fixtures are moved outside physics."
+  "material_report": "docs/materials_v013/validation.json",
+  "texture_data_estimate": {
+    "method": "PNG dimensions times stored color channels, base level only. Not measured VRAM; excludes mip levels, model textures, render targets and source JPGs.",
+    "before_base_level_bytes": 95207424,
+    "after_base_level_bytes": 106364928
+  },
+  "structure": {
+    "indices": 1991532,
+    "mesh_buffer_bytes": 43887176,
+    "mesh_instances": 1328,
+    "mesh_resources": 1328,
+    "nodes": 2369,
+    "shadow_lights": 5,
+    "triangles": 666942,
+    "vertices": 696552
+  },
+  "cc0_sources": "resources/material_sources/LICENSE.md",
+  "box_drop_issue": "Unchanged; recorded in docs/PENDENCIAS.md for the gameplay phase.",
+  "import_note": "Godot headless renderer emits 14 texture preview t=null messages during import; no script errors. Subsequent runtime integration has no errors. Interpolation warnings can occur when test fixtures are moved outside physics."
 }

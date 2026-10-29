@@ -1,4 +1,14 @@
-# Validação — revisão 0.12.0 — 29/10/2026
+# Validação — revisão 0.13.0 — 29/10/2026
+
+**125/125 verificações** passaram no projeto e no ZIP extraído com importação limpa. A galeria [materials_v013](materials_v013/README.md) compara materiais usando as mesmas câmeras, luzes e enquadramentos da 0.12.0. Há bases CC0 da Poly Haven para madeira, reboco, asfalto e concreto, além de acabamentos procedurais e nova arte de embalagens.
+
+As verificações novas conferem a diferença de rugosidade entre rótulo e vidro, metal exposto e pintura das latas, mipmaps das embalagens, verniz da bancada versus madeira crua e troca de qualidade nos materiais já instanciados. A suíte preserva o percurso completo de circulação, portas, animações, tarefas, clientes e checkpoints. Sem correção do problema de largar caixas nesta etapa.
+
+As medidas de geometria e textura ficam na galeria. As luzes e a quantidade de triângulos foram preservadas. O limite padrão permanece em 30 FPS; não foi medido FPS nativo no Windows/Radeon R7. Mapas de acabamento e verniz são desligados no modo Econômica.
+
+Fontes CC0 e originais para reprodução offline: [resources/material_sources](../resources/material_sources/LICENSE.md). Verificação do download: [downloads/project](../downloads/project/README.md).
+
+## Registro anterior — revisão 0.12.0 — 29/10/2026
 
 **119/119 verificações** passaram no projeto e no ZIP extraído com importação limpa. A galeria [layout_v012](layout_v012/README.md) registra os quatro pontos relatados: fiação sem sombras e remoção de autossombra do chão, cobertura baixa esquerda contínua, garrafas apoiadas em engradados e espaço para abrir as geladeiras. O corredor tem aproximadamente 2,10 m com as portas fechadas e 1,12 m livres com todas abertas.
 

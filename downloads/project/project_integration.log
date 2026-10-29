@@ -60,6 +60,12 @@ PASS conversa interrompe variação de postura e o conhecido retoma o repouso
 PASS conversa com Bryan preserva o progresso do expediente
 PASS modo Econômica desliga os mapas normais dos novos FBX
 PASS modo Nítida restaura os mapas normais dos novos FBX
+PASS rótulo fosco e vidro da garrafa têm respostas distintas à luz
+PASS alumínio exposto e impressão da lata têm metalicidade própria
+PASS embalagens usam arte revisada e mipmaps para distância
+PASS verniz da bancada difere da madeira crua dos paletes
+PASS Econômica desliga mapas de acabamento e camada de verniz
+PASS Nítida restaura os acabamentos nos materiais já instanciados
 PASS contato dos pés usa a medida do modelo recebido
 PASS respiração altera a caixa torácica em repouso
 PASS cintura e peito superior articulam separadamente em repouso
@@ -119,8 +125,8 @@ PASS continuar não duplica caixas já repostas
 PASS continuar restaura produtos na malha da geladeira
 PASS checkpoint antigo dentro da gôndola migra para corredor próximo
 PASS checkpoint antigo na rua acompanha a nova cota do terreno
-WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@6551/Depot/@Node3D@8162/@MeshInstance3D@8174" (possibly benign).
+WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@6593/Depot/@Node3D@8204/@MeshInstance3D@8213" (possibly benign).
      at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
 PASS checkpoint antigo no novo balcão restaura personagem fora dos móveis
 PASS pausa congela o relógio narrativo
-RESULT 119/119 passed; failures=[]
+RESULT 125/125 passed; failures=[]

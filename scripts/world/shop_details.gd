@@ -19,17 +19,17 @@ static func cup_display(parent: Node3D,at: Vector3) -> void:
 	batch.flush();RetailDetails.collision(root,Vector3(0,.98,0),Vector3(1.02,1.96,.40))
 func build_staff_wall() -> void:
 	var root:=Node3D.new();root.name="CashierSpiritsWall";root.position=Vector3(-5.72,0,-2.75);root.rotation.y=PI/2;add_child(root)
-	var batch:=PropBatch.new();root.add_child(batch);var wood:=SceneDetail.material("worktop",Color("b5aa8b"))
-	for x in [-.91,.91]:batch.add_box(Vector3(x,1.05,.02),Vector3(.045,2.1,.33),wood)
-	batch.add_box(Vector3(0,1.05,-.13),Vector3(1.84,2.1,.035),wood)
+	var batch:=PropBatch.new();root.add_child(batch);var wood:=SurfaceMaterials.make("wood",Color("b5aa8b"))
+	for x in [-.91,.91]:SurfaceMaterials.wood_box(batch,Vector3(x,1.05,.02),Vector3(.045,2.1,.33),wood)
+	SurfaceMaterials.wood_box(batch,Vector3(0,1.05,-.13),Vector3(1.84,2.1,.035),wood)
 	for row in 5:
-		var y:=.12+row*.40;batch.add_box(Vector3(0,y,.03),Vector3(1.84,.035,.34),wood)
+		var y:=.12+row*.40;SurfaceMaterials.wood_box(batch,Vector3(0,y,.03),Vector3(1.84,.035,.34),wood)
 		for i in 12:batch.add_product(("spirits_"+str(i/4%3) if row==1 or row==2 else "spirits"),Vector3(-.79+i*.14,y+.018,.06),0,Vector3.ONE*1.07)
 	batch.flush()
 	RetailDetails.collision(root,Vector3(0,1.05,.03),Vector3(1.84,2.1,.34))
 	# Upright ice freezer at the entrance end of the employee's wall.
 	var freezer:=Node3D.new();freezer.name="UprightIceFreezer";freezer.position=Vector3(-5.45,0,-.65);freezer.rotation.y=PI/2;add_child(freezer)
-	Geo.box(freezer,Vector3(0,1.05,0),Vector3(.83,2.10,.67),Geo.material(Color("d0d5c8")))
+	Geo.box(freezer,Vector3(0,1.05,0),Vector3(.83,2.10,.67),SurfaceMaterials.make("painted_metal",Color("d0d5c8")))
 	SceneDetail.panel(freezer,Vector3(0,1.12,.344),Vector2(.72,1.67),"ice_freezer")
 	Geo.box(freezer,Vector3(.32,1.16,.38),Vector3(.025,.38,.025),Geo.material(Color("656f65")),false)
 	for y in [.10,.14,.18]:Geo.box(freezer,Vector3(0,y,.34),Vector3(.65,.012,.015),Geo.material(Color("71796e")),false)
