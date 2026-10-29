@@ -1,0 +1,19 @@
+{
+  "source_url": "https://drive.google.com/file/d/1qogHQIpLHR2YuTVj_vi3I2FP-i-Qapxe/view",
+  "archive_bytes": 803907853,
+  "uncompressed_bytes": 881599347,
+  "file_count": 114,
+  "rig_fbx_files": [
+    "Modelos para The Last Sale/Bryan - NPC/Bryan RIG.fbx",
+    "Modelos para The Last Sale/Dery/Dery RIG.fbx",
+    "Modelos para The Last Sale/Felps/Felps RIG.fbx",
+    "Modelos para The Last Sale/Garota 1 - NPC/Garota 1 - NPC RIG.fbx",
+    "Modelos para The Last Sale/Garota 2 - NPC/Garota 2 - NPC RIG.fbx",
+    "Modelos para The Last Sale/Killer/Killer RIG.fbx",
+    "Modelos para The Last Sale/Velha 1 - NPC/Velha 1 - NPC RIG.fbx",
+    "Modelos para The Last Sale/Zirico - NPC/Zirico - NPC RIG.fbx"
+  ],
+  "texture_files": 79,
+  "crc_verified": true,
+  "sha256": "4e690dc4c51361572d592904d2a1e0e240889b35c078befc9a0cef5bdc5545e6"
+}

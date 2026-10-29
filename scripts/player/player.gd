@@ -26,7 +26,7 @@ func _ready() -> void:
 	capsule=CapsuleShape3D.new();capsule.radius=.26;capsule.height=1.74
 	col.shape=capsule;col.position.y=.87
 	add_child(col)
-	visual=load("res://assets/models/characters/Dery.glb").instantiate()
+	visual=CharacterModels.create("Dery")
 	add_child(visual)
 	visual.rotation.y=PI
 	animator=visual.find_child("AnimationPlayer",true,false)

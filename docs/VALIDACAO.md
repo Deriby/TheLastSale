@@ -1,4 +1,12 @@
-# Validação — revisão 0.9.0 — 29/10/2026
+# Validação — revisão 0.10.0 — 29/10/2026
+
+O novo elenco usa os FBX com rig enviados pelo autor. Os registros em [cast_v010](cast_v010/README.md) confirmam **106/106 testes** no projeto e **106/106** no pacote Linux, além das revisões de renderização dos modelos e do cenário. Normal maps dos materiais importados: nove ativos em Nítida e zero em Econômica. A prévia de movimento tem 12 segundos.
+
+O download atual é o **projeto Godot em ZIP**, disponível em [downloads/project](../downloads/project/README.md). O pacote contém os recursos derivados usados no jogo e não depende dos originais FBX para abrir no editor. A verificação do arquivo distribuído, incluindo abertura de uma extração limpa, fica em `downloads/project/release_verification.json`.
+
+Os registros abaixo preservam a validação das entregas anteriores. Os binários Windows não receberam teste nativo nesta máquina Linux; desempenho na Radeon R7 não foi medido.
+
+## Registro anterior — revisão 0.9.0 — 29/10/2026
 
 ## Ambiente
 

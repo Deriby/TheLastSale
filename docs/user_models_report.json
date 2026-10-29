@@ -1,0 +1,420 @@
+{
+  "Dery": {
+    "source_file": "Dery/Dery RIG.fbx",
+    "source_sha256": "6aa77fb68f33d689c96be12c6de27764d2c40e47d7e74ee413961b5b19fdba68",
+    "source_bones": 71,
+    "runtime_bones": 72,
+    "source_triangles": 50000,
+    "triangles": 35000,
+    "vertices": 17566,
+    "pruned_minor_influences": 4392,
+    "height_m": 1.78,
+    "source_height_m": 1.130477673157964,
+    "foot_clearance": 0.10795814916491508,
+    "stride_scale": 1.0,
+    "textures": [
+      {
+        "name": "Material_Diffuse",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "Material_Normal",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "clips": [
+      "idle",
+      "idle_shift",
+      "idle_look",
+      "idle_adjust",
+      "idle_tired",
+      "walk",
+      "walk_back",
+      "strafe_left",
+      "strafe_right",
+      "run",
+      "crouch_idle",
+      "crouch_walk",
+      "carry",
+      "carry_walk",
+      "pickup",
+      "place",
+      "put_down",
+      "talk",
+      "cashier",
+      "cashier_idle",
+      "look",
+      "startled",
+      "attack"
+    ],
+    "bytes": 4557112,
+    "skin": "uploaded AccuRIG weights; collapse interpolation and four-influence normalization only"
+  },
+  "Felps": {
+    "source_file": "Felps/Felps RIG.fbx",
+    "source_sha256": "0325dc17443ac6039cf967085dea8b408ac0be4071b01d48dee9ae8a67f4ab63",
+    "source_bones": 71,
+    "runtime_bones": 72,
+    "source_triangles": 50000,
+    "triangles": 35000,
+    "vertices": 17566,
+    "pruned_minor_influences": 4107,
+    "height_m": 1.77,
+    "source_height_m": 1.13634868942178,
+    "foot_clearance": 0.0957062037850029,
+    "stride_scale": 0.9943820224719101,
+    "textures": [
+      {
+        "name": "Material_Diffuse",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "Material_Normal",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "clips": [
+      "idle",
+      "idle_shift",
+      "idle_look",
+      "idle_adjust",
+      "idle_tired",
+      "walk",
+      "walk_back",
+      "strafe_left",
+      "strafe_right",
+      "run",
+      "crouch_idle",
+      "crouch_walk",
+      "carry",
+      "carry_walk",
+      "pickup",
+      "place",
+      "put_down",
+      "talk",
+      "cashier",
+      "cashier_idle",
+      "look",
+      "startled",
+      "attack"
+    ],
+    "bytes": 4783356,
+    "skin": "uploaded AccuRIG weights; collapse interpolation and four-influence normalization only"
+  },
+  "Enemy": {
+    "source_file": "Killer/Killer RIG.fbx",
+    "source_sha256": "2832d8b529e2eaebd678ab7bcd52dff47c9dfde20e726b125b2adc84db447dad",
+    "source_bones": 71,
+    "runtime_bones": 72,
+    "source_triangles": 49950,
+    "triangles": 26000,
+    "vertices": 12996,
+    "pruned_minor_influences": 5103,
+    "height_m": 1.86,
+    "source_height_m": 1.1188597371197133,
+    "foot_clearance": 0.10833289654234822,
+    "stride_scale": 1.0449438202247192,
+    "textures": [
+      {
+        "name": "Material_Diffuse",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "Material_Normal",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "clips": [
+      "idle",
+      "walk",
+      "look",
+      "attack"
+    ],
+    "bytes": 3057648,
+    "skin": "uploaded AccuRIG weights; collapse interpolation and four-influence normalization only"
+  },
+  "Bryan": {
+    "source_file": "Bryan - NPC/Bryan RIG.fbx",
+    "source_sha256": "c543eda2208e9835c157a5c41d2649ce11db1b1cbb4472e945f051d38e65b343",
+    "source_bones": 71,
+    "runtime_bones": 72,
+    "source_triangles": 50000,
+    "triangles": 24000,
+    "vertices": 12002,
+    "pruned_minor_influences": 4493,
+    "height_m": 1.19,
+    "source_height_m": 1.1257365636042884,
+    "foot_clearance": 0.06385808751991626,
+    "stride_scale": 0.6685393258426966,
+    "textures": [
+      {
+        "name": "Material_Diffuse",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "Material_Normal",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "clips": [
+      "idle",
+      "idle_shift",
+      "idle_look",
+      "walk",
+      "carry",
+      "talk",
+      "look",
+      "startled",
+      "hold_bottle",
+      "browse",
+      "pay"
+    ],
+    "bytes": 3317812,
+    "skin": "uploaded AccuRIG weights; collapse interpolation and four-influence normalization only"
+  },
+  "Garota1": {
+    "source_file": "Garota 1 - NPC/Garota 1 - NPC RIG.fbx",
+    "source_sha256": "721bbe17331de555b0dec6c2db7cd813888f8669bc9186cdf22422c593caa72c",
+    "source_bones": 71,
+    "runtime_bones": 72,
+    "source_triangles": 49986,
+    "triangles": 24000,
+    "vertices": 11998,
+    "pruned_minor_influences": 3911,
+    "height_m": 1.66,
+    "source_height_m": 1.1572627385522907,
+    "foot_clearance": 0.10516502193353149,
+    "stride_scale": 0.9325842696629213,
+    "textures": [
+      {
+        "name": "Material_Diffuse",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "Material_Normal",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "clips": [
+      "idle",
+      "idle_shift",
+      "idle_look",
+      "walk",
+      "carry",
+      "talk",
+      "look",
+      "startled",
+      "hold_bottle",
+      "browse",
+      "pay"
+    ],
+    "bytes": 3338060,
+    "skin": "uploaded AccuRIG weights; collapse interpolation and four-influence normalization only"
+  },
+  "Garota2": {
+    "source_file": "Garota 2 - NPC/Garota 2 - NPC RIG.fbx",
+    "source_sha256": "c9c2e19ba7ffa9facf366396971d207edd8e136cde43d05bba05e7894424875d",
+    "source_bones": 71,
+    "runtime_bones": 72,
+    "source_triangles": 50000,
+    "triangles": 24000,
+    "vertices": 11984,
+    "pruned_minor_influences": 3508,
+    "height_m": 1.7,
+    "source_height_m": 1.1350469877343503,
+    "foot_clearance": 0.09511790499928292,
+    "stride_scale": 0.9550561797752809,
+    "textures": [
+      {
+        "name": "Material_Diffuse",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "Material_Normal",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "clips": [
+      "idle",
+      "idle_shift",
+      "idle_look",
+      "walk",
+      "carry",
+      "talk",
+      "look",
+      "startled",
+      "hold_bottle",
+      "browse",
+      "pay"
+    ],
+    "bytes": 3464624,
+    "skin": "uploaded AccuRIG weights; collapse interpolation and four-influence normalization only"
+  },
+  "Velha1": {
+    "source_file": "Velha 1 - NPC/Velha 1 - NPC RIG.fbx",
+    "source_sha256": "4b92cbed9a0154a21265ee69add0f6c6a9459762020c00f2707fffa96be7120a",
+    "source_bones": 71,
+    "runtime_bones": 72,
+    "source_triangles": 49886,
+    "triangles": 24000,
+    "vertices": 11986,
+    "pruned_minor_influences": 3044,
+    "height_m": 1.58,
+    "source_height_m": 1.1657766849779634,
+    "foot_clearance": 0.10817151357618611,
+    "stride_scale": 0.8876404494382023,
+    "textures": [
+      {
+        "name": "Material_Diffuse",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "Material_Normal",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "clips": [
+      "idle",
+      "idle_shift",
+      "idle_look",
+      "walk",
+      "carry",
+      "talk",
+      "look",
+      "startled",
+      "hold_bottle",
+      "browse",
+      "pay"
+    ],
+    "bytes": 3274108,
+    "skin": "uploaded AccuRIG weights; collapse interpolation and four-influence normalization only"
+  },
+  "Zirico": {
+    "source_file": "Zirico - NPC/Zirico - NPC RIG.fbx",
+    "source_sha256": "5ca504bedca09b6c21f9c35b90b904948edae5748c630179cd85cb3fd49fce69",
+    "source_bones": 71,
+    "runtime_bones": 72,
+    "source_triangles": 50000,
+    "triangles": 26000,
+    "vertices": 13002,
+    "pruned_minor_influences": 3777,
+    "height_m": 1.74,
+    "source_height_m": 1.122811650969826,
+    "foot_clearance": 0.12037141407641132,
+    "stride_scale": 0.9775280898876404,
+    "textures": [
+      {
+        "name": "Material_Diffuse",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "Material_Normal",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "clips": [
+      "idle",
+      "idle_shift",
+      "idle_look",
+      "walk",
+      "carry",
+      "talk",
+      "look",
+      "startled",
+      "hold_bottle",
+      "browse",
+      "pay"
+    ],
+    "bytes": 3317616,
+    "skin": "uploaded AccuRIG weights; collapse interpolation and four-influence normalization only"
+  },
+  "Carro1": {
+    "source_file": "Carro 1/Carro 1.fbx",
+    "source_sha256": "588ef108ac35e1c882a7392a7313c6bb392d60f1fb3101569421b3fd87968292",
+    "triangles": 50000,
+    "dimensions_m": [
+      4.200000047683716,
+      2.0842257738113403,
+      1.5801923274993896
+    ],
+    "textures": [
+      {
+        "name": "texture_pbr_20250901.png",
+        "size": [
+          2048,
+          2048
+        ]
+      },
+      {
+        "name": "texture_pbr_20250901_roughness.png",
+        "size": [
+          512,
+          512
+        ]
+      },
+      {
+        "name": "texture_pbr_20250901_normal.png",
+        "size": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "name": "texture_pbr_20250901_metallic.png",
+        "size": [
+          512,
+          512
+        ]
+      }
+    ],
+    "bytes": 5571168
+  }
+}

@@ -1,0 +1,828 @@
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+first_scan_filesystem: begin: Project initialization steps: 5
+	first_scan_filesystem: step 0: Scanning file structure...
+	first_scan_filesystem: step 1: Loading global class names...
+	first_scan_filesystem: step 2: Verifying GDExtensions...
+	first_scan_filesystem: step 3: Creating autoload scripts...
+	first_scan_filesystem: step 4: Initializing plugins...
+	first_scan_filesystem: step 5: Starting file scan...
+first_scan_filesystem: end
+update_scripts_classes: begin: Registering global classes... steps: 65
+	update_scripts_classes: step 0: AisleNavigation
+	update_scripts_classes: step 1: Customer
+	update_scripts_classes: step 2: FamiliarNPC
+	update_scripts_classes: step 3: CharacterModels
+	update_scripts_classes: step 4: FelpsActor
+	update_scripts_classes: step 5: GroundFeet
+	update_scripts_classes: step 6: HeadAttention
+	update_scripts_classes: step 7: LivingMotion
+	update_scripts_classes: step 8: ShoulderCamera
+	update_scripts_classes: step 9: Interaction
+	update_scripts_classes: step 10: BoxHandling
+	update_scripts_classes: step 11: DepotPlayer
+	update_scripts_classes: step 12: Controls
+	update_scripts_classes: step 13:
+	update_scripts_classes: step 14: ShiftInterface
+	update_scripts_classes: step 15:
+	update_scripts_classes: step 16:
+	update_scripts_classes: step 17:
+	update_scripts_classes: step 18: SettingsPanel
+	update_scripts_classes: step 19: Soundscape
+	update_scripts_classes: step 20: CheckoutFixture
+	update_scripts_classes: step 21: Depot
+	update_scripts_classes: step 22: DepotFacade
+	update_scripts_classes: step 23: DepotRoof
+	update_scripts_classes: step 24: DepotShell
+	update_scripts_classes: step 25: FoliageWind
+	update_scripts_classes: step 26: Geo
+	update_scripts_classes: step 27: NeighborhoodCar
+	update_scripts_classes: step 28: NeighborhoodFrontages
+	update_scripts_classes: step 29: NeighborhoodLights
+	update_scripts_classes: step 30: NeighborhoodProps
+	update_scripts_classes: step 31: NeighborhoodServices
+	update_scripts_classes: step 32: NeonFinish
+	update_scripts_classes: step 33: NightAtmosphere
+	update_scripts_classes: step 34: ProductLibrary
+	update_scripts_classes: step 35: DepotProp
+	update_scripts_classes: step 36: PropBatch
+	update_scripts_classes: step 37: RetailDetails
+	update_scripts_classes: step 38: RetailFinish
+	update_scripts_classes: step 39: RoofTiles
+	update_scripts_classes: step 40: SceneDetail
+	update_scripts_classes: step 41: ShopDetails
+	update_scripts_classes: step 42: Street
+	update_scripts_classes: step 43: StreetAccents
+	update_scripts_classes: step 44: StreetBuildings
+	update_scripts_classes: step 45: StreetDetail
+	update_scripts_classes: step 46: StreetFurniture
+	update_scripts_classes: step 47: StreetHaze
+	update_scripts_classes: step 48: SurfaceMaterials
+	update_scripts_classes: step 49: ShiftWorld
+	update_scripts_classes: step 50:
+	update_scripts_classes: step 51:
+	update_scripts_classes: step 52:
+	update_scripts_classes: step 53:
+	update_scripts_classes: step 54:
+	update_scripts_classes: step 55:
+	update_scripts_classes: step 56:
+	update_scripts_classes: step 57:
+	update_scripts_classes: step 58:
+	update_scripts_classes: step 59:
+	update_scripts_classes: step 60:
+	update_scripts_classes: step 61:
+	update_scripts_classes: step 62:
+	update_scripts_classes: step 63:
+	update_scripts_classes: step 64:
+update_scripts_classes: end
+_update_scan_actions: begin: Scanning actions... steps: 178
+	_update_scan_actions: step 0: crate.wav
+	_update_scan_actions: step 1: distant_traffic.wav
+	_update_scan_actions: step 2: hum.wav
+	_update_scan_actions: step 3: knock.wav
+	_update_scan_actions: step 4: neighborhood_air.wav
+	_update_scan_actions: step 5: night.wav
+	_update_scan_actions: step 6: pole_ballast.wav
+	_update_scan_actions: step 7: radio.wav
+	_update_scan_actions: step 8: register.wav
+	_update_scan_actions: step 9: step.wav
+	_update_scan_actions: step 10: step_asphalt.wav
+	_update_scan_actions: step 11: step_tile.wav
+	_update_scan_actions: step 12: store_settle.wav
+	_update_scan_actions: step 13: Bryan.glb
+	_update_scan_actions: step 14: Bryan_Material_Diffuse.png
+	_update_scan_actions: step 15: Bryan_Material_Normal.png
+	_update_scan_actions: step 16: Customer1.glb
+	_update_scan_actions: step 17: Customer2.glb
+	_update_scan_actions: step 18: Customer3.glb
+	_update_scan_actions: step 19: Dery.glb
+	_update_scan_actions: step 20: Dery_Material_Diffuse.png
+	_update_scan_actions: step 21: Dery_Material_Normal.png
+	_update_scan_actions: step 22: Dery_texture_pbr_20250901.png
+	_update_scan_actions: step 23: Enemy.glb
+	_update_scan_actions: step 24: Enemy_Material_Diffuse.png
+	_update_scan_actions: step 25: Enemy_Material_Normal.png
+	_update_scan_actions: step 26: Enemy_texture_pbr_20250901.png
+	_update_scan_actions: step 27: Felps.glb
+	_update_scan_actions: step 28: Felps_Material_Diffuse.png
+	_update_scan_actions: step 29: Felps_Material_Normal.png
+	_update_scan_actions: step 30: Felps_texture_pbr_20250901.png
+	_update_scan_actions: step 31: Garota1.glb
+	_update_scan_actions: step 32: Garota1_Material_Diffuse.png
+	_update_scan_actions: step 33: Garota1_Material_Normal.png
+	_update_scan_actions: step 34: Garota2.glb
+	_update_scan_actions: step 35: Garota2_Material_Diffuse.png
+	_update_scan_actions: step 36: Garota2_Material_Normal.png
+	_update_scan_actions: step 37: Velha1.glb
+	_update_scan_actions: step 38: Velha1_Material_Diffuse.png
+	_update_scan_actions: step 39: Velha1_Material_Normal.png
+	_update_scan_actions: step 40: Zirico.glb
+	_update_scan_actions: step 41: Zirico_Material_Diffuse.png
+	_update_scan_actions: step 42: Zirico_Material_Normal.png
+	_update_scan_actions: step 43: hatchback.glb
+	_update_scan_actions: step 44: sedan.glb
+	_update_scan_actions: step 45: user_car.glb
+	_update_scan_actions: step 46: user_car_texture_pbr_20250901.png
+	_update_scan_actions: step 47: user_car_texture_pbr_20250901_metallic-texture_pbr_20250901_roughness.png
+	_update_scan_actions: step 48: user_car_texture_pbr_20250901_normal.png
+	_update_scan_actions: step 49: beer_0.png
+	_update_scan_actions: step 50: beer_1.png
+	_update_scan_actions: step 51: beer_banner.png
+	_update_scan_actions: step 52: can_0.png
+	_update_scan_actions: step 53: can_1.png
+	_update_scan_actions: step 54: can_2.png
+	_update_scan_actions: step 55: carton.png
+	_update_scan_actions: step 56: contact.png
+	_update_scan_actions: step 57: counter.png
+	_update_scan_actions: step 58: floor.png
+	_update_scan_actions: step 59: pix_sign.png
+	_update_scan_actions: step 60: poster.png
+	_update_scan_actions: step 61: price.png
+	_update_scan_actions: step 62: register_screen.png
+	_update_scan_actions: step 63: roof.png
+	_update_scan_actions: step 64: snack_0.png
+	_update_scan_actions: step 65: snack_1.png
+	_update_scan_actions: step 66: snack_2.png
+	_update_scan_actions: step 67: snack_3.png
+	_update_scan_actions: step 68: snack_4.png
+	_update_scan_actions: step 69: snack_5.png
+	_update_scan_actions: step 70: soda_0.png
+	_update_scan_actions: step 71: soda_1.png
+	_update_scan_actions: step 72: soda_2.png
+	_update_scan_actions: step 73: soda_banner.png
+	_update_scan_actions: step 74: spirits.png
+	_update_scan_actions: step 75: toy_0.png
+	_update_scan_actions: step 76: toy_1.png
+	_update_scan_actions: step 77: toy_2.png
+	_update_scan_actions: step 78: wall.png
+	_update_scan_actions: step 79: water.png
+	_update_scan_actions: step 80: water_banner.png
+	_update_scan_actions: step 81: wood.png
+	_update_scan_actions: step 82: charcoal.png
+	_update_scan_actions: step 83: counter_notice.png
+	_update_scan_actions: step 84: cracks.png
+	_update_scan_actions: step 85: cup_0.png
+	_update_scan_actions: step 86: cup_1.png
+	_update_scan_actions: step 87: cup_2.png
+	_update_scan_actions: step 88: cup_3.png
+	_update_scan_actions: step 89: cup_4.png
+	_update_scan_actions: step 90: cup_offer.png
+	_update_scan_actions: step 91: floor_wear.png
+	_update_scan_actions: step 92: ice_freezer.png
+	_update_scan_actions: step 93: payment_screen.png
+	_update_scan_actions: step 94: pos_screen.png
+	_update_scan_actions: step 95: spirits_0.png
+	_update_scan_actions: step 96: spirits_1.png
+	_update_scan_actions: step 97: spirits_2.png
+	_update_scan_actions: step 98: tv_screen.png
+	_update_scan_actions: step 99: worktop.png
+	_update_scan_actions: step 100: charcoal_bag.png
+	_update_scan_actions: step 101: cold_sign.png
+	_update_scan_actions: step 102: haze_noise.png
+	_update_scan_actions: step 103: ice_offer.png
+	_update_scan_actions: step 104: open_sign.png
+	_update_scan_actions: step 105: plastic_film.png
+	_update_scan_actions: step 106: asphalt.png
+	_update_scan_actions: step 107: curtain.png
+	_update_scan_actions: step 108: lamp_halo.png
+	_update_scan_actions: step 109: leaves.png
+	_update_scan_actions: step 110: night_sky.png
+	_update_scan_actions: step 111: paving.png
+	_update_scan_actions: step 112: plaster.png
+	_update_scan_actions: step 113: tile.png
+	_update_scan_actions: step 114: wall_base.png
+	_update_scan_actions: step 115: asphalt.png
+	_update_scan_actions: step 116: cassiano.png
+	_update_scan_actions: step 117: contact_icon.png
+	_update_scan_actions: step 118: cream.png
+	_update_scan_actions: step 119: gate.png
+	_update_scan_actions: step 120: ja_mural.png
+	_update_scan_actions: step 121: market_sign.png
+	_update_scan_actions: step 122: render.png
+	_update_scan_actions: step 123: shutter.png
+	_update_scan_actions: step 124: sidewalk.png
+	_update_scan_actions: step 125: stained.png
+	_update_scan_actions: step 126: terracotta.png
+	_update_scan_actions: step 127: asphalt_albedo.png
+	_update_scan_actions: step 128: asphalt_normal.png
+	_update_scan_actions: step 129: asphalt_orm.png
+	_update_scan_actions: step 130: azulejo_albedo.png
+	_update_scan_actions: step 131: azulejo_normal.png
+	_update_scan_actions: step 132: azulejo_orm.png
+	_update_scan_actions: step 133: bark_albedo.png
+	_update_scan_actions: step 134: bark_normal.png
+	_update_scan_actions: step 135: bark_orm.png
+	_update_scan_actions: step 136: brick_albedo.png
+	_update_scan_actions: step 137: brick_normal.png
+	_update_scan_actions: step 138: brick_orm.png
+	_update_scan_actions: step 139: carpaint_albedo.png
+	_update_scan_actions: step 140: carpaint_normal.png
+	_update_scan_actions: step 141: carpaint_orm.png
+	_update_scan_actions: step 142: ceramic_albedo.png
+	_update_scan_actions: step 143: ceramic_normal.png
+	_update_scan_actions: step 144: ceramic_orm.png
+	_update_scan_actions: step 145: glass_albedo.png
+	_update_scan_actions: step 146: glass_normal.png
+	_update_scan_actions: step 147: glass_orm.png
+	_update_scan_actions: step 148: painted_metal_albedo.png
+	_update_scan_actions: step 149: painted_metal_normal.png
+	_update_scan_actions: step 150: painted_metal_orm.png
+	_update_scan_actions: step 151: paving_albedo.png
+	_update_scan_actions: step 152: paving_normal.png
+	_update_scan_actions: step 153: paving_orm.png
+	_update_scan_actions: step 154: plaster_albedo.png
+	_update_scan_actions: step 155: plaster_normal.png
+	_update_scan_actions: step 156: plaster_orm.png
+	_update_scan_actions: step 157: plastic_albedo.png
+	_update_scan_actions: step 158: plastic_normal.png
+	_update_scan_actions: step 159: plastic_orm.png
+	_update_scan_actions: step 160: rubber_albedo.png
+	_update_scan_actions: step 161: rubber_normal.png
+	_update_scan_actions: step 162: rubber_orm.png
+	_update_scan_actions: step 163: steel_albedo.png
+	_update_scan_actions: step 164: steel_normal.png
+	_update_scan_actions: step 165: steel_orm.png
+	_update_scan_actions: step 166: wall_albedo.png
+	_update_scan_actions: step 167: wall_normal.png
+	_update_scan_actions: step 168: wall_orm.png
+	_update_scan_actions: step 169: wood_albedo.png
+	_update_scan_actions: step 170: wood_normal.png
+	_update_scan_actions: step 171: wood_orm.png
+	_update_scan_actions: step 172: asphalt.png
+	_update_scan_actions: step 173: cardboard.png
+	_update_scan_actions: step 174: concrete.png
+	_update_scan_actions: step 175: metal.png
+	_update_scan_actions: step 176: plaster.png
+	_update_scan_actions: step 177: tile.png
+_update_scan_actions: end
+reimport: begin: (Re)Importing Assets steps: 178
+	reimport: step 0: Preparing files to reimport...
+	reimport: step 1: Preparing files to reimport...
+	reimport: step 2: Preparing files to reimport...
+	reimport: step 3: Preparing files to reimport...
+	reimport: step 4: Preparing files to reimport...
+	reimport: step 5: Preparing files to reimport...
+	reimport: step 6: Preparing files to reimport...
+	reimport: step 7: Preparing files to reimport...
+	reimport: step 8: Preparing files to reimport...
+	reimport: step 9: Preparing files to reimport...
+	reimport: step 10: Preparing files to reimport...
+	reimport: step 11: Preparing files to reimport...
+	reimport: step 12: Preparing files to reimport...
+	reimport: step 13: Preparing files to reimport...
+	reimport: step 14: Preparing files to reimport...
+	reimport: step 15: Preparing files to reimport...
+	reimport: step 16: Preparing files to reimport...
+	reimport: step 17: Preparing files to reimport...
+	reimport: step 18: Preparing files to reimport...
+	reimport: step 19: Preparing files to reimport...
+	reimport: step 20: Preparing files to reimport...
+	reimport: step 21: Preparing files to reimport...
+	reimport: step 22: Preparing files to reimport...
+	reimport: step 23: Preparing files to reimport...
+	reimport: step 24: Preparing files to reimport...
+	reimport: step 25: Preparing files to reimport...
+	reimport: step 26: Preparing files to reimport...
+	reimport: step 27: Preparing files to reimport...
+	reimport: step 28: Preparing files to reimport...
+	reimport: step 29: Preparing files to reimport...
+	reimport: step 30: Preparing files to reimport...
+	reimport: step 31: Preparing files to reimport...
+	reimport: step 32: Preparing files to reimport...
+	reimport: step 33: Preparing files to reimport...
+	reimport: step 34: Preparing files to reimport...
+	reimport: step 35: Preparing files to reimport...
+	reimport: step 36: Preparing files to reimport...
+	reimport: step 37: Preparing files to reimport...
+	reimport: step 38: Preparing files to reimport...
+	reimport: step 39: Preparing files to reimport...
+	reimport: step 40: Preparing files to reimport...
+	reimport: step 41: Preparing files to reimport...
+	reimport: step 42: Preparing files to reimport...
+	reimport: step 43: Preparing files to reimport...
+	reimport: step 44: Preparing files to reimport...
+	reimport: step 45: Preparing files to reimport...
+	reimport: step 46: Preparing files to reimport...
+	reimport: step 47: Preparing files to reimport...
+	reimport: step 48: Preparing files to reimport...
+	reimport: step 49: Preparing files to reimport...
+	reimport: step 50: Preparing files to reimport...
+	reimport: step 51: Preparing files to reimport...
+	reimport: step 52: Preparing files to reimport...
+	reimport: step 53: Preparing files to reimport...
+	reimport: step 54: Preparing files to reimport...
+	reimport: step 55: Preparing files to reimport...
+	reimport: step 56: Preparing files to reimport...
+	reimport: step 57: Preparing files to reimport...
+	reimport: step 58: Preparing files to reimport...
+	reimport: step 59: Preparing files to reimport...
+	reimport: step 60: Preparing files to reimport...
+	reimport: step 61: Preparing files to reimport...
+	reimport: step 62: Preparing files to reimport...
+	reimport: step 63: Preparing files to reimport...
+	reimport: step 64: Preparing files to reimport...
+	reimport: step 65: Preparing files to reimport...
+	reimport: step 66: Preparing files to reimport...
+	reimport: step 67: Preparing files to reimport...
+	reimport: step 68: Preparing files to reimport...
+	reimport: step 69: Preparing files to reimport...
+	reimport: step 70: Preparing files to reimport...
+	reimport: step 71: Preparing files to reimport...
+	reimport: step 72: Preparing files to reimport...
+	reimport: step 73: Preparing files to reimport...
+	reimport: step 74: Preparing files to reimport...
+	reimport: step 75: Preparing files to reimport...
+	reimport: step 76: Preparing files to reimport...
+	reimport: step 77: Preparing files to reimport...
+	reimport: step 78: Preparing files to reimport...
+	reimport: step 79: Preparing files to reimport...
+	reimport: step 80: Preparing files to reimport...
+	reimport: step 81: Preparing files to reimport...
+	reimport: step 82: Preparing files to reimport...
+	reimport: step 83: Preparing files to reimport...
+	reimport: step 84: Preparing files to reimport...
+	reimport: step 85: Preparing files to reimport...
+	reimport: step 86: Preparing files to reimport...
+	reimport: step 87: Preparing files to reimport...
+	reimport: step 88: Preparing files to reimport...
+	reimport: step 89: Preparing files to reimport...
+	reimport: step 90: Preparing files to reimport...
+	reimport: step 91: Preparing files to reimport...
+	reimport: step 92: Preparing files to reimport...
+	reimport: step 93: Preparing files to reimport...
+	reimport: step 94: Preparing files to reimport...
+	reimport: step 95: Preparing files to reimport...
+	reimport: step 96: Preparing files to reimport...
+	reimport: step 97: Preparing files to reimport...
+	reimport: step 98: Preparing files to reimport...
+	reimport: step 99: Preparing files to reimport...
+	reimport: step 100: Preparing files to reimport...
+	reimport: step 101: Preparing files to reimport...
+	reimport: step 102: Preparing files to reimport...
+	reimport: step 103: Preparing files to reimport...
+	reimport: step 104: Preparing files to reimport...
+	reimport: step 105: Preparing files to reimport...
+	reimport: step 106: Preparing files to reimport...
+	reimport: step 107: Preparing files to reimport...
+	reimport: step 108: Preparing files to reimport...
+	reimport: step 109: Preparing files to reimport...
+	reimport: step 110: Preparing files to reimport...
+	reimport: step 111: Preparing files to reimport...
+	reimport: step 112: Preparing files to reimport...
+	reimport: step 113: Preparing files to reimport...
+	reimport: step 114: Preparing files to reimport...
+	reimport: step 115: Preparing files to reimport...
+	reimport: step 116: Preparing files to reimport...
+	reimport: step 117: Preparing files to reimport...
+	reimport: step 118: Preparing files to reimport...
+	reimport: step 119: Preparing files to reimport...
+	reimport: step 120: Preparing files to reimport...
+	reimport: step 121: Preparing files to reimport...
+	reimport: step 122: Preparing files to reimport...
+	reimport: step 123: Preparing files to reimport...
+	reimport: step 124: Preparing files to reimport...
+	reimport: step 125: Preparing files to reimport...
+	reimport: step 126: Preparing files to reimport...
+	reimport: step 127: Preparing files to reimport...
+	reimport: step 128: Preparing files to reimport...
+	reimport: step 129: Preparing files to reimport...
+	reimport: step 130: Preparing files to reimport...
+	reimport: step 131: Preparing files to reimport...
+	reimport: step 132: Preparing files to reimport...
+	reimport: step 133: Preparing files to reimport...
+	reimport: step 134: Preparing files to reimport...
+	reimport: step 135: Preparing files to reimport...
+	reimport: step 136: Preparing files to reimport...
+	reimport: step 137: Preparing files to reimport...
+	reimport: step 138: Preparing files to reimport...
+	reimport: step 139: Preparing files to reimport...
+	reimport: step 140: Preparing files to reimport...
+	reimport: step 141: Preparing files to reimport...
+	reimport: step 142: Preparing files to reimport...
+	reimport: step 143: Preparing files to reimport...
+	reimport: step 144: Preparing files to reimport...
+	reimport: step 145: Preparing files to reimport...
+	reimport: step 146: Preparing files to reimport...
+	reimport: step 147: Preparing files to reimport...
+	reimport: step 148: Preparing files to reimport...
+	reimport: step 149: Preparing files to reimport...
+	reimport: step 150: Preparing files to reimport...
+	reimport: step 151: Preparing files to reimport...
+	reimport: step 152: Preparing files to reimport...
+	reimport: step 153: Preparing files to reimport...
+	reimport: step 154: Preparing files to reimport...
+	reimport: step 155: Preparing files to reimport...
+	reimport: step 156: Preparing files to reimport...
+	reimport: step 157: Preparing files to reimport...
+	reimport: step 158: Preparing files to reimport...
+	reimport: step 159: Preparing files to reimport...
+	reimport: step 160: Preparing files to reimport...
+	reimport: step 161: Preparing files to reimport...
+	reimport: step 162: Preparing files to reimport...
+	reimport: step 163: Preparing files to reimport...
+	reimport: step 164: Preparing files to reimport...
+	reimport: step 165: Preparing files to reimport...
+	reimport: step 166: Preparing files to reimport...
+	reimport: step 167: Preparing files to reimport...
+	reimport: step 168: Preparing files to reimport...
+	reimport: step 169: Preparing files to reimport...
+	reimport: step 170: Preparing files to reimport...
+	reimport: step 171: Preparing files to reimport...
+	reimport: step 172: Preparing files to reimport...
+	reimport: step 173: Preparing files to reimport...
+	reimport: step 174: Preparing files to reimport...
+	reimport: step 175: Preparing files to reimport...
+	reimport: step 176: Preparing files to reimport...
+	reimport: step 177: Preparing files to reimport...
+	reimport: step 0: Executing pre-reimport operations...
+preload_reimporting_scene: begin: Preparing scenes for reload steps: 1
+	preload_reimporting_scene: step 0: Analyzing scene [empty]
+	preload_reimporting_scene: step 1: Preparation done.
+preload_reimporting_scene: end
+	reimport: step 0: paving.png
+	reimport: step 1: plaster.png
+	reimport: step 2: tile.png
+	reimport: step 3: wall_base.png
+	reimport: step 4: asphalt.png
+	reimport: step 5: cassiano.png
+	reimport: step 6: contact_icon.png
+	reimport: step 7: cream.png
+	reimport: step 8: gate.png
+	reimport: step 9: ja_mural.png
+	reimport: step 10: market_sign.png
+	reimport: step 11: render.png
+	reimport: step 12: shutter.png
+	reimport: step 13: sidewalk.png
+	reimport: step 14: stained.png
+	reimport: step 15: terracotta.png
+	reimport: step 16: asphalt_albedo.png
+	reimport: step 17: asphalt_normal.png
+	reimport: step 18: asphalt_orm.png
+	reimport: step 19: azulejo_albedo.png
+	reimport: step 20: azulejo_normal.png
+	reimport: step 21: azulejo_orm.png
+	reimport: step 22: cup_4.png
+	reimport: step 23: cup_offer.png
+	reimport: step 24: floor_wear.png
+	reimport: step 25: ice_freezer.png
+	reimport: step 26: payment_screen.png
+	reimport: step 27: pos_screen.png
+	reimport: step 28: spirits_0.png
+	reimport: step 29: spirits_1.png
+	reimport: step 30: spirits_2.png
+	reimport: step 31: tv_screen.png
+	reimport: step 32: worktop.png
+	reimport: step 33: charcoal_bag.png
+	reimport: step 34: cold_sign.png
+	reimport: step 35: haze_noise.png
+	reimport: step 36: ice_offer.png
+	reimport: step 37: open_sign.png
+	reimport: step 38: plastic_film.png
+	reimport: step 39: asphalt.png
+	reimport: step 40: curtain.png
+	reimport: step 41: lamp_halo.png
+	reimport: step 42: leaves.png
+	reimport: step 43: night_sky.png
+	reimport: step 44: plaster_orm.png
+	reimport: step 45: plastic_albedo.png
+	reimport: step 46: plastic_normal.png
+	reimport: step 47: plastic_orm.png
+	reimport: step 48: rubber_albedo.png
+	reimport: step 49: rubber_normal.png
+	reimport: step 50: rubber_orm.png
+	reimport: step 51: steel_albedo.png
+	reimport: step 52: steel_normal.png
+	reimport: step 53: steel_orm.png
+	reimport: step 54: wall_albedo.png
+	reimport: step 55: wall_normal.png
+	reimport: step 56: wall_orm.png
+	reimport: step 57: wood_albedo.png
+	reimport: step 58: wood_normal.png
+	reimport: step 59: wood_orm.png
+	reimport: step 60: asphalt.png
+	reimport: step 61: cardboard.png
+	reimport: step 62: concrete.png
+	reimport: step 63: metal.png
+	reimport: step 64: plaster.png
+	reimport: step 65: tile.png
+	reimport: step 66: bark_albedo.png
+	reimport: step 67: bark_normal.png
+	reimport: step 68: bark_orm.png
+	reimport: step 69: brick_albedo.png
+	reimport: step 70: brick_normal.png
+	reimport: step 71: brick_orm.png
+	reimport: step 72: carpaint_albedo.png
+	reimport: step 73: carpaint_normal.png
+	reimport: step 74: carpaint_orm.png
+	reimport: step 75: ceramic_albedo.png
+	reimport: step 76: ceramic_normal.png
+	reimport: step 77: ceramic_orm.png
+	reimport: step 78: glass_albedo.png
+	reimport: step 79: glass_normal.png
+	reimport: step 80: glass_orm.png
+	reimport: step 81: painted_metal_albedo.png
+	reimport: step 82: painted_metal_normal.png
+	reimport: step 83: painted_metal_orm.png
+	reimport: step 84: paving_albedo.png
+	reimport: step 85: paving_normal.png
+	reimport: step 86: paving_orm.png
+	reimport: step 87: plaster_albedo.png
+	reimport: step 88: plaster_normal.png
+	reimport: step 89: counter.png
+	reimport: step 90: contact.png
+	reimport: step 91: carton.png
+	reimport: step 92: can_2.png
+	reimport: step 93: can_1.png
+	reimport: step 94: can_0.png
+	reimport: step 95: beer_banner.png
+	reimport: step 96: beer_1.png
+	reimport: step 97: beer_0.png
+	reimport: step 98: user_car_texture_pbr_20250901_normal.png
+	reimport: step 99: user_car_texture_pbr_20250901_metallic-texture_pbr_20250901_roughness.png
+	reimport: step 100: user_car_texture_pbr_20250901.png
+	reimport: step 101: Zirico_Material_Normal.png
+	reimport: step 102: Zirico_Material_Diffuse.png
+	reimport: step 103: Velha1_Material_Normal.png
+	reimport: step 104: Velha1_Material_Diffuse.png
+	reimport: step 105: Garota2_Material_Normal.png
+	reimport: step 106: Garota2_Material_Diffuse.png
+	reimport: step 107: Garota1_Material_Normal.png
+	reimport: step 108: Garota1_Material_Diffuse.png
+	reimport: step 109: Felps_texture_pbr_20250901.png
+	reimport: step 110: Felps_Material_Normal.png
+	reimport: step 111: Felps_Material_Diffuse.png
+	reimport: step 112: Enemy_texture_pbr_20250901.png
+	reimport: step 113: Enemy_Material_Normal.png
+	reimport: step 114: Enemy_Material_Diffuse.png
+	reimport: step 115: Dery_texture_pbr_20250901.png
+	reimport: step 116: Dery_Material_Normal.png
+	reimport: step 117: Dery_Material_Diffuse.png
+	reimport: step 118: Bryan_Material_Normal.png
+	reimport: step 119: Bryan_Material_Diffuse.png
+	reimport: step 120: soda_2.png
+	reimport: step 121: soda_banner.png
+	reimport: step 122: spirits.png
+	reimport: step 123: toy_0.png
+	reimport: step 124: toy_1.png
+	reimport: step 125: toy_2.png
+	reimport: step 126: wall.png
+	reimport: step 127: water.png
+	reimport: step 128: water_banner.png
+	reimport: step 129: wood.png
+	reimport: step 130: charcoal.png
+	reimport: step 131: counter_notice.png
+	reimport: step 132: cracks.png
+	reimport: step 133: cup_0.png
+	reimport: step 134: cup_1.png
+	reimport: step 135: cup_2.png
+	reimport: step 136: cup_3.png
+	reimport: step 137: register_screen.png
+	reimport: step 138: roof.png
+	reimport: step 139: snack_0.png
+	reimport: step 140: snack_1.png
+	reimport: step 141: price.png
+	reimport: step 142: snack_2.png
+	reimport: step 143: snack_3.png
+	reimport: step 144: snack_4.png
+	reimport: step 145: poster.png
+	reimport: step 146: snack_5.png
+	reimport: step 147: pix_sign.png
+	reimport: step 148: soda_0.png
+	reimport: step 149: soda_1.png
+	reimport: step 150: floor.png
+	reimport: step 151: paving.png
+	reimport: step 154: wall_base.png
+	reimport: step 155: asphalt.png
+	reimport: step 156: cassiano.png
+	reimport: step 157: contact_icon.png
+	reimport: step 158: cream.png
+	reimport: step 159: gate.png
+	reimport: step 160: ja_mural.png
+	reimport: step 161: market_sign.png
+	reimport: step 162: render.png
+	reimport: step 163: shutter.png
+	reimport: step 164: Bryan.glb
+import: begin: Import Scene steps: 104
+	import: step 0: Importing Scene...
+	import: step 2: Running Custom Script...
+	import: step 104: Saving...
+ERROR: Parameter "t" is null.
+   at: texture_2d_get (servers/rendering/dummy/storage/texture_storage.h:107)
+import: end
+	reimport: step 165: Customer1.glb
+import: begin: Import Scene steps: 104
+	import: step 0: Importing Scene...
+	import: step 2: Running Custom Script...
+	import: step 104: Saving...
+ERROR: Parameter "t" is null.
+   at: texture_2d_get (servers/rendering/dummy/storage/texture_storage.h:107)
+import: end
+	reimport: step 166: Customer2.glb
+import: begin: Import Scene steps: 104
+	import: step 0: Importing Scene...
+	import: step 2: Running Custom Script...
+	import: step 104: Saving...
+ERROR: Parameter "t" is null.
+   at: texture_2d_get (servers/rendering/dummy/storage/texture_storage.h:107)
+import: end
+	reimport: step 167: Customer3.glb
+import: begin: Import Scene steps: 104
+	import: step 0: Importing Scene...
+	import: step 2: Running Custom Script...
+	import: step 104: Saving...
+ERROR: Parameter "t" is null.
+   at: texture_2d_get (servers/rendering/dummy/storage/texture_storage.h:107)
+import: end
+	reimport: step 168: Dery.glb
+import: begin: Import Scene steps: 104
+	import: step 0: Importing Scene...
+	import: step 2: Running Custom Script...
+	import: step 104: Saving...
+ERROR: Parameter "t" is null.
+   at: texture_2d_get (servers/rendering/dummy/storage/texture_storage.h:107)
+import: end
+	reimport: step 169: Enemy.glb
+import: begin: Import Scene steps: 104
+	import: step 0: Importing Scene...
+	import: step 2: Running Custom Script...
+	import: step 104: Saving...
+ERROR: Parameter "t" is null.
+   at: texture_2d_get (servers/rendering/dummy/storage/texture_storage.h:107)
+import: end
+	reimport: step 170: Felps.glb
+import: begin: Import Scene steps: 104
+	import: step 0: Importing Scene...
+	import: step 2: Running Custom Script...
+	import: step 104: Saving...
+ERROR: Parameter "t" is null.
+   at: texture_2d_get (servers/rendering/dummy/storage/texture_storage.h:107)
+import: end
+	reimport: step 171: Garota1.glb
+import: begin: Import Scene steps: 104
+	import: step 0: Importing Scene...
+	import: step 2: Running Custom Script...
+	import: step 104: Saving...
+ERROR: Parameter "t" is null.
+   at: texture_2d_get (servers/rendering/dummy/storage/texture_storage.h:107)
+import: end
+	reimport: step 172: Garota2.glb
+import: begin: Import Scene steps: 104
+	import: step 0: Importing Scene...
+	import: step 2: Running Custom Script...
+	import: step 104: Saving...
+ERROR: Parameter "t" is null.
+   at: texture_2d_get (servers/rendering/dummy/storage/texture_storage.h:107)
+import: end
+	reimport: step 173: Velha1.glb
+import: begin: Import Scene steps: 104
+	import: step 0: Importing Scene...
+	import: step 2: Running Custom Script...
+	import: step 104: Saving...
+ERROR: Parameter "t" is null.
+   at: texture_2d_get (servers/rendering/dummy/storage/texture_storage.h:107)
+import: end
+	reimport: step 174: Zirico.glb
+import: begin: Import Scene steps: 104
+	import: step 0: Importing Scene...
+	import: step 2: Running Custom Script...
+	import: step 104: Saving...
+ERROR: Parameter "t" is null.
+   at: texture_2d_get (servers/rendering/dummy/storage/texture_storage.h:107)
+import: end
+	reimport: step 175: hatchback.glb
+import: begin: Import Scene steps: 104
+	import: step 0: Importing Scene...
+	import: step 2: Running Custom Script...
+	import: step 104: Saving...
+ERROR: Parameter "t" is null.
+   at: texture_2d_get (servers/rendering/dummy/storage/texture_storage.h:107)
+import: end
+	reimport: step 176: sedan.glb
+import: begin: Import Scene steps: 104
+	import: step 0: Importing Scene...
+	import: step 2: Running Custom Script...
+	import: step 104: Saving...
+ERROR: Parameter "t" is null.
+   at: texture_2d_get (servers/rendering/dummy/storage/texture_storage.h:107)
+import: end
+	reimport: step 177: user_car.glb
+import: begin: Import Scene steps: 104
+	import: step 0: Importing Scene...
+	import: step 2: Running Custom Script...
+	import: step 104: Saving...
+ERROR: Parameter "t" is null.
+   at: texture_2d_get (servers/rendering/dummy/storage/texture_storage.h:107)
+import: end
+	reimport: step 178: Finalizing Asset Import...
+reimport: end
+update_script_paths_documentation: begin: Updating scripts documentation steps: 65
+	update_script_paths_documentation: step 0: aisle_navigation.gd
+	update_script_paths_documentation: step 1: customer.gd
+	update_script_paths_documentation: step 2: familiar_npc.gd
+	update_script_paths_documentation: step 3: character_models.gd
+	update_script_paths_documentation: step 4: felps_actor.gd
+	update_script_paths_documentation: step 5: ground_feet.gd
+	update_script_paths_documentation: step 6: head_attention.gd
+	update_script_paths_documentation: step 7: living_motion.gd
+	update_script_paths_documentation: step 8: shoulder_camera.gd
+	update_script_paths_documentation: step 9: interactable.gd
+	update_script_paths_documentation: step 10: box_handling.gd
+	update_script_paths_documentation: step 11: player.gd
+	update_script_paths_documentation: step 12: controls.gd
+	update_script_paths_documentation: step 13: dialogue.gd
+	update_script_paths_documentation: step 14: interface.gd
+	update_script_paths_documentation: step 15: main.gd
+	update_script_paths_documentation: step 16: preferences.gd
+	update_script_paths_documentation: step 17: session.gd
+	update_script_paths_documentation: step 18: settings_panel.gd
+	update_script_paths_documentation: step 19: soundscape.gd
+	update_script_paths_documentation: step 20: checkout_fixture.gd
+	update_script_paths_documentation: step 21: depot.gd
+	update_script_paths_documentation: step 22: depot_facade.gd
+	update_script_paths_documentation: step 23: depot_roof.gd
+	update_script_paths_documentation: step 24: depot_shell.gd
+	update_script_paths_documentation: step 25: foliage_wind.gd
+	update_script_paths_documentation: step 26: geometry.gd
+	update_script_paths_documentation: step 27: neighborhood_car.gd
+	update_script_paths_documentation: step 28: neighborhood_frontages.gd
+	update_script_paths_documentation: step 29: neighborhood_lights.gd
+	update_script_paths_documentation: step 30: neighborhood_props.gd
+	update_script_paths_documentation: step 31: neighborhood_services.gd
+	update_script_paths_documentation: step 32: neon_finish.gd
+	update_script_paths_documentation: step 33: night_atmosphere.gd
+	update_script_paths_documentation: step 34: product_library.gd
+	update_script_paths_documentation: step 35: prop.gd
+	update_script_paths_documentation: step 36: prop_batch.gd
+	update_script_paths_documentation: step 37: retail_details.gd
+	update_script_paths_documentation: step 38: retail_finish.gd
+	update_script_paths_documentation: step 39: roof_tiles.gd
+	update_script_paths_documentation: step 40: scene_detail.gd
+	update_script_paths_documentation: step 41: shop_details.gd
+	update_script_paths_documentation: step 42: street.gd
+	update_script_paths_documentation: step 43: street_accents.gd
+	update_script_paths_documentation: step 44: street_buildings.gd
+	update_script_paths_documentation: step 45: street_detail.gd
+	update_script_paths_documentation: step 46: street_furniture.gd
+	update_script_paths_documentation: step 47: street_haze.gd
+	update_script_paths_documentation: step 48: surface_materials.gd
+	update_script_paths_documentation: step 49: world.gd
+	update_script_paths_documentation: step 50: cast_motion_reel.gd
+	update_script_paths_documentation: step 51: cast_review.gd
+	update_script_paths_documentation: step 52: cast_world_review.gd
+	update_script_paths_documentation: step 53: depot_review.gd
+	update_script_paths_documentation: step 54: exterior_review.gd
+	update_script_paths_documentation: step 55: exterior_walkthrough.gd
+	update_script_paths_documentation: step 56: integration.gd
+	update_script_paths_documentation: step 57: material_review.gd
+	update_script_paths_documentation: step 58: mood_walkthrough.gd
+	update_script_paths_documentation: step 59: motion_review.gd
+	update_script_paths_documentation: step 60: neighborhood_review.gd
+	update_script_paths_documentation: step 61: retail_render_review.gd
+	update_script_paths_documentation: step 62: scene_review.gd
+	update_script_paths_documentation: step 63: scene_walkthrough.gd
+	update_script_paths_documentation: step 64: visual_review.gd
+update_script_paths_documentation: end
+update_scene_groups: begin: Updating Scene Groups steps: 36
+	update_scene_groups: step 0: main.tscn
+	update_scene_groups: step 1: crate.tscn
+	update_scene_groups: step 2: endcap.tscn
+	update_scene_groups: step 3: freezer.tscn
+	update_scene_groups: step 4: fridge.tscn
+	update_scene_groups: step 5: pallet.tscn
+	update_scene_groups: step 6: shelf.tscn
+	update_scene_groups: step 7: cast_motion_reel.tscn
+	update_scene_groups: step 8: cast_review.tscn
+	update_scene_groups: step 9: cast_world_review.tscn
+	update_scene_groups: step 10: depot_review.tscn
+	update_scene_groups: step 11: exterior_review.tscn
+	update_scene_groups: step 12: exterior_walkthrough.tscn
+	update_scene_groups: step 13: integration.tscn
+	update_scene_groups: step 14: material_review.tscn
+	update_scene_groups: step 15: mood_walkthrough.tscn
+	update_scene_groups: step 16: motion_review.tscn
+	update_scene_groups: step 17: neighborhood_review.tscn
+	update_scene_groups: step 18: retail_render_review.tscn
+	update_scene_groups: step 19: scene_review.tscn
+	update_scene_groups: step 20: scene_walkthrough.tscn
+	update_scene_groups: step 21: visual_review.tscn
+	update_scene_groups: step 22: Bryan.glb
+	update_scene_groups: step 23: Customer1.glb
+	update_scene_groups: step 24: Customer2.glb
+	update_scene_groups: step 25: Customer3.glb
+	update_scene_groups: step 26: Dery.glb
+	update_scene_groups: step 27: Enemy.glb
+	update_scene_groups: step 28: Felps.glb
+	update_scene_groups: step 29: Garota1.glb
+	update_scene_groups: step 30: Garota2.glb
+	update_scene_groups: step 31: Velha1.glb
+	update_scene_groups: step 32: Zirico.glb
+	update_scene_groups: step 33: hatchback.glb
+	update_scene_groups: step 34: sedan.glb
+	update_scene_groups: step 35: user_car.glb
+update_scene_groups: end
+reimport: begin: (Re)Importing Assets steps: 178
+	reimport: step 0: Executing post-reimport operations...
+reimport: end
+loading_editor_layout: begin: Loading editor steps: 5
+	loading_editor_layout: step 0: Loading editor layout...
+loading_editor_layout: end

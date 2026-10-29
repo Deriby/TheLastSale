@@ -2,6 +2,7 @@ class_name GroundFeet
 extends SkeletonModifier3D
 ## Small terrain correction after animation. Authored support/swing phases remain intact.
 var actor: Node3D
+var clearance:=.1335
 var corrections: Dictionary = {"L":0.0,"R":0.0}
 var supports: Dictionary = {"L":false,"R":false}
 func _physics_process(delta: float) -> void:
@@ -16,8 +17,8 @@ func _physics_process(delta: float) -> void:
 		var desired:=0.0
 		supports[side]=false
 		if not hit.is_empty() and hit.normal.dot(Vector3.UP)>.65:
-			var clearance: float=at.y-hit.position.y-.1335
-			var weight:=clampf(1.0-maxf(0,clearance-.03)/.10,0,1)
+			var gap: float=at.y-hit.position.y-clearance
+			var weight:=clampf(1.0-maxf(0,gap-.03)/.10,0,1)
 			desired=clampf(hit.position.y-actor.global_position.y,-.11,.14)*weight
 			supports[side]=weight>.5
 		corrections[side]=lerpf(corrections[side],desired,1-exp(-delta*18))

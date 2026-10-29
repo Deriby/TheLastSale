@@ -1,0 +1,20 @@
+{
+  "format": "Godot editor project ZIP",
+  "version": "0.10.0",
+  "godot": "4.4.1",
+  "file": "TheLastSale_Godot_0.10.0.zip",
+  "bytes": 82933966,
+  "sha256": "5abd38a71236ceb73b0dc3d2536f384cf12cb49a0c9c18072d9119b211aa8a2f",
+  "crc_verified": true,
+  "files_verified_against_manifest": 591,
+  "clean_extraction_import_exit_code": 0,
+  "clean_extraction_integration": {
+    "passed": 106,
+    "total": 106,
+    "exit_code": 0,
+    "runtime_errors": 0
+  },
+  "cache_or_executable_members": [],
+  "test_harness_note": "Synthetic absolute mouse events use matching local/global coordinates in visible mode, then restore capture. The camera assertions still use the actual viewport input route.",
+  "import_note": "Headless Godot dummy renderer reports texture-preview t=null messages during import; the subsequent complete integration run has no runtime errors."
+}

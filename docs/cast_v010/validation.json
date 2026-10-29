@@ -1,0 +1,33 @@
+{
+  "status": "source_and_export_validated",
+  "source_tests": {
+    "passed": 106,
+    "total": 106
+  },
+  "packed_tests": {
+    "passed": 106,
+    "total": 106
+  },
+  "runtime_error_logs": 0,
+  "rendered_views": {
+    "cast": 7,
+    "world_hd": 8,
+    "world_eco": 8,
+    "packed_cast": 7
+  },
+  "normal_materials_hd": 9,
+  "normal_materials_eco": 0,
+  "movie_seconds": 12.3,
+  "renderer": "Godot 4.4.1 Compatibility, Mesa llvmpipe Linux",
+  "native_windows_tested": false,
+  "radeon_r7_fps_measured": false,
+  "headless_import_note": "Godot dummy renderer emitted texture thumbnail t=null notices during scene reimport; the subsequent runtime and packed render logs above contain no errors.",
+  "long_idle_variations": "NPCs choose available one-shot idle clips; long-shift integration assertion passed",
+  "distribution": "Godot project ZIP in downloads/project",
+  "historical_local_windows_export": {
+    "name": "A_Ultima_Venda_0.10.0_LOCAL_Windows_x64.zip",
+    "bytes": 74791092,
+    "sha256": "bdcb6bcd21f6527aeafcabf08a1fbef0094f5f6fc7436d8d848807e3394ec8a6",
+    "crc_verified": true
+  }
+}

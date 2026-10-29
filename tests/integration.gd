@@ -79,15 +79,34 @@ func run() -> void:
 	var alley:=street_space.intersect_ray(PhysicsRayQueryParameters3D.create(Vector3(-18,Street.grade(-18)+.8,.8),Vector3(-18,Street.grade(-18)+.8,-.8),1))
 	check(not alley.is_empty(),"fechamento físico protege o vão entre as oficinas junto à borda da calçada")
 	player.position=Vector3(3.8,.01,1.8);player.velocity=Vector3.ZERO;player.camera_rig.yaw=0;player.reset_physics_interpolation();await ticks(12)
-	check(player.visual.find_child("Skeleton3D",true,false).get_bone_count()==21,"Dery usa 21 ossos com cintura e peito superior articulados")
+	check(player.visual.find_child("Skeleton3D",true,false).get_bone_count()==72,"Dery mantém os 71 ossos recebidos e um controle adicional de peito superior")
 	check(player.animator.get_animation_list().size()>=23,"23 clipes de Dery importados")
-	for name in ["Dery","Felps","Enemy","Customer1","Customer2","Customer3"]:
+	for name in ["Dery","Felps","Enemy","Bryan","Zirico","Garota1","Garota2","Velha1","Customer3"]:
 		var model: Node=load("res://assets/models/characters/"+name+".glb").instantiate()
 		check(model.find_child("Skeleton3D",true,false)!=null,"rig importado: "+name)
 		var meshes:=model.find_children("*","MeshInstance3D",true,false)
 		check(not meshes.is_empty() and meshes[0].mesh.surface_get_material(0)!=null,"material presente: "+name)
 		if name in ["Dery","Felps","Enemy"]:check(meshes[0].mesh.surface_get_material(0).albedo_texture!=null,"textura original preservada na derivação: "+name)
 		model.free()
+	var friends:=get_tree().get_nodes_in_group("familiar_npcs")
+	check(friends.size()==2,"Bryan e Zirico estão presentes como conhecidos dos protagonistas")
+	var child: FamiliarNPC=get_tree().get_first_node_in_group("familiar_npcs")
+	check(child.identity=="Bryan" and float(child.visual.get_meta("height_m"))<1.3,"Bryan tem escala infantil própria")
+	var stage_before:=Session.stage
+	check(child.interaction.activate(player) and Dialogue.sequence=="familiar_Bryan","Bryan tem conversa opcional com Dery e Felps")
+	clear_dialogue()
+	check(Session.stage==stage_before,"conversa com Bryan preserva o progresso do expediente")
+	var imported_normals:=false
+	Preferences.pixel_scale=3;CharacterModels.apply_quality()
+	for entry in CharacterModels.imported_materials.values():imported_normals=imported_normals or entry.material.normal_enabled
+	check(not imported_normals,"modo Econômica desliga os mapas normais dos novos FBX")
+	Preferences.pixel_scale=1;CharacterModels.apply_quality()
+	for entry in CharacterModels.imported_materials.values():imported_normals=imported_normals or entry.material.normal_enabled
+	check(imported_normals,"modo Nítida restaura os mapas normais dos novos FBX")
+	var elder: Node3D=CharacterModels.create("Velha1");add_child(elder)
+	var elder_motion:=LivingMotion.new();elder.add_child(elder_motion);elder_motion.setup(elder,elder)
+	check(absf(elder_motion.feet.clearance-float(elder.get_meta("foot_clearance")))<.001,"contato dos pés usa a medida do modelo recebido")
+	elder.queue_free()
 	var skeleton: Skeleton3D=player.motion.skeleton
 	var chest_index:=skeleton.find_bone("chest")
 	var breath_before:=skeleton.get_bone_global_pose(chest_index).basis.get_scale()
@@ -102,7 +121,7 @@ func run() -> void:
 		var elbow: Vector3=skeleton.global_transform*skeleton.get_bone_global_pose(skeleton.find_bone("forearm_"+side)).origin
 		var wrist: Vector3=skeleton.global_transform*skeleton.get_bone_global_pose(skeleton.find_bone("hand_"+side)).origin
 		var hip: Vector3=skeleton.global_transform*skeleton.get_bone_global_pose(skeleton.find_bone("thigh_"+side)).origin
-		arms_relaxed=arms_relaxed and wrist.y<hip.y-.04 and elbow.y<arm.y-.20
+		arms_relaxed=arms_relaxed and wrist.y<hip.y+.15 and elbow.y<arm.y-.18 and absf(wrist.x-hip.x)<.23
 	check(arms_relaxed,"cotovelos baixos e punhos abaixo do quadril no repouso")
 	var left_ankle:=skeleton.global_transform*skeleton.get_bone_global_pose(skeleton.find_bone("foot_L")).origin
 	var right_ankle:=skeleton.global_transform*skeleton.get_bone_global_pose(skeleton.find_bone("foot_R")).origin
@@ -119,12 +138,17 @@ func run() -> void:
 	Input.action_press("crouch");await ticks(3)
 	check(player.crouching and player.capsule.height<1.35,"agachamento altera colisão")
 	Input.action_release("crouch");await ticks(3)
+	# Synthetic absolute coordinates must not be warped by headless mouse capture.
+	# Keep the event going through the real viewport and application's input path.
+	var previous_mouse_mode:=Input.mouse_mode
+	Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
 	var previous_distance:=player.camera_rig.target_distance
-	var wheel:=InputEventMouseButton.new();wheel.button_index=MOUSE_BUTTON_WHEEL_UP;wheel.pressed=true;wheel.position=Vector2(640,360);Input.parse_input_event(wheel);await ticks(3)
+	var wheel:=InputEventMouseButton.new();wheel.button_index=MOUSE_BUTTON_WHEEL_UP;wheel.pressed=true;wheel.position=Vector2(640,360);wheel.global_position=wheel.position;Input.parse_input_event(wheel);await ticks(3)
 	check(player.camera_rig.target_distance<previous_distance,"roda do mouse chega à câmera pela viewport")
 	var previous_yaw:=player.camera_rig.yaw
-	var motion:=InputEventMouseMotion.new();motion.relative=Vector2(50,0);motion.position=Vector2(640,360);Input.parse_input_event(motion);await ticks(3)
+	var motion:=InputEventMouseMotion.new();motion.relative=Vector2(50,0);motion.position=Vector2(640,360);motion.global_position=motion.position;Input.parse_input_event(motion);await ticks(3)
 	check(player.camera_rig.yaw!=previous_yaw,"movimento do mouse gira a câmera pela viewport")
+	Input.mouse_mode=previous_mouse_mode
 	player.position=Vector3(5.45,0,-9.6);player.velocity=Vector3.ZERO;player.camera_rig.yaw=PI/2;player.camera_rig.target_distance=2.5
 	await ticks(30)
 	check(player.camera_rig.arm.get_hit_length()<1.0,"SpringArm encurta ao encostar na parede")
@@ -196,6 +220,12 @@ func run() -> void:
 		if Session.warning_delivered:break
 	Engine.time_scale=1
 	check(Session.customers_served>=3,"clientes atravessam loja, compram e saem")
+	var ambient_finished:=true
+	for friend in get_tree().get_nodes_in_group("familiar_npcs"):
+		if friend.motion.ambient_active:
+			var clip: String=friend.motion.clips.get(friend.motion.current_clip,"")
+			ambient_finished=ambient_finished and not clip.is_empty() and friend.motion.animator.get_animation(clip).loop_mode==Animation.LOOP_NONE
+	check(ambient_finished,"conhecidos mantêm variações de repouso que terminam durante o expediente longo")
 	check(served_states.size()>=7,"máquina de estados dos clientes executa o ciclo completo")
 	check(checkout_positions_valid,"todos os clientes são atendidos junto ao novo balcão esquerdo")
 	check(Session.warning_delivered and Session.stage==6,"aviso ocorre somente depois da rotina e da visita")

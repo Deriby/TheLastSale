@@ -8,7 +8,7 @@ var talking:=false
 var listening:=false
 var speaker:=""
 func _ready() -> void:
-	model=load("res://assets/models/characters/Felps.glb").instantiate();add_child(model)
+	model=CharacterModels.create("Felps");add_child(model)
 	motion=LivingMotion.new();add_child(motion);motion.setup(model,self);motion.play("cashier",0)
 	var body:=StaticBody3D.new();add_child(body)
 	var col:=CollisionShape3D.new();var shape:=CapsuleShape3D.new();shape.height=1.75;shape.radius=.25;col.shape=shape;col.position.y=.87;body.add_child(col)

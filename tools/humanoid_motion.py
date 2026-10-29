@@ -4,7 +4,7 @@ Blender coordinates: +Z up, -Y forward. No external animation or mocap assets.
 import math
 from mathutils import Vector, Quaternion, Matrix, Euler
 TAU=math.tau
-DURATIONS={'idle':8,'idle_shift':6,'idle_look':5,'idle_adjust':4,'idle_tired':4,'walk':1,'walk_back':1,'strafe_left':1,'strafe_right':1,'run':1,'crouch_idle':6,'crouch_walk':1,'carry':6,'carry_walk':1,'pickup':1.25,'place':1.0,'put_down':1.25,'talk':5,'cashier':6,'cashier_idle':7,'look':5,'startled':1.4,'attack':1.1}
+DURATIONS={'idle':8,'idle_shift':6,'idle_look':5,'idle_adjust':4,'idle_tired':4,'walk':1,'walk_back':1,'strafe_left':1,'strafe_right':1,'run':1,'crouch_idle':6,'crouch_walk':1,'carry':6,'carry_walk':1,'pickup':1.25,'place':1.0,'put_down':1.25,'talk':5,'cashier':6,'cashier_idle':7,'look':5,'startled':1.4,'attack':1.1,'hold_bottle':6,'browse':4,'pay':3}
 STRIDES={'walk':1.12,'walk_back':.80,'strafe_left':.82,'strafe_right':.82,'run':2.35,'crouch_walk':.62,'carry_walk':.86}
 ONESHOTS={'idle_shift','idle_look','idle_adjust','pickup','place','put_down','startled','attack'}
 def smooth(t):t=max(0,min(1,t));return t*t*(3-2*t)
@@ -30,15 +30,21 @@ class Motion:
   return self.height_cache[key]
  def fk(self,name,delta=Quaternion()):
   b=self.rig.data.bones[name]
-  base=self.rest[name] if not b.parent else self.pose[b.parent.name]@self.rest[b.parent.name].inverted()@self.rest[name]
+  base=self.rest[name] if not b.parent else self.inherit(b.parent.name)@self.rest[b.parent.name].inverted()@self.rest[name]
   self.pose[name]=Matrix.Translation(base.translation)@(delta@base.to_quaternion()).to_matrix().to_4x4()
+ def inherit(self,name):
+  # Uploaded rigs may retain twist, toe, facial and intermediate neck bones.
+  if name not in self.pose:
+   b=self.rig.data.bones[name]
+   self.pose[name]=self.rest[name].copy() if not b.parent else self.inherit(b.parent.name)@self.rest[b.parent.name].inverted()@self.rest[name]
+  return self.pose[name]
  def segment(self,name,head,tail):
   b=self.rig.data.bones[name];rest_dir=(b.tail_local-b.head_local).normalized()
   q=rest_dir.rotation_difference((tail-head).normalized())@self.rest[name].to_quaternion()
   self.pose[name]=Matrix.Translation(head)@q.to_matrix().to_4x4()
  def child_head(self,name):
   b=self.rig.data.bones[name]
-  return (self.pose[b.parent.name]@self.rest[b.parent.name].inverted()@self.rest[name]).translation
+  return (self.inherit(b.parent.name)@self.rest[b.parent.name].inverted()@self.rest[name]).translation
  def apply(self,clip,t):
   phase=t*TAU;breath=math.sin(t*TAU*(2 if DURATIONS[clip]>=6 else 1))
   moving=clip in STRIDES;running=clip=='run';crouch=clip.startswith('crouch');carrying=clip in ['carry','carry_walk']
@@ -132,6 +138,12 @@ class Motion:
     amount=.015*math.sin(phase*12+sg) if clip=='cashier' else .004*breath
     hand=Vector((.08+sg*.14,-.27,1.22+amount))
    if clip=='talk' and side=='L':hand=Vector((.27,-.16-.10*math.sin(phase),.99+.09*math.sin(phase*2)))
+   if clip=='hold_bottle' and side=='R':hand=Vector((-.23,-.16,1.02+.005*breath))
+   if clip=='browse' and side=='R':hand=Vector((-.24,-.23-.09*math.sin(math.pi*t)**2,1.09+.08*math.sin(math.pi*t)))
+   if clip=='pay' and side=='R':hand=Vector((-.20,-.25-.12*math.sin(math.pi*t),1.17+.025*math.sin(phase)))
+   if clip=='attack':
+    reach=math.sin(math.pi*t)**2
+    hand=hand.lerp(Vector((sg*.12,-.40 if side=='R' else -.22,1.38 if side=='R' else 1.08)),reach)
    if clip=='idle_adjust' and side=='R':
     amount=math.sin(math.pi*t)**2;hand=hand.lerp(Vector((-.18,-.13,.99)),amount)
    hand+=Vector((.002*breath,-.003*breath,.003*breath))
@@ -140,6 +152,7 @@ class Motion:
    self.segment('arm_'+side,shoulder,elbow);self.segment('forearm_'+side,elbow,wrist)
    hand_dir=Vector((0,-1,-.08)) if carrying or clip in ['pickup','put_down','place','cashier','cashier_idle'] else wrist-elbow
    self.segment('hand_'+side,wrist,wrist+hand_dir.normalized()*.08)
+  for bone in self.rig.data.bones:self.inherit(bone.name)
   for bone in self.rig.data.bones:
    local_rest=self.rest[bone.name] if not bone.parent else self.rest[bone.parent.name].inverted()@self.rest[bone.name]
    parent=self.pose[bone.parent.name] if bone.parent else Matrix.Identity(4)

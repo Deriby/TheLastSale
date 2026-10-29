@@ -1,0 +1,50 @@
+{
+  "Dery": {
+    "height_m": 1.78,
+    "foot_clearance": 0.10795814916491508,
+    "stride_scale": 1.0,
+    "runtime_bones": 72
+  },
+  "Felps": {
+    "height_m": 1.77,
+    "foot_clearance": 0.0957062037850029,
+    "stride_scale": 0.9943820224719101,
+    "runtime_bones": 72
+  },
+  "Enemy": {
+    "height_m": 1.86,
+    "foot_clearance": 0.10833289654234822,
+    "stride_scale": 1.0449438202247192,
+    "runtime_bones": 72
+  },
+  "Bryan": {
+    "height_m": 1.19,
+    "foot_clearance": 0.06385808751991626,
+    "stride_scale": 0.6685393258426966,
+    "runtime_bones": 72
+  },
+  "Garota1": {
+    "height_m": 1.66,
+    "foot_clearance": 0.10516502193353149,
+    "stride_scale": 0.9325842696629213,
+    "runtime_bones": 72
+  },
+  "Garota2": {
+    "height_m": 1.7,
+    "foot_clearance": 0.09511790499928292,
+    "stride_scale": 0.9550561797752809,
+    "runtime_bones": 72
+  },
+  "Velha1": {
+    "height_m": 1.58,
+    "foot_clearance": 0.10817151357618611,
+    "stride_scale": 0.8876404494382023,
+    "runtime_bones": 72
+  },
+  "Zirico": {
+    "height_m": 1.74,
+    "foot_clearance": 0.12037141407641132,
+    "stride_scale": 0.9775280898876404,
+    "runtime_bones": 72
+  }
+}

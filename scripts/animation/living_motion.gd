@@ -15,7 +15,7 @@ var variation_index:=0
 var locomotion_phase:=0.0
 var current_clip:=""
 var strides: Dictionary = {"walk":1.12,"walk_back":.80,"strafe_left":.82,"strafe_right":.82,"run":2.35,"crouch_walk":.62,"carry_walk":.86}
-const LOOP_CLIPS: Array[String] = ["idle","idle_tired","walk","walk_back","strafe_left","strafe_right","run","crouch_idle","crouch_walk","carry","carry_walk","talk","cashier","cashier_idle","look"]
+const LOOP_CLIPS: Array[String] = ["idle","idle_tired","walk","walk_back","strafe_left","strafe_right","run","crouch_idle","crouch_walk","carry","carry_walk","talk","cashier","cashier_idle","look","hold_bottle"]
 func setup(visual: Node3D,actor: Node3D) -> void:
 	animator=visual.find_child("AnimationPlayer",true,false)
 	skeleton=visual.find_child("Skeleton3D",true,false)
@@ -26,6 +26,10 @@ func setup(visual: Node3D,actor: Node3D) -> void:
 	animator.animation_finished.connect(on_finished)
 	feet=GroundFeet.new();feet.actor=actor;skeleton.add_child(feet)
 	attention=HeadAttention.new();attention.visual=visual;skeleton.add_child(attention)
+	feet.clearance=float(visual.get_meta("foot_clearance",.1335))
+	attention.eye_height=float(visual.get_meta("height_m",1.78))*.89
+	var stride_scale: float=visual.get_meta("stride_scale",1.0)
+	for key in strides:strides[key]*=stride_scale
 	skeleton.skeleton_updated.connect(func():pose_updated.emit())
 	play("idle",0)
 func play(clip: String,blend := .22,preserve_phase := false) -> void:
@@ -56,8 +60,12 @@ func locomotion(delta: float,speed: float,crouch: bool,carrying: bool,tired: boo
 		if ambient_active:return
 		var clip: String="carry" if carrying else ("crouch_idle" if crouch else ("idle_tired" if tired else "idle"))
 		if clip=="idle" and idle_time>8.5:
-			var variants: Array[String]=["idle_shift","idle_look","idle_adjust"]
-			clip=variants[variation_index%variants.size()];variation_index+=1;idle_time=0;ambient_active=true
+			var variants: Array[String]=[]
+			for candidate in ["idle_shift","idle_look","idle_adjust"]:
+				if clips.has(candidate):variants.append(candidate)
+			if not variants.is_empty():
+				clip=variants[variation_index%variants.size()];variation_index+=1;ambient_active=true
+			idle_time=0
 		play(clip,.35)
 func look_at_position(at: Vector3,enabled := true) -> void:
 	attention.target_global=at;attention.following=enabled

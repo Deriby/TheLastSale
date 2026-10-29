@@ -25,10 +25,15 @@ func _ready() -> void:
 	player=DepotPlayer.new();player.name="Dery";add_child(player);player.position=navigation.nearest_walkable(Session.saved_position);player.reset_physics_interpolation();player.camera_rig.reset_follow()
 	sound=Soundscape.new();add_child(sound)
 	depot.restore_state(player)
+	for identity in ["Bryan","Zirico"]:
+		var friend:=FamiliarNPC.new();friend.identity=identity;friend.name=identity;add_child(friend)
+		var at:=Vector3(-2.8,0,-.1) if identity=="Bryan" else Vector3(5.1,0,1.65)
+		friend.position=navigation.nearest_walkable(at);friend.visual.rotation.y=PI/2 if identity=="Bryan" else -PI/2
+		friend.reset_physics_interpolation()
 	Session.event_triggered.connect(on_event)
 	Dialogue.completed.connect(on_dialogue_completed)
 	# Enemy is present only for a later, spatially continuous glimpse; no early chase.
-	enemy_visual=load("res://assets/models/characters/Enemy.glb").instantiate();add_child(enemy_visual);enemy_visual.position=Vector3(10,0,15);enemy_visual.visible=false
+	enemy_visual=CharacterModels.create("Enemy");add_child(enemy_visual);enemy_visual.position=Vector3(10,0,15);enemy_visual.visible=false
 	var anim: AnimationPlayer=enemy_visual.find_child("AnimationPlayer",true,false)
 	if anim:
 		for key in anim.get_animation_list():

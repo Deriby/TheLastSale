@@ -2,7 +2,19 @@
 
 Demonstração jogável em **Godot 4.4.1 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP, com uma rotina narrativa curta. A campanha completa continua em desenvolvimento.
 
-## Revisão 0.9.0 — rua e vizinhança
+**[Baixar o projeto 0.10.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.10.0.zip)**
+
+Extraia o ZIP, importe `project.godot` no Godot **4.4.1**, aguarde a importação dos modelos e pressione **F5**. O arquivo inclui os modelos animados, cenários, código e recursos usados no jogo. [Conteúdo e instruções do projeto](downloads/project/README.md).
+
+## Revisão 0.10.0 — novo elenco recebido
+
+Os novos Dery, Felps e Killer usam os FBX com rig fornecidos pelo autor. Bryan e Zirico têm presenças e conversas opcionais; Garota 1, Garota 2 e Velha 1 participam da rotina de clientes. O Carro 1 substitui o hatch estacionado. As animações foram criadas sobre os rigs recebidos, com medidas próprias para os pés, a passada e a altura de cada personagem.
+
+[Veja os modelos, as capturas e a prévia animada de 12 segundos](docs/cast_v010/README.md). Os nove modelos derivados somam cerca de 33 MiB, com os 71 ossos recebidos e um controle adicional de peito superior por personagem. **106/106 testes** passaram no projeto e no pacote Linux.
+
+![Novo elenco — 0.10.0](docs/cast_v010/lineup.png)
+
+## Revisão anterior 0.9.0 — rua e vizinhança
 
 Seis fachadas dos trechos aproximados ganharam projetos distintos: garagem de tijolo, casa com jardim, pequeno comércio com toldo, casa com azulejos, casa com quintal recuado e anexo de oficina. Portões, alturas, recuos, aberturas e coberturas variam entre os imóveis. As casas próximas reconhecíveis nas fotos e a fachada JA mantêm sua disposição.
 
@@ -82,11 +94,11 @@ A reconstrução 0.2 do interior recebeu gôndolas abastecidas por categoria, ge
 
 ## Jogar
 
-**[Baixar o jogo 0.9.0 para Windows x64 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/windows/A_Ultima_Venda_Windows_x64.zip)**
+**[Baixar o projeto Godot 0.10.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.10.0.zip)**
 
-O pacote está versionado neste repositório em [`downloads/windows`](downloads/windows). Extraia o ZIP em uma pasta nova antes de abrir o jogo. O menu mostra **Demonstração 0.9.0**. A verificação SHA-256 está ao lado do arquivo. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida** se sua configuração antiga estiver em Retrô. Nítida também usa MSAA 2× para suavizar contornos. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera para diminuir o custo gráfico.
+O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **Demonstração 0.10.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
 
-**Windows:** extraia o pacote Windows e mantenha `A_Ultima_Venda.exe` junto de `A_Ultima_Venda.pck`. Abra o executável e escolha **Iniciar expediente**. O binário foi exportado nesta sessão Linux; sua execução no Windows ainda precisa de validação.
+O download atual é o projeto para o editor. O diretório `downloads/windows` guarda apenas a entrega anterior 0.9.0.
 
 **Editor:** importe `project.godot` na Godot **4.4.1**, aguarde a importação dos GLBs e pressione **F6** em `scenes/main/main.tscn` ou **F5**. Não é necessário instalar Blender para jogar ou editar os sistemas.
 
@@ -123,10 +135,10 @@ Os objetivos e legendas orientam o percurso. A ordem narrativa depende de tarefa
 - Depósito modular com gôndolas, garrafas e equipamentos em malhas estáticas agrupadas por material, geladeiras, caixa, paletes, caixas transportáveis, portas, telhado e estrutura metálica.
 - Exterior baseado nas sete capturas do Street View: fachada JA em dois níveis, comércios vizinhos, casas distintas em frente, rua com declive físico, calçadas e meios-fios transitáveis, postes/fios e carros; noite com luzes econômicas e atmosfera sonora original sintetizada.
 - Dery com CharacterBody3D, aceleração, corrida, agachamento e câmera de ombro com SpringArm e transição de distância.
-- Os três modelos enviados preservados integralmente em `assets/models/originals/`; derivados animados em `assets/models/characters/`.
-- Deryk e Felps: rigs de 21 ossos, cintura e peito superior articulados, proporções e pesos revisados, texturas 1024², cabeça separada para primeira pessoa e 23 clipes procedurais cada. Enemy mantém a derivação anterior, com 19 ossos, 14 clipes e textura 512².
+- Os originais GLB anteriores permanecem em `assets/models/originals/` no repositório. Os novos FBX estão no pacote de origem do Drive; o ZIP para Godot inclui as derivações prontas para uso.
+- Dery e Felps: 71 ossos recebidos mais um controle de peito superior, pele adaptada ao renderizador Compatibility, albedo 1024², cabeça separada para primeira pessoa e 23 clipes cada. Killer substitui Enemy, com quatro clipes preparados.
 - Respiração, variações de repouso, olhar contextual de Felps, passada ajustada ao deslocamento real e correção curta dos pés para desníveis. Caixas acompanham os punhos; pegar exige aproximação e tem alcance antes da fixação.
-- Felps no caixa e três clientes modulares originais, com A* local, colisões e ciclo de compra completo.
+- Felps no caixa, Bryan e Zirico com conversas opcionais, e Garota 1, Garota 2 e Velha 1 como clientes, com A* local, colisões e ciclo de compra completo.
 - Duas reposições, organização do estoque, conversas, cliente preocupado e ruído final condicionado à progressão.
 - Menu, pausa, legendas, objetivos, checkpoint/continuar e configurações persistentes. Resolução interna ajustável, dithering, granulação, VHS e interface em resolução plena.
 
@@ -140,7 +152,7 @@ Os objetivos e legendas orientam o percurso. A ordem narrativa depende de tarefa
 
 As referências e aproximações estão em [docs/REFERENCIAS.md](docs/REFERENCIAS.md). O estoque, a posição exata do caixa, profundidades e medidas não foram medidos. Não se afirma uma réplica arquitetônica exata.
 
-As animações receberam a primeira revisão da etapa 2. Ainda precisam de acabamento artístico nas curvas, dedos, contato durante giros e atendimento; não há captura de movimento, animação facial, sincronização labial ou todos os clipes da campanha (morte, dano). A correção dos pés cobre pequenos desníveis, sem planejamento de passos sobre obstáculos. Os clientes mantêm seus rigs anteriores. Não há dublagem, trilha final licenciada ou física livre de empilhamento.
+As animações usam os rigs fornecidos nesta revisão. Ainda precisam de acabamento artístico nas curvas, dedos, contato durante giros e atendimento; não há captura de movimento, animação facial, sincronização labial ou todos os clipes da campanha (morte, dano). A correção dos pés cobre pequenos desníveis, sem planejamento de passos sobre obstáculos. Não há dublagem, trilha final licenciada ou física livre de empilhamento.
 
 O Enemy está importado e rigado, mas **a IA de perseguição, esconderijos, câmeras de segurança, alternância de protagonistas e demais capítulos não foram implementados**. A porta antiga continua fechada; o ruído final é a conclusão desta demonstração. O save é de checkpoint: caixas soltas sem conclusão de objetivo retornam às posições iniciais; a caixa carregada e tarefas concluídas são restauradas.
 
@@ -150,10 +162,9 @@ Não foram medidos 60 FPS em PCs modestos nem testados binários em Windows real
 
 - `./tools/test.sh`: integração headless, isolando os saves em diretório temporário.
 - `./tools/godot.sh --audio-driver Dummy res://tests/visual_review.tscn`: capturas em `/tmp` com display configurado.
-- `blender -b -t 4 --python tools/rig_characters.py -- "$PWD"`: regenera Deryk e o Felps correto com os movimentos de `tools/humanoid_motion.py`, sem sobrescrever originais. `tools/rig_characters_legacy.py` regenera apenas Enemy.
-- `blender -b -t 4 --python tools/make_customers.py -- "$PWD"`: regenera os clientes originais.
-- `blender -b -t 4 --python tools/validate_rigs.py -- "$PWD"`: verifica poses exportadas e gera folhas de revisão em `/tmp/rig-review`.
-- `blender -b -t 4 --python tools/measure_motion.py -- "$PWD"`: amostra as solas em 13 clipes por protagonista e registra contato com o chão.
+- `blender -b -t 4 --python tools/import_user_models.py -- "$PWD" /caminho/para/modelos`: regenera os modelos e animações desta revisão a partir do pacote FBX do autor. Blender e os originais só são necessários para essa regeneração.
+- `tools/rig_characters.py`, `tools/rig_characters_legacy.py`, `tools/make_customers.py`, `tools/validate_rigs.py` e `tools/measure_motion.py` preservam os fluxos das versões antigas; não regeneram o novo elenco FBX.
+- `python3 tools/package_project.py`: gera o ZIP do projeto Godot e seu SHA-256 em `downloads/project`.
 - `./tools/godot.sh --fixed-fps 30 --write-movie /tmp/motion.avi res://tests/motion_review.tscn`: grava 38 segundos de movimento com display disponível.
 - `./tools/godot.sh --fixed-fps 144 res://tests/retail_render_review.tscn`: compara as malhas agrupadas com uma referência de objetos individuais, incluindo pausa e recarga. Requer display.
 - `python tools/make_depot_textures.py`: regenera a arte original dos produtos e superfícies do depósito (Python com Pillow).
@@ -169,4 +180,4 @@ Não foram medidos 60 FPS em PCs modestos nem testados binários em Windows real
 
 Para exportar, instale os templates oficiais 4.4.1 no editor e use o preset **Windows Desktop**. Os originais e ferramentas ficam fora do pacote de jogo. Resultados e limites dos testes: [docs/VALIDACAO.md](docs/VALIDACAO.md).
 
-Os modelos e fotografias são fornecidos pelo usuário. Não foi inferida licença de redistribuição pública para esses arquivos. Os sons e assets ambientais procedurais foram criados para esta entrega, sem conteúdo de outros jogos.
+Os modelos e fotografias são fornecidos pelo usuário. A publicação deste projeto foi solicitada pelo autor; nenhuma licença geral de reutilização por terceiros foi definida. Os sons e assets ambientais procedurais foram criados para esta entrega, sem conteúdo de outros jogos.

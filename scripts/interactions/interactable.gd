@@ -1,6 +1,6 @@
 class_name Interaction
 extends Node3D
-@export_enum("crate","fridge","door","pallet","talk","note","switch") var kind := "crate"
+@export_enum("crate","fridge","door","pallet","talk","note","switch","familiar") var kind := "crate"
 @export var identity := ""
 var open := false
 var busy := false
@@ -20,6 +20,7 @@ func prompt(player: Node3D) -> String:
 		"door": return "Fechar porta" if open else "Abrir porta do estoque"
 		"pallet": return "Guardar caixa no palete" if Session.carried_id == "loose" else "Palete • organizar após a reposição"
 		"talk": return "Conversar com Felps"
+		"familiar": return "Conversar com "+identity
 		"note": return "Examinar a porta antiga" if Session.stage != 6 else "Verificar o ruído"
 		"switch": return "Acender luz" if not open else "Apagar luz"
 	return "Interagir"
@@ -53,6 +54,15 @@ func activate(player: Node3D) -> bool:
 			if Session.greet():
 				Dialogue.play("greeting",[["Felps","Ô Dery, beleza? Tem duas caixas de retornável lá no estoque. Repõe a geladeira pra mim?"],["Dery","Já vou. Depois eu ajeito aquela caixa no caminho."],["Felps","Valeu! E deixa o corredor livre, hoje tá passando gente ainda."]])
 			else: Dialogue.play("smalltalk",[["Felps","Sextou, hein... pra quem não tá trabalhando."],["Dery","Nem me fala. Ainda falta chão até meia-noite."]])
+			return true
+		"familiar":
+			if Dialogue.active:return false
+			var lines: Array
+			if identity=="Bryan":
+				lines=[["Bryan","Oi, Dery! O Felps tá trabalhando também?"],["Dery","Tá ali no caixa. Bom te ver, Bryan."],["Felps","Ô, Bryan! Chega mais. Fica aqui perto da gente."]]
+			else:
+				lines=[["Zirico","Boa noite, meus amigos... hoje o turno tá comprido, hein?"],["Dery","Boa noite, Zirico. Vai com calma por aí."],["Felps","Bom te ver, Zirico. Se cuida, viu?"]]
+			Dialogue.play("familiar_"+identity,lines)
 			return true
 		"note":
 			if Session.stage == 6:

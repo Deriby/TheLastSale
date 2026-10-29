@@ -150,7 +150,7 @@ func build_frontages() -> void:
 	StreetFurniture.handcart(self,Vector3(8.0,grade(8.0),.65))
 	StreetFurniture.car(self,Vector3(10.4,surface_height(10.4,9.55),9.55),Color("4b5554"),PI,"sedan")
 	StreetFurniture.car(self,Vector3(3.0,surface_height(3.0,9.55),9.55),Color("909c9b"))
-	blockers.append(Rect2(8.15,8.58,4.5,1.94));blockers.append(Rect2(.95,8.58,4.1,1.94))
+	blockers.append(Rect2(8.15,8.58,4.5,1.94));blockers.append(Rect2(.85,8.46,4.3,2.18))
 	# Sparse plants by the grey house, not a regular row of invented avenue trees.
 	for x in [1.1,1.3,1.5]:
 		Geo.cylinder(self,Vector3(x,grade(x)+.13,12.05),.13,.26,StreetDetail.material(Color("9d7961")),.17)
