@@ -14,11 +14,12 @@ func solid(at: Vector3,size: Vector3,mat: Material,nav := true) -> MeshInstance3
 func build_envelope() -> void:
 	var wall:=SurfaceMaterials.make("wall")
 	var floor_mat:=SurfaceMaterials.make("ceramic")
-	solid(Vector3(0,-.14,-8.0),Vector3(12.2,.28,16.0),floor_mat,false)
+	var floor:=solid(Vector3(0,-.14,-8.0),Vector3(12.2,.28,16.0),floor_mat,false)
+	floor.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	solid(Vector3(6,2.71,-8),Vector3(.24,5.42,16),wall)
-	solid(Vector3(-6,2.2,-3),Vector3(.24,4.4,6),wall)
-	solid(Vector3(-6,2.71,-11),Vector3(.24,5.42,10),wall)
-	solid(Vector3(0,2.71,-16),Vector3(12,5.42,.24),wall)
+	solid(Vector3(-6,2.2,-8),Vector3(.24,4.4,16),wall)
+	solid(Vector3(-4.05,2.2,-16),Vector3(3.9,4.4,.24),wall)
+	solid(Vector3(1.95,2.71,-16),Vector3(8.1,5.42,.24),wall)
 	# Low tile skirting and a worn black entrance threshold from the entrance photograph.
 	for x in [-5.86,5.86]:Geo.box(self,Vector3(x,.065,-8),Vector3(.035,.13,16),Geo.material(Color("8b9487")),false)
 	Geo.box(self,Vector3(1.8,.007,-.10),Vector3(7.9,.014,.24),Geo.material(Color("323c36")),false)
@@ -31,7 +32,8 @@ func build_roof() -> void:
 		for z in [-2.0,-5.7,-9.0]:
 			var top_y:=DepotRoof.height_at(x,z)-.10
 			var mid_y:=top_y-(.55 if top_y<5 else .97)
-			Geo.cylinder(self,Vector3(x,(top_y+mid_y+.09)*.5,z),.009,top_y-mid_y-.09,steel)
+			var cable:=Geo.cylinder(self,Vector3(x,(top_y+mid_y+.09)*.5,z),.009,top_y-mid_y-.09,steel)
+			cable.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF;cable.add_to_group("non_shadow_cables")
 			Geo.cylinder(self,Vector3(x,mid_y,z),.255,.20,Geo.material(Color("adb9ad")),.07)
 			Geo.cylinder(self,Vector3(x,mid_y-.105,z),.226,.025,Geo.material(Color("e8eee0"),"",1.0))
 			var lamp:=Geo.light(self,Vector3(x,mid_y-.29,z),Color("e7eee3"),.48,5.4)

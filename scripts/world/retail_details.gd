@@ -29,10 +29,33 @@ static func plastic_crate(parent: Node3D,at: Vector3,color: Color,stack_count :=
 			for z in [-.09,.09]:batch.add_product("beer_0",Vector3(x,y+.06,z),0,Vector3.ONE*.85)
 	batch.flush()
 	collision(parent,at+Vector3(0,.155*stack_count,0),Vector3(.60,.31*stack_count,.40))
-static func display_pallet(parent: Node3D,at: Vector3) -> void:
-	var pallet: Node3D=load("res://scenes/world/props/pallet.tscn").instantiate();parent.add_child(pallet);pallet.position=at
-	var batch:=PropBatch.new();parent.add_child(batch)
-	for y in range(2):
-		for x in range(5):
-			for z in range(3):batch.add_product("soda_1" if x<2 else "soda_0",at+Vector3(-.5+x*.24,.23+y*.36,-.32+z*.25),0)
-	batch.flush();collision(parent,at+Vector3(0,.45,0),Vector3(1.3,.9,1.0))
+static func display_pallet(parent: Node3D,at: Vector3) -> Node3D:
+	var root:=Node3D.new();root.name="BeverageDisplay";parent.add_child(root);root.position=at;root.add_to_group("beverage_displays")
+	var batch:=PropBatch.new();batch.name="CratesAndPallet";root.add_child(batch)
+	var wood:=SurfaceMaterials.make("wood",Color("aaa18d"));var plastic:=SurfaceMaterials.make("plastic",Color("28527e"))
+	# Skids, nine support blocks, rails and deck meet physically at each layer.
+	for x in [-.51,0,.51]:
+		SurfaceMaterials.wood_box(batch,Vector3(x,.018,0),Vector3(.14,.036,.86),wood)
+		for z in [-.31,0,.31]:SurfaceMaterials.wood_box(batch,Vector3(x,.069,z),Vector3(.14,.066,.14),wood)
+		SurfaceMaterials.wood_box(batch,Vector3(x,.116,0),Vector3(.14,.028,.84),wood)
+	for z in [-.35,-.175,0,.175,.35]:SurfaceMaterials.wood_box(batch,Vector3(0,.146,z),Vector3(1.30,.032,.14),wood)
+	for level in 2:
+		for x in [-.315,.315]:
+			for z in [-.215,.215]:display_crate(batch,Vector3(x,.165+level*.410,z),plastic,"soda_0" if x<0 else "soda_1")
+	batch.flush();collision(root,Vector3(0,.4925,0),Vector3(1.30,.985,.88))
+	return root
+static func display_crate(batch: PropBatch,at: Vector3,plastic: Material,sku: String) -> void:
+	batch.add_box(at+Vector3(0,.02,0),Vector3(.58,.04,.40),plastic)
+	for x in [-.2735,.2735]:
+		for z in [-.1835,.1835]:batch.add_box(at+Vector3(x,.215,z),Vector3(.033,.39,.033),plastic)
+	for z in [-.19,.19]:
+		for y in [.12,.26,.38]:batch.add_box(at+Vector3(0,y,z),Vector3(.58,.04,.025),plastic)
+		for x in [-.20,-.07,.07,.20]:batch.add_box(at+Vector3(x,.18,z),Vector3(.022,.20,.025),plastic)
+		for x in [-.20,.20]:batch.add_box(at+Vector3(x,.315,z),Vector3(.16,.07,.025),plastic)
+	for x in [-.277,.277]:
+		for y in [.12,.26,.38]:batch.add_box(at+Vector3(x,y,0),Vector3(.025,.04,.40),plastic)
+		for z in [-.13,.13]:batch.add_box(at+Vector3(x,.315,z),Vector3(.025,.07,.10),plastic)
+	for x in [-.085,.085]:batch.add_box(at+Vector3(x,.145,0),Vector3(.010,.21,.34),plastic)
+	batch.add_box(at+Vector3(0,.145,0),Vector3(.50,.21,.010),plastic)
+	for x in [-.17,0,.17]:
+		for z in [-.095,.095]:batch.add_product(sku,at+Vector3(x,.041,z),0,Vector3.ONE*.95)

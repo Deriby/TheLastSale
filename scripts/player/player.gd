@@ -102,7 +102,7 @@ func update_focus() -> void:
 			if dot<best:continue
 			var sight:=PhysicsRayQueryParameters3D.create(global_position+Vector3.UP*1.2,aim,1,[get_rid()])
 			var obstruction:=get_world_3d().direct_space_state.intersect_ray(sight)
-			if not obstruction.is_empty() and obstruction.collider.get_meta("interaction",null)!=candidate:continue
+			if not obstruction.is_empty() and (not obstruction.collider.has_meta("interaction") or obstruction.collider.get_meta("interaction")!=candidate):continue
 			best=dot;target=candidate
 	focused.emit("[E]  "+target.prompt(self) if target!=null else "")
 func handle_input(event: InputEvent) -> void:

@@ -90,6 +90,8 @@ func build_services() -> void:
 		var blade:=Geo.box(fan,Vector3(sin(i*TAU/3)*.12,cos(i*TAU/3)*.12,0),Vector3(.095,.23,.012),motor,false);blade.rotation.z=-i*TAU/3+.25
 	for i in 8:StreetDetail.beam(batch,support.to_global(Vector3.ZERO),support.to_global(Vector3(sin(i*TAU/8)*.30,cos(i*TAU/8)*.30,.08)),.006,guard)
 	batch.flush()
+	for data in batch.groups.values():
+		data.node.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF;data.node.add_to_group("non_shadow_cables")
 func build_wear() -> void:
 	for at in [Vector3(-3.12,.012,-2.8),Vector3(.2,.012,-1.4),Vector3(4.6,.012,-8.2)]:SceneDetail.decal(self,at,Vector2(1.8,1.1),"floor_wear",.4)
 	# Hanging white wire hooks and a few empty positions on the snack end.

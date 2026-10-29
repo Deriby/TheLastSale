@@ -6,7 +6,7 @@ import json
 import zipfile
 
 ROOT = Path(__file__).resolve().parent.parent
-VERSION = "0.11.0"
+VERSION = "0.12.0"
 
 
 def main():
@@ -26,9 +26,9 @@ def main():
                 continue
             sources[relative.as_posix()] = path
     for name in ["project.godot", "export_presets.cfg", ".gitignore",
-                 "docs/.gdignore", "docs/user_models_report.json"]:
+                 "docs/.gdignore", "docs/user_models_report.json", "docs/PENDENCIAS.md"]:
         sources[name] = ROOT / name
-    for gallery in ["cast_v010", "optimization_v011"]:
+    for gallery in ["cast_v010", "optimization_v011", "layout_v012"]:
         for path in sorted((ROOT / "docs" / gallery).rglob("*")):
             if path.is_file():
                 sources[path.relative_to(ROOT).as_posix()] = path

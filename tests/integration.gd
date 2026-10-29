@@ -19,6 +19,23 @@ func find_interaction(parent: Node,kind: String) -> Interaction:
 	return null
 func clear_dialogue() -> void:
 	while Dialogue.active:Dialogue.next_line()
+func display_bottles_supported() -> bool:
+	var display: Node3D=get_tree().get_first_node_in_group("beverage_displays")
+	var batch: PropBatch=display.find_child("CratesAndPallet",true,false)
+	var support_boxes: Array[AABB]=[]
+	var bottles: Array[Vector3]=[]
+	for key in batch.groups:
+		var data: Dictionary=batch.groups[key]
+		for at in data.transforms:
+			if str(key).begins_with("soda_"):bottles.append(at.origin)
+			else:support_boxes.append(at*data.source_mesh.get_aabb())
+	if bottles.size()<24:return false
+	for bottle in bottles:
+		var supported:=false
+		for box in support_boxes:
+			if absf(bottle.y-box.end.y)<.004 and bottle.x>box.position.x and bottle.x<box.end.x and bottle.z>box.position.z and bottle.z<box.end.z:supported=true;break
+		if not supported:return false
+	return true
 func _ready() -> void:call_deferred("run")
 func run() -> void:
 	app=load("res://scenes/main/main.tscn").instantiate();app.process_mode=Node.PROCESS_MODE_PAUSABLE;add_child(app)
@@ -42,11 +59,45 @@ func run() -> void:
 	var annex_roof:=street_space.intersect_ray(PhysicsRayQueryParameters3D.create(Vector3(-4.7,2.8,-2.75),Vector3(-4.7,7,-2.75),1))
 	check(not annex_roof.is_empty() and annex_roof.position.y>4.25 and annex_roof.position.y<4.6,"cobertura baixa fecha o teto sobre o caixa esquerdo")
 	var rear_roof:=street_space.intersect_ray(PhysicsRayQueryParameters3D.create(Vector3(-4.7,2.8,-8),Vector3(-4.7,7,-8),1))
-	check(not rear_roof.is_empty() and rear_roof.position.y>5.2,"cobertura alta fecha o lado esquerdo dos fundos")
+	check(not rear_roof.is_empty() and rear_roof.position.y>4.25 and rear_roof.position.y<4.6 and absf(rear_roof.position.y-annex_roof.position.y)<.02,"teto baixo esquerdo continua na mesma altura até os fundos")
 	var side_riser:=street_space.intersect_ray(PhysicsRayQueryParameters3D.create(Vector3(-3.8,5.1,-2.2),Vector3(-1.8,5.1,-2.2),1))
 	check(not side_riser.is_empty() and absf(side_riser.position.x+2.1)<.2,"encontro lateral entre os dois níveis do telhado não tem vão")
 	var rear_riser:=street_space.intersect_ray(PhysicsRayQueryParameters3D.create(Vector3(-4.3,5,-4.5),Vector3(-4.3,5,-7.4),1))
-	check(not rear_riser.is_empty() and absf(rear_riser.position.z+6)<.2,"encontro traseiro da cobertura baixa não tem vão")
+	check(rear_riser.is_empty(),"antigo degrau transversal do teto foi removido")
+	var deep_riser:=street_space.intersect_ray(PhysicsRayQueryParameters3D.create(Vector3(-3.8,5.1,-13),Vector3(-1.8,5.1,-13),1))
+	check(not deep_riser.is_empty() and absf(deep_riser.position.x+2.1)<.2,"fechamento lateral entre os tetos continua até os fundos")
+	var cables:=get_tree().get_nodes_in_group("non_shadow_cables")
+	var cables_clear:=cables.size()>=7
+	for cable in cables:cables_clear=cables_clear and cable.is_visible_in_tree() and cable.cast_shadow==GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	check(cables_clear and not world.street.wires.groups.is_empty(),"fiação da rua e cabos internos continuam visíveis sem projetar sombras")
+	check(display_bottles_supported(),"todas as garrafas do expositor apoiam nas bases dos engradados")
+	var shelf_back:=INF
+	for shelf in world.depot.central_shelves:shelf_back=minf(shelf_back,shelf.position.z-shelf.shelf_length*.5)
+	check(shelf_back-world.depot.rear_fridges[0].hinge.global_position.z>=2.0,"gôndolas deixam pelo menos dois metros até as portas fechadas das geladeiras")
+	var sweeps_clear:=true
+	for fridge in world.depot.rear_fridges:
+		var sweep:=PhysicsShapeQueryParameters3D.new();var shape:=BoxShape3D.new();shape.size=Vector3(.98,1.90,.98)
+		sweep.shape=shape;sweep.transform=Transform3D(Basis.IDENTITY,fridge.to_global(Vector3(0,1.065,.91)));sweep.collision_mask=1
+		sweeps_clear=sweeps_clear and street_space.intersect_shape(sweep).is_empty()
+		find_interaction(fridge,"fridge").activate(player)
+	check(sweeps_clear,"giro das sete portas do fundo não invade gôndolas nem a geladeira do canto")
+	await ticks(30)
+	var door_front:=-INF
+	for fridge in world.depot.rear_fridges:
+		for piece in fridge.hinge.find_children("*","MeshInstance3D",true,false):
+			var bounds: AABB=piece.global_transform*piece.get_aabb();door_front=maxf(door_front,bounds.end.z)
+	check(shelf_back-door_front>=1.05,"portas abertas mantêm mais de um metro livre diante das gôndolas")
+	player.position=Vector3(-3.4,.01,-8.6);player.velocity=Vector3.ZERO;player.camera_rig.yaw=-PI/2;player.reset_physics_interpolation()
+	Input.action_press("forward");Input.action_press("sprint");await ticks(120);Input.action_release("forward");Input.action_release("sprint");player.velocity=Vector3.ZERO;await ticks(6)
+	check(player.is_on_floor() and player.position.x>3.0,"jogador atravessa o corredor traseiro com as geladeiras abertas")
+	player.position=Vector3(.1,.01,-8.6);player.velocity=Vector3.ZERO;player.camera_rig.yaw=0;player.camera_rig.pitch=-.10;player.reset_physics_interpolation();await ticks(30)
+	check(player.target!=null and player.target.get_parent()==world.depot.rear_fridges[4],"porta do fundo é alcançável pela interação no corredor livre")
+	var rear_key:=InputEventKey.new();rear_key.physical_keycode=KEY_E;rear_key.keycode=KEY_E;rear_key.pressed=true;Input.parse_input_event(rear_key);await ticks(30)
+	check(not world.depot.rear_fridges[4].opened and Session.stage==0,"E fecha a geladeira do fundo sem avançar as tarefas")
+	rear_key=InputEventKey.new();rear_key.physical_keycode=KEY_E;rear_key.keycode=KEY_E;rear_key.pressed=false;Input.parse_input_event(rear_key)
+	for fridge in world.depot.rear_fridges:
+		if fridge.opened:find_interaction(fridge,"fridge").activate(player)
+	await ticks(30)
 	var detailed_cars:=0
 	for car in world.street.find_children("Parked*","Node3D",true,false):
 		if not car.has_meta("vehicle_kind"):continue
@@ -99,8 +150,11 @@ func run() -> void:
 	var child: FamiliarNPC=get_tree().get_first_node_in_group("familiar_npcs")
 	check(child.identity=="Bryan" and float(child.visual.get_meta("height_m"))<1.3,"Bryan tem escala infantil própria")
 	var stage_before:=Session.stage
+	child.motion.ambient_active=false;child.motion.idle_time=0;child.motion.locomotion(9,0,false,false,false)
 	check(child.interaction.activate(player) and Dialogue.sequence=="familiar_Bryan","Bryan tem conversa opcional com Dery e Felps")
 	clear_dialogue()
+	await ticks(2)
+	check(not child.motion.ambient_active and child.motion.current_clip!="talk","conversa interrompe variação de postura e o conhecido retoma o repouso")
 	check(Session.stage==stage_before,"conversa com Bryan preserva o progresso do expediente")
 	var imported_normals:=false
 	Preferences.pixel_scale=3;CharacterModels.apply_quality()
@@ -170,10 +224,13 @@ func run() -> void:
 	check(not player.camera_rig.first_person and player.visual.find_child("Dery_Head",true,false).visible and player.visual.find_child("Dery_Head",true,false).cast_shadow==GeometryInstance3D.SHADOW_CASTING_SETTING_ON,"afastamento retorna à terceira pessoa")
 	player.position=CheckoutFixture.CUSTOMER_POSITION;player.velocity=Vector3.ZERO;player.camera_rig.yaw=PI/2;player.camera_rig.pitch=-.13;player.reset_physics_interpolation();await ticks(30)
 	check(player.target!=null and player.target.kind=="talk","Felps é alcançável pela interação sobre o balcão")
-	var interact_key:=InputEventKey.new();interact_key.physical_keycode=KEY_E;interact_key.keycode=KEY_E;interact_key.pressed=true;Input.parse_input_event(interact_key);await ticks(2)
+	# Flush accumulated input before advancing physics; a fast headless run can fit
+	# multiple physics ticks before the next rendered frame dispatches the event.
+	var interact_key:=InputEventKey.new();interact_key.physical_keycode=KEY_E;interact_key.keycode=KEY_E;interact_key.pressed=true;Input.parse_input_event(interact_key);Input.flush_buffered_events();await ticks(6)
 	check(Session.stage==1,"tecla E conversa com Felps e libera tarefas")
 	check(Dialogue.active,"diálogo exibe falas reais")
 	check(world.depot.felps.motion.current_clip=="talk","Felps gesticula enquanto fala")
+	interact_key=InputEventKey.new();interact_key.physical_keycode=KEY_E;interact_key.keycode=KEY_E;interact_key.pressed=false;Input.parse_input_event(interact_key);Input.flush_buffered_events()
 	clear_dialogue()
 	check(not Session.deliver("loose"),"caixa errada não avança reposição")
 	var door:=find_interaction(world.depot.stock_door,"door")

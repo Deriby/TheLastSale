@@ -1,4 +1,14 @@
-# Validação — revisão 0.11.0 — 29/10/2026
+# Validação — revisão 0.12.0 — 29/10/2026
+
+**119/119 verificações** passaram no projeto e no ZIP extraído com importação limpa. A galeria [layout_v012](layout_v012/README.md) registra os quatro pontos relatados: fiação sem sombras e remoção de autossombra do chão, cobertura baixa esquerda contínua, garrafas apoiadas em engradados e espaço para abrir as geladeiras. O corredor tem aproximadamente 2,10 m com as portas fechadas e 1,12 m livres com todas abertas.
+
+A suíte usa raios físicos no teto, confere apoio geométrico de todas as garrafas, consulta o espaço de giro das sete portas dos fundos, abre as portas pela interação e atravessa o corredor com movimento real. Verifica a tecla E numa geladeira do fundo sem avançar tarefas. O fluxo completo existente de reposição, clientes e checkpoints continua passando. Duas falhas encontradas durante a revisão também foram corrigidas: o estado de variação de repouso após conversa e a consulta de foco em obstáculos sem metadados.
+
+O problema de largar a caixa ficou **somente registrado** em [PENDENCIAS.md](PENDENCIAS.md). Não foi incluída correção desse comportamento.
+
+Capturas em Linux/Mesa llvmpipe, Godot 4.4.1 Compatibility, Nítida sem granulação para inspeção. A opção padrão de 30 FPS e as otimizações da 0.11.0 foram mantidas. Desempenho nativo no PC com Radeon R7 não foi medido. Download e integridade: [downloads/project](../downloads/project/README.md).
+
+## Registro anterior — revisão 0.11.0 — 29/10/2026
 
 A revisão [optimization_v011](optimization_v011/README.md) reduz dados de geometria mantendo objetos, triângulos e iluminação. 109/109 verificações passaram no projeto. O cenário inicial é reaproveitado, estados de câmera são atualizados só quando mudam e o assassino oculto pausa sua animação. O padrão de limite é 30 FPS, configurável; o desempenho nativo na Radeon R7 permanece sem medição.
 

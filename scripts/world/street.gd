@@ -9,6 +9,7 @@ const FAR_FRONT:=12.40
 const DRIVE_RAMPS:=[Vector3(-10.1,2.70,1),Vector3(23.2,2.90,0)]
 var blockers: Array[Rect2] = []
 var details: PropBatch
+var wires: PropBatch
 static func grade(x: float) -> float:
 	return signf(x)*maxf(0,absf(x)-6.0)*.045
 static func base_height(x: float,z: float) -> float:
@@ -32,7 +33,11 @@ static func surface_height(x: float,z: float) -> float:
 func _ready() -> void:
 	physics_interpolation_mode=Node.PHYSICS_INTERPOLATION_MODE_OFF
 	details=PropBatch.new();details.name="StreetDetails";add_child(details)
+	wires=PropBatch.new();wires.name="OverheadWires";add_child(wires)
 	build_ground();build_driveways();build_frontages();build_gap_fences();build_utilities();build_wear();build_limits();details.flush()
+	wires.flush()
+	for data in wires.groups.values():
+		data.node.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF;data.node.add_to_group("non_shadow_cables")
 	add_child(StreetAccents.new())
 	add_child(StreetHaze.new())
 	for body in get_tree().get_nodes_in_group("street_detail_obstacles"):
@@ -47,7 +52,7 @@ func ground_strip(x0: float,x1: float,z0: float,z1: float,offset0: float,offset1
 	var normal: Vector3=(points[3]-points[0]).cross(points[1]-points[0]).normalized()
 	var st:=SurfaceTool.new();st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	for index in [0,1,2,0,2,3]:st.set_normal(normal);st.set_uv(Vector2(points[index].x,points[index].z));st.add_vertex(points[index])
-	var node:=MeshInstance3D.new();node.mesh=st.commit();node.material_override=mat;add_child(node)
+	var node:=MeshInstance3D.new();node.name="StreetSurface";node.mesh=st.commit();node.material_override=mat;node.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF;add_child(node)
 	var body:=StaticBody3D.new();add_child(body);var collision:=CollisionShape3D.new();var shape:=ConvexPolygonShape3D.new()
 	var volume:=points.duplicate()
 	for p in points:volume.append(p-Vector3.UP*.25)
@@ -173,7 +178,7 @@ func build_utilities() -> void:
 func wire_span(a: Vector3,b: Vector3,sag: float,mat: Material) -> void:
 	for i in 12:
 		var u:=i/12.0;var v:=(i+1)/12.0
-		StreetDetail.beam(details,a.lerp(b,u)-Vector3.UP*(4*sag*u*(1-u)),a.lerp(b,v)-Vector3.UP*(4*sag*v*(1-v)),.015,mat)
+		StreetDetail.beam(wires,a.lerp(b,u)-Vector3.UP*(4*sag*u*(1-u)),a.lerp(b,v)-Vector3.UP*(4*sag*v*(1-v)),.015,mat)
 func build_wear() -> void:
 	var rng:=RandomNumberGenerator.new();rng.seed=558
 	for i in 26:
@@ -185,7 +190,7 @@ func build_wear() -> void:
 			var angle:=j*TAU/8;var p:=Vector3(x+sin(angle)*radius*rng.randf_range(.6,1.2),0,z+cos(angle)*radius*.45);p.y=surface_height(p.x,p.z)+.004;ring.append(p)
 		for j in 8:
 			for p in [center,ring[(j+1)%8],ring[j]]:st.set_normal(Vector3.UP);st.add_vertex(p)
-		var node:=MeshInstance3D.new();node.mesh=st.commit();node.material_override=StreetDetail.material(Color("d1d5cf") if i%3 else Color("ededdf"),"asphalt");add_child(node)
+		var node:=MeshInstance3D.new();node.name="AsphaltPatch";node.mesh=st.commit();node.material_override=StreetDetail.material(Color("d1d5cf") if i%3 else Color("ededdf"),"asphalt");node.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF;add_child(node)
 	for x in [-5.2,-2.2,7.6,12.1,-13.0]:
 		var z:=2.30 if x>0 else 11.1
 		StreetDetail.rotated_box(details,Vector3(x,surface_height(x,z)+.012,z),Vector3(.12,.008,.20),Vector3(0,x*.42,0),StreetDetail.material(Color("b1b2a0")))

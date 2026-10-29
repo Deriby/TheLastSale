@@ -1,0 +1,48 @@
+{
+  "version": "0.12.0",
+  "godot": "4.4.1",
+  "renderer": "Compatibility",
+  "review_device": "Linux / Mesa llvmpipe",
+  "source_integration": {
+    "passed": 119,
+    "total": 119,
+    "exit_code": 0,
+    "runtime_errors": 0
+  },
+  "wire_shadow_casting": "off; meshes visible",
+  "roof_left_bay": {
+    "height_m": 4.48,
+    "continuous_to_rear": true
+  },
+  "rear_aisle_approx_m": {
+    "doors_closed": 2.1,
+    "doors_open": 1.12
+  },
+  "display": {
+    "crates": 8,
+    "bottles": 48,
+    "levels": 2,
+    "bottles_supported_by_crate_bases": true
+  },
+  "rear_doors_checked": 7,
+  "fridges_interactive": 12,
+  "structure": {
+    "indices": 1991532,
+    "mesh_buffer_bytes": 43887176,
+    "mesh_instances": 1314,
+    "mesh_resources": 1314,
+    "nodes": 2355,
+    "shadow_lights": 5,
+    "triangles": 666942,
+    "vertices": 696552
+  },
+  "default_frame_limit": 30,
+  "native_radeon_r7_fps_measured": false,
+  "deferred": [
+    "Box drop issue recorded in docs/PENDENCIAS.md; no box drop correction in this revision."
+  ],
+  "notes": [
+    "Images use fixed cameras, full internal resolution, no grain.",
+    "Headless integration may log interpolation warnings while moving test actors/fixtures outside physics."
+  ]
+}

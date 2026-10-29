@@ -14,7 +14,7 @@ func prompt(player: Node3D) -> String:
 			if player.carried!=null:return "Mãos ocupadas • Q para soltar"
 			return "Pegar caixa" if global_position.distance_to(player.global_position)<=.95 else "Aproxime-se para pegar a caixa"
 		"fridge":
-			if player.carried != null and Session.stage in [1,2] and Session.carried_id.begins_with("stock_"):
+			if get_parent().needs_restock and player.carried != null and Session.stage in [1,2] and Session.carried_id.begins_with("stock_"):
 				return "Colocar bebidas" if open else "Abrir geladeira"
 			return "Fechar geladeira" if open else "Abrir geladeira"
 		"door": return "Fechar porta" if open else "Abrir porta do estoque"
@@ -32,7 +32,7 @@ func activate(player: Node3D) -> bool:
 			player.pick_up(get_parent(),identity)
 			return true
 		"fridge":
-			if not open or player.carried == null:
+			if not get_parent().needs_restock or not open or player.carried == null:
 				get_parent().toggle();open=get_parent().opened
 				return true
 			if Session.deliver(Session.carried_id):

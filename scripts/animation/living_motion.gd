@@ -17,6 +17,7 @@ var current_clip:=""
 var visual_meshes: Array[MeshInstance3D]=[]
 var last_view_state:=-1
 var strides: Dictionary = {"walk":1.12,"walk_back":.80,"strafe_left":.82,"strafe_right":.82,"run":2.35,"crouch_walk":.62,"carry_walk":.86}
+const IDLE_VARIANTS: Array[String]=["idle_shift","idle_look","idle_adjust"]
 const LOOP_CLIPS: Array[String] = ["idle","idle_tired","walk","walk_back","strafe_left","strafe_right","run","crouch_idle","crouch_walk","carry","carry_walk","talk","cashier","cashier_idle","look","hold_bottle"]
 func setup(visual: Node3D,actor: Node3D) -> void:
 	animator=visual.find_child("AnimationPlayer",true,false)
@@ -37,6 +38,8 @@ func setup(visual: Node3D,actor: Node3D) -> void:
 	play("idle",0)
 func play(clip: String,blend := .22,preserve_phase := false) -> void:
 	if not clips.has(clip):return
+	# Speech or another explicit pose can interrupt a one-shot idle variation.
+	if clip not in IDLE_VARIANTS:ambient_active=false
 	if current_clip==clip and animator.is_playing():return
 	var phase:=0.0
 	if preserve_phase and strides.has(current_clip) and animator.current_animation_length>0:phase=fmod(animator.current_animation_position/animator.current_animation_length,1)
@@ -64,7 +67,7 @@ func locomotion(delta: float,speed: float,crouch: bool,carrying: bool,tired: boo
 		var clip: String="carry" if carrying else ("crouch_idle" if crouch else ("idle_tired" if tired else "idle"))
 		if clip=="idle" and idle_time>8.5:
 			var variants: Array[String]=[]
-			for candidate in ["idle_shift","idle_look","idle_adjust"]:
+			for candidate in IDLE_VARIANTS:
 				if clips.has(candidate):variants.append(candidate)
 			if not variants.is_empty():
 				clip=variants[variation_index%variants.size()];variation_index+=1;ambient_active=true

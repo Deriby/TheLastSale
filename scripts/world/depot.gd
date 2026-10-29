@@ -8,6 +8,9 @@ var fridge_target: Node3D
 var fluorescent: OmniLight3D
 var felps: Node3D
 var counter: Node3D
+var central_shelves: Array[DepotProp]=[]
+var rear_fridges: Array[DepotProp]=[]
+const SHELF_LENGTH:=2.10
 func _ready() -> void:
 	build_shell()
 	build_furniture()
@@ -32,11 +35,11 @@ func build_shell() -> void:
 func build_furniture() -> void:
 	# Continuous central gondolas, with grouped products instead of repeated colored pegs.
 	for x in [-1.9,1.35]:
-		for z in [-5.1,-8.25]:
-			var style: String="snacks" if z==-5.1 else "beverages"
-			if x>0 and z==-8.25:style="mixed"
-			prop("shelf",Vector3(x,0,z),0,{"shelf_style":style,"brand_index":1 if x>0 else 0})
-			blockers.append(Rect2(Vector2(x-.57,z-1.44),Vector2(1.14,2.88)))
+		for z in [-4.70,-6.95]:
+			var style: String="snacks" if z==-4.70 else "beverages"
+			if x>0 and z==-6.95:style="mixed"
+			central_shelves.append(prop("shelf",Vector3(x,0,z),0,{"shelf_style":style,"brand_index":1 if x>0 else 0,"shelf_length":SHELF_LENGTH}))
+			blockers.append(Rect2(Vector2(x-.57,z-SHELF_LENGTH*.5),Vector2(1.14,SHELF_LENGTH)))
 		if x<0:
 			prop("endcap",Vector3(x,0,-3.5),0,{"brand_index":0})
 			blockers.append(Rect2(Vector2(x-.35,-3.62),Vector2(.7,.24)))
@@ -48,10 +51,12 @@ func build_furniture() -> void:
 		var z: float=-4.8-i*1.12
 		var cabinet:=prop("fridge",Vector3(-5.45,0,z),PI/2,{"brand_index":i%3,"needs_restock":i==0})
 		blockers.append(Rect2(Vector2(-5.86,z-.53),Vector2(.82,1.06)))
-		if i==0:fridge_target=cabinet;interact(cabinet,"fridge")
+		interact(cabinet,"fridge")
+		if i==0:fridge_target=cabinet
 	for i in 7:
-		var x: float=-4.8+i*1.10
-		prop("fridge",Vector3(x,0,-10.5),0,{"brand_index":(i+1)%3})
+		var x: float=-4.30+i*1.10
+		var cabinet:=prop("fridge",Vector3(x,0,-10.5),0,{"brand_index":(i+1)%3})
+		rear_fridges.append(cabinet);interact(cabinet,"fridge")
 		blockers.append(Rect2(Vector2(x-.52,-10.90),Vector2(1.04,.79)))
 	counter=CheckoutFixture.new();add_child(counter)
 	blockers.append(CheckoutFixture.FOOTPRINT)
@@ -65,7 +70,7 @@ func build_furniture() -> void:
 	blockers.append(Rect2(Vector2(4.895,-7.35),Vector2(.77,1.70)))
 	# Entrance display and blue returnable crates seen in interno7.
 	RetailDetails.display_pallet(self,Vector3(4.60,0,-1.25))
-	blockers.append(Rect2(Vector2(3.95,-1.75),Vector2(1.3,1.0)))
+	blockers.append(Rect2(Vector2(3.95,-1.69),Vector2(1.3,.88)))
 	for x in [-1.65,-1.0]:RetailDetails.plastic_crate(self,Vector3(x,0,-.85),Color("28527e"),3)
 	blockers.append(Rect2(Vector2(-1.96,-1.06),Vector2(1.27,.42)))
 func add_crate(id: String,pos: Vector3) -> void:

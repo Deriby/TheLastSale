@@ -2,11 +2,19 @@
 
 Demonstração jogável em **Godot 4.4.1 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP, com uma rotina narrativa curta. A campanha completa continua em desenvolvimento.
 
-**[Baixar o projeto 0.11.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.11.0.zip)**
+**[Baixar o projeto 0.12.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.12.0.zip)**
 
 Extraia o ZIP, importe `project.godot` no Godot **4.4.1**, aguarde a importação dos modelos e pressione **F5**. O arquivo inclui os modelos animados, cenários, código e recursos usados no jogo. [Conteúdo e instruções do projeto](downloads/project/README.md).
 
-## Revisão 0.11.0 — otimização para a meta de 30 FPS
+## Revisão 0.12.0 — sombras, teto e circulação
+
+A fiação não projeta sombras, e as faixas de autossombra no asfalto foram corrigidas. A cobertura baixa do lado esquerdo segue até os fundos. O expositor agora tem oito engradados com garrafas apoiadas, sobre um palete estruturado. As gôndolas foram encurtadas e reposicionadas: há cerca de 2,10 m até as geladeiras fechadas e 1,12 m livres com as portas abertas. Use **E** para abrir/fechar qualquer geladeira das duas fileiras.
+
+[Veja o antes/depois dos quatro pontos e as portas abertas](docs/layout_v012/README.md). **119/119 verificações** passaram, incluindo a travessia real do corredor. O problema de largar a caixa foi somente registrado em [Pendências](docs/PENDENCIAS.md), para a etapa de jogabilidade.
+
+![Corredor com portas abertas — 0.12.0](docs/layout_v012/doors_open.png)
+
+## Revisão anterior 0.11.0 — otimização para a meta de 30 FPS
 
 As malhas usam 44,6% menos vértices armazenados e 34,0% menos dados nos arrays de geometria, mantendo a contagem de objetos e triângulos. O início do turno aproveita o cenário já carregado; a câmera evita atualizações repetidas de estado do corpo; o assassino oculto pausa suas animações.
 
@@ -100,9 +108,9 @@ A reconstrução 0.2 do interior recebeu gôndolas abastecidas por categoria, ge
 
 ## Jogar
 
-**[Baixar o projeto Godot 0.11.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.11.0.zip)**
+**[Baixar o projeto Godot 0.12.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.12.0.zip)**
 
-O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **Demonstração 0.11.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
+O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **Demonstração 0.12.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
 
 O download atual é o projeto para o editor. O diretório `downloads/windows` guarda apenas a entrega anterior 0.9.0.
 
@@ -120,7 +128,7 @@ A Godot 4.4 tem Windows 10 como requisito oficial mínimo. **Windows 7/8 não s�
 | Shift / Ctrl | Correr com fôlego / agachar |
 | Roda para frente / trás | Aproximação contínua até primeira pessoa / terceira pessoa |
 | E | Interação contextual |
-| Q | Soltar caixa em superfície segura |
+| Q | Soltar caixa — falha relatada, correção pendente na etapa de jogabilidade |
 | Espaço | Avançar uma fala |
 | Esc | Pausar, salvar e configurar |
 | F | Lanterna, disponível depois do aviso do cliente |

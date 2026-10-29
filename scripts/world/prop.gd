@@ -4,6 +4,7 @@ extends Node3D
 @export_enum("snacks", "beverages", "mixed") var shelf_style := "snacks"
 @export var brand_index := 0
 @export var needs_restock := false
+@export var shelf_length := 2.88
 @export var tint := Color("465347")
 var hinge: Node3D
 var opened := false
@@ -23,18 +24,19 @@ func make_shelf() -> void:
 	var metal:=SurfaceMaterials.make("painted_metal",Color("242b27"))
 	var edge:=SurfaceMaterials.make("painted_metal",Color("51574a"))
 	for x in [-.55,.55]:
-		for z in [-1.39,1.39]:
+		for z in [-shelf_length*.5+.05,shelf_length*.5-.05]:
 			products.add_box(Vector3(x,.8,z),Vector3(.045,1.60,.045),metal)
 			products.add_box(Vector3(x,.035,z),Vector3(.085,.07,.085),edge)
-	products.add_box(Vector3(0,.81,0),Vector3(.035,1.43,2.76),metal)
+	products.add_box(Vector3(0,.81,0),Vector3(.035,1.43,shelf_length-.12),metal)
 	for row in 5:
 		var y:=.18+row*.34
-		products.add_box(Vector3(0,y,0),Vector3(1.14,.035,2.88),metal)
+		products.add_box(Vector3(0,y,0),Vector3(1.14,.035,shelf_length),metal)
 		for side in [-1,1]:
-			products.add_box(Vector3(side*.57,y-.025,0),Vector3(.025,.08,2.88),edge)
-			RetailDetails.price_strip(self,Vector3(side*.586,y,0),2.76,side*PI/2)
-			for index in 10:
-				var z: float=-1.22+index*.27
+			products.add_box(Vector3(side*.57,y-.025,0),Vector3(.025,.08,shelf_length),edge)
+			RetailDetails.price_strip(self,Vector3(side*.586,y,0),shelf_length-.12,side*PI/2)
+			var columns:=mini(10,maxi(2,floori((shelf_length-.24)/.25)+1))
+			for index in columns:
+				var z: float=lerpf(-shelf_length*.5+.18,shelf_length*.5-.18,float(index)/(columns-1))
 				var sku: String
 				if shelf_style=="snacks" and row<4:sku="snack_"+str((row*2+index/4+brand_index)%6)
 				elif shelf_style=="mixed" and row<3:sku="snack_"+str((row+index/3+brand_index)%6)
@@ -45,8 +47,8 @@ func make_shelf() -> void:
 				if not sku.begins_with("snack"):
 					products.add_product(sku,Vector3(side*.245,y+.022,z),side*PI/2)
 					if sku.begins_with("can"):products.add_product(sku,Vector3(side*.405,y+.15,z),side*PI/2)
-	RetailDetails.collision(self,Vector3(0,.77,0),Vector3(1.14,1.54,2.88))
-	RetailDetails.shadow(self,Vector3(0,.008,0),Vector2(1.45,3.15))
+	RetailDetails.collision(self,Vector3(0,.77,0),Vector3(1.14,1.54,shelf_length))
+	RetailDetails.shadow(self,Vector3(0,.008,0),Vector2(1.45,shelf_length+.27))
 func make_fridge() -> void:
 	var shell:=SurfaceMaterials.make("painted_metal",Color("c5cbc0"))
 	var dark:=Geo.material(Color("293a34"))
