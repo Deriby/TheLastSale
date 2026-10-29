@@ -8,6 +8,7 @@ static func roof(root: Node3D,batch: PropBatch,width: float,depth: float,eaves: 
 	StreetDetail.triangle(root,Vector3(-half,eaves,.015),Vector3(half,eaves,.015),Vector3(0,eaves+rise,.015),StreetDetail.material(color,"render"))
 	StreetDetail.beam(batch,Vector3(-half-.10,eaves,.26),Vector3(0,eaves+rise,.26),.065,StreetDetail.material(Color("ac7653")))
 	StreetDetail.beam(batch,Vector3(0,eaves+rise,.26),Vector3(half+.10,eaves,.26),.065,StreetDetail.material(Color("ac7653")))
+	RoofTiles.add_to(batch,width,depth,eaves,rise)
 static func create(parent: Node3D,name: String,x: float,z: float,elevation: float,opposite: bool,kind: String) -> Node3D:
 	var root:=Node3D.new();root.name=name;parent.add_child(root);root.position=Vector3(x,elevation,z)
 	if opposite:root.rotation.y=PI

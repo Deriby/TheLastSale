@@ -37,6 +37,8 @@ func review() -> void:
 	await shot("opposite",Vector3(1,1.8,2.2),Vector3(1,1.6,13),72)
 	await shot("car",Vector3(6.5,1.55,6.6),Vector3(3,1.0,9.55),55)
 	await shot("porch",Vector3(6.8,1.75,8),Vector3(8.8,1.7,12.4),62)
+	await shot("roof_left",Vector3(-4.5,1.75,-2.1),Vector3(-2.4,5.0,-6.2),80,false)
+	await shot("roof_outside",Vector3(-10,8,3),Vector3(-2.4,4.8,-3.8),60,false)
 	await shot("edge_fog",Vector3(-27,1.9+Street.grade(-27),6.6),Vector3(-130,Street.grade(-130)+1.7,6.6),68)
 	var env: Environment=app.world.get_node("Atmosphere").environment
 	env.fog_enabled=false
@@ -49,5 +51,6 @@ func review() -> void:
 	for light in app.world.street.find_children("*","Light3D",true,false):light.light_energy=0
 	for light in app.world.depot.get_node("Architecture/Facade").find_children("*","SpotLight3D",true,false):light.light_energy=0
 	await shot("inside_out_day",Vector3(-4.95,1.72,-2.25),Vector3(3.4,1.95,10.5),78,false)
+	await shot("car_day",Vector3(6.5,1.55,6.6),Vector3(3,1.0,9.55),55)
 	app.queue_free();await frames(20);await get_tree().create_timer(.2).timeout
 	Geo.materials.clear();ProductLibrary.materials.clear();ProductLibrary.meshes.clear();await frames(4);get_tree().quit()

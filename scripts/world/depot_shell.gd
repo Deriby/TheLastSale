@@ -17,43 +17,21 @@ func build_envelope() -> void:
 	var floor_mat:=Geo.material(Color.WHITE,"res://assets/textures/mood/tile.png")
 	floor_mat.uv1_scale=Vector3.ONE/0.60;floor_mat.roughness=.60;floor_mat.texture_filter=BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	solid(Vector3(0,-.14,-8.0),Vector3(12.2,.28,16.0),floor_mat,false)
-	solid(Vector3(6,2.8,-8),Vector3(.24,5.6,16),wall)
+	solid(Vector3(6,2.71,-8),Vector3(.24,5.42,16),wall)
 	solid(Vector3(-6,2.2,-3),Vector3(.24,4.4,6),wall)
-	solid(Vector3(-6,2.8,-11),Vector3(.24,5.6,10),wall)
-	solid(Vector3(0,2.8,-16),Vector3(12,5.6,.24),wall)
+	solid(Vector3(-6,2.71,-11),Vector3(.24,5.42,10),wall)
+	solid(Vector3(0,2.71,-16),Vector3(12,5.42,.24),wall)
 	# Low tile skirting and a worn black entrance threshold from the entrance photograph.
 	for x in [-5.86,5.86]:Geo.box(self,Vector3(x,.065,-8),Vector3(.035,.13,16),Geo.material(Color("8b9487")),false)
 	Geo.box(self,Vector3(1.8,.007,-.10),Vector3(7.9,.014,.24),Geo.material(Color("323c36")),false)
 	var facade:=DepotFacade.new();facade.name="Facade";add_child(facade);blockers.append_array(facade.blockers)
 func build_roof() -> void:
+	add_child(DepotRoof.new())
 	var steel:=Geo.material(Color("697873"))
-	var roof_mat:=Geo.material(Color.WHITE,"res://assets/textures/depot/roof.png");roof_mat.uv1_scale=Vector3.ONE*.65;roof_mat.texture_filter=BaseMaterial3D.TEXTURE_FILTER_NEAREST_WITH_MIPMAPS
-	# A lower roof over the left front annex preserves the stepped photographed silhouette.
-	var right:=Geo.box(self,Vector3(3.02,5.72,-8),Vector3(6.1,.10,16.4),roof_mat,false);right.rotation.z=-.09
-	var left_back:=Geo.box(self,Vector3(-3.02,5.72,-11.1),Vector3(6.1,.10,10.2),roof_mat,false);left_back.rotation.z=.09
-	var left_front:=Geo.box(self,Vector3(-1.05,5.90,-3),Vector3(2.16,.10,6.2),roof_mat,false);left_front.rotation.z=.09
-	Geo.box(self,Vector3(-4.1,4.42,-3),Vector3(4.1,.10,6.1),roof_mat,false)
-	for x in [-5.6,-3.8,-1.9,0,1.9,3.8,5.6]:
-		if x< -2.1:
-			Geo.box(self,Vector3(x,5.95-absf(x)*.09,-11),Vector3(.055,.10,10.2),steel,false)
-			Geo.box(self,Vector3(x,4.38,-3),Vector3(.055,.10,6),steel,false)
-		else:Geo.box(self,Vector3(x,5.95-absf(x)*.09,-8),Vector3(.055,.10,16.3),steel,false)
-	for z in [-.5,-3.5,-6.5,-9.5,-12.5,-15.5]:
-		var first: float=-2.1 if z> -6 else -5.9
-		Geo.beam(self,Vector3(first,5.05,z),Vector3(5.9,5.05,z),.065,steel)
-		Geo.beam(self,Vector3(first,5.96-absf(first)*.091,z),Vector3(0,5.96,z),.07,steel)
-		Geo.beam(self,Vector3(0,5.96,z),Vector3(5.9,5.42,z),.07,steel)
-		var count:=8 if z> -6 else 12
-		for j in count:
-			var x: float=lerpf(first,5.9,float(j)/count)
-			var next: float=lerpf(first,5.9,float(j+1)/count)
-			Geo.beam(self,Vector3(x,5.05,z),Vector3(next,5.96-absf(next)*.091,z),.028,steel)
-			Geo.beam(self,Vector3(x,5.05,z),Vector3(x,5.96-absf(x)*.091,z),.025,steel)
-		if z> -6:Geo.beam(self,Vector3(-5.9,4.23,z),Vector3(-2.1,4.23,z),.06,steel)
 	# The reference has suspended domes, not flat glowing cylinders.
 	for x in [-3.3,2.7]:
 		for z in [-2.0,-5.7,-9.0]:
-			var top_y:=4.40 if x< -2.1 and z> -6 else 5.95-absf(x)*.09
+			var top_y:=DepotRoof.height_at(x,z)-.10
 			var mid_y:=top_y-(.55 if top_y<5 else .97)
 			Geo.cylinder(self,Vector3(x,(top_y+mid_y+.09)*.5,z),.009,top_y-mid_y-.09,steel)
 			Geo.cylinder(self,Vector3(x,mid_y,z),.255,.20,Geo.material(Color("adb9ad")),.07)

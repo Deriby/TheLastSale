@@ -19,9 +19,10 @@ func _ready() -> void:
 	get_tree().paused=true
 func apply_settings() -> void:
 	if screen!=null:screen.stretch_shrink=Preferences.pixel_scale
+	if viewport!=null:viewport.msaa_3d=Viewport.MSAA_2X if Preferences.pixel_scale==1 else Viewport.MSAA_DISABLED
 	if retro!=null:
 		retro.set_shader_parameter("grain",Preferences.grain);retro.set_shader_parameter("vhs",Preferences.vhs)
-		retro.set_shader_parameter("bloom_strength",.20 if Preferences.pixel_scale<3 else 0.0)
+		retro.set_shader_parameter("bloom_strength",.48 if Preferences.pixel_scale<3 else 0.0)
 func build_world() -> void:
 	if world!=null:
 		viewport.remove_child(world);world.free()

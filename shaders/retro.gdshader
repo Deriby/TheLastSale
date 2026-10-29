@@ -17,7 +17,8 @@ void fragment() {
   for(int i=0;i<4;i++){
    vec2 axis=i==0?vec2(1.,0.):i==1?vec2(-1.,0.):i==2?vec2(0.,1.):vec2(0.,-1.);
    bloom+=max(texture(screen_texture,uv+axis*SCREEN_PIXEL_SIZE*3.).rgb-vec3(.74),vec3(0.));
-   bloom+=max(texture(screen_texture,uv+axis*SCREEN_PIXEL_SIZE*7.).rgb-vec3(.74),vec3(0.))*.65;
+   bloom+=max(texture(screen_texture,uv+axis*SCREEN_PIXEL_SIZE*9.).rgb-vec3(.74),vec3(0.))*.65;
+   bloom+=max(texture(screen_texture,uv+axis*SCREEN_PIXEL_SIZE*21.).rgb-vec3(.74),vec3(0.))*.38;
   }
   color+=bloom*bloom_strength*.25;
  }

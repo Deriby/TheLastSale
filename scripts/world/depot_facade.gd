@@ -25,7 +25,8 @@ func _ready() -> void:
 	for x in [0.0,4.05]:
 		details.add_box(Vector3(x,3.66,.025),Vector3(3.82,.28,.43),dark)
 		for y in [3.55,3.61,3.67,3.73,3.79]:details.add_box(Vector3(x,y,.25),Vector3(3.8,.017,.025),StreetDetail.material(Color("5b6261")))
-	StreetDetail.panel(self,Vector3(2.0,5.16,.184),Vector2(4.4,2.72),"ja_mural",0,true)
+	var mural:=StreetDetail.panel(self,Vector3(2.0,5.16,.184),Vector2(4.4,2.72),"ja_mural",0,true)
+	mural.material_override.emission_enabled=true;mural.material_override.emission=Color.WHITE;mural.material_override.emission_texture=mural.material_override.albedo_texture;mural.material_override.emission_energy_multiplier=.38
 	StreetDetail.text(self,"LOJA·2",Vector3(-1.04,4.48,.19),58)
 	StreetDetail.text(self,"99124-8730",Vector3(4.78,4.48,.19),50)
 	StreetDetail.panel(self,Vector3(3.56,4.48,.193),Vector2(.25,.25),"contact_icon",0,true)
@@ -41,7 +42,8 @@ func _ready() -> void:
 		light.light_cull_mask=4
 	for x in [-3.9,.1]:
 		var spill:=SpotLight3D.new();spill.name="EntranceLightSpill";add_child(spill);spill.position=Vector3(x,3.3,-.12);spill.look_at_from_position(spill.position,Vector3(x,0,3.3))
-		spill.light_color=Color("e7eee3");spill.light_energy=1.1;spill.spot_range=7.5;spill.spot_angle=62
-		spill.light_cull_mask=3
+		spill.light_color=Color("dcecf1");spill.light_energy=1.2;spill.spot_range=7.5;spill.spot_angle=62
+		spill.light_cull_mask=11
 	details.flush()
+	add_child(NeonFinish.new())
 	for mesh in find_children("*","MeshInstance3D",true,false):mesh.layers=5

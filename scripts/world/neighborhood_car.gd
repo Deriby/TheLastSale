@@ -1,24 +1,20 @@
 class_name NeighborhoodCar
 extends RefCounted
-## Low-poly compact body with sloped panels and wheel-arch silhouettes.
-static func face(st: SurfaceTool,a: Vector3,b: Vector3,c: Vector3,d: Vector3) -> void:
-	var normal: Vector3=(b-a).cross(c-a).normalized()
-	for point in [a,c,b,a,d,c]:st.set_normal(normal);st.add_vertex(point)
-static func body(parent: Node3D,color: Color) -> Material:
-	var paint:=StreetDetail.material(color).duplicate();paint.roughness=.57;paint.cull_mode=BaseMaterial3D.CULL_DISABLED
-	var outline:=PackedVector2Array([
-		Vector2(-1.86,.40),Vector2(-1.86,.73),Vector2(-1.43,.91),Vector2(-.92,.94),Vector2(.70,.92),Vector2(1.64,.79),Vector2(1.86,.64),Vector2(1.86,.40),
-		Vector2(1.50,.40),Vector2(1.45,.59),Vector2(1.30,.71),Vector2(1.10,.72),Vector2(.89,.61),Vector2(.82,.40),
-		Vector2(-.81,.40),Vector2(-.88,.60),Vector2(-1.05,.72),Vector2(-1.27,.71),Vector2(-1.44,.59),Vector2(-1.50,.40)])
-	var indices:=Geometry2D.triangulate_polygon(outline)
-	var st:=SurfaceTool.new();st.begin(Mesh.PRIMITIVE_TRIANGLES)
-	for side in [-1,1]:
-		for index in indices:
-			var p:=outline[index];st.set_normal(Vector3(0,0,side));st.add_vertex(Vector3(p.x,p.y,side*.78))
-	var ridge: Array[Vector2]=[Vector2(-1.86,.73),Vector2(-1.43,.91),Vector2(-.92,.94),Vector2(.70,.92),Vector2(1.64,.79),Vector2(1.86,.64)]
-	for i in ridge.size()-1:
-		var a:=ridge[i];var b:=ridge[i+1]
-		face(st,Vector3(a.x,a.y,-.78),Vector3(a.x,a.y,.78),Vector3(b.x,b.y,.78),Vector3(b.x,b.y,-.78))
-	for x in [-1.86,1.86]:face(st,Vector3(x,.40,-.78),Vector3(x,.40,.78),Vector3(x,.73 if x<0 else .64,.78),Vector3(x,.73 if x<0 else .64,-.78))
-	var node:=MeshInstance3D.new();node.name="ShapedBody";node.mesh=st.commit();node.material_override=paint;parent.add_child(node)
-	return paint
+## Original Blender assets: curved panels, glazing, interior and detailed wheels.
+static func create(parent: Node3D,at: Vector3,kind: String,angle: float) -> Node3D:
+	var root: Node3D=load("res://assets/models/environment/"+kind+".glb").instantiate()
+	root.name="ParkedSedan" if kind=="sedan" else "ParkedHatchback";root.set_meta("vehicle_kind",kind)
+	parent.add_child(root);root.position=at
+	var slope:=.045 if absf(at.x)>6 else 0.0
+	var forward:=Vector3(cos(angle),slope*cos(angle),-sin(angle)).normalized();var side:=Vector3(sin(angle),0,cos(angle))
+	root.basis=Basis(forward,side.cross(forward).normalized(),side)
+	for node in root.find_children("*","MeshInstance3D",true,false):
+		node.add_to_group("vehicle_render");node.layers=8
+		if str(node.name).contains("Glass"):
+			node.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+			for index in node.mesh.get_surface_count():
+				var mat: StandardMaterial3D=node.mesh.surface_get_material(index).duplicate()
+				mat.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA;mat.albedo_color.a=.62;mat.cull_mode=BaseMaterial3D.CULL_DISABLED
+				node.set_surface_override_material(index,mat)
+	RetailDetails.collision(root,Vector3(0,.77,0),Vector3(4.40 if kind=="sedan" else 4.0,1.54,1.88))
+	return root

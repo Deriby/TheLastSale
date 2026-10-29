@@ -12,7 +12,7 @@ static func porch(parent: Node3D,at: Vector3) -> void:
 	Geo.box(parent,at+Vector3(0,-.05,.075),Vector3(.11,.09,.02),Geo.material(Color("dfc79f"),"",1.4),false)
 	var light:=SpotLight3D.new();light.name="PorchLight";parent.add_child(light);light.position=at+Vector3(0,-.1,.12)
 	light.look_at_from_position(light.position,at+Vector3(0,-2,.6));light.light_color=Color("e5c898");light.light_energy=1.4;light.spot_range=3.2;light.spot_angle=58
-	light.light_cull_mask=2
+	light.light_cull_mask=10
 	halo(parent,at+Vector3(0,-.05,.10),.5)
 static func warm_window(parent: Node3D,at: Vector3,size: Vector2) -> void:
 	var panel:=mood_panel(parent,at,size,"curtain")

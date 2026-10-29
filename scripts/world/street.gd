@@ -22,8 +22,9 @@ func _ready() -> void:
 	details=PropBatch.new();details.name="StreetDetails";add_child(details)
 	build_ground();build_frontages();build_utilities();build_wear();build_limits();details.flush()
 	add_child(StreetAccents.new())
+	add_child(StreetHaze.new())
 	# Outdoor geometry has its own light layer; indoor fill must not reach the road.
-	for mesh in find_children("*","MeshInstance3D",true,false):mesh.layers=2
+	for mesh in find_children("*","MeshInstance3D",true,false):mesh.layers=8 if mesh.is_in_group("vehicle_render") else 2
 func ground_strip(x0: float,x1: float,z0: float,z1: float,offset0: float,offset1: float,mat: Material) -> void:
 	var points:=PackedVector3Array([Vector3(x0,grade(x0)+offset0,z0),Vector3(x1,grade(x1)+offset0,z0),Vector3(x1,grade(x1)+offset1,z1),Vector3(x0,grade(x0)+offset1,z1)])
 	var normal: Vector3=(points[3]-points[0]).cross(points[1]-points[0]).normalized()
@@ -95,9 +96,9 @@ func build_frontages() -> void:
 	blockers.append(Rect2(.03,11.96,.24,.24))
 	StreetFurniture.tree(self,Vector3(-8.1,grade(-8.1),14.2),4.0)
 	StreetFurniture.handcart(self,Vector3(8.0,grade(8.0),.65))
-	StreetFurniture.car(self,Vector3(10.4,surface_height(10.4,9.55),9.55),Color("4b5554"),PI)
+	StreetFurniture.car(self,Vector3(10.4,surface_height(10.4,9.55),9.55),Color("4b5554"),PI,"sedan")
 	StreetFurniture.car(self,Vector3(3.0,surface_height(3.0,9.55),9.55),Color("909c9b"))
-	blockers.append(Rect2(8.5,8.70,3.8,1.7));blockers.append(Rect2(1.1,8.70,3.8,1.7))
+	blockers.append(Rect2(8.15,8.58,4.5,1.94));blockers.append(Rect2(.95,8.58,4.1,1.94))
 	# Sparse plants by the grey house, not a regular row of invented avenue trees.
 	for x in [1.1,1.3,1.5]:
 		Geo.cylinder(self,Vector3(x,grade(x)+.13,12.05),.13,.26,StreetDetail.material(Color("9d7961")),.17)

@@ -19,6 +19,7 @@ func _ready() -> void:
 	var moon:=DirectionalLight3D.new();moon.name="MoonFill";add_child(moon);moon.rotation_degrees=Vector3(-43,-24,0);moon.light_color=Color("97adc1");moon.light_energy=.10
 	street=Street.new();street.name="Street";add_child(street)
 	depot=Depot.new();depot.name="Depot";add_child(depot)
+	var reflection:=ReflectionProbe.new();reflection.name="StreetReflection";reflection.position=Vector3(3,1.3,6.6);reflection.size=Vector3(27,9,24);reflection.max_distance=48;reflection.box_projection=true;reflection.cull_mask=6;add_child(reflection)
 	var mood:=NightAtmosphere.new();mood.name="NightMood";mood.environment=env.environment;mood.moon=moon;add_child(mood)
 	navigation=AisleNavigation.new();navigation.configure(depot.blockers+street.blockers,Street.surface_height)
 	player=DepotPlayer.new();player.name="Dery";add_child(player);player.position=navigation.nearest_walkable(Session.saved_position);player.reset_physics_interpolation();player.camera_rig.reset_follow()

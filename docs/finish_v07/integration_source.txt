@@ -1,0 +1,95 @@
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+PASS menu inicial pausa o mundo
+PASS cena principal e chão físico carregam
+PASS antigo caixa da direita está livre para circulação real
+PASS passos no salão usam contato seco de piso cerâmico
+PASS cobertura baixa fecha o teto sobre o caixa esquerdo
+PASS cobertura alta fecha o lado esquerdo dos fundos
+PASS encontro lateral entre os dois níveis do telhado não tem vão
+PASS encontro traseiro da cobertura baixa não tem vão
+PASS sedã e hatch importados têm malhas detalhadas e escala de automóvel
+PASS rua tem declive físico contínuo entre os lados do quarteirão
+PASS balizadores da fachada têm colisão física
+PASS jogador desce o meio-fio e entra na rua sem cair pelo chão
+PASS passos na rua trocam para contato de asfalto
+PASS jogador sobe à calçada oposta sem ficar preso no meio-fio
+PASS Dery usa 21 ossos com cintura e peito superior articulados
+PASS 23 clipes de Dery importados
+PASS rig importado: Dery
+PASS material presente: Dery
+PASS textura original preservada na derivação: Dery
+PASS rig importado: Felps
+PASS material presente: Felps
+PASS textura original preservada na derivação: Felps
+PASS rig importado: Enemy
+PASS material presente: Enemy
+PASS textura original preservada na derivação: Enemy
+PASS rig importado: Customer1
+PASS material presente: Customer1
+PASS rig importado: Customer2
+PASS material presente: Customer2
+PASS rig importado: Customer3
+PASS material presente: Customer3
+PASS respiração altera a caixa torácica em repouso
+PASS cintura e peito superior articulam separadamente em repouso
+PASS cotovelos baixos e punhos abaixo do quadril no repouso
+PASS repouso tem base estreita e dois pés apoiados
+PASS Felps correto usa malha de cabeça separada
+PASS WASD move Dery com colisão real
+PASS corrida mais rápida que caminhada
+PASS agachamento altera colisão
+PASS roda do mouse chega à câmera pela viewport
+PASS movimento do mouse gira a câmera pela viewport
+PASS SpringArm encurta ao encostar na parede
+PASS câmera permanece do lado interno da parede
+PASS ombro recolhe lateralmente perto da parede
+PASS volume próximo da lente fica fora da parede
+PASS aproximação entra em primeira pessoa com corpo visível e cabeça apenas na sombra
+PASS afastamento retorna à terceira pessoa
+PASS Felps é alcançável pela interação sobre o balcão
+PASS tecla E conversa com Felps e libera tarefas
+PASS diálogo exibe falas reais
+PASS Felps gesticula enquanto fala
+PASS caixa errada não avança reposição
+PASS porta fechada bloqueia passagem
+PASS porta aberta libera passagem física
+PASS caixa distante exige aproximação antes de alcançar
+PASS pegar stock_1
+PASS pegar caixa começa com alcance antes da fixação
+PASS caixa presa ao transporte visível
+PASS mão permanece junto à pega lateral da caixa
+PASS repor stock_1
+PASS mãos livres após reposição
+PASS malha visível recebe novos produtos após reposição
+PASS pegar stock_2
+PASS pegar caixa começa com alcance antes da fixação
+PASS caixa presa ao transporte visível
+PASS mão permanece junto à pega lateral da caixa
+PASS repor stock_2
+WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@1634/stock_2/@MeshInstance3D@3133" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
+PASS mãos livres após reposição
+PASS malha visível recebe novos produtos após reposição
+PASS duas reposições completam objetivo na ordem
+PASS organização move caixa para palete
+PASS caixa permanece materialmente no palete
+PASS aviso exige clientes atendidos além das tarefas
+PASS clientes atravessam loja, compram e saem
+PASS máquina de estados dos clientes executa o ciclo completo
+PASS todos os clientes são atendidos junto ao novo balcão esquerdo
+PASS aviso ocorre somente depois da rotina e da visita
+PASS ruído posterior tem reação narrativa
+PASS inspeção do ruído conclui a demonstração
+PASS salvamento grava checkpoint
+PASS checkpoint restaura progressão e tarefas
+PASS continuar restaura posição no mundo
+PASS continuar não duplica caixas já repostas
+PASS continuar restaura produtos na malha da geladeira
+PASS checkpoint antigo dentro da gôndola migra para corredor próximo
+PASS checkpoint antigo na rua acompanha a nova cota do terreno
+WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@6455/Depot/@Node3D@7693/@MeshInstance3D@7717" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
+PASS checkpoint antigo no novo balcão restaura personagem fora dos móveis
+PASS pausa congela o relógio narrativo
+RESULT 88/88 passed; failures=[]

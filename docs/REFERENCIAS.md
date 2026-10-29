@@ -55,3 +55,15 @@ A neblina começa a 22 m e fica opaca a 68 m da câmera; solo e volumes simplifi
 Carros compactos receberam painéis inclinados e recortes das rodas; não reproduzem uma marca/modelo exatos. Folhas recortadas com movimento substituem volumes sólidos da copa. Reboco, piso cerâmico, asfalto e calçada usam nova arte procedural original. O bairro, proporções e trechos não fotografados continuam aproximados.
 
 A neblina normal agora começa a 20 m e termina a 65 m, com intensificação lenta apenas à distância após o aviso narrativo existente. Uma luminária distante tem uma falha breve ocasional. Sons discretos de ar e reator elétrico são síntese original; os passos têm contatos diferentes dentro e fora da loja. A direção continua sendo terror cotidiano inspirado na referência pedida, com circulação e tarefas legíveis.
+
+## Revisão 0.7.0
+
+As cinco imagens de jogos enviadas nesta rodada orientam o contraste entre letreiros vermelhos/brancos, luz quente próxima ao chão, rua azulada e ar ligeiramente enevoado. São referências de acabamento, não uma mudança do depósito para uma pizzaria, posto ou loja de conveniência. O mural JA, as entradas, o balcão esquerdo e a sequência aproximada das casas permanecem vinculados às fotos do depósito. Não houve nova observação interativa do Maps.
+
+[Imagens e caminhada da revisão](finish_v07/README.md). O filete vermelho, as luminárias brancas, o pequeno letreiro ABERTO e a promoção de bebida gelada são interpretações para o expediente noturno. A reflexão local dos carros vem de uma sonda estática da vizinhança; o halo é um efeito de câmera compatível com OpenGL, sem renderização volumétrica.
+
+Sedã e hatch são modelos originais genéricos feitos no Blender, com carroceria curva, recortes dos para-lamas, envidraçamento, cabine, faróis e rodas. Não são reproduções medidas dos veículos fotografados. Fontes editáveis em `tools/vehicle_sources`, geração em `tools/model_neighborhood_cars.py` e medidas aproximadas em [vehicle_report.json](vehicle_report.json).
+
+A névoa de profundidade passa a 8–85 m com uma curva suave, somada a seis planos de opacidade baixa na rua, recortados antes do interior. Não se usa neblina volumétrica; o chão continua até ±160 m. A visibilidade próxima permanece suficiente para reconhecer os carros e atravessar a calçada.
+
+O anexo baixo à esquerda recebeu fechamentos no encontro lateral e traseiro com o telhado alto. As coberturas agora têm espessura, rufos, cumeeira, calha e colisão; os caibros e luminárias seguem a altura correspondente. O salão mantém cumeeira de cerca de 6 m e anexo a 4,48 m; os topos das paredes laterais foram ajustados a 5,42 m para acompanhar o beiral. Telhas curvas das casas, extintor, carvão e detalhes elétricos complementam o cenário sem constituir um levantamento do local real.

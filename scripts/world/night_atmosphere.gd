@@ -15,7 +15,7 @@ static func configure(env: Environment) -> void:
 	env.tonemap_mode=Environment.TONE_MAPPER_FILMIC
 	env.fog_enabled=true;env.fog_mode=Environment.FOG_MODE_DEPTH
 	env.fog_light_color=Color("1b2329");env.fog_light_energy=1.0
-	env.fog_depth_begin=20;env.fog_depth_end=65;env.fog_depth_curve=1.25
+	env.fog_depth_begin=8;env.fog_depth_end=85;env.fog_depth_curve=1.35
 	env.fog_sky_affect=.25;env.fog_sun_scatter=0
 func _ready() -> void:
 	for light in get_parent().find_children("*","Light3D",true,false):
@@ -32,4 +32,4 @@ func _process(delta: float) -> void:
 		unstable.light_energy=6.0*dip
 	# The shop stays readable after the warning; only the distant air grows heavier.
 	var tension:=1.0 if Session.warning_delivered else 0.0
-	environment.fog_depth_end=lerpf(environment.fog_depth_end,65.0-tension*6.0,1-exp(-delta*.16))
+	environment.fog_depth_end=lerpf(environment.fog_depth_end,85.0-tension*6.0,1-exp(-delta*.16))

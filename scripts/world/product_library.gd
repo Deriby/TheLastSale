@@ -23,19 +23,19 @@ static func mesh(id: String) -> ArrayMesh:
 	if meshes.has(id):return meshes[id]
 	var result: ArrayMesh
 	if id.begins_with("cup_"):
-		result=lathe([Vector2(.032,0),Vector2(.035,.008),Vector2(.045,.18),Vector2(.046,.19),Vector2(.042,.197)],12)
+		result=lathe([Vector2(.032,0),Vector2(.035,.008),Vector2(.045,.18),Vector2(.046,.19),Vector2(.042,.197)],16)
 	elif id.begins_with("snack") or id.begins_with("toy"):
 		result=packet(.24 if id.begins_with("snack") else .15,.255 if id.begins_with("snack") else .24,.055)
 	elif id.begins_with("can"):
-		result=lathe([Vector2(.030,0),Vector2(.034,.008),Vector2(.034,.118),Vector2(.030,.126)],10)
+		result=lathe([Vector2(.030,0),Vector2(.034,.008),Vector2(.034,.118),Vector2(.030,.126)],16)
 	elif id.begins_with("soda"):
-		result=lathe([Vector2(.044,0),Vector2(.052,.018),Vector2(.053,.06),Vector2(.050,.22),Vector2(.045,.26),Vector2(.019,.30),Vector2(.018,.33),Vector2(.020,.335)],10)
+		result=lathe([Vector2(.044,0),Vector2(.052,.018),Vector2(.053,.06),Vector2(.050,.22),Vector2(.045,.26),Vector2(.019,.30),Vector2(.018,.33),Vector2(.020,.335)],16)
 	elif id=="water":
-		result=lathe([Vector2(.032,0),Vector2(.037,.018),Vector2(.036,.19),Vector2(.017,.22),Vector2(.015,.25)],8)
+		result=lathe([Vector2(.032,0),Vector2(.037,.018),Vector2(.036,.19),Vector2(.017,.22),Vector2(.015,.25)],14)
 	elif id.begins_with("spirits"):
-		result=lathe([Vector2(.032,0),Vector2(.038,.02),Vector2(.038,.19),Vector2(.017,.23),Vector2(.014,.30)],8)
+		result=lathe([Vector2(.032,0),Vector2(.038,.02),Vector2(.038,.19),Vector2(.017,.23),Vector2(.014,.30)],14)
 	else:
-		result=lathe([Vector2(.031,0),Vector2(.037,.012),Vector2(.037,.18),Vector2(.033,.22),Vector2(.015,.26),Vector2(.013,.30),Vector2(.015,.306)],10)
+		result=lathe([Vector2(.031,0),Vector2(.037,.012),Vector2(.037,.18),Vector2(.033,.22),Vector2(.015,.26),Vector2(.013,.30),Vector2(.015,.306)],16)
 	meshes[id]=result
 	return result
 static func vertex(st: SurfaceTool,p: Vector3,uv: Vector2,n: Vector3) -> void:

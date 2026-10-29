@@ -59,6 +59,7 @@ func build_furniture() -> void:
 	blockers.append(Rect2(-5.81,-1.10,.73,.90))
 	blockers.append(Rect2(-5.38,-3.36,.52,.52))
 	var detail:=ShopDetails.new();add_child(detail)
+	add_child(RetailFinish.new());blockers.append(Rect2(4.98,-4.45,.64,1.26))
 	blockers.append(Rect2(1.50,-.64,1.14,.54))
 	prop("freezer",Vector3(5.28,0,-6.5),-PI/2)
 	blockers.append(Rect2(Vector2(4.895,-7.35),Vector2(.77,1.70)))

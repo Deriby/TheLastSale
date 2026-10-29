@@ -1,0 +1,18 @@
+[
+  {
+    "kind": "sedan",
+    "triangles": 56580,
+    "material_groups": 10,
+    "length_m": 4.38,
+    "width_m": 1.99,
+    "height_m": 1.55
+  },
+  {
+    "kind": "hatchback",
+    "triangles": 56372,
+    "material_groups": 10,
+    "length_m": 3.98,
+    "width_m": 1.99,
+    "height_m": 1.55
+  }
+]

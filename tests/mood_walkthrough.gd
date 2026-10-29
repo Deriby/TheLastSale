@@ -51,7 +51,7 @@ func _physics_process(delta: float) -> void:
 		walk(true);rig.yaw=0;rig.pitch=lerpf(.12,-.015,smoothstep(28.5,32,t));title="Entrada • luz da loja sobre o caminho"
 	else:
 		walk(false);rig.yaw=lerp_angle(0,.70,smoothstep(32,34,t));title="Caixa esquerdo • fim da caminhada"
-	label.text="0.6.0 • CAMINHADA NO JOGO\n"+title
+	label.text="0.7.0 • CAMINHADA NO JOGO\n"+title
 	if t>=8:mark("crossed_curbs",player.is_on_floor() and player.position.z>5.5 and player.position.z<7.2)
 	if t>=17.5:mark("downhill",player.is_on_floor() and player.position.x< -11 and absf(player.position.z-6.3)<.7)
 	if t>=27:mark("returned",player.is_on_floor() and absf(player.position.x)<1)

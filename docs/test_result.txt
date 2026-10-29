@@ -4,6 +4,11 @@ PASS menu inicial pausa o mundo
 PASS cena principal e chão físico carregam
 PASS antigo caixa da direita está livre para circulação real
 PASS passos no salão usam contato seco de piso cerâmico
+PASS cobertura baixa fecha o teto sobre o caixa esquerdo
+PASS cobertura alta fecha o lado esquerdo dos fundos
+PASS encontro lateral entre os dois níveis do telhado não tem vão
+PASS encontro traseiro da cobertura baixa não tem vão
+PASS sedã e hatch importados têm malhas detalhadas e escala de automóvel
 PASS rua tem declive físico contínuo entre os lados do quarteirão
 PASS balizadores da fachada têm colisão física
 PASS jogador desce o meio-fio e entra na rua sem cair pelo chão
@@ -62,7 +67,7 @@ PASS pegar caixa começa com alcance antes da fixação
 PASS caixa presa ao transporte visível
 PASS mão permanece junto à pega lateral da caixa
 PASS repor stock_2
-WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@1786/stock_2/@MeshInstance3D@3437" (possibly benign).
+WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@1634/stock_2/@MeshInstance3D@3133" (possibly benign).
      at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
 PASS mãos livres após reposição
 PASS malha visível recebe novos produtos após reposição
@@ -83,8 +88,8 @@ PASS continuar não duplica caixas já repostas
 PASS continuar restaura produtos na malha da geladeira
 PASS checkpoint antigo dentro da gôndola migra para corredor próximo
 PASS checkpoint antigo na rua acompanha a nova cota do terreno
-WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@7063/Depot/@Node3D@8468/@MeshInstance3D@8480" (possibly benign).
+WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@6455/Depot/@Node3D@7693/@MeshInstance3D@7717" (possibly benign).
      at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
 PASS checkpoint antigo no novo balcão restaura personagem fora dos móveis
 PASS pausa congela o relógio narrativo
-RESULT 83/83 passed; failures=[]
+RESULT 88/88 passed; failures=[]

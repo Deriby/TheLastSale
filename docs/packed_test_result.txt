@@ -4,6 +4,11 @@ PASS menu inicial pausa o mundo
 PASS cena principal e chão físico carregam
 PASS antigo caixa da direita está livre para circulação real
 PASS passos no salão usam contato seco de piso cerâmico
+PASS cobertura baixa fecha o teto sobre o caixa esquerdo
+PASS cobertura alta fecha o lado esquerdo dos fundos
+PASS encontro lateral entre os dois níveis do telhado não tem vão
+PASS encontro traseiro da cobertura baixa não tem vão
+PASS sedã e hatch importados têm malhas detalhadas e escala de automóvel
 PASS rua tem declive físico contínuo entre os lados do quarteirão
 PASS balizadores da fachada têm colisão física
 PASS jogador desce o meio-fio e entra na rua sem cair pelo chão
@@ -83,4 +88,4 @@ PASS checkpoint antigo dentro da gôndola migra para corredor próximo
 PASS checkpoint antigo na rua acompanha a nova cota do terreno
 PASS checkpoint antigo no novo balcão restaura personagem fora dos móveis
 PASS pausa congela o relógio narrativo
-RESULT 83/83 passed; failures=[]
+RESULT 88/88 passed; failures=[]

@@ -33,6 +33,24 @@ func run() -> void:
 	check(player.is_on_floor() and player.position.z< -3.3,"antigo caixa da direita está livre para circulação real")
 	check(player.foot_audio.stream==player.tile_step,"passos no salão usam contato seco de piso cerâmico")
 	var street_space:=world.get_world_3d().direct_space_state
+	var annex_roof:=street_space.intersect_ray(PhysicsRayQueryParameters3D.create(Vector3(-4.7,2.8,-2.75),Vector3(-4.7,7,-2.75),1))
+	check(not annex_roof.is_empty() and annex_roof.position.y>4.25 and annex_roof.position.y<4.6,"cobertura baixa fecha o teto sobre o caixa esquerdo")
+	var rear_roof:=street_space.intersect_ray(PhysicsRayQueryParameters3D.create(Vector3(-4.7,2.8,-8),Vector3(-4.7,7,-8),1))
+	check(not rear_roof.is_empty() and rear_roof.position.y>5.2,"cobertura alta fecha o lado esquerdo dos fundos")
+	var side_riser:=street_space.intersect_ray(PhysicsRayQueryParameters3D.create(Vector3(-3.8,5.1,-2.2),Vector3(-1.8,5.1,-2.2),1))
+	check(not side_riser.is_empty() and absf(side_riser.position.x+2.1)<.2,"encontro lateral entre os dois níveis do telhado não tem vão")
+	var rear_riser:=street_space.intersect_ray(PhysicsRayQueryParameters3D.create(Vector3(-4.3,5,-4.5),Vector3(-4.3,5,-7.4),1))
+	check(not rear_riser.is_empty() and absf(rear_riser.position.z+6)<.2,"encontro traseiro da cobertura baixa não tem vão")
+	var detailed_cars:=0
+	for car in world.street.find_children("Parked*","Node3D",true,false):
+		if not car.has_meta("vehicle_kind"):continue
+		var triangles:=0;var first_bounds:=true;var bounds:=AABB()
+		for part in car.find_children("*","MeshInstance3D",true,false):
+			var box: AABB=(car.global_transform.affine_inverse()*part.global_transform)*part.get_aabb()
+			bounds=box if first_bounds else bounds.merge(box);first_bounds=false
+			for index in part.mesh.get_surface_count():triangles+=part.mesh.surface_get_array_index_len(index)/3
+		if triangles>25000 and bounds.size.x>3.5 and bounds.size.x<4.8 and bounds.size.y>1.2 and bounds.size.y<1.8:detailed_cars+=1
+	check(detailed_cars==2,"sedã e hatch importados têm malhas detalhadas e escala de automóvel")
 	var lower:=street_space.intersect_ray(PhysicsRayQueryParameters3D.create(Vector3(-20,4,6.5),Vector3(-20,-3,6.5),1))
 	var upper:=street_space.intersect_ray(PhysicsRayQueryParameters3D.create(Vector3(20,4,6.5),Vector3(20,-3,6.5),1))
 	check(not lower.is_empty() and not upper.is_empty() and upper.position.y-lower.position.y>.8,"rua tem declive físico contínuo entre os lados do quarteirão")
