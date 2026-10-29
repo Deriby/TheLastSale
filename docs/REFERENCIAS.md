@@ -95,3 +95,7 @@ A revisão das imagens identificou uma faixa de claridade na borda da sonda loca
 ## Revisão 0.13.0 — acabamento dos materiais
 
 As fotos do depósito e do balcão orientam a madeira marrom envernizada, o piso claro acetinado, as gôndolas pintadas e a diferença de brilho entre vidro, PET, rótulos e embalagens. Madeira, reboco externo, asfalto e concreto usam bases CC0 da Poly Haven, com paleta e escala adaptadas; créditos, arquivos de origem e hashes estão em `resources/material_sources`. As fotografias do autor não foram recortadas para texturas. Os demais acabamentos e a arte das embalagens são procedurais/originais. A comparação preserva as mesmas luzes e câmeras da 0.12.0. [Galeria e dados](materials_v013/README.md).
+
+## Revisão 0.14.0 — iluminação noturna
+
+A foto noturna do interior orienta o contraste entre o salão, a iluminação das geladeiras e as paredes altas. A luz quente junto ao caixa preserva a leitura de Felps e da bancada; as referências de atmosfera enviadas pelo autor orientam o vermelho localizado da fachada, os intervalos escuros entre postes e a névoa distante. As câmeras do antes/depois são idênticas. Materiais, layout e modelos não foram remodelados nesta etapa. [Comparações e limites da validação](lighting_v014/README.md).

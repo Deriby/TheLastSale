@@ -2,11 +2,19 @@
 
 Demonstração jogável em **Godot 4.4.1 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP, com uma rotina narrativa curta. A campanha completa continua em desenvolvimento.
 
-**[Baixar o projeto 0.13.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.13.0.zip)**
+**[Baixar o projeto 0.14.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.14.0.zip)**
 
 Extraia o ZIP, importe `project.godot` no Godot **4.4.1**, aguarde a importação dos modelos e pressione **F5**. O arquivo inclui os modelos animados, cenários, código e recursos usados no jogo. [Conteúdo e instruções do projeto](downloads/project/README.md).
 
-## Revisão 0.13.0 — materiais e embalagens
+## Revisão 0.14.0 — iluminação e atmosfera noturna
+
+A iluminação do salão foi redistribuída para controlar os brancos estourados no piso, manter o caixa mais quente e deixar cantos e estoque mais escuros. As doze geladeiras têm iluminação restrita aos equipamentos e reflexos do salão capturados uma vez. O vermelho da fachada agora alcança a parede e a calçada; os postes formam áreas de luz mais localizadas. A névoa aumenta na distância, preservando o primeiro plano.
+
+[Veja as mesmas vistas antes/depois](docs/lighting_v014/README.md). A imagem Nítida tem menos halo e preserva as transições de cor. O padrão continua em 30 FPS e há cinco luzes com sombras. Econômica desliga sombras e os efeitos adicionais. **132/132 verificações** passaram no projeto e no ZIP extraído; FPS nativo na Radeon R7 não foi medido.
+
+![Iluminação noturna — 0.14.0](docs/lighting_v014/front_after.png)
+
+## Revisão anterior 0.13.0 — materiais e embalagens
 
 Madeira, reboco, asfalto e concreto usam bases de superfícies reais CC0, ajustadas às cores e à escala do depósito. A bancada tem grão irregular e verniz; os paletes usam madeira crua. Piso, pintura, aço, plástico e vidro têm acabamentos distintos. Garrafas, latas e salgadinhos receberam arte mais definida e mapas que separam brilho do corpo, rótulo e tampa, com filtragem para a distância.
 
@@ -116,9 +124,9 @@ A reconstrução 0.2 do interior recebeu gôndolas abastecidas por categoria, ge
 
 ## Jogar
 
-**[Baixar o projeto Godot 0.13.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.13.0.zip)**
+**[Baixar o projeto Godot 0.14.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.14.0.zip)**
 
-O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **Demonstração 0.13.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
+O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **Demonstração 0.14.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
 
 O download atual é o projeto para o editor. O diretório `downloads/windows` guarda apenas a entrega anterior 0.9.0.
 

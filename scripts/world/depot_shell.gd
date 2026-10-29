@@ -15,6 +15,7 @@ func build_envelope() -> void:
 	var wall:=SurfaceMaterials.make("wall")
 	var floor_mat:=SurfaceMaterials.make("ceramic")
 	var floor:=solid(Vector3(0,-.14,-8.0),Vector3(12.2,.28,16.0),floor_mat,false)
+	floor.name="DepotFloor"
 	floor.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	solid(Vector3(6,2.71,-8),Vector3(.24,5.42,16),wall)
 	solid(Vector3(-6,2.2,-8),Vector3(.24,4.4,16),wall)
@@ -36,14 +37,17 @@ func build_roof() -> void:
 			cable.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF;cable.add_to_group("non_shadow_cables")
 			Geo.cylinder(self,Vector3(x,mid_y,z),.255,.20,Geo.material(Color("adb9ad")),.07)
 			Geo.cylinder(self,Vector3(x,mid_y-.105,z),.226,.025,Geo.material(Color("e8eee0"),"",1.0))
-			var lamp:=Geo.light(self,Vector3(x,mid_y-.29,z),Color("e7eee3"),.48,5.4)
-			lamp.omni_attenuation=1.2
-			lamp.set_meta("normal_energy",.48)
+			var lamp:=Geo.light(self,Vector3(x,mid_y-.29,z),Color("d2ddd0"),.16,3.8)
+			lamp.name="CeilingFill";lamp.omni_attenuation=1.4
+			lamp.set_meta("normal_energy",.16)
 			if x<0 and z==-9.0:fluorescent=lamp
 			if z==-5.7 or x<0 and z==-2.0:
 				var spot:=SpotLight3D.new();add_child(spot);spot.position=Vector3(x,mid_y-.32,z);spot.rotation.x=-PI/2
-				spot.light_color=Color("e9ead7");spot.light_energy=2.4;spot.spot_range=6.8;spot.spot_angle=48
-				spot.shadow_enabled=true;spot.shadow_bias=.035;spot.shadow_normal_bias=.65;spot.set_meta("mood_shadow",true)
+				spot.name="CeilingPool";spot.light_color=Color("e8dfc9") if x<0 else Color("d1dfd5")
+				spot.light_energy=.68 if x<0 else .95;spot.spot_range=6.8;spot.spot_angle=46;spot.spot_attenuation=1.3
+				if x<0 and z==-2.0:
+					spot.light_energy=.82;spot.look_at_from_position(spot.position,Vector3(-4.35,1.0,-2.8))
+				spot.shadow_enabled=true;spot.shadow_bias=.06;spot.shadow_normal_bias=.7;spot.set_meta("mood_shadow",true)
 				spot.light_cull_mask=1
 func build_partition() -> void:
 	var wall:=SurfaceMaterials.make("wall")

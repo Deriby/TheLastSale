@@ -9,5 +9,6 @@ void fragment(){
  float density=texture(haze_noise,UV*vec2(2.4,1.)+vec2(drift*.008,0.)).r;
  float near_fade=smoothstep(.7,2.5,length(VERTEX));
  float street_only=smoothstep(.2,1.6,world_at.z)*(1.-smoothstep(10.9,12.4,world_at.z));
- ALBEDO=vec3(.38,.42,.48);ROUGHNESS=1.;ALPHA=shape*density*.032*near_fade*street_only;
+ float distance_density=mix(.018,.035,smoothstep(6.,28.,length(VERTEX)));
+ ALBEDO=vec3(.36,.40,.46);ROUGHNESS=1.;ALPHA=shape*density*distance_density*near_fade*street_only;
 }

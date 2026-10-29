@@ -42,8 +42,8 @@ func _ready() -> void:
 		light.light_cull_mask=4
 	for x in [-3.9,.1]:
 		var spill:=SpotLight3D.new();spill.name="EntranceLightSpill";add_child(spill);spill.position=Vector3(x,3.3,-.12);spill.look_at_from_position(spill.position,Vector3(x,0,3.3))
-		spill.light_color=Color("dcecf1");spill.light_energy=1.2;spill.spot_range=7.5;spill.spot_angle=62
-		spill.light_cull_mask=11
+		spill.light_color=Color("d6e3d9");spill.light_energy=.65;spill.spot_range=6.2;spill.spot_angle=56
+		spill.light_cull_mask=14
 	details.flush()
 	add_child(NeonFinish.new())
 	for mesh in find_children("*","MeshInstance3D",true,false):mesh.layers=5

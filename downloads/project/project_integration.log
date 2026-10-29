@@ -1,6 +1,10 @@
 Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
 
 PASS menu inicial pausa o mundo
+PASS luzes das doze geladeiras ficam restritas aos equipamentos sem iluminar o piso
+PASS nova iluminação preserva o orçamento de cinco luzes com sombras
+PASS reflexo das geladeiras captura uma vez em resolução limitada
+PASS neblina distante preserva o primeiro plano e oculta o fim da rua
 PASS primeiro início aproveita o cenário já carregado no menu
 PASS assassino oculto não atualiza animações
 PASS assassino retoma processamento quando fica visível
@@ -65,7 +69,9 @@ PASS alumínio exposto e impressão da lata têm metalicidade própria
 PASS embalagens usam arte revisada e mipmaps para distância
 PASS verniz da bancada difere da madeira crua dos paletes
 PASS Econômica desliga mapas de acabamento e camada de verniz
+PASS Econômica desliga sombras, halo e iluminação/reflexo adicional das geladeiras
 PASS Nítida restaura os acabamentos nos materiais já instanciados
+PASS Nítida restaura a iluminação detalhada sem posterizar a imagem
 PASS contato dos pés usa a medida do modelo recebido
 PASS respiração altera a caixa torácica em repouso
 PASS cintura e peito superior articulam separadamente em repouso
@@ -96,7 +102,7 @@ PASS pegar caixa começa com alcance antes da fixação
 PASS caixa presa ao transporte visível
 PASS mão permanece junto à pega lateral da caixa
 PASS repor stock_1
-WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@31/Depot/Fridge/DoorHinge/@MeshInstance3D@1611" (possibly benign).
+WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@31/Depot/Fridge/DoorHinge/@MeshInstance3D@1613" (possibly benign).
      at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
 PASS mãos livres após reposição
 PASS malha visível recebe novos produtos após reposição
@@ -125,8 +131,9 @@ PASS continuar não duplica caixas já repostas
 PASS continuar restaura produtos na malha da geladeira
 PASS checkpoint antigo dentro da gôndola migra para corredor próximo
 PASS checkpoint antigo na rua acompanha a nova cota do terreno
-WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@6593/Depot/@Node3D@8204/@MeshInstance3D@8213" (possibly benign).
+WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@6635/Depot/@Node3D@8331/DoorHinge/@MeshInstance3D@8348" (possibly benign).
      at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
 PASS checkpoint antigo no novo balcão restaura personagem fora dos móveis
 PASS pausa congela o relógio narrativo
-RESULT 125/125 passed; failures=[]
+PASS pausa congela a deriva da névoa e as variações de luz
+RESULT 132/132 passed; failures=[]

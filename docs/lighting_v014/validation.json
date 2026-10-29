@@ -1,0 +1,82 @@
+{
+  "version": "0.14.0",
+  "godot": "4.4.1",
+  "renderer": "Compatibility / Linux / Mesa llvmpipe",
+  "source_integration": {
+    "passed": 132,
+    "total": 132,
+    "exit_code": 0,
+    "runtime_errors": 0
+  },
+  "render": {
+    "hd_exit_code": 0,
+    "hd_fixed_views": 8,
+    "resolution": [
+      1280,
+      720
+    ],
+    "grain": 0,
+    "camera_grade_included": true,
+    "economic_exit_code": 0,
+    "economic_fixed_views": 4,
+    "economic_internal_resolution": [
+      426,
+      240
+    ]
+  },
+  "raw_entrance_comparison": {
+    "before": {
+      "fully_clipped_pixels": 6765,
+      "pixel_count": 921600,
+      "fully_clipped_percent": 0.7340494791666666,
+      "right_aisle_floor_luma_median": 178.0798
+    },
+    "after": {
+      "fully_clipped_pixels": 1973,
+      "pixel_count": 921600,
+      "fully_clipped_percent": 0.21408420138888887,
+      "right_aisle_floor_luma_median": 97.7336
+    },
+    "method": "Fixed 1280x720 entrance camera, raw viewport before camera postprocess. Fully clipped means R,G,B all >=250/255. Floor sample is x950:1150,y520:650. This is an image comparison, not a hardware benchmark or a measure of every light in the game."
+  },
+  "lighting": {
+    "before_light_nodes": 23,
+    "after_light_nodes": 37,
+    "shadow_lights_before": 5,
+    "shadow_lights_after": 5,
+    "cabinet_lights": 12,
+    "cabinet_light_mask": 16,
+    "neon_wall_lights": 2,
+    "additional_real_time_shadow_maps": 0,
+    "economic_shadow_lights": 0,
+    "economic_visible_cabinet_lights": 0
+  },
+  "reflection": {
+    "probe_count": 2,
+    "cabinet_update": "once",
+    "atlas_resolution": 128,
+    "atlas_slots": 4,
+    "cabinet_influence_mask": 16,
+    "disabled_in_economic": true
+  },
+  "fog": {
+    "depth_begin_m": 16,
+    "depth_end_m": 82,
+    "tension_depth_end_m": 76,
+    "volumetric": false,
+    "street_only_near_haze": true
+  },
+  "structure": {
+    "indices": 1991532,
+    "mesh_buffer_bytes": 43887176,
+    "mesh_instances": 1328,
+    "mesh_resources": 1328,
+    "nodes": 2384,
+    "shadow_lights": 5,
+    "triangles": 666942,
+    "vertices": 696552
+  },
+  "default_frame_limit": 30,
+  "native_radeon_r7_fps_measured": false,
+  "deferred_box_drop_issue": "Unchanged; recorded in docs/PENDENCIAS.md"
+}

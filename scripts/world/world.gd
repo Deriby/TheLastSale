@@ -16,10 +16,16 @@ func _ready() -> void:
 	var env:=WorldEnvironment.new();env.name="Atmosphere";env.environment=Environment.new()
 	NightAtmosphere.configure(env.environment)
 	add_child(env)
-	var moon:=DirectionalLight3D.new();moon.name="MoonFill";add_child(moon);moon.rotation_degrees=Vector3(-43,-24,0);moon.light_color=Color("97adc1");moon.light_energy=.10
+	var moon:=DirectionalLight3D.new();moon.name="MoonFill";add_child(moon);moon.rotation_degrees=Vector3(-43,-24,0);moon.light_color=Color("8c9fb7");moon.light_energy=.055
 	street=Street.new();street.name="Street";add_child(street)
 	depot=Depot.new();depot.name="Depot";add_child(depot)
 	var reflection:=ReflectionProbe.new();reflection.name="StreetReflection";reflection.position=Vector3(3,1.3,6.6);reflection.size=Vector3(27,9,24);reflection.max_distance=48;reflection.box_projection=true;reflection.cull_mask=6;reflection.reflection_mask=8;add_child(reflection)
+	var cabinet_reflection:=ReflectionProbe.new();cabinet_reflection.name="CabinetReflection"
+	cabinet_reflection.position=Vector3(-1.1,1.55,-7.5);cabinet_reflection.size=Vector3(11.3,3.4,8.4);cabinet_reflection.max_distance=16
+	cabinet_reflection.box_projection=true;cabinet_reflection.interior=true
+	cabinet_reflection.ambient_mode=ReflectionProbe.AMBIENT_DISABLED;cabinet_reflection.intensity=.45
+	cabinet_reflection.cull_mask=1;cabinet_reflection.reflection_mask=16;cabinet_reflection.update_mode=ReflectionProbe.UPDATE_ONCE
+	add_child(cabinet_reflection);cabinet_reflection.add_to_group("detail_reflections")
 	var mood:=NightAtmosphere.new();mood.name="NightMood";mood.environment=env.environment;mood.moon=moon;add_child(mood)
 	navigation=AisleNavigation.new();navigation.configure(depot.blockers+street.blockers,Street.surface_height)
 	player=DepotPlayer.new();player.name="Dery";add_child(player);player.position=navigation.nearest_walkable(Session.saved_position);player.reset_physics_interpolation();player.camera_rig.reset_follow()
@@ -53,7 +59,7 @@ func _physics_process(delta: float) -> void:
 		Dialogue.play("noise",[["Dery","Cê ouviu isso? Veio lá do fundo."],["Felps","Deve ter caído alguma caixa. Dá uma olhada? Eu fico aqui."]])
 		var tween:=create_tween();var light:=depot.fluorescent
 		for i in 3:
-			tween.tween_property(light,"light_energy",.12,.1)
+			tween.tween_property(light,"light_energy",float(light.get_meta("normal_energy",.16))*.20,.1)
 			tween.tween_property(light,"light_energy",float(light.get_meta("normal_energy",1.8)),.22)
 func spawn_customer(warning: bool) -> void:
 	customer=Customer.new();customer.navigation=navigation;customer.warned=warning;customer.appearance=Session.customers_served%3

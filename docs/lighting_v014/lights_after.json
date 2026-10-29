@@ -1,0 +1,261 @@
+[
+  {
+    "energy": 0.0549999997019768,
+    "mask": 4294967295,
+    "path": "MoonFill",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 1.39999997615814,
+    "mask": 10,
+    "path": "Street/OppositeYellowHouse/PorchLight",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 4.80000019073486,
+    "mask": 11,
+    "path": "Street/UtilityPole/StreetLamp",
+    "shadows": true,
+    "visible": true
+  },
+  {
+    "energy": 4.80000019073486,
+    "mask": 11,
+    "path": "Street/@Node3D@1151/StreetLamp",
+    "shadows": true,
+    "visible": true
+  },
+  {
+    "energy": 4.80000019073486,
+    "mask": 11,
+    "path": "Street/@Node3D@1163/StreetLamp",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 1.04999995231628,
+    "mask": 4,
+    "path": "Depot/Architecture/Facade/@SpotLight3D@1381",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 1.04999995231628,
+    "mask": 4,
+    "path": "Depot/Architecture/Facade/@SpotLight3D@1382",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 0.649999976158142,
+    "mask": 14,
+    "path": "Depot/Architecture/Facade/EntranceLightSpill",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 0.649999976158142,
+    "mask": 14,
+    "path": "Depot/Architecture/Facade/@SpotLight3D@1383",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 1.20000004768372,
+    "mask": 14,
+    "path": "Depot/Architecture/Facade/NeonFinish/NeonRedSpill",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 0.300000011920929,
+    "mask": 4,
+    "path": "Depot/Architecture/Facade/NeonFinish/NeonWallWash",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 1.20000004768372,
+    "mask": 14,
+    "path": "Depot/Architecture/Facade/NeonFinish/@SpotLight3D@1389",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 0.300000011920929,
+    "mask": 4,
+    "path": "Depot/Architecture/Facade/NeonFinish/NeonWallWash2",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 0.159999996423721,
+    "mask": 1,
+    "path": "Depot/Architecture/CeilingFill",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 0.819999992847443,
+    "mask": 1,
+    "path": "Depot/Architecture/CeilingPool",
+    "shadows": true,
+    "visible": true
+  },
+  {
+    "energy": 0.159999996423721,
+    "mask": 1,
+    "path": "Depot/Architecture/CeilingFill2",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 0.680000007152557,
+    "mask": 1,
+    "path": "Depot/Architecture/CeilingPool2",
+    "shadows": true,
+    "visible": true
+  },
+  {
+    "energy": 0.159999996423721,
+    "mask": 1,
+    "path": "Depot/Architecture/CeilingFill3",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 0.159999996423721,
+    "mask": 1,
+    "path": "Depot/Architecture/CeilingFill4",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 0.159999996423721,
+    "mask": 1,
+    "path": "Depot/Architecture/CeilingFill5",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 0.949999988079071,
+    "mask": 1,
+    "path": "Depot/Architecture/CeilingPool3",
+    "shadows": true,
+    "visible": true
+  },
+  {
+    "energy": 0.159999996423721,
+    "mask": 1,
+    "path": "Depot/Architecture/CeilingFill6",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 0.419999986886978,
+    "mask": 16,
+    "path": "Depot/Fridge/CabinetLight",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 0.419999986886978,
+    "mask": 16,
+    "path": "Depot/@Node3D@1619/CabinetLight",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 0.419999986886978,
+    "mask": 16,
+    "path": "Depot/@Node3D@1646/CabinetLight",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 0.419999986886978,
+    "mask": 16,
+    "path": "Depot/@Node3D@1674/CabinetLight",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 0.419999986886978,
+    "mask": 16,
+    "path": "Depot/@Node3D@1700/CabinetLight",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 0.419999986886978,
+    "mask": 16,
+    "path": "Depot/@Node3D@1727/CabinetLight",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 0.419999986886978,
+    "mask": 16,
+    "path": "Depot/@Node3D@1754/CabinetLight",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 0.419999986886978,
+    "mask": 16,
+    "path": "Depot/@Node3D@1782/CabinetLight",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 0.419999986886978,
+    "mask": 16,
+    "path": "Depot/@Node3D@1808/CabinetLight",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 0.419999986886978,
+    "mask": 16,
+    "path": "Depot/@Node3D@1835/CabinetLight",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 0.419999986886978,
+    "mask": 16,
+    "path": "Depot/@Node3D@1863/CabinetLight",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 0.419999986886978,
+    "mask": 16,
+    "path": "Depot/@Node3D@1889/CabinetLight",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 0.280000001192093,
+    "mask": 1,
+    "path": "Depot/Checkout/@OmniLight3D@1938",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 0.419999986886978,
+    "mask": 1,
+    "path": "Depot/StockLight",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 2.20000004768372,
+    "mask": 4294967295,
+    "path": "Dery/@Node3D@2198/@SpringArm3D@2199/@Camera3D@2200/@SpotLight3D@2204",
+    "shadows": false,
+    "visible": false
+  }
+]

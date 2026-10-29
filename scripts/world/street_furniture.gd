@@ -39,7 +39,8 @@ static func pole(parent: Node3D,at: Vector3,arm_side: float) -> void:
 	batch.add_box(Vector3(.16,5.90,0),Vector3(.23,.5,.20),StreetDetail.material(Color("454d48")))
 	var light:=SpotLight3D.new();light.name="StreetLamp";root.add_child(light);light.position=Vector3(0,7.98,arm_side*1.65)
 	light.look_at_from_position(light.global_position,root.to_global(Vector3(0,-.10,arm_side*3.0)))
-	light.light_color=Color("f2c68f");light.light_energy=6.0;light.spot_range=16;light.spot_angle=40;light.spot_attenuation=.7
+	light.light_color=Color("efd0a3");light.light_energy=4.8;light.spot_range=14.5;light.spot_angle=35;light.spot_attenuation=1.15
+	light.set_meta("normal_energy",4.8)
 	light.shadow_enabled=at.x<10;light.shadow_bias=.10;light.shadow_normal_bias=.8
 	light.light_cull_mask=11
 	light.set_meta("mood_shadow",at.x<10);light.set_meta("unstable_lamp",at.x>10)

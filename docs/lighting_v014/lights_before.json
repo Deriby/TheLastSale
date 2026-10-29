@@ -1,0 +1,163 @@
+[
+  {
+    "energy": 0.100000001490116,
+    "mask": 4294967295,
+    "path": "MoonFill",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 1.39999997615814,
+    "mask": 10,
+    "path": "Street/OppositeYellowHouse/PorchLight",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 6.0,
+    "mask": 11,
+    "path": "Street/UtilityPole/StreetLamp",
+    "shadows": true,
+    "visible": true
+  },
+  {
+    "energy": 6.0,
+    "mask": 11,
+    "path": "Street/@Node3D@1151/StreetLamp",
+    "shadows": true,
+    "visible": true
+  },
+  {
+    "energy": 6.0,
+    "mask": 11,
+    "path": "Street/@Node3D@1163/StreetLamp",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 1.04999995231628,
+    "mask": 4,
+    "path": "Depot/Architecture/Facade/@SpotLight3D@1381",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 1.04999995231628,
+    "mask": 4,
+    "path": "Depot/Architecture/Facade/@SpotLight3D@1382",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 1.20000004768372,
+    "mask": 11,
+    "path": "Depot/Architecture/Facade/EntranceLightSpill",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 1.20000004768372,
+    "mask": 11,
+    "path": "Depot/Architecture/Facade/@SpotLight3D@1383",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 1.75,
+    "mask": 10,
+    "path": "Depot/Architecture/Facade/NeonFinish/NeonRedSpill",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 1.75,
+    "mask": 10,
+    "path": "Depot/Architecture/Facade/NeonFinish/@SpotLight3D@1388",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 0.479999989271164,
+    "mask": 1,
+    "path": "Depot/Architecture/@OmniLight3D@1408",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 2.40000009536743,
+    "mask": 1,
+    "path": "Depot/Architecture/@SpotLight3D@1409",
+    "shadows": true,
+    "visible": true
+  },
+  {
+    "energy": 0.479999989271164,
+    "mask": 1,
+    "path": "Depot/Architecture/@OmniLight3D@1413",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 2.40000009536743,
+    "mask": 1,
+    "path": "Depot/Architecture/@SpotLight3D@1414",
+    "shadows": true,
+    "visible": true
+  },
+  {
+    "energy": 0.479999989271164,
+    "mask": 1,
+    "path": "Depot/Architecture/@OmniLight3D@1418",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 0.479999989271164,
+    "mask": 1,
+    "path": "Depot/Architecture/@OmniLight3D@1422",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 0.479999989271164,
+    "mask": 1,
+    "path": "Depot/Architecture/@OmniLight3D@1426",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 2.40000009536743,
+    "mask": 1,
+    "path": "Depot/Architecture/@SpotLight3D@1427",
+    "shadows": true,
+    "visible": true
+  },
+  {
+    "energy": 0.479999989271164,
+    "mask": 1,
+    "path": "Depot/Architecture/@OmniLight3D@1431",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 0.280000001192093,
+    "mask": 1,
+    "path": "Depot/Checkout/@OmniLight3D@1924",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 1.0,
+    "mask": 1,
+    "path": "Depot/@OmniLight3D@2071",
+    "shadows": false,
+    "visible": true
+  },
+  {
+    "energy": 2.20000004768372,
+    "mask": 4294967295,
+    "path": "Dery/@Node3D@2184/@SpringArm3D@2185/@Camera3D@2186/@SpotLight3D@2190",
+    "shadows": false,
+    "visible": false
+  }
+]

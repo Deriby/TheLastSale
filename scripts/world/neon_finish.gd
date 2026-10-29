@@ -11,8 +11,10 @@ func _ready() -> void:
 		batch.add_box(Vector3(x,3.89,.381),Vector3(width-.10,.035,.028),red)
 		batch.add_box(Vector3(x,3.67,-.33),Vector3(width-.20,.025,.025),white)
 	for x in [-4.1,3.4]:
-		var light:=SpotLight3D.new();light.name="NeonRedSpill";add_child(light);light.position=Vector3(x,3.78,.39);light.look_at_from_position(light.position,Vector3(x,.2,4.5))
-		light.light_color=Color(1,.035,.085);light.light_energy=1.75;light.spot_range=11.5;light.spot_angle=55;light.light_cull_mask=10
+		var light:=SpotLight3D.new();light.name="NeonRedSpill";add_child(light);light.position=Vector3(x,3.78,.48);light.look_at_from_position(light.position,Vector3(x,.3,2.7))
+		light.light_color=Color(1,.045,.055);light.light_energy=1.2;light.spot_range=7;light.spot_angle=53;light.light_cull_mask=14
+		var wall_wash:=Geo.light(self,Vector3(x,3.85,.70),Color(1,.035,.045),.30,2.1)
+		wall_wash.name="NeonWallWash";wall_wash.light_cull_mask=4;wall_wash.set_meta("detail_light",true)
 	# Illuminated original lettering, not a replacement business identity.
 	var open:=SceneDetail.panel(self,Vector3(-3.1,2.48,-.18),Vector2(1.23,.41),"finish/open_sign",0,.85)
 	var sign_material:=ShaderMaterial.new();sign_material.shader=load("res://shaders/illuminated_sign.gdshader");sign_material.set_shader_parameter("sign_art",load("res://assets/textures/finish/open_sign.png"));open.material_override=sign_material

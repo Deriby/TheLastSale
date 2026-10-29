@@ -1,4 +1,14 @@
-# Validação — revisão 0.13.0 — 29/10/2026
+# Validação — revisão 0.14.0 — 29/10/2026
+
+**132/132 verificações** passaram no projeto e no ZIP extraído com importação limpa. A galeria [lighting_v014](lighting_v014/README.md) registra oito vistas fixas do salão, caixa, geladeiras, fachada, rua, estoque e horizonte, com comparação da 0.13.0 à 0.14.0. Há capturas diretas sem pós-processamento para medir os brancos saturados da vista de entrada.
+
+As verificações novas conferem luzes restritas às geladeiras, preservação de cinco luzes com sombras, captura única de reflexos, limites da névoa, desligamento/restauração de efeitos por qualidade e congelamento da deriva/variações durante a pausa. O fluxo completo de tarefas, clientes, câmera, portas e checkpoints continua passando.
+
+A geometria e os materiais da 0.13.0 foram preservados. A revisão acrescenta luzes de pequeno alcance restritas aos equipamentos, duas luzes de parede para o neon e uma captura de reflexão. O atlas de reflexos tem 128 pixels e quatro posições; o reflexo é atualizado uma vez. Não foram adicionadas sombras em tempo real ou neblina volumétrica. O modo Econômica desliga os efeitos adicionais. Limite padrão de 30 FPS; FPS nativo no Windows/Radeon R7 permanece sem medição.
+
+O problema de largar caixas permanece somente registrado em [PENDENCIAS.md](PENDENCIAS.md), para a etapa de jogabilidade. Integridade do download em [downloads/project](../downloads/project/README.md).
+
+## Registro anterior — revisão 0.13.0 — 29/10/2026
 
 **125/125 verificações** passaram no projeto e no ZIP extraído com importação limpa. A galeria [materials_v013](materials_v013/README.md) compara materiais usando as mesmas câmeras, luzes e enquadramentos da 0.12.0. Há bases CC0 da Poly Haven para madeira, reboco, asfalto e concreto, além de acabamentos procedurais e nova arte de embalagens.
 

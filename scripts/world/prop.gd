@@ -20,6 +20,11 @@ func _ready() -> void:
 		"endcap":make_endcap()
 		"freezer":make_freezer()
 	products.flush()
+	if kind=="fridge":
+		for piece in find_children("*","MeshInstance3D",true,false):piece.layers|=16
+		var led_fill:=Geo.light(self,Vector3(0,1.10,.23),Color("d0e4df"),.42,1.35)
+		led_fill.name="CabinetLight";led_fill.light_cull_mask=16;led_fill.omni_attenuation=1.5
+		led_fill.set_meta("detail_light",true)
 func make_shelf() -> void:
 	var metal:=SurfaceMaterials.make("painted_metal",Color("242b27"))
 	var edge:=SurfaceMaterials.make("painted_metal",Color("51574a"))
@@ -72,7 +77,7 @@ func make_fridge() -> void:
 			for depth in [-.16,.08]:products.add_product(sku,Vector3(-.365+col*.145,y+.015,depth),0,scale_value)
 		RetailDetails.price_strip(self,Vector3(0,y,.31),.85,0)
 	# Light strips, ventilation grille and manufacturer rail replace the plain block.
-	var led:=Geo.material(Color("d8ece2"),"",1.2)
+	var led:=Geo.material(Color("d8ece2"),"",1.8)
 	for x in [-.445,.445]:products.add_box(Vector3(x,1.04,.27),Vector3(.016,1.73,.016),led)
 	for y in [.04,.067,.094]:products.add_box(Vector3(0,y,.389),Vector3(.8,.008,.012),dark)
 	RetailDetails.panel(self,Vector3(0,2.055,.389),Vector2(.96,.14),["beer_banner","soda_banner","water_banner"][brand_index%3],0,.12)

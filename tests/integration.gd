@@ -19,6 +19,11 @@ func find_interaction(parent: Node,kind: String) -> Interaction:
 	return null
 func clear_dialogue() -> void:
 	while Dialogue.active:Dialogue.next_line()
+func shadow_light_count() -> int:
+	var count:=0
+	for light in world.find_children("*","Light3D",true,false):
+		if light.shadow_enabled:count+=1
+	return count
 func display_bottles_supported() -> bool:
 	var display: Node3D=get_tree().get_first_node_in_group("beverage_displays")
 	var batch: PropBatch=display.find_child("CratesAndPallet",true,false)
@@ -44,6 +49,15 @@ func run() -> void:
 	var loaded_world_id: int=app.world.get_instance_id()
 	app.start_new();app.interface.has_started=true;app.interface.set_paused(false)
 	world=app.world;player=world.player
+	var cabinet_lights:=world.find_children("CabinetLight","OmniLight3D",true,false)
+	var local_cabinet_light:=cabinet_lights.size()==12
+	for light in cabinet_lights:local_cabinet_light=local_cabinet_light and light.light_cull_mask==16 and not light.shadow_enabled
+	check(local_cabinet_light and (world.depot.get_node("Architecture/DepotFloor").layers&16)==0,"luzes das doze geladeiras ficam restritas aos equipamentos sem iluminar o piso")
+	check(shadow_light_count()==5,"nova iluminação preserva o orçamento de cinco luzes com sombras")
+	var cabinet_probe: ReflectionProbe=world.get_node("CabinetReflection")
+	check(cabinet_probe.update_mode==ReflectionProbe.UPDATE_ONCE and int(ProjectSettings.get_setting("rendering/reflections/reflection_atlas/reflection_size"))<=128 and cabinet_probe.reflection_mask==16,"reflexo das geladeiras captura uma vez em resolução limitada")
+	var night_env: Environment=world.get_node("Atmosphere").environment
+	check(night_env.fog_depth_begin>=16 and night_env.fog_depth_end<100 and night_env.fog_depth_end>60,"neblina distante preserva o primeiro plano e oculta o fim da rua")
 	check(world.get_instance_id()==loaded_world_id,"primeiro início aproveita o cenário já carregado no menu")
 	check(world.enemy_visual.process_mode==Node.PROCESS_MODE_DISABLED,"assassino oculto não atualiza animações")
 	world.enemy_visual.show()
@@ -173,8 +187,14 @@ func run() -> void:
 	check(varnish.clearcoat_enabled and not pallet_finish.clearcoat_enabled and pallet_finish.roughness_texture.get_image().get_pixel(200,200).g>varnish.roughness_texture.get_image().get_pixel(200,200).g+.25,"verniz da bancada difere da madeira crua dos paletes")
 	Preferences.pixel_scale=3;Preferences.changed.emit()
 	check(beer_finish.roughness_texture==null and beer_finish.metallic_texture==null and varnish.roughness_texture==null and not varnish.normal_enabled and not varnish.clearcoat_enabled,"Econômica desliga mapas de acabamento e camada de verniz")
+	var cabinet_details_off:=not cabinet_probe.visible
+	for light in cabinet_lights:cabinet_details_off=cabinet_details_off and not light.visible
+	check(cabinet_details_off and shadow_light_count()==0 and float(app.retro.get_shader_parameter("bloom_strength"))==0,"Econômica desliga sombras, halo e iluminação/reflexo adicional das geladeiras")
 	Preferences.pixel_scale=1;Preferences.changed.emit()
 	check(beer_finish.roughness_texture!=null and varnish.normal_enabled and varnish.clearcoat_enabled,"Nítida restaura os acabamentos nos materiais já instanciados")
+	var cabinet_details_on:=cabinet_probe.visible
+	for light in cabinet_lights:cabinet_details_on=cabinet_details_on and light.visible
+	check(cabinet_details_on and shadow_light_count()==5 and not bool(app.retro.get_shader_parameter("posterize")),"Nítida restaura a iluminação detalhada sem posterizar a imagem")
 	var elder: Node3D=CharacterModels.create("Velha1");add_child(elder)
 	var elder_motion:=LivingMotion.new();elder.add_child(elder_motion);elder_motion.setup(elder,elder)
 	check(absf(elder_motion.feet.clearance-float(elder.get_meta("foot_clearance")))<.001,"contato dos pés usa a medida do modelo recebido")
@@ -329,8 +349,10 @@ func run() -> void:
 	var restored_probe:=PhysicsShapeQueryParameters3D.new();var restored_capsule:=CapsuleShape3D.new();restored_capsule.radius=.24;restored_capsule.height=1.68
 	restored_probe.shape=restored_capsule;restored_probe.transform=Transform3D(Basis.IDENTITY,player.global_position+Vector3.UP*.87);restored_probe.collision_mask=1
 	check(player.is_on_floor() and world.get_world_3d().direct_space_state.intersect_shape(restored_probe).is_empty(),"checkpoint antigo no novo balcão restaura personagem fora dos móveis")
-	app.interface.set_paused(true);var frozen:=Session.world_seconds;await ticks(3)
+	app.interface.set_paused(true);var frozen:=Session.world_seconds
+	var frozen_haze: float=world.street.get_node("StreetHaze").time;var frozen_light: float=world.get_node("NightMood").time;await ticks(3)
 	check(Session.world_seconds==frozen,"pausa congela o relógio narrativo")
+	check(world.street.get_node("StreetHaze").time==frozen_haze and world.get_node("NightMood").time==frozen_light,"pausa congela a deriva da névoa e as variações de luz")
 	app.interface.set_paused(false)
 	print("RESULT ",checks-failures.size(),"/",checks," passed; failures=",failures)
 	app.queue_free()
