@@ -212,7 +212,9 @@ func spawn_customer(warning: bool,snapshot: Dictionary={}) -> void:
 	if snapshot.is_empty():
 		sale=ShopSale.create(Session.next_sale_id,warning);Session.next_sale_id+=1
 	ensure_order_crate()
-	customer=Customer.new();customer.navigation=navigation;customer.warned=warning;customer.appearance=int(snapshot.get("appearance",Session.customers_served%3))
+	customer=Customer.new();customer.navigation=navigation;customer.warned=warning
+	customer.appearance=int(snapshot.get("appearance",Session.customers_served))
+	customer.identity=NPCCast.arrival_identity(Session.customers_served) if snapshot.is_empty() else str(snapshot.get("identity",""))
 	customer.empty_handed=sale!=null and sale.needs_bulk() and sale.order.size()==1
 	if sale!=null:
 		for sku in sale.order:

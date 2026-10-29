@@ -1,0 +1,18 @@
+{
+  "status": "workspace draft; not in the published 0.17.0 ZIP",
+  "godot": "4.4.1",
+  "regular_customer_identities": 9,
+  "temporary_identities": 6,
+  "temporary_base_models": 3,
+  "supplied_character_models_preserved": true,
+  "saved_customer_identity_verified": true,
+  "legacy_appearance_mapping_verified": true,
+  "source_integration": {
+    "passed": 188,
+    "total": 188,
+    "exit_code": 0,
+    "runtime_errors": 0
+  },
+  "render_exit_code": 0,
+  "native_radeon_r7_fps_measured": false
+}

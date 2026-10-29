@@ -29,11 +29,10 @@ func _ready() -> void:
 	add_to_group("customers")
 	collision_layer=2;collision_mask=1|2
 	var col:=CollisionShape3D.new();var shape:=CapsuleShape3D.new();shape.radius=.25;shape.height=1.7;col.shape=shape;col.position.y=.85;add_child(col)
-	var cast: Array[String]=["Garota1","Garota2","Velha1"]
-	identity="Customer3" if warned else cast[posmod(appearance,cast.size())]
+	identity="Customer3" if warned else NPCCast.customer_identity(appearance,identity)
 	visual=CharacterModels.create(identity);add_child(visual)
 	animation=visual.find_child("AnimationPlayer",true,false)
-	if not warned:
+	if not warned and visual.get_meta("motion_style","living")=="living":
 		motion=LivingMotion.new();add_child(motion);motion.setup(visual,self)
 	if animation:
 		for key in animation.get_animation_list():
@@ -109,7 +108,7 @@ func _physics_process(delta: float) -> void:
 		State.EXITING:departed.emit(self);queue_free()
 func snapshot() -> Dictionary:
 	var at:=global_position
-	return {"position":[at.x,at.y,at.z],"state":int(state),"wait":wait,"warned":warned,"appearance":appearance,"service_started":service_started,"purchase_complete":purchase_complete,"waited_seconds":waited_seconds,"wait_comment":wait_comment}
+	return {"position":[at.x,at.y,at.z],"state":int(state),"wait":wait,"warned":warned,"identity":identity,"appearance":appearance,"service_started":service_started,"purchase_complete":purchase_complete,"waited_seconds":waited_seconds,"wait_comment":wait_comment}
 func restore(data: Dictionary) -> void:
 	global_position=navigation.restore_position(Session.read_position(data.get("position"),global_position))
 	state=clampi(int(data.get("state",0)),0,6) as State;wait=maxf(0,float(data.get("wait",0)))

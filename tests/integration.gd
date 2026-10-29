@@ -56,9 +56,10 @@ func fetch_order_box() -> bool:
 		await ticks(1)
 		if not actor.motion.action_active and not actor.handling.busy:break
 	if not bulk_checkpoint_checked:
-		var supply_id:=world.sale.supply_id();var old_total:=Session.sales_cents
+		var supply_id:=world.sale.supply_id();var old_total:=Session.sales_cents;var customer_identity:=world.customer.identity
 		Session.save_shift(actor.global_position);app.start_saved();world=app.world;actor=world.characters.Dery;player=actor;await ticks(8)
 		check(world.player==actor and actor.carried_id==supply_id and actor.carried==world.depot.crates[supply_id] and not world.sale.bulk_supplied and Session.sales_cents==old_total,"continuar com Deryk carregando a caixa do pedido preserva mercadoria, cliente e receita")
+		check(world.customer.identity==customer_identity and world.customer.visual.get_meta("placeholder",false),"cliente provisório mantém a identidade e o visual ao continuar com a caixa do pedido")
 		bulk_checkpoint_checked=true;door=find_interaction(world.depot.stock_door,"door")
 	# Clear the opened leaf before turning into the shop; the coarse A* grid is static.
 	if not await walk_to(actor,Vector3(4.95,0,-11.7),.3):print("COURIER_FAIL inside door ",actor.position);return false
@@ -94,6 +95,23 @@ func display_bottles_supported() -> bool:
 	return true
 func _ready() -> void:call_deferred("run")
 func run() -> void:
+	var cast_ids: Dictionary={};var placeholder_count:=0;var placeholder_rigs:=true;var costume_colors: Dictionary={}
+	for entry in NPCCast.customers():
+		cast_ids[entry.id]=true
+		if not entry.get("placeholder",false):continue
+		placeholder_count+=1
+		var model:=CharacterModels.create(entry.id)
+		var animator: AnimationPlayer=model.find_child("AnimationPlayer",true,false)
+		placeholder_rigs=placeholder_rigs and model.find_child("Skeleton3D",true,false)!=null and animator.has_animation("walk") and animator.has_animation("idle")
+		for mesh in model.find_children("*","MeshInstance3D",true,false):
+			for surface in mesh.mesh.get_surface_count():
+				var material: StandardMaterial3D=mesh.get_surface_override_material(surface)
+				if material!=null and material.resource_name.begins_with("Roupa"):costume_colors[material.albedo_color.to_html()]=true
+		model.free()
+	check(cast_ids.size()==9 and placeholder_count==6 and placeholder_rigs,"elenco contém três modelos do autor e seis identidades provisórias com rig e caminhada")
+	check(costume_colors.size()==6,"clientes provisórios têm seis roupas distintas sem alterar as malhas originais")
+	check(NPCCast.customer_identity(0)=="Garota1" and NPCCast.customer_identity(1)=="Garota2" and NPCCast.customer_identity(2)=="Velha1","checkpoints antigos sem identidade preservam as três aparências originais")
+	check(NPCCast.customer_identity(0,"ClienteVerde")=="ClienteVerde" and NPCCast.arrival_identity(1)=="ClienteBone","identidade salva independe da ordem de chegada e a rotina inclui clientes provisórios")
 	var totals: Array[int]=[]
 	for id in range(1,6):totals.append(ShopSale.create(id).total())
 	check(totals==[1150,7200,3200,4300,2000] and ShopSale.money(350)=="R$ 3,50","catálogo calcula pedidos variados em centavos e formata reais sem arredondamento")

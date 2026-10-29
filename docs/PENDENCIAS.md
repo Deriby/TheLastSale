@@ -10,6 +10,8 @@
 
 ## Próximas etapas de mecânicas
 
+- Campanha solicitada com sexta, sábado e domingo: pane de energia na primeira noite, terror crescente na segunda e fuga do assassino na terceira, com revelação e finais diferentes. [Proposta de trama, decisões e etapas](CAMPANHA_TRES_NOITES.md); a implementação das três noites ainda está pendente.
+- O autor aprovou a proposta de campanha e autorizou modelos provisórios para novos NPCs. O rascunho inclui seis identidades adicionais de clientes, com visuais simples substituíveis; [cadastro, substituição e próximos papéis](ELENCO_PROVISORIO.md).
 - Registro, quantidades, dinheiro/troco, entrega e recibos foram implementados na 0.17.0. Próximas formas de pagamento: cartão e Pix. [Validação e instruções](checkout_v017/README.md).
 - Expandir estoque e reposição, comunicação da dupla e visitas de Bryan/Zirico.
 - Implementar tarefas de fechamento e, depois, investigação, perseguição e esconderijos.
