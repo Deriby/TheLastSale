@@ -1,0 +1,71 @@
+{
+	"bulk_request": {
+		"internal_resolution": "(640, 480)",
+		"message": "Confira o pedido e registre os produtos.",
+		"order": {
+			"case_returnable": 1
+		},
+		"panel_rect": "[P: (160.0, 30.0), S: (960.0, 660.0)]",
+		"phase": 0,
+		"sales_cents": 1150,
+		"selected_change": 0,
+		"total": 7200,
+		"window_size": "(1280, 720)"
+	},
+	"delivered": {
+		"internal_resolution": "(640, 480)",
+		"message": "Troco correto. Entregue a compra ao cliente.",
+		"order": {
+			"snack_0": 1,
+			"water": 2
+		},
+		"panel_rect": "closed",
+		"phase": 4,
+		"sales_cents": 1150,
+		"selected_change": 850,
+		"total": 1150,
+		"window_size": "(1280, 720)"
+	},
+	"ready": {
+		"internal_resolution": "(640, 480)",
+		"message": "Troco correto. Entregue a compra ao cliente.",
+		"order": {
+			"snack_0": 1,
+			"water": 2
+		},
+		"panel_rect": "[P: (160.0, 30.0), S: (960.0, 660.0)]",
+		"phase": 3,
+		"sales_cents": 0,
+		"selected_change": 850,
+		"total": 1150,
+		"window_size": "(1280, 720)"
+	},
+	"register": {
+		"internal_resolution": "(640, 480)",
+		"message": "Confira o pedido e registre os produtos.",
+		"order": {
+			"snack_0": 1,
+			"water": 2
+		},
+		"panel_rect": "[P: (160.0, 30.0), S: (960.0, 660.0)]",
+		"phase": 0,
+		"sales_cents": 0,
+		"selected_change": 0,
+		"total": 1150,
+		"window_size": "(1280, 720)"
+	},
+	"wrong_change": {
+		"internal_resolution": "(640, 480)",
+		"message": "Cliente: acho que o troco não bate. Pode conferir?",
+		"order": {
+			"snack_0": 1,
+			"water": 2
+		},
+		"panel_rect": "[P: (160.0, 30.0), S: (960.0, 660.0)]",
+		"phase": 2,
+		"sales_cents": 0,
+		"selected_change": 500,
+		"total": 1150,
+		"window_size": "(1280, 720)"
+	}
+}

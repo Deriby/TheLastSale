@@ -1,4 +1,14 @@
-# Validação — revisão 0.16.0 — 29/10/2026
+# Validação — revisão 0.17.0 — 29/10/2026
+
+**183/183 verificações** passaram no projeto e no ZIP extraído após importação limpa. [Galeria, instruções e relatório](checkout_v017/README.md).
+
+A suíte percorre pedidos variados, registro por produto/quantidade, bloqueio de compra incorreta, recebimento de dinheiro, troco errado/correção, pagamento exato, entrega com recibo e receita únicos. Verifica o painel real, controle de Felps enquanto a tela está aberta e retomada de cliente com registro/dinheiro/troco parcial.
+
+Para pedidos de caixas fechadas, Deryk caminha com colisão até o estoque, pega a mercadoria, salva/continua carregando, volta fisicamente pelo corredor e entrega no balcão. A progressão dos clientes e da história continua sendo testada com rotas completas. A suíte mantém as verificações anteriores de câmeras, duas personagens, Q, materiais, iluminação, portas e resoluções PS1/PS1/2.
+
+O checkpoint versão 3 conserva a venda e o cliente em andamento, recibos, receita e estados dos personagens. Formatos antigos são aceitos. O limite padrão continua em 30 FPS; desempenho nativo na Radeon R7 não foi medido. [Integridade do ZIP](../downloads/project/release_verification.json).
+
+## Registro anterior — revisão 0.16.0 — 29/10/2026
 
 **168/168 verificações** passaram no projeto e no ZIP extraído após importação limpa. [Capturas, controles e relatório](gameplay_v016/README.md).
 

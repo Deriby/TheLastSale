@@ -4,6 +4,7 @@ signal focused(text: String)
 signal made_noise(position_value: Vector3, strength: float)
 var identity:="Dery"
 var controlled:=true
+var input_locked:=false
 var carried_id:=""
 var drop_pending:=false
 var dialogue_speaker:=""
@@ -69,13 +70,13 @@ func finish_action() -> void:
 func play_clip(clip: String) -> void:
 	motion.play(clip)
 func _physics_process(delta: float) -> void:
-	if controlled and not Dialogue.active:crouching=Input.is_action_pressed("crouch") and carried==null and not motion.action_active
+	if controlled and not input_locked and not Dialogue.active:crouching=Input.is_action_pressed("crouch") and carried==null and not motion.action_active
 	if not crouching and capsule.height<1.7:
 		var ray:=PhysicsRayQueryParameters3D.create(global_position+Vector3.UP*.9,global_position+Vector3.UP*1.8,1,[get_rid()])
 		if not get_world_3d().direct_space_state.intersect_ray(ray).is_empty():crouching=true
 	capsule.height=1.30 if crouching else 1.74
 	get_child(0).position.y=capsule.height*.5
-	var input:=Input.get_vector("left","right","forward","backward") if controlled and not motion.action_active and not Dialogue.active else Vector2.ZERO
+	var input:=Input.get_vector("left","right","forward","backward") if controlled and not input_locked and not motion.action_active and not Dialogue.active else Vector2.ZERO
 	var direction:=Basis(Vector3.UP,camera_rig.yaw)*Vector3(input.x,0,input.y)
 	var running:=controlled and Input.is_action_pressed("sprint") and not crouching and carried==null and stamina>.05 and input.length()>.1
 	stamina=clampf(stamina+delta*(-.18 if running else .16),0,1)
@@ -124,6 +125,9 @@ func update_footsteps() -> void:
 	last_step_half=half
 func update_focus() -> void:
 	target=null
+	if identity=="Dery" and carried_id.begins_with("order_"):
+		var world:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
+		if world!=null and world.can_supply_order(self):target=world.depot.checkout;focused.emit("[E]  "+target.prompt(self));return
 	if identity=="Felps" and global_position.distance_to(CheckoutFixture.STAFF_POSITION)<1.4:
 		var world:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
 		if world!=null:
@@ -151,7 +155,7 @@ func update_focus() -> void:
 			best=dot;target=candidate
 	focused.emit("[E]  "+target.prompt(self) if target!=null else "")
 func handle_input(event: InputEvent) -> void:
-	if not controlled or Dialogue.active:return
+	if not controlled or input_locked or Dialogue.active:return
 	if event.is_action_pressed("drop"):
 		drop_carried();return
 	if motion.action_active or handling.busy:return

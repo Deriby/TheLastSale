@@ -1,0 +1,116 @@
+{
+  "version": "0.17.0",
+  "godot": "4.4.1",
+  "source_integration": {
+    "passed": 183,
+    "total": 183,
+    "exit_code": 0,
+    "runtime_errors": 0
+  },
+  "editor_script_import_errors": 0,
+  "render_exit_code": 0,
+  "currency": "integer centavos",
+  "payment_methods": [
+    "cash"
+  ],
+  "planned_payment_methods": [
+    "card",
+    "pix"
+  ],
+  "order_totals_verified": [
+    1150,
+    7200,
+    3200,
+    4300,
+    2000
+  ],
+  "wrong_items_block_payment": true,
+  "wrong_change_correctable": true,
+  "exact_payment_supported": true,
+  "register_panel_fits_window": true,
+  "partial_change_checkpoint_restored": true,
+  "held_order_box_checkpoint_restored": true,
+  "physical_courier_and_customer_routes_verified": true,
+  "npc_detours_around_people": true,
+  "receipt_and_revenue_credited_once": true,
+  "legacy_save_versions_verified": [
+    1,
+    2
+  ],
+  "save_version": 3,
+  "full_story_progression_verified": true,
+  "ps1_and_ps12_preserved": true,
+  "default_frame_limit": 30,
+  "native_radeon_r7_fps_measured": false,
+  "layout": {
+    "bulk_request": {
+      "internal_resolution": "(640, 480)",
+      "message": "Confira o pedido e registre os produtos.",
+      "order": {
+        "case_returnable": 1
+      },
+      "panel_rect": "[P: (160.0, 30.0), S: (960.0, 660.0)]",
+      "phase": 0,
+      "sales_cents": 1150,
+      "selected_change": 0,
+      "total": 7200,
+      "window_size": "(1280, 720)"
+    },
+    "delivered": {
+      "internal_resolution": "(640, 480)",
+      "message": "Troco correto. Entregue a compra ao cliente.",
+      "order": {
+        "snack_0": 1,
+        "water": 2
+      },
+      "panel_rect": "closed",
+      "phase": 4,
+      "sales_cents": 1150,
+      "selected_change": 850,
+      "total": 1150,
+      "window_size": "(1280, 720)"
+    },
+    "ready": {
+      "internal_resolution": "(640, 480)",
+      "message": "Troco correto. Entregue a compra ao cliente.",
+      "order": {
+        "snack_0": 1,
+        "water": 2
+      },
+      "panel_rect": "[P: (160.0, 30.0), S: (960.0, 660.0)]",
+      "phase": 3,
+      "sales_cents": 0,
+      "selected_change": 850,
+      "total": 1150,
+      "window_size": "(1280, 720)"
+    },
+    "register": {
+      "internal_resolution": "(640, 480)",
+      "message": "Confira o pedido e registre os produtos.",
+      "order": {
+        "snack_0": 1,
+        "water": 2
+      },
+      "panel_rect": "[P: (160.0, 30.0), S: (960.0, 660.0)]",
+      "phase": 0,
+      "sales_cents": 0,
+      "selected_change": 0,
+      "total": 1150,
+      "window_size": "(1280, 720)"
+    },
+    "wrong_change": {
+      "internal_resolution": "(640, 480)",
+      "message": "Cliente: acho que o troco não bate. Pode conferir?",
+      "order": {
+        "snack_0": 1,
+        "water": 2
+      },
+      "panel_rect": "[P: (160.0, 30.0), S: (960.0, 660.0)]",
+      "phase": 2,
+      "sales_cents": 0,
+      "selected_change": 500,
+      "total": 1150,
+      "window_size": "(1280, 720)"
+    }
+  }
+}

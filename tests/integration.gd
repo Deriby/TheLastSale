@@ -7,6 +7,7 @@ var world: ShiftWorld
 var player: DepotPlayer
 var served_states: Dictionary = {}
 var checkout_positions_valid:=true
+var bulk_checkpoint_checked:=false
 func check(condition: bool,description: String) -> void:
 	checks+=1
 	print("PASS " if condition else "FAIL ",description)
@@ -24,6 +25,51 @@ func find_interaction(parent: Node,kind: String) -> Interaction:
 	return null
 func clear_dialogue() -> void:
 	while Dialogue.active:Dialogue.next_line()
+func press_register(id: String) -> bool:
+	await get_tree().process_frame
+	if app.interface.checkout==null:return false
+	var button:=app.interface.checkout.find_child(id,true,false) as Button
+	if button==null:return false
+	button.pressed.emit();await get_tree().process_frame
+	return true
+func walk_to(actor: DepotPlayer,destination: Vector3,reach := .35) -> bool:
+	var path:=world.navigation.path(actor.global_position,destination)
+	for step in 1000:
+		var diff:=destination-actor.global_position;diff.y=0
+		if diff.length()<reach:Input.action_release("forward");await ticks(2);return true
+		while not path.is_empty() and Vector2(path[0].x-actor.position.x,path[0].z-actor.position.z).length()<.36:path.remove_at(0)
+		if path.is_empty():path.append(destination)
+		var direction:=path[0]-actor.global_position;actor.camera_rig.yaw=atan2(-direction.x,-direction.z)
+		Input.action_press("forward");await ticks(1)
+	Input.action_release("forward");return false
+func fetch_order_box() -> bool:
+	if app.interface.checkout!=null:await press_register("CallDeryk")
+	if world.player.identity!="Dery":world.switch_player()
+	var actor:=world.player
+	var door:=find_interaction(world.depot.stock_door,"door")
+	if not await walk_to(actor,Vector3(4.85,0,-10.35),.45):print("COURIER_FAIL door ",actor.position);return false
+	if not door.open:door.activate(actor);await ticks(8)
+	var box: Node3D=world.depot.crates[world.sale.supply_id()]
+	if not await walk_to(actor,box.global_position+Vector3(0,0,.65),.28):print("COURIER_FAIL stock ",actor.position);return false
+	if not find_interaction(box,"crate").activate(actor):print("COURIER_FAIL pickup ",actor.position," box=",box.global_position," carry=",actor.carried_id," action=",actor.motion.action_active);return false
+	for step in 120:
+		await ticks(1)
+		if not actor.motion.action_active and not actor.handling.busy:break
+	if not bulk_checkpoint_checked:
+		var supply_id:=world.sale.supply_id();var old_total:=Session.sales_cents
+		Session.save_shift(actor.global_position);app.start_saved();world=app.world;actor=world.characters.Dery;player=actor;await ticks(8)
+		check(world.player==actor and actor.carried_id==supply_id and actor.carried==world.depot.crates[supply_id] and not world.sale.bulk_supplied and Session.sales_cents==old_total,"continuar com Deryk carregando a caixa do pedido preserva mercadoria, cliente e receita")
+		bulk_checkpoint_checked=true;door=find_interaction(world.depot.stock_door,"door")
+	# Clear the opened leaf before turning into the shop; the coarse A* grid is static.
+	if not await walk_to(actor,Vector3(4.95,0,-11.7),.3):print("COURIER_FAIL inside door ",actor.position);return false
+	if not door.open:door.activate(actor);await ticks(8)
+	if not await walk_to(actor,Vector3(4.95,0,-8.8),.3):print("COURIER_FAIL outside door ",actor.position);return false
+	if not await walk_to(actor,CheckoutFixture.CUSTOMER_POSITION+Vector3(.55,0,0),.4):print("COURIER_FAIL counter ",actor.position);return false
+	if not world.supply_order(actor):print("COURIER_FAIL supply ",actor.position," carry=",actor.carried_id," action=",actor.motion.action_active," busy=",actor.handling.busy);return false
+	for step in 120:
+		await ticks(1)
+		if world.sale.bulk_supplied and not actor.motion.action_active and not actor.handling.busy:break
+	return world.sale.bulk_supplied and world.switch_player()
 func shadow_light_count() -> int:
 	var count:=0
 	for light in world.find_children("*","Light3D",true,false):
@@ -48,6 +94,14 @@ func display_bottles_supported() -> bool:
 	return true
 func _ready() -> void:call_deferred("run")
 func run() -> void:
+	var totals: Array[int]=[]
+	for id in range(1,6):totals.append(ShopSale.create(id).total())
+	check(totals==[1150,7200,3200,4300,2000] and ShopSale.money(350)=="R$ 3,50","catálogo calcula pedidos variados em centavos e formata reais sem arredondamento")
+	var exact:=ShopSale.create(5)
+	for sku in exact.order:
+		for i in int(exact.order[sku]):exact.register(sku)
+	check(exact.confirm_items() and exact.receive_cash() and exact.change_due()==0 and exact.confirm_change(),"pagamento exato conclui a conferência sem exigir moeda de troco")
+	check(not exact.receive_cash() and not exact.add_coin(-50) and exact.phase==ShopSale.Phase.READY,"pagamento e troco não podem ser repetidos fora da etapa correta")
 	app=load("res://scenes/main/main.tscn").instantiate();app.process_mode=Node.PROCESS_MODE_PAUSABLE;add_child(app)
 	await get_tree().process_frame
 	check(get_tree().paused,"menu inicial pausa o mundo")
@@ -400,26 +454,80 @@ func run() -> void:
 	Engine.time_scale=12
 	var waiting_ticks:=0
 	var checkout_gate_checked:=false
+	var register_checked:=false
+	var change_checked:=false
+	var sale_resumed:=false
+	var bulk_checked:=false
+	var delivered_checked:=false
 	for i in 3000:
 		await get_tree().physics_frame
 		if world.customer!=null:
 			served_states[world.customer.state]=true
 			if world.customer.state in [Customer.State.WAITING,Customer.State.PAYING] and world.customer.global_position.distance_to(CheckoutFixture.CUSTOMER_POSITION)>.4:checkout_positions_valid=false
-			if world.customer.state==Customer.State.WAITING and not world.customer.service_started:
+			if world.customer.state==Customer.State.WAITING and not world.customer.purchase_complete:
 				if not checkout_gate_checked:
 					waiting_ticks+=1
 					if waiting_ticks<60:continue
 					check(Session.customers_served==0 and not world.try_checkout(world.characters.Dery),"cliente aguarda atendimento e Deryk não conclui a venda no lugar de Felps")
 					checkout_gate_checked=true
 				if world.player.identity!="Felps":world.switch_player()
-				elif world.player.target!=null and world.player.target.kind=="checkout":
+				elif app.interface.checkout==null and world.player.target!=null and world.player.target.kind=="checkout":
 					var service_key:=InputEventKey.new();service_key.physical_keycode=KEY_E;service_key.keycode=KEY_E;service_key.pressed=true;Input.parse_input_event(service_key);Input.flush_buffered_events()
 					service_key=InputEventKey.new();service_key.physical_keycode=KEY_E;service_key.keycode=KEY_E;service_key.pressed=false;Input.parse_input_event(service_key);Input.flush_buffered_events()
+				if app.interface.checkout!=null:
+					var sale:=world.sale
+					match sale.phase:
+						ShopSale.Phase.REGISTER:
+							if sale.needs_bulk() and not sale.bulk_supplied:
+								check(not world.customer.product.visible and not world.checkout_step("confirm"),"pedido de caixa fechada aguarda mercadoria física e não inventa produto nas mãos do cliente")
+								var fetched:=await fetch_order_box()
+								check(fetched and world.sale.bulk_supplied and world.characters.Dery.carried==null,"Deryk percorre o estoque, pega a caixa e entrega no balcão antes de voltar a Felps")
+								if not fetched:break
+								bulk_checked=true;continue
+							if not register_checked:
+								check(Rect2(Vector2.ZERO,app.interface.root.size).encloses(app.interface.checkout.get_global_rect()) and world.characters.Felps.input_locked,"tela do caixa cabe na janela e impede caminhada enquanto recebe cliques")
+								await press_register("Register_beer_0");await press_register("ConfirmItems")
+								check(sale.phase==ShopSale.Phase.REGISTER and not world.checkout_step("receive") and Session.sales_cents==0,"produto ou quantidade errada impede cobrança e recebe resposta do cliente")
+								await press_register("Remove_beer_0");register_checked=true
+							for sku in sale.order:
+								while int(sale.registered.get(sku,0))<int(sale.order[sku]):await press_register("Register_"+sku)
+							await press_register("ConfirmItems")
+						ShopSale.Phase.PAYMENT:
+							await press_register("ReceiveCash")
+							if not change_checked:check(sale.phase==ShopSale.Phase.CHANGE and world.depot.counter.drawer_is_open,"receber dinheiro abre a gaveta e libera a separação do troco")
+						ShopSale.Phase.CHANGE:
+							if not change_checked:
+								await press_register("Coin_500");await press_register("ConfirmChange")
+								check(sale.phase==ShopSale.Phase.CHANGE and not world.customer.purchase_complete and Session.sales_cents==0,"troco errado mantém venda pendente e permite corrigir sem cobrar outra vez")
+								await press_register("UndoCoin");await press_register("Coin_500");change_checked=true
+							if not sale_resumed:
+								Session.save_shift(world.player.global_position)
+								var current_id:=sale.id
+								app.start_saved();world=app.world;player=world.characters.Dery;felps=world.characters.Felps;await ticks(8)
+								check(world.sale.id==current_id and world.sale.phase==ShopSale.Phase.CHANGE and world.sale.selected_change()==500 and world.customer.state==Customer.State.WAITING and Session.customers_served==0,"continuar preserva cliente, registro, dinheiro recebido e troco parcial sem concluir ou duplicar venda")
+								sale_resumed=true;continue
+							var remaining:=sale.change_due()-sale.selected_change()
+							for coin in ShopSale.COINS:
+								while coin<=remaining:
+									await press_register("Coin_"+str(coin));remaining-=coin
+							await press_register("ConfirmChange")
+						ShopSale.Phase.READY:
+							var previous_count:=Session.customers_served;var previous_cash:=Session.sales_cents
+							await press_register("DeliverPurchase")
+							if not delivered_checked:
+								check(world.customer.purchase_complete and world.customer.bag.visible and Session.customers_served==previous_count+1 and Session.sales_cents==previous_cash+sale.total() and not world.checkout_step("deliver"),"entrega cria recibo, sacola e receita uma única vez e libera a saída do cliente")
+								delivered_checked=true
 		if Dialogue.active and world.customer!=null and world.customer.state==Customer.State.WAITING:
 			clear_dialogue()
 		if Session.warning_delivered:break
 	Engine.time_scale=1
+	if not Session.warning_delivered:
+		print("CHECKOUT_FLOW_DEBUG served=",Session.customers_served," stage=",Session.stage," active=",world.player.identity," dery=",world.characters.Dery.position," phase=",world.sale.phase if world.sale!=null else -1," customer=",world.customer.position if world.customer!=null else Vector3.ZERO," state=",world.customer.state if world.customer!=null else -1," routes=",world.customer.reroutes if world.customer!=null else -1," next=",world.customer.waypoints[0] if world.customer!=null and not world.customer.waypoints.is_empty() else Vector3.ZERO," dialogue=",Dialogue.active)
 	check(Session.customers_served>=3,"clientes atravessam loja, compram e saem")
+	check(register_checked and change_checked and sale_resumed and bulk_checked and delivered_checked,"turno percorre registro, troco, retomada e trabalho dos dois personagens")
+	var ledger_total:=0
+	for receipt in Session.receipts:ledger_total+=int(receipt.total)
+	check(ledger_total==Session.sales_cents and Session.receipts.size()==Session.customers_served,"receita do turno corresponde aos recibos sem duplicação após continuar")
 	var served_checkpoint=JSON.parse_string(FileAccess.get_file_as_string(Session.SAVE_PATH))
 	check(served_checkpoint is Dictionary and int(served_checkpoint.get("customers",0))==Session.customers_served,"saída do cliente salva automaticamente o total de atendimentos concluídos")
 	var ambient_finished:=true
@@ -468,6 +576,12 @@ func run() -> void:
 	var legacy_file:=FileAccess.open(Session.SAVE_PATH,FileAccess.WRITE);legacy_file.store_string(JSON.stringify(legacy));legacy_file.close()
 	app.start_saved();world=app.world;player=world.player;await ticks(8)
 	check(player.identity=="Dery" and player.carried_id=="stock_1" and player.carried==world.depot.crates.stock_1 and world.characters.Felps.position.distance_to(CheckoutFixture.STAFF_POSITION)<.1,"checkpoint antigo da versão 1 migra para a dupla preservando a caixa carregada")
+	Session.save_shift(player.global_position)
+	var previous_format=JSON.parse_string(FileAccess.get_file_as_string(Session.SAVE_PATH));previous_format.version=2
+	for field in ["sale","customer_state","next_sale_id","sales_cents","receipts","familiar_visits"]:previous_format.erase(field)
+	legacy_file=FileAccess.open(Session.SAVE_PATH,FileAccess.WRITE);legacy_file.store_string(JSON.stringify(previous_format));legacy_file.close()
+	app.start_saved();world=app.world;player=world.player;await ticks(8)
+	check(player.carried_id=="stock_1" and world.characters.size()==2 and Session.sales_cents==0 and Session.receipts.is_empty(),"checkpoint da versão 2 preserva a dupla e caixas ao migrar para pedidos e dinheiro")
 	print("RESULT ",checks-failures.size(),"/",checks," passed; failures=",failures)
 	app.queue_free()
 	await get_tree().process_frame

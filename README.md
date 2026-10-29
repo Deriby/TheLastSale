@@ -2,11 +2,21 @@
 
 Demonstração jogável em **Godot 4.4.1 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP, com uma rotina narrativa curta. A campanha completa continua em desenvolvimento.
 
-**[Baixar o projeto 0.16.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.16.0.zip)**
+**[Baixar o projeto 0.17.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.17.0.zip)**
 
 Extraia o ZIP, importe `project.godot` no Godot **4.4.1**, aguarde a importação dos modelos e pressione **F5**. O arquivo inclui os modelos animados, cenários, código e recursos usados no jogo. [Conteúdo e instruções do projeto](downloads/project/README.md).
 
-## Revisão 0.16.0 — dupla jogável, caixas e atendimento básico
+## Revisão 0.17.0 — pedidos, dinheiro e troco
+
+Felps agora registra produtos e quantidades, recebe dinheiro, separa o troco e entrega a compra. Os clientes fazem pedidos variados, esperam pelo atendimento e reagem a erros. Alguns pedidos precisam de uma caixa fechada: Felps chama Deryk, que busca a mercadoria no estoque e a entrega no balcão.
+
+O monitor e a gaveta acompanham a venda, com produtos no balcão e efeitos de scanner, dinheiro e entrega. O salvamento conserva cliente, registro, dinheiro, troco parcial, recibos e os dois personagens. A receita é creditada uma vez por compra concluída. Cartão e Pix são as próximas formas de pagamento.
+
+**183/183 verificações** passaram no projeto e no ZIP extraído após importação limpa. [Controles, capturas e validação](docs/checkout_v017/README.md).
+
+![Frente de caixa e pedido do cliente](docs/checkout_v017/register.png)
+
+## Revisão anterior 0.16.0 — dupla jogável, caixas e atendimento básico
 
 **Tab** alterna entre **Deryk**, responsável pelas caixas e reposição, e **Felps**, responsável pelo balcão. Os dois permanecem no cenário com seus próprios corpos, câmeras, posições e objetos. O cliente aguarda Felps usar **E** no caixa para começar o atendimento.
 
@@ -148,9 +158,9 @@ A reconstrução 0.2 do interior recebeu gôndolas abastecidas por categoria, ge
 
 ## Jogar
 
-**[Baixar o projeto Godot 0.16.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.16.0.zip)**
+**[Baixar o projeto Godot 0.17.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.17.0.zip)**
 
-O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **Demonstração 0.16.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
+O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **Demonstração 0.17.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
 
 O download atual é o projeto para o editor. O diretório `downloads/windows` guarda apenas a entrega anterior 0.9.0.
 

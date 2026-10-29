@@ -1,5 +1,6 @@
-Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
-
+PASS catálogo calcula pedidos variados em centavos e formata reais sem arredondamento
+PASS pagamento exato conclui a conferência sem exigir moeda de troco
+PASS pagamento e troco não podem ser repetidos fora da etapa correta
 PASS menu inicial pausa o mundo
 PASS luzes das doze geladeiras ficam restritas aos equipamentos sem iluminar o piso
 PASS nova iluminação preserva o orçamento de cinco luzes com sombras
@@ -121,7 +122,7 @@ PASS porta fechada bloqueia passagem
 PASS porta aberta libera passagem física
 PASS caixa distante exige aproximação antes de alcançar
 PASS Q durante a pegada agenda a soltura e Tab aguarda a animação
-WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@34/stock_1/@MeshInstance3D@2100" (possibly benign).
+WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@34/stock_1/@MeshInstance3D@2103" (possibly benign).
      at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
 PASS soltura agendada apoia a caixa em pé no chão sem perder o objeto
 PASS caixa largada pode ser pega novamente
@@ -150,10 +151,23 @@ PASS duas reposições completam objetivo na ordem
 PASS organização move caixa para palete
 PASS caixa permanece materialmente no palete
 PASS aviso exige clientes atendidos além das tarefas
-WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@4549/@CharacterBody3D@6755/Garota1/@MeshInstance3D@6761" (possibly benign).
+WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@4555/@CharacterBody3D@6764/Garota1/@MeshInstance3D@6770" (possibly benign).
      at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
 PASS cliente aguarda atendimento e Deryk não conclui a venda no lugar de Felps
+PASS tela do caixa cabe na janela e impede caminhada enquanto recebe cliques
+PASS produto ou quantidade errada impede cobrança e recebe resposta do cliente
+PASS receber dinheiro abre a gaveta e libera a separação do troco
+PASS troco errado mantém venda pendente e permite corrigir sem cobrar outra vez
+PASS continuar preserva cliente, registro, dinheiro recebido e troco parcial sem concluir ou duplicar venda
+PASS entrega cria recibo, sacola e receita uma única vez e libera a saída do cliente
+PASS pedido de caixa fechada aguarda mercadoria física e não inventa produto nas mãos do cliente
+PASS continuar com Deryk carregando a caixa do pedido preserva mercadoria, cliente e receita
+WARNING: [Physics interpolation] Non-interpolated instance triggered from physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@9470/Dery/BoxPlacementPreview/@MeshInstance3D@11694" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:966)
+PASS Deryk percorre o estoque, pega a caixa e entrega no balcão antes de voltar a Felps
 PASS clientes atravessam loja, compram e saem
+PASS turno percorre registro, troco, retomada e trabalho dos dois personagens
+PASS receita do turno corresponde aos recibos sem duplicação após continuar
 PASS saída do cliente salva automaticamente o total de atendimentos concluídos
 PASS conhecidos mantêm variações de repouso que terminam durante o expediente longo
 PASS máquina de estados dos clientes executa o ciclo completo
@@ -168,10 +182,11 @@ PASS continuar não duplica caixas já repostas
 PASS continuar restaura produtos na malha da geladeira
 PASS checkpoint antigo dentro da gôndola migra para corredor próximo
 PASS checkpoint antigo na rua acompanha a nova cota do terreno
+WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@16467/Depot/@Node3D@18325/DoorHinge/@MeshInstance3D@18342" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
 PASS checkpoint antigo no novo balcão restaura personagem fora dos móveis
 PASS pausa congela o relógio narrativo
 PASS pausa congela a deriva da névoa e as variações de luz
-WARNING: [Physics interpolation] Non-interpolated instance triggered from physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@13384/Depot/BeverageDisplay/CratesAndPallet/@MeshInstance3D@15404" (possibly benign).
-     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:966)
 PASS checkpoint antigo da versão 1 migra para a dupla preservando a caixa carregada
-RESULT 168/168 passed; failures=[]
+PASS checkpoint da versão 2 preserva a dupla e caixas ao migrar para pedidos e dinheiro
+RESULT 183/183 passed; failures=[]

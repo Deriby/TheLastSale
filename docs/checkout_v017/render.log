@@ -1,0 +1,10 @@
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:360)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+CAPTURE register {"internal_resolution":"(640, 480)","message":"Confira o pedido e registre os produtos.","order":{"snack_0":1,"water":2},"panel_rect":"[P: (160.0, 30.0), S: (960.0, 660.0)]","phase":0,"sales_cents":0,"selected_change":0,"total":1150,"window_size":"(1280, 720)"}
+CAPTURE wrong_change {"internal_resolution":"(640, 480)","message":"Cliente: acho que o troco não bate. Pode conferir?","order":{"snack_0":1,"water":2},"panel_rect":"[P: (160.0, 30.0), S: (960.0, 660.0)]","phase":2,"sales_cents":0,"selected_change":500,"total":1150,"window_size":"(1280, 720)"}
+CAPTURE ready {"internal_resolution":"(640, 480)","message":"Troco correto. Entregue a compra ao cliente.","order":{"snack_0":1,"water":2},"panel_rect":"[P: (160.0, 30.0), S: (960.0, 660.0)]","phase":3,"sales_cents":0,"selected_change":850,"total":1150,"window_size":"(1280, 720)"}
+CAPTURE delivered {"internal_resolution":"(640, 480)","message":"Troco correto. Entregue a compra ao cliente.","order":{"snack_0":1,"water":2},"panel_rect":"closed","phase":4,"sales_cents":1150,"selected_change":850,"total":1150,"window_size":"(1280, 720)"}
+CAPTURE bulk_request {"internal_resolution":"(640, 480)","message":"Confira o pedido e registre os produtos.","order":{"case_returnable":1},"panel_rect":"[P: (160.0, 30.0), S: (960.0, 660.0)]","phase":0,"sales_cents":1150,"selected_change":0,"total":7200,"window_size":"(1280, 720)"}

@@ -3,6 +3,13 @@ extends Node3D
 signal slice_finished
 signal player_changed(actor: DepotPlayer)
 signal notice(text: String)
+signal checkout_requested
+signal checkout_changed
+signal checkout_closed
+var sale: ShopSale
+var cashier_open:=false
+var sale_save_wait:=-1.0
+var checkout_goods: Node3D
 var characters: Dictionary={}
 var depot: Depot
 var street: Street
@@ -18,6 +25,7 @@ var enemy_visual: Node3D
 func _ready() -> void:
 	add_to_group("shift_world")
 	var legacy_carried:=Session.carried_id
+	if not Session.sale_state.is_empty():sale=ShopSale.restore(Session.sale_state)
 	var env:=WorldEnvironment.new();env.name="Atmosphere";env.environment=Environment.new()
 	NightAtmosphere.configure(env.environment)
 	add_child(env)
@@ -52,6 +60,7 @@ func _ready() -> void:
 	var talk:=depot.interact(characters.Dery,"talk","Dery");characters.Dery.set_meta("interaction",talk)
 	select_player(Session.active_character)
 	sound=Soundscape.new();add_child(sound)
+	ensure_order_crate()
 	depot.restore_state(player)
 	for identity in characters:
 		var actor: DepotPlayer=characters[identity]
@@ -87,10 +96,13 @@ func switch_player() -> bool:
 	for actor in characters.values():
 		if actor.motion.action_active or actor.handling.busy:
 			notice.emit("Espere terminar de movimentar a caixa.");return false
+	checkout_closed.emit()
 	capture_state();select_player("Felps" if player.identity=="Dery" else "Dery")
 	Session.save_shift(player.global_position)
 	return true
 func capture_state() -> void:
+	Session.sale_state=sale.snapshot() if sale!=null else {}
+	Session.customer_state=customer.snapshot() if is_instance_valid(customer) else {}
 	for identity in characters:
 		var actor: DepotPlayer=characters[identity]
 		var at:=actor.global_position
@@ -99,21 +111,91 @@ func capture_state() -> void:
 	Session.crate_states.clear()
 	for id in depot.crates:
 		if not is_instance_valid(depot.crates[id]) or id in Session.stocked:continue
+		if sale!=null and id==sale.supply_id() and sale.bulk_supplied:continue
 		var item: Node3D=depot.crates[id]
 		var at:=item.global_position
 		Session.crate_states[id]={"position":[at.x,at.y,at.z],"yaw":item.global_rotation.y}
 func on_handling_completed() -> void:
 	if active:Session.save_shift(player.global_position)
 func can_checkout(actor: DepotPlayer) -> bool:
-	return actor.identity=="Felps" and actor.global_position.distance_to(CheckoutFixture.STAFF_POSITION)<1.4 and customer!=null and customer.state==Customer.State.WAITING and not customer.service_started
+	return actor.identity=="Felps" and actor.global_position.distance_to(CheckoutFixture.STAFF_POSITION)<1.4 and customer!=null and customer.state==Customer.State.WAITING and not customer.purchase_complete
 func try_checkout(actor: DepotPlayer) -> bool:
-	if not can_checkout(actor) or Dialogue.active:return false
-	customer.service_started=true
-	begin_checkout(customer)
+	if not can_checkout(actor) or Dialogue.active or sale==null:return false
+	if not customer.service_started:
+		customer.service_started=true;begin_checkout(customer)
+	else:checkout_requested.emit()
 	return true
+func set_register_open(value: bool) -> void:
+	cashier_open=value;characters.Felps.input_locked=value
+func can_operate_register() -> bool:
+	return sale!=null and can_checkout(player) and customer.service_started and not Dialogue.active
+func update_sale(sound_id := "") -> void:
+	update_checkout_scene();checkout_changed.emit();sale_save_wait=.25
+	if not sound_id.is_empty():sound.play_at(sound_id,CheckoutFixture.POSITION+Vector3.UP)
+func register_product(sku: String,quantity := 1) -> bool:
+	if not can_operate_register():return false
+	var result:=sale.register(sku,quantity)
+	update_sale("scanner" if result else "");return result
+func checkout_step(action: String,value := 0) -> bool:
+	if not can_operate_register():return false
+	var result:=false
+	match action:
+		"confirm":result=sale.confirm_items()
+		"receive":result=sale.receive_cash()
+		"coin":result=sale.add_coin(value)
+		"undo":result=sale.undo_coin()
+		"clear":result=sale.clear_change()
+		"change":result=sale.confirm_change()
+		"deliver":
+			if sale.phase!=ShopSale.Phase.READY:return false
+			sale.phase=ShopSale.Phase.COMPLETE;Session.record_sale(sale.receipt())
+			customer.purchase_complete=true;customer.product.hide();customer.bag.show()
+			if customer.warned and Session.can_warn():
+				warning_started=true;Session.stage=5;Session.changed.emit()
+				var lines: Array=JSON.parse_string(FileAccess.get_file_as_string("res://resources/warning.json"));Dialogue.play("warning",lines)
+			notice.emit("Compra entregue • "+ShopSale.money(sale.total())+" • Troco "+ShopSale.money(sale.selected_change()))
+			checkout_closed.emit();result=true
+	update_sale("register" if result and action=="receive" else ("cash" if result and action=="change" else ("bag" if result and action=="deliver" else "")))
+	if result and action=="deliver":Session.save_shift(player.global_position)
+	return result
+func ensure_order_crate() -> void:
+	if sale==null or not sale.needs_bulk() or sale.bulk_supplied:return
+	var id:=sale.supply_id()
+	if not depot.crates.has(id):depot.add_crate(id,Vector3(-.5,0,-13.35))
+func request_stock() -> bool:
+	if not can_operate_register() or not sale.needs_bulk() or sale.bulk_supplied:return false
+	notice.emit("Felps: Deryk, traz a caixa fechada do pedido pra mim? Ela está no estoque.")
+	checkout_closed.emit();return switch_player()
+func can_supply_order(actor: DepotPlayer) -> bool:
+	return sale!=null and sale.needs_bulk() and not sale.bulk_supplied and actor.identity=="Dery" and actor.carried_id==sale.supply_id() and actor.global_position.distance_to(CheckoutFixture.CUSTOMER_POSITION)<2.5
+func supply_order(actor: DepotPlayer) -> bool:
+	if not can_supply_order(actor) or actor.handling.busy or actor.motion.action_active:return false
+	actor.consume_carried(Vector3(-4.12,1.13,-1.9),func():
+		sale.bulk_supplied=true;update_sale("crate");notice.emit("Deryk: a caixa do pedido está no balcão. [Tab] volte a Felps."))
+	return true
+func update_checkout_scene() -> void:
+	if sale==null:return
+	if is_instance_valid(customer) and customer.service_started:depot.counter.show_sale(sale)
+	else:depot.counter.screen_text.text="JA • FRENTE DE CAIXA\n\nCAIXA DISPONÍVEL"
+	if checkout_goods!=null:checkout_goods.queue_free();checkout_goods=null
+	if sale.phase==ShopSale.Phase.COMPLETE or not is_instance_valid(customer) or not customer.service_started:return
+	checkout_goods=Node3D.new();checkout_goods.name="PurchaseGoods";add_child(checkout_goods)
+	var index:=0
+	for sku in sale.order:
+		if sku=="case_returnable":
+			if sale.bulk_supplied:
+				var box:=depot.prop("crate",Vector3(-4.17,1.13,-1.85));box.scale=Vector3.ONE*.65;box.reparent(checkout_goods)
+				for col in box.find_children("*","CollisionShape3D",true,false):col.disabled=true
+			continue
+		for i in mini(6-index,int(sale.order[sku])):
+			var item:=MeshInstance3D.new();checkout_goods.add_child(item);item.mesh=ProductLibrary.mesh(sku);item.material_override=ProductLibrary.material(sku)
+			item.position=Vector3(-4.32+(index%2)*.16,1.13,-1.6-floori(index/2.0)*.24);index+=1
 func _physics_process(delta: float) -> void:
 	if not active:return
 	Session.world_seconds+=delta
+	if sale_save_wait>=0:
+		sale_save_wait-=delta
+		if sale_save_wait<0:Session.save_shift(player.global_position)
 	if customer==null and Session.stage>0 and Session.stage<6 and not Dialogue.active:
 		spawn_wait-=delta
 		if spawn_wait<=0:spawn_customer(Session.can_warn())
@@ -125,24 +207,32 @@ func _physics_process(delta: float) -> void:
 		for i in 3:
 			tween.tween_property(light,"light_energy",float(light.get_meta("normal_energy",.16))*.20,.1)
 			tween.tween_property(light,"light_energy",float(light.get_meta("normal_energy",1.8)),.22)
-func spawn_customer(warning: bool) -> void:
-	customer=Customer.new();customer.navigation=navigation;customer.warned=warning;customer.appearance=Session.customers_served%3
+func spawn_customer(warning: bool,snapshot: Dictionary={}) -> void:
+	if is_instance_valid(customer):return
+	if snapshot.is_empty():
+		sale=ShopSale.create(Session.next_sale_id,warning);Session.next_sale_id+=1
+	ensure_order_crate()
+	customer=Customer.new();customer.navigation=navigation;customer.warned=warning;customer.appearance=int(snapshot.get("appearance",Session.customers_served%3))
+	customer.empty_handed=sale!=null and sale.needs_bulk() and sale.order.size()==1
+	if sale!=null:
+		for sku in sale.order:
+			if sku!="case_returnable":customer.basket_sku=sku;break
 	add_child(customer);customer.global_position=Vector3(-18,Street.surface_height(-18,1.8)+.01,1.8);customer.reset_physics_interpolation()
 	# _ready initially computes from local origin; recompute after spawn position.
 	customer.go_to(Vector3(0,0,-1.5))
 	customer.checked_out.connect(on_checkout)
 	customer.departed.connect(on_departure)
+	customer.impatient.connect(func(text: String):notice.emit(text))
+	if not snapshot.is_empty():customer.restore(snapshot)
+	update_checkout_scene()
+	if active:Session.save_shift(player.global_position)
 func on_checkout(who: Customer) -> void:
 	notice.emit("Felps, tem cliente esperando no caixa. [Tab] trocar personagem.")
 func begin_checkout(who: Customer) -> void:
-	sound.play_at("register",CheckoutFixture.POSITION+Vector3.UP)
-	if who.warned and Session.can_warn():
-		warning_started=true
-		Session.stage=5;Session.changed.emit()
-		var lines: Array=JSON.parse_string(FileAccess.get_file_as_string("res://resources/warning.json"))
-		Dialogue.play("warning",lines)
-	else:
-		Dialogue.play("purchase",[["Cliente","Boa noite! Só essa aqui mesmo."],["Felps","Fechou. Boa noite, vai com Deus!"]])
+	update_checkout_scene()
+	var request: String="Boa noite! Vou levar: "+sale.describe().replace("\n",", ")+"."
+	if sale.needs_bulk():request="Boa noite! Separa uma caixa fechada de retornável pra mim?"
+	Dialogue.play("sale_order_"+str(sale.id),[["Cliente",request],["Felps","Fechou. O Deryk traz a caixa do estoque." if sale.needs_bulk() and not sale.bulk_supplied else "Beleza! Vou registrar aqui pra você."]])
 func on_departure(who: Customer) -> void:
 	if who.warned and warning_started:
 		Session.stage=4
@@ -152,6 +242,7 @@ func on_departure(who: Customer) -> void:
 	Session.save_shift(player.global_position)
 func on_dialogue_completed(id: String) -> void:
 	if id=="after_warning":noise_pending=true
+	if sale!=null and id=="sale_order_"+str(sale.id) and can_checkout(player):checkout_requested.emit()
 func on_event(id: String) -> void:
 	match id:
 		"stocked":sound.play_at("crate",player.global_position)
@@ -164,6 +255,11 @@ func on_event(id: String) -> void:
 			slice_finished.emit()
 	if id in ["greeted","stocked","organized","warning"]:Session.save_shift(player.global_position)
 func restore_transient() -> void:
-	# A saved warning conversation safely restarts at the customer arrival.
-	if Session.stage==5:Session.stage=4
+	if sale!=null and not Session.customer_state.is_empty():
+		var state:=Session.customer_state.duplicate(true)
+		spawn_customer(bool(state.get("warned",false)),state)
+		if Session.stage==5 and customer!=null and customer.warned:
+			warning_started=true
+			var lines: Array=JSON.parse_string(FileAccess.get_file_as_string("res://resources/warning.json"));Dialogue.play("warning",lines)
+	elif Session.stage==5:Session.stage=4
 	noise_pending=Session.stage==6

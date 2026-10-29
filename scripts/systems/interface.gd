@@ -7,6 +7,7 @@ var root: Control
 var hud: Control
 var menu: PanelContainer
 var settings: SettingsPanel
+var checkout: CheckoutPanel
 var objective: Label
 var prompt: Label
 var subtitle: Label
@@ -75,7 +76,7 @@ func build_menu() -> void:
 	message=label(v,"21h40. O bairro vai dormir.\nPra vocês, ainda é expediente.",18)
 	buttons=VBoxContainer.new();v.add_child(buttons);buttons.add_theme_constant_override("separation",9)
 	rebuild_buttons()
-	label(v,"Demonstração 0.16.0 • Capítulo 1\nFones de ouvido recomendados",13).modulate=Color("9ca58f")
+	label(v,"Demonstração 0.17.0 • Capítulo 1\nFones de ouvido recomendados",13).modulate=Color("9ca58f")
 func button(text: String,callback: Callable) -> Button:
 	var b:=Button.new();buttons.add_child(b);b.text=text;b.pressed.connect(callback);return b
 func rebuild_buttons() -> void:
@@ -104,9 +105,22 @@ func set_paused(value: bool) -> void:
 func open_settings() -> void:
 	menu.hide();settings=SettingsPanel.new();root.add_child(settings);settings.position=Vector2(355,35)
 	settings.closed.connect(func():settings.queue_free();settings=null;menu.show())
+func open_checkout(world: ShiftWorld) -> void:
+	if paused or checkout!=null:return
+	checkout=CheckoutPanel.new();checkout.world=world;root.add_child(checkout);checkout.position=Vector2(160,30)
+	checkout.closed.connect(close_checkout)
+	world.set_register_open(true);hud.hide();Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
+func close_checkout() -> void:
+	if checkout==null:return
+	if is_instance_valid(checkout.world):checkout.world.set_register_open(false)
+	checkout.queue_free();checkout=null
+	if not paused:hud.show();Input.mouse_mode=Input.MOUSE_MODE_CAPTURED
 func update_objective() -> void:
 	var player:=get_tree().get_first_node_in_group("player") as DepotPlayer
-	objective.text="Atenda os clientes no balcão. [Tab] Deryk cuida da reposição." if player!=null and player.identity=="Felps" and Session.stage in [1,2,3,4] else Session.objective()
+	var world:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
+	if player!=null and player.identity=="Dery" and world!=null and world.sale!=null and world.sale.needs_bulk() and not world.sale.bulk_supplied:
+		objective.text="Pedido do balcão: leve a caixa fechada do estoque para Felps. [E] entregar no balcão."
+	else:objective.text="Atenda os clientes no balcão. [Tab] Deryk cuida da reposição." if player!=null and player.identity=="Felps" and Session.stage in [1,2,3,4] else Session.objective()
 func on_spoken(who: String,text: String) -> void:
 	speaker.text=who+"  •  [ESPAÇO] continuar" if not who.is_empty() else "";subtitle.text=text
 	hud.get_node("ControlsHint").visible=not Dialogue.active
@@ -120,6 +134,8 @@ func set_character(actor: DepotPlayer,animate := true) -> void:
 		fade_tween=create_tween();fade_tween.tween_property(switch_fade,"color:a",0.0,.18)
 func show_notice(text: String) -> void:
 	notice_label.text=text;notice_remaining=4.0
+	if checkout!=null and is_instance_valid(checkout.world) and checkout.world.sale!=null:
+		checkout.world.sale.message=text;checkout.queue_refresh()
 func _process(_delta: float) -> void:
 	var player:=get_tree().get_first_node_in_group("player") as DepotPlayer
 	if player!=null:
@@ -132,6 +148,11 @@ func _process(_delta: float) -> void:
 	if Session.stage>=5:minutes=maxi(minutes,22*60+35)
 	clock.text="%02d:%02d"%[minutes/60%24,minutes%60]
 func _input(event: InputEvent) -> void:
+	if checkout!=null:
+		if event.is_action_pressed("pause"):
+			close_checkout();get_viewport().set_input_as_handled();return
+		if event.is_action_pressed("switch_character"):
+			var world:=checkout.world;close_checkout();world.switch_player();get_viewport().set_input_as_handled();return
 	if event.is_action_pressed("pause") and has_started:
 		if settings!=null:settings.closed.emit()
 		else:set_paused(not paused)

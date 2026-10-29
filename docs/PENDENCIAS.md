@@ -10,7 +10,7 @@
 
 ## Próximas etapas de mecânicas
 
-- Detalhar o atendimento: lista de produtos, quantidades, registro, dinheiro/troco, cartão e Pix. A 0.16.0 inclui atendimento básico com Felps por E, usando as conversas e animações existentes.
+- Registro, quantidades, dinheiro/troco, entrega e recibos foram implementados na 0.17.0. Próximas formas de pagamento: cartão e Pix. [Validação e instruções](checkout_v017/README.md).
 - Expandir estoque e reposição, comunicação da dupla e visitas de Bryan/Zirico.
 - Implementar tarefas de fechamento e, depois, investigação, perseguição e esconderijos.
 - Definir o comportamento do companheiro durante situações de perigo. Nesta etapa, ele mantém sua posição e animações enquanto está fora do controle.

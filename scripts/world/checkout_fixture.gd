@@ -5,6 +5,10 @@ const POSITION:=Vector3(-4.25,0,-2.80)
 const CUSTOMER_POSITION:=Vector3(-3.10,0,-2.80)
 const STAFF_POSITION:=Vector3(-5.12,0,-3.10)
 const FOOTPRINT:=Rect2(-4.75,-4.30,1.0,3.0)
+var drawer: Node3D
+var screen_text: Label3D
+var drawer_tween: Tween
+var drawer_is_open:=false
 func _init() -> void:
 	name="Checkout";position=POSITION;rotation.y=PI/2
 	physics_interpolation_mode=Node.PHYSICS_INTERPOLATION_MODE_OFF
@@ -17,9 +21,11 @@ func _ready() -> void:
 	SurfaceMaterials.wood_box(batch,Vector3(0,1.09,0),Vector3(2.98,.075,1.00),wood)
 	for x in [-1.39,-.10,1.39]:batch.add_box(Vector3(x,.5,-.44),Vector3(.035,.94,.04),metal)
 	# Employee-side cash drawer, lower open cubbies and tucked notebook.
-	batch.add_box(Vector3(.52,.83,-.435),Vector3(1.24,.24,.035),dark)
-	batch.add_box(Vector3(.52,.895,-.459),Vector3(.85,.025,.023),metal)
-	var lock:=Geo.cylinder(self,Vector3(1.02,.79,-.46),.022,.012,metal);lock.rotation.x=PI/2
+	drawer=Node3D.new();drawer.name="CashDrawer";add_child(drawer)
+	Geo.box(drawer,Vector3(.52,.83,-.435),Vector3(1.24,.24,.035),dark,false)
+	Geo.box(drawer,Vector3(.52,.895,-.459),Vector3(.85,.025,.023),metal,false)
+	Geo.box(drawer,Vector3(.52,.72,-.24),Vector3(1.18,.025,.42),dark,false)
+	var lock:=Geo.cylinder(drawer,Vector3(1.02,.79,-.46),.022,.012,metal);lock.rotation.x=PI/2
 	SurfaceMaterials.wood_box(batch,Vector3(.52,.58,-.455),Vector3(1.25,.08,.055),wood)
 	batch.add_box(Vector3(.26,.625,-.465),Vector3(.63,.025,.18),Geo.material(Color("cecfba")))
 	for x in range(14):batch.add_box(Vector3(-.035+x*.043,.63,-.566),Vector3(.012,.03,.012),dark)
@@ -30,7 +36,10 @@ func _ready() -> void:
 	var monitor:=Node3D.new();monitor.name="RegisterMonitor";add_child(monitor);monitor.position=Vector3(.30,1.48,.045);monitor.rotation.y=PI
 	Geo.box(monitor,Vector3.ZERO,Vector3(.55,.36,.055),dark,false)
 	for i in 5:Geo.box(monitor,Vector3(0,-.10+i*.022,-.031),Vector3(.28,.007,.008),metal,false)
-	SceneDetail.panel(monitor,Vector3(0,.005,.029),Vector2(.505,.315),"pos_screen",0,.48)
+	Geo.box(monitor,Vector3(0,.005,.029),Vector3(.505,.315,.004),Geo.material(Color("d9e1c5")),false)
+	screen_text=Label3D.new();screen_text.name="LiveRegisterScreen";monitor.add_child(screen_text)
+	screen_text.position=Vector3(0,.005,.036);screen_text.pixel_size=.00125;screen_text.font_size=22;screen_text.outline_size=0;screen_text.modulate=Color("20362b")
+	screen_text.text="JA • FRENTE DE CAIXA\n\nCAIXA DISPONÍVEL";screen_text.no_depth_test=false
 	Geo.box(monitor,Vector3(0,-.23,-.005),Vector3(.035,.14,.04),dark,false)
 	Geo.box(self,Vector3(.30,1.142,.06),Vector3(.27,.025,.20),dark,false)
 	batch.add_box(Vector3(.32,1.148,-.29),Vector3(.48,.026,.19),dark)
@@ -60,3 +69,11 @@ func _ready() -> void:
 	for i in 4:StreetDetail.rotated_box(batch,Vector3(1.14,1.18+i*.008,-.24),Vector3(.27,.008,.20),Vector3(0,.13*i,0),Geo.material(Color("b0b7a0")))
 	for i in 2:batch.add_product("snack_"+str(i+1),Vector3(-1.19+i*.18,1.13,.02),.3,Vector3.ONE*.7)
 	batch.flush()
+func show_sale(sale: ShopSale) -> void:
+	var status: String=["REGISTRAR PRODUTOS","RECEBER DINHEIRO","SEPARAR TROCO","ENTREGAR COMPRA","COMPRA CONCLUÍDA"][sale.phase]
+	screen_text.text="JA • PEDIDO #%03d\n%s\nTOTAL %s\nRECEBIDO %s\nTROCO %s"%[sale.id,status,ShopSale.money(sale.total()),ShopSale.money(sale.tendered) if sale.phase>=ShopSale.Phase.CHANGE else "—",ShopSale.money(sale.change_due()) if sale.phase>=ShopSale.Phase.CHANGE else "—"]
+	var opened:=sale.phase==ShopSale.Phase.CHANGE
+	if opened!=drawer_is_open:
+		drawer_is_open=opened
+		if drawer_tween!=null:drawer_tween.kill()
+		drawer_tween=create_tween();drawer_tween.tween_property(drawer,"position:z",-.24 if opened else 0.0,.25)

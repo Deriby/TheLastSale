@@ -13,7 +13,7 @@ func prompt(player: Node3D) -> String:
 		"crate":
 			if player.identity!="Dery":return "[Tab] Deryk cuida das caixas e da reposição"
 			if player.carried!=null:return "Mãos ocupadas • Q para soltar"
-			return "Pegar caixa" if global_position.distance_to(player.global_position)<=.95 else "Aproxime-se para pegar a caixa"
+			return ("Pegar caixa do pedido" if identity.begins_with("order_") else "Pegar caixa") if global_position.distance_to(player.global_position)<=.95 else "Aproxime-se para pegar a caixa"
 		"fridge":
 			if get_parent().needs_restock and player.carried != null and Session.stage in [1,2] and Session.carried_id.begins_with("stock_"):
 				return "Colocar bebidas" if open else "Abrir geladeira"
@@ -23,13 +23,14 @@ func prompt(player: Node3D) -> String:
 		"talk": return "Conversar com "+("Deryk" if identity=="Dery" else "Felps")
 		"checkout":
 			var world:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
-			return "Atender cliente" if world!=null and world.can_checkout(player) else "Caixa • aguarde um cliente"
+			if world!=null and world.can_supply_order(player):return "Deixar a caixa do pedido no balcão"
+			return "Continuar atendimento" if world!=null and world.can_checkout(player) and world.customer.service_started else ("Atender cliente" if world!=null and world.can_checkout(player) else "Caixa • aguarde um cliente")
 		"familiar": return "Conversar com "+identity
 		"note": return "Examinar a porta antiga" if Session.stage != 6 else "Verificar o ruído"
 		"switch": return "Acender luz" if not open else "Apagar luz"
 	return "Interagir"
 func available_for(player: DepotPlayer) -> bool:
-	if kind=="checkout":return player.identity=="Felps"
+	if kind=="checkout":return player.identity=="Felps" or player.carried_id.begins_with("order_")
 	if kind=="talk":return get_parent()!=player
 	return true
 func activate(player: Node3D) -> bool:
@@ -66,14 +67,19 @@ func activate(player: Node3D) -> bool:
 			return true
 		"checkout":
 			var world:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
-			return world!=null and world.try_checkout(player)
+			return world!=null and (world.supply_order(player) if player.identity=="Dery" else world.try_checkout(player))
 		"familiar":
 			if Dialogue.active:return false
 			var lines: Array
+			var visits:=int(Session.familiar_visits.get(identity,0));Session.familiar_visits[identity]=visits+1
 			if identity=="Bryan":
-				lines=[["Bryan","Oi, Dery! O Felps tá trabalhando também?"],["Dery","Tá ali no caixa. Bom te ver, Bryan."],["Felps","Ô, Bryan! Chega mais. Fica aqui perto da gente."]]
+				if player.identity=="Felps":lines=[["Bryan","Ô, Felps! O Deryk tá aí também?"],["Felps","Tá cuidando do estoque. Fica aqui perto, Bryan."],["Dery","Já volto aí, moleque!"]]
+				elif visits>0:lines=[["Bryan","Vocês vão trabalhar até tarde hoje?"],["Dery","Até meia-noite. Tá uma correria, viu?"],["Felps","Depois a gente conversa com calma, Bryan."]]
+				else:lines=[["Bryan","Oi, Dery! O Felps tá trabalhando também?"],["Dery","Tá ali no caixa. Bom te ver, Bryan."],["Felps","Ô, Bryan! Chega mais. Fica aqui perto da gente."]]
 			else:
-				lines=[["Zirico","Boa noite, meus amigos... hoje o turno tá comprido, hein?"],["Dery","Boa noite, Zirico. Vai com calma por aí."],["Felps","Bom te ver, Zirico. Se cuida, viu?"]]
+				if player.identity=="Felps":lines=[["Zirico","Felps, cê não larga esse caixa hoje, hein?"],["Felps","Alguém tem que trabalhar, Zirico! O Deryk tá lá atrás."],["Zirico","Vocês dois se ajudam... isso é bom."]]
+				elif visits>0:lines=[["Zirico","Passei pra dar mais um boa-noite, meus amigos."],["Dery","Boa-noite, Zirico. Vai com calma."],["Felps","Se cuida no caminho, viu?"]]
+				else:lines=[["Zirico","Boa noite, meus amigos... hoje o turno tá comprido, hein?"],["Dery","Boa noite, Zirico. Vai com calma por aí."],["Felps","Bom te ver, Zirico. Se cuida, viu?"]]
 			Dialogue.play("familiar_"+identity,lines)
 			return true
 		"note":

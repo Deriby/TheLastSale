@@ -99,7 +99,7 @@ func build_staff() -> void:
 	checkout=interact(counter,"checkout")
 	set_counter_role("Dery")
 func set_counter_role(identity: String) -> void:
-	for collider in counter.find_children("*","CollisionObject3D",true,false):collider.set_meta("interaction",checkout if identity=="Felps" else staff_talk)
+	for collider in counter.find_children("*","CollisionObject3D",true,false):collider.set_meta("interaction",checkout if identity=="Felps" or Session.carried_id.begins_with("order_") else staff_talk)
 func restore_state(player: DepotPlayer) -> void:
 	for id in crates:
 		if id in Session.stocked:

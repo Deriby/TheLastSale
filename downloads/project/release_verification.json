@@ -1,25 +1,25 @@
 {
   "format": "Godot editor project ZIP",
-  "version": "0.16.0",
+  "version": "0.17.0",
   "godot": "4.4.1",
-  "file": "TheLastSale_Godot_0.16.0.zip",
-  "bytes": 80534065,
-  "sha256": "95b39142d94d7006fa022fbddb184cbb744bf4c28e4477122a03e29a2ea1aaa0",
+  "file": "TheLastSale_Godot_0.17.0.zip",
+  "bytes": 79965463,
+  "sha256": "539bd9b2564a73ce73ad77d20917875c400256d5f2a945b14006b17ea30deaa6",
   "crc_verified": true,
-  "files_verified_against_manifest": 646,
+  "files_verified_against_manifest": 661,
   "manifest_files_changed_by_import": 0,
   "clean_extraction_import_exit_code": 0,
   "import_script_errors": 0,
   "headless_import_texture_preview_messages": 14,
   "clean_extraction_integration": {
-    "passed": 168,
-    "total": 168,
+    "passed": 183,
+    "total": 183,
     "exit_code": 0,
     "runtime_errors": 0
   },
   "source_integration": {
-    "passed": 168,
-    "total": 168,
+    "passed": 183,
+    "total": 183,
     "exit_code": 0,
     "runtime_errors": 0
   },
@@ -31,20 +31,36 @@
   "switch_key": "Tab",
   "drop_key": "Q",
   "checkout_key": "E",
-  "save_version": 2,
-  "legacy_save_version_1_verified": true,
-  "queued_drop_during_pickup_verified": true,
-  "inactive_character_holding_restored": true,
-  "cashier_staff_position_preserved_on_load": true,
-  "customer_requires_felps_service": true,
+  "save_version": 3,
+  "legacy_save_versions_verified": [
+    1,
+    2
+  ],
+  "currency": "integer centavos",
+  "payment_methods": [
+    "cash"
+  ],
+  "planned_payment_methods": [
+    "card",
+    "pix"
+  ],
+  "wrong_items_block_payment": true,
+  "wrong_change_correctable": true,
+  "exact_payment_supported": true,
+  "partial_change_checkpoint_restored": true,
+  "held_order_box_checkpoint_restored": true,
+  "physical_courier_and_customer_routes_verified": true,
+  "npc_detours_around_people": true,
+  "receipt_and_revenue_credited_once": true,
   "completed_sales_autosaved": true,
   "full_customer_routes_and_story_verified": true,
+  "register_panel_fits_window": true,
   "ps1_and_ps12_preserved": true,
-  "assets_and_resources_unchanged_from_0_15_1": 414,
+  "assets_and_resources_unchanged_from_0_16_0": 414,
+  "new_synthesized_audio_files": 3,
   "default_frame_limit": 30,
   "native_radeon_r7_fps_measured": false,
-  "gameplay_report": "docs/gameplay_v016/validation.json",
-  "box_drop_issue": "Fixed and regression-tested in this release.",
-  "scope": "Controllable duo, safe crate handling and basic manual checkout; detailed payments and later gameplay phases remain planned.",
-  "import_note": "Headless import emits 14 known texture preview t=null messages; no script errors. Runtime integration has no errors."
+  "gameplay_report": "docs/checkout_v017/validation.json",
+  "scope": "Customer orders, product quantities, cash, correctable change, receipts, Deryk sealed-case deliveries and contextual conversations.",
+  "import_note": "Headless import emits 14 known texture preview t=null messages; no script errors. Runtime integration has no errors. Physics interpolation warnings may appear in test-driven state restoration."
 }

@@ -6,6 +6,12 @@ signal saving
 var active_character:="Dery"
 var character_states: Dictionary={}
 var crate_states: Dictionary={}
+var sale_state: Dictionary={}
+var customer_state: Dictionary={}
+var next_sale_id:=1
+var sales_cents:=0
+var receipts: Array=[]
+var familiar_visits: Dictionary={}
 var stage := 0
 var stocked: Array[String] = []
 var organized := false
@@ -28,6 +34,7 @@ func new_shift() -> void:
 	carried_id = ""
 	saved_position = Vector3(3.8, 0.1, 1.8)
 	active_character="Dery";character_states.clear();crate_states.clear()
+	sale_state.clear();customer_state.clear();next_sale_id=1;sales_cents=0;receipts.clear();familiar_visits.clear()
 	changed.emit()
 func objective() -> String:
 	return OBJECTIVES[clampi(stage, 0, OBJECTIVES.size()-1)]
@@ -56,6 +63,11 @@ func organize() -> bool:
 func serve_customer() -> void:
 	customers_served += 1
 	changed.emit()
+func record_sale(receipt: Dictionary) -> bool:
+	for previous in receipts:
+		if int(previous.id)==int(receipt.id):return false
+	receipts.append(receipt.duplicate(true));sales_cents+=int(receipt.total)
+	serve_customer();return true
 func can_warn() -> bool:
 	return stage == 4 and customers_served >= 2 and not warning_delivered
 func finish_warning() -> void:
@@ -74,7 +86,7 @@ func save_shift(position_value: Vector3) -> Error:
 	saving.emit()
 	saved_position = position_value
 	if character_states.has(active_character):character_states[active_character].position=[position_value.x,position_value.y,position_value.z]
-	var data := {"version":2,"stage":stage,"stocked":stocked,"organized":organized,"customers":customers_served,"warning":warning_delivered,"finale":finale_seen,"seconds":world_seconds,"position":[saved_position.x,saved_position.y,saved_position.z],"carried":carried_id,"active_character":active_character,"characters":character_states,"crates":crate_states}
+	var data := {"version":3,"stage":stage,"stocked":stocked,"organized":organized,"customers":customers_served,"warning":warning_delivered,"finale":finale_seen,"seconds":world_seconds,"position":[saved_position.x,saved_position.y,saved_position.z],"carried":carried_id,"active_character":active_character,"characters":character_states,"crates":crate_states,"sale":sale_state,"customer_state":customer_state,"next_sale_id":next_sale_id,"sales_cents":sales_cents,"receipts":receipts,"familiar_visits":familiar_visits}
 	var f := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if f == null: return FileAccess.get_open_error()
 	f.store_string(JSON.stringify(data))
@@ -82,7 +94,7 @@ func save_shift(position_value: Vector3) -> Error:
 func load_shift() -> bool:
 	if not FileAccess.file_exists(SAVE_PATH): return false
 	var data = JSON.parse_string(FileAccess.get_file_as_string(SAVE_PATH))
-	if not data is Dictionary or int(data.get("version",0)) not in [1,2]: return false
+	if not data is Dictionary or int(data.get("version",0)) not in [1,2,3]: return false
 	if not data.get("position") is Array or data.position.size() != 3: return false
 	stage = clampi(int(data.get("stage",0)),0,7)
 	stocked.assign(data.get("stocked", []))
@@ -96,6 +108,11 @@ func load_shift() -> bool:
 	active_character="Felps" if data.get("active_character", "Dery")=="Felps" else "Dery"
 	character_states=data.get("characters",{}).duplicate(true) if data.get("characters",{}) is Dictionary else {}
 	crate_states=data.get("crates",{}).duplicate(true) if data.get("crates",{}) is Dictionary else {}
+	sale_state=data.get("sale",{}).duplicate(true) if data.get("sale",{}) is Dictionary else {}
+	customer_state=data.get("customer_state",{}).duplicate(true) if data.get("customer_state",{}) is Dictionary else {}
+	next_sale_id=maxi(1,int(data.get("next_sale_id",customers_served+1)));sales_cents=maxi(0,int(data.get("sales_cents",0)))
+	receipts=data.get("receipts",[]).duplicate(true) if data.get("receipts",[]) is Array else []
+	familiar_visits=data.get("familiar_visits",{}).duplicate(true) if data.get("familiar_visits",{}) is Dictionary else {}
 	changed.emit()
 	return true
 func read_position(value: Variant,fallback: Vector3) -> Vector3:

@@ -51,12 +51,16 @@ func update_render_size() -> void:
 		screen.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	if retro!=null:retro.set_shader_parameter("game_bounds",bounds)
 func build_world() -> void:
+	interface.close_checkout()
 	if world!=null:
 		viewport.remove_child(world);world.free()
 	world=ShiftWorld.new();viewport.add_child(world)
 	for actor in world.characters.values():actor.focused.connect(on_focused.bind(actor))
 	world.player_changed.connect(func(actor: DepotPlayer):interface.set_character(actor))
 	world.notice.connect(interface.show_notice)
+	world.checkout_requested.connect(func():interface.open_checkout(world))
+	world.checkout_closed.connect(interface.close_checkout)
+	world.checkout_changed.connect(interface.update_objective)
 	interface.set_character(world.player,false)
 	world.restore_transient()
 func on_focused(text: String,actor: DepotPlayer) -> void:
@@ -76,7 +80,7 @@ func start_saved() -> void:
 	build_world();world.active=true
 
 func _unhandled_input(event: InputEvent) -> void:
-	if interface.paused or world==null:return
+	if interface.paused or interface.checkout!=null or world==null:return
 	if event.is_action_pressed("switch_character"):
 		world.switch_player();get_viewport().set_input_as_handled();return
 	world.player.camera_rig.handle_input(event)
