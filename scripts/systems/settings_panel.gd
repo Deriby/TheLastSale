@@ -22,10 +22,12 @@ func _ready() -> void:
 	var select:=OptionButton.new();select.name="RenderQuality";rows.add_child(select)
 	select.add_item("Nítida — resolução da janela",1);select.add_item("Retrô — metade da resolução",2);select.add_item("Econômica — um terço",3)
 	select.add_item("PS1 — 320×240 (4:3)",4)
-	select.select(3 if Preferences.ps1_mode else Preferences.pixel_scale-1)
+	select.add_item("PS1/2 — 640×480 (4:3)",5)
+	select.select((4 if Preferences.ps1_high_resolution else 3) if Preferences.ps1_mode else Preferences.pixel_scale-1)
 	select.item_selected.connect(func(i):
 		var mode:=select.get_item_id(i)
-		Preferences.ps1_mode=mode==4
+		Preferences.ps1_mode=mode==4 or mode==5
+		Preferences.ps1_high_resolution=mode==5
 		Preferences.pixel_scale=2 if Preferences.ps1_mode else mode
 		Preferences.save())
 	var limit_label:=Label.new();limit_label.text="Limite de quadros";rows.add_child(limit_label)

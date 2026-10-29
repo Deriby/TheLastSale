@@ -1,0 +1,68 @@
+{
+	"ps12_640": {
+		"image_position": [
+			160.0,
+			0.0
+		],
+		"image_size": [
+			960.0,
+			720.0
+		],
+		"internal_resolution": [
+			640,
+			480
+		],
+		"ui_size": [
+			1280.0,
+			720.0
+		],
+		"window_size": [
+			1280,
+			720
+		]
+	},
+	"ps1_320": {
+		"image_position": [
+			160.0,
+			0.0
+		],
+		"image_size": [
+			960.0,
+			720.0
+		],
+		"internal_resolution": [
+			320,
+			240
+		],
+		"ui_size": [
+			1280.0,
+			720.0
+		],
+		"window_size": [
+			1280,
+			720
+		]
+	},
+	"settings": {
+		"image_position": [
+			160.0,
+			0.0
+		],
+		"image_size": [
+			960.0,
+			720.0
+		],
+		"internal_resolution": [
+			640,
+			480
+		],
+		"ui_size": [
+			1280.0,
+			720.0
+		],
+		"window_size": [
+			1280,
+			720
+		]
+	}
+}

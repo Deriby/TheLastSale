@@ -2,11 +2,19 @@
 
 Demonstração jogável em **Godot 4.4.1 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP, com uma rotina narrativa curta. A campanha completa continua em desenvolvimento.
 
-**[Baixar o projeto 0.15.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.15.0.zip)**
+**[Baixar o projeto 0.15.1 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.15.1.zip)**
 
 Extraia o ZIP, importe `project.godot` no Godot **4.4.1**, aguarde a importação dos modelos e pressione **F5**. O arquivo inclui os modelos animados, cenários, código e recursos usados no jogo. [Conteúdo e instruções do projeto](downloads/project/README.md).
 
-## Revisão 0.15.0 — PS1 em 320×240 com janela grande
+## Revisão 0.15.1 — PS1/2 em 640×480
+
+Em **Configurações → Resolução interna / qualidade**, escolha **PS1/2 — 640×480 (4:3)**. A opção oferece mais definição e ocupa a mesma área da janela que PS1 em 320×240, mantendo HUD e menus nítidos. A preferência fica salva; os dois modos continuam disponíveis.
+
+**146/146 verificações** passaram no projeto e no ZIP extraído com importação limpa. [Comparação, instruções e validação](docs/resolution_v0151/README.md).
+
+![Modo PS1/2 nas Configurações](docs/resolution_v0151/settings.png)
+
+## Revisão anterior 0.15.0 — PS1 em 320×240 com janela grande
 
 Em **Configurações → Resolução interna / qualidade**, escolha **PS1 — 320×240 (4:3)**. O cenário é renderizado em 320×240 e ampliado, mantendo a janela grande e os menus nítidos. Na janela padrão de 1280×720, a imagem ocupa 960×720 com barras laterais de 160 pixels. A preferência fica salva; os outros modos continuam disponíveis.
 
@@ -132,9 +140,9 @@ A reconstrução 0.2 do interior recebeu gôndolas abastecidas por categoria, ge
 
 ## Jogar
 
-**[Baixar o projeto Godot 0.15.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.15.0.zip)**
+**[Baixar o projeto Godot 0.15.1 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.15.1.zip)**
 
-O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **Demonstração 0.15.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
+O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **Demonstração 0.15.1**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
 
 O download atual é o projeto para o editor. O diretório `downloads/windows` guarda apenas a entrega anterior 0.9.0.
 

@@ -658,6 +658,9 @@ preload_reimporting_scene: end
 	reimport: step 171: curtain.png
 	reimport: step 172: lamp_halo.png
 	reimport: step 173: leaves.png
+	reimport: step 174: night_sky.png
+	reimport: step 175: paving.png
+	reimport: step 176: plaster.png
 	reimport: step 177: tile.png
 	reimport: step 178: wall_base.png
 	reimport: step 179: asphalt.png

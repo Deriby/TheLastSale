@@ -1,0 +1,98 @@
+{
+  "version": "0.15.1",
+  "godot": "4.4.1",
+  "source_integration": {
+    "passed": 146,
+    "total": 146,
+    "exit_code": 0,
+    "runtime_errors": 0
+  },
+  "render_exit_code": 0,
+  "layout": {
+    "ps12_640": {
+      "image_position": [
+        160.0,
+        0.0
+      ],
+      "image_size": [
+        960.0,
+        720.0
+      ],
+      "internal_resolution": [
+        640,
+        480
+      ],
+      "ui_size": [
+        1280.0,
+        720.0
+      ],
+      "window_size": [
+        1280,
+        720
+      ]
+    },
+    "ps1_320": {
+      "image_position": [
+        160.0,
+        0.0
+      ],
+      "image_size": [
+        960.0,
+        720.0
+      ],
+      "internal_resolution": [
+        320,
+        240
+      ],
+      "ui_size": [
+        1280.0,
+        720.0
+      ],
+      "window_size": [
+        1280,
+        720
+      ]
+    },
+    "settings": {
+      "image_position": [
+        160.0,
+        0.0
+      ],
+      "image_size": [
+        960.0,
+        720.0
+      ],
+      "internal_resolution": [
+        640,
+        480
+      ],
+      "ui_size": [
+        1280.0,
+        720.0
+      ],
+      "window_size": [
+        1280,
+        720
+      ]
+    }
+  },
+  "resolution_preference_persisted": true,
+  "settings_reopened_with_ps12_selected": true,
+  "tested_window_sizes": [
+    [
+      1280,
+      720
+    ],
+    [
+      1280,
+      960
+    ],
+    [
+      1600,
+      900
+    ]
+  ],
+  "default_frame_limit": 30,
+  "native_radeon_r7_fps_measured": false,
+  "deferred_box_drop_issue": "Unchanged; recorded in docs/PENDENCIAS.md"
+}

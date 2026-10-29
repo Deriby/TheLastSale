@@ -1,4 +1,12 @@
-# Validação — revisão 0.15.0 — 29/10/2026
+# Validação — revisão 0.15.1 — 29/10/2026
+
+**146/146 verificações** passaram no projeto e no ZIP extraído após importação limpa. A opção **PS1/2 — 640×480 (4:3)** foi adicionada ao painel real de Configurações, mantendo PS1 em 320×240, Nítida, Retrô e Econômica.
+
+As seis verificações novas cobrem resolução interna de 640×480, mesma área visual de PS1 na janela padrão, HUD em resolução normal, preferência salva e opção selecionada ao reabrir o painel, redimensionamento e retorno a 320×240 sem escala residual. A verificação existente de retorno a Nítida também confere a restauração da escala do contêiner.
+
+[Capturas e dados de tamanho](resolution_v0151/README.md). O cenário ocupa 960×720 nos dois modos retrô na janela padrão de 1280×720. Nenhum modelo, iluminação ou lógica de caixas foi alterado. O desempenho nativo na Radeon R7 não foi medido. [Verificação do ZIP](../downloads/project/release_verification.json).
+
+## Registro anterior — revisão 0.15.0 — 29/10/2026
 
 **140/140 verificações** passaram no projeto e no ZIP extraído com importação limpa. A galeria [resolution_v015](resolution_v015/README.md) mostra o cenário em 320×240 dentro de uma janela de 1280×720, com imagem de 960×720 em 4:3 e HUD/menu em resolução normal.
 

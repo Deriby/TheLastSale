@@ -35,13 +35,17 @@ func update_render_size() -> void:
 	var available:=get_viewport().get_visible_rect().size
 	if available.x<=0 or available.y<=0:return
 	var bounds:=Vector4(0,0,1,1)
+	screen.scale=Vector2.ONE
 	if Preferences.ps1_mode:
-		# Keep the 3D image at 320x240; the container enlarges it with nearest filtering.
-		var zoom:=maxi(1,floori(minf(available.x/320.0,available.y/240.0)))
+		var render_size:=Vector2(640,480) if Preferences.ps1_high_resolution else Vector2(320,240)
+		var zoom:=maxi(1,floori(minf(available.x/render_size.x,available.y/render_size.y)))
 		screen.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
-		screen.stretch_shrink=zoom;screen.size=Vector2(320,240)*zoom
-		screen.position=((available-screen.size)*.5).floor()
-		bounds=Vector4(screen.position.x/available.x,screen.position.y/available.y,(screen.position.x+screen.size.x)/available.x,(screen.position.y+screen.size.y)/available.y)
+		screen.stretch_shrink=zoom;screen.size=render_size*zoom
+		# Enlarge 640x480 to the same 4:3 area even when the window fits a fractional scale.
+		if Preferences.ps1_high_resolution:screen.scale=Vector2.ONE*minf(available.x/screen.size.x,available.y/screen.size.y)
+		var display_size:=screen.size*screen.scale
+		screen.position=((available-display_size)*.5).floor()
+		bounds=Vector4(screen.position.x/available.x,screen.position.y/available.y,(screen.position.x+display_size.x)/available.x,(screen.position.y+display_size.y)/available.y)
 	else:
 		screen.stretch_shrink=Preferences.pixel_scale
 		screen.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)

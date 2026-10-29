@@ -1,25 +1,25 @@
 {
   "format": "Godot editor project ZIP",
-  "version": "0.15.0",
+  "version": "0.15.1",
   "godot": "4.4.1",
-  "file": "TheLastSale_Godot_0.15.0.zip",
-  "bytes": 79496665,
-  "sha256": "b6fdb32dda0d6f7c59790ea70e66db29fdad88d503a371c38cbcb6627457dfeb",
+  "file": "TheLastSale_Godot_0.15.1.zip",
+  "bytes": 80265058,
+  "sha256": "9d38d85fd315f2cb9a4ee1b3bf0f99549e8f7d13065ba3b18f4dc096af66eece",
   "crc_verified": true,
-  "files_verified_against_manifest": 639,
+  "files_verified_against_manifest": 641,
   "manifest_files_changed_by_import": 0,
   "clean_extraction_import_exit_code": 0,
   "import_script_errors": 0,
   "headless_import_texture_preview_messages": 14,
   "clean_extraction_integration": {
-    "passed": 140,
-    "total": 140,
+    "passed": 146,
+    "total": 146,
     "exit_code": 0,
     "runtime_errors": 0
   },
   "source_integration": {
-    "passed": 140,
-    "total": 140,
+    "passed": 146,
+    "total": 146,
     "exit_code": 0,
     "runtime_errors": 0
   },
@@ -27,11 +27,15 @@
     320,
     240
   ],
+  "ps12_internal_resolution": [
+    640,
+    480
+  ],
   "default_window_size": [
     1280,
     720
   ],
-  "ps1_displayed_image_size": [
+  "retro_displayed_image_size": [
     960,
     720
   ],
@@ -39,9 +43,10 @@
     1280,
     720
   ],
+  "assets_and_resources_unchanged_from_0_15_0": 414,
   "default_frame_limit": 30,
   "native_radeon_r7_fps_measured": false,
-  "resolution_report": "docs/resolution_v015/validation.json",
+  "resolution_report": "docs/resolution_v0151/validation.json",
   "box_drop_issue": "Unchanged; recorded in docs/PENDENCIAS.md for the gameplay phase.",
   "import_note": "Headless import emits 14 known texture preview t=null messages; no script errors. Runtime integration has no errors."
 }
