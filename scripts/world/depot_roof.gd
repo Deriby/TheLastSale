@@ -21,7 +21,7 @@ func patch(id: String,x0: float,x1: float,z0: float,z1: float,annex: bool,mat: M
 	slab(id,[Vector3(x0,a,z0),Vector3(x0,a,z1),Vector3(x1,b,z1),Vector3(x1,b,z0)],Vector3.DOWN*.10,mat)
 func _ready() -> void:
 	var roof:=Geo.material(Color("d5d9d4"),"res://assets/textures/depot/roof.png");roof.uv1_scale=Vector3.ONE*.65;roof.texture_filter=BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS;roof.cull_mode=BaseMaterial3D.CULL_DISABLED
-	var steel:=Geo.material(Color("62716e"));var flashing:=Geo.material(Color("899690"));var wall:=Geo.material(Color.WHITE,"res://assets/textures/depot/wall.png")
+	var steel:=SurfaceMaterials.make("painted_metal",Color("62716e"));var flashing:=SurfaceMaterials.make("steel",Color("899690"))
 	patch("MainRightDeck",0,6.12,-16.12,.06,false,roof)
 	patch("MainRearLeftDeck",-6.12,0,-16.12,-6,false,roof)
 	patch("MainFrontLeftDeck",-2.1,0,-6,.06,false,roof)
@@ -29,7 +29,7 @@ func _ready() -> void:
 	# Back gable meets the same ridge instead of leaving a triangular opening.
 	var gable:=SurfaceTool.new();gable.begin(Mesh.PRIMITIVE_TRIANGLES)
 	for p in [Vector3(-6.0,5.40,-16.02),Vector3(0,5.96,-16.02),Vector3(6.0,5.40,-16.02)]:gable.set_normal(Vector3.BACK);gable.add_vertex(p)
-	var rear:=MeshInstance3D.new();rear.name="RearGable";rear.mesh=gable.commit();rear.material_override=wall.duplicate();rear.material_override.cull_mode=BaseMaterial3D.CULL_DISABLED;add_child(rear)
+	var rear:=MeshInstance3D.new();rear.name="RearGable";rear.mesh=gable.commit();rear.material_override=SurfaceMaterials.make("wall",Color.WHITE,true);add_child(rear)
 	# Two risers were missing before: both the longitudinal and rear annex joints.
 	slab("AnnexSideRiser",[Vector3(-2.1,4.38,-6),Vector3(-2.1,5.811,-6),Vector3(-2.1,5.811,.06),Vector3(-2.1,4.38,.06)],Vector3.LEFT*.10,roof)
 	slab("AnnexRearRiser",[Vector3(-6.12,4.38,-6),Vector3(-2.1,4.38,-6),Vector3(-2.1,5.811,-6),Vector3(-6.12,5.4492,-6)],Vector3.FORWARD*.10,roof)

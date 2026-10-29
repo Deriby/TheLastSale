@@ -36,7 +36,7 @@ func ground_strip(x0: float,x1: float,z0: float,z1: float,offset0: float,offset1
 	for p in points:volume.append(p-Vector3.UP*.25)
 	shape.points=volume;collision.shape=shape;body.add_child(collision)
 func build_ground() -> void:
-	var asphalt:=StreetDetail.material(Color.WHITE,"asphalt",.45);asphalt.roughness=.81
+	var asphalt:=StreetDetail.material(Color.WHITE,"asphalt",.45)
 	var pavement:=StreetDetail.material(Color("d0ccbc"),"sidewalk",.7)
 	var curb:=StreetDetail.material(Color("bebda8"),"render")
 	# Shared grade knots keep the storefront apron flat and the street continuous downhill.

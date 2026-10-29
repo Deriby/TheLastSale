@@ -67,3 +67,13 @@ Sedã e hatch são modelos originais genéricos feitos no Blender, com carroceri
 A névoa de profundidade passa a 8–85 m com uma curva suave, somada a seis planos de opacidade baixa na rua, recortados antes do interior. Não se usa neblina volumétrica; o chão continua até ±160 m. A visibilidade próxima permanece suficiente para reconhecer os carros e atravessar a calçada.
 
 O anexo baixo à esquerda recebeu fechamentos no encontro lateral e traseiro com o telhado alto. As coberturas agora têm espessura, rufos, cumeeira, calha e colisão; os caibros e luminárias seguem a altura correspondente. O salão mantém cumeeira de cerca de 6 m e anexo a 4,48 m; os topos das paredes laterais foram ajustados a 5,42 m para acompanhar o beiral. Telhas curvas das casas, extintor, carvão e detalhes elétricos complementam o cenário sem constituir um levantamento do local real.
+
+## Revisão 0.8.0 — materiais
+
+[Comparações de materiais no jogo](materials_v08/README.md). A observação de `interno4.jpg` orienta o piso cinza com variações suaves e brilho acetinado, o reboco claro e o acabamento das gôndolas. As fotos do balcão enviadas na conversa orientam a madeira marrom envernizada e seu desgaste discreto. As capturas externas orientam a cor e a escala do asfalto, do cimento e da pintura das fachadas. As novas texturas são arte procedural original; os pixels das fotografias não foram incorporados ao jogo.
+
+São 12 conjuntos com albedo, normal e acabamento ORM: madeira, cerâmica, parede interna, reboco externo, asfalto, cimento, metal pintado, aço, plástico, borracha, pintura automotiva e vidro. O pacote contém 36 mapas, com mipmaps. A madeira usa 2048 × 1024; as cinco superfícies arquitetônicas, 1024²; os outros seis conjuntos, 512². Escalas e intervalos em [surface_report.json](surface_report.json). As intensidades de rugosidade e os relevos são estimativas artísticas, não medições físicas do local.
+
+A bancada tem coordenadas UV na escala de 2,4 × 1,2 m, com os veios seguindo seu comprimento. O atlas cerâmico cobre 2,4 × 2,4 m com 16 peças de cerca de 60 cm. As outras superfícies usam projeção em coordenadas do mundo para conservar a escala ao agrupar malhas. As dimensões e colisões do mobiliário foram preservadas.
+
+A pintura dos carros recebeu verniz e metalização mais contidos; pneus, aros e vidro têm respostas próprias. Os modelos GLB não foram remodelados. Nítida e Retrô usam relevo fino e oclusão das texturas. Econômica desliga esses dois efeitos e a filtragem anisotrópica dos novos materiais; cor, rugosidade e metalização permanecem. A troca é aplicada aos materiais existentes durante a partida.

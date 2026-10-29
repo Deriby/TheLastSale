@@ -9,17 +9,18 @@ func _init() -> void:
 	name="Checkout";position=POSITION;rotation.y=PI/2
 	physics_interpolation_mode=Node.PHYSICS_INTERPOLATION_MODE_OFF
 func _ready() -> void:
-	var wood:=SceneDetail.material("worktop");wood.roughness=.56;wood.uv1_scale=Vector3(1,.65,1)
-	var dark:=Geo.material(Color("252925"));var metal:=Geo.material(Color("555952"))
+	var wood:=SurfaceMaterials.make("wood")
+	var dark:=SurfaceMaterials.make("plastic",Color("252925"));var metal:=SurfaceMaterials.make("painted_metal",Color("555952"))
 	var batch:=PropBatch.new();batch.name="CheckoutObjects";add_child(batch)
-	Geo.box(self,Vector3(0,.53,0),Vector3(2.80,1.06,.82),wood)
-	batch.add_box(Vector3(0,1.09,0),Vector3(2.98,.075,1.00),wood)
+	var body:=Geo.box(self,Vector3(0,.53,0),Vector3(2.80,1.06,.82),wood)
+	body.mesh=SurfaceMaterials.wood_box_mesh(Vector3(2.80,1.06,.82))
+	SurfaceMaterials.wood_box(batch,Vector3(0,1.09,0),Vector3(2.98,.075,1.00),wood)
 	for x in [-1.39,-.10,1.39]:batch.add_box(Vector3(x,.5,-.44),Vector3(.035,.94,.04),metal)
 	# Employee-side cash drawer, lower open cubbies and tucked notebook.
 	batch.add_box(Vector3(.52,.83,-.435),Vector3(1.24,.24,.035),dark)
 	batch.add_box(Vector3(.52,.895,-.459),Vector3(.85,.025,.023),metal)
 	var lock:=Geo.cylinder(self,Vector3(1.02,.79,-.46),.022,.012,metal);lock.rotation.x=PI/2
-	batch.add_box(Vector3(.52,.58,-.455),Vector3(1.25,.08,.055),wood)
+	SurfaceMaterials.wood_box(batch,Vector3(.52,.58,-.455),Vector3(1.25,.08,.055),wood)
 	batch.add_box(Vector3(.26,.625,-.465),Vector3(.63,.025,.18),Geo.material(Color("cecfba")))
 	for x in range(14):batch.add_box(Vector3(-.035+x*.043,.63,-.566),Vector3(.012,.03,.012),dark)
 	for x in [-.97,1.04]:

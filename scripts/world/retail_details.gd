@@ -14,7 +14,7 @@ static func price_strip(parent: Node3D,at: Vector3,width: float,angle: float) ->
 	panel(parent,at,Vector2(width,.055),"price",angle)
 static func plastic_crate(parent: Node3D,at: Vector3,color: Color,stack_count := 1) -> void:
 	var batch:=PropBatch.new();parent.add_child(batch);batch.position=at
-	var plastic:=Geo.material(color)
+	var plastic:=SurfaceMaterials.make("plastic",color)
 	for level in stack_count:
 		var y:=level*.31
 		batch.add_box(Vector3(0,y+.03,0),Vector3(.59,.06,.39),plastic)

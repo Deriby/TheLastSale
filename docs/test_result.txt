@@ -64,11 +64,11 @@ PASS mãos livres após reposição
 PASS malha visível recebe novos produtos após reposição
 PASS pegar stock_2
 PASS pegar caixa começa com alcance antes da fixação
+WARNING: [Physics interpolation] Non-interpolated instance triggered from physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@1635/Dery/@Node3D@3227/stock_2/@MeshInstance3D@3134" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:966)
 PASS caixa presa ao transporte visível
 PASS mão permanece junto à pega lateral da caixa
 PASS repor stock_2
-WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@1634/stock_2/@MeshInstance3D@3133" (possibly benign).
-     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
 PASS mãos livres após reposição
 PASS malha visível recebe novos produtos após reposição
 PASS duas reposições completam objetivo na ordem
@@ -88,7 +88,7 @@ PASS continuar não duplica caixas já repostas
 PASS continuar restaura produtos na malha da geladeira
 PASS checkpoint antigo dentro da gôndola migra para corredor próximo
 PASS checkpoint antigo na rua acompanha a nova cota do terreno
-WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@6455/Depot/@Node3D@7693/@MeshInstance3D@7717" (possibly benign).
+WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@6459/Depot/@Node3D@7697/@MeshInstance3D@7708" (possibly benign).
      at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
 PASS checkpoint antigo no novo balcão restaura personagem fora dos móveis
 PASS pausa congela o relógio narrativo

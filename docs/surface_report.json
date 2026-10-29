@@ -1,0 +1,194 @@
+[
+  {
+    "surface": "wood",
+    "pixels": [
+      2048,
+      1024
+    ],
+    "repeat_m": [
+      2.4,
+      1.2
+    ],
+    "roughness_range": [
+      0.312,
+      0.69
+    ],
+    "metallic": 0
+  },
+  {
+    "surface": "ceramic",
+    "pixels": [
+      1024,
+      1024
+    ],
+    "repeat_m": [
+      2.4,
+      2.4
+    ],
+    "roughness_range": [
+      0.405,
+      0.877
+    ],
+    "metallic": 0
+  },
+  {
+    "surface": "wall",
+    "pixels": [
+      1024,
+      1024
+    ],
+    "repeat_m": [
+      2.8,
+      2.8
+    ],
+    "roughness_range": [
+      0.868,
+      0.99
+    ],
+    "metallic": 0
+  },
+  {
+    "surface": "plaster",
+    "pixels": [
+      1024,
+      1024
+    ],
+    "repeat_m": [
+      2.8,
+      2.8
+    ],
+    "roughness_range": [
+      0.869,
+      0.99
+    ],
+    "metallic": 0
+  },
+  {
+    "surface": "asphalt",
+    "pixels": [
+      1024,
+      1024
+    ],
+    "repeat_m": [
+      4,
+      4
+    ],
+    "roughness_range": [
+      0.812,
+      0.954
+    ],
+    "metallic": 0
+  },
+  {
+    "surface": "paving",
+    "pixels": [
+      1024,
+      1024
+    ],
+    "repeat_m": [
+      2.0,
+      2.0
+    ],
+    "roughness_range": [
+      0.837,
+      0.962
+    ],
+    "metallic": 0
+  },
+  {
+    "surface": "painted_metal",
+    "pixels": [
+      512,
+      512
+    ],
+    "repeat_m": [
+      0.85,
+      0.85
+    ],
+    "roughness_range": [
+      0.447,
+      0.687
+    ],
+    "metallic": 0.08
+  },
+  {
+    "surface": "steel",
+    "pixels": [
+      512,
+      512
+    ],
+    "repeat_m": [
+      0.6,
+      0.6
+    ],
+    "roughness_range": [
+      0.23,
+      0.551
+    ],
+    "metallic": 0.82
+  },
+  {
+    "surface": "plastic",
+    "pixels": [
+      512,
+      512
+    ],
+    "repeat_m": [
+      0.6,
+      0.6
+    ],
+    "roughness_range": [
+      0.546,
+      0.73
+    ],
+    "metallic": 0
+  },
+  {
+    "surface": "rubber",
+    "pixels": [
+      512,
+      512
+    ],
+    "repeat_m": [
+      0.5,
+      0.5
+    ],
+    "roughness_range": [
+      0.882,
+      0.963
+    ],
+    "metallic": 0
+  },
+  {
+    "surface": "carpaint",
+    "pixels": [
+      512,
+      512
+    ],
+    "repeat_m": [
+      1.2,
+      1.2
+    ],
+    "roughness_range": [
+      0.292,
+      0.387
+    ],
+    "metallic": 0.32
+  },
+  {
+    "surface": "glass",
+    "pixels": [
+      512,
+      512
+    ],
+    "repeat_m": [
+      1.4,
+      1.4
+    ],
+    "roughness_range": [
+      0.14,
+      0.261
+    ],
+    "metallic": 0.03
+  }
+]

@@ -2,7 +2,17 @@
 
 Demonstração jogável em **Godot 4.4.1 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP, com uma rotina narrativa curta. A campanha completa continua em desenvolvimento.
 
-## Revisão 0.7.0 — carros modelados, neon e telhado corrigido
+## Revisão 0.8.0 — materiais e acabamento
+
+A bancada recebeu veios irregulares na escala da madeira, riscos finos e variações de verniz. O piso tem peças cinza acetinadas de aproximadamente 60 cm, com rejunte, manchas suaves e pequenas diferenças entre peças. Paredes, reboco, asfalto e calçada agora têm rugosidade e relevo próprios. As cores e a escala foram orientadas pelas fotos do depósito.
+
+Metal pintado, aço, plástico, pneus, vidro e pintura dos carros também receberam acabamentos distintos. Há 12 conjuntos de materiais originais, com mapas de cor, relevo e acabamento. Nítida e Retrô exibem os detalhes; Econômica desliga o relevo fino e a oclusão das texturas, além das sombras e do halo já desativados nesse modo.
+
+[Veja as comparações de antes/depois com as mesmas câmeras e luzes](docs/materials_v08/README.md).
+
+![Bancada com madeira e verniz revisados — 0.8.0](docs/materials_v08/wood_after.png)
+
+## Revisão anterior 0.7.0 — carros modelados, neon e telhado corrigido
 
 Os carros foram substituídos por dois modelos originais feitos no Blender, com carroceria curva, para-brisas, vidros laterais, bancos, volante, retrovisores, faróis, rodas e recortes físicos dos para-lamas. A fachada recebeu iluminação vermelha e branca, letreiro ABERTO e reflexos locais nos carros. Uma névoa leve percorre apenas a rua, além da neblina do horizonte.
 
@@ -62,9 +72,9 @@ A reconstrução 0.2 do interior recebeu gôndolas abastecidas por categoria, ge
 
 ## Jogar
 
-**[Baixar o jogo 0.7.0 para Windows x64 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/windows/A_Ultima_Venda_Windows_x64.zip)**
+**[Baixar o jogo 0.8.0 para Windows x64 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/windows/A_Ultima_Venda_Windows_x64.zip)**
 
-O pacote está versionado neste repositório em [`downloads/windows`](downloads/windows). Extraia o ZIP em uma pasta nova antes de abrir o jogo. O menu mostra **Demonstração 0.7.0**. A verificação SHA-256 está ao lado do arquivo. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida** se sua configuração antiga estiver em Retrô. Nítida também usa MSAA 2× para suavizar contornos. O modo **Econômica** reduz a resolução e desliga as sombras dinâmicas e o halo de câmera para diminuir o custo gráfico.
+O pacote está versionado neste repositório em [`downloads/windows`](downloads/windows). Extraia o ZIP em uma pasta nova antes de abrir o jogo. O menu mostra **Demonstração 0.8.0**. A verificação SHA-256 está ao lado do arquivo. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida** se sua configuração antiga estiver em Retrô. Nítida também usa MSAA 2× para suavizar contornos. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera para diminuir o custo gráfico.
 
 **Windows:** extraia o pacote Windows e mantenha `A_Ultima_Venda.exe` junto de `A_Ultima_Venda.pck`. Abra o executável e escolha **Iniciar expediente**. O binário foi exportado nesta sessão Linux; sua execução no Windows ainda precisa de validação.
 

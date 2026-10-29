@@ -4,8 +4,11 @@ const ART:="res://assets/textures/street/"
 static var cube: BoxMesh
 static var sphere: SphereMesh
 static func material(color: Color,art: String="",scale_value:=.7) -> StandardMaterial3D:
+	if art in ["asphalt","render","sidewalk","cream","stained"]:
+		var surface: String={"asphalt":"asphalt","render":"plaster","sidewalk":"paving","cream":"plaster","stained":"plaster"}[art]
+		return SurfaceMaterials.make(surface,color)
+	if art=="gate":return SurfaceMaterials.make("painted_metal",color)
 	var path:=ART+art+".png" if not art.is_empty() else ""
-	if art in ["asphalt","render","sidewalk"]:path="res://assets/textures/mood/"+{"asphalt":"asphalt","render":"plaster","sidewalk":"paving"}[art]+".png"
 	var m:=Geo.material(color,path)
 	m.uv1_scale=Vector3.ONE*scale_value;m.texture_filter=BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	return m

@@ -20,8 +20,8 @@ func _ready() -> void:
 		"freezer":make_freezer()
 	products.flush()
 func make_shelf() -> void:
-	var metal:=Geo.material(Color("242b27"))
-	var edge:=Geo.material(Color("51574a"))
+	var metal:=SurfaceMaterials.make("painted_metal",Color("242b27"))
+	var edge:=SurfaceMaterials.make("painted_metal",Color("51574a"))
 	for x in [-.55,.55]:
 		for z in [-1.39,1.39]:
 			products.add_box(Vector3(x,.8,z),Vector3(.045,1.60,.045),metal)
@@ -48,13 +48,13 @@ func make_shelf() -> void:
 	RetailDetails.collision(self,Vector3(0,.77,0),Vector3(1.14,1.54,2.88))
 	RetailDetails.shadow(self,Vector3(0,.008,0),Vector2(1.45,3.15))
 func make_fridge() -> void:
-	var shell:=Geo.material(Color("c5cbc0"))
+	var shell:=SurfaceMaterials.make("painted_metal",Color("c5cbc0"))
 	var dark:=Geo.material(Color("293a34"))
 	var brand_color: Color=[Color("a0893d"),Color("a93b34"),Color("396c85")][brand_index%3]
 	products.add_box(Vector3(0,.08,0),Vector3(1.04,.16,.76),shell)
 	products.add_box(Vector3(0,1.04,-.34),Vector3(1.04,1.94,.08),shell)
 	for x in [-.49,.49]:products.add_box(Vector3(x,1.02,0),Vector3(.065,1.9,.76),shell)
-	products.add_box(Vector3(0,2.04,0),Vector3(1.04,.18,.76),Geo.material(brand_color))
+	products.add_box(Vector3(0,2.04,0),Vector3(1.04,.18,.76),SurfaceMaterials.make("painted_metal",brand_color))
 	products.add_box(Vector3(0,1.08,-.29),Vector3(.92,1.72,.025),dark)
 	# Products are recessed behind the door, with a deliberately empty restock slot.
 	for row in 5:
@@ -75,10 +75,10 @@ func make_fridge() -> void:
 	for y in [.04,.067,.094]:products.add_box(Vector3(0,y,.389),Vector3(.8,.008,.012),dark)
 	RetailDetails.panel(self,Vector3(0,2.055,.389),Vector2(.96,.14),["beer_banner","soda_banner","water_banner"][brand_index%3],0,.12)
 	hinge=Node3D.new();hinge.name="DoorHinge";add_child(hinge);hinge.position=Vector3(-.49,0,.40)
-	var frame:=Geo.material(brand_color.darkened(.12))
+	var frame:=SurfaceMaterials.make("painted_metal",brand_color.darkened(.12))
 	for x in [0,.98]:Geo.box(hinge,Vector3(x,1.065,0),Vector3(.032,1.82,.045),frame,false)
 	for y in [.155,1.975]:Geo.box(hinge,Vector3(.49,y,0),Vector3(1,.032,.045),frame,false)
-	var glass:=StandardMaterial3D.new();glass.albedo_color=Color(.53,.74,.68,.10);glass.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA;glass.roughness=.22;glass.cull_mode=BaseMaterial3D.CULL_DISABLED
+	var glass:=SurfaceMaterials.make("glass",Color(.53,.74,.68,.10));glass.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA;glass.cull_mode=BaseMaterial3D.CULL_DISABLED
 	var pane:=Geo.box(hinge,Vector3(.49,1.065,0),Vector3(.935,1.77,.008),glass,false);pane.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	Geo.box(hinge,Vector3(.87,1.08,.045),Vector3(.03,.40,.04),Geo.material(Color("a1aca0")),false)
 	# Small diagonal glints suggest old glass without a screen-space reflection dependency.

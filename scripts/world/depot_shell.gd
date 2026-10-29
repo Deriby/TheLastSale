@@ -12,10 +12,8 @@ func solid(at: Vector3,size: Vector3,mat: Material,nav := true) -> MeshInstance3
 	if nav and at.y-size.y/2<1.8:blockers.append(Rect2(Vector2(at.x-size.x/2,at.z-size.z/2),Vector2(size.x,size.z)))
 	return Geo.box(self,at,size,mat)
 func build_envelope() -> void:
-	var wall:=Geo.material(Color.WHITE,"res://assets/textures/depot/wall.png")
-	wall.uv1_scale=Vector3.ONE*.55
-	var floor_mat:=Geo.material(Color.WHITE,"res://assets/textures/mood/tile.png")
-	floor_mat.uv1_scale=Vector3.ONE/0.60;floor_mat.roughness=.60;floor_mat.texture_filter=BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+	var wall:=SurfaceMaterials.make("wall")
+	var floor_mat:=SurfaceMaterials.make("ceramic")
 	solid(Vector3(0,-.14,-8.0),Vector3(12.2,.28,16.0),floor_mat,false)
 	solid(Vector3(6,2.71,-8),Vector3(.24,5.42,16),wall)
 	solid(Vector3(-6,2.2,-3),Vector3(.24,4.4,6),wall)
@@ -46,7 +44,7 @@ func build_roof() -> void:
 				spot.shadow_enabled=true;spot.shadow_bias=.035;spot.shadow_normal_bias=.65;spot.set_meta("mood_shadow",true)
 				spot.light_cull_mask=1
 func build_partition() -> void:
-	var wall:=Geo.material(Color.WHITE,"res://assets/textures/depot/wall.png")
+	var wall:=SurfaceMaterials.make("wall")
 	# Fictitious stock/cold-room volume, made explicit in the reference notes.
 	solid(Vector3(-1.1,1.6,-11.1),Vector3(9.8,3.2,.18),wall)
 	solid(Vector3(5.85,1.6,-11.1),Vector3(.3,3.2,.18),wall)
