@@ -1,4 +1,10 @@
-# Validação — revisão 0.10.0 — 29/10/2026
+# Validação — revisão 0.11.0 — 29/10/2026
+
+A revisão [optimization_v011](optimization_v011/README.md) reduz dados de geometria mantendo objetos, triângulos e iluminação. 109/109 verificações passaram no projeto. O cenário inicial é reaproveitado, estados de câmera são atualizados só quando mudam e o assassino oculto pausa sua animação. O padrão de limite é 30 FPS, configurável; o desempenho nativo na Radeon R7 permanece sem medição.
+
+O download atual é o projeto Godot 0.11.0 em ZIP, com os hashes e registros em [downloads/project](../downloads/project/README.md).
+
+## Registro anterior — revisão 0.10.0 — 29/10/2026
 
 O novo elenco usa os FBX com rig enviados pelo autor. Os registros em [cast_v010](cast_v010/README.md) confirmam **106/106 testes** no projeto e **106/106** no pacote Linux, além das revisões de renderização dos modelos e do cenário. Normal maps dos materiais importados: nove ativos em Nítida e zero em Econômica. A prévia de movimento tem 12 segundos.
 

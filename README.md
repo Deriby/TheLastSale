@@ -2,11 +2,17 @@
 
 Demonstração jogável em **Godot 4.4.1 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP, com uma rotina narrativa curta. A campanha completa continua em desenvolvimento.
 
-**[Baixar o projeto 0.10.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.10.0.zip)**
+**[Baixar o projeto 0.11.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.11.0.zip)**
 
 Extraia o ZIP, importe `project.godot` no Godot **4.4.1**, aguarde a importação dos modelos e pressione **F5**. O arquivo inclui os modelos animados, cenários, código e recursos usados no jogo. [Conteúdo e instruções do projeto](downloads/project/README.md).
 
-## Revisão 0.10.0 — novo elenco recebido
+## Revisão 0.11.0 — otimização para a meta de 30 FPS
+
+As malhas usam 44,6% menos vértices armazenados e 34,0% menos dados nos arrays de geometria, mantendo a contagem de objetos e triângulos. O início do turno aproveita o cenário já carregado; a câmera evita atualizações repetidas de estado do corpo; o assassino oculto pausa suas animações.
+
+O limite padrão é **30 FPS**, com opções de 60 FPS ou Sem limite em Configurações. Os detalhes, modelos, texturas e luzes foram mantidos. A medição foi feita em Linux/Mesa; 30 FPS na Radeon R7 ainda precisam de teste no PC alvo. [Relatório, dados e validação](docs/optimization_v011/README.md).
+
+## Revisão anterior 0.10.0 — novo elenco recebido
 
 Os novos Dery, Felps e Killer usam os FBX com rig fornecidos pelo autor. Bryan e Zirico têm presenças e conversas opcionais; Garota 1, Garota 2 e Velha 1 participam da rotina de clientes. O Carro 1 substitui o hatch estacionado. As animações foram criadas sobre os rigs recebidos, com medidas próprias para os pés, a passada e a altura de cada personagem.
 
@@ -94,9 +100,9 @@ A reconstrução 0.2 do interior recebeu gôndolas abastecidas por categoria, ge
 
 ## Jogar
 
-**[Baixar o projeto Godot 0.10.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.10.0.zip)**
+**[Baixar o projeto Godot 0.11.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.11.0.zip)**
 
-O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **Demonstração 0.10.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
+O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **Demonstração 0.11.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
 
 O download atual é o projeto para o editor. O diretório `downloads/windows` guarda apenas a entrega anterior 0.9.0.
 

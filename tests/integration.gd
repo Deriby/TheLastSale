@@ -24,8 +24,14 @@ func run() -> void:
 	app=load("res://scenes/main/main.tscn").instantiate();app.process_mode=Node.PROCESS_MODE_PAUSABLE;add_child(app)
 	await get_tree().process_frame
 	check(get_tree().paused,"menu inicial pausa o mundo")
+	var loaded_world_id: int=app.world.get_instance_id()
 	app.start_new();app.interface.has_started=true;app.interface.set_paused(false)
 	world=app.world;player=world.player
+	check(world.get_instance_id()==loaded_world_id,"primeiro início aproveita o cenário já carregado no menu")
+	check(world.enemy_visual.process_mode==Node.PROCESS_MODE_DISABLED,"assassino oculto não atualiza animações")
+	world.enemy_visual.show()
+	check(world.enemy_visual.process_mode==Node.PROCESS_MODE_INHERIT,"assassino retoma processamento quando fica visível")
+	world.enemy_visual.hide()
 	await ticks(12)
 	check(world.depot!=null and player.is_on_floor(),"cena principal e chão físico carregam")
 	player.position=Vector3(4.2,.01,-2.0);player.velocity=Vector3.ZERO;player.camera_rig.yaw=0;player.reset_physics_interpolation()

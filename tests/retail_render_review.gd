@@ -3,6 +3,7 @@ extends Node
 var app: Node
 var camera: Camera3D
 var prefix:=""
+var settle_frames:=25
 func _ready() -> void:call_deferred("review")
 func frames(count: int) -> void:
 	for i in count:await get_tree().process_frame
@@ -12,8 +13,9 @@ func view() -> void:
 	camera.position=Vector3(4.0,1.8,-.4);camera.look_at(Vector3(-1.5,1.0,-7.1));camera.fov=72;camera.current=true
 	app.world.player.hide()
 	app.world.depot.felps.hide()
+	for friend in get_tree().get_nodes_in_group("familiar_npcs"):friend.hide()
 func capture(id: String) -> Image:
-	await frames(25)
+	await frames(settle_frames)
 	await RenderingServer.frame_post_draw
 	var shot: Image=app.viewport.get_texture().get_image()
 	shot.save_png("/tmp/retail_"+prefix+id+".png")
@@ -44,6 +46,7 @@ func review() -> void:
 	await get_tree().physics_frame
 	var args:=OS.get_cmdline_user_args()
 	if not args.is_empty():prefix=args[0]+"_"
+	if prefix.contains("fast"):settle_frames=3
 	if prefix.contains("legacy"):Preferences.pixel_scale=2
 	app=load("res://scenes/main/main.tscn").instantiate();app.process_mode=Node.PROCESS_MODE_PAUSABLE;add_child(app)
 	view();await capture("menu")

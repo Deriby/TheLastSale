@@ -20,6 +20,12 @@ func add_instance(key: String,mesh: Mesh,mat: Material,transform_value: Transfor
 func flush() -> void:
 	for data in groups.values():
 		if not data.dirty:continue
+		# Index each small source once; its copies retain those shared vertices.
+		# Avoid re-hashing a whole shelf/roof whenever a batch is rebuilt.
+		var arrays: Array=data.source_mesh.surface_get_arrays(0)
+		if arrays[Mesh.ARRAY_INDEX]==null or arrays[Mesh.ARRAY_INDEX].is_empty():
+			var source:=SurfaceTool.new();source.create_from(data.source_mesh,0);source.index()
+			data.source_mesh=source.commit()
 		var surface:=SurfaceTool.new();surface.begin(Mesh.PRIMITIVE_TRIANGLES)
 		for at in data.transforms:surface.append_from(data.source_mesh,0,at)
 		var combined:=surface.commit()

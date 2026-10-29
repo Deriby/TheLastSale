@@ -34,10 +34,13 @@ func _ready() -> void:
 	Dialogue.completed.connect(on_dialogue_completed)
 	# Enemy is present only for a later, spatially continuous glimpse; no early chase.
 	enemy_visual=CharacterModels.create("Enemy");add_child(enemy_visual);enemy_visual.position=Vector3(10,0,15);enemy_visual.visible=false
+	enemy_visual.visibility_changed.connect(update_enemy_visibility);update_enemy_visibility()
 	var anim: AnimationPlayer=enemy_visual.find_child("AnimationPlayer",true,false)
 	if anim:
 		for key in anim.get_animation_list():
 			if key.contains("idle"):anim.get_animation(key).loop_mode=Animation.LOOP_LINEAR;anim.play(key)
+func update_enemy_visibility() -> void:
+	enemy_visual.process_mode=Node.PROCESS_MODE_INHERIT if enemy_visual.is_visible_in_tree() else Node.PROCESS_MODE_DISABLED
 func _physics_process(delta: float) -> void:
 	if not active:return
 	Session.world_seconds+=delta

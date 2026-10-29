@@ -1,0 +1,45 @@
+{
+  "measurement": "Decoded mesh arrays of unique mesh resources; not total RAM/VRAM or a native FPS benchmark.",
+  "before": {
+    "menu_build_ms": 2719.201,
+    "paused_render_comparison": true,
+    "pixel_scale": 1,
+    "renderer": "",
+    "simulation_fps": 60,
+    "start_shift_ms": 940.144,
+    "structure": {
+      "indices": 1068990,
+      "mesh_buffer_bytes": 67047104,
+      "mesh_instances": 1302,
+      "mesh_resources": 1302,
+      "nodes": 2337,
+      "shadow_lights": 5,
+      "triangles": 674563,
+      "vertices": 1267170
+    },
+    "views": {}
+  },
+  "after": {
+    "menu_build_ms": 2420.004,
+    "paused_render_comparison": true,
+    "pixel_scale": 1,
+    "renderer": "",
+    "simulation_fps": 60,
+    "start_shift_ms": 0.135,
+    "structure": {
+      "indices": 2014326,
+      "mesh_buffer_bytes": 44238968,
+      "mesh_instances": 1302,
+      "mesh_resources": 1302,
+      "nodes": 2337,
+      "shadow_lights": 5,
+      "triangles": 674563,
+      "vertices": 701981
+    },
+    "views": {}
+  },
+  "vertex_reduction_percent": 44.60246060118216,
+  "mesh_array_reduction_percent": 34.01807779796127,
+  "target_fps": 30,
+  "native_radeon_r7_tested": false
+}

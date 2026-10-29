@@ -4,6 +4,7 @@ var viewport: SubViewport
 var world: ShiftWorld
 var interface: ShiftInterface
 var retro: ShaderMaterial
+var initial_world_pristine:=false
 func _ready() -> void:
 	Controls.install()
 	screen=SubViewportContainer.new();add_child(screen);screen.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);screen.mouse_filter=Control.MOUSE_FILTER_IGNORE;screen.stretch=true;screen.stretch_shrink=Preferences.pixel_scale;screen.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
@@ -15,6 +16,7 @@ func _ready() -> void:
 	interface.new_game.connect(start_new)
 	interface.continue_game.connect(start_saved)
 	Preferences.changed.connect(apply_settings);apply_settings()
+	initial_world_pristine=Session.stage==0 and Session.stocked.is_empty() and not Session.organized and Session.carried_id.is_empty()
 	build_world()
 	get_tree().paused=true
 func apply_settings() -> void:
@@ -32,8 +34,15 @@ func build_world() -> void:
 	world.player.focused.connect(func(text):interface.prompt.text=text)
 	world.restore_transient()
 func start_new() -> void:
-	Dialogue.clear();Session.new_shift();build_world();world.active=true
+	Dialogue.clear();Session.new_shift()
+	if initial_world_pristine and is_instance_valid(world) and not world.active:
+		world.player.position=world.navigation.nearest_walkable(Session.saved_position);world.player.velocity=Vector3.ZERO;world.player.reset_physics_interpolation()
+		world.player.camera_rig.target_distance=Preferences.camera_distance;world.player.camera_rig.distance=Preferences.camera_distance;world.player.camera_rig.reset_follow()
+		world.player.camera_rig.arm.spring_length=Preferences.camera_distance;world.player.camera_rig.camera.position.z=Preferences.camera_distance
+	else:build_world()
+	initial_world_pristine=false;world.active=true
 func start_saved() -> void:
+	initial_world_pristine=false
 	Dialogue.clear()
 	if not Session.load_shift():Session.new_shift()
 	build_world();world.active=true

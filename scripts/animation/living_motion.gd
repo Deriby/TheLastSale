@@ -14,11 +14,14 @@ var idle_time:=0.0
 var variation_index:=0
 var locomotion_phase:=0.0
 var current_clip:=""
+var visual_meshes: Array[MeshInstance3D]=[]
+var last_view_state:=-1
 var strides: Dictionary = {"walk":1.12,"walk_back":.80,"strafe_left":.82,"strafe_right":.82,"run":2.35,"crouch_walk":.62,"carry_walk":.86}
 const LOOP_CLIPS: Array[String] = ["idle","idle_tired","walk","walk_back","strafe_left","strafe_right","run","crouch_idle","crouch_walk","carry","carry_walk","talk","cashier","cashier_idle","look","hold_bottle"]
 func setup(visual: Node3D,actor: Node3D) -> void:
 	animator=visual.find_child("AnimationPlayer",true,false)
 	skeleton=visual.find_child("Skeleton3D",true,false)
+	for mesh in skeleton.find_children("*","MeshInstance3D",true,false):visual_meshes.append(mesh)
 	for key in animator.get_animation_list():
 		var name: String=key.get_slice("/",key.get_slice_count("/")-1)
 		clips[name]=key
@@ -71,6 +74,9 @@ func look_at_position(at: Vector3,enabled := true) -> void:
 	attention.target_global=at;attention.following=enabled
 func set_first_person(value: bool,hide_body := false) -> void:
 	# Keep a complete shadow while hiding geometry from the camera's own view.
-	for mesh in skeleton.find_children("*","MeshInstance3D",true,false):
+	var state: int=(1 if value else 0)|(2 if hide_body else 0)
+	if state==last_view_state:return
+	last_view_state=state
+	for mesh in visual_meshes:
 		mesh.visible=true
 		mesh.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_SHADOWS_ONLY if hide_body or value and mesh.name.contains("Head") else GeometryInstance3D.SHADOW_CASTING_SETTING_ON

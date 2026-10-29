@@ -63,6 +63,7 @@ static func lathe(profile: Array,segments: int) -> ArrayMesh:
 			for j in [i,i+1]:
 				var angle: float=TAU*j/segments
 				vertex(st,Vector3(sin(angle)*r,y,cos(angle)*r),Vector2(.5,1-y/height),Vector3.DOWN if end==0 else Vector3.UP)
+	st.index()
 	return st.commit()
 static func packet(width: float,height: float,depth: float) -> ArrayMesh:
 	var st:=SurfaceTool.new();st.begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -75,4 +76,5 @@ static func packet(width: float,height: float,depth: float) -> ArrayMesh:
 			var a:=corners[i];var b:=corners[next];a.z*=side;b.z*=side
 			var n:=Vector3(0,.1,side).normalized()
 			vertex(st,center,Vector2(.5,.5),n);vertex(st,a,uvs[i],n);vertex(st,b,uvs[next],n)
+	st.index()
 	return st.commit()

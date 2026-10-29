@@ -1,4 +1,4 @@
-# The Last Sale — projeto Godot 0.10.0
+# The Last Sale — projeto Godot 0.11.0
 
 1. Extraia este ZIP em uma pasta nova.
 2. No Godot **4.4.1**, clique em **Importar** e escolha `project.godot`.
@@ -6,6 +6,8 @@
 4. Pressione **F5** e escolha **Iniciar expediente**.
 
 Os modelos animados, cenários, sons, texturas, código, testes e ferramentas estão incluídos. Blender não é necessário para abrir ou jogar o projeto. O renderizador é Compatibility / OpenGL.
+
+O padrão é 30 FPS. Em Configurações, escolha 30 FPS, 60 FPS ou Sem limite. A otimização preserva os objetos, triângulos, texturas e iluminação; o relatório está em `docs/optimization_v011`. A estabilidade de 30 FPS precisa de teste no PC alvo.
 
 O novo elenco inclui Dery, Felps, Killer, Bryan, Zirico, Garota 1, Garota 2 e Velha 1. Carro 1 substitui o hatch estacionado. Os FBX de origem completos podem ser obtidos no [pacote fornecido pelo autor](https://drive.google.com/file/d/1qogHQIpLHR2YuTVj_vi3I2FP-i-Qapxe/view); só são necessários para refazer a conversão das malhas e animações.
 
@@ -23,7 +25,7 @@ Converse com Felps no balcão esquerdo para iniciar as tarefas. Reponha duas cai
 
 ## Validação e edição
 
-106/106 testes passaram em Linux no projeto e no pacote exportado. Em Linux, `./tools/test.sh` roda a suíte; `./tools/godot.sh` usa a Godot instalada no ambiente de desenvolvimento. Em outra máquina, abra o projeto pelo editor ou defina `GODOT_BIN` com o caminho do motor.
+109/109 testes passaram em Linux no projeto e no pacote exportado. Em Linux, `./tools/test.sh` roda a suíte; `./tools/godot.sh` usa a Godot instalada no ambiente de desenvolvimento. Em outra máquina, abra o projeto pelo editor ou defina `GODOT_BIN` com o caminho do motor.
 
 A Godot 4.4 tem Windows 10 como requisito oficial mínimo. Windows 7/Radeon R7 não foram validados nativamente. Em uma máquina compatível, o modo **Econômica** reduz a resolução, as sombras e os mapas normais.
 

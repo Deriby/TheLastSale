@@ -1,0 +1,14 @@
+{
+  "hd": {
+    "different_pixels": 20,
+    "limit": 0.01,
+    "pixels": 921600,
+    "ratio": 2.17013888888889e-05
+  },
+  "retro": {
+    "different_pixels": 3,
+    "limit": 0.01,
+    "pixels": 230400,
+    "ratio": 1.30208333333333e-05
+  }
+}
