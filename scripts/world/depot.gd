@@ -10,6 +10,7 @@ var felps: Node3D
 var counter: Node3D
 var staff_talk: Interaction
 var checkout: Interaction
+var access: SundayAccess
 var yard: ServiceYard
 var service_door: Node3D
 var central_shelves: Array[DepotProp]=[]
@@ -19,6 +20,8 @@ func _ready() -> void:
 	build_shell()
 	build_furniture()
 	build_stock()
+	if int(Session.campaign.night)==2:
+		access=SundayAccess.new();add_child(access);blockers.append_array(access.blockers)
 	build_staff()
 func solid(pos: Vector3,size: Vector3,mat: Material,nav := true) -> MeshInstance3D:
 	if nav and pos.y-size.y/2<1.8:blockers.append(Rect2(Vector2(pos.x-size.x/2,pos.z-size.z/2),Vector2(size.x,size.z)))
@@ -94,8 +97,9 @@ func build_stock() -> void:
 		for y in [.0,.48,.96]:prop("crate",Vector3(x,y,-15.0))
 	blockers.append(Rect2(Vector2(-4.7,-15.6),Vector2(2.4,1.2)))
 	old_door=Node3D.new();add_child(old_door);old_door.position=Vector3(0,0,-15.82)
-	Geo.box(old_door,Vector3(0,1.2,0),Vector3(1.3,2.4,.12),Geo.material(Color("3b443d"),"res://assets/textures/metal.png"))
-	Geo.sign_text(old_door,"SEM ACESSO",Vector3(0,1.65,.08),22)
+	if int(Session.campaign.night)==2:old_door.position.x=-.68
+	Geo.box(old_door,Vector3(.65 if int(Session.campaign.night)==2 else 0.0,1.2,0),Vector3(1.3,2.4,.12),Geo.material(Color("3b443d"),"res://assets/textures/metal.png"))
+	Geo.sign_text(old_door,"SEM ACESSO",Vector3(.65 if int(Session.campaign.night)==2 else 0.0,1.65,.08),22)
 	interact(old_door,"note")
 func build_staff() -> void:
 	felps=FelpsActor.new();felps.name="Felps";felps.position=CheckoutFixture.STAFF_POSITION;add_child(felps);felps.visual.rotation.y=PI/2

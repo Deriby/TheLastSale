@@ -1,9 +1,10 @@
 # A Última Venda — campanha de sexta a domingo
 
-Estado: direção narrativa aprovada pelo autor. A 0.19.0 inclui sexta e uma primeira
-versão jogável de sábado: dois pedidos, câmeras ao vivo, registros textuais do DVR,
-vestígios no estoque, decisões, tentativa na porta e fechamento. Domingo contém
-apenas a abertura. A revelação, perseguição e finais abaixo são direção futura.
+Estado: a 0.20.0 entrega a primeira versão jogável das três noites: sexta com pane
+recuperável; sábado com câmeras, pistas e decisões; domingo com recuperação da
+gravação, revelação, perseguição, cooperação, coberturas e três epílogos. Abaixo
+permanece a direção narrativa, incluindo metas de duração ainda não medidas.
+[Guia do domingo e limites desta implementação](sunday_v020/README.md).
 
 ## Direção definida pelo autor
 
@@ -127,7 +128,7 @@ inativo reage ao perigo com ações legíveis: acompanhar, aguardar protegido ou
 buscar cobertura. O jogador será avisado antes de abandonar o outro numa situação
 sem retorno. As duas posições e o estado da ameaça pertencem ao mesmo mundo.
 
-## Finais propostos
+## Finais implementados na 0.20.0
 
 | Final | Condição principal | Epílogo |
 | --- | --- | --- |

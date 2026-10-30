@@ -57,7 +57,7 @@ func build_shutters() -> void:
 		mesh.name="ClosingShutter";mesh.visible=false;shutters.append(mesh)
 		for shape in mesh.find_children("*","CollisionShape3D",true,false):shape.disabled=true
 func phase() -> String:return str(Session.campaign.phase)
-func is_outage() -> bool:return phase()=="outage"
+func is_outage() -> bool:return phase()=="outage" or int(Session.campaign.night)==2 and phase()=="sunday_escape" and not Session.flag("generator_running")
 func can_spawn() -> bool:
 	return int(Session.campaign.night)==0 and phase() in ["routine","restored"]
 func save() -> void:

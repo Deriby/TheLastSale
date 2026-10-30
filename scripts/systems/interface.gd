@@ -3,11 +3,14 @@ extends CanvasLayer
 signal new_game
 signal continue_game
 signal pause_changed(value: bool)
+signal retry_game
 signal next_night
 var root: Control
 var hud: Control
 var menu: PanelContainer
 var settings: SettingsPanel
+var sunday_desk: SundayDesk
+var campaign_panel: CampaignPanel
 var surveillance: SurveillancePanel
 var checkout: CheckoutPanel
 var objective: Label
@@ -65,8 +68,8 @@ func build_hud() -> void:
 	speaker=label(sub,"",15);speaker.modulate=Color("c6b18b");speaker.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
 	subtitle=label(sub,"",21);subtitle.custom_minimum_size=Vector2(860,80);subtitle.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;subtitle.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
 	stamina=ProgressBar.new();hud.add_child(stamina);stamina.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT);anchored_rect(stamina,Rect2(34,-45,130,5));stamina.show_percentage=false;stamina.max_value=1
-	var hint:=label(hud,"WASD mover   SHIFT correr   CTRL agachar   E interagir   Q apoiar   TAB trocar\nMOUSE olhar   RODA primeira pessoa   F lanterna   C câmeras no caixa   ESPAÇO fala   ESC pausa",13)
-	hint.name="ControlsHint";hint.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT);anchored_rect(hint,Rect2(-710,-92,680,85));hint.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT;hint.modulate=Color("babbaa")
+	var hint:=label(hud,"WASD mover   SHIFT correr   CTRL agachar   E interagir   Q apoiar   TAB trocar\nMOUSE olhar   RODA primeira pessoa   F lanterna   C DVR   H chamar/aguardar   ESPAÇO fala   ESC pausa",13)
+	hint.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;hint.name="ControlsHint";hint.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT);anchored_rect(hint,Rect2(-710,-92,680,85));hint.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT;hint.modulate=Color("babbaa")
 	hud.hide()
 func anchored_rect(control: Control,rect: Rect2) -> void:
 	control.offset_left=rect.position.x;control.offset_top=rect.position.y
@@ -80,7 +83,7 @@ func build_menu() -> void:
 	message=label(v,"21h40. O bairro vai dormir.\nPra vocês, ainda é expediente.",18)
 	buttons=VBoxContainer.new();v.add_child(buttons);buttons.add_theme_constant_override("separation",9)
 	rebuild_buttons()
-	label(v,"0.19.0 • Sábado / câmeras e investigação\nFones de ouvido recomendados",13).modulate=Color("9ca58f")
+	label(v,"0.20.0 • Sexta a domingo / campanha completa\nFones de ouvido recomendados",13).modulate=Color("9ca58f")
 func button(text: String,callback: Callable) -> Button:
 	var b:=Button.new();buttons.add_child(b);b.text=text;b.pressed.connect(callback);return b
 func rebuild_buttons() -> void:
@@ -89,6 +92,7 @@ func rebuild_buttons() -> void:
 	else:button("INICIAR EXPEDIENTE",func():new_game.emit();has_started=true;set_paused(false))
 	if FileAccess.file_exists(Session.SAVE_PATH):button("CONTINUAR TURNO SALVO",func():continue_game.emit();has_started=true;set_paused(false))
 	if has_started:button("SALVAR TURNO",save_current)
+	if has_started and Session.campaign.phase=="sunday_escape":button("RETOMAR CHECKPOINT DA FUGA",func():retry_game.emit();set_paused(false))
 	button("CONFIGURAÇÕES",open_settings)
 	button("SAIR",func():get_tree().quit())
 func save_current() -> void:
@@ -100,7 +104,7 @@ func save_current() -> void:
 		var err:=Session.save_shift(player.global_position)
 		message.text="Turno salvo." if err==OK else "Não foi possível salvar o turno."
 func set_paused(value: bool) -> void:
-	if value:close_surveillance()
+	if value:close_surveillance();close_sunday_desk()
 	paused=value;get_tree().paused=value
 	menu.visible=value;hud.visible=not value
 	Input.mouse_mode=Input.MOUSE_MODE_VISIBLE if value else Input.MOUSE_MODE_CAPTURED
@@ -111,7 +115,7 @@ func open_settings() -> void:
 	menu.hide();settings=SettingsPanel.new();root.add_child(settings);settings.position=Vector2(355,35)
 	settings.closed.connect(func():settings.queue_free();settings=null;menu.show())
 func open_checkout(world: ShiftWorld) -> void:
-	if paused or checkout!=null or surveillance!=null:return
+	if paused or checkout!=null or surveillance!=null or sunday_desk!=null or campaign_panel!=null:return
 	checkout=CheckoutPanel.new();checkout.world=world;root.add_child(checkout);checkout.position=Vector2(160,30)
 	checkout.closed.connect(close_checkout)
 	world.set_register_open(true);hud.hide();Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
@@ -135,6 +139,32 @@ func close_surveillance() -> void:
 	root.remove_child(surveillance);surveillance.queue_free();surveillance=null
 	get_parent().viewport.render_target_update_mode=SubViewport.UPDATE_ALWAYS
 	if not paused:hud.show();Input.mouse_mode=Input.MOUSE_MODE_CAPTURED
+func open_sunday_desk(world: ShiftWorld) -> void:
+	if paused or sunday_desk!=null or campaign_panel!=null or not world.sunday.can_open(world.player):return
+	world.sunday.desk_open=true;world.characters.Felps.input_locked=true
+	sunday_desk=SundayDesk.new();sunday_desk.world=world;root.add_child(sunday_desk);sunday_desk.position=Vector2(100,35)
+	sunday_desk.closed.connect(close_sunday_desk)
+	get_parent().viewport.render_target_update_mode=SubViewport.UPDATE_DISABLED
+	hud.hide();Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
+func close_sunday_desk() -> void:
+	if sunday_desk==null:return
+	if is_instance_valid(sunday_desk.world):sunday_desk.world.sunday.desk_open=false;sunday_desk.world.characters.Felps.input_locked=false
+	sunday_desk.video.stop();root.remove_child(sunday_desk);sunday_desk.queue_free();sunday_desk=null
+	get_parent().viewport.render_target_update_mode=SubViewport.UPDATE_ALWAYS
+	if not paused:hud.show();Input.mouse_mode=Input.MOUSE_MODE_CAPTURED
+func close_campaign(unpause:=true) -> void:
+	if campaign_panel!=null:root.remove_child(campaign_panel);campaign_panel.queue_free();campaign_panel=null
+	if unpause:set_paused(false)
+func show_campaign(kind: String) -> void:
+	close_campaign(false);close_sunday_desk();close_checkout();set_paused(true);menu.hide();hud.hide()
+	campaign_panel=CampaignPanel.new();campaign_panel.world=get_parent().world;campaign_panel.kind=kind
+	root.add_child(campaign_panel);campaign_panel.position=Vector2(260,100)
+	campaign_panel.cancel.connect(func():close_campaign())
+	campaign_panel.escape.connect(func(alone: bool):
+		var world:=campaign_panel.world;close_campaign(false)
+		if not world.sunday.finish(alone):set_paused(false))
+	campaign_panel.retry.connect(func():close_campaign(false);retry_game.emit();set_paused(false))
+	campaign_panel.restart.connect(func():close_campaign(false);new_game.emit();has_started=true;set_paused(false))
 func update_objective() -> void:
 	night_label.text="FRANCA / "+Session.night_title()
 	var player:=get_tree().get_first_node_in_group("player") as DepotPlayer
@@ -183,14 +213,23 @@ func show_night_summary() -> void:
 		message_text="Registros: "+("cópia guardada" if Session.campaign.decisions.get("evidence","")=="copy" else "somente no gravador")
 		message_text+="\nContato: "+("responsável avisado" if Session.campaign.decisions.get("help","")=="contact" else "ainda sem aviso")
 		message_text+="\nSaída: "+("preparada" if Session.campaign.decisions.get("exit","")=="prepared" else "sem preparação")
-		message_text+="\nDomingo inclui uma abertura. A fuga e os finais\ncontinuam em desenvolvimento."
+		message_text+="\nDomingo: recupere a gravação antiga, enfrente\na perseguição e decida como sair do depósito."
 	var note:=label(column,message_text,18);note.custom_minimum_size.x=610
-	var proceed:=Button.new();column.add_child(proceed);proceed.text="VER ABERTURA DE DOMINGO" if saturday else "COMEÇAR SÁBADO"
+	var proceed:=Button.new();column.add_child(proceed);proceed.text="COMEÇAR DOMINGO" if saturday else "COMEÇAR SÁBADO"
 	proceed.name="NextNight"
 	proceed.pressed.connect(func():night_panel.queue_free();night_panel=null;next_night.emit();set_paused(false))
 	var leave:=Button.new();column.add_child(leave);leave.text="SAIR • CAMPANHA SALVA";leave.pressed.connect(func():get_tree().quit())
 	proceed.grab_focus()
 func _input(event: InputEvent) -> void:
+	if campaign_panel!=null:
+		if event.is_action_pressed("pause") and campaign_panel.kind=="escape":close_campaign()
+		if event.is_action_pressed("pause") or event.is_action_pressed("switch_character"):get_viewport().set_input_as_handled()
+		return
+	if sunday_desk!=null:
+		if event.is_action_pressed("pause") or event.is_action_pressed("surveillance"):
+			close_sunday_desk();get_viewport().set_input_as_handled();return
+		if event.is_action_pressed("switch_character"):
+			var world:=sunday_desk.world;close_sunday_desk();world.switch_player();get_viewport().set_input_as_handled();return
 	if surveillance!=null:
 		if event.is_action_pressed("pause") or event.is_action_pressed("surveillance"):
 			close_surveillance();get_viewport().set_input_as_handled();return

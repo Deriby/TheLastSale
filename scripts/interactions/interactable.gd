@@ -1,6 +1,6 @@
 class_name Interaction
 extends Node3D
-@export_enum("crate","fridge","door","pallet","talk","note","switch","familiar","checkout","campaign","investigation") var kind := "crate"
+@export_enum("crate","fridge","door","pallet","talk","note","switch","familiar","checkout","campaign","investigation","sunday") var kind := "crate"
 @export var identity := ""
 var open := false
 var busy := false
@@ -9,6 +9,14 @@ func _ready() -> void:
 	for body in get_parent().find_children("*","CollisionObject3D",true,false):
 		body.set_meta("interaction", self)
 func prompt(player: Node3D) -> String:
+	if int(Session.campaign.night)==2:
+		var world:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
+		if world!=null and world.sunday!=null:
+			if kind=="sunday":return world.sunday.prompt(identity,player)
+			if kind=="checkout":return world.sunday.prompt("counter",player)
+			if kind=="note":return world.sunday.prompt("old",player)
+			if kind=="campaign":return world.sunday.prompt("shutter" if identity=="exit" else identity,player)
+			if kind=="door" and identity!="service" and Session.campaign.phase=="sunday_escape" and not Session.flag("stock_released"):return "Estoque travado • Felps precisa liberar pelo salão"
 	match kind:
 		"crate":
 			if player.identity!="Dery":return "[Tab] Deryk cuida das caixas e da reposição"
@@ -39,14 +47,27 @@ func prompt(player: Node3D) -> String:
 		"switch": return "Acender luz" if not open else "Apagar luz"
 	return "Interagir"
 func available_for(player: DepotPlayer) -> bool:
-	if kind=="checkout":return player.identity=="Felps" or player.carried_id.begins_with("order_")
+	if kind=="checkout":return int(Session.campaign.night)==2 or player.identity=="Felps" or player.carried_id.begins_with("order_")
 	if kind=="talk":return get_parent()!=player
 	if kind=="familiar":return not get_parent().leaving
 	return true
 func activate(player: Node3D) -> bool:
 	if busy or player.motion.action_active: return false
 	var chapter:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
-	if chapter!=null and chapter.surveillance_open:return false
+	if chapter!=null and (chapter.surveillance_open or chapter.sunday!=null and chapter.sunday.desk_open):return false
+	if int(Session.campaign.night)==2 and chapter!=null and chapter.sunday!=null:
+		if kind=="talk":
+			if global_position.distance_to(player.global_position)>2.65:return false
+			return chapter.sunday.introduce(player)
+		if kind in ["sunday","checkout","note","campaign"]:
+			if global_position.distance_to(player.global_position)>2.65:return false
+			var action: String=identity if kind=="sunday" or kind=="campaign" else "counter" if kind=="checkout" else "old"
+			return chapter.sunday.activate("shutter" if action=="exit" else action,player)
+		if kind=="door":
+			var id: String="service" if identity=="service" else "stock"
+			if chapter.sunday.phase()=="sunday_escape" and id=="stock" and not Session.flag("stock_released"):return false
+			if global_position.distance_to(player.position)>2.65:return false
+			chapter.sunday.change_door(id,not chapter.sunday.door_open(id));chapter.sunday.save();return true
 	if int(Session.campaign.night)==1 and chapter!=null and chapter.saturday!=null:
 		if kind=="campaign" and identity=="exit" and Session.campaign.phase=="saturday_decisions":return chapter.saturday.prepare_exit(player)
 		if kind=="talk" or kind=="checkout" and Session.campaign.phase=="saturday_intro":
@@ -68,9 +89,7 @@ func activate(player: Node3D) -> bool:
 				return world.friday.activate(identity,player)
 			if kind=="checkout" and world.friday.phase() in ["outage","closing"]:return world.friday.activate("counter",player)
 			if kind=="note" and world.friday.phase()=="closing":return world.friday.activate("stock",player)
-			if kind=="talk" and Session.campaign.phase=="sunday_preview":
-				if Dialogue.active:return false
-				Dialogue.play("sunday_intro",[["Felps","Hoje a loja não vai abrir. A gente veio recuperar o que falta e conferir o prédio."],["Dery","A cópia tá guardada fora daqui." if Session.campaign.decisions.get("evidence","")=="copy" else "As imagens ainda estão só no gravador. Vamos ter que preservar isso."],["Felps","Já avisei o responsável e combinei contato." if Session.campaign.decisions.get("help","")=="contact" else "Antes de mexer nos fundos, precisamos avisar alguém."],["","ABERTURA DE DOMINGO • A perseguição, a revelação e os finais continuam em desenvolvimento."]]);return true
+
 	match kind:
 		"crate":
 			if player.identity!="Dery":return false

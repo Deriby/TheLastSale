@@ -6,6 +6,9 @@ signal notice(text: String)
 signal checkout_requested
 signal checkout_changed
 signal checkout_closed
+signal terminal_requested
+signal desk_closed
+signal campaign_event(kind: String)
 signal surveillance_requested
 var sale: ShopSale
 var cashier_open:=false
@@ -24,6 +27,7 @@ var warning_started:=false
 var noise_pending:=false
 var enemy_visual: Node3D
 var friday: FridayShift
+var sunday: SundayShift
 var saturday: SaturdayShift
 var surveillance_open:=false
 func _ready() -> void:
@@ -57,6 +61,7 @@ func _ready() -> void:
 		actor.camera_rig.pitch=float(state.get("pitch",-.12))
 		actor.camera_rig.target_distance=float(state.get("camera_distance",Preferences.camera_distance));actor.camera_rig.distance=actor.camera_rig.target_distance
 		actor.torch.visible=bool(state.get("torch",false)) and Session.stage>=6
+		actor.concealed=bool(state.get("concealed",false));actor.crouching=actor.concealed
 		actor.reset_physics_interpolation()
 		actor.handling.completed.connect(on_handling_completed)
 		actor.handling.feedback.connect(func(text: String):notice.emit(text))
@@ -72,7 +77,7 @@ func _ready() -> void:
 		var carried: String=str(state.get("carried",legacy_carried if identity==Session.active_character else ""))
 		if depot.crates.has(carried) and carried not in Session.stocked and not (carried=="loose" and Session.organized):actor.pick_up(depot.crates[carried],carried,true)
 	Session.saving.connect(capture_state)
-	for identity in ["Bryan","Zirico"]:
+	for identity in ([] if int(Session.campaign.night)==2 else ["Bryan","Zirico"]):
 		var friend:=FamiliarNPC.new();friend.identity=identity;friend.name=identity;add_child(friend)
 		var at:=Vector3(-2.8,0,-.1) if identity=="Bryan" else Vector3(5.1,0,1.65)
 		friend.position=navigation.nearest_walkable(at);friend.visual.rotation.y=PI/2 if identity=="Bryan" else -PI/2
@@ -89,6 +94,7 @@ func _ready() -> void:
 	friday=FridayShift.new();friday.world=self;add_child(friday)
 	friday.night_completed.connect(func():slice_finished.emit())
 	saturday=SaturdayShift.new();saturday.world=self;add_child(saturday)
+	sunday=SundayShift.new();sunday.world=self;add_child(sunday)
 func update_enemy_visibility() -> void:
 	enemy_visual.process_mode=Node.PROCESS_MODE_INHERIT if enemy_visual.is_visible_in_tree() else Node.PROCESS_MODE_DISABLED
 func select_player(identity: String) -> void:
@@ -97,7 +103,7 @@ func select_player(identity: String) -> void:
 	Session.active_character=player.identity;Session.carried_id=player.carried_id
 	depot.set_counter_role(player.identity);player_changed.emit(player)
 func switch_player() -> bool:
-	if not active or get_tree().paused or surveillance_open:return false
+	if not active or get_tree().paused or surveillance_open or sunday!=null and sunday.desk_open:return false
 	if Dialogue.active:
 		notice.emit("Termine a conversa antes de trocar de personagem.");return false
 	for actor in characters.values():
@@ -108,6 +114,7 @@ func switch_player() -> bool:
 	Session.save_shift(player.global_position)
 	return true
 func capture_state() -> void:
+	Session.saved_position=player.global_position
 	Session.sale_state=sale.snapshot() if sale!=null else {}
 	Session.customer_state=customer.snapshot() if is_instance_valid(customer) else {}
 	for identity in characters:
@@ -122,11 +129,15 @@ func capture_state() -> void:
 		var item: Node3D=depot.crates[id]
 		var at:=item.global_position
 		Session.crate_states[id]={"position":[at.x,at.y,at.z],"yaw":item.global_rotation.y}
+	if sunday!=null:sunday.capture()
 func on_handling_completed() -> void:
 	if active:Session.save_shift(player.global_position)
 func can_checkout(actor: DepotPlayer) -> bool:
 	return not surveillance_open and (friday==null or not friday.is_outage() and friday.phase() not in ["closing","complete"]) and actor.identity=="Felps" and actor.global_position.distance_to(CheckoutFixture.STAFF_POSITION)<1.4 and is_instance_valid(customer) and customer.state==Customer.State.WAITING and not customer.purchase_complete
 func try_surveillance() -> bool:
+	if int(Session.campaign.night)==2:
+		if sunday==null or sunday.desk_open or not sunday.can_open(player):return false
+		terminal_requested.emit();return sunday.desk_open
 	if surveillance_open or cashier_open or saturday==null or not saturday.can_open(player):return false
 	surveillance_requested.emit();return surveillance_open
 func set_surveillance_open(value: bool) -> void:
@@ -210,6 +221,7 @@ func _physics_process(delta: float) -> void:
 	if Session.stage==6 and friday!=null and friday.phase()=="routine" and not Dialogue.active:friday.begin_outage()
 	if friday!=null:friday.tick(delta)
 	if saturday!=null:saturday.tick()
+	if sunday!=null:sunday.tick(delta)
 	if sale_save_wait>=0:
 		sale_save_wait-=delta
 		if sale_save_wait<0:Session.save_shift(player.global_position)
@@ -288,8 +300,11 @@ func restore_transient() -> void:
 	elif Session.stage==5:Session.stage=4
 	noise_pending=false
 	if friday!=null and Session.stage==6 and friday.phase()=="routine" and not Dialogue.active:friday.begin_outage()
-	if friday!=null and friday.is_outage():
+	if int(Session.campaign.night)==0 and friday!=null and friday.is_outage():
 		for actor in characters.values():actor.torch.show()
 	if saturday!=null:saturday.tick()
 	if Session.campaign.phase=="complete":call_deferred("emit_night_completed")
+	if Session.campaign.phase=="campaign_complete":call_deferred("emit_campaign_ending")
 func emit_night_completed() -> void:slice_finished.emit()
+
+func emit_campaign_ending() -> void:campaign_event.emit("ending")

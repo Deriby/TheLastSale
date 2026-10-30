@@ -12,6 +12,7 @@ var next_sale_id:=1
 var sales_cents:=0
 var receipts: Array=[]
 var familiar_visits: Dictionary={}
+var retry_state: Dictionary={}
 var campaign: Dictionary=default_campaign()
 var stage := 0
 var stocked: Array[String] = []
@@ -24,7 +25,7 @@ var saved_position := Vector3(3.8, 0.1, 1.8)
 var carried_id := ""
 const SAVE_PATH := "user://shift.json"
 func default_campaign() -> Dictionary:
-	return {"night":0,"phase":"routine","flags":{},"clues":{},"decisions":{},"evidence_archive":{},"records":[],"completed_nights":[],"reports":{}}
+	return {"night":0,"phase":"routine","flags":{},"clues":{},"decisions":{},"evidence_archive":{},"records":[],"sunday":{},"ending":{},"completed_nights":[],"reports":{}}
 func flag(id: String) -> bool:return bool(campaign.flags.get(id,false))
 func night_title() -> String:return ["SEXTA-FEIRA","SÁBADO","DOMINGO"][clampi(int(campaign.night),0,2)]
 func campaign_objective() -> String:
@@ -43,12 +44,23 @@ func campaign_objective() -> String:
 		"saturday_routine":return "Felps: atenda os dois clientes. [C] no caixa: câmeras e caderno. Deryk pode conferir os fundos."
 		"saturday_investigation":return "Felps: confira os eventos do DVR e o recibo [C no caixa]. Deryk: examine a porta antiga e as caixas deslocadas nos fundos."
 		"saturday_decisions":return "No caderno do caixa [C], decida sobre a cópia e o contato. Confira a saída no comando das portas, à direita da entrada."
-		"sunday_preview":return "Domingo: converse com Felps. A fuga e os finais serão a próxima etapa."
+		"sunday_intro":return "Domingo: converse com Felps. Hoje o depósito não abre."
+		"sunday_investigation":
+			if not flag("module_found"):return "Deryk: examine a porta antiga e recupere o módulo do DVR na área de manutenção."
+			if not flag("module_delivered"):return "Deryk: leve o módulo até o balcão. Felps recupera a gravação com C no caixa."
+			return "Felps: use C no caixa, recupere e analise a gravação antiga."
+		"sunday_prepare":return "Proteja a gravação e avise ajuda no caixa [C]. Deryk: confira o quadro dentro do estoque; Felps precisa ficar no posto."
+		"sunday_escape":
+			if not flag("generator_running"):return "Deryk: ligue o gerador no pátio. Felps: aguarde a energia para liberar a porta do estoque. F lanterna; H acompanhar/aguardar."
+			if not flag("stock_released"):return "Gerador: selecione ESTOQUE. Felps: use C no terminal para destravar, ou o comando junto à porta do estoque."
+			if not flag("front_open"):return "Abra a saída pelo comando manual na frente do salão. H chama o companheiro; agache e use E nas coberturas."
+			return "Fuja pela calçada à direita. H chama o companheiro. E no ponto de encontro permite sair juntos ou confirmar saída sozinho."
+		"campaign_complete":return "Campanha concluída. Confira o epílogo."
 	return ""
 func advance_to_saturday() -> void:
 	start_day(1,"saturday_intro")
 func advance_to_sunday() -> void:
-	start_day(2,"sunday_preview")
+	start_day(2,"sunday_intro")
 func start_day(night: int,phase: String) -> void:
 	campaign.night=night;campaign.phase=phase;campaign.flags={};campaign.records=[]
 	stage=0;stocked.clear();organized=false;customers_served=0;warning_delivered=false;finale_seen=false;world_seconds=0
@@ -76,7 +88,7 @@ func new_shift() -> void:
 	saved_position = Vector3(3.8, 0.1, 1.8)
 	active_character="Dery";character_states.clear();crate_states.clear()
 	sale_state.clear();customer_state.clear();next_sale_id=1;sales_cents=0;receipts.clear();familiar_visits.clear()
-	campaign=default_campaign()
+	campaign=default_campaign();retry_state.clear()
 	changed.emit()
 func objective() -> String:
 	if campaign.phase!="routine":return campaign_objective()
@@ -125,21 +137,28 @@ func end_slice() -> void:
 	stage = 7
 	changed.emit()
 	event_triggered.emit("finale")
+func snapshot_data() -> Dictionary:
+	return {"version":5,"stage":stage,"stocked":stocked.duplicate(),"organized":organized,"customers":customers_served,"warning":warning_delivered,"finale":finale_seen,"seconds":world_seconds,"position":[saved_position.x,saved_position.y,saved_position.z],"carried":carried_id,"active_character":active_character,"characters":character_states.duplicate(true),"crates":crate_states.duplicate(true),"sale":sale_state.duplicate(true),"customer_state":customer_state.duplicate(true),"next_sale_id":next_sale_id,"sales_cents":sales_cents,"receipts":receipts.duplicate(true),"familiar_visits":familiar_visits.duplicate(true),"campaign":campaign.duplicate(true)}
+func write_save(data: Dictionary) -> Error:
+	var f:=FileAccess.open(SAVE_PATH,FileAccess.WRITE)
+	if f==null:return FileAccess.get_open_error()
+	var complete:=data.duplicate(true);complete.retry=retry_state
+	f.store_string(JSON.stringify(complete));return OK
 func save_shift(position_value: Vector3) -> Error:
-	saving.emit()
-	saved_position = position_value
+	saving.emit();saved_position=position_value
 	if character_states.has(active_character):character_states[active_character].position=[position_value.x,position_value.y,position_value.z]
-	var data := {"version":3,"stage":stage,"stocked":stocked,"organized":organized,"customers":customers_served,"warning":warning_delivered,"finale":finale_seen,"seconds":world_seconds,"position":[saved_position.x,saved_position.y,saved_position.z],"carried":carried_id,"active_character":active_character,"characters":character_states,"crates":crate_states,"sale":sale_state,"customer_state":customer_state,"next_sale_id":next_sale_id,"sales_cents":sales_cents,"receipts":receipts,"familiar_visits":familiar_visits}
-	data.version=4;data.campaign=campaign
-	var f := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
-	if f == null: return FileAccess.get_open_error()
-	f.store_string(JSON.stringify(data))
-	return OK
+	return write_save(snapshot_data())
+func checkpoint() -> void:
+	saving.emit();retry_state=snapshot_data()
+	write_save(retry_state)
+func save_retry() -> void:
+	if not retry_state.is_empty():write_save(retry_state)
 func load_shift() -> bool:
-	if not FileAccess.file_exists(SAVE_PATH): return false
-	var data = JSON.parse_string(FileAccess.get_file_as_string(SAVE_PATH))
-	if not data is Dictionary or int(data.get("version",0)) not in [1,2,3,4]: return false
-	if not data.get("position") is Array or data.position.size() != 3: return false
+	if not FileAccess.file_exists(SAVE_PATH):return false
+	var data=JSON.parse_string(FileAccess.get_file_as_string(SAVE_PATH))
+	if not data is Dictionary or int(data.get("version",0)) not in [1,2,3,4,5]:return false
+	if not data.get("position") is Array or data.position.size()!=3:return false
+	retry_state=data.get("retry",{}).duplicate(true) if data.get("retry",{}) is Dictionary else {}
 	stage = clampi(int(data.get("stage",0)),0,7)
 	stocked.assign(data.get("stocked", []))
 	organized = bool(data.get("organized",false))
@@ -158,7 +177,7 @@ func load_shift() -> bool:
 	receipts=data.get("receipts",[]).duplicate(true) if data.get("receipts",[]) is Array else []
 	familiar_visits=data.get("familiar_visits",{}).duplicate(true) if data.get("familiar_visits",{}) is Dictionary else {}
 	campaign=default_campaign()
-	if int(data.version)==4 and data.get("campaign") is Dictionary:
+	if int(data.version)>=4 and data.get("campaign") is Dictionary:
 		for key in campaign:campaign[key]=data.campaign.get(key,campaign[key])
 		campaign.night=clampi(int(campaign.night),0,2)
 		# JSON parses numbers as floats; Array.has distinguishes int/float values.
@@ -171,6 +190,7 @@ func load_shift() -> bool:
 		campaign.completed_nights=completed
 		if int(campaign.night)==1 and campaign.phase in ["saturday_preview","saturday_preview_done"]:
 			campaign.phase="saturday_intro";stage=0
+		if int(campaign.night)==2 and campaign.phase=="sunday_preview":campaign.phase="sunday_intro";stage=0
 	elif stage>=6:
 		stage=6;finale_seen=false;campaign.phase="outage"
 	changed.emit()

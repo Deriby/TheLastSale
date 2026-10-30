@@ -21,7 +21,7 @@ func configure(blockers: Array[Rect2],ground: Callable=Callable()) -> void:
 				if rect.grow(.33).has_point(point):blocked=true;break
 			grid.set_point_solid(Vector2i(x,z),blocked)
 func outside_bounds(point: Vector2) -> bool:
-	return (point.y<-.15 and (absf(point.x)>5.65 or point.y< -15.6) and not ServiceYard.contains(point)) or point.y>16.2
+	return (point.y<-.15 and (absf(point.x)>5.65 or point.y< -15.6) and not ServiceYard.contains(point) and not SundayAccess.contains(point)) or point.y>16.2
 func path(from: Vector3,to: Vector3) -> PackedVector3Array:
 	var start:=Vector2i(roundi(from.x/CELL),roundi(from.z/CELL))
 	var end:=Vector2i(roundi(to.x/CELL),roundi(to.z/CELL))
@@ -86,3 +86,15 @@ func nearest_walkable(at: Vector3) -> Vector3:
 			var distance:=candidate.distance_squared_to(at)
 			if distance<best_distance:best_distance=distance;best=candidate
 	return best
+
+func path_with_obstacles(from: Vector3,to: Vector3,obstacles: Array[Rect2]) -> PackedVector3Array:
+	var changed: Array[Vector2i]=[]
+	for rect in obstacles:
+		var bounds:=rect.grow(.28)
+		for x in range(floori(bounds.position.x/CELL),ceili(bounds.end.x/CELL)+1):
+			for z in range(floori(bounds.position.y/CELL),ceili(bounds.end.y/CELL)+1):
+				var point:=Vector2i(x,z)
+				if grid.is_in_boundsv(point) and not grid.is_point_solid(point):grid.set_point_solid(point,true);changed.append(point)
+	var result:=path(from,to)
+	for point in changed:grid.set_point_solid(point,false)
+	return result

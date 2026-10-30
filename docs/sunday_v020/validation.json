@@ -1,0 +1,61 @@
+{
+  "version": "0.20.0",
+  "godot": "4.4.1",
+  "checks": {
+    "main": 188,
+    "friday": 48,
+    "saturday": 53,
+    "sunday": 59,
+    "total": 348,
+    "passed": 348
+  },
+  "runtime_errors": 0,
+  "sunday_quest_and_escape_with_real_pursuer": true,
+  "cooperative_paths_without_teleport": true,
+  "companion_evades_nearby_threat": true,
+  "archived_video": {
+    "codec": "theora",
+    "duration_seconds": 8,
+    "resolution": [
+      384,
+      216
+    ],
+    "fps": 10,
+    "source": "offline render of project scene and supplied/adult placeholder models"
+  },
+  "killer_memory_saved": [
+    "position",
+    "facing",
+    "mode",
+    "target",
+    "last_seen",
+    "goal",
+    "search",
+    "lost",
+    "grace",
+    "attack"
+  ],
+  "endings": [
+    "resolved",
+    "unresolved",
+    "alone"
+  ],
+  "defeat_separate_from_narrative_ending": true,
+  "save_version": 5,
+  "legacy_save_versions_verified": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "autosave_interval_seconds": 5,
+  "safe_retry_checkpoint": true,
+  "assets_and_resources_byte_identical_to_0_19_0": 426,
+  "new_shadow_casting_lights": 0,
+  "native_target_fps_measured": false,
+  "default_frame_limit": 30,
+  "ps1_and_ps12_preserved": true,
+  "graphics": "Compatibility/OpenGL, Linux Mesa llvmpipe, 1280x720; staged screenshots, separate physical integration",
+  "distribution_validation": "See downloads/project/release_verification.json on GitHub for clean ZIP validation and SHA-256.",
+  "known_test_warning": "ObjectDB leak notice at shutdown and physics interpolation warnings during test-driven scene restoration; no runtime errors."
+}

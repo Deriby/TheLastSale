@@ -1,4 +1,4 @@
-# The Last Sale — projeto Godot 0.19.0
+# The Last Sale — projeto Godot 0.20.0
 
 1. Extraia este ZIP em uma pasta nova.
 2. No Godot **4.4.1**, clique em **Importar** e escolha `project.godot`.
@@ -21,9 +21,21 @@ Converse com Felps, atenda os dois pedidos e aguarde o cliente de boné sair. Co
 
 Com Deryk e mãos livres, abra o estoque e examine a porta antiga e a caixa deslocada. Depois, volte a Felps e use **Caderno / decisões**. Escolha copiar os registros/recibo ou deixá-los no gravador; avisar o responsável ou esperar. Você pode rever essas duas escolhas antes de sair do monitor. Prepare a saída por E no comando das portas, à direita da entrada, ou escolha seguir sem preparar no caderno. Bryan e Zirico são opcionais.
 
-Depois das três decisões, alguém força a porta do pátio. Feche o caixa com Felps, confira o estoque com Deryk, apague o salão no quadro e reúna a dupla na calçada para baixar as portas. A cópia efetiva dos registros e recibos, as pistas e as escolhas ficam salvas. **Domingo contém só a abertura; revelação, perseguição e finais continuam em desenvolvimento.** Veja `docs/saturday_v019/README.md`.
+Depois das três decisões, alguém força a porta do pátio. Feche o caixa com Felps, confira o estoque com Deryk, apague o salão no quadro e reúna a dupla na calçada para baixar as portas. A cópia efetiva dos registros e recibos, as pistas e as escolhas ficam salvas. Domingo continua a investigação e conclui a primeira versão jogável da campanha. Veja `docs/saturday_v019/README.md`.
 
-O save versão 4 registra noite, energia, chave, fechamento, pistas e relatórios. Seis identidades provisórias de clientes usam três modelos simples com rig e roupas variadas; veja `docs/ELENCO_PROVISORIO.md`.
+## Domingo: gravação, revelação e fuga
+
+Converse no balcão. Deryk abre a porta antiga no fundo do estoque, recolhe o módulo na sala de manutenção e leva-o fisicamente ao balcão. Com Felps, C abre a recuperação: reproduza o vídeo de quarta-feira e analise o trecho. O cadastro e as imagens revelam a ligação do cliente com o acesso antigo.
+
+Antes de conferir o quadro do estoque, Felps pode copiar o fragmento para levar consigo e avisar o contato de confiança. Enviar a prova para fora preserva-a mesmo que o gravador seja destruído. Estas oportunidades continuam disponíveis se você não preparou ajuda no sábado.
+
+Com Felps no terminal, Deryk confere o quadro. Durante a separação, Deryk abre o pátio e seleciona **ESTOQUE** no gerador. Alterne para Felps e use **C → DESTRAVAR ESTOQUE** no terminal energizado; também existe um comando junto à porta. **H** manda o companheiro acompanhar ou aguardar em cobertura. Os dois caminham pelo cenário. O assassino vê, ouve, investiga e procura no último ponto conhecido; trocar de personagem não apaga sua memória.
+
+Apague a lanterna com F, agache e quebre a linha de visão. **Ctrl + E** junto às coberturas do balcão, armário do estoque ou freezer abaixa o corpo; mover-se ou usar E sai da cobertura. No comando manual à direita da entrada, E começa a abertura; fique perto até terminar. A preparação de sábado reduz a espera. O gerador também pode alimentar o SALÃO, reduzindo o tempo de abertura sem preparo.
+
+Leve os dois ao mesmo encontro na calçada à direita. A ajuda avisada espera no primeiro ponto; a rota até o vizinho continua disponível mais adiante. E abre uma confirmação: fugir juntos com prova, fugir juntos sem prova ou confirmar sair sem o companheiro leva a três epílogos distintos. Cancelar permite voltar para resgatar. Ser alcançado abre **Retomar checkpoint da fuga**, sem registrar derrota como final permanente.
+
+O save versão 5 conserva campanha, portas, circuito, prova, posições, coberturas e memória do perseguidor. Durante a fuga há salvamento a cada cinco segundos; o checkpoint de tentativa permanece separado. Formatos 1–4 continuam aceitos. Veja `docs/sunday_v020/README.md`.
 
 ## Atendimento
 
@@ -36,7 +48,7 @@ O salvamento conserva pedido, cliente, registro, dinheiro recebido e troco parci
 ## Controles e configurações
 
 - WASD e mouse: mover/olhar. Shift: correr. Ctrl: agachar.
-- Tab: trocar entre Felps e Deryk. E: interagir e atender. C: câmeras/caderno, com Felps no caixa.
+- Tab: trocar entre Felps e Deryk. E: interagir e atender. C: câmeras/caderno/DVR, com Felps no caixa. H: acompanhar/aguardar no domingo.
 - Q: apoiar caixa na marca verde; a marca vermelha indica bloqueio. Q durante a pegada agenda a soltura.
 - Roda do mouse: aproximar até primeira pessoa ou afastar.
 - Espaço: avançar diálogo. Esc: fechar monitor/caixa ou pausar. F: lanterna após o aviso narrativo.
@@ -53,7 +65,7 @@ O elenco inclui Dery, Felps, Killer, Bryan, Zirico, Garota 1, Garota 2 e Velha 1
 
 ## Validação
 
-289/289 verificações passaram em Linux no projeto e no ZIP extraído. `./tools/test.sh` roda a suíte; em outra máquina, abra pelo editor ou defina `GODOT_BIN` com o caminho do motor.
+**348/348 verificações** passaram nas quatro suítes em Linux. Os resultados e a verificação da extração limpa ficam em `docs/sunday_v020/validation.json` e na verificação de distribuição no GitHub. `./tools/test.sh` roda a suíte; em outra máquina, abra pelo editor ou defina `GODOT_BIN` com o caminho do motor.
 
 A Godot 4.4 tem Windows 10 como requisito oficial mínimo. Windows 7/Radeon R7 não foram validados nativamente. O modo Econômica reduz resolução, sombras e acabamento dos materiais.
 

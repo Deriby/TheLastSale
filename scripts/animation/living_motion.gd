@@ -58,6 +58,7 @@ func locomotion(delta: float,speed: float,crouch: bool,carrying: bool,tired: boo
 	if speed>.10:
 		idle_time=0;ambient_active=false
 		var clip: String="carry_walk" if carrying else ("crouch_walk" if crouch else ("run" if speed>2.55 else direction))
+		if not clips.has(clip):clip="walk" if clips.has("walk") else "idle"
 		play(clip,.20,true)
 		animator.speed_scale=clampf(speed*animator.get_animation(clips[clip]).length/float(strides.get(clip,1.12)),.25,2.7)
 	else:

@@ -1,12 +1,22 @@
 # A Última Venda — Depois do Fechamento
 
-Demonstração jogável em **Godot 4.4.1 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP, com uma rotina narrativa curta. A campanha completa continua em desenvolvimento.
+Demonstração jogável em **Godot 4.4.1 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP, com uma primeira versão jogável da campanha de sexta a domingo. Acabamento e ritmo continuam em desenvolvimento.
 
-**[Baixar o projeto 0.19.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.19.0.zip)**
+**[Baixar o projeto 0.20.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.20.0.zip)**
 
 Extraia o ZIP, importe `project.godot` no Godot **4.4.1**, aguarde a importação dos modelos e pressione **F5**. O arquivo inclui os modelos animados, cenários, código e recursos usados no jogo. [Conteúdo e instruções do projeto](downloads/project/README.md).
 
-## Revisão 0.19.0 — sábado, câmeras e investigação
+## Revisão 0.20.0 — domingo, perseguição e três finais
+
+Deryk recupera o módulo na sala atrás da porta antiga e o leva a Felps. O DVR reproduz um fragmento real de oito segundos, gravado no cenário do jogo, que liga o cliente recorrente ao acesso de manutenção. A revelação inicia a preparação da fuga.
+
+Na separação, Deryk alimenta o estoque pelo gerador e Felps destrava a porta pelo terminal. O Killer persegue os dois no mesmo cenário, com visão, audição e memória. **H** alterna acompanhar/aguardar; **Ctrl + E** usa uma cobertura próxima. Abra a saída manual, reúna a dupla na calçada e escolha partir. Prova preservada, prova perdida ou abandono confirmado do companheiro produzem três epílogos. Uma captura permite retomar o checkpoint.
+
+Saves versão 5 conservam a ameaça, portas, circuitos, prova e cobertura; formatos 1–4 continuam aceitos. [Controles, percurso, capturas e validação](docs/sunday_v020/README.md). O ZIP inclui todo o projeto para Godot 4.4.1. **348/348 verificações** passaram nas quatro suítes em Linux.
+
+![Recuperação do vídeo de quarta-feira](docs/sunday_v020/dvr_playback.png)
+
+## Revisão anterior 0.19.0 — sábado, câmeras e investigação
 
 Depois da sexta, **Começar sábado** inicia uma nova rotina com dois pedidos e o retorno do cliente de boné. Com Felps no posto do caixa, **C** abre o monitor: fachada, estoque e pátio mostram o mesmo cenário ao vivo. A porta do pátio se move durante a consulta; a observação fica registrada sem revelar quem está do outro lado. O DVR tem registros textuais explicitamente separados do vídeo ao vivo.
 
@@ -184,9 +194,9 @@ A reconstrução 0.2 do interior recebeu gôndolas abastecidas por categoria, ge
 
 ## Jogar
 
-**[Baixar o projeto Godot 0.17.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.17.0.zip)**
+**[Baixar o projeto Godot 0.20.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.20.0.zip)**
 
-O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **Demonstração 0.17.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
+O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **0.20.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
 
 O download atual é o projeto para o editor. O diretório `downloads/windows` guarda apenas a entrega anterior 0.9.0.
 
@@ -204,21 +214,18 @@ A Godot 4.4 tem Windows 10 como requisito oficial mínimo. **Windows 7/8 não s�
 | Shift / Ctrl | Correr com fôlego / agachar |
 | Roda para frente / trás | Aproximação contínua até primeira pessoa / terceira pessoa |
 | E | Interação contextual |
-| Q | Soltar caixa — falha relatada, correção pendente na etapa de jogabilidade |
+| Q | Apoiar caixa em superfície livre |
+| Tab / C | Trocar protagonista / terminal de Felps no caixa |
+| H / Ctrl + E | Acompanhar ou aguardar / cobertura próxima no domingo |
 | Espaço | Avançar uma fala |
 | Esc | Pausar, salvar e configurar |
 | F | Lanterna, disponível depois do aviso do cliente |
 
-## Percurso da demonstração
+## Percurso da campanha
 
-1. Entre pelo vão aberto e converse com Felps no balcão à esquerda, junto à parede.
-2. Vá pelo corredor da direita até a porta **Estoque**, nos fundos; abra com E.
-3. Pegue uma caixa de retornáveis e leve até a primeira geladeira da parede esquerda. Abra com E; use E novamente para repor. Repita com a segunda caixa.
-4. Guarde a caixa solta no palete marcado **Devoluções**, no estoque.
-5. Retorne à loja. Os clientes entram pela calçada, escolhem bebida, compram e saem. Após duas compras e as tarefas concluídas, chega o cliente preocupado.
-6. Ouça o aviso. Após sua saída e a conversa, um ruído vem do estoque. Examine a porta **Sem acesso** para encerrar a sequência.
+Sexta ensina atendimento e reposição, interrompe a rotina com a pane e termina no fechamento cooperativo. Sábado traz novas compras, câmeras, pistas e decisões. Domingo recupera a gravação antiga, revela o invasor e termina na fuga e nos três epílogos. [Guia completo do ZIP](tools/project_archive_readme.md).
 
-Os objetivos e legendas orientam o percurso. A ordem narrativa depende de tarefas e visitas concluídas; esperar parado não conclui o expediente. Um cliente bloqueado pelo jogador espera/recalcula seu caminho, sem teletransporte. A demo leva aproximadamente alguns minutos, conforme exploração e leitura, sem duração de campanha prometida.
+Os objetivos e legendas orientam as ações; esperar parado não conclui as tarefas. As metas de duração da proposta narrativa ainda precisam de playtest.
 
 ## Entregue
 
@@ -244,9 +251,9 @@ As referências e aproximações estão em [docs/REFERENCIAS.md](docs/REFERENCIA
 
 As animações usam os rigs fornecidos nesta revisão. Ainda precisam de acabamento artístico nas curvas, dedos, contato durante giros e atendimento; não há captura de movimento, animação facial, sincronização labial ou todos os clipes da campanha (morte, dano). A correção dos pés cobre pequenos desníveis, sem planejamento de passos sobre obstáculos. Não há dublagem, trilha final licenciada ou física livre de empilhamento.
 
-O Enemy está importado e rigado, mas **a IA de perseguição, esconderijos, câmeras de segurança, alternância de protagonistas e demais capítulos não foram implementados**. A porta antiga continua fechada; o ruído final é a conclusão desta demonstração. O save é de checkpoint: caixas soltas sem conclusão de objetivo retornam às posições iniciais; a caixa carregada e tarefas concluídas são restauradas.
+A campanha tem uma primeira versão completa do fluxo, com alternância, CCTV, perseguição, coberturas e três finais. Ela ainda precisa de playtests de dificuldade, ritmo, clareza dos objetivos e acabamento das animações. Não há duração final prometida. O salvamento conserva os mecanismos de domingo e um checkpoint separado para tentativas da fuga.
 
-Não foram medidos 60 FPS em PCs modestos nem testados binários em Windows real. O ambiente de revisão usa Mesa/llvmpipe em Linux. Próxima entrega recomendada: revisão artística do mapa e dos clientes, ajuste manual de pesos/contatos de animação e playtest do ritmo antes da etapa de perseguição.
+O ambiente de revisão usa Mesa/llvmpipe em Linux. FPS nativo na Radeon R7 não foi medido. A próxima etapa é testar a campanha inteira e ajustar o ritmo e as rotas com a experiência do jogador.
 
 ## Ferramentas e validação
 

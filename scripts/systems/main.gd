@@ -16,6 +16,7 @@ func _ready() -> void:
 	interface=ShiftInterface.new();add_child(interface)
 	interface.new_game.connect(start_new)
 	interface.continue_game.connect(start_saved)
+	interface.retry_game.connect(retry_sunday)
 	interface.next_night.connect(start_next_night)
 	Preferences.changed.connect(apply_settings);get_viewport().size_changed.connect(update_render_size);apply_settings()
 	initial_world_pristine=Session.stage==0 and Session.stocked.is_empty() and not Session.organized and Session.carried_id.is_empty() and Session.campaign.phase=="routine"
@@ -52,7 +53,7 @@ func update_render_size() -> void:
 		screen.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	if retro!=null:retro.set_shader_parameter("game_bounds",bounds)
 func build_world() -> void:
-	interface.close_surveillance();interface.close_checkout()
+	interface.close_sunday_desk();interface.close_surveillance();interface.close_checkout()
 	if world!=null:
 		viewport.remove_child(world);world.free()
 	world=ShiftWorld.new();viewport.add_child(world)
@@ -61,6 +62,9 @@ func build_world() -> void:
 	world.notice.connect(interface.show_notice)
 	world.checkout_requested.connect(func():interface.open_checkout(world))
 	world.surveillance_requested.connect(func():interface.open_surveillance(world))
+	world.terminal_requested.connect(func():interface.open_sunday_desk(world))
+	world.desk_closed.connect(interface.close_sunday_desk)
+	world.campaign_event.connect(interface.show_campaign)
 	world.checkout_closed.connect(interface.close_checkout)
 	world.checkout_changed.connect(interface.update_objective)
 	world.slice_finished.connect(interface.show_night_summary)
@@ -89,8 +93,12 @@ func start_next_night() -> void:
 	if int(Session.campaign.night)==0:start_saturday();return
 	Dialogue.clear();Session.advance_to_sunday();build_world();world.active=true
 	Session.save_shift(world.player.global_position)
+func retry_sunday() -> void:
+	Session.save_retry();start_saved()
 func _unhandled_input(event: InputEvent) -> void:
-	if interface.paused or interface.checkout!=null or interface.surveillance!=null or world==null:return
+	if interface.paused or interface.checkout!=null or interface.surveillance!=null or interface.sunday_desk!=null or interface.campaign_panel!=null or world==null:return
+	if event.is_action_pressed("companion") and world.sunday!=null:
+		world.sunday.command_companion();get_viewport().set_input_as_handled();return
 	if event.is_action_pressed("surveillance"):
 		if not world.try_surveillance():interface.show_notice("Felps acessa as câmeras no caixa, depois da conversa de abertura. Termine o atendimento aberto antes de usar C.")
 		get_viewport().set_input_as_handled();return

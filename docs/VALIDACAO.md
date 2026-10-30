@@ -1,3 +1,11 @@
+## Revisão 0.20.0 — 30/10/2026
+
+**348/348 verificações**: 188 de integração, 48 de sexta, 53 de sábado e 59 de domingo. A nova suíte percorre acesso antigo, entrega física do módulo, vídeo real, análise, prova/ajuda, separação, gerador, liberação pelo terminal, perseguidor ativo, companheiro, abertura manual, fuga e final favorável. Depois, posições preparadas isolam percepção, memória após Tab/save, preparação do golpe, derrota/checkpoint, coberturas, outros finais e migração da antiga prévia de domingo.
+
+Formato 5 conserva portas, circuito, prova, cobertura e estado do perseguidor, com checkpoint de tentativa separado. Modelos, texturas e recursos anteriores: 426 arquivos idênticos à 0.19.0. Novo vídeo Theora produzido no próprio cenário, oito segundos, 384×216/10 FPS. Sem novas luzes com sombras. Capturas em Linux/Mesa llvmpipe; FPS nativo na Radeon R7 não foi medido. Avisos de interpolação e ObjectDB no encerramento dos testes estão registrados; não há erros de execução.
+
+[Guia, capturas e logs](sunday_v020/README.md). [Relatório](sunday_v020/validation.json). [Verificação independente do ZIP extraído](../downloads/project/release_verification.json).
+
 ## Revisão 0.19.0 — 30/10/2026
 
 **289/289 verificações**: 188 de integração, 48 de sexta e 53 de sábado. O sábado percorre dois clientes completos, operação das três câmeras por teclado/botões, um único viewport compartilhado, desligamento do canal nas abas e ao sair/pausar/trocar, registros e recibos, pistas físicas, fontes opcionais, alternativas de decisões, preparação da saída, fechamento e transição de dia.

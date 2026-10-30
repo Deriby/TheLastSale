@@ -21,7 +21,11 @@ func build_envelope() -> void:
 	solid(Vector3(6,2.71,-8),Vector3(.24,5.42,16),wall)
 	solid(Vector3(-6,2.2,-8),Vector3(.24,4.4,16),wall)
 	solid(Vector3(-4.05,2.2,-16),Vector3(3.9,4.4,.24),wall)
-	solid(Vector3(.875,2.71,-16),Vector3(5.95,5.42,.24),wall)
+	if int(Session.campaign.night)==2:
+		solid(Vector3(-1.425,2.71,-16),Vector3(1.35,5.42,.24),wall)
+		solid(Vector3(2.3,2.71,-16),Vector3(3.1,5.42,.24),wall)
+		solid(Vector3(0,4.01,-16),Vector3(1.5,2.82,.24),wall)
+	else:solid(Vector3(.875,2.71,-16),Vector3(5.95,5.42,.24),wall)
 	solid(Vector3(5.875,2.71,-16),Vector3(.25,5.42,.24),wall)
 	solid(Vector3(4.8,4.01,-16),Vector3(1.9,2.82,.24),wall)
 	service_door=Node3D.new();service_door.name="ServiceDoor";add_child(service_door);service_door.position=Vector3(3.85,0,-16)

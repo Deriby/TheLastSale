@@ -16,6 +16,8 @@ var camera_rig: ShoulderCamera
 var socket: Node3D
 var carried: Node3D
 var target: Interaction
+var concealed:=false
+var assisted_speed:=1.55
 var crouching := false
 var stamina := 1.0
 var motion: LivingMotion
@@ -72,7 +74,10 @@ func finish_action() -> void:
 func play_clip(clip: String) -> void:
 	motion.play(clip)
 func _physics_process(delta: float) -> void:
-	if controlled and not input_locked and not Dialogue.active:crouching=Input.is_action_pressed("crouch") and carried==null and not motion.action_active
+	if controlled and concealed and not Dialogue.active and Input.get_vector("left","right","forward","backward").length()>.1:concealed=false
+	if controlled and not input_locked and not Dialogue.active:crouching=(concealed or Input.is_action_pressed("crouch")) and carried==null and not motion.action_active
+	if not controlled:crouching=concealed
+	if concealed:crouching=true
 	if not crouching and capsule.height<1.7:
 		var ray:=PhysicsRayQueryParameters3D.create(global_position+Vector3.UP*.9,global_position+Vector3.UP*1.8,1,[get_rid()])
 		if not get_world_3d().direct_space_state.intersect_ray(ray).is_empty():crouching=true
@@ -86,6 +91,7 @@ func _physics_process(delta: float) -> void:
 	var running:=controlled and Input.is_action_pressed("sprint") and not crouching and carried==null and stamina>.05 and input.length()>.1
 	stamina=clampf(stamina+delta*(-.18 if running else .16),0,1)
 	var speed:=3.9 if running else (.85 if crouching else (1.15 if carried!=null else 1.55))
+	if not controlled and not crouching:speed=assisted_speed
 	var acceleration:=10.0 if running else (8.0 if input.length()<.1 else 6.5)
 	velocity.x=move_toward(velocity.x,direction.x*speed,delta*acceleration)
 	velocity.z=move_toward(velocity.z,direction.z*speed,delta*acceleration)
@@ -104,7 +110,7 @@ func _physics_process(delta: float) -> void:
 		elif absf(input.x)>.4 and absf(input.y)<.3:gait="strafe_left" if input.x<0 else "strafe_right"
 	if Dialogue.active and actual_speed<.1 and not motion.action_active and carried==null:
 		motion.play("talk" if dialogue_speaker in [identity,display_name()] else ("cashier_idle" if identity=="Felps" else "idle"),.28)
-	elif identity=="Felps" and actual_speed<.1 and carried==null and not motion.action_active and global_position.distance_to(CheckoutFixture.STAFF_POSITION)<1.2:
+	elif identity=="Felps" and not crouching and actual_speed<.1 and carried==null and not motion.action_active and global_position.distance_to(CheckoutFixture.STAFF_POSITION)<1.2:
 		routine_time+=delta
 		if routine_time>6.5:routine_time=0;routine_index+=1
 		var routines: Array[String]=["cashier","cashier_idle","idle_shift","cashier_idle","idle_look"]
@@ -126,10 +132,20 @@ func update_footsteps() -> void:
 	if last_step_half!=-1 and half!=last_step_half:
 		foot_audio.stream=asphalt_step if global_position.z>=0 else tile_step
 		foot_audio.volume_db=linear_to_db(maxf(Preferences.effects_volume,.001))-11;foot_audio.play()
-		made_noise.emit(global_position,8.0 if actual_speed>2.55 else 3.0)
+		made_noise.emit(global_position,1.2 if crouching else 8.0 if actual_speed>2.55 else 3.0)
 	last_step_half=half
 func update_focus() -> void:
 	target=null
+	if int(Session.campaign.night)==2 and crouching:
+		var world:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
+		if world!=null and world.sunday!=null and world.sunday.threat_active():
+			for id in world.sunday.covers:
+				if position.distance_to(world.sunday.covers[id])<1.0:
+					target=world.sunday.get_node("Cover_"+id).get_child(0);focused.emit("[E]  "+target.prompt(self));return
+
+	if int(Session.campaign.night)==2 and identity=="Dery" and Session.flag("module_found") and not Session.flag("module_delivered") and position.distance_to(CheckoutFixture.CUSTOMER_POSITION)<2.2:
+		var world:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
+		target=world.depot.checkout;focused.emit("[E]  Entregar módulo no balcão");return
 	if identity=="Dery" and carried_id.begins_with("order_"):
 		var world:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
 		if world!=null and world.can_supply_order(self):target=world.depot.checkout;focused.emit("[E]  "+target.prompt(self));return
@@ -150,7 +166,7 @@ func update_focus() -> void:
 		var best:=0.67
 		for candidate in get_tree().get_nodes_in_group("interactables"):
 			if not candidate.is_inside_tree() or not candidate.get_parent().is_visible_in_tree() or candidate.get_parent() in [carried,self] or not candidate.available_for(self):continue
-			var aim: Vector3=candidate.global_position+Vector3.UP*(1.1 if candidate.kind in ["checkout","talk"] else .7)
+			var aim: Vector3=candidate.global_position+Vector3.UP*(1.1 if candidate.kind in ["checkout","talk","sunday"] else .7)
 			if global_position.distance_to(candidate.global_position)>2.65:continue
 			var dot:=(-cam.global_basis.z).dot((aim-start).normalized())
 			if dot<best:continue
@@ -165,7 +181,9 @@ func handle_input(event: InputEvent) -> void:
 		drop_carried();return
 	if motion.action_active or handling.busy:return
 	if event.is_action_pressed("interact") and target!=null:target.activate(self)
-	if event.is_action_pressed("flashlight") and Session.stage>=6:torch.visible=not torch.visible
+	if event.is_action_pressed("flashlight") and Session.stage>=6:
+		torch.visible=not torch.visible
+		if torch.visible:concealed=false
 func set_collision(node: Node,enabled: bool) -> void:
 	for c in node.find_children("*","CollisionShape3D",true,false):c.set_deferred("disabled",not enabled)
 func pick_up(item: Node3D,id: String,instant := false) -> void:

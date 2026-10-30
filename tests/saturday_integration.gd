@@ -120,7 +120,7 @@ func run() -> void:
 	check(Session.campaign.phase=="complete" and 1 in Session.campaign.completed_nights and app.interface.night_panel!=null,"sábado termina com relatório e campanha salva")
 	check(Session.campaign.reports.saturday.decisions.evidence=="copy" and Session.campaign.reports.saturday.receipts.size()==2,"resumo da segunda noite preserva suas decisões e os dois recibos")
 	app.interface.night_panel.find_child("NextNight",true,false).pressed.emit();world=app.world;await ticks(3)
-	check(int(Session.campaign.night)==2 and Session.campaign.phase=="sunday_preview" and Session.campaign.decisions.exit=="prepared" and Session.campaign.clues.door_marks,"passagem ao domingo conserva pistas e preparação e reinicia dados diários")
+	check(int(Session.campaign.night)==2 and Session.campaign.phase=="sunday_intro" and Session.campaign.decisions.exit=="prepared" and Session.campaign.clues.door_marks,"passagem ao domingo conserva pistas e preparação e reinicia dados diários")
 	check(Session.campaign.evidence_archive.receipts.size()==2 and Session.campaign.evidence_archive.records.size()==2,"cópia guarda dados reais de recibos e registros através da passagem de dia")
 	check(Session.sales_cents==0 and Session.receipts.is_empty() and 0 in Session.campaign.completed_nights and 1 in Session.campaign.completed_nights,"histórico das noites concluídas permanece separado das vendas de domingo")
 	Session.save_shift(world.player.global_position);await reload_world()

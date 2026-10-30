@@ -13,7 +13,11 @@ func solid(at: Vector3,size: Vector3,material: Material,nav := true) -> void:
 func _ready() -> void:
 	var wall:=SurfaceMaterials.make("wall",Color("8f9587"))
 	solid(Vector3(4.9,-.12,-18.35),Vector3(2.9,.24,4.7),SurfaceMaterials.make("paving"),false)
-	for x in [3.45,6.35]:solid(Vector3(x,1.35,-18.4),Vector3(.18,2.7,4.8),wall)
+	for x in [3.45,6.35]:
+		if x==3.45 and int(Session.campaign.night)==2:
+			solid(Vector3(x,1.35,-17.35),Vector3(.18,2.7,2.9),wall)
+			solid(Vector3(x,1.35,-20.6),Vector3(.18,2.7,.4),wall)
+		else:solid(Vector3(x,1.35,-18.4),Vector3(.18,2.7,4.8),wall)
 	solid(Vector3(4.9,1.35,-20.8),Vector3(2.9,2.7,.18),wall)
 	var steel:=Geo.material(Color("353e39"));var red:=Geo.material(Color("805044"))
 	generator=Node3D.new();generator.name="BackupGenerator";add_child(generator);generator.position=Vector3(5.5,0,-19.5)

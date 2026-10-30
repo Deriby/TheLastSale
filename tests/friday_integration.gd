@@ -125,7 +125,9 @@ func run() -> void:
 	legacy.stage=6;legacy.finale=false
 	f=FileAccess.open(Session.SAVE_PATH,FileAccess.WRITE);f.store_string(JSON.stringify(legacy));f.close();await reload_world()
 	check(Session.stage==6 and world.friday.is_outage(),"save antigo após o aviso e antes do fim da demonstração migra para a pane")
-	Session.new_shift();Session.stage=6;Session.warning_delivered=true;Session.save_shift(world.player.global_position);await reload_world()
+	Session.new_shift();Session.stage=6;Session.warning_delivered=true;Session.save_shift(world.player.global_position)
+	var v4: Dictionary=JSON.parse_string(FileAccess.get_file_as_string(Session.SAVE_PATH));v4.version=4;v4.erase("retry")
+	f=FileAccess.open(Session.SAVE_PATH,FileAccess.WRITE);f.store_string(JSON.stringify(v4));f.close();await reload_world()
 	check(world.friday.is_outage() and Dialogue.active,"save versão 4 na transição após o aviso retoma o apagão sem bloquear a noite")
 	clear_dialogue()
 	Session.campaign.phase="routine";Session.stage=6
