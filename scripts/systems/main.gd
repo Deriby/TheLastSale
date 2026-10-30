@@ -16,7 +16,7 @@ func _ready() -> void:
 	interface=ShiftInterface.new();add_child(interface)
 	interface.new_game.connect(start_new)
 	interface.continue_game.connect(start_saved)
-	interface.next_night.connect(start_saturday)
+	interface.next_night.connect(start_next_night)
 	Preferences.changed.connect(apply_settings);get_viewport().size_changed.connect(update_render_size);apply_settings()
 	initial_world_pristine=Session.stage==0 and Session.stocked.is_empty() and not Session.organized and Session.carried_id.is_empty() and Session.campaign.phase=="routine"
 	build_world()
@@ -52,7 +52,7 @@ func update_render_size() -> void:
 		screen.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	if retro!=null:retro.set_shader_parameter("game_bounds",bounds)
 func build_world() -> void:
-	interface.close_checkout()
+	interface.close_surveillance();interface.close_checkout()
 	if world!=null:
 		viewport.remove_child(world);world.free()
 	world=ShiftWorld.new();viewport.add_child(world)
@@ -60,6 +60,7 @@ func build_world() -> void:
 	world.player_changed.connect(func(actor: DepotPlayer):interface.set_character(actor))
 	world.notice.connect(interface.show_notice)
 	world.checkout_requested.connect(func():interface.open_checkout(world))
+	world.surveillance_requested.connect(func():interface.open_surveillance(world))
 	world.checkout_closed.connect(interface.close_checkout)
 	world.checkout_changed.connect(interface.update_objective)
 	world.slice_finished.connect(interface.show_night_summary)
@@ -84,8 +85,15 @@ func start_saturday() -> void:
 	Dialogue.clear();Session.advance_to_saturday();build_world();world.active=true
 	Session.save_shift(world.player.global_position)
 
+func start_next_night() -> void:
+	if int(Session.campaign.night)==0:start_saturday();return
+	Dialogue.clear();Session.advance_to_sunday();build_world();world.active=true
+	Session.save_shift(world.player.global_position)
 func _unhandled_input(event: InputEvent) -> void:
-	if interface.paused or interface.checkout!=null or world==null:return
+	if interface.paused or interface.checkout!=null or interface.surveillance!=null or world==null:return
+	if event.is_action_pressed("surveillance"):
+		if not world.try_surveillance():interface.show_notice("Felps acessa as câmeras no caixa, depois da conversa de abertura. Termine o atendimento aberto antes de usar C.")
+		get_viewport().set_input_as_handled();return
 	if event.is_action_pressed("switch_character"):
 		world.switch_player();get_viewport().set_input_as_handled();return
 	world.player.camera_rig.handle_input(event)

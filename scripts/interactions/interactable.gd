@@ -1,6 +1,6 @@
 class_name Interaction
 extends Node3D
-@export_enum("crate","fridge","door","pallet","talk","note","switch","familiar","checkout","campaign") var kind := "crate"
+@export_enum("crate","fridge","door","pallet","talk","note","switch","familiar","checkout","campaign","investigation") var kind := "crate"
 @export var identity := ""
 var open := false
 var busy := false
@@ -18,27 +18,48 @@ func prompt(player: Node3D) -> String:
 			if get_parent().needs_restock and player.carried != null and Session.stage in [1,2] and Session.carried_id.begins_with("stock_"):
 				return "Colocar bebidas" if open else "Abrir geladeira"
 			return "Fechar geladeira" if open else "Abrir geladeira"
-		"door": return "Fechar porta" if open else "Abrir porta do pátio" if identity=="service" else "Abrir porta do estoque"
+		"door":
+			if identity=="service" and int(Session.campaign.night)==1:return "Pátio trancado • nenhuma entrega autorizada"
+			return "Fechar porta" if open else "Abrir porta do pátio" if identity=="service" else "Abrir porta do estoque"
 		"pallet": return "Guardar caixa no palete" if Session.carried_id == "loose" else "Palete • organizar após a reposição"
 		"talk": return "Conversar com "+("Deryk" if identity=="Dery" else "Felps")
 		"checkout":
 			var world:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
 			if world!=null and world.friday!=null and world.friday.phase() in ["outage","closing"]:return world.friday.prompt("counter",player)
 			if world!=null and world.can_supply_order(player):return "Deixar a caixa do pedido no balcão"
+			if int(Session.campaign.night)==1 and world!=null and not world.can_checkout(player):return "Câmeras e caderno [C]" if Session.campaign.phase!="saturday_intro" else "Conferir a noite com Deryk"
 			return "Continuar atendimento" if world!=null and world.can_checkout(player) and world.customer.service_started else ("Atender cliente" if world!=null and world.can_checkout(player) else "Caixa • aguarde um cliente")
 		"familiar": return "Conversar com "+identity
 		"note": return "Conferir estoque e porta antiga" if Session.campaign.phase=="closing" else "Examinar a porta antiga"
+		"investigation":return "Examinar caixas deslocadas • Deryk"
 		"campaign":
 			var world:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
+			if identity=="exit" and Session.campaign.phase=="saturday_decisions":return "Conferir saída e combinar ponto de encontro"
 			return world.friday.prompt(identity,player) if world!=null and world.friday!=null else "Interagir"
 		"switch": return "Acender luz" if not open else "Apagar luz"
 	return "Interagir"
 func available_for(player: DepotPlayer) -> bool:
 	if kind=="checkout":return player.identity=="Felps" or player.carried_id.begins_with("order_")
 	if kind=="talk":return get_parent()!=player
+	if kind=="familiar":return not get_parent().leaving
 	return true
 func activate(player: Node3D) -> bool:
 	if busy or player.motion.action_active: return false
+	var chapter:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
+	if chapter!=null and chapter.surveillance_open:return false
+	if int(Session.campaign.night)==1 and chapter!=null and chapter.saturday!=null:
+		if kind=="campaign" and identity=="exit" and Session.campaign.phase=="saturday_decisions":return chapter.saturday.prepare_exit(player)
+		if kind=="talk" or kind=="checkout" and Session.campaign.phase=="saturday_intro":
+			if global_position.distance_to(player.global_position)>2.65:return false
+			return chapter.saturday.introduce(player)
+		if kind=="familiar":
+			if get_parent().leaving or global_position.distance_to(player.global_position)>2.65:return false
+			return chapter.saturday.familiar(identity,player)
+		if kind=="investigation":return chapter.saturday.inspect("boxes",player)
+		if kind=="note" and Session.campaign.phase!="closing":return chapter.saturday.inspect("door",player)
+		if kind=="door" and identity=="service":
+			chapter.notice.emit("Pátio trancado. Nenhuma entrega autorizada hoje; a dupla vai sair pela frente.");return false
+		if kind=="checkout" and Session.campaign.phase!="closing" and not chapter.can_checkout(player):return chapter.try_surveillance()
 	if kind in ["campaign","checkout","note","talk"]:
 		var world:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
 		if world!=null and world.friday!=null:
@@ -47,10 +68,9 @@ func activate(player: Node3D) -> bool:
 				return world.friday.activate(identity,player)
 			if kind=="checkout" and world.friday.phase() in ["outage","closing"]:return world.friday.activate("counter",player)
 			if kind=="note" and world.friday.phase()=="closing":return world.friday.activate("stock",player)
-			if kind=="talk" and Session.campaign.phase in ["saturday_preview","saturday_preview_done"]:
+			if kind=="talk" and Session.campaign.phase=="sunday_preview":
 				if Dialogue.active:return false
-				Session.campaign.phase="saturday_preview_done";Session.changed.emit();Session.save_shift(player.global_position)
-				Dialogue.play("saturday_intro",[["Felps","Falei com o responsável sobre a energia. E aquele portão dos fundos... tava mexido."],["Dery","Hoje vamos conferir as imagens e ficar de olho. Ontem a rua não apagou."],["","ABERTURA DE SÁBADO — a investigação continua na próxima etapa."]]);return true
+				Dialogue.play("sunday_intro",[["Felps","Hoje a loja não vai abrir. A gente veio recuperar o que falta e conferir o prédio."],["Dery","A cópia tá guardada fora daqui." if Session.campaign.decisions.get("evidence","")=="copy" else "As imagens ainda estão só no gravador. Vamos ter que preservar isso."],["Felps","Já avisei o responsável e combinei contato." if Session.campaign.decisions.get("help","")=="contact" else "Antes de mexer nos fundos, precisamos avisar alguém."],["","ABERTURA DE DOMINGO • A perseguição, a revelação e os finais continuam em desenvolvimento."]]);return true
 	match kind:
 		"crate":
 			if player.identity!="Dery":return false

@@ -24,7 +24,7 @@ var saved_position := Vector3(3.8, 0.1, 1.8)
 var carried_id := ""
 const SAVE_PATH := "user://shift.json"
 func default_campaign() -> Dictionary:
-	return {"night":0,"phase":"routine","flags":{},"clues":{},"completed_nights":[],"reports":{}}
+	return {"night":0,"phase":"routine","flags":{},"clues":{},"decisions":{},"evidence_archive":{},"records":[],"completed_nights":[],"reports":{}}
 func flag(id: String) -> bool:return bool(campaign.flags.get(id,false))
 func night_title() -> String:return ["SEXTA-FEIRA","SÁBADO","DOMINGO"][clampi(int(campaign.night),0,2)]
 func campaign_objective() -> String:
@@ -38,16 +38,31 @@ func campaign_objective() -> String:
 			if not flag("till_closed") or not flag("stock_checked"):return "Fechamento: Felps confere o caixa; Deryk verifica a porta antiga no estoque."
 			if not flag("lights_off"):return "Desligue a iluminação do salão no quadro junto à porta do estoque."
 			return "Reúna a dupla na calçada: use E no comando das portas, à direita da entrada."
-		"complete":return "Sexta-feira concluída. O sábado começa na próxima cena."
-		"saturday_preview":return "Prévia de sábado: converse com Felps sobre a pane de ontem."
-		"saturday_preview_done":return "Abertura de sábado concluída. Investigação e domingo estão em desenvolvimento."
+		"complete":return "Noite concluída. Confira o resumo para continuar."
+		"saturday_intro":return "Converse com Felps no caixa sobre a pane de ontem."
+		"saturday_routine":return "Felps: atenda os dois clientes. [C] no caixa: câmeras e caderno. Deryk pode conferir os fundos."
+		"saturday_investigation":return "Felps: confira os eventos do DVR e o recibo [C no caixa]. Deryk: examine a porta antiga e as caixas deslocadas nos fundos."
+		"saturday_decisions":return "No caderno do caixa [C], decida sobre a cópia e o contato. Confira a saída no comando das portas, à direita da entrada."
+		"sunday_preview":return "Domingo: converse com Felps. A fuga e os finais serão a próxima etapa."
 	return ""
 func advance_to_saturday() -> void:
-	campaign.night=1;campaign.phase="saturday_preview";campaign.flags={}
+	start_day(1,"saturday_intro")
+func advance_to_sunday() -> void:
+	start_day(2,"sunday_preview")
+func start_day(night: int,phase: String) -> void:
+	campaign.night=night;campaign.phase=phase;campaign.flags={};campaign.records=[]
 	stage=0;stocked.clear();organized=false;customers_served=0;warning_delivered=false;finale_seen=false;world_seconds=0
 	character_states.clear();crate_states.clear();sale_state.clear();customer_state.clear();receipts.clear();sales_cents=0
 	carried_id="";active_character="Dery";saved_position=Vector3(3.8,.01,1.8)
 	changed.emit()
+func clock_minutes() -> int:
+	var minutes:=21*60+40+int(world_seconds/8)
+	if int(campaign.night)==0 and stage>=5:minutes=maxi(minutes,22*60+35)
+	if campaign.phase in ["restored","closing","complete"]:minutes=maxi(minutes,23*60+40)
+	return mini(minutes,23*60+59)
+func clock_text() -> String:
+	var minutes:=clock_minutes()
+	return "%02d:%02d"%[minutes/60,minutes%60]
 const OBJECTIVES = ["Converse com Felps no caixa.", "Busque uma caixa no estoque e reponha a geladeira da esquerda.  0/2", "Reponha mais uma caixa na geladeira.  1/2", "Guarde a caixa solta no palete do estoque.", "Volte ao caixa. O expediente continua.", "Escute o cliente no caixa.", "Confira o ruído no estoque.", "Fim da demonstração — o turno ainda não acabou."]
 func new_shift() -> void:
 	stage = 0
@@ -97,7 +112,7 @@ func record_sale(receipt: Dictionary) -> bool:
 	receipts.append(receipt.duplicate(true));sales_cents+=int(receipt.total)
 	serve_customer();return true
 func can_warn() -> bool:
-	return stage == 4 and customers_served >= 2 and not warning_delivered
+	return int(campaign.night)==0 and stage == 4 and customers_served >= 2 and not warning_delivered
 func finish_warning() -> void:
 	if not can_warn(): return
 	warning_delivered = true
@@ -146,6 +161,16 @@ func load_shift() -> bool:
 	if int(data.version)==4 and data.get("campaign") is Dictionary:
 		for key in campaign:campaign[key]=data.campaign.get(key,campaign[key])
 		campaign.night=clampi(int(campaign.night),0,2)
+		# JSON parses numbers as floats; Array.has distinguishes int/float values.
+		var completed: Array[int]=[]
+		if campaign.completed_nights is Array:
+			for value in campaign.completed_nights:
+				if value is float or value is int:
+					var night:=int(value)
+					if night>=0 and night<=2 and night not in completed:completed.append(night)
+		campaign.completed_nights=completed
+		if int(campaign.night)==1 and campaign.phase in ["saturday_preview","saturday_preview_done"]:
+			campaign.phase="saturday_intro";stage=0
 	elif stage>=6:
 		stage=6;finale_seen=false;campaign.phase="outage"
 	changed.emit()

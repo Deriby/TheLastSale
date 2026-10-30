@@ -6,6 +6,7 @@ signal notice(text: String)
 signal checkout_requested
 signal checkout_changed
 signal checkout_closed
+signal surveillance_requested
 var sale: ShopSale
 var cashier_open:=false
 var sale_save_wait:=-1.0
@@ -23,6 +24,8 @@ var warning_started:=false
 var noise_pending:=false
 var enemy_visual: Node3D
 var friday: FridayShift
+var saturday: SaturdayShift
+var surveillance_open:=false
 func _ready() -> void:
 	add_to_group("shift_world")
 	var legacy_carried:=Session.carried_id
@@ -85,6 +88,7 @@ func _ready() -> void:
 			if key.contains("idle"):anim.get_animation(key).loop_mode=Animation.LOOP_LINEAR;anim.play(key)
 	friday=FridayShift.new();friday.world=self;add_child(friday)
 	friday.night_completed.connect(func():slice_finished.emit())
+	saturday=SaturdayShift.new();saturday.world=self;add_child(saturday)
 func update_enemy_visibility() -> void:
 	enemy_visual.process_mode=Node.PROCESS_MODE_INHERIT if enemy_visual.is_visible_in_tree() else Node.PROCESS_MODE_DISABLED
 func select_player(identity: String) -> void:
@@ -93,7 +97,7 @@ func select_player(identity: String) -> void:
 	Session.active_character=player.identity;Session.carried_id=player.carried_id
 	depot.set_counter_role(player.identity);player_changed.emit(player)
 func switch_player() -> bool:
-	if not active or get_tree().paused:return false
+	if not active or get_tree().paused or surveillance_open:return false
 	if Dialogue.active:
 		notice.emit("Termine a conversa antes de trocar de personagem.");return false
 	for actor in characters.values():
@@ -121,7 +125,12 @@ func capture_state() -> void:
 func on_handling_completed() -> void:
 	if active:Session.save_shift(player.global_position)
 func can_checkout(actor: DepotPlayer) -> bool:
-	return (friday==null or not friday.is_outage() and friday.phase() not in ["closing","complete"]) and actor.identity=="Felps" and actor.global_position.distance_to(CheckoutFixture.STAFF_POSITION)<1.4 and is_instance_valid(customer) and customer.state==Customer.State.WAITING and not customer.purchase_complete
+	return not surveillance_open and (friday==null or not friday.is_outage() and friday.phase() not in ["closing","complete"]) and actor.identity=="Felps" and actor.global_position.distance_to(CheckoutFixture.STAFF_POSITION)<1.4 and is_instance_valid(customer) and customer.state==Customer.State.WAITING and not customer.purchase_complete
+func try_surveillance() -> bool:
+	if surveillance_open or cashier_open or saturday==null or not saturday.can_open(player):return false
+	surveillance_requested.emit();return surveillance_open
+func set_surveillance_open(value: bool) -> void:
+	surveillance_open=value;characters.Felps.input_locked=value
 func try_checkout(actor: DepotPlayer) -> bool:
 	if not can_checkout(actor) or Dialogue.active or sale==null:return false
 	if not customer.service_started:
@@ -151,7 +160,9 @@ func checkout_step(action: String,value := 0) -> bool:
 		"change":result=sale.confirm_change()
 		"deliver":
 			if sale.phase!=ShopSale.Phase.READY:return false
-			sale.phase=ShopSale.Phase.COMPLETE;Session.record_sale(sale.receipt())
+			sale.phase=ShopSale.Phase.COMPLETE
+			var receipt:=sale.receipt();receipt.customer=customer.identity;receipt.night=int(Session.campaign.night);receipt.time=Session.clock_text()
+			Session.record_sale(receipt)
 			customer.purchase_complete=true;customer.product.hide();customer.bag.show()
 			if customer.warned and Session.can_warn():
 				warning_started=true;Session.stage=5;Session.changed.emit()
@@ -198,10 +209,11 @@ func _physics_process(delta: float) -> void:
 	Session.world_seconds+=delta
 	if Session.stage==6 and friday!=null and friday.phase()=="routine" and not Dialogue.active:friday.begin_outage()
 	if friday!=null:friday.tick(delta)
+	if saturday!=null:saturday.tick()
 	if sale_save_wait>=0:
 		sale_save_wait-=delta
 		if sale_save_wait<0:Session.save_shift(player.global_position)
-	if customer==null and Session.stage>0 and (Session.stage<6 or friday.phase()=="restored") and friday.can_spawn() and not Dialogue.active:
+	if customer==null and Session.stage>0 and (friday.can_spawn() or saturday.can_spawn()) and not Dialogue.active:
 		spawn_wait-=delta
 		if spawn_wait<=0:spawn_customer(Session.can_warn())
 	if noise_pending and player.position.z> -8.0 and not Dialogue.active:
@@ -215,11 +227,12 @@ func _physics_process(delta: float) -> void:
 func spawn_customer(warning: bool,snapshot: Dictionary={}) -> void:
 	if is_instance_valid(customer):return
 	if snapshot.is_empty():
-		sale=ShopSale.create(Session.next_sale_id,warning);Session.next_sale_id+=1
+		sale=saturday.order(Session.next_sale_id) if int(Session.campaign.night)==1 else ShopSale.create(Session.next_sale_id,warning);Session.next_sale_id+=1
 	ensure_order_crate()
 	customer=Customer.new();customer.navigation=navigation;customer.warned=warning
 	customer.appearance=int(snapshot.get("appearance",Session.customers_served))
 	customer.identity=NPCCast.arrival_identity(Session.customers_served) if snapshot.is_empty() else str(snapshot.get("identity",""))
+	if snapshot.is_empty() and int(Session.campaign.night)==1:customer.identity=saturday.next_identity()
 	customer.empty_handed=sale!=null and sale.needs_bulk() and sale.order.size()==1
 	if sale!=null:
 		for sku in sale.order:
@@ -237,6 +250,8 @@ func on_checkout(who: Customer) -> void:
 	notice.emit("Felps, tem cliente esperando no caixa. [Tab] trocar personagem.")
 func begin_checkout(who: Customer) -> void:
 	update_checkout_scene()
+	if int(Session.campaign.night)==1:
+		Dialogue.play("sale_order_"+str(sale.id),saturday.order_lines(who));return
 	var request: String="Boa noite! Vou levar: "+sale.describe().replace("\n",", ")+"."
 	if sale.needs_bulk():request="Boa noite! Separa uma caixa fechada de retornável pra mim?"
 	Dialogue.play("sale_order_"+str(sale.id),[["Cliente",request],["Felps","Fechou. O Deryk traz a caixa do estoque." if sale.needs_bulk() and not sale.bulk_supplied else "Beleza! Vou registrar aqui pra você."]])
@@ -246,6 +261,7 @@ func on_departure(who: Customer) -> void:
 		Session.finish_warning()
 		Dialogue.play("after_warning",[["Felps","Daqui a pouco o cara pede emprego de vigia, cê vai ver."],["Dery","Sei não, mano. Ficar atrás do depósito a essa hora?"]])
 	customer=null;spawn_wait=8
+	if saturday!=null:saturday.on_departure()
 	if friday!=null and friday.phase()=="restored":friday.begin_closing()
 	Session.save_shift(player.global_position)
 func on_dialogue_completed(id: String) -> void:
@@ -274,5 +290,6 @@ func restore_transient() -> void:
 	if friday!=null and Session.stage==6 and friday.phase()=="routine" and not Dialogue.active:friday.begin_outage()
 	if friday!=null and friday.is_outage():
 		for actor in characters.values():actor.torch.show()
+	if saturday!=null:saturday.tick()
 	if Session.campaign.phase=="complete":call_deferred("emit_night_completed")
 func emit_night_completed() -> void:slice_finished.emit()

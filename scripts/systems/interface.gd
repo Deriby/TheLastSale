@@ -8,6 +8,7 @@ var root: Control
 var hud: Control
 var menu: PanelContainer
 var settings: SettingsPanel
+var surveillance: SurveillancePanel
 var checkout: CheckoutPanel
 var objective: Label
 var prompt: Label
@@ -64,7 +65,7 @@ func build_hud() -> void:
 	speaker=label(sub,"",15);speaker.modulate=Color("c6b18b");speaker.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
 	subtitle=label(sub,"",21);subtitle.custom_minimum_size=Vector2(860,80);subtitle.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;subtitle.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
 	stamina=ProgressBar.new();hud.add_child(stamina);stamina.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT);anchored_rect(stamina,Rect2(34,-45,130,5));stamina.show_percentage=false;stamina.max_value=1
-	var hint:=label(hud,"WASD mover   SHIFT correr   CTRL agachar   E interagir   Q apoiar   TAB trocar\nMOUSE olhar   RODA primeira pessoa   F lanterna   ESPAÇO avançar fala   ESC pausa",13)
+	var hint:=label(hud,"WASD mover   SHIFT correr   CTRL agachar   E interagir   Q apoiar   TAB trocar\nMOUSE olhar   RODA primeira pessoa   F lanterna   C câmeras no caixa   ESPAÇO fala   ESC pausa",13)
 	hint.name="ControlsHint";hint.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT);anchored_rect(hint,Rect2(-710,-92,680,85));hint.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT;hint.modulate=Color("babbaa")
 	hud.hide()
 func anchored_rect(control: Control,rect: Rect2) -> void:
@@ -79,7 +80,7 @@ func build_menu() -> void:
 	message=label(v,"21h40. O bairro vai dormir.\nPra vocês, ainda é expediente.",18)
 	buttons=VBoxContainer.new();v.add_child(buttons);buttons.add_theme_constant_override("separation",9)
 	rebuild_buttons()
-	label(v,"0.18.1 • Sexta-feira / campanha de três noites\nFones de ouvido recomendados",13).modulate=Color("9ca58f")
+	label(v,"0.19.0 • Sábado / câmeras e investigação\nFones de ouvido recomendados",13).modulate=Color("9ca58f")
 func button(text: String,callback: Callable) -> Button:
 	var b:=Button.new();buttons.add_child(b);b.text=text;b.pressed.connect(callback);return b
 func rebuild_buttons() -> void:
@@ -99,6 +100,7 @@ func save_current() -> void:
 		var err:=Session.save_shift(player.global_position)
 		message.text="Turno salvo." if err==OK else "Não foi possível salvar o turno."
 func set_paused(value: bool) -> void:
+	if value:close_surveillance()
 	paused=value;get_tree().paused=value
 	menu.visible=value;hud.visible=not value
 	Input.mouse_mode=Input.MOUSE_MODE_VISIBLE if value else Input.MOUSE_MODE_CAPTURED
@@ -109,7 +111,7 @@ func open_settings() -> void:
 	menu.hide();settings=SettingsPanel.new();root.add_child(settings);settings.position=Vector2(355,35)
 	settings.closed.connect(func():settings.queue_free();settings=null;menu.show())
 func open_checkout(world: ShiftWorld) -> void:
-	if paused or checkout!=null:return
+	if paused or checkout!=null or surveillance!=null:return
 	checkout=CheckoutPanel.new();checkout.world=world;root.add_child(checkout);checkout.position=Vector2(160,30)
 	checkout.closed.connect(close_checkout)
 	world.set_register_open(true);hud.hide();Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
@@ -117,6 +119,21 @@ func close_checkout() -> void:
 	if checkout==null:return
 	if is_instance_valid(checkout.world):checkout.world.set_register_open(false)
 	checkout.queue_free();checkout=null
+	if not paused:hud.show();Input.mouse_mode=Input.MOUSE_MODE_CAPTURED
+func open_surveillance(world: ShiftWorld) -> void:
+	if paused or checkout!=null or surveillance!=null or not world.saturday.can_open(world.player):return
+	world.set_surveillance_open(true)
+	surveillance=SurveillancePanel.new();surveillance.world=world;root.add_child(surveillance);surveillance.position=Vector2(60,35)
+	surveillance.closed.connect(close_surveillance)
+	# The security viewport renders instead of the covered player viewport.
+	get_parent().viewport.render_target_update_mode=SubViewport.UPDATE_DISABLED
+	hud.hide();Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
+func close_surveillance() -> void:
+	if surveillance==null:return
+	if is_instance_valid(surveillance.world):surveillance.world.set_surveillance_open(false)
+	surveillance.feed.render_target_update_mode=SubViewport.UPDATE_DISABLED
+	root.remove_child(surveillance);surveillance.queue_free();surveillance=null
+	get_parent().viewport.render_target_update_mode=SubViewport.UPDATE_ALWAYS
 	if not paused:hud.show();Input.mouse_mode=Input.MOUSE_MODE_CAPTURED
 func update_objective() -> void:
 	night_label.text="FRANCA / "+Session.night_title()
@@ -149,10 +166,7 @@ func _process(_delta: float) -> void:
 	if not paused:
 		notice_remaining=maxf(0,notice_remaining-_delta)
 		if notice_remaining==0:notice_label.text=""
-	var minutes:=21*60+40+int(Session.world_seconds/8)
-	if Session.stage>=5:minutes=maxi(minutes,22*60+35)
-	if Session.campaign.phase in ["restored","closing","complete"]:minutes=maxi(minutes,23*60+40)
-	clock.text="%02d:%02d"%[minutes/60%24,minutes%60]
+	clock.text=Session.clock_text()
 func show_night_summary() -> void:
 	if night_panel!=null:return
 	close_checkout();set_paused(true);menu.hide();hud.hide()
@@ -160,17 +174,28 @@ func show_night_summary() -> void:
 	var scroll:=ScrollContainer.new();night_panel.add_child(scroll);scroll.custom_minimum_size=Vector2(628,388)
 	scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;scroll.follow_focus=true
 	var column:=VBoxContainer.new();scroll.add_child(column);column.size_flags_horizontal=Control.SIZE_EXPAND_FILL;column.add_theme_constant_override("separation",18)
-	label(column,"SEXTA-FEIRA CONCLUÍDA",31)
-	var report: Dictionary=Session.campaign.reports.get("friday",{})
+	var saturday:=int(Session.campaign.night)==1
+	label(column,"SÁBADO CONCLUÍDO" if saturday else "SEXTA-FEIRA CONCLUÍDA",31)
+	var report: Dictionary=Session.campaign.reports.get("saturday" if saturday else "friday",{})
 	label(column,"Os dois saíram juntos.\n%d atendimentos • Vendas %s"%[int(report.get("customers",0)),ShopSale.money(int(report.get("sales_cents",0)))],21)
-	var note:=label(column,"A pane foi comunicada ao responsável pelo depósito.\nA próxima cena apresenta a abertura de sábado.\nA investigação de sábado e a fuga de domingo\ncontinuam em desenvolvimento.",18)
-	note.custom_minimum_size.x=610
-	var proceed:=Button.new();column.add_child(proceed);proceed.text="VER ABERTURA DE SÁBADO"
+	var message_text:="A pane foi comunicada ao responsável pelo depósito.\nSábado: atenda os clientes, confira as câmeras\ne investigue os fundos com a dupla."
+	if saturday:
+		message_text="Registros: "+("cópia guardada" if Session.campaign.decisions.get("evidence","")=="copy" else "somente no gravador")
+		message_text+="\nContato: "+("responsável avisado" if Session.campaign.decisions.get("help","")=="contact" else "ainda sem aviso")
+		message_text+="\nSaída: "+("preparada" if Session.campaign.decisions.get("exit","")=="prepared" else "sem preparação")
+		message_text+="\nDomingo inclui uma abertura. A fuga e os finais\ncontinuam em desenvolvimento."
+	var note:=label(column,message_text,18);note.custom_minimum_size.x=610
+	var proceed:=Button.new();column.add_child(proceed);proceed.text="VER ABERTURA DE DOMINGO" if saturday else "COMEÇAR SÁBADO"
 	proceed.name="NextNight"
 	proceed.pressed.connect(func():night_panel.queue_free();night_panel=null;next_night.emit();set_paused(false))
 	var leave:=Button.new();column.add_child(leave);leave.text="SAIR • CAMPANHA SALVA";leave.pressed.connect(func():get_tree().quit())
 	proceed.grab_focus()
 func _input(event: InputEvent) -> void:
+	if surveillance!=null:
+		if event.is_action_pressed("pause") or event.is_action_pressed("surveillance"):
+			close_surveillance();get_viewport().set_input_as_handled();return
+		if event.is_action_pressed("switch_character"):
+			var world:=surveillance.world;close_surveillance();world.switch_player();get_viewport().set_input_as_handled();return
 	if night_panel!=null:
 		if event.is_action_pressed("pause") or event.is_action_pressed("switch_character"):get_viewport().set_input_as_handled()
 		return

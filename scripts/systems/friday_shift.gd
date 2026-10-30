@@ -76,10 +76,11 @@ func prompt(action: String,actor: DepotPlayer) -> String:
 			if phase()!="closing":return "Portas • fechar ao encerrar o expediente"
 			if not ready_to_leave():return "Conclua caixa, estoque e iluminação antes de sair"
 			if not Session.flag("reunite"):return "Chamar companheiro para fechar juntos"
-			return "Baixar portas e encerrar sexta" if both_outside() else "Aguarde o companheiro chegar à calçada"
+			return "Baixar portas e encerrar a noite" if both_outside() else "Aguarde o companheiro chegar à calçada"
 	return "Interagir"
 func activate(action: String,actor: DepotPlayer) -> bool:
-	if Dialogue.active or int(Session.campaign.night)!=0 or finishing:return false
+	if Dialogue.active or finishing:return false
+	if int(Session.campaign.night)!=0 and phase()!="closing":return false
 	if action=="counter" and actor.global_position.distance_to(CheckoutFixture.STAFF_POSITION)>1.4:return false
 	if action=="stock" and actor.global_position.distance_to(world.depot.old_door.global_position)>2.65:return false
 	if action=="exit" and actor.global_position.distance_to(exit_control.global_position)>2.65:return false
@@ -106,7 +107,9 @@ func activate(action: String,actor: DepotPlayer) -> bool:
 		"stock":
 			if phase()!="closing" or actor.identity!="Dery" or Session.flag("stock_checked"):return false
 			Session.campaign.flags.stock_checked=true;save()
-			Dialogue.play("stock_checked",[["Dery","Estoque conferido. Essa porta antiga continua trancada."],["Felps","Amanhã a gente pede pra olharem a energia. Vamos fechar juntos."]]);return true
+			if int(Session.campaign.night)==1:Dialogue.play("stock_checked",[["Dery","A porta antiga tá trancada, e conferi a trava do pátio. Não vou abrir."],["Felps","Vem pra frente. Amanhã a gente volta com luz e ajuda."]])
+			else:Dialogue.play("stock_checked",[["Dery","Estoque conferido. Essa porta antiga continua trancada."],["Felps","Amanhã a gente pede pra olharem a energia. Vamos fechar juntos."]])
+			return true
 		"exit":
 			if phase()!="closing" or not ready_to_leave():return false
 			if not Session.flag("reunite"):
@@ -143,8 +146,9 @@ func finish_friday() -> void:
 	get_tree().create_timer(1.6,false).timeout.connect(func():
 		if not is_inside_tree():return
 		Session.campaign.phase="complete";Session.stage=7;Session.finale_seen=true
-		if 0 not in Session.campaign.completed_nights:Session.campaign.completed_nights.append(0)
-		Session.campaign.reports.friday={"sales_cents":Session.sales_cents,"receipts":Session.receipts.duplicate(true),"customers":Session.customers_served}
+		var night:=int(Session.campaign.night)
+		if night not in Session.campaign.completed_nights:Session.campaign.completed_nights.append(night)
+		Session.campaign.reports["friday" if night==0 else "saturday"]={"sales_cents":Session.sales_cents,"receipts":Session.receipts.duplicate(true),"customers":Session.customers_served,"decisions":Session.campaign.decisions.duplicate(true),"records":Session.campaign.records.duplicate(true)}
 		save();night_completed.emit())
 func apply_power() -> void:
 	var mains:=not is_outage();var shop_on:=mains and not Session.flag("lights_off")

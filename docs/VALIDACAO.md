@@ -1,3 +1,11 @@
+## Revisão 0.19.0 — 30/10/2026
+
+**289/289 verificações**: 188 de integração, 48 de sexta e 53 de sábado. O sábado percorre dois clientes completos, operação das três câmeras por teclado/botões, um único viewport compartilhado, desligamento do canal nas abas e ao sair/pausar/trocar, registros e recibos, pistas físicas, fontes opcionais, alternativas de decisões, preparação da saída, fechamento e transição de dia.
+
+A cópia dos registros e recibos é preservada como dados no save. As noites concluídas são normalizadas para inteiros na carga de JSON para manter o histórico após salvar/continuar. Saves da antiga prévia de sábado voltam à abertura jogável. Modelo/texturas fornecidos foram preservados, sem novas luzes com sombras. Capturas em Compatibility/OpenGL/Linux Mesa llvmpipe. FPS nativo na Radeon R7 não foi medido. Domingo contém só a abertura; perseguição e finais estão pendentes.
+
+[Guia e capturas](saturday_v019/README.md). [Verificação da distribuição](../downloads/project/release_verification.json).
+
 ## Revisão 0.18.1 — 30/10/2026
 
 **236/236 verificações** passaram no projeto e no ZIP extraído após importação limpa. A integração anterior mantém 188 verificações; a suíte de sexta verifica o atendimento interrompido, falta de energia, qualidade gráfica durante a pane, chave e posto de Felps, percursos físicos até o pátio, salvamento antes/depois do gerador, encerramento do atendimento, fechamento cooperativo, saída autônoma de ambos os personagens, resumo e passagem para a prévia de sábado.

@@ -114,11 +114,11 @@ func run() -> void:
 	check(int(Session.campaign.reports.friday.sales_cents)==1150 and Session.campaign.reports.friday.receipts.size()==1,"resumo conserva vendas e recibos da sexta sem duplicação")
 	Engine.time_scale=1
 	app.interface.night_panel.find_child("NextNight",true,false).pressed.emit();world=app.world;player=world.player;await ticks(5)
-	check(int(Session.campaign.night)==1 and app.interface.night_label.text.contains("SÁBADO") and Session.campaign.phase=="saturday_preview","transição prepara abertura de sábado e atualiza o dia no HUD")
+	check(int(Session.campaign.night)==1 and app.interface.night_label.text.contains("SÁBADO") and Session.campaign.phase=="saturday_intro","transição prepara abertura de sábado e atualiza o dia no HUD")
 	check(Session.campaign.clues.local_outage and 0 in Session.campaign.completed_nights and Session.sales_cents==0,"nova noite preserva pistas e histórico e reinicia o caixa diário")
-	check(world.depot.staff_talk.activate(world.player) and Session.campaign.phase=="saturday_preview_done","abertura de sábado reconhece acontecimentos da sexta sem prometer investigação já pronta")
+	check(await approach(CheckoutFixture.CUSTOMER_POSITION) and world.depot.staff_talk.activate(world.player) and Session.campaign.phase=="saturday_routine","abertura de sábado reconhece sexta e libera a nova rotina após conversa no caixa")
 	clear_dialogue();Session.save_shift(world.player.global_position);await reload_world()
-	check(Session.campaign.phase=="saturday_preview_done" and world.friday.can_spawn()==false,"continuar na prévia não reinicia a sexta nem cria tarefas de atendimento incompletas")
+	check(Session.campaign.phase=="saturday_routine" and world.saturday.can_spawn() and not world.friday.can_spawn(),"continuar no sábado retoma sua rotina sem reiniciar a sexta")
 	var legacy:={"version":3,"stage":7,"stocked":["stock_1","stock_2"],"organized":true,"customers":3,"warning":true,"finale":true,"position":[0,0,-4]}
 	var f:=FileAccess.open(Session.SAVE_PATH,FileAccess.WRITE);f.store_string(JSON.stringify(legacy));f.close();await reload_world()
 	check(Session.stage==6 and world.friday.is_outage() and not Session.finale_seen,"checkpoint completo da versão 3 migra para a pane e permite continuar a sexta")

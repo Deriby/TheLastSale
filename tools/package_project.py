@@ -6,7 +6,7 @@ import json
 import zipfile
 
 ROOT = Path(__file__).resolve().parent.parent
-VERSION = "0.18.1"
+VERSION = "0.19.0"
 
 
 def main():
@@ -29,7 +29,7 @@ def main():
                  "docs/.gdignore", "docs/user_models_report.json", "docs/PENDENCIAS.md", "docs/surface_report.json",
                  "docs/CAMPANHA_TRES_NOITES.md", "docs/ELENCO_PROVISORIO.md"]:
         sources[name] = ROOT / name
-    for gallery in ["optimization_v011", "friday_v018", "npc_cast_draft"]:
+    for gallery in ["optimization_v011", "friday_v018", "saturday_v019", "npc_cast_draft"]:
         for path in sorted((ROOT / "docs" / gallery).rglob("*")):
             if path.is_file():
                 sources[path.relative_to(ROOT).as_posix()] = path

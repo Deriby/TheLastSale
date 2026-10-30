@@ -1,0 +1,36 @@
+{
+  "version": "0.19.0",
+  "godot": "4.4.1",
+  "checks": {
+    "main": 188,
+    "friday": 48,
+    "saturday": 53,
+    "total": 289,
+    "passed": 289
+  },
+  "runtime_errors": 0,
+  "live_camera_channels": 3,
+  "live_viewports_when_open": 1,
+  "live_viewports_when_closed": 0,
+  "feed_resolution": [
+    384,
+    216
+  ],
+  "feed_update_limit_hz": 10,
+  "covered_player_viewport_paused": true,
+  "camera_housings_excluded_from_feed": true,
+  "archived_video_playback": false,
+  "dvr_text_events": true,
+  "physical_service_door_movement": true,
+  "friday_saturday_closing_verified": true,
+  "evidence_archive_contains_receipts_and_records": true,
+  "completed_nights_normalized_from_json": true,
+  "optional_witnesses_required": false,
+  "save_version": 4,
+  "sunday_scope": "opening only",
+  "chase_and_endings_implemented": false,
+  "new_shadow_lights": 0,
+  "native_target_fps_measured": false,
+  "graphics": "Compatibility/OpenGL, Linux Mesa llvmpipe, 1280x720; staged screenshots, separate physical integration",
+  "distribution_validation": "See downloads/project/release_verification.json on GitHub for clean ZIP validation and SHA-256."
+}

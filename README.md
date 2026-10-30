@@ -2,11 +2,25 @@
 
 Demonstração jogável em **Godot 4.4.1 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP, com uma rotina narrativa curta. A campanha completa continua em desenvolvimento.
 
-**[Baixar o projeto 0.18.1 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.18.1.zip)**
+**[Baixar o projeto 0.19.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.19.0.zip)**
 
 Extraia o ZIP, importe `project.godot` no Godot **4.4.1**, aguarde a importação dos modelos e pressione **F5**. O arquivo inclui os modelos animados, cenários, código e recursos usados no jogo. [Conteúdo e instruções do projeto](downloads/project/README.md).
 
-## Revisão 0.18.1 — sexta-feira, apagão e fechamento
+## Revisão 0.19.0 — sábado, câmeras e investigação
+
+Depois da sexta, **Começar sábado** inicia uma nova rotina com dois pedidos e o retorno do cliente de boné. Com Felps no posto do caixa, **C** abre o monitor: fachada, estoque e pátio mostram o mesmo cenário ao vivo. A porta do pátio se move durante a consulta; a observação fica registrada sem revelar quem está do outro lado. O DVR tem registros textuais explicitamente separados do vídeo ao vivo.
+
+Felps anota o evento e separa o recibo; Deryk examina as marcas da porta antiga e a caixa deslocada. Bryan e Zirico têm relatos opcionais. No caderno, decida copiar os registros e recibos ou deixá-los no gravador, avisar o responsável ou esperar. A saída pode ser preparada no comando das portas. As escolhas e a cópia efetiva dos dados atravessam as noites.
+
+Uma tentativa na porta inicia o fechamento: confira caixa e estoque, apague o salão, reúna a dupla e saia pela frente. **Domingo tem apenas a abertura; revelação, perseguição e finais continuam em desenvolvimento.** [Guia e validação](docs/saturday_v019/README.md).
+
+O monitor usa uma única câmera em 384×216, atualizada a até 10 imagens por segundo, enquanto suspende a renderização encoberta do jogador. O caderno para o canal; fechar o monitor libera o viewport. Nenhuma nova luz com sombras foi adicionada. FPS nativo na Radeon R7 não foi medido.
+
+**289/289 verificações** cobrem cenário, sexta e sábado, incluindo saves e fechamento. [Registros](docs/saturday_v019/validation.json).
+
+![Câmeras de segurança no caixa](docs/saturday_v019/camera_2.png)
+
+## Revisão anterior 0.18.1 — sexta-feira, apagão e fechamento
 
 A sexta continua depois do aviso: a luz cai, Felps suspende o atendimento e Deryk busca a chave no estoque para ligar o gerador no pátio externo. Iluminação de emergência e lanternas mantêm o caminho legível. Rádio, ventilador, equipamentos, luzes e letreiros reagem à energia; a rua continua iluminada. Uma venda interrompida conserva produtos, dinheiro e troco.
 

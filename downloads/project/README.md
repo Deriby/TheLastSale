@@ -1,17 +1,19 @@
-# Projeto Godot — 0.18.1
+# Projeto Godot — 0.19.0
 
-**[Baixar TheLastSale_Godot_0.18.1.zip](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.18.1.zip)**
+**[Baixar TheLastSale_Godot_0.19.0.zip](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.19.0.zip)**
 
-Extraia numa pasta nova, importe `project.godot` no **Godot 4.4.1**, aguarde os recursos e pressione F5. Inicie um novo expediente para jogar a sexta desde o começo.
+Extraia numa pasta nova, importe `project.godot` no **Godot 4.4.1**, aguarde os recursos e pressione F5. Inicie um novo expediente para jogar desde a sexta; um save da antiga prévia de sábado migra para a abertura jogável.
 
-A rotina de atendimento continua com apagão, emergência, lanternas e gerador no pátio dos fundos. Felps suspende o caixa e Deryk busca a chave para restaurar a energia. O fechamento exige conferir caixa e estoque, apagar o salão e reunir a dupla na calçada. O companheiro vem andando; as portas só baixam com ambos fora. Há resumo da sexta e uma breve abertura de sábado.
+Sábado tem dois pedidos, retorno do cliente de boné, câmeras da fachada/estoque/pátio ao vivo e investigação dos fundos. **C**, com Felps no caixa, abre o monitor; Deryk examina a porta antiga e as caixas. Os eventos antigos do DVR são registros textuais, separados do vídeo ao vivo. Há escolhas de copiar os registros, avisar o responsável e preparar a saída. A cópia efetiva dos dados e as decisões atravessam a passagem de dia.
 
-**Investigação de sábado, perseguição de domingo e finais diferentes continuam em desenvolvimento.** [Guia, capturas e validação](../../docs/friday_v018/README.md).
+Uma tentativa na porta leva ao fechamento cooperativo. O companheiro caminha até a calçada; ambos precisam sair antes de baixar as portas. **Domingo tem apenas a abertura: revelação, perseguição e finais continuam em desenvolvimento.** [Guia, capturas e validação](../../docs/saturday_v019/README.md).
 
-O elenco mantém os modelos do autor e acrescenta seis identidades provisórias com visuais simples substituíveis. Tab troca de personagem; E interage; F liga a lanterna; Q apoia caixas. Atendimento, dinheiro e troco continuam funcionando. O save versão 4 registra campanha, energia, tarefas, pistas, vendas e os dois personagens. Aceita saves 1, 2 e 3.
+O elenco e os modelos fornecidos foram preservados. Tab troca personagem; E interage; C consulta monitor; F lanterna; Q apoia caixas. Atendimento, dinheiro/troco, pane e gerador da sexta continuam funcionando. Saves 1–4 são aceitos.
 
-PS1 e PS1/2 mantêm a janela grande e os menus legíveis. Limite padrão de 30 FPS, com modo Econômica disponível. FPS nativo na Radeon R7 não foi medido.
+Uma câmera de segurança em baixa resolução atualiza a até 10 imagens por segundo. A renderização encoberta para durante a consulta. PS1 e PS1/2 mantêm janela grande e interface legível. Limite padrão de 30 FPS; FPS nativo na Radeon R7 não foi medido.
 
-**236/236 verificações** passaram no projeto e numa extração limpa. [Integridade, importação e testes](release_verification.json). [SHA-256 do ZIP](TheLastSale_Godot_0.18.1.sha256).
+**289/289 verificações** no código e na extração limpa.
 
-O ZIP contém modelos, cenários, sons, texturas, código, testes, ferramentas e `PROJETO_MANIFESTO.json`, com hashes dos arquivos. Caches e exportações de Windows ficam fora. Para gerar: `python3 tools/package_project.py`.
+[Integridade, importação e testes](release_verification.json). [SHA-256](TheLastSale_Godot_0.19.0.sha256).
+
+O ZIP contém modelos, cenários, sons, texturas, código, testes, ferramentas e `PROJETO_MANIFESTO.json`. Caches e exportações de Windows ficam fora. Para gerar: `python3 tools/package_project.py`.

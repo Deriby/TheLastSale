@@ -1,4 +1,4 @@
-# The Last Sale — projeto Godot 0.18.1
+# The Last Sale — projeto Godot 0.19.0
 
 1. Extraia este ZIP em uma pasta nova.
 2. No Godot **4.4.1**, clique em **Importar** e escolha `project.godot`.
@@ -13,7 +13,15 @@ Depois do aviso e da saída do cliente, a energia cai. Use F para a lanterna. Co
 
 Conclua o último atendimento. Felps confere o caixa por E; Deryk examina a porta antiga nos fundos. Use o quadro da chave para apagar o salão. Na calçada, E no comando das portas à direita da entrada chama o companheiro, que vem andando. Com os dois fora, E novamente baixa as portas e conclui a sexta.
 
-O resumo salva a sexta e permite ver uma breve abertura de sábado. **Investigação de sábado, perseguição de domingo e finais diferentes continuam em desenvolvimento.** Veja `docs/friday_v018/README.md` e `docs/CAMPANHA_TRES_NOITES.md`.
+O resumo salva a sexta e permite começar sábado. Veja `docs/friday_v018/README.md`.
+
+## Sábado: câmeras e pistas
+
+Converse com Felps, atenda os dois pedidos e aguarde o cliente de boné sair. Com Felps no caixa, **C** abre as câmeras da fachada, estoque e pátio. O cenário é mostrado ao vivo; **Eventos do DVR** contém registros escritos, sem reprodução de vídeo arquivado. Anote o evento, separe o recibo e confira o canal do pátio.
+
+Com Deryk e mãos livres, abra o estoque e examine a porta antiga e a caixa deslocada. Depois, volte a Felps e use **Caderno / decisões**. Escolha copiar os registros/recibo ou deixá-los no gravador; avisar o responsável ou esperar. Você pode rever essas duas escolhas antes de sair do monitor. Prepare a saída por E no comando das portas, à direita da entrada, ou escolha seguir sem preparar no caderno. Bryan e Zirico são opcionais.
+
+Depois das três decisões, alguém força a porta do pátio. Feche o caixa com Felps, confira o estoque com Deryk, apague o salão no quadro e reúna a dupla na calçada para baixar as portas. A cópia efetiva dos registros e recibos, as pistas e as escolhas ficam salvas. **Domingo contém só a abertura; revelação, perseguição e finais continuam em desenvolvimento.** Veja `docs/saturday_v019/README.md`.
 
 O save versão 4 registra noite, energia, chave, fechamento, pistas e relatórios. Seis identidades provisórias de clientes usam três modelos simples com rig e roupas variadas; veja `docs/ELENCO_PROVISORIO.md`.
 
@@ -28,10 +36,10 @@ O salvamento conserva pedido, cliente, registro, dinheiro recebido e troco parci
 ## Controles e configurações
 
 - WASD e mouse: mover/olhar. Shift: correr. Ctrl: agachar.
-- Tab: trocar entre Felps e Deryk. E: interagir e atender.
+- Tab: trocar entre Felps e Deryk. E: interagir e atender. C: câmeras/caderno, com Felps no caixa.
 - Q: apoiar caixa na marca verde; a marca vermelha indica bloqueio. Q durante a pegada agenda a soltura.
 - Roda do mouse: aproximar até primeira pessoa ou afastar.
-- Espaço: avançar diálogo. Esc: fechar caixa/pausar. F: lanterna após o aviso narrativo.
+- Espaço: avançar diálogo. Esc: fechar monitor/caixa ou pausar. F: lanterna após o aviso narrativo.
 
 Converse com Felps para iniciar. Reponha as duas caixas na geladeira e organize a caixa solta. A caixa fechada de um pedido tem identificação própria. Bryan e Zirico têm conversas opcionais.
 
@@ -45,7 +53,7 @@ O elenco inclui Dery, Felps, Killer, Bryan, Zirico, Garota 1, Garota 2 e Velha 1
 
 ## Validação
 
-236/236 verificações passaram em Linux no projeto e no ZIP extraído. `./tools/test.sh` roda a suíte; em outra máquina, abra pelo editor ou defina `GODOT_BIN` com o caminho do motor.
+289/289 verificações passaram em Linux no projeto e no ZIP extraído. `./tools/test.sh` roda a suíte; em outra máquina, abra pelo editor ou defina `GODOT_BIN` com o caminho do motor.
 
 A Godot 4.4 tem Windows 10 como requisito oficial mínimo. Windows 7/Radeon R7 não foram validados nativamente. O modo Econômica reduz resolução, sombras e acabamento dos materiais.
 
