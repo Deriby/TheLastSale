@@ -7,6 +7,8 @@ var animator: AnimationPlayer
 var skeleton: Skeleton3D
 var feet: GroundFeet
 var attention: HeadAttention
+var detail: MotionDetail
+var filtered_speed:=0.0
 var clips: Dictionary = {}
 var action_active:=false
 var ambient_active:=false
@@ -29,11 +31,19 @@ func setup(visual: Node3D,actor: Node3D) -> void:
 		animator.get_animation(key).loop_mode=Animation.LOOP_LINEAR if name in LOOP_CLIPS else Animation.LOOP_NONE
 	animator.animation_finished.connect(on_finished)
 	feet=GroundFeet.new();feet.actor=actor;skeleton.add_child(feet)
+	detail=MotionDetail.new();detail.visual=visual;skeleton.add_child(detail)
 	attention=HeadAttention.new();attention.visual=visual;skeleton.add_child(attention)
+	feet.motion=self
 	feet.clearance=float(visual.get_meta("foot_clearance",.1335))
 	attention.eye_height=float(visual.get_meta("height_m",1.78))*.89
 	var stride_scale: float=visual.get_meta("stride_scale",1.0)
 	for key in strides:strides[key]*=stride_scale
+	var path: String="res://resources/motion/"+visual.scene_file_path.get_file().get_basename()+".res"
+	if ResourceLoader.exists(path):
+		var library: AnimationLibrary=load(path)
+		if not animator.has_animation_library("natural"):animator.add_animation_library("natural",library)
+		for clip in library.get_animation_list():clips[str(clip)]="natural/"+str(clip)
+		for key in library.get_meta("strides",{}):strides[key]=library.get_meta("strides")[key]
 	skeleton.skeleton_updated.connect(func():pose_updated.emit())
 	play("idle",0)
 func play(clip: String,blend := .22,preserve_phase := false) -> void:
@@ -54,13 +64,15 @@ func on_finished(_name: StringName) -> void:
 	if action_active:action_active=false;action_finished.emit()
 	ambient_active=false;current_clip=""
 func locomotion(delta: float,speed: float,crouch: bool,carrying: bool,tired: bool,direction := "walk") -> void:
+	if detail!=null:detail.speed=speed;detail.carrying=carrying
 	if action_active:return
+	filtered_speed=lerpf(filtered_speed,speed,1-exp(-delta*14))
 	if speed>.10:
 		idle_time=0;ambient_active=false
 		var clip: String="carry_walk" if carrying else ("crouch_walk" if crouch else ("run" if speed>2.55 else direction))
 		if not clips.has(clip):clip="walk" if clips.has("walk") else "idle"
 		play(clip,.20,true)
-		animator.speed_scale=clampf(speed*animator.get_animation(clips[clip]).length/float(strides.get(clip,1.12)),.25,2.7)
+		animator.speed_scale=clampf(filtered_speed*animator.get_animation(clips[clip]).length/float(strides.get(clip,1.12)),.25,2.7)
 	else:
 		animator.speed_scale=1
 		idle_time+=delta

@@ -1,0 +1,145 @@
+{
+  "Bryan": {
+    "bones": 72,
+    "clips": 10,
+    "sole_samples": [
+      1026,
+      1065
+    ],
+    "strides": {
+      "walk": 0.828949879722211
+    }
+  },
+  "Customer1": {
+    "bones": 19,
+    "clips": 10,
+    "sole_samples": [
+      96,
+      96
+    ],
+    "strides": {
+      "carry_walk": 1.08392902530473,
+      "crouch_walk": 0.705576441000248,
+      "run": 2.19853528717469,
+      "walk": 1.30889542678307
+    }
+  },
+  "Customer2": {
+    "bones": 19,
+    "clips": 10,
+    "sole_samples": [
+      96,
+      96
+    ],
+    "strides": {
+      "carry_walk": 1.08392902530473,
+      "crouch_walk": 0.705576441000248,
+      "run": 2.19853528717469,
+      "walk": 1.30889542678307
+    }
+  },
+  "Customer3": {
+    "bones": 19,
+    "clips": 10,
+    "sole_samples": [
+      96,
+      96
+    ],
+    "strides": {
+      "carry_walk": 1.08392902530473,
+      "crouch_walk": 0.705576441000248,
+      "run": 2.19853528717469,
+      "walk": 1.30889542678307
+    }
+  },
+  "Dery": {
+    "bones": 72,
+    "clips": 18,
+    "sole_samples": [
+      1652,
+      1684
+    ],
+    "strides": {
+      "carry_walk": 1.06112842436495,
+      "crouch_walk": 0.690734540388502,
+      "run": 2.15228878526852,
+      "strafe_left": 0.941000678210423,
+      "strafe_right": 0.941000678210423,
+      "walk": 1.28136262564824,
+      "walk_back": 0.900958096158916
+    }
+  },
+  "Enemy": {
+    "bones": 72,
+    "clips": 4,
+    "sole_samples": [
+      838,
+      1002
+    ],
+    "strides": {
+      "run": 2.60162547291379,
+      "walk": 1.54887470015333
+    }
+  },
+  "Felps": {
+    "bones": 72,
+    "clips": 18,
+    "sole_samples": [
+      1468,
+      1461
+    ],
+    "strides": {
+      "carry_walk": 1.1747534780048,
+      "crouch_walk": 0.764698018701237,
+      "run": 2.38275469595313,
+      "strafe_left": 1.04176251823067,
+      "strafe_right": 1.04176251823067,
+      "walk": 1.4185702375907,
+      "walk_back": 0.997432198305961
+    }
+  },
+  "Garota1": {
+    "bones": 72,
+    "clips": 10,
+    "sole_samples": [
+      875,
+      983
+    ],
+    "strides": {
+      "walk": 1.41212291616578
+    }
+  },
+  "Garota2": {
+    "bones": 72,
+    "clips": 10,
+    "sole_samples": [
+      707,
+      683
+    ],
+    "strides": {
+      "walk": 1.52883229868028
+    }
+  },
+  "Velha1": {
+    "bones": 72,
+    "clips": 10,
+    "sole_samples": [
+      715,
+      629
+    ],
+    "strides": {
+      "walk": 1.1435042455697
+    }
+  },
+  "Zirico": {
+    "bones": 72,
+    "clips": 10,
+    "sole_samples": [
+      1329,
+      1446
+    ],
+    "strides": {
+      "walk": 1.29139877341349
+    }
+  }
+}

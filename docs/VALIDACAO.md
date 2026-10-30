@@ -1,3 +1,11 @@
+## Revisão 0.22.0 — 30/10/2026
+
+**431/431 verificações**: 188 de integração, 48 de sexta, 53 de sábado, 59 de domingo, 35 de reposição/entrega e 48 de animação. A nova suíte calcula deformações de amostras reais das solas, com os pesos do modelo, em nove personagens representativos e cinco tipos de pose. As onze bibliotecas são geradas com medidas dos rigs e curvas salvas; o jogo usa essas curvas prontas.
+
+O contato amostrado tem limite de 2,5 cm; resultados por modelo/clipe estão no relatório de solas. Os testes anteriores mantêm as verificações de postura, respiração, punhos junto à caixa, controles, entrega, vendas e perseguição. Os 428 arquivos anteriores de modelos, texturas e recursos permanecem idênticos à 0.21.0. Objetos estáticos detalham depósito e rua, sem novas luzes com sombras ou viewports. O limite de jogo permanece em 30 FPS; FPS nativo na Radeon R7 não foi medido.
+
+[Vídeo, capturas e guia](natural_v022/README.md). [Validação](natural_v022/validation.json). [Verificação do ZIP](../downloads/project/release_verification.json).
+
 ## Revisão 0.21.0 — 30/10/2026
 
 **383/383 verificações**: 188 de integração, 48 de sexta, 53 de sábado, 59 de domingo e 35 de reposição/entrega. A nova suíte usa E para abrir/repor G1, abastecer P1, guardar cascos e entregar pedido no balcão; valida reposição antes da conversa inicial, caixa errada preservada com orientação, salvamento, quantidades restauradas, marcadores PS1/PS1/2 e venda completa com recibo único. As noites posteriores não recriam as tarefas concluídas da sexta.

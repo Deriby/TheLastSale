@@ -1,12 +1,12 @@
 {
   "format": "Godot editor project ZIP",
-  "version": "0.21.0",
+  "version": "0.22.0",
   "godot": "4.4.1",
-  "file": "TheLastSale_Godot_0.21.0.zip",
-  "bytes": 95677678,
-  "sha256": "1a96d5acd70b811501b99df4c87a2f59a292000c07cf339f7ded6e97ee3c2d0e",
+  "file": "TheLastSale_Godot_0.22.0.zip",
+  "bytes": 101939953,
+  "sha256": "e5702b25fc93068528e9e382231d41fa76835a308e4e9393dd9df9ed32953dc5",
   "crc_verified": true,
-  "files_verified_against_manifest": 755,
+  "files_verified_against_manifest": 799,
   "manifest_files_changed_by_import_or_tests": 0,
   "clean_extraction_import_exit_code": 0,
   "import_script_errors": 0,
@@ -17,29 +17,33 @@
     "saturday": 53,
     "sunday": 59,
     "supply": 35,
-    "total": 383,
-    "passed": 383,
+    "natural_motion": 48,
+    "total": 431,
+    "passed": 431,
     "exit_code": 0,
     "runtime_errors": 0
   },
-  "clean_extraction_log": "validation_0.21.0.log",
-  "restock_targets": {
-    "G1": [
-      "R1",
-      "R2"
-    ],
-    "P1": [
-      "R3"
-    ]
+  "clean_extraction_log": "validation_0.22.0.log",
+  "authored_rig_libraries": 11,
+  "weighted_sole_deformation_models_sampled": 9,
+  "max_sampled_sole_penetration_m": 0.0140389110893011,
+  "max_sampled_support_gap_m": 0.0102266678586602,
+  "crouch_height_m": {
+    "Dery": 1.30946803092957,
+    "Felps": 1.29289743704014
   },
-  "P1_extra_task_optional": true,
-  "stocking_before_initial_greeting_supported": true,
-  "numbered_bulk_sale_crate_separate_from_replenishment": true,
-  "physical_counter_drop_off_by_E": true,
-  "wrong_crate_preserved_with_destination_notice": true,
-  "empty_returns_separate_from_sellable_goods": true,
-  "completed_friday_work_not_recreated_on_later_nights": true,
-  "native_objective_marker_ps1_and_ps12": true,
+  "animation_curves_baked_offline": true,
+  "full_pose_authoring_solver_in_runtime_loop": false,
+  "original_pickup_place_attack_timings_preserved": true,
+  "killer_uses_own_rig_run": true,
+  "assets_and_previous_resources_byte_identical_to_0_21_0": 428,
+  "static_details_batched": true,
+  "new_shadow_casting_lights": 0,
+  "new_viewports": 0,
+  "default_frame_limit": 30,
+  "native_radeon_r7_fps_measured": false,
+  "ps1_and_ps12_preserved": true,
+  "comparison_video_duration_seconds": 9.6,
   "save_version": 5,
   "legacy_save_versions_verified": [
     1,
@@ -47,11 +51,6 @@
     3,
     4
   ],
-  "assets_and_resources_byte_identical_to_0_20_0": 428,
-  "new_shadow_casting_lights": 0,
-  "new_viewports": 0,
-  "default_frame_limit": 30,
-  "native_radeon_r7_fps_measured": false,
-  "report": "docs/supplies_v021/validation.json",
-  "import_note": "Headless editor import reports 14 known GLB texture preview t=null messages; no script errors. Runtime suites have no errors."
+  "report": "docs/natural_v022/validation.json",
+  "import_note": "Headless import reports 14 known GLB texture preview t=null messages; no script errors. Runtime suites have no errors."
 }

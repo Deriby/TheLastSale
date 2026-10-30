@@ -22,18 +22,7 @@ func _ready() -> void:
 	var shape:=CapsuleShape3D.new();shape.radius=.27;shape.height=1.8
 	var col:=CollisionShape3D.new();col.shape=shape;col.position.y=.9;add_child(col)
 	visual.reparent(self,false);visual.transform=Transform3D.IDENTITY;visual.show();visual.process_mode=Node.PROCESS_MODE_INHERIT
-	# The supplied Killer has idle/walk/attack. Reuse the compatible 72-bone run.
-	var animator: AnimationPlayer=visual.find_child("AnimationPlayer",true,false)
-	var skeleton: Skeleton3D=visual.find_child("Skeleton3D",true,false)
-	var source: AnimationPlayer=chapter.world.characters.Dery.animator
-	for key in source.get_animation_list():
-		if key=="run" or key.ends_with("/run"):
-			var clip: Animation=source.get_animation(key).duplicate(true)
-			var target: String=str(animator.get_node(animator.root_node).get_path_to(skeleton))
-			for track in clip.get_track_count():
-				var path:=str(clip.track_get_path(track))
-				if path.contains(":"):clip.track_set_path(track,NodePath(target+":"+path.get_slice(":",1)))
-			var library:=AnimationLibrary.new();library.add_animation("run",clip);animator.add_animation_library("pursuit",library);break
+	# The measured library supplies this rig's own run, without retargeting body offsets.
 	motion=LivingMotion.new();add_child(motion);motion.setup(visual,self)
 	goal=PATROL[0]
 func snapshot() -> Dictionary:

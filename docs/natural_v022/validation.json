@@ -1,0 +1,42 @@
+{
+  "version": "0.22.0",
+  "godot": "4.4.1",
+  "checks": {
+    "main": 188,
+    "friday": 48,
+    "saturday": 53,
+    "sunday": 59,
+    "supply": 35,
+    "natural_motion": 48,
+    "total": 431,
+    "passed": 431
+  },
+  "runtime_errors": 0,
+  "authored_rig_libraries": 11,
+  "deformed_sole_models_sampled": 9,
+  "max_sampled_sole_penetration_m": 0.0140389110893011,
+  "max_sampled_support_gap_m": 0.0102266678586602,
+  "sole_contact_test_tolerance_m": 0.025,
+  "animation_baking_offline": true,
+  "key_reduction_tolerances": {
+    "position_m": 0.0003,
+    "rotation_rad": 0.0012,
+    "scale": 0.0001
+  },
+  "full_pose_solver_in_runtime_loop": false,
+  "runtime_feet_stabilization_limit_m": 0.1,
+  "existing_pickup_place_attack_timings_preserved": true,
+  "killer_uses_own_rig_run": true,
+  "assets_and_previous_resources_byte_identical_to_0_21_0": 428,
+  "new_shadow_lights": 0,
+  "new_viewports": 0,
+  "default_frame_limit": 30,
+  "native_radeon_r7_fps_measured": false,
+  "graphics": "Staged comparison of original/new clips; offline movie; environment PS1/2 640x480 in a 1280x720 window, Linux/Mesa llvmpipe.",
+  "comparison_video_seconds": 9.6,
+  "distribution_validation": "See downloads/project/release_verification.json on GitHub for clean ZIP validation.",
+  "crouch_height_m": {
+    "Dery": 1.30946803092957,
+    "Felps": 1.29289743704014
+  }
+}

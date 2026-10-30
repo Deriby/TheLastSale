@@ -24,6 +24,7 @@ func _ready() -> void:
 	if int(Session.campaign.night)==2:
 		access=SundayAccess.new();add_child(access);blockers.append_array(access.blockers)
 	build_staff()
+	add_child(LivedInDetails.new())
 func solid(pos: Vector3,size: Vector3,mat: Material,nav := true) -> MeshInstance3D:
 	if nav and pos.y-size.y/2<1.8:blockers.append(Rect2(Vector2(pos.x-size.x/2,pos.z-size.z/2),Vector2(size.x,size.z)))
 	return Geo.box(self,pos,size,mat)

@@ -1,0 +1,166 @@
+{
+  "Bryan": {
+    "idle": {
+      "finite": true,
+      "penetration_m": 0.000762971758376807,
+      "support_gap_m": 0.000110887864138931
+    },
+    "walk": {
+      "finite": true,
+      "penetration_m": 0.0140389110893011,
+      "support_gap_m": 0.00266081863082945
+    }
+  },
+  "Customer2": {
+    "carry_walk": {
+      "finite": true,
+      "penetration_m": 0.00165389664471149,
+      "support_gap_m": 1.47316604852676e-05
+    },
+    "crouch_walk": {
+      "finite": true,
+      "penetration_m": 0.00029020756483078,
+      "support_gap_m": 2.17929482460022e-07
+    },
+    "idle": {
+      "finite": true,
+      "penetration_m": 0.000125238671898842,
+      "support_gap_m": 2.98395752906799e-06
+    },
+    "run": {
+      "finite": true,
+      "penetration_m": 0.00118980556726456,
+      "support_gap_m": 2.43671238422394e-05
+    },
+    "walk": {
+      "finite": true,
+      "penetration_m": 0.00334151834249496,
+      "support_gap_m": 5.12227416038513e-06
+    }
+  },
+  "Dery": {
+    "carry_walk": {
+      "finite": true,
+      "penetration_m": 0.00120277574751526,
+      "support_gap_m": 0.000366315100109205
+    },
+    "crouch_height_m": {
+      "height_m": 1.30946803092957
+    },
+    "crouch_walk": {
+      "finite": true,
+      "penetration_m": 0.00030470933415927,
+      "support_gap_m": 0.00141618982888758
+    },
+    "idle": {
+      "finite": true,
+      "penetration_m": 3.04884833894903e-05,
+      "support_gap_m": 0.000307574868202209
+    },
+    "run": {
+      "finite": true,
+      "penetration_m": 0.00117078120820224,
+      "support_gap_m": 0.000646428670734167
+    },
+    "walk": {
+      "finite": true,
+      "penetration_m": 0.00203239847905934,
+      "support_gap_m": 0.000256712664850056
+    }
+  },
+  "Enemy": {
+    "idle": {
+      "finite": true,
+      "penetration_m": 6.88893851474859e-05,
+      "support_gap_m": 0.000175304856384173
+    },
+    "run": {
+      "finite": true,
+      "penetration_m": 0.0011301594786346,
+      "support_gap_m": 0.00338804814964533
+    },
+    "walk": {
+      "finite": true,
+      "penetration_m": 0.00292097078636289,
+      "support_gap_m": 0.00128467846661806
+    }
+  },
+  "Felps": {
+    "carry_walk": {
+      "finite": true,
+      "penetration_m": 0.00215027038939297,
+      "support_gap_m": 0.00414756080135703
+    },
+    "crouch_height_m": {
+      "height_m": 1.29289743704014
+    },
+    "crouch_walk": {
+      "finite": true,
+      "penetration_m": 0.000490743259433657,
+      "support_gap_m": 0.00463306624442339
+    },
+    "idle": {
+      "finite": true,
+      "penetration_m": 0.000543318106792867,
+      "support_gap_m": 0.0
+    },
+    "run": {
+      "finite": true,
+      "penetration_m": 0.00129915925208479,
+      "support_gap_m": 0.00546647747978568
+    },
+    "walk": {
+      "finite": true,
+      "penetration_m": 0.00334032019600272,
+      "support_gap_m": 0.0055457460694015
+    }
+  },
+  "Garota1": {
+    "idle": {
+      "finite": true,
+      "penetration_m": 0.0,
+      "support_gap_m": 0.00125501770526171
+    },
+    "walk": {
+      "finite": true,
+      "penetration_m": 0.0038245574105531,
+      "support_gap_m": 0.00567763205617666
+    }
+  },
+  "Garota2": {
+    "idle": {
+      "finite": true,
+      "penetration_m": 0.0,
+      "support_gap_m": 0.000720420095603913
+    },
+    "walk": {
+      "finite": true,
+      "penetration_m": 0.00339136691763997,
+      "support_gap_m": 0.00524105643853545
+    }
+  },
+  "Velha1": {
+    "idle": {
+      "finite": true,
+      "penetration_m": 5.74837031308562e-05,
+      "support_gap_m": 8.26066025183536e-05
+    },
+    "walk": {
+      "finite": true,
+      "penetration_m": 0.00507128098979592,
+      "support_gap_m": 0.000435432360973209
+    }
+  },
+  "Zirico": {
+    "idle": {
+      "finite": true,
+      "penetration_m": 0.000201282950001769,
+      "support_gap_m": 0.000116888164484408
+    },
+    "walk": {
+      "finite": true,
+      "penetration_m": 0.00331498146988451,
+      "support_gap_m": 0.0102266678586602
+    }
+  }
+}

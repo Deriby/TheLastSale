@@ -3,6 +3,14 @@ extends SkeletonModifier3D
 ## Small terrain correction after animation. Authored support/swing phases remain intact.
 var actor: Node3D
 var clearance:=.1335
+var motion: LivingMotion
+var anchors: Dictionary={}
+var was_support: Dictionary={"L":false,"R":false}
+var bones: Dictionary={}
+func _ready() -> void:
+	var sk:=get_skeleton()
+	for side in ["L","R"]:
+		bones[side]=[sk.find_bone("thigh_"+side),sk.find_bone("shin_"+side),sk.find_bone("foot_"+side)]
 var corrections: Dictionary = {"L":0.0,"R":0.0}
 var supports: Dictionary = {"L":false,"R":false}
 func _physics_process(delta: float) -> void:
@@ -26,11 +34,24 @@ func _process_modification() -> void:
 	var skeleton:=get_skeleton()
 	if skeleton==null:return
 	for side in ["L","R"]:
-		var amount: float=corrections[side]
-		if absf(amount)<.0001:continue
-		var hip:=skeleton.find_bone("thigh_"+side);var knee:=skeleton.find_bone("shin_"+side);var foot:=skeleton.find_bone("foot_"+side)
+		var hip: int=bones[side][0];var knee: int=bones[side][1];var foot: int=bones[side][2]
 		var a:=skeleton.get_bone_global_pose(hip);var b:=skeleton.get_bone_global_pose(knee);var c:=skeleton.get_bone_global_pose(foot)
-		var target:=c.origin+skeleton.global_basis.inverse()*(Vector3.UP*amount)
+		var amount: float=corrections[side]
+		var world:=skeleton.global_transform*c.origin
+		var locked:=false
+		if motion!=null and motion.strides.has(motion.current_clip) and not motion.action_active and motion.filtered_speed>.15:
+			var phase:=fposmod(motion.animator.current_animation_position/maxf(.001,motion.animator.current_animation_length)+(0 if side=="L" else .5),1.0)
+			locked=phase<(.36 if motion.current_clip=="run" else .61)
+		if locked:
+			if not was_support[side]:anchors[side]=world
+			var anchor: Vector3=anchors[side]
+			var offset:=Vector2(anchor.x-world.x,anchor.z-world.z)
+			if offset.length()>.10:
+				offset=offset.limit_length(.10);anchors[side]=world+Vector3(offset.x,0,offset.y)
+			world.x+=offset.x;world.z+=offset.y
+		was_support[side]=locked
+		var target:=skeleton.to_local(world+Vector3.UP*amount)
+		if target.distance_to(c.origin)<.0002:continue
 		var first:=a.origin.distance_to(b.origin);var second:=b.origin.distance_to(c.origin)
 		var axis: Vector3=target-a.origin;var length:=clampf(axis.length(),.01,first+second-.001);axis=axis.normalized();target=a.origin+axis*length
 		var pole: Vector3=b.origin-a.origin-axis*((b.origin-a.origin).dot(axis))

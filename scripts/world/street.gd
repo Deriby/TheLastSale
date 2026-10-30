@@ -40,6 +40,7 @@ func _ready() -> void:
 		data.node.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF;data.node.add_to_group("non_shadow_cables")
 	add_child(StreetAccents.new())
 	add_child(StreetHaze.new())
+	var lived_in:=LivedInDetails.new();lived_in.exterior=true;add_child(lived_in)
 	for body in get_tree().get_nodes_in_group("street_detail_obstacles"):
 		if not is_ancestor_of(body):continue
 		var size: Vector3=body.get_meta("nav_size");var center: Vector3=body.get_meta("nav_center")

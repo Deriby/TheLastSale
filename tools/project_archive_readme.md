@@ -1,4 +1,4 @@
-# The Last Sale — projeto Godot 0.21.0
+# The Last Sale — projeto Godot 0.22.0
 
 1. Extraia este ZIP em uma pasta nova.
 2. No Godot **4.4.1**, clique em **Importar** e escolha `project.godot`.
@@ -6,6 +6,10 @@
 4. Pressione **F5** e escolha **Iniciar expediente** para testar a rotina completa.
 
 Modelos animados, cenários, sons, texturas, código, testes e ferramentas estão incluídos. Blender não é necessário para jogar. O renderizador é Compatibility / OpenGL.
+
+## Movimento e acabamento do cenário
+
+A 0.22.0 inclui bibliotecas de animação medidas para cada rig: caminhada, corrida, transporte, agachamento, repouso e gestos comuns. Os pés levantam menos, a cadência acompanha o deslocamento e o tronco reage à aceleração e às curvas. Os modelos e as texturas recebidos foram preservados. Ferramentas, papéis, tapete e relógio detalham o depósito; lixeira, sarjeta e marcas de uso complementam a rua. Veja `docs/natural_v022/README.md` e o vídeo comparativo incluído.
 
 ## Reposição e pedidos: como identificar as caixas
 
@@ -74,7 +78,7 @@ O elenco inclui Dery, Felps, Killer, Bryan, Zirico, Garota 1, Garota 2 e Velha 1
 
 ## Validação
 
-Os resultados das cinco suítes e a verificação da extração limpa ficam em `docs/supplies_v021/validation.json` e na verificação de distribuição no GitHub. `./tools/test.sh` roda a suíte; em outra máquina, abra pelo editor ou defina `GODOT_BIN` com o caminho do motor.
+Os resultados das seis suítes e a verificação da extração limpa ficam em `docs/natural_v022/validation.json` e na verificação de distribuição no GitHub. `./tools/test.sh` roda a suíte; em outra máquina, abra pelo editor ou defina `GODOT_BIN` com o caminho do motor.
 
 A Godot 4.4 tem Windows 10 como requisito oficial mínimo. Windows 7/Radeon R7 não foram validados nativamente. O modo Econômica reduz resolução, sombras e acabamento dos materiais.
 

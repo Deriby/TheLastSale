@@ -20,3 +20,7 @@
 ## Reposição e caixas de venda — corrigido na 0.21.0
 
 G1 recebe R1/R2, P1 recebe R3 como reposição extra, pedidos recebem caixas laranja numeradas e o palete recebe cascos vazios. A reposição não fica bloqueada pela conversa inicial. Placas mostram o que falta e o HUD aponta para caixa/destino; caixas erradas não são consumidas. A área de entrega no balcão libera a cobrança de Felps uma única vez. [Guia e validação](supplies_v021/README.md).
+
+## Locomoção e acabamento — revisão 0.22.0
+
+Novas bibliotecas medidas para cada rig reduzem a marcha rígida, a elevação dos pés e o quadril permanentemente baixo. Corpo e respiração reagem ao movimento; contato dos pés e transporte continuam verificados. Novos detalhes estáticos entram no depósito e na calçada. Curvas de dedos, giros muito rápidos e gestos específicos ainda admitem acabamento manual. [Comparação e validação](natural_v022/README.md).
