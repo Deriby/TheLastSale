@@ -1,6 +1,6 @@
 # Elenco provisório para as três noites
 
-Estado: incluído na 0.18.0, junto à sexta-feira jogável.
+Estado: incluído na 0.18.1, junto à sexta-feira jogável.
 
 O autor autorizou personagens visuais simples enquanto prepara os modelos com
 rig. Deryk, Felps, Killer, Bryan, Zirico, Garota 1, Garota 2 e a senhora continuam

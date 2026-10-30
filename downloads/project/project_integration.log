@@ -187,7 +187,7 @@ PASS continuar não duplica caixas já repostas
 PASS continuar restaura produtos na malha da geladeira
 PASS checkpoint antigo dentro da gôndola migra para corredor próximo
 PASS checkpoint antigo na rua acompanha a nova cota do terreno
-WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@17028/Depot/@Node3D@18772/@MeshInstance3D@18782" (possibly benign).
+WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@17028/Depot/ServiceYard/BackupGenerator/@MeshInstance3D@18523" (possibly benign).
      at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
 PASS checkpoint antigo no novo balcão restaura personagem fora dos móveis
 PASS pausa congela o relógio narrativo
@@ -244,4 +244,7 @@ PASS nova noite preserva pistas e histórico e reinicia o caixa diário
 PASS abertura de sábado reconhece acontecimentos da sexta sem prometer investigação já pronta
 PASS continuar na prévia não reinicia a sexta nem cria tarefas de atendimento incompletas
 PASS checkpoint completo da versão 3 migra para a pane e permite continuar a sexta
-FRIDAY RESULT 45/45 passed; failures=[]
+PASS save antigo após o aviso e antes do fim da demonstração migra para a pane
+PASS save versão 4 na transição após o aviso retoma o apagão sem bloquear a noite
+PASS transição em execução aguarda a conversa e retoma a pane mesmo sem callback anterior
+FRIDAY RESULT 48/48 passed; failures=[]

@@ -17,7 +17,7 @@ func approach(at: Vector3) -> bool:
 	return result
 func run() -> void:
 	Engine.time_scale=4
-	Session.new_shift();Session.stage=6;Session.stocked.assign(["stock_1","stock_2"]);Session.organized=true;Session.warning_delivered=true;Session.customers_served=3
+	Session.new_shift();Session.stage=4;Session.stocked.assign(["stock_1","stock_2"]);Session.organized=true;Session.warning_delivered=true;Session.customers_served=3
 	app=load("res://scenes/main/main.tscn").instantiate();add_child(app)
 	await get_tree().process_frame
 	app.interface.has_started=true;app.interface.set_paused(false);world=app.world;world.active=true;player=world.player
@@ -122,6 +122,18 @@ func run() -> void:
 	var legacy:={"version":3,"stage":7,"stocked":["stock_1","stock_2"],"organized":true,"customers":3,"warning":true,"finale":true,"position":[0,0,-4]}
 	var f:=FileAccess.open(Session.SAVE_PATH,FileAccess.WRITE);f.store_string(JSON.stringify(legacy));f.close();await reload_world()
 	check(Session.stage==6 and world.friday.is_outage() and not Session.finale_seen,"checkpoint completo da versão 3 migra para a pane e permite continuar a sexta")
+	legacy.stage=6;legacy.finale=false
+	f=FileAccess.open(Session.SAVE_PATH,FileAccess.WRITE);f.store_string(JSON.stringify(legacy));f.close();await reload_world()
+	check(Session.stage==6 and world.friday.is_outage(),"save antigo após o aviso e antes do fim da demonstração migra para a pane")
+	Session.new_shift();Session.stage=6;Session.warning_delivered=true;Session.save_shift(world.player.global_position);await reload_world()
+	check(world.friday.is_outage() and Dialogue.active,"save versão 4 na transição após o aviso retoma o apagão sem bloquear a noite")
+	clear_dialogue()
+	Session.campaign.phase="routine";Session.stage=6
+	Dialogue.play("transition_resume",[["Felps","Vamos terminar essa conversa antes de conferir os fundos."]]);await ticks(3)
+	var waited_for_dialogue:=world.friday.phase()=="routine"
+	clear_dialogue();await ticks(3)
+	check(waited_for_dialogue and world.friday.is_outage(),"transição em execução aguarda a conversa e retoma a pane mesmo sem callback anterior")
+	clear_dialogue()
 	print("FRIDAY RESULT ",checks-failures.size(),"/",checks," passed; failures=",failures)
 	app.queue_free();await get_tree().process_frame;await get_tree().create_timer(.2).timeout
 	Geo.materials.clear();CharacterModels.costume_materials.clear()

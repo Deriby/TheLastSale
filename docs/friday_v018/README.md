@@ -1,6 +1,6 @@
-# Sexta-feira — 0.18.0
+# Sexta-feira — 0.18.1
 
-[Baixar projeto Godot 0.18.0](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.18.0.zip).
+[Baixar projeto Godot 0.18.1](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.18.1.zip).
 Extraia numa pasta nova e importe `project.godot` no Godot 4.4.1. Pressione F5 e
 inicie um novo expediente. Esta entrega conclui a primeira sexta jogável e mostra
 a abertura de sábado. A investigação do sábado, a fuga do domingo e os finais
@@ -66,7 +66,7 @@ além das vendas e dos dois personagens. Uma venda interrompida mantém dinheiro
 troco parcial; a receita é creditada uma vez. Saves 1 e 2 continuam aceitos. Saves
 3 já terminados na demonstração migram para o apagão, permitindo continuar a sexta.
 
-**233/233 verificações** passaram no projeto e no ZIP extraído após
+**236/236 verificações** passaram no projeto e no ZIP extraído após
 importação limpa. A suíte principal cobre 188 verificações de cenário, rig, modos
 gráficos, caixas, clientes, pagamentos e saves. A suíte de sexta cobre os eventos
 novos, percursos físicos, encerramento, cooperação dos dois personagens, retomada

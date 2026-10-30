@@ -1,12 +1,13 @@
 {
-  "version": "0.18.0",
+  "version": "0.18.1",
   "godot": "4.4.1",
   "source_integration": {
-    "passed": 233,
-    "total": 233,
+    "passed": 236,
+    "total": 236,
     "main": 188,
-    "friday": 45,
-    "runtime_errors": 0
+    "friday": 48,
+    "runtime_errors": 0,
+    "exit_code": 0
   },
   "friday_implemented": true,
   "saturday_scope": "opening preview only",
@@ -50,5 +51,8 @@
     "staged_visual_review": true
   },
   "native_radeon_r7_fps_measured": false,
-  "pause_freezes_shutter_completion": true
+  "pause_freezes_shutter_completion": true,
+  "legacy_post_warning_checkpoint_restored": true,
+  "v4_post_warning_transition_resumes": true,
+  "dialogue_completes_before_blackout": true
 }

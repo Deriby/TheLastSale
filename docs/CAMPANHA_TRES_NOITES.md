@@ -1,7 +1,7 @@
 # A Última Venda — campanha de sexta a domingo
 
 Estado: direção narrativa aprovada pelo autor. Este documento registra a nova
-estrutura. A 0.18.0 implementa a primeira sexta jogável, com apagão, gerador,
+estrutura. A 0.18.1 implementa a primeira sexta jogável, com apagão, gerador,
 fechamento e abertura de sábado. A investigação de sábado, o domingo, a identidade
 do assassino e os finais abaixo continuam como direção para as próximas etapas.
 

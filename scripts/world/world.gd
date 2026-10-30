@@ -196,6 +196,7 @@ func update_checkout_scene() -> void:
 func _physics_process(delta: float) -> void:
 	if not active:return
 	Session.world_seconds+=delta
+	if Session.stage==6 and friday!=null and friday.phase()=="routine" and not Dialogue.active:friday.begin_outage()
 	if friday!=null:friday.tick(delta)
 	if sale_save_wait>=0:
 		sale_save_wait-=delta
@@ -270,6 +271,7 @@ func restore_transient() -> void:
 			var lines: Array=JSON.parse_string(FileAccess.get_file_as_string("res://resources/warning.json"));Dialogue.play("warning",lines)
 	elif Session.stage==5:Session.stage=4
 	noise_pending=false
+	if friday!=null and Session.stage==6 and friday.phase()=="routine" and not Dialogue.active:friday.begin_outage()
 	if friday!=null and friday.is_outage():
 		for actor in characters.values():actor.torch.show()
 	if Session.campaign.phase=="complete":call_deferred("emit_night_completed")

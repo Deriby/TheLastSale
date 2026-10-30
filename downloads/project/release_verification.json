@@ -1,10 +1,10 @@
 {
   "format": "Godot editor project ZIP",
-  "version": "0.18.0",
+  "version": "0.18.1",
   "godot": "4.4.1",
-  "file": "TheLastSale_Godot_0.18.0.zip",
-  "bytes": 85478466,
-  "sha256": "c3ad14d1816c1d141fcf345d7e34a143a9cc85001bcffc622e148dca71e131cb",
+  "file": "TheLastSale_Godot_0.18.1.zip",
+  "bytes": 85478833,
+  "sha256": "15f37a3669e9097228b82a8d46a73176cfb43cbe1965ad6d88f0151ea66ad421",
   "crc_verified": true,
   "files_verified_against_manifest": 685,
   "manifest_files_changed_by_import": 0,
@@ -12,18 +12,18 @@
   "import_script_errors": 0,
   "headless_import_texture_preview_messages": 14,
   "source_integration": {
-    "passed": 233,
-    "total": 233,
+    "passed": 236,
+    "total": 236,
     "main": 188,
-    "friday": 45,
+    "friday": 48,
     "exit_code": 0,
     "runtime_errors": 0
   },
   "clean_extraction_integration": {
-    "passed": 233,
-    "total": 233,
+    "passed": 236,
+    "total": 236,
     "main": 188,
-    "friday": 45,
+    "friday": 48,
     "exit_code": 0,
     "runtime_errors": 0
   },
@@ -58,5 +58,8 @@
   "ps1_and_ps12_preserved": true,
   "gameplay_report": "docs/friday_v018/validation.json",
   "import_note": "Headless import emits 14 known texture preview t=null messages; no script errors. Runtime integration has no errors. Physics interpolation warnings may appear during test-driven restoration.",
-  "scope": "Friday routine, replaceable temporary customers, recoverable blackout, courtyard generator, cooperative closing, night summary and Saturday opening preview."
+  "scope": "Friday routine, replaceable temporary customers, recoverable blackout, courtyard generator, cooperative closing, night summary and Saturday opening preview.",
+  "legacy_post_warning_checkpoint_restored": true,
+  "v4_post_warning_transition_resumes": true,
+  "dialogue_completes_before_blackout": true
 }

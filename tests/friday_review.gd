@@ -13,11 +13,12 @@ func capture(id: String) -> void:
 	var path:="/tmp/friday_018_"+id+".png"
 	get_viewport().get_texture().get_image().save_png(path);print("CAPTURE ",path)
 func review() -> void:
-	Session.new_shift();Session.stage=6;Session.warning_delivered=true
+	Session.new_shift();Session.stage=4;Session.warning_delivered=true
 	Session.stocked.assign(["stock_1","stock_2"]);Session.organized=true;Session.customers_served=4
 	Preferences.ps1_mode=true;Preferences.ps1_high_resolution=true;Preferences.pixel_scale=2
 	app=load("res://scenes/main/main.tscn").instantiate();add_child(app);await get_tree().process_frame
 	app.interface.has_started=true;app.interface.set_paused(false);world=app.world;world.active=false
+	Session.stage=6;Session.changed.emit()
 	world.player.camera_rig.process_mode=Node.PROCESS_MODE_DISABLED
 	world.player.process_mode=Node.PROCESS_MODE_DISABLED;app.interface.prompt.text=""
 	camera=Camera3D.new();camera.fov=64;world.add_child(camera)

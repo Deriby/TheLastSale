@@ -146,7 +146,7 @@ func load_shift() -> bool:
 	if int(data.version)==4 and data.get("campaign") is Dictionary:
 		for key in campaign:campaign[key]=data.campaign.get(key,campaign[key])
 		campaign.night=clampi(int(campaign.night),0,2)
-	elif stage==7:
+	elif stage>=6:
 		stage=6;finale_seen=false;campaign.phase="outage"
 	changed.emit()
 	return true

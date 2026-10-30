@@ -502,6 +502,7 @@ preload_reimporting_scene: begin: Preparing scenes for reload steps: 1
 preload_reimporting_scene: end
 	reimport: step 0: asphalt.png
 	reimport: step 1: curtain.png
+	reimport: step 2: lamp_halo.png
 	reimport: step 3: leaves.png
 	reimport: step 4: night_sky.png
 	reimport: step 5: paving.png
@@ -675,7 +676,6 @@ preload_reimporting_scene: end
 	reimport: step 173: lamp_halo.png
 	reimport: step 174: leaves.png
 	reimport: step 175: night_sky.png
-	reimport: step 176: paving.png
 	reimport: step 177: plaster.png
 	reimport: step 178: tile.png
 	reimport: step 179: wall_base.png

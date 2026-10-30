@@ -6,7 +6,7 @@ import json
 import zipfile
 
 ROOT = Path(__file__).resolve().parent.parent
-VERSION = "0.18.0"
+VERSION = "0.18.1"
 
 
 def main():
