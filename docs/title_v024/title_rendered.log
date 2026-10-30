@@ -14,7 +14,7 @@ PASS tipografia da abertura permanece na resolução da interface
 PASS tempo, objetivos e progresso da campanha não avançam na intro
 PASS animação da fita continua com o mundo pausado
 PASS tempo gasto no primeiro carregamento não pula a abertura
-PASS intro apresenta o autor antes da localização
+PASS intro apresenta o estúdio antes da localização
 PASS segundo cartão apresenta local e horário do jogo
 PASS Enter pula a intro e revela o menu
 PASS tecla usada para pular não começa uma partida por acidente

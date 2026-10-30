@@ -98,7 +98,7 @@ func update_intro() -> void:
 	if elapsed<1.2:
 		heading.text="";caption.text=""
 	elif elapsed<4.0:
-		heading.text="DERIBY";heading.add_theme_font_size_override("font_size",44);caption.text="A P R E S E N T A"
+		heading.text="Two Brothers Lab";heading.add_theme_font_size_override("font_size",44);caption.text="A P R E S E N T A"
 		heading.modulate.a=smoothstep(1.2,1.8,elapsed)*(1.0-smoothstep(3.15,3.95,elapsed));caption.modulate.a=heading.modulate.a
 	else:
 		heading.text="FRANCA, SÃO PAULO";heading.add_theme_font_size_override("font_size",30);caption.text="SEXTA-FEIRA  /  21:40"

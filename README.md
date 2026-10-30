@@ -8,7 +8,7 @@ Extraia o ZIP, importe `project.godot` no Godot **4.4.1**, aguarde a importaçã
 
 ## Revisão 0.24.0 — abertura em fita e menu de suspense
 
-A abertura de 9,4 segundos apresenta o autor e **Franca, São Paulo — sexta-feira, 21:40**, antes de revelar o depósito vazio à noite. **Espaço, Enter, Esc ou clique** pulam a sequência e levam ao menu. A tecla de pular é consumida para não começar uma partida por acidente.
+A abertura de 9,4 segundos apresenta **Two Brothers Lab** e **Franca, São Paulo — sexta-feira, 21:40**, antes de revelar o depósito vazio à noite. **Espaço, Enter, Esc ou clique** pulam a sequência e levam ao menu. A tecla de pular é consumida para não começar uma partida por acidente.
 
 O menu recebeu tipografia de cartaz de terror, sombra vermelha, granulação, linhas de fita e um movimento lento de câmera. Os sons de fita e a atmosfera de sintetizador foram criados para o jogo. Iniciar, continuar, configurar e sair continuam acessíveis por teclado e mouse; a pausa usa a mesma identidade sem repetir a intro. [Vídeo, imagens e validação](docs/title_v024/README.md).
 

@@ -8,7 +8,7 @@ A apresentação tem clima de fita doméstica e cartaz de terror dos anos 80: pr
 
 ## Abertura e controles
 
-A sequência dura aproximadamente **9,4 segundos**, depois dos primeiros quadros de carregamento: fita iniciando, **Deriby apresenta**, **Franca, São Paulo — sexta-feira, 21:40**, e a revelação do cenário antes do menu. Não avança o turno nem os objetivos.
+A sequência dura aproximadamente **9,4 segundos**, depois dos primeiros quadros de carregamento: fita iniciando, **Two Brothers Lab apresenta**, **Franca, São Paulo — sexta-feira, 21:40**, e a revelação do cenário antes do menu. Não avança o turno nem os objetivos.
 
 **Espaço, Enter, Esc ou clique** pulam a intro. O evento é consumido para não acionar Iniciar expediente por baixo. A abertura aparece uma vez ao executar a cena principal/F5; pausar, continuar, trocar de noite ou reconstruir o mundo não a repete.
 

@@ -585,7 +585,6 @@ preload_reimporting_scene: end
 	reimport: step 42: cup_4.png
 	reimport: step 43: cup_offer.png
 	reimport: step 44: floor_wear.png
-	reimport: step 45: ice_freezer.png
 	reimport: step 46: payment_screen.png
 	reimport: step 47: pos_screen.png
 	reimport: step 48: spirits_0.png
@@ -656,7 +655,6 @@ preload_reimporting_scene: end
 	reimport: step 113: beer_0.png
 	reimport: step 114: beer_0_orm.png
 	reimport: step 115: beer_1.png
-	reimport: step 116: beer_1_orm.png
 	reimport: step 117: beer_banner.png
 	reimport: step 118: can_0.png
 	reimport: step 119: can_0_orm.png
@@ -716,8 +714,6 @@ preload_reimporting_scene: end
 	reimport: step 173: snack_3.png
 	reimport: step 174: contact.png
 	reimport: step 175: TitleSerif.ttf
-	reimport: step 176: TitleMono.ttf
-	reimport: step 177: intro_tape.ogg
 	reimport: step 178: title_drone.ogg
 	reimport: step 179: plastic_film.png
 	reimport: step 180: asphalt.png

@@ -48,7 +48,7 @@ func run() -> void:
 	check(title_screen.elapsed==0 and title_screen.intro_active,"tempo gasto no primeiro carregamento não pula a abertura")
 	await frames()
 	title_screen.elapsed=2.3;title_screen.update_intro()
-	check(title_screen.heading.text=="DERIBY" and title_screen.caption.text.replace(" ","")=="APRESENTA","intro apresenta o autor antes da localização")
+	check(title_screen.heading.text=="Two Brothers Lab" and title_screen.caption.text.replace(" ","")=="APRESENTA","intro apresenta o estúdio antes da localização")
 	title_screen.elapsed=5.2;title_screen.update_intro()
 	check(title_screen.heading.text=="FRANCA, SÃO PAULO" and title_screen.caption.text.contains("21:40"),"segundo cartão apresenta local e horário do jogo")
 	title_screen.elapsed=.4

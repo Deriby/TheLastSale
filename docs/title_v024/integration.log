@@ -162,7 +162,7 @@ PASS tela do caixa cabe na janela e impede caminhada enquanto recebe cliques
 PASS produto ou quantidade errada impede cobrança e recebe resposta do cliente
 PASS receber dinheiro abre a gaveta e libera a separação do troco
 PASS troco errado mantém venda pendente e permite corrigir sem cobrar outra vez
-WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@7677/Depot/@Node3D@9859/@MeshInstance3D@9864" (possibly benign).
+WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@7677/Depot/@Node3D@9866/@MeshInstance3D@9870" (possibly benign).
      at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
 PASS continuar preserva cliente, registro, dinheiro recebido e troco parcial sem concluir ou duplicar venda
 PASS entrega cria recibo, sacola e receita uma única vez e libera a saída do cliente
@@ -216,14 +216,14 @@ PASS checkpoint no pátio mantém posição e contato com o chão
 PASS Deryk liga o gerador com a chave e a confirmação do salão
 PASS energia de reserva restaura equipamentos e inicia som local do gerador
 PASS observação da rua iluminada fica registrada e venda mantém o troco parcial
+WARNING: [Physics interpolation] Non-interpolated instance triggered from physics process: "/root/FridayIntegration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@7228/Dery/@Node3D@9528/@SpringArm3D@9529/@Camera3D@9530/@SpotLight3D@9534" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:966)
 PASS continuar depois de ligar o gerador não exige repetir a tarefa
 PASS Felps retoma o atendimento interrompido quando a energia volta
 PASS atendimento retomado entrega compra e credita um único recibo
 PASS último cliente sai fisicamente antes de iniciar o fechamento
 PASS saída é bloqueada enquanto faltam tarefas de fechamento
 PASS Felps confere e fecha o caixa após terminar todas as vendas
-WARNING: [Physics interpolation] Non-interpolated instance triggered from physics process: "/root/FridayIntegration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@7228/Dery/@Node3D@9528/@SpringArm3D@9529/@Camera3D@9530/@SpotLight3D@9534" (possibly benign).
-     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:966)
 PASS Deryk retorna do gerador pelo pátio
 PASS Deryk volta ao estoque e verifica a área antiga sem atravessar paredes
 PASS inspeção da porta antiga conclui a conferência do estoque
@@ -233,6 +233,8 @@ PASS Felps alcança o comando das portas pelo lado de fora
 PASS chamar companheiro inicia encontro da dupla na calçada
 PASS companheiro percorre fisicamente o estoque e o salão até a calçada
 PASS Felps também sai autonomamente do posto quando Deryk chama o companheiro
+WARNING: [Physics interpolation] Non-interpolated instance triggered from physics process: "/root/FridayIntegration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@9648/Street/DownhillGreyWorkshop/@MeshInstance3D@10361" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:966)
 PASS retomada do fechamento preserva tarefas, encontro da dupla e posição na calçada
 PASS portas só podem baixar com os dois protagonistas do lado de fora
 PASS pausa congela o fechamento e impede que a noite termine com animação suspensa
@@ -242,8 +244,6 @@ PASS resumo conserva vendas e recibos da sexta sem duplicação
 PASS transição prepara abertura de sábado e atualiza o dia no HUD
 PASS nova noite preserva pistas e histórico e reinicia o caixa diário
 PASS abertura de sábado reconhece sexta e libera a nova rotina após conversa no caixa
-WARNING: [Physics interpolation] Non-interpolated instance triggered from physics process: "/root/FridayIntegration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@14417/Depot/Architecture/ServiceDoor/@MeshInstance3D@16777" (possibly benign).
-     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:966)
 PASS continuar no sábado retoma sua rotina sem reiniciar a sexta
 PASS checkpoint completo da versão 3 migra para a pane e permite continuar a sexta
 PASS save antigo após o aviso e antes do fim da demonstração migra para a pane
@@ -310,8 +310,6 @@ PASS histórico das noites concluídas permanece separado das vendas de domingo
 PASS retomada de domingo mantém o contato combinado no sábado
 PASS save da antiga prévia migra para sábado jogável com campos novos seguros
 SATURDAY RESULT 53/53 passed; failures=[]
-WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
-     at: cleanup (core/object/object.cpp:2378)
 Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
 
 PASS domingo inicia sem clientes ou criança no cenário de perigo
@@ -376,8 +374,6 @@ PASS final sozinho persiste e não inicia uma quarta noite
 PASS reiniciar após o epílogo limpa ameaça, final e retry e volta à sexta
 PASS save 0.19 do domingo em prévia migra para abertura jogável sem iniciar perigo antes da hora
 SUNDAY RESULT 59/59 passed; failures=[]
-WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
-     at: cleanup (core/object/object.cpp:2378)
 Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
 
 PASS caixas distinguem reposição e cascos vazios antes de qualquer coleta
@@ -511,7 +507,7 @@ PASS tipografia da abertura permanece na resolução da interface
 PASS tempo, objetivos e progresso da campanha não avançam na intro
 PASS animação da fita continua com o mundo pausado
 PASS tempo gasto no primeiro carregamento não pula a abertura
-PASS intro apresenta o autor antes da localização
+PASS intro apresenta o estúdio antes da localização
 PASS segundo cartão apresenta local e horário do jogo
 PASS Enter pula a intro e revela o menu
 PASS tecla usada para pular não começa uma partida por acidente

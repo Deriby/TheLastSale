@@ -3,8 +3,8 @@
   "version": "0.24.0",
   "godot": "4.4.1",
   "file": "TheLastSale_Godot_0.24.0.zip",
-  "bytes": 104152727,
-  "sha256": "d4c7601b12975da9058ca32eea2d55607a6815978f2f18d2f47a155281e869b6",
+  "bytes": 104152790,
+  "sha256": "71a020f14c099e83c4917a1d7ad82371354ee5acb69bf38b6ed3e4e7d263b260",
   "crc_verified": true,
   "files_verified_against_manifest": 844,
   "manifest_files_changed_by_import_or_tests": 0,
@@ -47,7 +47,8 @@
     "world_paused": true,
     "same_skip_key_cannot_start_game": true,
     "warmup_loading_delta_ignored": true,
-    "low_fps_does_not_stretch_duration": true
+    "low_fps_does_not_stretch_duration": true,
+    "studio": "Two Brothers Lab"
   },
   "menu": {
     "new_runtime_viewports": 0,
@@ -73,7 +74,7 @@
   "preview": {
     "path": "docs/title_v024/intro_menu.mp4",
     "duration_seconds": 12.866667,
-    "bytes": 902634,
+    "bytes": 878012,
     "video_codec": "H.264",
     "audio_codec": "AAC",
     "capture_fps": 15,

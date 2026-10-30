@@ -9,7 +9,7 @@ Modelos animados, cenários, sons, texturas, código, testes e ferramentas estã
 
 ## Intro retrô e menu de suspense — 0.24.0
 
-Ao abrir o jogo, uma sequência de fita apresenta o autor e o depósito em Franca às 21:40. Espaço, Enter, Esc ou clique pulam a intro e mostram o menu. O depósito vazio, a tipografia de terror dos anos 80 e a atmosfera sonora criam o fundo do menu. Configurações e continuar o checkpoint ficam disponíveis antes de iniciar a partida. A pausa não repete a intro.
+Ao abrir o jogo, uma sequência de fita apresenta o estúdio **Two Brothers Lab** e o depósito em Franca às 21:40. Espaço, Enter, Esc ou clique pulam a intro e mostram o menu. O depósito vazio, a tipografia de terror dos anos 80 e a atmosfera sonora criam o fundo do menu. Configurações e continuar o checkpoint ficam disponíveis antes de iniciar a partida. A pausa não repete a intro.
 
 Fontes, sons originais e código estão prontos no pacote: não é necessário instalar ferramentas extras para jogar. As opções de volume controlam a apresentação. Modelos, animações, física, energia, HUD e a correção do piso da 0.23.1 foram preservados. Veja `docs/title_v024/README.md`.
 
