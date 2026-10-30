@@ -2,11 +2,19 @@
 
 Demonstração jogável em **Godot 4.4.1 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP, com uma primeira versão jogável da campanha de sexta a domingo. Acabamento e ritmo continuam em desenvolvimento.
 
-**[Baixar o projeto 0.23.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.23.0.zip)**
+**[Baixar o projeto 0.23.1 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.23.1.zip)**
 
 Extraia o ZIP, importe `project.godot` no Godot **4.4.1**, aguarde a importação dos modelos e pressione **F5**. O arquivo inclui os modelos animados, cenários, código e recursos usados no jogo. [Conteúdo e instruções do projeto](downloads/project/README.md).
 
-## Revisão 0.23.0 — precisão de vértices e texturas afins PS1
+## Revisão 0.23.1 — piso estável ao girar a câmera
+
+Corrige o piso e outras superfícies com texturas repetidas que deslizavam ao mover a câmera nos modos PS1 e PS1/2. O mapeamento desses materiais permanece preso ao cenário. O efeito afim das texturas UV recebeu limites suaves, e o cálculo passou a preservar corretamente os vértices atrás da câmera.
+
+As opções Desligada/Suave/Marcada continuam independentes. Modelos, animações, HUD, física, energia e saves foram preservados. O novo teste renderizado gira a câmera em seis direções, nas duas resoluções e intensidades: **48/48 casos** passaram; o shader 0.23.0 falha nos mesmos casos. [Correção e validação](docs/psx_v0231/README.md).
+
+![PS1/2 Suave com o piso estável](docs/psx_v0231/fixed_ps12.png)
+
+## Revisão anterior 0.23.0 — precisão de vértices e texturas afins PS1
 
 Em **Configurações**, escolha **PS1 — 320×240** ou **PS1/2 — 640×480**. **Precisão de vértices PS1** e **Texturas afins PS1** têm seleções independentes: **Desligada**, **Suave** (padrão) e **Marcada**. As preferências ficam salvas. A precisão reduzida faz os vértices avançarem em pequenos passos na tela; a interpolação afim deforma as texturas sobre os triângulos, especialmente em superfícies oblíquas.
 
@@ -220,9 +228,9 @@ A reconstrução 0.2 do interior recebeu gôndolas abastecidas por categoria, ge
 
 ## Jogar
 
-**[Baixar o projeto Godot 0.23.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.23.0.zip)**
+**[Baixar o projeto Godot 0.23.1 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.23.1.zip)**
 
-O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **0.23.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
+O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **0.23.1**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
 
 O download atual é o projeto para o editor. O diretório `downloads/windows` guarda apenas a entrega anterior 0.9.0.
 

@@ -1,4 +1,4 @@
-# The Last Sale — projeto Godot 0.23.0
+# The Last Sale — projeto Godot 0.23.1
 
 1. Extraia este ZIP em uma pasta nova.
 2. No Godot **4.4.1**, clique em **Importar** e escolha `project.godot`.
@@ -6,6 +6,10 @@
 4. Pressione **F5** e escolha **Iniciar expediente** para testar a rotina completa.
 
 Modelos animados, cenários, sons, texturas, código, testes e ferramentas estão incluídos. Blender não é necessário para jogar. O renderizador é Compatibility / OpenGL.
+
+## Piso estável ao mover a câmera — 0.23.1
+
+Corrige o deslizamento das texturas do piso em PS1 e PS1/2. Materiais com projeção triplanar mantêm o mapeamento preso ao cenário/objeto. A interpolação afim das texturas UV recebeu limites suaves e trata corretamente vértices atrás da câmera. As escolhas Desligada/Suave/Marcada, a precisão de vértices e a resolução continuam disponíveis. Veja `docs/psx_v0231/README.md`.
 
 ## Efeitos PS1 / PS1/2 — 0.23.0
 

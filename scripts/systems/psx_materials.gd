@@ -88,14 +88,14 @@ func make_shader(source: Material) -> Shader:
 		var world_coords := code.contains("world_vertex_coords")
 		var fragment_start := code.find("void fragment(){")
 		code = code.substr(0,fragment_start)+code.substr(fragment_start).replace("UV","psx_sample_uv")
-		code = code.replace("void fragment(){","void fragment(){\n vec2 psx_sample_uv = mix(UV,psx_uv / max(psx_w,0.0001),affine_strength);\n")
-		var body := "\n vec4 psx_clip=PROJECTION_MATRIX*"+("VIEW_MATRIX" if world_coords else "MODELVIEW_MATRIX")+"*vec4(VERTEX,1.0);\n psx_w=max(psx_clip.w,0.0001);psx_uv=UV*psx_w;\n if(snap_pixels>0.0 && psx_clip.w>0.01){vec2 grid=VIEWPORT_SIZE/(2.0*snap_pixels);psx_clip.xy=floor(psx_clip.xy/psx_clip.w*grid+0.5)/grid*psx_clip.w;}\n POSITION=psx_clip;\n"
+		code = code.replace("void fragment(){","void fragment(){\n vec2 psx_delta=psx_uv/max(psx_w,0.0001)-UV;\n float psx_limit=max(affine_limit,0.00001);\n psx_delta*=inversesqrt(1.0+dot(psx_delta,psx_delta)/(psx_limit*psx_limit));\n vec2 psx_sample_uv=UV+psx_delta*affine_strength;\n")
+		var body := "\n vec4 psx_clip=PROJECTION_MATRIX*"+("VIEW_MATRIX" if world_coords else "MODELVIEW_MATRIX")+"*vec4(VERTEX,1.0);\n psx_w=psx_clip.w;psx_uv=UV*psx_w;\n if(snap_pixels>0.0 && psx_clip.w>0.01){vec2 grid=VIEWPORT_SIZE/(2.0*snap_pixels);psx_clip.xy=floor(psx_clip.xy/psx_clip.w*grid+0.5)/grid*psx_clip.w;}\n POSITION=psx_clip;\n"
 		var start := code.find("void vertex(){")
 		if start < 0: code += "\nvoid vertex(){"+body+"}\n"
 		else:
 			var end := code.find("}",start)
 			code = code.insert(end,body)
-		code = code.replace("shader_type spatial;","shader_type spatial;\nuniform float snap_pixels=0.5;uniform float affine_strength=0.35;varying vec2 psx_uv;varying float psx_w;")
+		code = code.replace("shader_type spatial;","shader_type spatial;\nuniform float snap_pixels=0.5;uniform float affine_strength=0.35;uniform float affine_limit=0.008;varying vec2 psx_uv;varying float psx_w;")
 	if not shaders.has(code):
 		var shader := Shader.new();shader.code = code;shaders[code] = shader
 	return shaders[code]
@@ -109,6 +109,7 @@ func sync_material(entry: Dictionary) -> void:
 	var mat: ShaderMaterial = entry.material
 	mat.set_shader_parameter("snap_pixels",[0.0,0.5,1.5][Preferences.psx_vertices])
 	mat.set_shader_parameter("affine_strength",[0.0,0.35,1.0][Preferences.psx_affine])
+	mat.set_shader_parameter("affine_limit",[0.0,0.008,0.02][Preferences.psx_affine])
 	if source is ShaderMaterial:
 		for parameter in source.shader.get_shader_uniform_list(): mat.set_shader_parameter(parameter.name,source.get_shader_parameter(parameter.name))
 		return

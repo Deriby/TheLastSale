@@ -1,0 +1,389 @@
+{
+  "version": "0.23.1",
+  "godot": "4.4.1",
+  "base_commit": "198ab39f3ac200b37d61d30ca5023a0c1aec8ea3",
+  "regression": "floor textures follow camera movement with affine interpolation",
+  "fix": {
+    "triplanar_coordinates_use_perspective_interpolation": true,
+    "clip_w_signed_before_clipping": true,
+    "smooth_uv_displacement_limits": {
+      "Suave": 0.008,
+      "Marcada": 0.02
+    },
+    "intensity_and_vertex_options_preserved": true
+  },
+  "rendered_motion": {
+    "baseline_0_23_0_passed": 0,
+    "fixed_passed": 48,
+    "total": 48,
+    "camera_directions": 6,
+    "resolutions": [
+      [
+        320,
+        240
+      ],
+      [
+        640,
+        480
+      ]
+    ],
+    "mapping_types": [
+      "UV",
+      "world triplanar"
+    ],
+    "intensities": [
+      "Suave",
+      "Marcada"
+    ],
+    "world_mapping_max_color_difference": 0.0,
+    "measurements": [
+      {
+        "high_resolution": false,
+        "intensity": 1,
+        "mapping": "uv",
+        "maximum_color_error": 0.00784313678741455,
+        "yaw_degrees": -155.0
+      },
+      {
+        "high_resolution": false,
+        "intensity": 1,
+        "mapping": "uv",
+        "maximum_color_error": 0.00784313678741455,
+        "yaw_degrees": -90.0
+      },
+      {
+        "high_resolution": false,
+        "intensity": 1,
+        "mapping": "uv",
+        "maximum_color_error": 0.00784313678741455,
+        "yaw_degrees": -20.0
+      },
+      {
+        "high_resolution": false,
+        "intensity": 1,
+        "mapping": "uv",
+        "maximum_color_error": 0.00784313678741455,
+        "yaw_degrees": 25.0
+      },
+      {
+        "high_resolution": false,
+        "intensity": 1,
+        "mapping": "uv",
+        "maximum_color_error": 0.00784313678741455,
+        "yaw_degrees": 95.0
+      },
+      {
+        "high_resolution": false,
+        "intensity": 1,
+        "mapping": "uv",
+        "maximum_color_error": 0.00784313678741455,
+        "yaw_degrees": 165.0
+      },
+      {
+        "high_resolution": false,
+        "intensity": 2,
+        "mapping": "uv",
+        "maximum_color_error": 0.0274510085582733,
+        "yaw_degrees": -155.0
+      },
+      {
+        "high_resolution": false,
+        "intensity": 2,
+        "mapping": "uv",
+        "maximum_color_error": 0.0274510085582733,
+        "yaw_degrees": -90.0
+      },
+      {
+        "high_resolution": false,
+        "intensity": 2,
+        "mapping": "uv",
+        "maximum_color_error": 0.0274510085582733,
+        "yaw_degrees": -20.0
+      },
+      {
+        "high_resolution": false,
+        "intensity": 2,
+        "mapping": "uv",
+        "maximum_color_error": 0.0274510085582733,
+        "yaw_degrees": 25.0
+      },
+      {
+        "high_resolution": false,
+        "intensity": 2,
+        "mapping": "uv",
+        "maximum_color_error": 0.0274510085582733,
+        "yaw_degrees": 95.0
+      },
+      {
+        "high_resolution": false,
+        "intensity": 2,
+        "mapping": "uv",
+        "maximum_color_error": 0.0274510085582733,
+        "yaw_degrees": 165.0
+      },
+      {
+        "high_resolution": true,
+        "intensity": 1,
+        "mapping": "uv",
+        "maximum_color_error": 0.00784313678741455,
+        "yaw_degrees": -155.0
+      },
+      {
+        "high_resolution": true,
+        "intensity": 1,
+        "mapping": "uv",
+        "maximum_color_error": 0.00784313678741455,
+        "yaw_degrees": -90.0
+      },
+      {
+        "high_resolution": true,
+        "intensity": 1,
+        "mapping": "uv",
+        "maximum_color_error": 0.00784313678741455,
+        "yaw_degrees": -20.0
+      },
+      {
+        "high_resolution": true,
+        "intensity": 1,
+        "mapping": "uv",
+        "maximum_color_error": 0.00784313678741455,
+        "yaw_degrees": 25.0
+      },
+      {
+        "high_resolution": true,
+        "intensity": 1,
+        "mapping": "uv",
+        "maximum_color_error": 0.00784313678741455,
+        "yaw_degrees": 95.0
+      },
+      {
+        "high_resolution": true,
+        "intensity": 1,
+        "mapping": "uv",
+        "maximum_color_error": 0.00784313678741455,
+        "yaw_degrees": 165.0
+      },
+      {
+        "high_resolution": true,
+        "intensity": 2,
+        "mapping": "uv",
+        "maximum_color_error": 0.0274510085582733,
+        "yaw_degrees": -155.0
+      },
+      {
+        "high_resolution": true,
+        "intensity": 2,
+        "mapping": "uv",
+        "maximum_color_error": 0.0274510085582733,
+        "yaw_degrees": -90.0
+      },
+      {
+        "high_resolution": true,
+        "intensity": 2,
+        "mapping": "uv",
+        "maximum_color_error": 0.0274510085582733,
+        "yaw_degrees": -20.0
+      },
+      {
+        "high_resolution": true,
+        "intensity": 2,
+        "mapping": "uv",
+        "maximum_color_error": 0.0274510085582733,
+        "yaw_degrees": 25.0
+      },
+      {
+        "high_resolution": true,
+        "intensity": 2,
+        "mapping": "uv",
+        "maximum_color_error": 0.0274510085582733,
+        "yaw_degrees": 95.0
+      },
+      {
+        "high_resolution": true,
+        "intensity": 2,
+        "mapping": "uv",
+        "maximum_color_error": 0.0274510085582733,
+        "yaw_degrees": 165.0
+      },
+      {
+        "high_resolution": false,
+        "intensity": 1,
+        "mapping": "world",
+        "maximum_color_error": 0.0,
+        "yaw_degrees": -155.0
+      },
+      {
+        "high_resolution": false,
+        "intensity": 1,
+        "mapping": "world",
+        "maximum_color_error": 0.0,
+        "yaw_degrees": -90.0
+      },
+      {
+        "high_resolution": false,
+        "intensity": 1,
+        "mapping": "world",
+        "maximum_color_error": 0.0,
+        "yaw_degrees": -20.0
+      },
+      {
+        "high_resolution": false,
+        "intensity": 1,
+        "mapping": "world",
+        "maximum_color_error": 0.0,
+        "yaw_degrees": 25.0
+      },
+      {
+        "high_resolution": false,
+        "intensity": 1,
+        "mapping": "world",
+        "maximum_color_error": 0.0,
+        "yaw_degrees": 95.0
+      },
+      {
+        "high_resolution": false,
+        "intensity": 1,
+        "mapping": "world",
+        "maximum_color_error": 0.0,
+        "yaw_degrees": 165.0
+      },
+      {
+        "high_resolution": false,
+        "intensity": 2,
+        "mapping": "world",
+        "maximum_color_error": 0.0,
+        "yaw_degrees": -155.0
+      },
+      {
+        "high_resolution": false,
+        "intensity": 2,
+        "mapping": "world",
+        "maximum_color_error": 0.0,
+        "yaw_degrees": -90.0
+      },
+      {
+        "high_resolution": false,
+        "intensity": 2,
+        "mapping": "world",
+        "maximum_color_error": 0.0,
+        "yaw_degrees": -20.0
+      },
+      {
+        "high_resolution": false,
+        "intensity": 2,
+        "mapping": "world",
+        "maximum_color_error": 0.0,
+        "yaw_degrees": 25.0
+      },
+      {
+        "high_resolution": false,
+        "intensity": 2,
+        "mapping": "world",
+        "maximum_color_error": 0.0,
+        "yaw_degrees": 95.0
+      },
+      {
+        "high_resolution": false,
+        "intensity": 2,
+        "mapping": "world",
+        "maximum_color_error": 0.0,
+        "yaw_degrees": 165.0
+      },
+      {
+        "high_resolution": true,
+        "intensity": 1,
+        "mapping": "world",
+        "maximum_color_error": 0.0,
+        "yaw_degrees": -155.0
+      },
+      {
+        "high_resolution": true,
+        "intensity": 1,
+        "mapping": "world",
+        "maximum_color_error": 0.0,
+        "yaw_degrees": -90.0
+      },
+      {
+        "high_resolution": true,
+        "intensity": 1,
+        "mapping": "world",
+        "maximum_color_error": 0.0,
+        "yaw_degrees": -20.0
+      },
+      {
+        "high_resolution": true,
+        "intensity": 1,
+        "mapping": "world",
+        "maximum_color_error": 0.0,
+        "yaw_degrees": 25.0
+      },
+      {
+        "high_resolution": true,
+        "intensity": 1,
+        "mapping": "world",
+        "maximum_color_error": 0.0,
+        "yaw_degrees": 95.0
+      },
+      {
+        "high_resolution": true,
+        "intensity": 1,
+        "mapping": "world",
+        "maximum_color_error": 0.0,
+        "yaw_degrees": 165.0
+      },
+      {
+        "high_resolution": true,
+        "intensity": 2,
+        "mapping": "world",
+        "maximum_color_error": 0.0,
+        "yaw_degrees": -155.0
+      },
+      {
+        "high_resolution": true,
+        "intensity": 2,
+        "mapping": "world",
+        "maximum_color_error": 0.0,
+        "yaw_degrees": -90.0
+      },
+      {
+        "high_resolution": true,
+        "intensity": 2,
+        "mapping": "world",
+        "maximum_color_error": 0.0,
+        "yaw_degrees": -20.0
+      },
+      {
+        "high_resolution": true,
+        "intensity": 2,
+        "mapping": "world",
+        "maximum_color_error": 0.0,
+        "yaw_degrees": 25.0
+      },
+      {
+        "high_resolution": true,
+        "intensity": 2,
+        "mapping": "world",
+        "maximum_color_error": 0.0,
+        "yaw_degrees": 95.0
+      },
+      {
+        "high_resolution": true,
+        "intensity": 2,
+        "mapping": "world",
+        "maximum_color_error": 0.0,
+        "yaw_degrees": 165.0
+      }
+    ],
+    "camera_physics_interpolation_disabled_for_deterministic_pairs": true,
+    "engine_fps_unlimited": true
+  },
+  "all_440_published_assets_and_resources_preserved": true,
+  "physics_animation_power_and_save_code_unchanged": true,
+  "new_lights": 0,
+  "new_viewports": 0,
+  "default_frame_limit": 30,
+  "rendering": "OpenGL Compatibility, Mesa llvmpipe, Linux",
+  "baseline_log": "motion_before.log",
+  "fixed_log": "motion_after.log",
+  "archive_verification": "https://github.com/Deriby/TheLastSale/blob/main/downloads/project/release_verification.json"
+}

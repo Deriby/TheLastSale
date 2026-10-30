@@ -3,6 +3,7 @@ render_mode diffuse_burley, specular_schlick_ggx;
 
 uniform float snap_pixels = 0.5;
 uniform float affine_strength = 0.35;
+uniform float affine_limit = 0.008;
 uniform vec4 base_color : source_color = vec4(1.0);
 uniform sampler2D base_texture : source_color, filter_linear_mipmap, repeat_enable;
 uniform bool has_base = false;
@@ -39,7 +40,6 @@ uniform float coat_roughness = 0.5;
 
 varying vec2 affine_uv;
 varying vec3 tri_position;
-varying vec3 affine_tri_position;
 varying vec3 tri_weights;
 varying float affine_w;
 
@@ -50,9 +50,10 @@ void vertex() {
  tri_weights = pow(abs(tri_normal),vec3(triplanar_sharpness));
  tri_weights /= max(dot(tri_weights,vec3(1.0)),0.0001);
  vec4 clip = PROJECTION_MATRIX * MODELVIEW_MATRIX * vec4(VERTEX,1.0);
- affine_w = max(clip.w,0.0001);
+ // Keep the signed depth through clipping. Clamping behind-camera vertices
+ // corrupts interpolation on the large triangles used by the floor and walls.
+ affine_w = clip.w;
  affine_uv = UV * affine_w;
- affine_tri_position = tri_position * affine_w;
  if (snap_pixels > 0.0 && clip.w > 0.01) {
   vec2 grid = VIEWPORT_SIZE / (2.0 * snap_pixels);
   clip.xy = floor(clip.xy / clip.w * grid + 0.5) / grid * clip.w;
@@ -68,8 +69,13 @@ vec4 surface_sample(sampler2D image, vec2 at, vec3 tri) {
 }
 
 void fragment() {
- vec2 at = mix(UV,affine_uv / max(affine_w,0.0001),affine_strength);
- vec3 tri = mix(tri_position,affine_tri_position / max(affine_w,0.0001),affine_strength);
+ vec2 delta = affine_uv / max(affine_w,0.0001) - UV;
+ float limit = max(affine_limit,0.00001);
+ delta *= inversesqrt(1.0 + dot(delta,delta) / (limit * limit));
+ vec2 at = UV + delta * affine_strength;
+ // Tiled projections must stay attached to the surface in world/object space.
+ // Applying affine interpolation here makes whole floor tiles follow the camera.
+ vec3 tri = tri_position;
  vec4 color = base_color;
  if (has_base) { color *= surface_sample(base_texture,at,tri); }
  if (vertex_color) { color *= COLOR; }
