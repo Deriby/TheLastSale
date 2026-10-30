@@ -1,0 +1,55 @@
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+PASS cenas de revisão embutidas não iniciam a intro automaticamente
+PASS baixa taxa de quadros não prolonga artificialmente a intro
+PASS abertura pausa a campanha antes de qualquer interação
+PASS intro oculta menu e HUD até terminar
+PASS abertura usa câmera externa do próprio depósito
+PASS tela inicial mostra o depósito vazio sem remover os protagonistas
+PASS apresentação não acrescenta viewports nem luzes
+PASS tipografia da abertura permanece na resolução da interface
+PASS tempo, objetivos e progresso da campanha não avançam na intro
+PASS animação da fita continua com o mundo pausado
+PASS tempo gasto no primeiro carregamento não pula a abertura
+PASS intro apresenta o estúdio antes da localização
+PASS segundo cartão apresenta local e horário do jogo
+PASS Enter pula a intro e revela o menu
+PASS tecla usada para pular não começa uma partida por acidente
+PASS menu conserva ambiente sonoro e encerra a fita da intro
+PASS primeira ação do menu recebe foco de teclado
+PASS Continuar indica corretamente a disponibilidade do checkpoint
+PASS título aparece gradualmente com o mundo pausado e sem bloquear foco
+PASS entrada termina corretamente mesmo após um quadro longo
+PASS seleção de teclado ilumina a opção gradualmente
+PASS seleção se estabiliza e não destaca Continuar desabilitado
+PASS câmera se aproxima lentamente sem avançar o expediente
+PASS Configurações abre sobre o fundo do menu
+PASS Esc fecha Configurações antes da partida sem sair do menu
+PASS PS1 não reduz a resolução do menu nem da intro
+PASS PS1/2 permanece disponível no fundo do menu
+PASS menu cabe em uma janela de 800×600
+PASS redimensionar durante a entrada mantém o menu dentro da janela
+PASS abertura e menu respeitam os controles de música e efeitos
+PASS Espaço pula apenas a abertura
+PASS Esc também pula a abertura sem iniciar o jogo
+WARNING: An input event object is being parsed more than once in the same frame, which is unsafe.
+If you are generating events in a script, you have to instantiate a new event instead of sending the same one more than once, unless the original one was sent on an earlier frame.
+You can call duplicate() on the event to get a new instance with identical values.
+     at: parse_input_event (core/input/input.cpp:1145)
+PASS clique pula a abertura sem acionar um botão por baixo
+PASS fim natural da sequência revela o menu uma única vez
+PASS finalizar uma intro já encerrada não repete a transição
+PASS entrar no jogo cancela a animação sem deixar fades pendentes
+PASS Iniciar expediente ativa o jogo normalmente
+PASS início aproveita o mundo carregado sem alterar a progressão
+PASS controle e câmera retornam ao protagonista
+PASS visibilidade dos protagonistas é restaurada ao entrar no jogo
+PASS áudio e intro encerram ao entrar no jogo
+PASS transição libera o HUD sem uma camada preta residual
+PASS pausa usa o novo menu sem repetir a abertura
+PASS pausa conserva a câmera e a posição do jogador
+PASS salvamento continua disponível depois da nova abertura
+PASS Continuar restaura o checkpoint e a câmera de jogo
+PASS Continuar não reproduz a intro outra vez
+PASS executar a cena principal inicia a intro automaticamente antes do menu
+TITLE RESULT 48/48 passed; failures=[]

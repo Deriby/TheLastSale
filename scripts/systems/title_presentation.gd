@@ -2,8 +2,9 @@ class_name TitlePresentation
 extends Control
 ## Launch-only tape sequence. Reuses the existing world/viewport, never advances it.
 signal intro_finished
-const SERIF = preload("res://assets/fonts/title/TitleSerif.ttf")
-const MONO = preload("res://assets/fonts/title/TitleMono.ttf")
+const DISPLAY = preload("res://assets/fonts/title/retro/BebasNeue-Regular.ttf")
+const TYPEWRITER = preload("res://assets/fonts/title/retro/SpecialElite-Regular.ttf")
+const VCR = preload("res://assets/fonts/title/retro/VT323-Regular.ttf")
 const DURATION := 9.4
 const CAMERA_POSITION := Vector3(-8.2,1.85,9.7)
 const CAMERA_TARGET := Vector3(.6,2.05,-.1)
@@ -11,6 +12,7 @@ var intro_active := false
 var title_active := false
 var elapsed := 0.0
 var title_time := 0.0
+var menu_time := 0.0
 var warmup_frames := 0
 var camera: Camera3D
 var previous_camera: Camera3D
@@ -22,6 +24,7 @@ var intro: Control
 var black: ColorRect
 var heading: Label
 var caption: Label
+var intro_rule: ColorRect
 var skip_hint: Label
 var transition: ColorRect
 var transition_tween: Tween
@@ -31,20 +34,24 @@ var select_audio: AudioStreamPlayer
 
 func _ready() -> void:
 	process_mode=Node.PROCESS_MODE_ALWAYS
+	texture_filter=CanvasItem.TEXTURE_FILTER_LINEAR
 	mouse_filter=Control.MOUSE_FILTER_IGNORE
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	atmosphere=ColorRect.new();add_child(atmosphere);fill(atmosphere)
 	var material:=ShaderMaterial.new();material.shader=load("res://shaders/title_atmosphere.gdshader");atmosphere.material=material
 	osd=Control.new();osd.z_index=101;add_child(osd);fill(osd)
-	var play:=text(osd,"PLAY  ▶  SP",14);play.position=Vector2(48,31)
-	counter=text(osd,"FITA 01   00:00:00",12);counter.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT);counter.offset_left=-320;counter.offset_right=-48;counter.offset_top=33;counter.offset_bottom=56;counter.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
-	var footer:=text(osd,"FRANCA, SÃO PAULO  /  DEPOIS DO FECHAMENTO",11);footer.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT);footer.position=Vector2(48,-40)
+	var play:=text(osd,"PLAY  >  SP",22);play.position=Vector2(48,20)
+	counter=text(osd,"FITA 01   00:00:00",20);counter.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT);counter.offset_left=-320;counter.offset_right=-48;counter.offset_top=22;counter.offset_bottom=49;counter.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
+	var footer:=text(osd,"FRANCA, SÃO PAULO  /  DEPOIS DO FECHAMENTO",17);footer.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT);footer.position=Vector2(48,-40)
 	intro=Control.new();intro.z_index=100;add_child(intro);fill(intro);intro.mouse_filter=Control.MOUSE_FILTER_STOP
 	black=ColorRect.new();intro.add_child(black);fill(black);black.color=Color.BLACK
 	var noise:=ColorRect.new();intro.add_child(noise);fill(noise);noise.material=material
-	heading=text(intro,"",44);heading.add_theme_font_override("font",SERIF);center(heading,Rect2(-520,-80,1040,100))
-	caption=text(intro,"",14);center(caption,Rect2(-500,29,1000,50))
-	skip_hint=text(intro,"ESPAÇO / ENTER / ESC  ·  PULAR INTRO",11);skip_hint.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT);skip_hint.offset_left=-520;skip_hint.offset_right=-48;skip_hint.offset_top=-43;skip_hint.offset_bottom=-22;skip_hint.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
+	heading=text(intro,"",64);heading.add_theme_font_override("font",DISPLAY);center(heading,Rect2(-520,-88,1040,100))
+	heading.add_theme_color_override("font_color",Color("eee3c8"))
+	intro_rule=ColorRect.new();intro.add_child(intro_rule);intro_rule.color=Color("c34d36");intro_rule.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	intro_rule.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+	caption=text(intro,"",20);center(caption,Rect2(-500,36,1000,50))
+	skip_hint=text(intro,"ESPAÇO / ENTER / ESC  ·  PULAR INTRO",17);skip_hint.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT);skip_hint.offset_left=-520;skip_hint.offset_right=-48;skip_hint.offset_top=-43;skip_hint.offset_bottom=-18;skip_hint.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
 	transition=ColorRect.new();transition.z_index=110;add_child(transition);fill(transition);transition.color=Color(0,0,0,0)
 	drone=audio("res://assets/audio/title/title_drone.ogg")
 	var loop: AudioStreamOggVorbis=drone.stream.duplicate();loop.loop=true;drone.stream=loop
@@ -58,7 +65,7 @@ func fill(control: Control) -> void:
 
 func text(parent: Control,value: String,font_size: int) -> Label:
 	var label:=Label.new();parent.add_child(label);label.text=value;label.mouse_filter=Control.MOUSE_FILTER_IGNORE
-	label.add_theme_font_override("font",MONO);label.add_theme_font_size_override("font_size",font_size)
+	label.add_theme_font_override("font",VCR);label.add_theme_font_size_override("font_size",font_size)
 	label.add_theme_color_override("font_color",Color("bfb8a4"));return label
 
 func center(label: Label,rect: Rect2) -> void:
@@ -88,27 +95,35 @@ func begin(world: ShiftWorld) -> void:
 	camera=Camera3D.new();camera.name="TitleCamera";camera.fov=59
 	camera.physics_interpolation_mode=Node.PHYSICS_INTERPOLATION_MODE_OFF
 	world.add_child(camera);camera.position=CAMERA_POSITION;camera.look_at(CAMERA_TARGET);camera.make_current()
-	intro_active=true;title_active=true;elapsed=0;title_time=0;warmup_frames=2
+	intro_active=true;title_active=true;elapsed=0;title_time=0;menu_time=0;warmup_frames=2
 	show();atmosphere.show();osd.show();intro.show();black.color.a=1
 	transition.color.a=0
 	drone.stop();tape.stop();update_intro()
 	Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
 
 func update_intro() -> void:
+	var reveal:=0.0
 	if elapsed<1.2:
-		heading.text="";caption.text=""
+		heading.text="";caption.text="";heading.modulate.a=0;caption.modulate.a=0
 	elif elapsed<4.0:
-		heading.text="Two Brothers Lab";heading.add_theme_font_size_override("font_size",44);caption.text="A P R E S E N T A"
+		heading.text="Two Brothers Lab";heading.add_theme_font_size_override("font_size",64);caption.text="A P R E S E N T A"
+		caption.add_theme_font_override("font",VCR);caption.add_theme_font_size_override("font_size",20)
+		reveal=smoothstep(1.2,2.2,elapsed)
 		heading.modulate.a=smoothstep(1.2,1.8,elapsed)*(1.0-smoothstep(3.15,3.95,elapsed));caption.modulate.a=heading.modulate.a
 	else:
-		heading.text="FRANCA, SÃO PAULO";heading.add_theme_font_size_override("font_size",30);caption.text="SEXTA-FEIRA  /  21:40"
+		heading.text="FRANCA, SÃO PAULO";heading.add_theme_font_size_override("font_size",48);caption.text="SEXTA-FEIRA  /  21:40"
+		caption.add_theme_font_override("font",TYPEWRITER);caption.add_theme_font_size_override("font_size",16)
+		reveal=smoothstep(4.0,5.2,elapsed)
 		heading.modulate.a=smoothstep(4.0,4.7,elapsed)*(1.0-smoothstep(6.4,7.5,elapsed));caption.modulate.a=heading.modulate.a
+	heading.offset_top=-88+10*(1.0-reveal);heading.offset_bottom=12+10*(1.0-reveal)
+	var width:=lerpf(24,96,reveal)
+	intro_rule.offset_left=-width*.5;intro_rule.offset_right=width*.5;intro_rule.offset_top=26;intro_rule.offset_bottom=28;intro_rule.modulate.a=heading.modulate.a
 	black.color.a=1.0-smoothstep(7.0,DURATION,elapsed)
 	skip_hint.modulate.a=.3+smoothstep(.3,1.0,elapsed)*.35
 
 func finish_intro() -> void:
 	if not intro_active:return
-	intro_active=false;elapsed=DURATION;intro.hide();tape.stop();intro_finished.emit()
+	intro_active=false;elapsed=DURATION;menu_time=0;intro.hide();tape.stop();intro_finished.emit()
 
 func restore_camera() -> void:
 	for actor in hidden_actors:
@@ -162,8 +177,12 @@ func _process(delta: float) -> void:
 			if intro_active:tape.play()
 	if title_active:
 		title_time+=step
+		if not intro_active:menu_time+=step
 		if is_instance_valid(camera):
-			camera.position=CAMERA_POSITION+Vector3(sin(title_time*.08)*.18,sin(title_time*.13)*.015,cos(title_time*.08)*.07)
+			var push:=smoothstep(0,14,menu_time)
+			var direction: Vector3=(CAMERA_TARGET-CAMERA_POSITION).normalized()
+			camera.position=CAMERA_POSITION+direction*push*.65+Vector3(sin(title_time*.1)*.16,sin(title_time*.16)*.018,cos(title_time*.1)*.06)
+			camera.fov=lerpf(59,56.5,smoothstep(0,10,menu_time))
 			camera.look_at(CAMERA_TARGET)
 		counter.text="FITA 01   00:%02d:%02d"%[int(title_time/60.0),int(title_time)%60]
 	if intro_active:

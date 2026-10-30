@@ -37,6 +37,9 @@ var night_panel: PanelContainer
 var presentation: TitlePresentation
 var menu_eyebrow: Label
 var menu_subtitle: Label
+var title_second: Label
+var title_lockup: VBoxContainer
+var menu_motion: TitleMenuMotion
 func _ready() -> void:
 	process_mode=Node.PROCESS_MODE_ALWAYS
 	layer=5
@@ -88,22 +91,26 @@ func anchored_rect(control: Control,rect: Rect2) -> void:
 func build_menu() -> void:
 	menu=PanelContainer.new();menu.name="TitleMenu";root.add_child(menu)
 	menu.add_theme_stylebox_override("panel",StyleBoxEmpty.new())
-	menu.custom_minimum_size=Vector2(550,0)
-	var v:=VBoxContainer.new();menu.add_child(v);v.add_theme_constant_override("separation",13)
-	menu_eyebrow=label(v,"U M  T U R N O  E M  F R A N C A",12)
-	menu_eyebrow.add_theme_font_override("font",TitlePresentation.MONO);menu_eyebrow.modulate=Color("b79578")
-	title=label(v,"A ÚLTIMA\nVENDA",86);title.add_theme_font_override("font",TitlePresentation.SERIF)
-	title.add_theme_color_override("font_color",Color("e3dac3"));title.add_theme_color_override("font_shadow_color",Color("541a1b"))
-	title.add_theme_constant_override("shadow_offset_x",3);title.add_theme_constant_override("shadow_offset_y",2)
-	title.add_theme_constant_override("line_spacing",-8)
-	menu_subtitle=label(v,"D E P O I S  D O  F E C H A M E N T O",12)
-	menu_subtitle.add_theme_font_override("font",TitlePresentation.MONO);menu_subtitle.modulate=Color("b79578")
+	menu.custom_minimum_size=Vector2(510,0);menu.texture_filter=CanvasItem.TEXTURE_FILTER_LINEAR
+	var v:=VBoxContainer.new();menu.add_child(v);v.add_theme_constant_override("separation",12)
+	menu_eyebrow=label(v,"TWO BROTHERS LAB APRESENTA",18)
+	menu_eyebrow.add_theme_font_override("font",TitlePresentation.VCR);menu_eyebrow.modulate=Color("a6a58a")
+	title_lockup=VBoxContainer.new();v.add_child(title_lockup);title_lockup.add_theme_constant_override("separation",-27)
+	title=label(title_lockup,"A ÚLTIMA",108);title_second=label(title_lockup,"VENDA",156)
+	for line in [title,title_second]:
+		line.add_theme_font_override("font",TitlePresentation.DISPLAY)
+		line.add_theme_color_override("font_shadow_color",Color("250d0e"));line.add_theme_constant_override("shadow_offset_x",4);line.add_theme_constant_override("shadow_offset_y",4)
+	title.add_theme_color_override("font_color",Color("eee3c8"));title_second.add_theme_color_override("font_color",Color("c34d36"))
+	menu_subtitle=label(v,"DEPOIS DO FECHAMENTO",16)
+	menu_subtitle.add_theme_font_override("font",TitlePresentation.TYPEWRITER);menu_subtitle.modulate=Color("c3ac86")
+	var rule:=ColorRect.new();v.add_child(rule);rule.custom_minimum_size=Vector2(0,1);rule.color=Color(.66,.38,.23,.5);rule.mouse_filter=Control.MOUSE_FILTER_IGNORE
 	message=label(v,"21:40. A rua está vazia.\nO expediente ainda não acabou.",15)
-	message.add_theme_font_override("font",TitlePresentation.MONO);message.modulate=Color("aaa898")
+	message.add_theme_font_override("font",TitlePresentation.TYPEWRITER);message.modulate=Color("a8a38f")
 	buttons=VBoxContainer.new();v.add_child(buttons);buttons.add_theme_constant_override("separation",3)
 	rebuild_buttons()
-	var footer:=label(v,"0.24.0  /  FONES DE OUVIDO RECOMENDADOS",10)
-	footer.add_theme_font_override("font",TitlePresentation.MONO);footer.modulate=Color("777d73")
+	var footer:=label(v,"0.24.1  /  FONES DE OUVIDO RECOMENDADOS",16)
+	footer.add_theme_font_override("font",TitlePresentation.VCR);footer.modulate=Color("828473")
+	menu_motion=TitleMenuMotion.new(menu,v,buttons,title_lockup)
 	layout_menu()
 
 func layout_menu() -> void:
@@ -111,25 +118,27 @@ func layout_menu() -> void:
 	var available:=root.size
 	if available.x<1 or available.y<1:return
 	var minimum:=menu.get_combined_minimum_size()
-	menu.size=Vector2(550,maxf(560,minimum.y))
+	menu.size=Vector2(maxf(510,minimum.x),maxf(560,minimum.y))
 	var fit:=minf(1.0,minf((available.x-64)/menu.size.x,(available.y-64)/menu.size.y))
 	menu.scale=Vector2.ONE*maxf(.45,fit)
-	menu.position=Vector2(maxf(28,available.x*.063),(available.y-menu.size.y*menu.scale.y)*.5)
+	var at:=Vector2(maxf(28,available.x*.075),(available.y-menu.size.y*menu.scale.y)*.5)
+	if menu_motion!=null:menu_motion.layout(at)
+	else:menu.position=at
 	if settings!=null:settings.position=((available-settings.custom_minimum_size)*.5).max(Vector2(12,12))
 
 func button(text: String,callback: Callable) -> Button:
 	var b:=Button.new();buttons.add_child(b);b.text=text;b.alignment=HORIZONTAL_ALIGNMENT_LEFT
-	b.custom_minimum_size.y=41;b.add_theme_font_override("font",TitlePresentation.MONO);b.add_theme_font_size_override("font_size",17)
-	var normal:=StyleBoxFlat.new();normal.bg_color=Color(0,0,0,0);normal.content_margin_left=17;normal.content_margin_top=8;normal.content_margin_bottom=8
-	var selected:=normal.duplicate();selected.bg_color=Color(.3,.08,.06,.17);selected.border_color=Color("a34236");selected.border_width_left=2
-	b.add_theme_stylebox_override("normal",normal);b.add_theme_stylebox_override("hover",selected);b.add_theme_stylebox_override("focus",selected);b.add_theme_stylebox_override("pressed",selected)
-	b.add_theme_stylebox_override("disabled",normal)
-	b.add_theme_color_override("font_color",Color("c6c0af"));b.add_theme_color_override("font_hover_color",Color("fff0d2"));b.add_theme_color_override("font_focus_color",Color("fff0d2"));b.add_theme_color_override("font_disabled_color",Color("5e635b"))
+	b.custom_minimum_size.y=40;b.add_theme_font_override("font",TitlePresentation.TYPEWRITER);b.add_theme_font_size_override("font_size",18)
+	var normal:=StyleBoxFlat.new();normal.bg_color=Color(0,0,0,0);normal.border_color=Color(0,0,0,0);normal.border_width_left=2;normal.content_margin_left=18;normal.content_margin_top=8;normal.content_margin_bottom=8
+	for state in ["normal","hover","focus","pressed","disabled"]:b.add_theme_stylebox_override(state,normal)
+	b.set_meta("title_style",normal);b.set_meta("title_selection",0.0)
+	b.add_theme_color_override("font_color",Color("b8af97"));b.add_theme_color_override("font_disabled_color",Color("63675c"))
 	b.mouse_entered.connect(presentation.select_sound);b.focus_entered.connect(presentation.select_sound)
 	b.pressed.connect(func():presentation.select_sound();callback.call())
 	return b
 
 func rebuild_buttons() -> void:
+	if menu_motion!=null:menu_motion.cancel()
 	for node in buttons.get_children():buttons.remove_child(node);node.queue_free()
 	if has_started:button("RETOMAR",func():set_paused(false))
 	else:button("INICIAR EXPEDIENTE",start_from_title)
@@ -142,11 +151,12 @@ func rebuild_buttons() -> void:
 	call_deferred("layout_menu")
 
 func begin_title(world: ShiftWorld) -> void:
+	menu_motion.cancel()
 	paused=true;get_tree().paused=true;menu.hide();hud.hide();presentation.begin(world)
 
 func on_intro_finished() -> void:
 	if has_started:return
-	menu.show();call_deferred("focus_menu")
+	menu.show();layout_menu();menu_motion.reveal();call_deferred("focus_menu")
 
 func focus_menu() -> void:
 	for item in buttons.get_children():
@@ -173,13 +183,14 @@ func set_paused(value: bool) -> void:
 	Input.mouse_mode=Input.MOUSE_MODE_VISIBLE if value else Input.MOUSE_MODE_CAPTURED
 	if value:
 		if has_started:presentation.pause_backdrop()
-		title.text="EXPEDIENTE\nEM PAUSA";title.add_theme_font_size_override("font_size",50);rebuild_buttons()
+		title.text="EXPEDIENTE";title_second.text="EM PAUSA";title.add_theme_font_size_override("font_size",74);title_second.add_theme_font_size_override("font_size",108);rebuild_buttons()
+		layout_menu();menu_motion.reveal(true)
 		call_deferred("focus_menu")
-	else:presentation.dismiss(true)
+	else:menu_motion.cancel();presentation.dismiss(true)
 	pause_changed.emit(value)
 func open_settings() -> void:
-	menu.hide();settings=SettingsPanel.new();root.add_child(settings);layout_menu()
-	settings.closed.connect(func():settings.queue_free();settings=null;menu.show();focus_menu())
+	menu_motion.cancel();menu.hide();settings=SettingsPanel.new();root.add_child(settings);layout_menu()
+	settings.closed.connect(func():settings.queue_free();settings=null;menu.show();layout_menu();menu_motion.reveal(true);focus_menu())
 func open_checkout(world: ShiftWorld) -> void:
 	if paused or checkout!=null or surveillance!=null or sunday_desk!=null or campaign_panel!=null:return
 	checkout=CheckoutPanel.new();checkout.world=world;root.add_child(checkout);checkout.position=Vector2(160,30)
@@ -257,6 +268,7 @@ func show_notice(text: String) -> void:
 	if checkout!=null and is_instance_valid(checkout.world) and checkout.world.sale!=null:
 		checkout.world.sale.message=text;checkout.queue_refresh()
 func _process(_delta: float) -> void:
+	if menu_motion!=null:menu_motion.update(_delta)
 	var player:=get_tree().get_first_node_in_group("player") as DepotPlayer
 	if player!=null:
 		stamina.value=player.stamina;stamina.visible=player.stamina<.98

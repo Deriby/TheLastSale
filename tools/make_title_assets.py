@@ -1,4 +1,8 @@
-"""Create original tape/drone audio and portable Latin font subsets for the title."""
+"""Regenerate original title audio and legacy DejaVu subsets.
+
+The current title uses the bundled, unmodified fonts in assets/fonts/title/retro.
+Their licenses and upstream locations are documented alongside the TTF files.
+"""
 from pathlib import Path
 import array
 import math

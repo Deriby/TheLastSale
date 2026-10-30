@@ -2,9 +2,17 @@
 
 Demonstração jogável em **Godot 4.4.1 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP, com uma primeira versão jogável da campanha de sexta a domingo. Acabamento e ritmo continuam em desenvolvimento.
 
-**[Baixar o projeto 0.24.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.24.0.zip)**
+**[Baixar o projeto 0.24.1 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.24.1.zip)**
 
 Extraia o ZIP, importe `project.godot` no Godot **4.4.1**, aguarde a importação dos modelos e pressione **F5**. O arquivo inclui os modelos animados, cenários, código e recursos usados no jogo. [Conteúdo e instruções do projeto](downloads/project/README.md).
+
+## Revisão 0.24.1 — tipografia e movimento do menu
+
+A intro de **Two Brothers Lab** e o menu receberam fontes retrô próprias: **Bebas Neue** no título, **Special Elite** nas opções e **VT323** no visor de fita. O título combina creme e vermelho queimado, com uma composição mais alta de cartaz de terror.
+
+O menu aparece em etapas, com aproximação lenta da câmera e destaque suave ao mudar de opção. Pausa e retorno das configurações usam transições curtas. [Prévia com som, imagens e validação](docs/title_v0241/README.md).
+
+![Menu com a nova tipografia](docs/title_v0241/menu.png)
 
 ## Revisão 0.24.0 — abertura em fita e menu de suspense
 
@@ -236,7 +244,7 @@ A reconstrução 0.2 do interior recebeu gôndolas abastecidas por categoria, ge
 
 ## Jogar
 
-**[Baixar o projeto Godot 0.24.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.24.0.zip)**
+**[Baixar o projeto Godot 0.24.1 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.24.1.zip)**
 
 O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **0.24.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
 

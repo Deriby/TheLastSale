@@ -1,4 +1,4 @@
-# The Last Sale — projeto Godot 0.24.0
+# The Last Sale — projeto Godot 0.24.1
 
 1. Extraia este ZIP em uma pasta nova.
 2. No Godot **4.4.1**, clique em **Importar** e escolha `project.godot`.
@@ -7,11 +7,13 @@
 
 Modelos animados, cenários, sons, texturas, código, testes e ferramentas estão incluídos. Blender não é necessário para jogar. O renderizador é Compatibility / OpenGL.
 
-## Intro retrô e menu de suspense — 0.24.0
+## Intro retrô e menu de suspense — 0.24.1
 
 Ao abrir o jogo, uma sequência de fita apresenta o estúdio **Two Brothers Lab** e o depósito em Franca às 21:40. Espaço, Enter, Esc ou clique pulam a intro e mostram o menu. O depósito vazio, a tipografia de terror dos anos 80 e a atmosfera sonora criam o fundo do menu. Configurações e continuar o checkpoint ficam disponíveis antes de iniciar a partida. A pausa não repete a intro.
 
-Fontes, sons originais e código estão prontos no pacote: não é necessário instalar ferramentas extras para jogar. As opções de volume controlam a apresentação. Modelos, animações, física, energia, HUD e a correção do piso da 0.23.1 foram preservados. Veja `docs/title_v024/README.md`.
+O título usa Bebas Neue em duas linhas, com creme e vermelho queimado; as opções usam Special Elite e o visor usa VT323. O menu entra em etapas, a seleção responde suavemente e a câmera se aproxima devagar. As três fontes estão incluídas com suas licenças em `assets/fonts/title/retro/`.
+
+Fontes, sons originais e código estão prontos no pacote: não é necessário instalar ferramentas extras para jogar. As opções de volume controlam a apresentação. Modelos, animações, física, energia, HUD e a correção do piso da 0.23.1 foram preservados. Veja `docs/title_v0241/README.md`.
 
 ## Piso estável ao mover a câmera — 0.23.1
 
