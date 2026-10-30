@@ -26,8 +26,8 @@ func _ready() -> void:
 	Preferences.changed.connect(apply_quality);apply_quality()
 func apply_quality() -> void:
 	for light in shadow_lights:light.shadow_enabled=Preferences.pixel_scale<3
-	for light in detail_lights:light.visible=Preferences.pixel_scale<3
-	for probe in get_tree().get_nodes_in_group("detail_reflections"):probe.visible=Preferences.pixel_scale<3
+	for light in detail_lights:light.visible=Preferences.pixel_scale<3 and light.get_meta("circuit_on",true)
+	for probe in get_tree().get_nodes_in_group("detail_reflections"):probe.visible=Preferences.pixel_scale<3 and probe.get_meta("circuit_on",true)
 func _process(delta: float) -> void:
 	time+=delta
 	if unstable!=null:

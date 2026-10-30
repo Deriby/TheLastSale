@@ -561,11 +561,12 @@ func run() -> void:
 	if world.player.identity!="Dery":world.switch_player()
 	player=world.player
 	player.position=Vector3(4,0,-6);await ticks(3)
-	check(Dialogue.active,"ruído posterior tem reação narrativa")
+	check(world.friday.is_outage() and not world.enemy_visual.visible,"aviso inicia pane de energia com reações e preserva assassino oculto na sexta")
 	clear_dialogue()
-	check(find_interaction(world.depot.old_door,"note").activate(player) and Session.finale_seen,"inspeção do ruído conclui a demonstração")
+	await ticks(90)
+	check(find_interaction(world.depot.old_door,"note").activate(player) and not Session.finale_seen,"porta antiga continua trancada sem encerrar a sexta antes do fechamento")
 	check(Session.save_shift(Vector3(0,0,-4))==OK,"salvamento grava checkpoint")
-	Session.new_shift();check(Session.load_shift() and Session.stage==7 and Session.stocked.size()==2,"checkpoint restaura progressão e tarefas")
+	Session.new_shift();check(Session.load_shift() and Session.stage==6 and Session.stocked.size()==2 and Session.campaign.phase=="outage","checkpoint restaura pane de energia, progressão e tarefas")
 	clear_dialogue()
 	await get_tree().process_frame
 	app.start_saved();world=app.world;player=world.player;await ticks(5)

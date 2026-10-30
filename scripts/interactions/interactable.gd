@@ -1,6 +1,6 @@
 class_name Interaction
 extends Node3D
-@export_enum("crate","fridge","door","pallet","talk","note","switch","familiar","checkout") var kind := "crate"
+@export_enum("crate","fridge","door","pallet","talk","note","switch","familiar","checkout","campaign") var kind := "crate"
 @export var identity := ""
 var open := false
 var busy := false
@@ -18,15 +18,19 @@ func prompt(player: Node3D) -> String:
 			if get_parent().needs_restock and player.carried != null and Session.stage in [1,2] and Session.carried_id.begins_with("stock_"):
 				return "Colocar bebidas" if open else "Abrir geladeira"
 			return "Fechar geladeira" if open else "Abrir geladeira"
-		"door": return "Fechar porta" if open else "Abrir porta do estoque"
+		"door": return "Fechar porta" if open else "Abrir porta do pátio" if identity=="service" else "Abrir porta do estoque"
 		"pallet": return "Guardar caixa no palete" if Session.carried_id == "loose" else "Palete • organizar após a reposição"
 		"talk": return "Conversar com "+("Deryk" if identity=="Dery" else "Felps")
 		"checkout":
 			var world:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
+			if world!=null and world.friday!=null and world.friday.phase() in ["outage","closing"]:return world.friday.prompt("counter",player)
 			if world!=null and world.can_supply_order(player):return "Deixar a caixa do pedido no balcão"
 			return "Continuar atendimento" if world!=null and world.can_checkout(player) and world.customer.service_started else ("Atender cliente" if world!=null and world.can_checkout(player) else "Caixa • aguarde um cliente")
 		"familiar": return "Conversar com "+identity
-		"note": return "Examinar a porta antiga" if Session.stage != 6 else "Verificar o ruído"
+		"note": return "Conferir estoque e porta antiga" if Session.campaign.phase=="closing" else "Examinar a porta antiga"
+		"campaign":
+			var world:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
+			return world.friday.prompt(identity,player) if world!=null and world.friday!=null else "Interagir"
 		"switch": return "Acender luz" if not open else "Apagar luz"
 	return "Interagir"
 func available_for(player: DepotPlayer) -> bool:
@@ -35,6 +39,18 @@ func available_for(player: DepotPlayer) -> bool:
 	return true
 func activate(player: Node3D) -> bool:
 	if busy or player.motion.action_active: return false
+	if kind in ["campaign","checkout","note","talk"]:
+		var world:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
+		if world!=null and world.friday!=null:
+			if kind=="campaign":
+				if global_position.distance_to(player.global_position)>2.65:return false
+				return world.friday.activate(identity,player)
+			if kind=="checkout" and world.friday.phase() in ["outage","closing"]:return world.friday.activate("counter",player)
+			if kind=="note" and world.friday.phase()=="closing":return world.friday.activate("stock",player)
+			if kind=="talk" and Session.campaign.phase in ["saturday_preview","saturday_preview_done"]:
+				if Dialogue.active:return false
+				Session.campaign.phase="saturday_preview_done";Session.changed.emit();Session.save_shift(player.global_position)
+				Dialogue.play("saturday_intro",[["Felps","Falei com o responsável sobre a energia. E aquele portão dos fundos... tava mexido."],["Dery","Hoje vamos conferir as imagens e ficar de olho. Ontem a rua não apagou."],["","ABERTURA DE SÁBADO — a investigação continua na próxima etapa."]]);return true
 	match kind:
 		"crate":
 			if player.identity!="Dery":return false
@@ -52,7 +68,7 @@ func activate(player: Node3D) -> bool:
 			open = not open
 			busy = true
 			var tween := create_tween()
-			tween.tween_property(get_parent(),"rotation:y",-1.45 if open else 0.0,.5)
+			tween.tween_property(get_parent(),"rotation:y",(1.45 if identity=="service" else -1.45) if open else 0.0,.5)
 			tween.finished.connect(func(): busy=false)
 			return true
 		"pallet":
@@ -83,8 +99,6 @@ func activate(player: Node3D) -> bool:
 			Dialogue.play("familiar_"+identity,lines)
 			return true
 		"note":
-			if Session.stage == 6:
-				Session.end_slice()
-			else: Dialogue.play("old_door",[["Dery","Esse depósito velho tá trancado faz tempo. Melhor deixar quieto."]])
+			Dialogue.play("old_door",[["Dery","Esse depósito velho tá trancado faz tempo. Melhor deixar quieto."]])
 			return true
 	return false

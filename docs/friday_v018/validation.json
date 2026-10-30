@@ -1,0 +1,54 @@
+{
+  "version": "0.18.0",
+  "godot": "4.4.1",
+  "source_integration": {
+    "passed": 233,
+    "total": 233,
+    "main": 188,
+    "friday": 45,
+    "runtime_errors": 0
+  },
+  "friday_implemented": true,
+  "saturday_scope": "opening preview only",
+  "sunday_implemented": false,
+  "multiple_endings_implemented": false,
+  "save_version": 4,
+  "legacy_save_versions_verified": [
+    1,
+    2,
+    3
+  ],
+  "blackout_preserves_partial_payment": true,
+  "quality_changes_preserve_power_circuits": true,
+  "physical_key_and_generator_route_verified": true,
+  "courtyard_save_restored": true,
+  "generator_state_restored": true,
+  "customer_exits_before_closing": true,
+  "both_protagonists_walk_to_exit": true,
+  "companion_teleportation_used": false,
+  "closing_save_restored": true,
+  "shutters_require_both_outside": true,
+  "friday_ledger_carried_to_campaign": true,
+  "saturday_resets_daily_cash_preserves_clues": true,
+  "summary_fits_window": true,
+  "temporary_customer_identities": 6,
+  "temporary_base_models": 3,
+  "fictitious_service_courtyard": true,
+  "new_shadow_casting_lights": 0,
+  "default_frame_limit": 30,
+  "render": {
+    "exit_code": 0,
+    "platform": "Linux / Mesa llvmpipe",
+    "window": [
+      1280,
+      720
+    ],
+    "world_resolution": [
+      640,
+      480
+    ],
+    "staged_visual_review": true
+  },
+  "native_radeon_r7_fps_measured": false,
+  "pause_freezes_shutter_completion": true
+}

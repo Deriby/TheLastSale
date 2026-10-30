@@ -16,8 +16,9 @@ func _ready() -> void:
 	interface=ShiftInterface.new();add_child(interface)
 	interface.new_game.connect(start_new)
 	interface.continue_game.connect(start_saved)
+	interface.next_night.connect(start_saturday)
 	Preferences.changed.connect(apply_settings);get_viewport().size_changed.connect(update_render_size);apply_settings()
-	initial_world_pristine=Session.stage==0 and Session.stocked.is_empty() and not Session.organized and Session.carried_id.is_empty()
+	initial_world_pristine=Session.stage==0 and Session.stocked.is_empty() and not Session.organized and Session.carried_id.is_empty() and Session.campaign.phase=="routine"
 	build_world()
 	get_tree().paused=true
 func apply_settings() -> void:
@@ -61,6 +62,7 @@ func build_world() -> void:
 	world.checkout_requested.connect(func():interface.open_checkout(world))
 	world.checkout_closed.connect(interface.close_checkout)
 	world.checkout_changed.connect(interface.update_objective)
+	world.slice_finished.connect(interface.show_night_summary)
 	interface.set_character(world.player,false)
 	world.restore_transient()
 func on_focused(text: String,actor: DepotPlayer) -> void:
@@ -78,6 +80,9 @@ func start_saved() -> void:
 	Dialogue.clear()
 	if not Session.load_shift():Session.new_shift()
 	build_world();world.active=true
+func start_saturday() -> void:
+	Dialogue.clear();Session.advance_to_saturday();build_world();world.active=true
+	Session.save_shift(world.player.global_position)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if interface.paused or interface.checkout!=null or world==null:return

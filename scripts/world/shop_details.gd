@@ -28,7 +28,7 @@ func build_staff_wall() -> void:
 	batch.flush()
 	RetailDetails.collision(root,Vector3(0,1.05,.03),Vector3(1.84,2.1,.34))
 	# Upright ice freezer at the entrance end of the employee's wall.
-	var freezer:=Node3D.new();freezer.name="UprightIceFreezer";freezer.position=Vector3(-5.45,0,-.65);freezer.rotation.y=PI/2;add_child(freezer)
+	var freezer:=Node3D.new();freezer.name="UprightIceFreezer";freezer.position=Vector3(-5.45,0,-.20);freezer.rotation.y=PI/2;add_child(freezer)
 	Geo.box(freezer,Vector3(0,1.05,0),Vector3(.83,2.10,.67),SurfaceMaterials.make("painted_metal",Color("d0d5c8")))
 	SceneDetail.panel(freezer,Vector3(0,1.12,.344),Vector2(.72,1.67),"ice_freezer")
 	Geo.box(freezer,Vector3(.32,1.16,.38),Vector3(.025,.38,.025),Geo.material(Color("656f65")),false)
@@ -104,4 +104,4 @@ func build_wear() -> void:
 			if row%2==0:hooks.add_product("snack_"+str(row+1),Vector3(x,y-.17,-3.23),0,Vector3.ONE*.75)
 	hooks.flush()
 func _process(delta: float) -> void:
-	if fan!=null:fan.rotation.z=fposmod(fan.rotation.z+delta*7.5,TAU)
+	if fan!=null and Session.campaign.phase!="outage" and not Session.flag("lights_off"):fan.rotation.z=fposmod(fan.rotation.z+delta*7.5,TAU)

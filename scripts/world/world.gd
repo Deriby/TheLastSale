@@ -22,6 +22,7 @@ var active:=false
 var warning_started:=false
 var noise_pending:=false
 var enemy_visual: Node3D
+var friday: FridayShift
 func _ready() -> void:
 	add_to_group("shift_world")
 	var legacy_carried:=Session.carried_id
@@ -82,6 +83,8 @@ func _ready() -> void:
 	if anim:
 		for key in anim.get_animation_list():
 			if key.contains("idle"):anim.get_animation(key).loop_mode=Animation.LOOP_LINEAR;anim.play(key)
+	friday=FridayShift.new();friday.world=self;add_child(friday)
+	friday.night_completed.connect(func():slice_finished.emit())
 func update_enemy_visibility() -> void:
 	enemy_visual.process_mode=Node.PROCESS_MODE_INHERIT if enemy_visual.is_visible_in_tree() else Node.PROCESS_MODE_DISABLED
 func select_player(identity: String) -> void:
@@ -118,7 +121,7 @@ func capture_state() -> void:
 func on_handling_completed() -> void:
 	if active:Session.save_shift(player.global_position)
 func can_checkout(actor: DepotPlayer) -> bool:
-	return actor.identity=="Felps" and actor.global_position.distance_to(CheckoutFixture.STAFF_POSITION)<1.4 and customer!=null and customer.state==Customer.State.WAITING and not customer.purchase_complete
+	return (friday==null or not friday.is_outage() and friday.phase() not in ["closing","complete"]) and actor.identity=="Felps" and actor.global_position.distance_to(CheckoutFixture.STAFF_POSITION)<1.4 and is_instance_valid(customer) and customer.state==Customer.State.WAITING and not customer.purchase_complete
 func try_checkout(actor: DepotPlayer) -> bool:
 	if not can_checkout(actor) or Dialogue.active or sale==null:return false
 	if not customer.service_started:
@@ -193,10 +196,11 @@ func update_checkout_scene() -> void:
 func _physics_process(delta: float) -> void:
 	if not active:return
 	Session.world_seconds+=delta
+	if friday!=null:friday.tick(delta)
 	if sale_save_wait>=0:
 		sale_save_wait-=delta
 		if sale_save_wait<0:Session.save_shift(player.global_position)
-	if customer==null and Session.stage>0 and Session.stage<6 and not Dialogue.active:
+	if customer==null and Session.stage>0 and (Session.stage<6 or friday.phase()=="restored") and friday.can_spawn() and not Dialogue.active:
 		spawn_wait-=delta
 		if spawn_wait<=0:spawn_customer(Session.can_warn())
 	if noise_pending and player.position.z> -8.0 and not Dialogue.active:
@@ -241,9 +245,10 @@ func on_departure(who: Customer) -> void:
 		Session.finish_warning()
 		Dialogue.play("after_warning",[["Felps","Daqui a pouco o cara pede emprego de vigia, cê vai ver."],["Dery","Sei não, mano. Ficar atrás do depósito a essa hora?"]])
 	customer=null;spawn_wait=8
+	if friday!=null and friday.phase()=="restored":friday.begin_closing()
 	Session.save_shift(player.global_position)
 func on_dialogue_completed(id: String) -> void:
-	if id=="after_warning":noise_pending=true
+	if id=="after_warning" and friday!=null:friday.begin_outage()
 	if sale!=null and id=="sale_order_"+str(sale.id) and can_checkout(player):checkout_requested.emit()
 func on_event(id: String) -> void:
 	match id:
@@ -264,4 +269,8 @@ func restore_transient() -> void:
 			warning_started=true
 			var lines: Array=JSON.parse_string(FileAccess.get_file_as_string("res://resources/warning.json"));Dialogue.play("warning",lines)
 	elif Session.stage==5:Session.stage=4
-	noise_pending=Session.stage==6
+	noise_pending=false
+	if friday!=null and friday.is_outage():
+		for actor in characters.values():actor.torch.show()
+	if Session.campaign.phase=="complete":call_deferred("emit_night_completed")
+func emit_night_completed() -> void:slice_finished.emit()

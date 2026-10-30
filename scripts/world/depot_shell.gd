@@ -4,6 +4,7 @@ extends Node3D
 var blockers: Array[Rect2] = []
 var stock_door: Node3D
 var fluorescent: OmniLight3D
+var service_door: Node3D
 func _init() -> void:
 	physics_interpolation_mode=Node.PHYSICS_INTERPOLATION_MODE_OFF
 func _ready() -> void:
@@ -20,7 +21,13 @@ func build_envelope() -> void:
 	solid(Vector3(6,2.71,-8),Vector3(.24,5.42,16),wall)
 	solid(Vector3(-6,2.2,-8),Vector3(.24,4.4,16),wall)
 	solid(Vector3(-4.05,2.2,-16),Vector3(3.9,4.4,.24),wall)
-	solid(Vector3(1.95,2.71,-16),Vector3(8.1,5.42,.24),wall)
+	solid(Vector3(.875,2.71,-16),Vector3(5.95,5.42,.24),wall)
+	solid(Vector3(5.875,2.71,-16),Vector3(.25,5.42,.24),wall)
+	solid(Vector3(4.8,4.01,-16),Vector3(1.9,2.82,.24),wall)
+	service_door=Node3D.new();service_door.name="ServiceDoor";add_child(service_door);service_door.position=Vector3(3.85,0,-16)
+	Geo.box(service_door,Vector3(.95,1.3,0),Vector3(1.86,2.6,.10),Geo.material(Color("53685f"),"res://assets/textures/metal.png"))
+	Geo.box(service_door,Vector3(1.65,1.15,.09),Vector3(.13,.04,.08),Geo.material(Color("c3bca7")),false)
+	Geo.sign_text(service_door,"PÁTIO / GERADOR",Vector3(.95,1.8,.065),23)
 	# Low tile skirting and a worn black entrance threshold from the entrance photograph.
 	for x in [-5.86,5.86]:Geo.box(self,Vector3(x,.065,-8),Vector3(.035,.13,16),Geo.material(Color("8b9487")),false)
 	Geo.box(self,Vector3(1.8,.007,-.10),Vector3(7.9,.014,.24),Geo.material(Color("323c36")),false)

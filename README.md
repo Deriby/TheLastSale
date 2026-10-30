@@ -2,11 +2,23 @@
 
 Demonstração jogável em **Godot 4.4.1 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP, com uma rotina narrativa curta. A campanha completa continua em desenvolvimento.
 
-**[Baixar o projeto 0.17.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.17.0.zip)**
+**[Baixar o projeto 0.18.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.18.0.zip)**
 
 Extraia o ZIP, importe `project.godot` no Godot **4.4.1**, aguarde a importação dos modelos e pressione **F5**. O arquivo inclui os modelos animados, cenários, código e recursos usados no jogo. [Conteúdo e instruções do projeto](downloads/project/README.md).
 
-## Revisão 0.17.0 — pedidos, dinheiro e troco
+## Revisão 0.18.0 — sexta-feira, apagão e fechamento
+
+A sexta continua depois do aviso: a luz cai, Felps suspende o atendimento e Deryk busca a chave no estoque para ligar o gerador no pátio externo. Iluminação de emergência e lanternas mantêm o caminho legível. Rádio, ventilador, equipamentos, luzes e letreiros reagem à energia; a rua continua iluminada. Uma venda interrompida conserva produtos, dinheiro e troco.
+
+Depois do último atendimento, Felps confere o caixa e Deryk verifica o estoque. Apague o salão, chame o companheiro no comando das portas e reúnam-se na calçada. O outro personagem vem andando pelo cenário; as portas só baixam com os dois do lado de fora. O resumo salva a sexta e permite ver a abertura de sábado. **Investigação de sábado, perseguição de domingo e finais diferentes continuam em desenvolvimento.**
+
+Há seis identidades provisórias de clientes, usando três modelos simples com rig e roupas variadas. Elas podem receber os modelos do autor depois, preservando a identidade do atendimento e do save. Checkpoints versões 1, 2 e 3 continuam aceitos; o formato 4 registra campanha, energia, chave, fechamento, pistas e relatórios por noite.
+
+**233/233 verificações** passaram no projeto e no ZIP extraído com importação limpa. [Como jogar, capturas e validação](docs/friday_v018/README.md).
+
+![Pane e iluminação de emergência](docs/friday_v018/outage.png)
+
+## Revisão anterior 0.17.0 — pedidos, dinheiro e troco
 
 Felps agora registra produtos e quantidades, recebe dinheiro, separa o troco e entrega a compra. Os clientes fazem pedidos variados, esperam pelo atendimento e reagem a erros. Alguns pedidos precisam de uma caixa fechada: Felps chama Deryk, que busca a mercadoria no estoque e a entrega no balcão.
 

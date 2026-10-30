@@ -10,6 +10,8 @@ var felps: Node3D
 var counter: Node3D
 var staff_talk: Interaction
 var checkout: Interaction
+var yard: ServiceYard
+var service_door: Node3D
 var central_shelves: Array[DepotProp]=[]
 var rear_fridges: Array[DepotProp]=[]
 const SHELF_LENGTH:=2.10
@@ -34,6 +36,8 @@ func build_shell() -> void:
 	blockers.append_array(shell.blockers)
 	stock_door=shell.stock_door;fluorescent=shell.fluorescent
 	interact(stock_door,"door")
+	service_door=shell.service_door;interact(service_door,"door","service")
+	yard=ServiceYard.new();yard.name="ServiceYard";add_child(yard);blockers.append_array(yard.blockers)
 func build_furniture() -> void:
 	# Continuous central gondolas, with grouped products instead of repeated colored pegs.
 	for x in [-1.9,1.35]:
@@ -63,7 +67,7 @@ func build_furniture() -> void:
 	counter=CheckoutFixture.new();add_child(counter)
 	blockers.append(CheckoutFixture.FOOTPRINT)
 	blockers.append(Rect2(-5.90,-3.70,.40,1.92))
-	blockers.append(Rect2(-5.81,-1.10,.73,.90))
+	blockers.append(Rect2(-5.81,-.65,.73,.90))
 	# Felps now has a live CharacterBody3D; do not reserve his own position as furniture.
 	var detail:=ShopDetails.new();add_child(detail)
 	add_child(RetailFinish.new());blockers.append(Rect2(4.98,-4.45,.64,1.26))

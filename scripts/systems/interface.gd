@@ -3,6 +3,7 @@ extends CanvasLayer
 signal new_game
 signal continue_game
 signal pause_changed(value: bool)
+signal next_night
 var root: Control
 var hud: Control
 var menu: PanelContainer
@@ -25,6 +26,8 @@ var notice_label: Label
 var notice_remaining:=0.0
 var switch_fade: ColorRect
 var fade_tween: Tween
+var night_label: Label
+var night_panel: PanelContainer
 func _ready() -> void:
 	process_mode=Node.PROCESS_MODE_ALWAYS
 	layer=5
@@ -49,7 +52,7 @@ func label(parent: Node,text: String,font_size: int) -> Label:
 func build_hud() -> void:
 	hud=Control.new();root.add_child(hud);hud.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);hud.mouse_filter=Control.MOUSE_FILTER_IGNORE
 	var top:=VBoxContainer.new();hud.add_child(top);top.position=Vector2(34,30);top.mouse_filter=Control.MOUSE_FILTER_IGNORE
-	label(top,"FRANCA / SEXTA-FEIRA",14).modulate=Color("c6b18b")
+	night_label=label(top,"FRANCA / SEXTA-FEIRA",14);night_label.modulate=Color("c6b18b")
 	clock=label(top,"21:40",25)
 	character_label=label(top,"DERYK • REPOSIÇÃO   [TAB] FELPS",15);character_label.modulate=Color("c6b18b")
 	objective=label(top,"",18);objective.custom_minimum_size=Vector2(500,60);objective.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
@@ -61,7 +64,7 @@ func build_hud() -> void:
 	speaker=label(sub,"",15);speaker.modulate=Color("c6b18b");speaker.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
 	subtitle=label(sub,"",21);subtitle.custom_minimum_size=Vector2(860,80);subtitle.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;subtitle.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
 	stamina=ProgressBar.new();hud.add_child(stamina);stamina.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT);anchored_rect(stamina,Rect2(34,-45,130,5));stamina.show_percentage=false;stamina.max_value=1
-	var hint:=label(hud,"WASD mover   SHIFT correr   CTRL agachar   E interagir   Q apoiar   TAB trocar\nMOUSE olhar   RODA aproximar / primeira pessoa   ESPAÇO avançar fala   ESC pausa",13)
+	var hint:=label(hud,"WASD mover   SHIFT correr   CTRL agachar   E interagir   Q apoiar   TAB trocar\nMOUSE olhar   RODA primeira pessoa   F lanterna   ESPAÇO avançar fala   ESC pausa",13)
 	hint.name="ControlsHint";hint.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT);anchored_rect(hint,Rect2(-710,-92,680,85));hint.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT;hint.modulate=Color("babbaa")
 	hud.hide()
 func anchored_rect(control: Control,rect: Rect2) -> void:
@@ -76,7 +79,7 @@ func build_menu() -> void:
 	message=label(v,"21h40. O bairro vai dormir.\nPra vocês, ainda é expediente.",18)
 	buttons=VBoxContainer.new();v.add_child(buttons);buttons.add_theme_constant_override("separation",9)
 	rebuild_buttons()
-	label(v,"Demonstração 0.17.0 • Capítulo 1\nFones de ouvido recomendados",13).modulate=Color("9ca58f")
+	label(v,"0.18.0 • Sexta-feira / campanha de três noites\nFones de ouvido recomendados",13).modulate=Color("9ca58f")
 func button(text: String,callback: Callable) -> Button:
 	var b:=Button.new();buttons.add_child(b);b.text=text;b.pressed.connect(callback);return b
 func rebuild_buttons() -> void:
@@ -116,9 +119,11 @@ func close_checkout() -> void:
 	checkout.queue_free();checkout=null
 	if not paused:hud.show();Input.mouse_mode=Input.MOUSE_MODE_CAPTURED
 func update_objective() -> void:
+	night_label.text="FRANCA / "+Session.night_title()
 	var player:=get_tree().get_first_node_in_group("player") as DepotPlayer
 	var world:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
-	if player!=null and player.identity=="Dery" and world!=null and world.sale!=null and world.sale.needs_bulk() and not world.sale.bulk_supplied:
+	if Session.campaign.phase!="routine":objective.text=Session.objective()
+	elif player!=null and player.identity=="Dery" and world!=null and world.sale!=null and world.sale.needs_bulk() and not world.sale.bulk_supplied:
 		objective.text="Pedido do balcão: leve a caixa fechada do estoque para Felps. [E] entregar no balcão."
 	else:objective.text="Atenda os clientes no balcão. [Tab] Deryk cuida da reposição." if player!=null and player.identity=="Felps" and Session.stage in [1,2,3,4] else Session.objective()
 func on_spoken(who: String,text: String) -> void:
@@ -146,8 +151,29 @@ func _process(_delta: float) -> void:
 		if notice_remaining==0:notice_label.text=""
 	var minutes:=21*60+40+int(Session.world_seconds/8)
 	if Session.stage>=5:minutes=maxi(minutes,22*60+35)
+	if Session.campaign.phase in ["restored","closing","complete"]:minutes=maxi(minutes,23*60+40)
 	clock.text="%02d:%02d"%[minutes/60%24,minutes%60]
+func show_night_summary() -> void:
+	if night_panel!=null:return
+	close_checkout();set_paused(true);menu.hide();hud.hide()
+	night_panel=PanelContainer.new();root.add_child(night_panel);night_panel.position=Vector2(310,155);night_panel.custom_minimum_size=Vector2(660,410)
+	var scroll:=ScrollContainer.new();night_panel.add_child(scroll);scroll.custom_minimum_size=Vector2(628,388)
+	scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;scroll.follow_focus=true
+	var column:=VBoxContainer.new();scroll.add_child(column);column.size_flags_horizontal=Control.SIZE_EXPAND_FILL;column.add_theme_constant_override("separation",18)
+	label(column,"SEXTA-FEIRA CONCLUÍDA",31)
+	var report: Dictionary=Session.campaign.reports.get("friday",{})
+	label(column,"Os dois saíram juntos.\n%d atendimentos • Vendas %s"%[int(report.get("customers",0)),ShopSale.money(int(report.get("sales_cents",0)))],21)
+	var note:=label(column,"A pane foi comunicada ao responsável pelo depósito.\nA próxima cena apresenta a abertura de sábado.\nA investigação de sábado e a fuga de domingo\ncontinuam em desenvolvimento.",18)
+	note.custom_minimum_size.x=610
+	var proceed:=Button.new();column.add_child(proceed);proceed.text="VER ABERTURA DE SÁBADO"
+	proceed.name="NextNight"
+	proceed.pressed.connect(func():night_panel.queue_free();night_panel=null;next_night.emit();set_paused(false))
+	var leave:=Button.new();column.add_child(leave);leave.text="SAIR • CAMPANHA SALVA";leave.pressed.connect(func():get_tree().quit())
+	proceed.grab_focus()
 func _input(event: InputEvent) -> void:
+	if night_panel!=null:
+		if event.is_action_pressed("pause") or event.is_action_pressed("switch_character"):get_viewport().set_input_as_handled()
+		return
 	if checkout!=null:
 		if event.is_action_pressed("pause"):
 			close_checkout();get_viewport().set_input_as_handled();return

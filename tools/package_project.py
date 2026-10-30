@@ -6,7 +6,7 @@ import json
 import zipfile
 
 ROOT = Path(__file__).resolve().parent.parent
-VERSION = "0.17.0"
+VERSION = "0.18.0"
 
 
 def main():
@@ -26,9 +26,10 @@ def main():
                 continue
             sources[relative.as_posix()] = path
     for name in ["project.godot", "export_presets.cfg", ".gitignore",
-                 "docs/.gdignore", "docs/user_models_report.json", "docs/PENDENCIAS.md", "docs/surface_report.json"]:
+                 "docs/.gdignore", "docs/user_models_report.json", "docs/PENDENCIAS.md", "docs/surface_report.json",
+                 "docs/CAMPANHA_TRES_NOITES.md", "docs/ELENCO_PROVISORIO.md"]:
         sources[name] = ROOT / name
-    for gallery in ["optimization_v011", "checkout_v017"]:
+    for gallery in ["optimization_v011", "friday_v018", "npc_cast_draft"]:
         for path in sorted((ROOT / "docs" / gallery).rglob("*")):
             if path.is_file():
                 sources[path.relative_to(ROOT).as_posix()] = path
@@ -41,7 +42,7 @@ def main():
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(args.output, "w", zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
         for name, path in sorted(sources.items()):
-            info = zipfile.ZipInfo("TheLastSale/" + name, date_time=(2026, 10, 29, 0, 0, 0))
+            info = zipfile.ZipInfo("TheLastSale/" + name, date_time=(2026, 10, 30, 0, 0, 0))
             info.compress_type = zipfile.ZIP_DEFLATED
             info.external_attr = (0o100755 if name.endswith(".sh") else 0o100644) << 16
             archive.writestr(info, path.read_bytes(), compresslevel=9)

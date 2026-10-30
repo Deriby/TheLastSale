@@ -10,9 +10,9 @@
 
 ## Próximas etapas de mecânicas
 
-- Campanha solicitada com sexta, sábado e domingo: pane de energia na primeira noite, terror crescente na segunda e fuga do assassino na terceira, com revelação e finais diferentes. [Proposta de trama, decisões e etapas](CAMPANHA_TRES_NOITES.md); a implementação das três noites ainda está pendente.
-- O autor aprovou a proposta de campanha e autorizou modelos provisórios para novos NPCs. O rascunho inclui seis identidades adicionais de clientes, com visuais simples substituíveis; [cadastro, substituição e próximos papéis](ELENCO_PROVISORIO.md).
+- Campanha solicitada com sexta, sábado e domingo: pane de energia na primeira noite, terror crescente na segunda e fuga do assassino na terceira, com revelação e finais diferentes. [Proposta de trama, decisões e etapas](CAMPANHA_TRES_NOITES.md); a primeira sexta está implementada na 0.18.0; sábado completo e domingo estão pendentes.
+- O autor aprovou a proposta de campanha e autorizou modelos provisórios para novos NPCs. A 0.18.0 inclui seis identidades adicionais de clientes, com visuais simples substituíveis; [cadastro, substituição e próximos papéis](ELENCO_PROVISORIO.md).
 - Registro, quantidades, dinheiro/troco, entrega e recibos foram implementados na 0.17.0. Próximas formas de pagamento: cartão e Pix. [Validação e instruções](checkout_v017/README.md).
 - Expandir estoque e reposição, comunicação da dupla e visitas de Bryan/Zirico.
-- Implementar tarefas de fechamento e, depois, investigação, perseguição e esconderijos.
-- Definir o comportamento do companheiro durante situações de perigo. Nesta etapa, ele mantém sua posição e animações enquanto está fora do controle.
+- Fechamento cooperativo e passagem para abertura de sábado implementados na 0.18.0. Próximas etapas: investigação do sábado, perseguição do domingo e esconderijos.
+- O companheiro caminha até a calçada quando chamado no fechamento; mantém seu posto durante a pane. Busca de cobertura e respostas durante perseguição ficam para a etapa de perigo.

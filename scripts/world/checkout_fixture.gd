@@ -4,7 +4,7 @@ extends Node3D
 const POSITION:=Vector3(-4.25,0,-2.80)
 const CUSTOMER_POSITION:=Vector3(-3.10,0,-2.80)
 const STAFF_POSITION:=Vector3(-5.12,0,-3.10)
-const FOOTPRINT:=Rect2(-4.75,-4.30,1.0,3.0)
+const FOOTPRINT:=Rect2(-4.66,-4.20,.82,2.80)
 var drawer: Node3D
 var screen_text: Label3D
 var drawer_tween: Tween

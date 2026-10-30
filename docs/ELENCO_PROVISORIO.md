@@ -1,7 +1,6 @@
 # Elenco provisório para as três noites
 
-Estado: implementado e validado no rascunho local. O ZIP publicado 0.17.0 ainda
-contém o elenco anterior.
+Estado: incluído na 0.18.0, junto à sexta-feira jogável.
 
 O autor autorizou personagens visuais simples enquanto prepara os modelos com
 rig. Deryk, Felps, Killer, Bryan, Zirico, Garota 1, Garota 2 e a senhora continuam
@@ -62,7 +61,7 @@ display; ele grava repouso e caminhada em `/tmp/npc_cast_idle.png` e
 `/tmp/npc_cast_walk.png`. `./tools/test.sh` verifica cadastro, materiais, rig,
 compatibilidade dos checkpoints e o atendimento real com cliente provisório.
 
-Validação deste rascunho: **188/188 verificações passaram**, sem erros de execução.
+Validação inicial do elenco: **188/188 verificações passaram**, sem erros de execução.
 Importação e revisão visual concluídas no Godot 4.4.1, em Linux/Mesa llvmpipe.
 Registros: [integração](npc_cast_draft/integration.log),
 [capturas](npc_cast_draft/render.log) e [relatório](npc_cast_draft/validation.json).

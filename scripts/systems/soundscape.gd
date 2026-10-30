@@ -8,6 +8,17 @@ var ambience: AudioStreamPlayer3D
 var ballast: AudioStreamPlayer3D
 var ambient_wait:=18.0
 var ambient_index:=0
+var store_powered:=true
+var radio_powered:=true
+func set_store_power(value: bool,radio_on := true) -> void:
+	store_powered=value;radio_powered=value and radio_on
+	if hum!=null:
+		if store_powered and not hum.playing:hum.play()
+		elif not store_powered:hum.stop()
+	if radio!=null:
+		if radio_powered and not radio.playing:radio.play()
+		elif not radio_powered:radio.stop()
+	refresh()
 func _ready() -> void:
 	hum=loop_sound("hum",Vector3(-4,1,-6),-17,14)
 	radio=loop_sound("radio",Vector3(-5.4,1.7,-2.7),-13,9)

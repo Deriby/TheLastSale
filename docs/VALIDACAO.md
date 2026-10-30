@@ -1,3 +1,11 @@
+## Revisão 0.18.0 — 30/10/2026
+
+**233/233 verificações** passaram no projeto e no ZIP extraído após importação limpa. A integração anterior mantém 188 verificações; a suíte de sexta verifica o atendimento interrompido, falta de energia, qualidade gráfica durante a pane, chave e posto de Felps, percursos físicos até o pátio, salvamento antes/depois do gerador, encerramento do atendimento, fechamento cooperativo, saída autônoma de ambos os personagens, resumo e passagem para a prévia de sábado.
+
+O checkpoint versão 4 conserva campanha, pistas e relatórios por noite. São verificadas migrações dos formatos 1, 2 e 3. Um save da demonstração antiga já terminada volta à pane para permitir continuar a sexta. Modelos e texturas fornecidos pelo autor foram preservados; não foram adicionadas luzes com sombras. FPS nativo na Radeon R7 não foi medido.
+
+[Instruções, capturas e registros](friday_v018/README.md). Sábado completo, domingo, IA de perseguição e finais da campanha estão pendentes.
+
 # Validação — revisão 0.17.0 — 29/10/2026
 
 **183/183 verificações** passaram no projeto e no ZIP extraído após importação limpa. [Galeria, instruções e relatório](checkout_v017/README.md).

@@ -27,6 +27,7 @@ var tile_step: AudioStream=preload("res://assets/audio/step_tile.wav")
 var asphalt_step: AudioStream=preload("res://assets/audio/step_asphalt.wav")
 var capsule: CapsuleShape3D
 var torch: SpotLight3D
+var assisted_path:=PackedVector3Array()
 func _ready() -> void:
 	collision_layer = 2
 	collision_mask = 1|2
@@ -52,6 +53,7 @@ func _ready() -> void:
 func display_name() -> String:return "Deryk" if identity=="Dery" else "Felps"
 func set_controlled(value: bool) -> void:
 	controlled=value;velocity=Vector3.ZERO;actual_speed=0;target=null
+	assisted_path.clear()
 	if value:add_to_group("player")
 	else:
 		remove_from_group("player")
@@ -78,6 +80,9 @@ func _physics_process(delta: float) -> void:
 	get_child(0).position.y=capsule.height*.5
 	var input:=Input.get_vector("left","right","forward","backward") if controlled and not input_locked and not motion.action_active and not Dialogue.active else Vector2.ZERO
 	var direction:=Basis(Vector3.UP,camera_rig.yaw)*Vector3(input.x,0,input.y)
+	if not controlled and not input_locked and not Dialogue.active and not motion.action_active:
+		while not assisted_path.is_empty() and Vector2(assisted_path[0].x-position.x,assisted_path[0].z-position.z).length()<.10:assisted_path.remove_at(0)
+		if not assisted_path.is_empty():direction=(assisted_path[0]-position)*Vector3(1,0,1);direction=direction.normalized()
 	var running:=controlled and Input.is_action_pressed("sprint") and not crouching and carried==null and stamina>.05 and input.length()>.1
 	stamina=clampf(stamina+delta*(-.18 if running else .16),0,1)
 	var speed:=3.9 if running else (.85 if crouching else (1.15 if carried!=null else 1.55))

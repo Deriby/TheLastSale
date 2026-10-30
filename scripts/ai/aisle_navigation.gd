@@ -9,17 +9,19 @@ const CELL := .25
 func configure(blockers: Array[Rect2],ground: Callable=Callable()) -> void:
 	ground_height=ground
 	physical_blockers=blockers.duplicate()
-	grid.region=Rect2i(-108,-68,216,140)
+	grid.region=Rect2i(-108,-92,216,164)
 	grid.cell_size=Vector2(CELL,CELL)
 	grid.diagonal_mode=AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES
 	grid.update()
 	for x in range(-108,108):
-		for z in range(-68,72):
+		for z in range(-92,72):
 			var point:=Vector2(x*CELL,z*CELL)
-			var blocked: bool=(point.y < -.15 and (absf(point.x)>5.65 or point.y< -15.6)) or point.y>16.2
+			var blocked: bool=outside_bounds(point)
 			for rect in blockers:
 				if rect.grow(.33).has_point(point):blocked=true;break
 			grid.set_point_solid(Vector2i(x,z),blocked)
+func outside_bounds(point: Vector2) -> bool:
+	return (point.y<-.15 and (absf(point.x)>5.65 or point.y< -15.6) and not ServiceYard.contains(point)) or point.y>16.2
 func path(from: Vector3,to: Vector3) -> PackedVector3Array:
 	var start:=Vector2i(roundi(from.x/CELL),roundi(from.z/CELL))
 	var end:=Vector2i(roundi(to.x/CELL),roundi(to.z/CELL))
@@ -64,7 +66,7 @@ func restore_position(at: Vector3) -> Vector3:
 	# Preserve valid narrow staff passages that the coarse customer path grid cannot represent.
 	var cell:=Vector2i(roundi(at.x/CELL),roundi(at.z/CELL))
 	var point:=Vector2(at.x,at.z)
-	var blocked: bool=not grid.is_in_boundsv(cell) or (at.z<-.15 and (absf(at.x)>5.65 or at.z< -15.6)) or at.z>16.2
+	var blocked: bool=not grid.is_in_boundsv(cell) or outside_bounds(point)
 	for rect in physical_blockers:
 		if rect.grow(.27).has_point(point):blocked=true;break
 	if not blocked:return Vector3(at.x,height_at(at.x,at.z)+.01,at.z) if at.z>=0 else at

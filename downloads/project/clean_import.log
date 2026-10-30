@@ -8,62 +8,62 @@ first_scan_filesystem: begin: Project initialization steps: 5
 	first_scan_filesystem: step 4: Initializing plugins...
 	first_scan_filesystem: step 5: Starting file scan...
 first_scan_filesystem: end
-update_scripts_classes: begin: Registering global classes... steps: 74
+update_scripts_classes: begin: Registering global classes... steps: 80
 	update_scripts_classes: step 0: AisleNavigation
 	update_scripts_classes: step 1: Customer
 	update_scripts_classes: step 2: FamiliarNPC
-	update_scripts_classes: step 3: CharacterModels
-	update_scripts_classes: step 4: FelpsActor
-	update_scripts_classes: step 5: GroundFeet
-	update_scripts_classes: step 6: HeadAttention
-	update_scripts_classes: step 7: LivingMotion
-	update_scripts_classes: step 8: ShoulderCamera
-	update_scripts_classes: step 9: Interaction
-	update_scripts_classes: step 10: BoxHandling
-	update_scripts_classes: step 11: DepotPlayer
-	update_scripts_classes: step 12: CheckoutPanel
-	update_scripts_classes: step 13: Controls
-	update_scripts_classes: step 14:
-	update_scripts_classes: step 15: ShiftInterface
-	update_scripts_classes: step 16:
-	update_scripts_classes: step 17:
+	update_scripts_classes: step 3: NPCCast
+	update_scripts_classes: step 4: CharacterModels
+	update_scripts_classes: step 5: FelpsActor
+	update_scripts_classes: step 6: GroundFeet
+	update_scripts_classes: step 7: HeadAttention
+	update_scripts_classes: step 8: LivingMotion
+	update_scripts_classes: step 9: ShoulderCamera
+	update_scripts_classes: step 10: Interaction
+	update_scripts_classes: step 11: BoxHandling
+	update_scripts_classes: step 12: DepotPlayer
+	update_scripts_classes: step 13: CheckoutPanel
+	update_scripts_classes: step 14: Controls
+	update_scripts_classes: step 15:
+	update_scripts_classes: step 16: FridayShift
+	update_scripts_classes: step 17: ShiftInterface
 	update_scripts_classes: step 18:
-	update_scripts_classes: step 19: SettingsPanel
-	update_scripts_classes: step 20: ShopSale
-	update_scripts_classes: step 21: Soundscape
-	update_scripts_classes: step 22: CheckoutFixture
-	update_scripts_classes: step 23: Depot
-	update_scripts_classes: step 24: DepotFacade
-	update_scripts_classes: step 25: DepotRoof
-	update_scripts_classes: step 26: DepotShell
-	update_scripts_classes: step 27: FoliageWind
-	update_scripts_classes: step 28: Geo
-	update_scripts_classes: step 29: NeighborhoodCar
-	update_scripts_classes: step 30: NeighborhoodFrontages
-	update_scripts_classes: step 31: NeighborhoodLights
-	update_scripts_classes: step 32: NeighborhoodProps
-	update_scripts_classes: step 33: NeighborhoodServices
-	update_scripts_classes: step 34: NeonFinish
-	update_scripts_classes: step 35: NightAtmosphere
-	update_scripts_classes: step 36: ProductLibrary
-	update_scripts_classes: step 37: DepotProp
-	update_scripts_classes: step 38: PropBatch
-	update_scripts_classes: step 39: RetailDetails
-	update_scripts_classes: step 40: RetailFinish
-	update_scripts_classes: step 41: RoofTiles
-	update_scripts_classes: step 42: SceneDetail
-	update_scripts_classes: step 43: ShopDetails
-	update_scripts_classes: step 44: Street
-	update_scripts_classes: step 45: StreetAccents
-	update_scripts_classes: step 46: StreetBuildings
-	update_scripts_classes: step 47: StreetDetail
-	update_scripts_classes: step 48: StreetFurniture
-	update_scripts_classes: step 49: StreetHaze
-	update_scripts_classes: step 50: SurfaceMaterials
-	update_scripts_classes: step 51: ShiftWorld
-	update_scripts_classes: step 52:
-	update_scripts_classes: step 53:
-	update_scripts_classes: step 54:
+	update_scripts_classes: step 19:
+	update_scripts_classes: step 20:
+	update_scripts_classes: step 21: SettingsPanel
+	update_scripts_classes: step 22: ShopSale
+	update_scripts_classes: step 23: Soundscape
+	update_scripts_classes: step 24: CheckoutFixture
+	update_scripts_classes: step 25: Depot
+	update_scripts_classes: step 26: DepotFacade
+	update_scripts_classes: step 27: DepotRoof
+	update_scripts_classes: step 28: DepotShell
+	update_scripts_classes: step 29: FoliageWind
+	update_scripts_classes: step 30: Geo
+	update_scripts_classes: step 31: NeighborhoodCar
+	update_scripts_classes: step 32: NeighborhoodFrontages
+	update_scripts_classes: step 33: NeighborhoodLights
+	update_scripts_classes: step 34: NeighborhoodProps
+	update_scripts_classes: step 35: NeighborhoodServices
+	update_scripts_classes: step 36: NeonFinish
+	update_scripts_classes: step 37: NightAtmosphere
+	update_scripts_classes: step 38: ProductLibrary
+	update_scripts_classes: step 39: DepotProp
+	update_scripts_classes: step 40: PropBatch
+	update_scripts_classes: step 41: RetailDetails
+	update_scripts_classes: step 42: RetailFinish
+	update_scripts_classes: step 43: RoofTiles
+	update_scripts_classes: step 44: SceneDetail
+	update_scripts_classes: step 45: ServiceYard
+	update_scripts_classes: step 46: ShopDetails
+	update_scripts_classes: step 47: Street
+	update_scripts_classes: step 48: StreetAccents
+	update_scripts_classes: step 49: StreetBuildings
+	update_scripts_classes: step 50: StreetDetail
+	update_scripts_classes: step 51: StreetFurniture
+	update_scripts_classes: step 52: StreetHaze
+	update_scripts_classes: step 53: SurfaceMaterials
+	update_scripts_classes: step 54: ShiftWorld
 	update_scripts_classes: step 55:
 	update_scripts_classes: step 56:
 	update_scripts_classes: step 57:
@@ -83,6 +83,12 @@ update_scripts_classes: begin: Registering global classes... steps: 74
 	update_scripts_classes: step 71:
 	update_scripts_classes: step 72:
 	update_scripts_classes: step 73:
+	update_scripts_classes: step 74:
+	update_scripts_classes: step 75:
+	update_scripts_classes: step 76:
+	update_scripts_classes: step 77:
+	update_scripts_classes: step 78:
+	update_scripts_classes: step 79:
 update_scripts_classes: end
 _update_scan_actions: begin: Scanning actions... steps: 201
 	_update_scan_actions: step 0: bag.wav
@@ -496,7 +502,6 @@ preload_reimporting_scene: begin: Preparing scenes for reload steps: 1
 preload_reimporting_scene: end
 	reimport: step 0: asphalt.png
 	reimport: step 1: curtain.png
-	reimport: step 2: lamp_halo.png
 	reimport: step 3: leaves.png
 	reimport: step 4: night_sky.png
 	reimport: step 5: paving.png
@@ -666,6 +671,7 @@ preload_reimporting_scene: end
 	reimport: step 169: counter.png
 	reimport: step 170: contact.png
 	reimport: step 171: asphalt.png
+	reimport: step 172: curtain.png
 	reimport: step 173: lamp_halo.png
 	reimport: step 174: leaves.png
 	reimport: step 175: night_sky.png
@@ -794,83 +800,89 @@ ERROR: Parameter "t" is null.
 import: end
 	reimport: step 201: Finalizing Asset Import...
 reimport: end
-update_script_paths_documentation: begin: Updating scripts documentation steps: 74
+update_script_paths_documentation: begin: Updating scripts documentation steps: 80
 	update_script_paths_documentation: step 0: aisle_navigation.gd
 	update_script_paths_documentation: step 1: customer.gd
 	update_script_paths_documentation: step 2: familiar_npc.gd
-	update_script_paths_documentation: step 3: character_models.gd
-	update_script_paths_documentation: step 4: felps_actor.gd
-	update_script_paths_documentation: step 5: ground_feet.gd
-	update_script_paths_documentation: step 6: head_attention.gd
-	update_script_paths_documentation: step 7: living_motion.gd
-	update_script_paths_documentation: step 8: shoulder_camera.gd
-	update_script_paths_documentation: step 9: interactable.gd
-	update_script_paths_documentation: step 10: box_handling.gd
-	update_script_paths_documentation: step 11: player.gd
-	update_script_paths_documentation: step 12: checkout_panel.gd
-	update_script_paths_documentation: step 13: controls.gd
-	update_script_paths_documentation: step 14: dialogue.gd
-	update_script_paths_documentation: step 15: interface.gd
-	update_script_paths_documentation: step 16: main.gd
-	update_script_paths_documentation: step 17: preferences.gd
-	update_script_paths_documentation: step 18: session.gd
-	update_script_paths_documentation: step 19: settings_panel.gd
-	update_script_paths_documentation: step 20: shop_sale.gd
-	update_script_paths_documentation: step 21: soundscape.gd
-	update_script_paths_documentation: step 22: checkout_fixture.gd
-	update_script_paths_documentation: step 23: depot.gd
-	update_script_paths_documentation: step 24: depot_facade.gd
-	update_script_paths_documentation: step 25: depot_roof.gd
-	update_script_paths_documentation: step 26: depot_shell.gd
-	update_script_paths_documentation: step 27: foliage_wind.gd
-	update_script_paths_documentation: step 28: geometry.gd
-	update_script_paths_documentation: step 29: neighborhood_car.gd
-	update_script_paths_documentation: step 30: neighborhood_frontages.gd
-	update_script_paths_documentation: step 31: neighborhood_lights.gd
-	update_script_paths_documentation: step 32: neighborhood_props.gd
-	update_script_paths_documentation: step 33: neighborhood_services.gd
-	update_script_paths_documentation: step 34: neon_finish.gd
-	update_script_paths_documentation: step 35: night_atmosphere.gd
-	update_script_paths_documentation: step 36: product_library.gd
-	update_script_paths_documentation: step 37: prop.gd
-	update_script_paths_documentation: step 38: prop_batch.gd
-	update_script_paths_documentation: step 39: retail_details.gd
-	update_script_paths_documentation: step 40: retail_finish.gd
-	update_script_paths_documentation: step 41: roof_tiles.gd
-	update_script_paths_documentation: step 42: scene_detail.gd
-	update_script_paths_documentation: step 43: shop_details.gd
-	update_script_paths_documentation: step 44: street.gd
-	update_script_paths_documentation: step 45: street_accents.gd
-	update_script_paths_documentation: step 46: street_buildings.gd
-	update_script_paths_documentation: step 47: street_detail.gd
-	update_script_paths_documentation: step 48: street_furniture.gd
-	update_script_paths_documentation: step 49: street_haze.gd
-	update_script_paths_documentation: step 50: surface_materials.gd
-	update_script_paths_documentation: step 51: world.gd
-	update_script_paths_documentation: step 52: cast_motion_reel.gd
-	update_script_paths_documentation: step 53: cast_review.gd
-	update_script_paths_documentation: step 54: cast_world_review.gd
-	update_script_paths_documentation: step 55: depot_review.gd
-	update_script_paths_documentation: step 56: duo_review.gd
-	update_script_paths_documentation: step 57: exterior_review.gd
-	update_script_paths_documentation: step 58: exterior_walkthrough.gd
-	update_script_paths_documentation: step 59: integration.gd
-	update_script_paths_documentation: step 60: layout_review.gd
-	update_script_paths_documentation: step 61: lighting_review.gd
-	update_script_paths_documentation: step 62: material_review.gd
-	update_script_paths_documentation: step 63: mood_walkthrough.gd
-	update_script_paths_documentation: step 64: motion_review.gd
-	update_script_paths_documentation: step 65: neighborhood_review.gd
-	update_script_paths_documentation: step 66: performance_review.gd
-	update_script_paths_documentation: step 67: register_review.gd
-	update_script_paths_documentation: step 68: resolution_review.gd
-	update_script_paths_documentation: step 69: retail_render_review.gd
-	update_script_paths_documentation: step 70: scene_review.gd
-	update_script_paths_documentation: step 71: scene_walkthrough.gd
-	update_script_paths_documentation: step 72: surface_finish_review.gd
-	update_script_paths_documentation: step 73: visual_review.gd
+	update_script_paths_documentation: step 3: npc_cast.gd
+	update_script_paths_documentation: step 4: character_models.gd
+	update_script_paths_documentation: step 5: felps_actor.gd
+	update_script_paths_documentation: step 6: ground_feet.gd
+	update_script_paths_documentation: step 7: head_attention.gd
+	update_script_paths_documentation: step 8: living_motion.gd
+	update_script_paths_documentation: step 9: shoulder_camera.gd
+	update_script_paths_documentation: step 10: interactable.gd
+	update_script_paths_documentation: step 11: box_handling.gd
+	update_script_paths_documentation: step 12: player.gd
+	update_script_paths_documentation: step 13: checkout_panel.gd
+	update_script_paths_documentation: step 14: controls.gd
+	update_script_paths_documentation: step 15: dialogue.gd
+	update_script_paths_documentation: step 16: friday_shift.gd
+	update_script_paths_documentation: step 17: interface.gd
+	update_script_paths_documentation: step 18: main.gd
+	update_script_paths_documentation: step 19: preferences.gd
+	update_script_paths_documentation: step 20: session.gd
+	update_script_paths_documentation: step 21: settings_panel.gd
+	update_script_paths_documentation: step 22: shop_sale.gd
+	update_script_paths_documentation: step 23: soundscape.gd
+	update_script_paths_documentation: step 24: checkout_fixture.gd
+	update_script_paths_documentation: step 25: depot.gd
+	update_script_paths_documentation: step 26: depot_facade.gd
+	update_script_paths_documentation: step 27: depot_roof.gd
+	update_script_paths_documentation: step 28: depot_shell.gd
+	update_script_paths_documentation: step 29: foliage_wind.gd
+	update_script_paths_documentation: step 30: geometry.gd
+	update_script_paths_documentation: step 31: neighborhood_car.gd
+	update_script_paths_documentation: step 32: neighborhood_frontages.gd
+	update_script_paths_documentation: step 33: neighborhood_lights.gd
+	update_script_paths_documentation: step 34: neighborhood_props.gd
+	update_script_paths_documentation: step 35: neighborhood_services.gd
+	update_script_paths_documentation: step 36: neon_finish.gd
+	update_script_paths_documentation: step 37: night_atmosphere.gd
+	update_script_paths_documentation: step 38: product_library.gd
+	update_script_paths_documentation: step 39: prop.gd
+	update_script_paths_documentation: step 40: prop_batch.gd
+	update_script_paths_documentation: step 41: retail_details.gd
+	update_script_paths_documentation: step 42: retail_finish.gd
+	update_script_paths_documentation: step 43: roof_tiles.gd
+	update_script_paths_documentation: step 44: scene_detail.gd
+	update_script_paths_documentation: step 45: service_yard.gd
+	update_script_paths_documentation: step 46: shop_details.gd
+	update_script_paths_documentation: step 47: street.gd
+	update_script_paths_documentation: step 48: street_accents.gd
+	update_script_paths_documentation: step 49: street_buildings.gd
+	update_script_paths_documentation: step 50: street_detail.gd
+	update_script_paths_documentation: step 51: street_furniture.gd
+	update_script_paths_documentation: step 52: street_haze.gd
+	update_script_paths_documentation: step 53: surface_materials.gd
+	update_script_paths_documentation: step 54: world.gd
+	update_script_paths_documentation: step 55: cast_motion_reel.gd
+	update_script_paths_documentation: step 56: cast_review.gd
+	update_script_paths_documentation: step 57: cast_world_review.gd
+	update_script_paths_documentation: step 58: depot_review.gd
+	update_script_paths_documentation: step 59: duo_review.gd
+	update_script_paths_documentation: step 60: exterior_review.gd
+	update_script_paths_documentation: step 61: exterior_walkthrough.gd
+	update_script_paths_documentation: step 62: friday_integration.gd
+	update_script_paths_documentation: step 63: friday_review.gd
+	update_script_paths_documentation: step 64: integration.gd
+	update_script_paths_documentation: step 65: layout_review.gd
+	update_script_paths_documentation: step 66: lighting_review.gd
+	update_script_paths_documentation: step 67: material_review.gd
+	update_script_paths_documentation: step 68: mood_walkthrough.gd
+	update_script_paths_documentation: step 69: motion_review.gd
+	update_script_paths_documentation: step 70: neighborhood_review.gd
+	update_script_paths_documentation: step 71: npc_cast_review.gd
+	update_script_paths_documentation: step 72: performance_review.gd
+	update_script_paths_documentation: step 73: register_review.gd
+	update_script_paths_documentation: step 74: resolution_review.gd
+	update_script_paths_documentation: step 75: retail_render_review.gd
+	update_script_paths_documentation: step 76: scene_review.gd
+	update_script_paths_documentation: step 77: scene_walkthrough.gd
+	update_script_paths_documentation: step 78: surface_finish_review.gd
+	update_script_paths_documentation: step 79: visual_review.gd
 update_script_paths_documentation: end
-update_scene_groups: begin: Updating Scene Groups steps: 43
+update_scene_groups: begin: Updating Scene Groups steps: 46
 	update_scene_groups: step 0: main.tscn
 	update_scene_groups: step 1: crate.tscn
 	update_scene_groups: step 2: endcap.tscn
@@ -885,35 +897,38 @@ update_scene_groups: begin: Updating Scene Groups steps: 43
 	update_scene_groups: step 11: duo_review.tscn
 	update_scene_groups: step 12: exterior_review.tscn
 	update_scene_groups: step 13: exterior_walkthrough.tscn
-	update_scene_groups: step 14: integration.tscn
-	update_scene_groups: step 15: layout_review.tscn
-	update_scene_groups: step 16: lighting_review.tscn
-	update_scene_groups: step 17: material_review.tscn
-	update_scene_groups: step 18: mood_walkthrough.tscn
-	update_scene_groups: step 19: motion_review.tscn
-	update_scene_groups: step 20: neighborhood_review.tscn
-	update_scene_groups: step 21: performance_review.tscn
-	update_scene_groups: step 22: register_review.tscn
-	update_scene_groups: step 23: resolution_review.tscn
-	update_scene_groups: step 24: retail_render_review.tscn
-	update_scene_groups: step 25: scene_review.tscn
-	update_scene_groups: step 26: scene_walkthrough.tscn
-	update_scene_groups: step 27: surface_finish_review.tscn
-	update_scene_groups: step 28: visual_review.tscn
-	update_scene_groups: step 29: Bryan.glb
-	update_scene_groups: step 30: Customer1.glb
-	update_scene_groups: step 31: Customer2.glb
-	update_scene_groups: step 32: Customer3.glb
-	update_scene_groups: step 33: Dery.glb
-	update_scene_groups: step 34: Enemy.glb
-	update_scene_groups: step 35: Felps.glb
-	update_scene_groups: step 36: Garota1.glb
-	update_scene_groups: step 37: Garota2.glb
-	update_scene_groups: step 38: Velha1.glb
-	update_scene_groups: step 39: Zirico.glb
-	update_scene_groups: step 40: hatchback.glb
-	update_scene_groups: step 41: sedan.glb
-	update_scene_groups: step 42: user_car.glb
+	update_scene_groups: step 14: friday_integration.tscn
+	update_scene_groups: step 15: friday_review.tscn
+	update_scene_groups: step 16: integration.tscn
+	update_scene_groups: step 17: layout_review.tscn
+	update_scene_groups: step 18: lighting_review.tscn
+	update_scene_groups: step 19: material_review.tscn
+	update_scene_groups: step 20: mood_walkthrough.tscn
+	update_scene_groups: step 21: motion_review.tscn
+	update_scene_groups: step 22: neighborhood_review.tscn
+	update_scene_groups: step 23: npc_cast_review.tscn
+	update_scene_groups: step 24: performance_review.tscn
+	update_scene_groups: step 25: register_review.tscn
+	update_scene_groups: step 26: resolution_review.tscn
+	update_scene_groups: step 27: retail_render_review.tscn
+	update_scene_groups: step 28: scene_review.tscn
+	update_scene_groups: step 29: scene_walkthrough.tscn
+	update_scene_groups: step 30: surface_finish_review.tscn
+	update_scene_groups: step 31: visual_review.tscn
+	update_scene_groups: step 32: Bryan.glb
+	update_scene_groups: step 33: Customer1.glb
+	update_scene_groups: step 34: Customer2.glb
+	update_scene_groups: step 35: Customer3.glb
+	update_scene_groups: step 36: Dery.glb
+	update_scene_groups: step 37: Enemy.glb
+	update_scene_groups: step 38: Felps.glb
+	update_scene_groups: step 39: Garota1.glb
+	update_scene_groups: step 40: Garota2.glb
+	update_scene_groups: step 41: Velha1.glb
+	update_scene_groups: step 42: Zirico.glb
+	update_scene_groups: step 43: hatchback.glb
+	update_scene_groups: step 44: sedan.glb
+	update_scene_groups: step 45: user_car.glb
 update_scene_groups: end
 reimport: begin: (Re)Importing Assets steps: 201
 	reimport: step 0: Executing post-reimport operations...
