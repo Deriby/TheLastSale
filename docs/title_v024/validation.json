@@ -1,0 +1,58 @@
+{
+  "version": "0.24.0",
+  "godot": "4.4.1",
+  "base_commit": "a070fcadac2b374c37fb2301b7b6ac2e29840697",
+  "intro": {
+    "duration_seconds": 9.4,
+    "startup_frames_excluded": 2,
+    "skip": [
+      "Space",
+      "Enter",
+      "Escape",
+      "Left click"
+    ],
+    "skip_event_consumed": true,
+    "plays_once_per_launch": true,
+    "cards": [
+      "DERIBY APRESENTA",
+      "FRANCA, SÃO PAULO / SEXTA-FEIRA 21:40"
+    ],
+    "campaign_paused_during_intro": true
+  },
+  "title_menu": {
+    "background": "existing depot world, exterior camera, characters temporarily hidden",
+    "camera_and_visibility_restored_before_play": true,
+    "new_runtime_viewports": 0,
+    "new_lights": 0,
+    "keyboard_and_mouse": true,
+    "disabled_continue_without_save": true,
+    "responsive_window_verified": [
+      800,
+      600
+    ],
+    "native_resolution_in_ps1_and_ps12": true
+  },
+  "audio": {
+    "original_synthesized_audio": true,
+    "ambient_loop_seconds": 20,
+    "music_and_effects_controls_respected": true,
+    "stops_on_gameplay": true
+  },
+  "title_source_checks": {
+    "passed": 41,
+    "total": 41,
+    "runtime_errors": 0,
+    "log": "title_source.log"
+  },
+  "previous_asset_and_resource_files_byte_identical": 440,
+  "models_or_animation_assets_modified": 0,
+  "gameplay_physics_energy_and_save_code_unchanged": true,
+  "previous_floor_shader_unchanged": true,
+  "save_version": 5,
+  "default_frame_limit": 30,
+  "fonts": "DejaVu Latin subsets, bundled Bitstream Vera license; DejaVu changes public domain",
+  "preview_video": "intro_menu.mp4",
+  "preview_capture": "Godot 4.4.1, Linux/Mesa llvmpipe, Retrô quality, 15 FPS capture",
+  "native_radeon_r7_fps_measured": false,
+  "archive_verification": "https://github.com/Deriby/TheLastSale/blob/main/downloads/project/release_verification.json"
+}

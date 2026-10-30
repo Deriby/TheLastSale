@@ -34,13 +34,19 @@ var switch_fade: ColorRect
 var fade_tween: Tween
 var night_label: Label
 var night_panel: PanelContainer
+var presentation: TitlePresentation
+var menu_eyebrow: Label
+var menu_subtitle: Label
 func _ready() -> void:
 	process_mode=Node.PROCESS_MODE_ALWAYS
 	layer=5
 	root=Control.new();root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);root.mouse_filter=Control.MOUSE_FILTER_IGNORE;add_child(root)
 	root.theme=make_theme()
 	switch_fade=ColorRect.new();root.add_child(switch_fade);switch_fade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);switch_fade.color=Color(0,0,0,0);switch_fade.mouse_filter=Control.MOUSE_FILTER_IGNORE
+	presentation=TitlePresentation.new();root.add_child(presentation)
+	presentation.intro_finished.connect(on_intro_finished)
 	build_hud();build_menu()
+	root.resized.connect(layout_menu);call_deferred("layout_menu")
 	Session.changed.connect(update_objective)
 	Dialogue.spoken.connect(on_spoken)
 	update_objective()
@@ -80,26 +86,78 @@ func anchored_rect(control: Control,rect: Rect2) -> void:
 	control.offset_left=rect.position.x;control.offset_top=rect.position.y
 	control.offset_right=rect.end.x;control.offset_bottom=rect.end.y
 func build_menu() -> void:
-	menu=PanelContainer.new();root.add_child(menu);menu.position=Vector2(55,80);menu.size=Vector2(480,560)
+	menu=PanelContainer.new();menu.name="TitleMenu";root.add_child(menu)
+	menu.add_theme_stylebox_override("panel",StyleBoxEmpty.new())
+	menu.custom_minimum_size=Vector2(550,0)
 	var v:=VBoxContainer.new();menu.add_child(v);v.add_theme_constant_override("separation",13)
-	label(v,"UM TURNO EM FRANCA, SP",15).modulate=Color("b8a078")
-	title=label(v,"A ÚLTIMA\nVENDA",52)
-	label(v,"DEPOIS DO FECHAMENTO",17).modulate=Color("b8a078")
-	message=label(v,"21h40. O bairro vai dormir.\nPra vocês, ainda é expediente.",18)
-	buttons=VBoxContainer.new();v.add_child(buttons);buttons.add_theme_constant_override("separation",9)
+	menu_eyebrow=label(v,"U M  T U R N O  E M  F R A N C A",12)
+	menu_eyebrow.add_theme_font_override("font",TitlePresentation.MONO);menu_eyebrow.modulate=Color("b79578")
+	title=label(v,"A ÚLTIMA\nVENDA",86);title.add_theme_font_override("font",TitlePresentation.SERIF)
+	title.add_theme_color_override("font_color",Color("e3dac3"));title.add_theme_color_override("font_shadow_color",Color("541a1b"))
+	title.add_theme_constant_override("shadow_offset_x",3);title.add_theme_constant_override("shadow_offset_y",2)
+	title.add_theme_constant_override("line_spacing",-8)
+	menu_subtitle=label(v,"D E P O I S  D O  F E C H A M E N T O",12)
+	menu_subtitle.add_theme_font_override("font",TitlePresentation.MONO);menu_subtitle.modulate=Color("b79578")
+	message=label(v,"21:40. A rua está vazia.\nO expediente ainda não acabou.",15)
+	message.add_theme_font_override("font",TitlePresentation.MONO);message.modulate=Color("aaa898")
+	buttons=VBoxContainer.new();v.add_child(buttons);buttons.add_theme_constant_override("separation",3)
 	rebuild_buttons()
-	label(v,"0.23.1 • Movimento e detalhes do cenário\nFones de ouvido recomendados",13).modulate=Color("9ca58f")
+	var footer:=label(v,"0.24.0  /  FONES DE OUVIDO RECOMENDADOS",10)
+	footer.add_theme_font_override("font",TitlePresentation.MONO);footer.modulate=Color("777d73")
+	layout_menu()
+
+func layout_menu() -> void:
+	if menu==null:return
+	var available:=root.size
+	if available.x<1 or available.y<1:return
+	var minimum:=menu.get_combined_minimum_size()
+	menu.size=Vector2(550,maxf(560,minimum.y))
+	var fit:=minf(1.0,minf((available.x-64)/menu.size.x,(available.y-64)/menu.size.y))
+	menu.scale=Vector2.ONE*maxf(.45,fit)
+	menu.position=Vector2(maxf(28,available.x*.063),(available.y-menu.size.y*menu.scale.y)*.5)
+	if settings!=null:settings.position=((available-settings.custom_minimum_size)*.5).max(Vector2(12,12))
+
 func button(text: String,callback: Callable) -> Button:
-	var b:=Button.new();buttons.add_child(b);b.text=text;b.pressed.connect(callback);return b
+	var b:=Button.new();buttons.add_child(b);b.text=text;b.alignment=HORIZONTAL_ALIGNMENT_LEFT
+	b.custom_minimum_size.y=41;b.add_theme_font_override("font",TitlePresentation.MONO);b.add_theme_font_size_override("font_size",17)
+	var normal:=StyleBoxFlat.new();normal.bg_color=Color(0,0,0,0);normal.content_margin_left=17;normal.content_margin_top=8;normal.content_margin_bottom=8
+	var selected:=normal.duplicate();selected.bg_color=Color(.3,.08,.06,.17);selected.border_color=Color("a34236");selected.border_width_left=2
+	b.add_theme_stylebox_override("normal",normal);b.add_theme_stylebox_override("hover",selected);b.add_theme_stylebox_override("focus",selected);b.add_theme_stylebox_override("pressed",selected)
+	b.add_theme_stylebox_override("disabled",normal)
+	b.add_theme_color_override("font_color",Color("c6c0af"));b.add_theme_color_override("font_hover_color",Color("fff0d2"));b.add_theme_color_override("font_focus_color",Color("fff0d2"));b.add_theme_color_override("font_disabled_color",Color("5e635b"))
+	b.mouse_entered.connect(presentation.select_sound);b.focus_entered.connect(presentation.select_sound)
+	b.pressed.connect(func():presentation.select_sound();callback.call())
+	return b
+
 func rebuild_buttons() -> void:
-	for node in buttons.get_children():node.queue_free()
+	for node in buttons.get_children():buttons.remove_child(node);node.queue_free()
 	if has_started:button("RETOMAR",func():set_paused(false))
-	else:button("INICIAR EXPEDIENTE",func():new_game.emit();has_started=true;set_paused(false))
-	if FileAccess.file_exists(Session.SAVE_PATH):button("CONTINUAR TURNO SALVO",func():continue_game.emit();has_started=true;set_paused(false))
+	else:button("INICIAR EXPEDIENTE",start_from_title)
+	if FileAccess.file_exists(Session.SAVE_PATH):button("CONTINUAR TURNO SALVO",continue_from_title)
+	elif not has_started:button("CONTINUAR TURNO SALVO",continue_from_title).disabled=true
 	if has_started:button("SALVAR TURNO",save_current)
 	if has_started and Session.campaign.phase=="sunday_escape":button("RETOMAR CHECKPOINT DA FUGA",func():retry_game.emit();set_paused(false))
 	button("CONFIGURAÇÕES",open_settings)
 	button("SAIR",func():get_tree().quit())
+	call_deferred("layout_menu")
+
+func begin_title(world: ShiftWorld) -> void:
+	paused=true;get_tree().paused=true;menu.hide();hud.hide();presentation.begin(world)
+
+func on_intro_finished() -> void:
+	if has_started:return
+	menu.show();call_deferred("focus_menu")
+
+func focus_menu() -> void:
+	for item in buttons.get_children():
+		if item is Button and not item.disabled:item.grab_focus();return
+
+func start_from_title() -> void:
+	presentation.restore_camera();new_game.emit();has_started=true;set_paused(false)
+
+func continue_from_title() -> void:
+	presentation.restore_camera();continue_game.emit();has_started=true;set_paused(false)
+
 func save_current() -> void:
 	var player:=get_tree().get_first_node_in_group("player") as DepotPlayer
 	if player!=null:
@@ -114,11 +172,14 @@ func set_paused(value: bool) -> void:
 	menu.visible=value;hud.visible=not value
 	Input.mouse_mode=Input.MOUSE_MODE_VISIBLE if value else Input.MOUSE_MODE_CAPTURED
 	if value:
-		title.text="EXPEDIENTE\nEM PAUSA";rebuild_buttons()
+		if has_started:presentation.pause_backdrop()
+		title.text="EXPEDIENTE\nEM PAUSA";title.add_theme_font_size_override("font_size",50);rebuild_buttons()
+		call_deferred("focus_menu")
+	else:presentation.dismiss(true)
 	pause_changed.emit(value)
 func open_settings() -> void:
-	menu.hide();settings=SettingsPanel.new();root.add_child(settings);settings.position=Vector2(355,35)
-	settings.closed.connect(func():settings.queue_free();settings=null;menu.show())
+	menu.hide();settings=SettingsPanel.new();root.add_child(settings);layout_menu()
+	settings.closed.connect(func():settings.queue_free();settings=null;menu.show();focus_menu())
 func open_checkout(world: ShiftWorld) -> void:
 	if paused or checkout!=null or surveillance!=null or sunday_desk!=null or campaign_panel!=null:return
 	checkout=CheckoutPanel.new();checkout.world=world;root.add_child(checkout);checkout.position=Vector2(160,30)
@@ -230,6 +291,9 @@ func show_night_summary() -> void:
 	var leave:=Button.new();column.add_child(leave);leave.text="SAIR • CAMPANHA SALVA";leave.pressed.connect(func():get_tree().quit())
 	proceed.grab_focus()
 func _input(event: InputEvent) -> void:
+	if presentation!=null and presentation.intro_active:return
+	if settings!=null and event.is_action_pressed("pause"):
+		settings.closed.emit();get_viewport().set_input_as_handled();return
 	if campaign_panel!=null:
 		if event.is_action_pressed("pause") and campaign_panel.kind=="escape":close_campaign()
 		if event.is_action_pressed("pause") or event.is_action_pressed("switch_character"):get_viewport().set_input_as_handled()

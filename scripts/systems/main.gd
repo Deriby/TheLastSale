@@ -24,6 +24,8 @@ func _ready() -> void:
 	build_world()
 	psx=PSXMaterials.new();psx.root=world;add_child(psx)
 	get_tree().paused=true
+	# Embedded review/test scenes opt in explicitly; the launch scene always plays it.
+	if get_parent()==get_tree().root:interface.begin_title(world)
 func apply_settings() -> void:
 	SurfaceMaterials.apply_quality()
 	ProductLibrary.apply_quality()

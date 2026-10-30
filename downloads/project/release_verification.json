@@ -1,12 +1,12 @@
 {
   "format": "Godot editor project ZIP",
-  "version": "0.23.1",
+  "version": "0.24.0",
   "godot": "4.4.1",
-  "file": "TheLastSale_Godot_0.23.1.zip",
-  "bytes": 103829016,
-  "sha256": "e3dd1d41cbf1ac541f513a1cc0714e43c148ba575fdb396c88e717b83dc091c7",
+  "file": "TheLastSale_Godot_0.24.0.zip",
+  "bytes": 104152727,
+  "sha256": "d4c7601b12975da9058ca32eea2d55607a6815978f2f18d2f47a155281e869b6",
   "crc_verified": true,
-  "files_verified_against_manifest": 819,
+  "files_verified_against_manifest": 844,
   "manifest_files_changed_by_import_or_tests": 0,
   "all_packaged_sources_match_repository": true,
   "clean_extraction_import_exit_code": 0,
@@ -20,51 +20,69 @@
     "supply": 35,
     "natural_motion": 48,
     "psx": 28,
-    "passed": 459,
-    "total": 459,
+    "title": 41,
+    "passed": 500,
+    "total": 500,
     "runtime_errors": 0
   },
-  "clean_extraction_rendered_psx": {
-    "passed": 28,
-    "total": 28,
+  "clean_extraction_rendered_title": {
+    "passed": 41,
+    "total": 41,
     "runtime_or_shader_errors": 0
   },
-  "clean_extraction_camera_motion": {
+  "clean_extraction_psx_camera_motion": {
     "passed": 48,
     "total": 48,
-    "world_triplanar_cases": 24,
-    "uv_cases": 24,
-    "camera_directions": 6,
-    "baseline_0_23_0_passed": 0,
-    "baseline_total": 48,
-    "runtime_or_shader_errors": 0,
-    "engine_fps_unlimited": true,
-    "camera_physics_interpolation_disabled_for_fixed_pose_comparison": true
+    "runtime_or_shader_errors": 0
   },
-  "integration_runtime_tools_and_suite_inputs_byte_identical_to_final_archive": true,
-  "validation_note": "After making the camera regression deterministic at unlimited FPS, rebuilt the ZIP. Every runtime, tool and suite file matches the extracted project that passed 459 integration and 28 rendered checks. The final ZIP was then clean-imported and all 48 camera-motion checks repeated.",
-  "all_440_published_asset_and_resource_files_preserved": true,
-  "physics_animation_power_and_save_code_unchanged": true,
-  "triplanar_floor_mapping_anchored_to_world": true,
-  "signed_clip_depth_preserved": true,
-  "uv_affine_distortion_smoothly_bounded": true,
-  "independent_intensities": [
-    "Desligada",
-    "Suave",
-    "Marcada"
-  ],
-  "hud_native_resolution": true,
-  "new_lights": 0,
-  "new_viewports": 0,
-  "save_version": 5,
+  "intro": {
+    "duration_seconds": 9.4,
+    "skip": [
+      "Space",
+      "Enter",
+      "Escape",
+      "Left click"
+    ],
+    "plays_once_per_launch": true,
+    "world_paused": true,
+    "same_skip_key_cannot_start_game": true,
+    "warmup_loading_delta_ignored": true,
+    "low_fps_does_not_stretch_duration": true
+  },
+  "menu": {
+    "new_runtime_viewports": 0,
+    "new_lights": 0,
+    "temporary_exterior_camera": true,
+    "actors_visibility_restored": true,
+    "native_ui_resolution": true,
+    "minimum_tested_window": [
+      800,
+      600
+    ],
+    "save_continue_pause_and_audio_settings_verified": true
+  },
+  "previous_asset_and_resource_files_byte_identical": 440,
+  "models_and_animations_modified": 0,
+  "gameplay_physics_energy_save_and_floor_shader_unchanged": true,
   "default_frame_limit": 30,
+  "save_version": 5,
   "executable_exports": 0,
+  "project_zip_only": true,
   "below_github_100_mib_limit": true,
   "native_radeon_r7_fps_measured": false,
-  "report": "docs/psx_v0231/validation.json",
-  "clean_extraction_log": "validation_0.23.1.log",
-  "clean_import_log": "clean_import_0.23.1.log",
-  "rendered_psx_log": "psx_rendered_0.23.1.log",
-  "motion_log": "psx_motion_0.23.1.log",
-  "import_note": "Clean headless import reports the same 14 GLB texture preview t=null messages as 0.23.0; no script errors. Runtime, rendered integration and camera motion checks passed without errors."
+  "preview": {
+    "path": "docs/title_v024/intro_menu.mp4",
+    "duration_seconds": 12.866667,
+    "bytes": 902634,
+    "video_codec": "H.264",
+    "audio_codec": "AAC",
+    "capture_fps": 15,
+    "capture_quality": "Retrô"
+  },
+  "report": "docs/title_v024/validation.json",
+  "clean_extraction_log": "validation_0.24.0.log",
+  "clean_import_log": "clean_import_0.24.0.log",
+  "rendered_title_log": "title_rendered_0.24.0.log",
+  "motion_log": "psx_motion_0.24.0.log",
+  "import_note": "Clean headless import reports the same 14 GLB texture preview t=null messages as 0.23.1; no script errors. Runtime, rendered title and PSX camera-motion checks passed without errors."
 }

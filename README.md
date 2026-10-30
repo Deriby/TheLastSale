@@ -2,11 +2,19 @@
 
 Demonstração jogável em **Godot 4.4.1 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP, com uma primeira versão jogável da campanha de sexta a domingo. Acabamento e ritmo continuam em desenvolvimento.
 
-**[Baixar o projeto 0.23.1 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.23.1.zip)**
+**[Baixar o projeto 0.24.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.24.0.zip)**
 
 Extraia o ZIP, importe `project.godot` no Godot **4.4.1**, aguarde a importação dos modelos e pressione **F5**. O arquivo inclui os modelos animados, cenários, código e recursos usados no jogo. [Conteúdo e instruções do projeto](downloads/project/README.md).
 
-## Revisão 0.23.1 — piso estável ao girar a câmera
+## Revisão 0.24.0 — abertura em fita e menu de suspense
+
+A abertura de 9,4 segundos apresenta o autor e **Franca, São Paulo — sexta-feira, 21:40**, antes de revelar o depósito vazio à noite. **Espaço, Enter, Esc ou clique** pulam a sequência e levam ao menu. A tecla de pular é consumida para não começar uma partida por acidente.
+
+O menu recebeu tipografia de cartaz de terror, sombra vermelha, granulação, linhas de fita e um movimento lento de câmera. Os sons de fita e a atmosfera de sintetizador foram criados para o jogo. Iniciar, continuar, configurar e sair continuam acessíveis por teclado e mouse; a pausa usa a mesma identidade sem repetir a intro. [Vídeo, imagens e validação](docs/title_v024/README.md).
+
+![Novo menu de A Última Venda](docs/title_v024/menu.png)
+
+## Revisão anterior 0.23.1 — piso estável ao girar a câmera
 
 Corrige o piso e outras superfícies com texturas repetidas que deslizavam ao mover a câmera nos modos PS1 e PS1/2. O mapeamento desses materiais permanece preso ao cenário. O efeito afim das texturas UV recebeu limites suaves, e o cálculo passou a preservar corretamente os vértices atrás da câmera.
 
@@ -228,9 +236,9 @@ A reconstrução 0.2 do interior recebeu gôndolas abastecidas por categoria, ge
 
 ## Jogar
 
-**[Baixar o projeto Godot 0.23.1 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.23.1.zip)**
+**[Baixar o projeto Godot 0.24.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.24.0.zip)**
 
-O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **0.23.1**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
+O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **0.24.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
 
 O download atual é o projeto para o editor. O diretório `downloads/windows` guarda apenas a entrega anterior 0.9.0.
 
