@@ -2,11 +2,21 @@
 
 Demonstração jogável em **Godot 4.4.1 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP, com uma primeira versão jogável da campanha de sexta a domingo. Acabamento e ritmo continuam em desenvolvimento.
 
-**[Baixar o projeto 0.20.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.20.0.zip)**
+**[Baixar o projeto 0.21.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.21.0.zip)**
 
 Extraia o ZIP, importe `project.godot` no Godot **4.4.1**, aguarde a importação dos modelos e pressione **F5**. O arquivo inclui os modelos animados, cenários, código e recursos usados no jogo. [Conteúdo e instruções do projeto](downloads/project/README.md).
 
-## Revisão 0.20.0 — domingo, perseguição e três finais
+## Revisão 0.21.0 — reposição e entrega de pedidos
+
+As caixas agora têm identificação e destino: **R1/R2 → geladeira G1**, **R3 → prateleira P1**, **VENDA #NNN → balcão** e **CASCOS VAZIOS → devoluções**. Um marcador legível indica qual caixa pegar e onde levá-la, inclusive nos modos PS1/PS1/2.
+
+G1 abre com E e repõe com E novamente; P1 recebe os salgadinhos da R3. A reposição funciona mesmo antes da conversa inicial e o save conserva o que já foi abastecido. Caixas erradas mostram seu destino e permanecem com Deryk. Sábado e domingo não recriam tarefas de reposição da sexta.
+
+Quando Felps pede uma caixa fechada, a chamada indica a caixa laranja daquele pedido. Deryk entrega por E na área marcada do balcão e Felps retoma a cobrança. [Guia, capturas e validação](docs/supplies_v021/README.md). **383/383 verificações** passaram nas cinco suítes em Linux.
+
+![Entrega do pedido no balcão](docs/supplies_v021/order_delivery.png)
+
+## Revisão anterior 0.20.0 — domingo, perseguição e três finais
 
 Deryk recupera o módulo na sala atrás da porta antiga e o leva a Felps. O DVR reproduz um fragmento real de oito segundos, gravado no cenário do jogo, que liga o cliente recorrente ao acesso de manutenção. A revelação inicia a preparação da fuga.
 
@@ -194,9 +204,9 @@ A reconstrução 0.2 do interior recebeu gôndolas abastecidas por categoria, ge
 
 ## Jogar
 
-**[Baixar o projeto Godot 0.20.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.20.0.zip)**
+**[Baixar o projeto Godot 0.21.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.21.0.zip)**
 
-O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **0.20.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
+O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **0.21.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
 
 O download atual é o projeto para o editor. O diretório `downloads/windows` guarda apenas a entrega anterior 0.9.0.
 

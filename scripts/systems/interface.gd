@@ -26,6 +26,8 @@ var paused:=true
 var has_started:=false
 var character_label: Label
 var carry_status: Label
+var supply_marker: PanelContainer
+var supply_marker_text: Label
 var notice_label: Label
 var notice_remaining:=0.0
 var switch_fade: ColorRect
@@ -70,6 +72,9 @@ func build_hud() -> void:
 	stamina=ProgressBar.new();hud.add_child(stamina);stamina.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT);anchored_rect(stamina,Rect2(34,-45,130,5));stamina.show_percentage=false;stamina.max_value=1
 	var hint:=label(hud,"WASD mover   SHIFT correr   CTRL agachar   E interagir   Q apoiar   TAB trocar\nMOUSE olhar   RODA primeira pessoa   F lanterna   C DVR   H chamar/aguardar   ESPAÇO fala   ESC pausa",13)
 	hint.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;hint.name="ControlsHint";hint.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT);anchored_rect(hint,Rect2(-710,-92,680,85));hint.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT;hint.modulate=Color("babbaa")
+	supply_marker=PanelContainer.new();supply_marker.name="SupplyDestination";hud.add_child(supply_marker);supply_marker.mouse_filter=Control.MOUSE_FILTER_IGNORE;supply_marker.custom_minimum_size=Vector2(300,70)
+	supply_marker_text=label(supply_marker,"",16);supply_marker_text.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;supply_marker_text.custom_minimum_size.x=270
+	supply_marker.hide()
 	hud.hide()
 func anchored_rect(control: Control,rect: Rect2) -> void:
 	control.offset_left=rect.position.x;control.offset_top=rect.position.y
@@ -83,7 +88,7 @@ func build_menu() -> void:
 	message=label(v,"21h40. O bairro vai dormir.\nPra vocês, ainda é expediente.",18)
 	buttons=VBoxContainer.new();v.add_child(buttons);buttons.add_theme_constant_override("separation",9)
 	rebuild_buttons()
-	label(v,"0.20.0 • Sexta a domingo / campanha completa\nFones de ouvido recomendados",13).modulate=Color("9ca58f")
+	label(v,"0.21.0 • Reposição e entregas guiadas\nFones de ouvido recomendados",13).modulate=Color("9ca58f")
 func button(text: String,callback: Callable) -> Button:
 	var b:=Button.new();buttons.add_child(b);b.text=text;b.pressed.connect(callback);return b
 func rebuild_buttons() -> void:
@@ -169,9 +174,11 @@ func update_objective() -> void:
 	night_label.text="FRANCA / "+Session.night_title()
 	var player:=get_tree().get_first_node_in_group("player") as DepotPlayer
 	var world:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
-	if Session.campaign.phase!="routine":objective.text=Session.objective()
-	elif player!=null and player.identity=="Dery" and world!=null and world.sale!=null and world.sale.needs_bulk() and not world.sale.bulk_supplied:
-		objective.text="Pedido do balcão: leve a caixa fechada do estoque para Felps. [E] entregar no balcão."
+	if player!=null and int(Session.campaign.night)<2 and not player.carried_id.is_empty():
+		objective.text=StockTasks.crate_name(player.carried_id)+"\nDestino: "+StockTasks.destination(player.carried_id)+". [E] usar no destino; [Q] apoiar."
+	elif player!=null and player.identity=="Dery" and world!=null and world.supplies!=null and world.supplies.active_order() and Session.campaign.phase in ["routine","saturday_routine"]:
+		objective.text="Pedido #%03d: pegue a caixa LARANJA VENDA no estoque e entregue na marca do balcão. [E] deixar para Felps."%world.sale.id
+	elif Session.campaign.phase!="routine":objective.text=Session.objective()
 	else:objective.text="Atenda os clientes no balcão. [Tab] Deryk cuida da reposição." if player!=null and player.identity=="Felps" and Session.stage in [1,2,3,4] else Session.objective()
 func on_spoken(who: String,text: String) -> void:
 	speaker.text=who+"  •  [ESPAÇO] continuar" if not who.is_empty() else "";subtitle.text=text
@@ -192,7 +199,9 @@ func _process(_delta: float) -> void:
 	var player:=get_tree().get_first_node_in_group("player") as DepotPlayer
 	if player!=null:
 		stamina.value=player.stamina;stamina.visible=player.stamina<.98
-		carry_status.text=("Preparando a caixa…" if player.handling.busy or player.motion.action_active else ("[Q] Apoiar caixa • marca verde: espaço livre" if player.handling.can_place else "Sem espaço para apoiar • procure uma superfície livre")) if player.carried!=null else ""
+		carry_status.text=("Preparando a caixa…" if player.handling.busy or player.motion.action_active else StockTasks.crate_name(player.carried_id)+" • [Q] apoiar") if player.carried!=null else ""
+	update_supply_marker()
+
 	if not paused:
 		notice_remaining=maxf(0,notice_remaining-_delta)
 		if notice_remaining==0:notice_label.text=""
@@ -247,3 +256,29 @@ func _input(event: InputEvent) -> void:
 		if settings!=null:settings.closed.emit()
 		else:set_paused(not paused)
 		get_viewport().set_input_as_handled()
+
+func update_supply_marker() -> void:
+	supply_marker.hide()
+	if paused or checkout!=null or surveillance!=null or sunday_desk!=null or campaign_panel!=null or Dialogue.active:return
+	var world: ShiftWorld=get_parent().world
+	if world==null or not world.active or world.supplies==null:return
+	var goal:=world.supplies.goal()
+	if goal.is_empty():return
+	var camera:=world.player.camera_rig.camera
+	var at: Vector3=goal.at
+	var display: Rect2=get_parent().screen.get_global_rect()
+	var projected: Vector2=camera.unproject_position(at)/Vector2(get_parent().viewport.size)
+	var point:=display.position+projected*display.size
+	var behind:=camera.is_position_behind(at)
+	if behind:
+		var local:=camera.to_local(at)
+		point=root.size*.5+Vector2(local.x,-local.y).normalized()*root.size.length()
+	var unclamped:=point-Vector2(150,55)
+	var position_hint:=Vector2(clampf(unclamped.x,34,root.size.x-334),clampf(unclamped.y,220,root.size.y-360))
+	var arrow:="↓"
+	if behind or unclamped.distance_to(position_hint)>15:
+		var direction:=point-root.size*.5
+		arrow=("→" if direction.x>0 else "←") if absf(direction.x)>absf(direction.y) else ("↓" if direction.y>0 else "↑")
+	supply_marker.position=position_hint;supply_marker.size=Vector2(300,80)
+	supply_marker_text.text=arrow+" "+str(goal.text)+"\n"+str(goal.hint)+" • %.1f m"%Vector2(world.player.position.x-at.x,world.player.position.z-at.z).length()
+	supply_marker.show()

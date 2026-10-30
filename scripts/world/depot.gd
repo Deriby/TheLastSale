@@ -5,6 +5,7 @@ var crates: Dictionary = {}
 var stock_door: Node3D
 var old_door: Node3D
 var fridge_target: Node3D
+var shelf_target: DepotProp
 var fluorescent: OmniLight3D
 var felps: Node3D
 var counter: Node3D
@@ -47,7 +48,11 @@ func build_furniture() -> void:
 		for z in [-4.70,-6.95]:
 			var style: String="snacks" if z==-4.70 else "beverages"
 			if x>0 and z==-6.95:style="mixed"
-			central_shelves.append(prop("shelf",Vector3(x,0,z),0,{"shelf_style":style,"brand_index":1 if x>0 else 0,"shelf_length":SHELF_LENGTH}))
+			var shelf:=prop("shelf",Vector3(x,0,z),0,{"shelf_style":style,"brand_index":1 if x>0 else 0,"shelf_length":SHELF_LENGTH,"needs_restock":x<0 and z==-4.70 and int(Session.campaign.night)==0})
+			central_shelves.append(shelf)
+			if x<0 and z==-4.70:
+				shelf_target=shelf
+				if int(Session.campaign.night)==0:interact(shelf,"shelf","P1")
 			blockers.append(Rect2(Vector2(x-.57,z-SHELF_LENGTH*.5),Vector2(1.14,SHELF_LENGTH)))
 		if x<0:
 			prop("endcap",Vector3(x,0,-3.5),0,{"brand_index":0})
@@ -58,7 +63,7 @@ func build_furniture() -> void:
 	# Close-set equipment follows the unbroken refrigerated perimeter in the photos.
 	for i in 5:
 		var z: float=-4.8-i*1.12
-		var cabinet:=prop("fridge",Vector3(-5.45,0,z),PI/2,{"brand_index":i%3,"needs_restock":i==0})
+		var cabinet:=prop("fridge",Vector3(-5.45,0,z),PI/2,{"brand_index":i%3,"needs_restock":i==0 and int(Session.campaign.night)==0})
 		blockers.append(Rect2(Vector2(-5.86,z-.53),Vector2(.82,1.06)))
 		interact(cabinet,"fridge")
 		if i==0:fridge_target=cabinet
@@ -90,9 +95,11 @@ func build_stock() -> void:
 	var stock_light:=Geo.light(self,Vector3(0,3.3,-13.4),Color("c9ceb5"),.42,4.7);stock_light.name="StockLight"
 	var p:=prop("pallet",Vector3(-3.8,0,-13.8));interact(p,"pallet")
 	Geo.sign_text(self,"DEVOLUÇÕES",Vector3(-3.8,1.9,-14.5),26)
-	add_crate("stock_1",Vector3(.5,0,-13.5))
-	add_crate("stock_2",Vector3(1.5,0,-13.5))
-	add_crate("loose",Vector3(3.4,0,-13.3))
+	if int(Session.campaign.night)==0:
+		add_crate("stock_1",Vector3(.5,0,-13.5))
+		add_crate("stock_2",Vector3(1.5,0,-13.5))
+		add_crate("stock_shelf",Vector3(-1.5,0,-12.6))
+		add_crate("loose",Vector3(3.4,0,-13.3))
 	for x in [-4.2,-3.5,-2.8]:
 		for y in [.0,.48,.96]:prop("crate",Vector3(x,y,-15.0))
 	blockers.append(Rect2(Vector2(-4.7,-15.6),Vector2(2.4,1.2)))
@@ -118,4 +125,6 @@ func restore_state(player: DepotPlayer) -> void:
 			var state: Dictionary=Session.crate_states[id]
 			crates[id].global_position=Session.read_position(state.get("position"),crates[id].global_position)
 			crates[id].rotation.y=float(state.get("yaw",0))
-	for i in Session.stocked.size():fridge_target.replenish(i)
+	for id in StockTasks.REQUIRED:
+		if int(Session.campaign.night)==0 and id in Session.stocked:fridge_target.replenish(StockTasks.REQUIRED.find(id))
+	if "stock_shelf" in Session.stocked and int(Session.campaign.night)==0:shelf_target.replenish()

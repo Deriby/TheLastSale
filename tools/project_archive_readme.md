@@ -1,4 +1,4 @@
-# The Last Sale — projeto Godot 0.20.0
+# The Last Sale — projeto Godot 0.21.0
 
 1. Extraia este ZIP em uma pasta nova.
 2. No Godot **4.4.1**, clique em **Importar** e escolha `project.godot`.
@@ -6,6 +6,15 @@
 4. Pressione **F5** e escolha **Iniciar expediente** para testar a rotina completa.
 
 Modelos animados, cenários, sons, texturas, código, testes e ferramentas estão incluídos. Blender não é necessário para jogar. O renderizador é Compatibility / OpenGL.
+
+## Reposição e pedidos: como identificar as caixas
+
+- **R1/R2, verdes:** pegue no estoque e leve à geladeira **G1** da parede esquerda. E abre; E novamente repõe. A placa mostra quantas caixas faltam.
+- **R3, verde:** salgadinhos para a prateleira **P1**, primeira gôndola à esquerda. E repõe; é uma tarefa extra.
+- **VENDA #NNN, laranja:** caixa fechada daquele pedido. Deryk leva à marca **ENTREGA DE PEDIDOS** no balcão e usa E. Tab volta a Felps para registrar e concluir o pagamento.
+- **CASCOS VAZIOS:** vão ao palete **DEVOLUÇÕES**. Não abastecem os móveis nem completam uma venda.
+
+O marcador aponta para a caixa ou o destino atual. Caixas erradas mostram o destino correto e continuam nas mãos. Reposição antes da conversa com Felps funciona e fica registrada. Sábado/domingo não recriam caixas das tarefas concluídas da sexta. [Guia](docs/supplies_v021/README.md).
 
 ## Sexta-feira: apagão e fechamento
 
@@ -65,7 +74,7 @@ O elenco inclui Dery, Felps, Killer, Bryan, Zirico, Garota 1, Garota 2 e Velha 1
 
 ## Validação
 
-**348/348 verificações** passaram nas quatro suítes em Linux. Os resultados e a verificação da extração limpa ficam em `docs/sunday_v020/validation.json` e na verificação de distribuição no GitHub. `./tools/test.sh` roda a suíte; em outra máquina, abra pelo editor ou defina `GODOT_BIN` com o caminho do motor.
+Os resultados das cinco suítes e a verificação da extração limpa ficam em `docs/supplies_v021/validation.json` e na verificação de distribuição no GitHub. `./tools/test.sh` roda a suíte; em outra máquina, abra pelo editor ou defina `GODOT_BIN` com o caminho do motor.
 
 A Godot 4.4 tem Windows 10 como requisito oficial mínimo. Windows 7/Radeon R7 não foram validados nativamente. O modo Econômica reduz resolução, sombras e acabamento dos materiais.
 

@@ -50,7 +50,7 @@ func introduce(actor: DepotPlayer) -> bool:
 	Session.stocked.assign(["stock_1","stock_2"]);Session.organized=true
 	for id in ["stock_1","stock_2"]:
 		if is_instance_valid(world.depot.crates.get(id)):world.depot.crates[id].queue_free()
-	world.depot.crates.loose.position=Vector3(-3.8,.23,-13.8)
+	if is_instance_valid(world.depot.crates.get("loose")):world.depot.crates.loose.position=Vector3(-3.8,.23,-13.8)
 	save()
 	Dialogue.play("saturday_intro",[["Felps","Avisei o responsável sobre a pane. Mandou a gente conferir o gravador e não mexer na instalação."],["Dery","Beleza. Eu olho o estoque. A rua não apagou ontem, aquilo foi só aqui."],["Felps","Tem dois pedidos antes de fechar. Aqui no caixa, C abre as câmeras e o caderno. A gente compara tudo depois."]])
 	return true

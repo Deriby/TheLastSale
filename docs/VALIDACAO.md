@@ -1,3 +1,11 @@
+## Revisão 0.21.0 — 30/10/2026
+
+**383/383 verificações**: 188 de integração, 48 de sexta, 53 de sábado, 59 de domingo e 35 de reposição/entrega. A nova suíte usa E para abrir/repor G1, abastecer P1, guardar cascos e entregar pedido no balcão; valida reposição antes da conversa inicial, caixa errada preservada com orientação, salvamento, quantidades restauradas, marcadores PS1/PS1/2 e venda completa com recibo único. As noites posteriores não recriam as tarefas concluídas da sexta.
+
+O save continua no formato 5, mantendo os códigos anteriores de caixa. Modelos, texturas e recursos anteriores: 428 arquivos idênticos à 0.20.0. Sem novas luzes ou viewports. Capturas em Linux/Mesa llvmpipe; FPS nativo na Radeon R7 não foi medido.
+
+[Guia, capturas e logs](supplies_v021/README.md). [Relatório](supplies_v021/validation.json). [Verificação independente do ZIP](../downloads/project/release_verification.json).
+
 ## Revisão 0.20.0 — 30/10/2026
 
 **348/348 verificações**: 188 de integração, 48 de sexta, 53 de sábado e 59 de domingo. A nova suíte percorre acesso antigo, entrega física do módulo, vídeo real, análise, prova/ajuda, separação, gerador, liberação pelo terminal, perseguidor ativo, companheiro, abertura manual, fuga e final favorável. Depois, posições preparadas isolam percepção, memória após Tab/save, preparação do golpe, derrota/checkpoint, coberturas, outros finais e migração da antiga prévia de domingo.

@@ -1,6 +1,6 @@
 class_name Interaction
 extends Node3D
-@export_enum("crate","fridge","door","pallet","talk","note","switch","familiar","checkout","campaign","investigation","sunday") var kind := "crate"
+@export_enum("crate","fridge","door","pallet","talk","note","switch","familiar","checkout","campaign","investigation","sunday","shelf") var kind := "crate"
 @export var identity := ""
 var open := false
 var busy := false
@@ -20,16 +20,21 @@ func prompt(player: Node3D) -> String:
 	match kind:
 		"crate":
 			if player.identity!="Dery":return "[Tab] Deryk cuida das caixas e da reposição"
-			if player.carried!=null:return "Mãos ocupadas • Q para soltar"
-			return ("Pegar caixa do pedido" if identity.begins_with("order_") else "Pegar caixa") if global_position.distance_to(player.global_position)<=.95 else "Aproxime-se para pegar a caixa"
-		"fridge":
-			if get_parent().needs_restock and player.carried != null and Session.stage in [1,2] and Session.carried_id.begins_with("stock_"):
-				return "Colocar bebidas" if open else "Abrir geladeira"
-			return "Fechar geladeira" if open else "Abrir geladeira"
+			if player.carried!=null:return "Mãos ocupadas • Q para apoiar a caixa"
+			return ("Pegar "+StockTasks.crate_name(identity)) if global_position.distance_to(player.global_position)<=.95 else "Aproxime-se: "+StockTasks.crate_name(identity)
+		"fridge","shelf":
+			var target: String="G1" if kind=="fridge" and get_parent().needs_restock else "P1" if kind=="shelf" else ""
+			if player.carried!=null:
+				if StockTasks.JOBS.has(player.carried_id) and StockTasks.JOBS[player.carried_id].target==target:
+					return "Repor "+target+" • "+str(StockTasks.JOBS[player.carried_id].code) if kind=="shelf" or get_parent().opened else "Abrir G1 para repor • use E novamente após abrir"
+				return "Esta caixa vai para "+StockTasks.destination(player.carried_id)
+			if kind=="shelf":return "P1 abastecida" if "stock_shelf" in Session.stocked else "Faltam salgadinhos na P1 • pegue R3 no estoque"
+			if target=="G1" and StockTasks.required_count()<2:return ("Fechar G1" if get_parent().opened else "Abrir G1")+" • faltam retornáveis: R1 / R2 no estoque"
+			return ("Fechar geladeira" if get_parent().opened else "Abrir geladeira")+" • abastecida"
 		"door":
 			if identity=="service" and int(Session.campaign.night)==1:return "Pátio trancado • nenhuma entrega autorizada"
 			return "Fechar porta" if open else "Abrir porta do pátio" if identity=="service" else "Abrir porta do estoque"
-		"pallet": return "Guardar caixa no palete" if Session.carried_id == "loose" else "Palete • organizar após a reposição"
+		"pallet": return "Guardar CASCOS VAZIOS no palete" if player.carried_id=="loose" else "DEVOLUÇÕES • somente cascos vazios"
 		"talk": return "Conversar com "+("Deryk" if identity=="Dery" else "Felps")
 		"checkout":
 			var world:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
@@ -93,16 +98,28 @@ func activate(player: Node3D) -> bool:
 	match kind:
 		"crate":
 			if player.identity!="Dery":return false
-			if player.carried != null or global_position.distance_to(player.global_position)>.95:return false
+			if player.carried != null:return reject("Apoie a caixa atual com Q antes de pegar outra.")
+			if global_position.distance_to(player.global_position)>.95:return reject("Aproxime-se da caixa para pegá-la.")
 			player.pick_up(get_parent(),identity)
 			return true
-		"fridge":
-			if not get_parent().needs_restock or not open or player.carried == null:
-				get_parent().toggle();open=get_parent().opened
-				return true
-			if Session.deliver(Session.carried_id):
-				player.consume_carried(get_parent().to_global(Vector3(.12,.88,.10)),get_parent().replenish)
-				return true
+		"fridge","shelf":
+			if global_position.distance_to(player.global_position)>1.8:return reject("Aproxime-se da frente da geladeira/prateleira para repor.")
+			if player.carried==null:
+				if kind=="fridge":get_parent().toggle();open=get_parent().opened;return true
+				return reject("Faltam salgadinhos na P1. Pegue a caixa R3 no estoque." if "stock_shelf" not in Session.stocked else "P1 já está abastecida.")
+			if player.identity!="Dery":return reject("[Tab] Deryk faz a reposição.")
+			var id: String=player.carried_id
+			var target: String="G1" if kind=="fridge" and get_parent().needs_restock else "P1" if kind=="shelf" else ""
+			if not StockTasks.JOBS.has(id) or StockTasks.JOBS[id].target!=target:
+				return reject("Esta caixa não repõe aqui. Destino: "+StockTasks.destination(id)+".")
+			if kind=="fridge" and not get_parent().opened:get_parent().toggle();open=get_parent().opened;return true
+			if not Session.deliver(id):return reject("Esta reposição já foi feita ou está suspensa durante o fechamento/apagão.")
+			var at: Vector3=get_parent().to_global(Vector3(.12,.88,.10)) if kind=="fridge" else get_parent().to_global(Vector3(-.68,.88,0))
+			var destination: Node3D=get_parent()
+			player.consume_carried(at,func():
+				if target=="G1":destination.replenish(StockTasks.REQUIRED.find(id))
+				else:destination.replenish())
+			reject("Reposição concluída: "+target+" • "+str(StockTasks.JOBS[id].product)+".");return true
 		"door":
 			open = not open
 			busy = true
@@ -111,13 +128,15 @@ func activate(player: Node3D) -> bool:
 			tween.finished.connect(func(): busy=false)
 			return true
 		"pallet":
+			if player.identity!="Dery" or player.carried_id!="loose" or player.carried==null:return reject("O palete recebe a caixa CASCOS VAZIOS; as caixas R1/R2/R3 e VENDA têm outros destinos.")
+			if global_position.distance_to(player.position)>1.8:return reject("Aproxime-se do palete DEVOLUÇÕES.")
 			if Session.organize():
 				player.place_carried(get_parent().global_position+Vector3(0,.23,0))
 				return true
 		"talk":
-			if Dialogue.active: return false
+			if Dialogue.active or global_position.distance_to(player.global_position)>2.65:return false
 			if Session.greet():
-				Dialogue.play("greeting",[["Felps","Ô Dery, beleza? Tem duas caixas de retornável lá no estoque. Repõe a geladeira pra mim?"],["Dery","Já vou. Depois eu ajeito aquela caixa no caminho."],["Felps","Valeu! E deixa o corredor livre, hoje tá passando gente ainda."]])
+				Dialogue.play("greeting",[["Felps","Ô Dery! As caixas verdes R1 e R2 são pra geladeira G1, na parede esquerda. Abre e usa E de novo pra repor." if StockTasks.required_count()<2 else "Boa, Dery! Já vi a geladeira G1 abastecida."],["Felps","R3 tem salgadinhos pra prateleira P1, como reposição extra. A caixa CASCOS VAZIOS vai pro palete DEVOLUÇÕES."],["Dery","E a mercadoria dos pedidos?"],["Felps","Quando eu pedir, pega a caixa laranja VENDA com o número do pedido e traz na marca do balcão. Ela não é de reposição."]])
 			else: Dialogue.play("smalltalk",[["Felps","Sextou, hein... pra quem não tá trabalhando."],["Dery","Nem me fala. Ainda falta chão até meia-noite."]])
 			return true
 		"checkout":
@@ -140,4 +159,9 @@ func activate(player: Node3D) -> bool:
 		"note":
 			Dialogue.play("old_door",[["Dery","Esse depósito velho tá trancado faz tempo. Melhor deixar quieto."]])
 			return true
+	return false
+
+func reject(text: String) -> bool:
+	var world:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
+	if world!=null:world.notice.emit(text)
 	return false

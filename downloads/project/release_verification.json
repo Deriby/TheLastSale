@@ -1,12 +1,12 @@
 {
   "format": "Godot editor project ZIP",
-  "version": "0.20.0",
+  "version": "0.21.0",
   "godot": "4.4.1",
-  "file": "TheLastSale_Godot_0.20.0.zip",
-  "bytes": 91643729,
-  "sha256": "11d3b148c0d9fdc98fd26a004cdfe7e78972cb28e7633fea83139f359dc607de",
+  "file": "TheLastSale_Godot_0.21.0.zip",
+  "bytes": 95677678,
+  "sha256": "1a96d5acd70b811501b99df4c87a2f59a292000c07cf339f7ded6e97ee3c2d0e",
   "crc_verified": true,
-  "files_verified_against_manifest": 739,
+  "files_verified_against_manifest": 755,
   "manifest_files_changed_by_import_or_tests": 0,
   "clean_extraction_import_exit_code": 0,
   "import_script_errors": 0,
@@ -16,26 +16,30 @@
     "friday": 48,
     "saturday": 53,
     "sunday": 59,
-    "total": 348,
-    "passed": 348,
+    "supply": 35,
+    "total": 383,
+    "passed": 383,
     "exit_code": 0,
     "runtime_errors": 0
   },
-  "clean_extraction_log": "validation_0.20.0.log",
-  "sunday_scope": "Physical maintenance room/module delivery, real archived video, reveal, circuits, cooperative escape, sight/hearing/search/chase, cover, three endings and safe checkpoint retry.",
-  "chase_and_multiple_endings_implemented": true,
-  "archived_video_playback": true,
-  "archived_video_duration_seconds": 8,
-  "archived_video_resolution": [
-    384,
-    216
-  ],
-  "archived_video_fps": 10,
-  "endings": [
-    "resolved",
-    "unresolved",
-    "alone"
-  ],
+  "clean_extraction_log": "validation_0.21.0.log",
+  "restock_targets": {
+    "G1": [
+      "R1",
+      "R2"
+    ],
+    "P1": [
+      "R3"
+    ]
+  },
+  "P1_extra_task_optional": true,
+  "stocking_before_initial_greeting_supported": true,
+  "numbered_bulk_sale_crate_separate_from_replenishment": true,
+  "physical_counter_drop_off_by_E": true,
+  "wrong_crate_preserved_with_destination_notice": true,
+  "empty_returns_separate_from_sellable_goods": true,
+  "completed_friday_work_not_recreated_on_later_nights": true,
+  "native_objective_marker_ps1_and_ps12": true,
   "save_version": 5,
   "legacy_save_versions_verified": [
     1,
@@ -43,14 +47,11 @@
     3,
     4
   ],
-  "old_sunday_preview_migrates_to_playable_opening": true,
-  "safe_checkpoint_retry_separate_from_current_save": true,
-  "autosave_interval_seconds": 5,
-  "assets_and_resources_byte_identical_to_0_19_0": 426,
+  "assets_and_resources_byte_identical_to_0_20_0": 428,
   "new_shadow_casting_lights": 0,
+  "new_viewports": 0,
   "default_frame_limit": 30,
   "native_radeon_r7_fps_measured": false,
-  "ps1_and_ps12_preserved": true,
-  "report": "docs/sunday_v020/validation.json",
-  "import_note": "Headless editor import reports 14 known GLB texture preview t=null messages; no script errors. Runtime tests have no errors. Physics interpolation warnings can appear during test-driven restoration."
+  "report": "docs/supplies_v021/validation.json",
+  "import_note": "Headless editor import reports 14 known GLB texture preview t=null messages; no script errors. Runtime suites have no errors."
 }

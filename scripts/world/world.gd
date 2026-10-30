@@ -30,6 +30,7 @@ var friday: FridayShift
 var sunday: SundayShift
 var saturday: SaturdayShift
 var surveillance_open:=false
+var supplies: SupplyGuide
 func _ready() -> void:
 	add_to_group("shift_world")
 	var legacy_carried:=Session.carried_id
@@ -95,6 +96,7 @@ func _ready() -> void:
 	friday.night_completed.connect(func():slice_finished.emit())
 	saturday=SaturdayShift.new();saturday.world=self;add_child(saturday)
 	sunday=SundayShift.new();sunday.world=self;add_child(sunday)
+	supplies=SupplyGuide.new();supplies.world=self;add_child(supplies)
 func update_enemy_visibility() -> void:
 	enemy_visual.process_mode=Node.PROCESS_MODE_INHERIT if enemy_visual.is_visible_in_tree() else Node.PROCESS_MODE_DISABLED
 func select_player(identity: String) -> void:
@@ -131,7 +133,7 @@ func capture_state() -> void:
 		Session.crate_states[id]={"position":[at.x,at.y,at.z],"yaw":item.global_rotation.y}
 	if sunday!=null:sunday.capture()
 func on_handling_completed() -> void:
-	if active:Session.save_shift(player.global_position)
+	if active:Session.changed.emit();Session.save_shift(player.global_position)
 func can_checkout(actor: DepotPlayer) -> bool:
 	return not surveillance_open and (friday==null or not friday.is_outage() and friday.phase() not in ["closing","complete"]) and actor.identity=="Felps" and actor.global_position.distance_to(CheckoutFixture.STAFF_POSITION)<1.4 and is_instance_valid(customer) and customer.state==Customer.State.WAITING and not customer.purchase_complete
 func try_surveillance() -> bool:
@@ -189,14 +191,14 @@ func ensure_order_crate() -> void:
 	if not depot.crates.has(id):depot.add_crate(id,Vector3(-.5,0,-13.35))
 func request_stock() -> bool:
 	if not can_operate_register() or not sale.needs_bulk() or sale.bulk_supplied:return false
-	notice.emit("Felps: Deryk, traz a caixa fechada do pedido pra mim? Ela está no estoque.")
+	notice.emit("Felps: pegue a caixa laranja VENDA #%03d no estoque e entregue na área marcada do balcão. As R1/R2 são de reposição."%sale.id)
 	checkout_closed.emit();return switch_player()
 func can_supply_order(actor: DepotPlayer) -> bool:
-	return sale!=null and sale.needs_bulk() and not sale.bulk_supplied and actor.identity=="Dery" and actor.carried_id==sale.supply_id() and actor.global_position.distance_to(CheckoutFixture.CUSTOMER_POSITION)<2.5
+	return sale!=null and sale.needs_bulk() and not sale.bulk_supplied and actor.identity=="Dery" and actor.carried!=null and actor.carried_id==sale.supply_id() and actor.global_position.distance_to(CheckoutFixture.CUSTOMER_POSITION)<2.5
 func supply_order(actor: DepotPlayer) -> bool:
 	if not can_supply_order(actor) or actor.handling.busy or actor.motion.action_active:return false
-	actor.consume_carried(Vector3(-4.12,1.13,-1.9),func():
-		sale.bulk_supplied=true;update_sale("crate");notice.emit("Deryk: a caixa do pedido está no balcão. [Tab] volte a Felps."))
+	actor.consume_carried(SupplyGuide.DELIVERY_POINT,func():
+		sale.bulk_supplied=true;update_sale("crate");notice.emit("Caixa entregue. [Tab] Felps: registre os produtos, receba o dinheiro e finalize a venda no caixa."))
 	return true
 func update_checkout_scene() -> void:
 	if sale==null:return
@@ -257,7 +259,7 @@ func spawn_customer(warning: bool,snapshot: Dictionary={}) -> void:
 	customer.impatient.connect(func(text: String):notice.emit(text))
 	if not snapshot.is_empty():customer.restore(snapshot)
 	update_checkout_scene()
-	if active:Session.save_shift(player.global_position)
+	if active:Session.changed.emit();Session.save_shift(player.global_position)
 func on_checkout(who: Customer) -> void:
 	notice.emit("Felps, tem cliente esperando no caixa. [Tab] trocar personagem.")
 func begin_checkout(who: Customer) -> void:

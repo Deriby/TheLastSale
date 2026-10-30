@@ -136,6 +136,10 @@ func update_footsteps() -> void:
 	last_step_half=half
 func update_focus() -> void:
 	target=null
+	var current_world:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
+	if current_world!=null and current_world.supplies!=null:
+		target=current_world.supplies.priority_focus(self)
+		if target!=null:focused.emit("[E]  "+target.prompt(self));return
 	if int(Session.campaign.night)==2 and crouching:
 		var world:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
 		if world!=null and world.sunday!=null and world.sunday.threat_active():

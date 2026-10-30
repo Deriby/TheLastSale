@@ -16,3 +16,7 @@
 - Expandir estoque e reposição, comunicação da dupla e visitas de Bryan/Zirico.
 - Fechamento cooperativo desde a 0.18.1; investigação, câmeras e decisões de sábado implementados na 0.19.0. Gravação antiga, revelação, perseguição do domingo e coberturas implementadas na 0.20.0; acabamento de animação, ritmo e balanceamento continuam pendentes.
 - O companheiro caminha até a calçada quando chamado no fechamento; mantém seu posto durante a pane. No domingo, H alterna acompanhar/aguardar e o companheiro procura cobertura física. Refinar decisões de rota e comportamento sob pressão com playtests.
+
+## Reposição e caixas de venda — corrigido na 0.21.0
+
+G1 recebe R1/R2, P1 recebe R3 como reposição extra, pedidos recebem caixas laranja numeradas e o palete recebe cascos vazios. A reposição não fica bloqueada pela conversa inicial. Placas mostram o que falta e o HUD aponta para caixa/destino; caixas erradas não são consumidas. A área de entrega no balcão libera a cobrança de Felps uma única vez. [Guia e validação](supplies_v021/README.md).

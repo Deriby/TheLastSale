@@ -75,7 +75,7 @@ func clock_minutes() -> int:
 func clock_text() -> String:
 	var minutes:=clock_minutes()
 	return "%02d:%02d"%[minutes/60,minutes%60]
-const OBJECTIVES = ["Converse com Felps no caixa.", "Busque uma caixa no estoque e reponha a geladeira da esquerda.  0/2", "Reponha mais uma caixa na geladeira.  1/2", "Guarde a caixa solta no palete do estoque.", "Volte ao caixa. O expediente continua.", "Escute o cliente no caixa.", "Confira o ruído no estoque.", "Fim da demonstração — o turno ainda não acabou."]
+const OBJECTIVES = ["Converse com Felps no caixa.", "Reposição: pegue R1 e R2 no estoque e leve à geladeira G1, na parede esquerda. 0/2", "Reposição: leve a outra caixa R1/R2 à geladeira G1. 1/2", "Guarde a caixa CASCOS VAZIOS no palete DEVOLUÇÕES, no estoque.", "Volte ao caixa. O expediente continua.", "Escute o cliente no caixa.", "Confira o ruído no estoque.", "Fim da demonstração — o turno ainda não acabou."]
 func new_shift() -> void:
 	stage = 0
 	stocked.clear()
@@ -95,26 +95,20 @@ func objective() -> String:
 	return OBJECTIVES[clampi(stage, 0, OBJECTIVES.size()-1)]
 func greet() -> bool:
 	if stage != 0 or int(campaign.night)!=0: return false
-	stage = 1
+	stage = (4 if organized else 3) if StockTasks.required_count()==2 else 2 if StockTasks.required_count()==1 else 1
 	changed.emit()
 	event_triggered.emit("greeted")
 	return true
 func deliver(id: String) -> bool:
-	if stage not in [1, 2] or id in stocked or not id.begins_with("stock_"): return false
+	if int(campaign.night)!=0 or campaign.phase not in ["routine","restored"] or id in stocked or not StockTasks.JOBS.has(id):return false
 	stocked.append(id)
-	carried_id = ""
-	stage = 2 if stocked.size() == 1 else 3
-	changed.emit()
-	event_triggered.emit("stocked")
-	return true
+	if stage in [1,2]:stage=(4 if organized else 3) if StockTasks.required_count()==2 else 2 if StockTasks.required_count()==1 else 1
+	changed.emit();event_triggered.emit("stocked");return true
 func organize() -> bool:
-	if stage != 3 or carried_id != "loose": return false
-	organized = true
-	carried_id = ""
-	stage = 4
-	changed.emit()
-	event_triggered.emit("organized")
-	return true
+	if int(campaign.night)!=0 or campaign.phase not in ["routine","restored"] or organized or carried_id!="loose":return false
+	organized=true
+	if stage==3:stage=4
+	changed.emit();event_triggered.emit("organized");return true
 func serve_customer() -> void:
 	customers_served += 1
 	changed.emit()

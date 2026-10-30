@@ -41,6 +41,7 @@ func make_shelf() -> void:
 			RetailDetails.price_strip(self,Vector3(side*.586,y,0),shelf_length-.12,side*PI/2)
 			var columns:=mini(10,maxi(2,floori((shelf_length-.24)/.25)+1))
 			for index in columns:
+				if needs_restock and side==-1 and row==2 and index>=columns-3:continue
 				var z: float=lerpf(-shelf_length*.5+.18,shelf_length*.5-.18,float(index)/(columns-1))
 				var sku: String
 				if shelf_style=="snacks" and row<4:sku="snack_"+str((row*2+index/4+brand_index)%6)
@@ -68,7 +69,7 @@ func make_fridge() -> void:
 		var y:=.19+row*.35
 		products.add_box(Vector3(0,y,.015),Vector3(.89,.025,.56),Geo.material(Color("9baca1")))
 		for col in 6:
-			if needs_restock and row==2 and col>=3:continue
+			if needs_restock and row==2 and col in [3,4]:continue
 			var sku: String
 			if brand_index%3==0:sku="beer_"+str(col/3%2)
 			elif brand_index%3==1:sku="soda_"+str(col/2%3)
@@ -94,6 +95,13 @@ func make_fridge() -> void:
 	RetailDetails.collision(self,Vector3(0,1.05,-.02),Vector3(1.04,2.10,.76))
 	RetailDetails.shadow(self,Vector3(0,.009,.02),Vector2(1.25,1.0))
 func replenish(slot := -1) -> void:
+	if kind=="shelf":
+		if restock_count>0:return
+		var columns:=mini(10,maxi(2,floori((shelf_length-.24)/.25)+1))
+		for index in range(columns-3,columns):
+			var z: float=lerpf(-shelf_length*.5+.18,shelf_length*.5-.18,float(index)/(columns-1))
+			products.add_product("snack_0",Vector3(-.405,.882,z),-PI/2)
+		restock_count=1;products.flush();return
 	var index:=restock_count if slot<0 else slot
 	products.add_product("beer_0",Vector3(.07+index*.14,.905,.08))
 	products.add_product("beer_0",Vector3(.07+index*.14,.905,-.16))

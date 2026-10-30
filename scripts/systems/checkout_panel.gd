@@ -36,7 +36,7 @@ func refresh() -> void:
 	text(order,"PEDIDO DO CLIENTE",20);text(order,sale.describe(),20)
 	text(order,"TOTAL  "+ShopSale.money(sale.total()),23)
 	if sale.needs_bulk():
-		text(order,"Caixa no balcão • recebida de Deryk" if sale.bulk_supplied else "Caixa fechada no estoque. Deryk precisa trazer a mercadoria.",17)
+		text(order,"Caixa no balcão • recebida de Deryk" if sale.bulk_supplied else "VENDA #%03d • etiqueta LARANJA no estoque. Deryk entrega na área ENTREGA DE PEDIDOS do balcão. R1/R2 são de reposição."%sale.id,17)
 		if not sale.bulk_supplied:action(order,"CallDeryk","CHAMAR DERYK [TAB]",world.request_stock)
 	var work:=VBoxContainer.new();work.custom_minimum_size.x=500;work.size_flags_horizontal=Control.SIZE_EXPAND_FILL;work.add_theme_constant_override("separation",8);columns.add_child(work)
 	match sale.phase:

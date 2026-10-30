@@ -1,0 +1,48 @@
+{
+  "version": "0.21.0",
+  "godot": "4.4.1",
+  "checks": {
+    "main": 188,
+    "friday": 48,
+    "saturday": 53,
+    "sunday": 59,
+    "supply": 35,
+    "total": 383,
+    "passed": 383
+  },
+  "runtime_errors": 0,
+  "fridge_restock_before_initial_greeting": true,
+  "restock_targets": {
+    "G1": [
+      "stock_1",
+      "stock_2"
+    ],
+    "P1": [
+      "stock_shelf"
+    ]
+  },
+  "shelf_task_optional": true,
+  "crate_types_distinguished": [
+    "replenishment",
+    "numbered sale",
+    "empty returns"
+  ],
+  "wrong_crate_preserves_goods_and_explains_destination": true,
+  "physical_counter_delivery_by_E": true,
+  "full_bulk_sale_and_receipt_verified": true,
+  "native_hud_marker_ps1_and_ps12": true,
+  "completed_friday_work_not_recreated_in_later_nights": true,
+  "save_version": 5,
+  "legacy_save_versions_verified": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "assets_and_resources_byte_identical_to_0_20_0": 428,
+  "new_shadow_casting_lights": 0,
+  "default_frame_limit": 30,
+  "native_target_fps_measured": false,
+  "graphics": "Staged review in Compatibility/OpenGL/Linux Mesa llvmpipe, 1280x720; physical behavior and sales verified separately.",
+  "distribution_validation": "See downloads/project/release_verification.json on GitHub for clean ZIP validation."
+}
