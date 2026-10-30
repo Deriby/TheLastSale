@@ -1,0 +1,64 @@
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+PASS domingo inicia sem clientes ou criança no cenário de perigo
+PASS dupla inicia domingo por conversa no balcão
+PASS terminal exige recuperar e entregar o módulo físico antes do vídeo
+PASS Tab fecha o DVR de domingo e devolve controle a Deryk
+PASS Deryk abre a porta do estoque fisicamente
+PASS porta antiga abre para uma sala real de manutenção
+PASS acesso antigo possui piso, vão e navegação até o módulo sem atravessar paredes
+PASS módulo e cadastro são recolhidos pelo personagem presente
+PASS save retoma dentro da manutenção com porta e módulo corretos
+PASS Deryk volta da sala antiga ao balcão por todo o percurso físico
+PASS módulo precisa chegar ao balcão antes da recuperação
+PASS arquivo recuperado é vídeo Theora real, separado da câmera ao vivo
+PASS reprodução do fragmento libera análise sem depender de um temporizador de objetivo invisível
+PASS gravação e cadastro revelam ligação do cliente antes de qualquer perseguição
+PASS não preparar contato no sábado mantém a ajuda pendente no domingo
+PASS cópia do fragmento fica vinculada a Felps e pode sair com ele
+PASS contato e envio no domingo permitem preservar prova e obter ajuda mesmo sem preparo no sábado
+PASS uma cópia enviada não desaparece ao escolher deixar o gravador
+PASS Deryk retorna ao quadro enquanto Felps permanece no terminal
+WARNING: [Physics interpolation] Non-interpolated instance triggered from physics process: "/root/SundayIntegration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@2479/Dery/@Node3D@4810/@SpringArm3D@4811/@Camera3D@4812/@SpotLight3D@4816" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:966)
+PASS conferência inicia separação física, apagão e checkpoint de fuga
+PASS estoque fica realmente trancado e checkpoint precede a ameaça
+PASS modelo Killer fornecido é reutilizado como um único inimigo físico
+PASS Deryk alcança e abre o pátio enquanto o assassino está no mesmo mundo
+PASS rota até o gerador permanece física durante a fuga
+PASS gerador alimenta estoque e emite ruído no mundo da perseguição
+PASS Deryk consegue retornar ao estoque sob ameaça sem teleporte
+PASS Felps pode liberar a porta pelo terminal energizado sem abandonar seu posto
+PASS cooperação exige Deryk no gerador e Felps no terminal físico
+PASS H manda o companheiro acompanhar sem mover seu corpo instantaneamente
+PASS Felps conduz a fuga de volta à frente do depósito
+PASS comando manual inicia abertura progressiva da saída
+PASS pausa congela perseguição e mecanismo de saída
+PASS preparar a saída no sábado reduz a duração de abertura no domingo
+PASS jogador deixa o prédio e alcança o contato pela calçada
+PASS companheiro sai do estoque, percorre o salão e chega ao mesmo encontro
+PASS saída abre confirmação contextual sem encerrar a história automaticamente
+PASS dois sobreviventes com prova recebem o final do caso esclarecido
+PASS continuar depois do fim reabre o epílogo salvo
+PASS sem preparo no sábado, abertura manual exige permanecer por mais tempo
+PASS afastar-se do comando interrompe a abertura em vez de liberar saída remotamente
+PASS visão reconhece personagem exposto no cone sem consultar o personagem controlado
+PASS porta e parede bloqueiam detecção e captura através da divisão
+PASS ruído muda busca para a posição ouvida
+PASS Tab não reinicia nem teleporta o assassino ou apaga sua memória
+PASS lanterna aumenta alcance de detecção em um corredor escuro
+PASS save conserva posição de busca, tempo, estado e último ponto conhecido
+PASS save preserva alvo e tempo restante do golpe em preparação
+PASS captura abre derrota recuperável sem gravar final narrativo
+PASS retomar derrota volta a um checkpoint viável anterior aos mecanismos e mantém breve proteção
+PASS E entra em cobertura agachada sem teleporte e apaga a lanterna
+PASS salvar e continuar mantém corpo, colisão agachada e cobertura
+PASS mover-se sai da cobertura sem invisibilidade persistente
+PASS sair com os dois sem prova produz epílogo distinto do caso aberto
+PASS separação na saída exige confirmação explícita para abandonar companheiro
+PASS cancelar saída permite voltar para resgatar sem escolher final
+PASS confirmar saída sozinho registra apenas o sobrevivente que chegou
+PASS final sozinho persiste e não inicia uma quarta noite
+PASS reiniciar após o epílogo limpa ameaça, final e retry e volta à sexta
+PASS save 0.19 do domingo em prévia migra para abertura jogável sem iniciar perigo antes da hora
+SUNDAY RESULT 59/59 passed; failures=[]

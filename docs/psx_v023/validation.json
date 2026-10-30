@@ -1,0 +1,56 @@
+{
+  "version": "0.23.0",
+  "godot": "4.4.1",
+  "base_commit": "a4195e3",
+  "source_integration": {
+    "main": 188,
+    "friday": 48,
+    "saturday": 53,
+    "sunday": 59,
+    "supply": 35,
+    "natural_motion": 48,
+    "psx": 28,
+    "passed": 459,
+    "total": 459,
+    "runtime_errors": 0
+  },
+  "psx_power_regression": {
+    "mode": "PS1/2, Marcada",
+    "friday": 48,
+    "sunday": 59,
+    "passed": 107,
+    "total": 107,
+    "runtime_errors": 0
+  },
+  "rendered_psx_checks": 28,
+  "rendering": "OpenGL Compatibility, Mesa llvmpipe, Linux",
+  "visual_captures": [
+    "ps1_off.png",
+    "ps1_soft.png",
+    "ps1_strong.png",
+    "ps12_off.png",
+    "ps12_soft.png",
+    "ps12_strong.png",
+    "settings.png"
+  ],
+  "source_log": "integration.log",
+  "power_logs": [
+    "psx_friday.log",
+    "psx_sunday.log"
+  ],
+  "render_log": "render.log",
+  "all_published_assets_and_resources_byte_identical_to_0_22_0": 440,
+  "models_and_animation_libraries_modified": 0,
+  "physics_and_save_code_modified": false,
+  "new_lights": 0,
+  "new_viewports": 0,
+  "default_frame_limit": 30,
+  "save_version": 5,
+  "hud_native_resolution": true,
+  "settings_persisted_independently": true,
+  "conventional_modes_restore_original_materials": true,
+  "no_executable_export": true,
+  "native_radeon_r7_fps_measured": false,
+  "archive_verification": "https://github.com/Deriby/TheLastSale/blob/main/downloads/project/release_verification.json",
+  "live_placement_preview_color_verified": true
+}

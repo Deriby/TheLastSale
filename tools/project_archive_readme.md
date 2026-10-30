@@ -1,4 +1,4 @@
-# The Last Sale — projeto Godot 0.22.0
+# The Last Sale — projeto Godot 0.23.0
 
 1. Extraia este ZIP em uma pasta nova.
 2. No Godot **4.4.1**, clique em **Importar** e escolha `project.godot`.
@@ -7,7 +7,11 @@
 
 Modelos animados, cenários, sons, texturas, código, testes e ferramentas estão incluídos. Blender não é necessário para jogar. O renderizador é Compatibility / OpenGL.
 
-## Movimento e acabamento do cenário
+## Efeitos PS1 / PS1/2 — 0.23.0
+
+Em Configurações, selecione PS1 (320×240) ou PS1/2 (640×480). Precisão de vértices PS1 e Texturas afins PS1 podem ser Desligada, Suave ou Marcada, independentemente. Suave é o padrão. As escolhas ficam salvas e só afetam esses dois modos. HUD e menus permanecem em resolução plena. Os modelos, animações, colisões, saves e circuitos de energia foram preservados. Veja `docs/psx_v023/README.md`.
+
+## Movimento e acabamento do cenário — 0.22.0
 
 A 0.22.0 inclui bibliotecas de animação medidas para cada rig: caminhada, corrida, transporte, agachamento, repouso e gestos comuns. Os pés levantam menos, a cadência acompanha o deslocamento e o tronco reage à aceleração e às curvas. Os modelos e as texturas recebidos foram preservados. Ferramentas, papéis, tapete e relógio detalham o depósito; lixeira, sarjeta e marcas de uso complementam a rua. Veja `docs/natural_v022/README.md` e o vídeo comparativo incluído.
 

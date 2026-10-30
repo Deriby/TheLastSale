@@ -1,0 +1,34 @@
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:360)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+PASS preferências antigas recebem intensidade Suave por padrão
+PASS Configurações expõe os dois efeitos separadamente
+PASS cada efeito oferece Desligada, Suave e Marcada
+PASS PS1 mantém cenário em 320×240
+PASS HUD continua no viewport em resolução plena
+PASS PS1 aplica efeitos às superfícies do cenário
+PASS Suave usa grade de meio pixel para vértices
+PASS Suave mistura interpolação afim a 35%
+PASS Marcada usa grade de 1,5 pixel e interpolação afim completa
+PASS precisão desligada preserva a seleção de texturas afins
+PASS texturas afins desligadas preservam a precisão selecionada
+PASS desligar os dois efeitos restaura os materiais originais
+PASS PS1/2 mantém cenário em 640×480
+PASS PS1/2 recebe os mesmos efeitos 3D
+PASS Nítida restaura o material original
+PASS Retrô restaura o material original
+PASS Econômica restaura o material original
+PASS efeitos não reconstroem nem modificam a geometria
+PASS rig e animações publicados permanecem intactos
+PASS trocas de intensidade preservam posição e formas de colisão
+PASS salão energizado mantém emissão no material adaptado
+PASS apagão desliga a emissão original e a adaptada
+PASS apagão preserva circuitos de luz e baterias
+PASS restabelecer energia religa materiais e desliga baterias
+PASS atribuição de material durante jogo é preservada ao sair de PS1
+PASS objetos novos recebem efeitos e marcador de apoio acompanha a cor válida/bloqueada
+PASS reconstruir o mundo renova efeitos e circuitos
+PASS intensidades independentes persistem em settings.cfg
+PSX RESULT 28/28 passed; failures=[]

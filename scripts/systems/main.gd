@@ -5,6 +5,7 @@ var world: ShiftWorld
 var interface: ShiftInterface
 var retro: ShaderMaterial
 var initial_world_pristine:=false
+var psx: PSXMaterials
 func _ready() -> void:
 	Controls.install()
 	var background:=ColorRect.new();background.name="LetterboxBackground";add_child(background);background.color=Color.BLACK;background.mouse_filter=Control.MOUSE_FILTER_IGNORE;background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -21,6 +22,7 @@ func _ready() -> void:
 	Preferences.changed.connect(apply_settings);get_viewport().size_changed.connect(update_render_size);apply_settings()
 	initial_world_pristine=Session.stage==0 and Session.stocked.is_empty() and not Session.organized and Session.carried_id.is_empty() and Session.campaign.phase=="routine"
 	build_world()
+	psx=PSXMaterials.new();psx.root=world;add_child(psx)
 	get_tree().paused=true
 func apply_settings() -> void:
 	SurfaceMaterials.apply_quality()
@@ -54,6 +56,7 @@ func update_render_size() -> void:
 	if retro!=null:retro.set_shader_parameter("game_bounds",bounds)
 func build_world() -> void:
 	interface.close_sunday_desk();interface.close_surveillance();interface.close_checkout()
+	if psx!=null:psx.restore()
 	if world!=null:
 		viewport.remove_child(world);world.free()
 	world=ShiftWorld.new();viewport.add_child(world)
@@ -70,6 +73,7 @@ func build_world() -> void:
 	world.slice_finished.connect(interface.show_night_summary)
 	interface.set_character(world.player,false)
 	world.restore_transient()
+	if psx!=null:psx.root=world;psx.refresh()
 func on_focused(text: String,actor: DepotPlayer) -> void:
 	if actor.controlled:interface.prompt.text=text
 func start_new() -> void:

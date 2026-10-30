@@ -1,0 +1,55 @@
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+PASS sexta permite uma única pane recuperável durante atendimento em andamento
+PASS pane fecha o painel sem prender Felps nem repetir o evento
+PASS sem energia a cobrança para e preserva troco e etapa da venda
+PASS pane apaga luzes comerciais e sons dos equipamentos, mantendo emergência
+PASS alterar qualidade durante apagão não religa geladeiras
+PASS gerador exige chave e confirmação de Felps
+PASS Felps suspende o atendimento fisicamente no posto do caixa
+PASS Felps não recolhe a chave destinada a Deryk
+PASS Deryk alcança a porta do estoque durante o apagão
+PASS Deryk atravessa a porta aberta e chega ao suporte da chave
+PASS chave é recolhida por interação e desaparece do suporte
+PASS continuar durante pane preserva chave, tarefa de Felps e luzes apagadas
+PASS continuar mantém pedido, cliente provisório e troco interrompido
+PASS Deryk alcança a porta do pátio no fundo do estoque
+PASS Deryk sai por abertura real e caminha até o gerador externo
+PASS checkpoint no pátio mantém posição e contato com o chão
+PASS Deryk liga o gerador com a chave e a confirmação do salão
+PASS energia de reserva restaura equipamentos e inicia som local do gerador
+PASS observação da rua iluminada fica registrada e venda mantém o troco parcial
+PASS continuar depois de ligar o gerador não exige repetir a tarefa
+PASS Felps retoma o atendimento interrompido quando a energia volta
+PASS atendimento retomado entrega compra e credita um único recibo
+PASS último cliente sai fisicamente antes de iniciar o fechamento
+PASS saída é bloqueada enquanto faltam tarefas de fechamento
+PASS Felps confere e fecha o caixa após terminar todas as vendas
+WARNING: [Physics interpolation] Non-interpolated instance triggered from physics process: "/root/FridayIntegration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@7212/Dery/@Node3D@9512/@SpringArm3D@9513/@Camera3D@9514/@SpotLight3D@9518" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:966)
+PASS Deryk retorna do gerador pelo pátio
+PASS Deryk volta ao estoque e verifica a área antiga sem atravessar paredes
+PASS inspeção da porta antiga conclui a conferência do estoque
+PASS quadro permite apagar o salão somente após caixa e estoque conferidos
+PASS fechamento silencia rádio e salão, preservando refrigeração
+PASS Felps alcança o comando das portas pelo lado de fora
+PASS chamar companheiro inicia encontro da dupla na calçada
+PASS companheiro percorre fisicamente o estoque e o salão até a calçada
+PASS Felps também sai autonomamente do posto quando Deryk chama o companheiro
+PASS retomada do fechamento preserva tarefas, encontro da dupla e posição na calçada
+PASS portas só podem baixar com os dois protagonistas do lado de fora
+PASS pausa congela o fechamento e impede que a noite termine com animação suspensa
+PASS sexta conclui com resumo, salvamento e passagem de dia
+PASS resumo e botão de transição cabem na janela com cenário PS1/PS1/2 independente
+PASS resumo conserva vendas e recibos da sexta sem duplicação
+PASS transição prepara abertura de sábado e atualiza o dia no HUD
+PASS nova noite preserva pistas e histórico e reinicia o caixa diário
+PASS abertura de sábado reconhece sexta e libera a nova rotina após conversa no caixa
+WARNING: [Physics interpolation] Non-interpolated instance triggered from physics process: "/root/FridayIntegration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@14401/Depot/Architecture/ServiceDoor/@MeshInstance3D@16761" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:966)
+PASS continuar no sábado retoma sua rotina sem reiniciar a sexta
+PASS checkpoint completo da versão 3 migra para a pane e permite continuar a sexta
+PASS save antigo após o aviso e antes do fim da demonstração migra para a pane
+PASS save versão 4 na transição após o aviso retoma o apagão sem bloquear a noite
+PASS transição em execução aguarda a conversa e retoma a pane mesmo sem callback anterior
+FRIDAY RESULT 48/48 passed; failures=[]

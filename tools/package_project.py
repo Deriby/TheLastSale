@@ -6,7 +6,7 @@ import json
 import zipfile
 
 ROOT = Path(__file__).resolve().parent.parent
-VERSION = "0.22.0"
+VERSION = "0.23.0"
 
 
 def main():
@@ -33,6 +33,11 @@ def main():
         for path in sorted((ROOT / "docs" / gallery).rglob("*")):
             if path.is_file():
                 sources[path.relative_to(ROOT).as_posix()] = path
+    # Keep the editor ZIP below GitHub's 100 MiB per-file limit. Full comparison
+    # galleries remain published in the repository; include the PSX guide and two views.
+    for name in ["README.md", "validation.json", "ps1_soft.png", "settings.png"]:
+        relative = "docs/psx_v023/" + name
+        sources[relative] = ROOT / relative
     sources["README.md"] = ROOT / "tools/project_archive_readme.md"
     records = {name: {"bytes": path.stat().st_size,
                        "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
