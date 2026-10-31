@@ -109,7 +109,7 @@ func build_menu() -> void:
 	message.add_theme_font_override("font",TitlePresentation.TYPEWRITER);message.modulate=Color("a8a38f")
 	buttons=VBoxContainer.new();v.add_child(buttons);buttons.add_theme_constant_override("separation",7)
 	rebuild_buttons()
-	var footer:=label(v,"0.25.0  /  FONES DE OUVIDO RECOMENDADOS",16)
+	var footer:=label(v,"0.26.0  /  FONES DE OUVIDO RECOMENDADOS",16)
 	footer.add_theme_font_override("font",TitlePresentation.VCR);footer.modulate=Color("828473")
 	menu_motion=TitleMenuMotion.new(menu,v,buttons,title_lockup)
 	layout_menu()

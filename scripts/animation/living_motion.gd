@@ -19,6 +19,7 @@ var current_clip:=""
 var visual_meshes: Array[MeshInstance3D]=[]
 var last_view_state:=-1
 var profile: Dictionary={}
+var contacts: Dictionary={}
 var strides: Dictionary = {"walk":1.12,"walk_back":.80,"strafe_left":.82,"strafe_right":.82,"run":2.35,"crouch_walk":.62,"carry_walk":.86}
 const IDLE_VARIANTS: Array[String]=["idle_shift","idle_look","idle_adjust"]
 const LOOP_CLIPS: Array[String] = ["idle","idle_tired","walk","walk_back","strafe_left","strafe_right","run","crouch_idle","crouch_walk","carry","carry_walk","talk","cashier","cashier_idle","look","hold_bottle"]
@@ -37,7 +38,7 @@ func setup(visual: Node3D,actor: Node3D) -> void:
 	attention=HeadAttention.new();attention.visual=visual;skeleton.add_child(attention)
 	feet.motion=self
 	feet.clearance=float(visual.get_meta("foot_clearance",.1335))
-	feet.anchor_limit=.06*float(visual.get_meta("stride_scale",1.0))
+	feet.anchor_limit=.025*float(visual.get_meta("stride_scale",1.0))
 	attention.eye_height=float(visual.get_meta("height_m",1.78))*.89
 	var stride_scale: float=visual.get_meta("stride_scale",1.0)
 	for key in strides:strides[key]*=stride_scale
@@ -47,8 +48,15 @@ func setup(visual: Node3D,actor: Node3D) -> void:
 		if not animator.has_animation_library("natural"):animator.add_animation_library("natural",library)
 		for clip in library.get_animation_list():clips[str(clip)]="natural/"+str(clip)
 		for key in library.get_meta("strides",{}):strides[key]=library.get_meta("strides")[key]
+		contacts=library.get_meta("contacts",{})
 	skeleton.skeleton_updated.connect(func():pose_updated.emit())
 	play("idle",0)
+func foot_contact(side: String) -> float:
+	if not contacts.has(current_clip):return 0.0
+	var samples: Array=contacts[current_clip]
+	var at:=fposmod(animator.current_animation_position/maxf(.001,animator.current_animation_length),1.0)*(samples.size()-1)
+	var low:=int(at);var high:=mini(low+1,samples.size()-1);var k:=0 if side=="L" else 1
+	return lerpf(samples[low][k],samples[high][k],at-low)
 func play(clip: String,blend := .22,preserve_phase := false) -> void:
 	if not clips.has(clip):return
 	# Speech or another explicit pose can interrupt a one-shot idle variation.

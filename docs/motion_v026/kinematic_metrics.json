@@ -1,0 +1,167 @@
+{
+  "Bryan": {
+    "cadence_at_1_15_mps": 1.68398775692682,
+    "idle": {
+      "body_roll_range": 0.0158404704395608,
+      "hand_range": 0.0721590309699769
+    },
+    "run": {
+      "body_roll_range": 0.0649571438226024,
+      "hand_range": 0.404247271904449
+    },
+    "walk": {
+      "body_roll_range": 0.122612742900548,
+      "hand_range": 0.210854602761806
+    }
+  },
+  "Customer1": {
+    "cadence_at_1_15_mps": 0.991848180224606,
+    "idle": {
+      "body_roll_range": 0.013242769727778,
+      "hand_range": 0.0317111611366272
+    },
+    "run": {
+      "body_roll_range": 0.0361543679834485,
+      "hand_range": 0.73292750120163
+    },
+    "walk": {
+      "body_roll_range": 0.112367592769169,
+      "hand_range": 0.39018052816391
+    }
+  },
+  "Customer2": {
+    "cadence_at_1_15_mps": 0.961486388045805,
+    "idle": {
+      "body_roll_range": 0.013242769727778,
+      "hand_range": 0.0317111611366272
+    },
+    "run": {
+      "body_roll_range": 0.0361543679834485,
+      "hand_range": 0.73292750120163
+    },
+    "walk": {
+      "body_roll_range": 0.0489345950953686,
+      "hand_range": 0.126381620764732
+    }
+  },
+  "Customer3": {
+    "cadence_at_1_15_mps": 0.991848180224606,
+    "idle": {
+      "body_roll_range": 0.013242769727778,
+      "hand_range": 0.0317111611366272
+    },
+    "run": {
+      "body_roll_range": 0.0361543679834485,
+      "hand_range": 0.73292750120163
+    },
+    "walk": {
+      "body_roll_range": 0.112367592769169,
+      "hand_range": 0.39018052816391
+    }
+  },
+  "Dery": {
+    "cadence_at_1_15_mps": 1.03383688548785,
+    "idle": {
+      "body_roll_range": 0.0183108872779089,
+      "hand_range": 0.0280524492263794
+    },
+    "run": {
+      "body_roll_range": 0.0763385168575947,
+      "hand_range": 0.469314128160477
+    },
+    "walk": {
+      "body_roll_range": 0.130720831364396,
+      "hand_range": 0.285869777202606
+    }
+  },
+  "Enemy": {
+    "cadence_at_1_15_mps": 0.838173382927994,
+    "idle": {
+      "body_roll_range": 0.0180081512244858,
+      "hand_range": 0.0288053150735799
+    },
+    "run": {
+      "body_roll_range": 0.0813176898159048,
+      "hand_range": 0.664774141834755
+    },
+    "walk": {
+      "body_roll_range": 0.111878291670806,
+      "hand_range": 0.386954926088293
+    }
+  },
+  "Felps": {
+    "cadence_at_1_15_mps": 0.924114987164777,
+    "idle": {
+      "body_roll_range": 0.0185560978558717,
+      "hand_range": 0.0293135032285186
+    },
+    "run": {
+      "body_roll_range": 0.0695391602138103,
+      "hand_range": 0.575974546897584
+    },
+    "walk": {
+      "body_roll_range": 0.0538071469883271,
+      "hand_range": 0.120577195800768
+    }
+  },
+  "Garota1": {
+    "cadence_at_1_15_mps": 0.957649127288837,
+    "idle": {
+      "body_roll_range": 0.0384557505915466,
+      "hand_range": 0.0266837659548207
+    },
+    "run": {
+      "body_roll_range": 0.0558656994755676,
+      "hand_range": 0.518740981716633
+    },
+    "walk": {
+      "body_roll_range": 0.121716277538288,
+      "hand_range": 0.300479351960419
+    }
+  },
+  "Garota2": {
+    "cadence_at_1_15_mps": 0.831482372787159,
+    "idle": {
+      "body_roll_range": 0.0384363663299676,
+      "hand_range": 0.0302371446798766
+    },
+    "run": {
+      "body_roll_range": 0.0532814947779464,
+      "hand_range": 0.562003170784408
+    },
+    "walk": {
+      "body_roll_range": 0.0541007016410253,
+      "hand_range": 0.122428933757774
+    }
+  },
+  "Velha1": {
+    "cadence_at_1_15_mps": 1.30996676244788,
+    "idle": {
+      "body_roll_range": 0.0179498910277172,
+      "hand_range": 0.0258112538945072
+    },
+    "run": {
+      "body_roll_range": 0.130623481504153,
+      "hand_range": 0.463936725966391
+    },
+    "walk": {
+      "body_roll_range": 0.103590343259316,
+      "hand_range": 0.259370239389128
+    }
+  },
+  "Zirico": {
+    "cadence_at_1_15_mps": 1.11698482287075,
+    "idle": {
+      "body_roll_range": 0.11951905345229,
+      "hand_range": 0.0619259090783864
+    },
+    "run": {
+      "body_roll_range": 0.0812790008838291,
+      "hand_range": 0.566776916979705
+    },
+    "walk": {
+      "body_roll_range": 0.120980055972855,
+      "hand_range": 0.340516802492274
+    }
+  }
+}

@@ -1,0 +1,245 @@
+{
+  "Bryan": {
+    "idle": {
+      "finite": true,
+      "penetration_m": 0.0,
+      "support_gap_m": 0.00116467371117324
+    },
+    "run": {
+      "finite": true,
+      "penetration_m": 0.00414187461137772,
+      "support_gap_m": 0.00599472736939788
+    },
+    "walk": {
+      "finite": true,
+      "penetration_m": 0.000168721191585064,
+      "support_gap_m": 0.00133452063892037
+    }
+  },
+  "Customer1": {
+    "carry_walk": {
+      "finite": true,
+      "penetration_m": 0.0,
+      "support_gap_m": 0.00205203890800476
+    },
+    "crouch_walk": {
+      "finite": true,
+      "penetration_m": 0.00295456871390343,
+      "support_gap_m": 0.00277036428451538
+    },
+    "idle": {
+      "finite": true,
+      "penetration_m": 0.0,
+      "support_gap_m": 0.00152772106230259
+    },
+    "run": {
+      "finite": true,
+      "penetration_m": 0.00682572461664677,
+      "support_gap_m": 0.0155613636597991
+    },
+    "walk": {
+      "finite": true,
+      "penetration_m": 0.0,
+      "support_gap_m": 0.00205213576555252
+    }
+  },
+  "Customer2": {
+    "carry_walk": {
+      "finite": true,
+      "penetration_m": 0.0,
+      "support_gap_m": 0.0030527263879776
+    },
+    "crouch_walk": {
+      "finite": true,
+      "penetration_m": 0.00295456871390343,
+      "support_gap_m": 0.00277036428451538
+    },
+    "idle": {
+      "finite": true,
+      "penetration_m": 0.0,
+      "support_gap_m": 0.00152772106230259
+    },
+    "run": {
+      "finite": true,
+      "penetration_m": 0.00682572461664677,
+      "support_gap_m": 0.0155613636597991
+    },
+    "walk": {
+      "finite": true,
+      "penetration_m": 0.0,
+      "support_gap_m": 0.00281837582588196
+    }
+  },
+  "Customer3": {
+    "carry_walk": {
+      "finite": true,
+      "penetration_m": 0.0,
+      "support_gap_m": 0.00205203890800476
+    },
+    "crouch_walk": {
+      "finite": true,
+      "penetration_m": 0.00295456871390343,
+      "support_gap_m": 0.00277036428451538
+    },
+    "idle": {
+      "finite": true,
+      "penetration_m": 0.0,
+      "support_gap_m": 0.00152772106230259
+    },
+    "run": {
+      "finite": true,
+      "penetration_m": 0.00682572461664677,
+      "support_gap_m": 0.0155613636597991
+    },
+    "walk": {
+      "finite": true,
+      "penetration_m": 0.0,
+      "support_gap_m": 0.00205213576555252
+    }
+  },
+  "Dery": {
+    "carry_walk": {
+      "finite": true,
+      "penetration_m": 0.0,
+      "support_gap_m": 0.00220793089829385
+    },
+    "crouch_height_m": {
+      "height_m": 1.08692854642868
+    },
+    "crouch_walk": {
+      "finite": true,
+      "penetration_m": 0.00155748019460589,
+      "support_gap_m": 0.00232856906950474
+    },
+    "idle": {
+      "finite": true,
+      "penetration_m": 0.0,
+      "support_gap_m": 0.0015709059080109
+    },
+    "run": {
+      "finite": true,
+      "penetration_m": 0.0077458112500608,
+      "support_gap_m": 0.0246234498918056
+    },
+    "walk": {
+      "finite": true,
+      "penetration_m": 0.0,
+      "support_gap_m": 0.00220812484622002
+    }
+  },
+  "Enemy": {
+    "idle": {
+      "finite": true,
+      "penetration_m": 0.0,
+      "support_gap_m": 0.00168417568784207
+    },
+    "run": {
+      "finite": true,
+      "penetration_m": 0.00808750744909048,
+      "support_gap_m": 0.0206387583166361
+    },
+    "walk": {
+      "finite": true,
+      "penetration_m": 0.0,
+      "support_gap_m": 0.00228954548947513
+    }
+  },
+  "Felps": {
+    "carry_walk": {
+      "finite": true,
+      "penetration_m": 0.0,
+      "support_gap_m": 0.00328956847079098
+    },
+    "crouch_height_m": {
+      "height_m": 1.00893238586598
+    },
+    "crouch_walk": {
+      "finite": true,
+      "penetration_m": 0.00192903273273259,
+      "support_gap_m": 0.00249897525645792
+    },
+    "idle": {
+      "finite": true,
+      "penetration_m": 0.0,
+      "support_gap_m": 0.00134323514066637
+    },
+    "run": {
+      "finite": true,
+      "penetration_m": 0.00739636970683932,
+      "support_gap_m": 0.00359889748506248
+    },
+    "walk": {
+      "finite": true,
+      "penetration_m": 0.0,
+      "support_gap_m": 0.00328787812031806
+    }
+  },
+  "Garota1": {
+    "idle": {
+      "finite": true,
+      "penetration_m": 0.000541461573448032,
+      "support_gap_m": 0.00263899518176913
+    },
+    "run": {
+      "finite": true,
+      "penetration_m": 0.00844223238527775,
+      "support_gap_m": 0.00823371578007936
+    },
+    "walk": {
+      "finite": true,
+      "penetration_m": 0.00110555510036647,
+      "support_gap_m": 0.00260098464787006
+    }
+  },
+  "Garota2": {
+    "idle": {
+      "finite": true,
+      "penetration_m": 0.0,
+      "support_gap_m": 0.00213376781903207
+    },
+    "run": {
+      "finite": true,
+      "penetration_m": 0.00824928563088179,
+      "support_gap_m": 0.00219884444959462
+    },
+    "walk": {
+      "finite": true,
+      "penetration_m": 0.000513689999934286,
+      "support_gap_m": 0.00296248984523118
+    }
+  },
+  "Velha1": {
+    "idle": {
+      "finite": true,
+      "penetration_m": 0.0,
+      "support_gap_m": 0.00143797451164573
+    },
+    "run": {
+      "finite": true,
+      "penetration_m": 0.0130919590592384,
+      "support_gap_m": 0.0131613267585635
+    },
+    "walk": {
+      "finite": true,
+      "penetration_m": 0.0,
+      "support_gap_m": 0.00174069625791162
+    }
+  },
+  "Zirico": {
+    "idle": {
+      "finite": true,
+      "penetration_m": 0.0,
+      "support_gap_m": 0.0038402690552175
+    },
+    "run": {
+      "finite": true,
+      "penetration_m": 0.00685903243720531,
+      "support_gap_m": 0.0233077798038721
+    },
+    "walk": {
+      "finite": true,
+      "penetration_m": 0.00105207751039416,
+      "support_gap_m": 0.0210914127528667
+    }
+  }
+}

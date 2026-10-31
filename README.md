@@ -2,9 +2,17 @@
 
 Demonstração jogável em **Godot 4.4.1 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP, com uma primeira versão jogável da campanha de sexta a domingo. Acabamento e ritmo continuam em desenvolvimento.
 
-**[Baixar o projeto 0.25.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.25.0.zip)**
+**[Baixar o projeto 0.26.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.26.0.zip)**
 
 Extraia o ZIP, importe `project.godot` no Godot **4.4.1**, aguarde a importação dos modelos e pressione **F5**. O arquivo inclui os modelos animados, cenários, código e recursos usados no jogo. [Conteúdo e instruções do projeto](downloads/project/README.md).
+
+## Revisão 0.26.0 — nova base para as animações
+
+A caminhada, corrida, repouso, agachamento e conversa agora partem de animações de referência de Quaternius (CC0), transferidas para os 11 rigs existentes. Quadril, ombros, braços e joelhos acompanham a passada; o apoio dos pés vem do contato real da referência. Zirico e Bryan conservam seus movimentos próprios, e os protagonistas e garotas têm variações de postura e cadência.
+
+Nos clientes modulares, o giro do braço foi corrigido para a raiz real da manga, eliminando a peça que subia ao lado do rosto. As malhas, texturas, pesos, física, câmera, HUD, energia, saves, intro e menu foram preservados. [Vídeo da nova revisão e detalhes](docs/motion_v026/README.md).
+
+![Nova caminhada](docs/motion_v026/profile_0.png)
 
 ## Revisão 0.25.0 — movimentos próprios para o elenco
 
@@ -260,7 +268,7 @@ A reconstrução 0.2 do interior recebeu gôndolas abastecidas por categoria, ge
 
 ## Jogar
 
-**[Baixar o projeto Godot 0.25.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.25.0.zip)**
+**[Baixar o projeto Godot 0.25.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.26.0.zip)**
 
 O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **0.24.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
 

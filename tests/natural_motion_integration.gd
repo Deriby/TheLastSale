@@ -56,16 +56,18 @@ func run() -> void:
 		var results:={}
 		for clip in ["idle","walk","run","carry_walk","crouch_walk"]:
 			if not motion.clips.has(clip):continue
-			motion.play(clip,0);var penetration:=0.0;var floating:=0.0;var finite:=true
+			motion.play(clip,0);var penetration:=0.0;var floating:=0.0;var finite:=true;var support_samples:=0
 			for frame in 25:
 				var t:=float(frame)/24;motion.animator.seek(t*motion.animator.current_animation_length,true);motion.animator.advance(0)
 				for side in ["L","R"]:
 					var floor:=lowest(sole[side],sk);penetration=maxf(penetration,-floor)
-					var phase:=fposmod(t+(0 if side=="L" else .5),1)
-					if clip=="idle" or phase<(.36 if clip=="run" else .61):floating=maxf(floating,floor)
+					# Reference contact samples come from its independently skinned
+					# shoe surface. Running includes a real airborne interval.
+					if clip=="idle" or motion.foot_contact(side)>.95:
+						floating=maxf(floating,floor);support_samples+=1
 				for bone in sk.get_bone_count():finite=finite and sk.get_bone_global_pose(bone).is_finite()
 			results[clip]={"penetration_m":penetration,"support_gap_m":floating,"finite":finite}
-			check(finite and penetration<.025 and floating<.025,identity+" • "+clip+" mantém solas no piso sem deformação inválida (pen=%.3f, gap=%.3f)"%[penetration,floating])
+			check(finite and support_samples>=6 and penetration<.025 and floating<.025,identity+" • "+clip+" mantém contato nas fases de apoio sem deformação inválida (pen=%.3f, gap=%.3f)"%[penetration,floating])
 		if identity in ["Dery","Felps"]:
 			motion.play("crouch_idle",0);motion.animator.seek(1,true);motion.animator.advance(0)
 			var head:=sk.find_bone("head");var crown:=0.0

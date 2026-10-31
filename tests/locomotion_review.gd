@@ -37,7 +37,7 @@ func _ready() -> void:
 		var group:=Node3D.new();add_child(group);groups.append(group);var members: Array=[]
 		for number in GROUPS[index].size():
 			var identity: String=GROUPS[index][number]
-			var actor:=ReviewActor.new();group.add_child(actor);actor.physics_interpolation_mode=Node.PHYSICS_INTERPOLATION_MODE_OFF
+			var actor:=ReviewActor.new();group.add_child(actor)
 			actor.position=Vector3((number-(GROUPS[index].size()-1)*.5)*1.35,.01,0)
 			var shape:=CollisionShape3D.new();var capsule:=CapsuleShape3D.new();capsule.radius=.20;capsule.height=1.1 if identity=="Bryan" else 1.65;shape.shape=capsule;shape.position.y=capsule.height*.5;actor.add_child(shape);actor.collision_layer=2;actor.collision_mask=1
 			actor.visual=CharacterModels.create(identity);actor.add_child(actor.visual)
@@ -77,9 +77,10 @@ func _process(_delta: float) -> void:
 	focus/=actors[page].size()
 	var child:=page==3
 	var distance:=6.4 if actors[page].size()>2 else 5.0 if actors[page].size()>1 else 3.8
-	camera.position=focus+Vector3(distance*.30,1.2 if child else 1.45,distance)
+	var angle:=deg_to_rad(18.0+48.0*smoothstep(0,6.0,fmod(elapsed,6.0)))
+	camera.position=focus+Vector3(sin(angle)*distance,1.2 if child else 1.45,cos(angle)*distance)
 	camera.look_at(focus+Vector3.UP*(.66 if child else .91))
-	caption.text="0.25.0  /  "+HEADINGS[page]+"\n"+{"idle":"Repouso","walk":"Caminhada real","run":"Corrida","carry_walk":"Transporte","talk":"Conversa","fidget":"Gesto inquieto"}.get(actors[page][0].mode,"")
+	caption.text="0.26.0  /  "+HEADINGS[page]+"\n"+{"idle":"Repouso","walk":"Caminhada real","run":"Corrida","carry_walk":"Transporte","talk":"Conversa","fidget":"Gesto inquieto"}.get(actors[page][0].mode,"")
 func capture(id: String) -> void:
 	await RenderingServer.frame_post_draw
 	DirAccess.make_dir_recursive_absolute(output);get_viewport().get_texture().get_image().save_png(output+"/profile_"+id+".png");print("LOCOMOTION CAPTURE ",id)

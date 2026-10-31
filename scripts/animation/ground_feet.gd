@@ -42,19 +42,16 @@ func _process_modification() -> void:
 		var amount: float=corrections[side]
 		var world:=skeleton.global_transform*c.origin
 		var locked:=false
+		var contact_weight:=0.0
 		if motion!=null and motion.strides.has(motion.current_clip) and not motion.action_active and motion.filtered_speed>.15:
-			var phase:=fposmod(motion.animator.current_animation_position/maxf(.001,motion.animator.current_animation_length)+(0 if side=="L" else .5),1.0)
-			locked=phase<(.36 if motion.current_clip=="run" else .61)
+			contact_weight=motion.foot_contact(side);locked=contact_weight>.05
 		if locked:
 			if not was_support[side]:anchors[side]=world
 			var anchor: Vector3=anchors[side]
 			var offset:=Vector2(anchor.x-world.x,anchor.z-world.z)
 			if offset.length()>anchor_limit:
 				offset=offset.limit_length(anchor_limit);anchors[side]=world+Vector3(offset.x,0,offset.y)
-			var phase:=fposmod(motion.animator.current_animation_position/maxf(.001,motion.animator.current_animation_length)+(0 if side=="L" else .5),1.0)
-			var end:=.36 if motion.current_clip=="run" else .61
-			var weight:=smoothstep(0,.07,phase)*(1.0-smoothstep(end-.07,end,phase))
-			world.x+=offset.x*weight;world.z+=offset.y*weight
+			world.x+=offset.x*contact_weight;world.z+=offset.y*contact_weight
 		was_support[side]=locked
 		var target:=skeleton.to_local(world+Vector3.UP*amount)
 		if target.distance_to(c.origin)<.0002:continue

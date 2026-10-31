@@ -1,0 +1,23 @@
+{
+  "version": "0.26.0",
+  "godot": "4.4.1",
+  "animation_source": "Quaternius Universal Animation Library Standard",
+  "source_license": "CC0-1.0",
+  "rigs": 11,
+  "original_mesh_material_texture_weights_files_changed": 0,
+  "contact_checks": 67,
+  "locomotion_checks": 45,
+  "sole_max_penetration_m": 0.0130919590592384,
+  "sole_max_support_gap_m": 0.0246234498918056,
+  "sole_contact_tolerance_m": 0.025,
+  "locomotion_uses_reference_contact_curves": true,
+  "modular_customer_sleeve_pivot_regression_models": 3,
+  "backward_support_direction_regression": true,
+  "core_idle_pose_requirements_preserved": true,
+  "full_suite_expected_checks": 591,
+  "full_clean_package_results": "../../downloads/project/release_verification.json",
+  "preview_fps": 30,
+  "physics_interpolation_enabled": true,
+  "player_physics_camera_controls_inventory_energy_save_floor_and_intro_code_changed": false,
+  "native_radeon_r7_fps_measured": false
+}

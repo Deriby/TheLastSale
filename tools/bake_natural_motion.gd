@@ -1,5 +1,5 @@
 extends Node
-const PoseAuthor=preload("res://tools/natural_pose.gd")
+const PoseAuthor=preload("res://tools/reference_pose.gd")
 func _ready() -> void:call_deferred("bake")
 func bake() -> void:
 	DirAccess.make_dir_recursive_absolute("res://resources/motion")
@@ -9,12 +9,12 @@ func bake() -> void:
 		var skeleton: Skeleton3D=visual.find_child("Skeleton3D",true,false)
 		var animator: AnimationPlayer=visual.find_child("AnimationPlayer",true,false)
 		var author:=PoseAuthor.new();author.init(skeleton,visual,identity)
-		var library:=AnimationLibrary.new();var strides:={}
+		var library:=AnimationLibrary.new();var strides:={};var contacts:={}
 		var root: Node=animator.get_node(animator.root_node);var path:=str(root.get_path_to(skeleton))
 		for clip in PoseAuthor.LOOPS:
 			# Missing NPC actions still use their existing authored actions.
 			if not animator.has_animation(clip) and clip!="run":continue
-			var animation:=Animation.new();animation.length=PoseAuthor.LOOPS[clip]
+			var animation:=Animation.new();animation.length=author.duration(clip)
 			animation.loop_mode=Animation.LOOP_NONE if clip in ["idle_shift","idle_look","idle_adjust","browse","pay"] else Animation.LOOP_LINEAR
 			var tracks: Array[Vector3i]=[]
 			for bone in skeleton.get_bone_count():
@@ -24,16 +24,20 @@ func bake() -> void:
 				var scale_track:=animation.add_track(Animation.TYPE_SCALE_3D);animation.track_set_path(scale_track,bone_path)
 				tracks.append(Vector3i(position_track,rotation_track,scale_track))
 			var frames:=roundi(animation.length*30)
+			var support: Array=[]
 			for frame in frames+1:
 				var time:=float(frame)/frames;var poses:=author.sample(clip,time)
+				var contact:=author.contact_weights(clip,time);support.append([contact.x,contact.y])
 				for bone in skeleton.get_bone_count():
 					animation.position_track_insert_key(tracks[bone].x,time*animation.length,poses[bone].origin)
 					animation.rotation_track_insert_key(tracks[bone].y,time*animation.length,poses[bone].basis.orthonormalized().get_rotation_quaternion())
 					animation.scale_track_insert_key(tracks[bone].z,time*animation.length,poses[bone].basis.get_scale())
 			simplify(animation)
 			library.add_animation(clip,animation)
+			contacts[clip]=support
 			if PoseAuthor.GAITS.has(clip):strides[clip]=author.stride(clip)*author.stride_scale*author.actor_scale
-		library.set_meta("strides",strides);library.set_meta("revision",25);library.set_meta("style",author.profile.style);library.set_meta("source_model_sha256",FileAccess.get_sha256(visual.scene_file_path));library.set_meta("authoring","identity profiles, measured stance/swing, offline 30 Hz")
+		library.set_meta("strides",strides);library.set_meta("revision",26);library.set_meta("style",author.profile.style);library.set_meta("source_model_sha256",FileAccess.get_sha256(visual.scene_file_path));library.set_meta("authoring","Quaternius CC0 reference, rig retargeting, per-shoe contact, offline 30 Hz")
+		library.set_meta("contacts",contacts)
 		var error:=ResourceSaver.save(library,"res://resources/motion/"+identity+".res",ResourceSaver.FLAG_COMPRESS)
 		assert(error==OK)
 		report[identity]={"style":author.profile.style,"clips":library.get_animation_list().size(),"strides":strides,"bones":skeleton.get_bone_count(),"sole_samples":[author.soles.L.size(),author.soles.R.size()]}

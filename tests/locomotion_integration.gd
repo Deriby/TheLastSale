@@ -9,6 +9,39 @@ func ticks(count: int) -> void:
 	for frame in count:await get_tree().physics_frame
 	await get_tree().process_frame
 func _ready() -> void:call_deferred("run")
+func sleeve_attached(identity: String) -> bool:
+	var actor:=Node3D.new();add_child(actor);var visual:=CharacterModels.create(identity);actor.add_child(visual)
+	var motion:=LivingMotion.new();actor.add_child(motion);motion.setup(visual,actor)
+	motion.feet.active=false;motion.detail.active=false;motion.attention.active=false
+	var sk:=motion.skeleton;var arm:=sk.find_bone("arm_L");var chest:=sk.find_bone("chest");var points: Array=[]
+	for mesh in visual.find_children("*","MeshInstance3D",true,false):
+		if mesh.skin==null:continue
+		for bind in mesh.skin.get_bind_count():
+			if str(mesh.skin.get_bind_name(bind))!="arm_L":continue
+			for surface in mesh.mesh.get_surface_count():
+				var arrays: Array=mesh.mesh.surface_get_arrays(surface);var vertices: PackedVector3Array=arrays[Mesh.ARRAY_VERTEX]
+				var bones: PackedInt32Array=arrays[Mesh.ARRAY_BONES];var weights: PackedFloat32Array=arrays[Mesh.ARRAY_WEIGHTS];var count: int=bones.size()/vertices.size()
+				for v in vertices.size():
+					var rest_point: Vector3=sk.global_transform.affine_inverse()*mesh.global_transform*vertices[v]
+					if absf(rest_point.x-.13)>.012 or absf(rest_point.y-1.34)>.11:continue
+					for k in count:
+						if bones[v*count+k]==bind and weights[v*count+k]>.99:points.append(mesh.skin.get_bind_pose(bind)*vertices[v])
+	var okay:=not points.is_empty()
+	for clip in ["idle","walk","run"]:
+		motion.play(clip,0)
+		for frame in 16:
+			motion.animator.seek(float(frame)/16*motion.animator.current_animation_length,true);motion.animator.advance(0)
+			var collar: Vector3=sk.get_bone_global_pose(chest)*sk.get_bone_global_rest(chest).affine_inverse()*Vector3(.13,1.34,0)
+			for point in points:okay=okay and (sk.get_bone_global_pose(arm)*point).distance_to(collar)<.145
+	actor.free();return okay
+func backward_support() -> bool:
+	var actor:=Node3D.new();add_child(actor);var visual:=CharacterModels.create("Dery");actor.add_child(visual)
+	var motion:=LivingMotion.new();actor.add_child(motion);motion.setup(visual,actor)
+	motion.feet.active=false;motion.detail.active=false;motion.attention.active=false;motion.play("walk_back",0)
+	var sk:=motion.skeleton;var foot:=sk.find_bone("foot_L");var positions: Array[float]=[]
+	for t in [.70,.80]:
+		motion.animator.seek(t*motion.animator.current_animation_length,true);motion.animator.advance(0);positions.append(sk.get_bone_global_pose(foot).origin.z)
+	actor.free();return positions[1]-positions[0]>.04
 func sample(identity: String) -> Dictionary:
 	var actor:=Node3D.new();add_child(actor);actor.physics_interpolation_mode=Node.PHYSICS_INTERPOLATION_MODE_OFF
 	var visual:=CharacterModels.create(identity);actor.add_child(visual)
@@ -36,6 +69,8 @@ func sample(identity: String) -> Dictionary:
 func run() -> void:
 	Engine.max_fps=60
 	for identity in ["Dery","Felps","Garota1","Garota2","Customer1","Customer2","Customer3","Zirico","Bryan","Velha1","Enemy"]:metrics[identity]=sample(identity)
+	for identity in ["Customer1","Customer2","Customer3"]:check(sleeve_attached(identity),identity+" mantém a raiz da manga junto ao ombro sem subir para o rosto")
+	check(backward_support(),"passada para trás acompanha o recuo sem inverter duas vezes o movimento dos pés")
 	check(float(metrics.Zirico.idle.body_roll_range)>float(metrics.Dery.idle.body_roll_range)*2.5,"Zirico oscila o tronco de forma própria em vez de usar repouso genérico")
 	check(float(metrics.Bryan.idle.hand_range)>float(metrics.Dery.idle.hand_range)*2.0 and float(metrics.Bryan.idle.hand_range)>.04,"Bryan tem gestos inquietos reais no repouso, proporcionais ao corpo infantil")
 	check(absf(float(metrics.Dery.cadence_at_1_15_mps)-float(metrics.Felps.cadence_at_1_15_mps))>.03,"Deryk e Felps não compartilham a mesma cadência de caminhada")

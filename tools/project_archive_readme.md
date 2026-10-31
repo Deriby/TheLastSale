@@ -1,4 +1,4 @@
-# The Last Sale — projeto Godot 0.25.0
+# The Last Sale — projeto Godot 0.26.0
 
 1. Extraia este ZIP em uma pasta nova.
 2. No Godot **4.4.1**, clique em **Importar** e escolha `project.godot`.
@@ -6,6 +6,12 @@
 4. Pressione **F5** e escolha **Iniciar expediente** para testar a rotina completa.
 
 Modelos animados, cenários, sons, texturas, código, testes e ferramentas estão incluídos. Blender não é necessário para jogar. O renderizador é Compatibility / OpenGL.
+
+## Animações refeitas — 0.26.0
+
+A base de caminhada, corrida, repouso, agachamento e conversa usa animações de Quaternius (CC0), adaptadas aos 11 rigs sem modificar suas malhas, texturas ou pesos. O apoio dos pés segue o contato de cada referência, e os clientes modulares receberam o pivô correto da manga. Protagonistas, garotas, homens, Zirico e Bryan têm variações próprias. As ações de caixas conservam seus tempos e controles. Veja `docs/motion_v026/README.md` e a licença em `tools/motion_reference/`.
+
+As bibliotecas prontas são usadas pelo jogo. Não é necessário baixar referências, instalar scipy ou executar Blender. Para regenerar, execute `tools/bake_natural_motion.tscn` no Godot 4.4.1.
 
 ## Movimento dos personagens — 0.25.0
 

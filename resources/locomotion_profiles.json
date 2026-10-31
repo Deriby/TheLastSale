@@ -1,7 +1,7 @@
 {
   "default": {
     "style": "adult",
-    "walk_scale": 0.94,
+    "walk_scale": 1.0,
     "run_scale": 1.0,
     "width": 0.026,
     "arm_swing": 0.12,
@@ -15,7 +15,7 @@
   "characters": {
     "Dery": {
       "style": "protagonist_deryk",
-      "walk_scale": 0.88,
+      "walk_scale": 0.98,
       "arm_swing": 0.13,
       "arm_reach": 0.9,
       "sway": 0.008,
@@ -24,7 +24,7 @@
     },
     "Felps": {
       "style": "protagonist_felps",
-      "walk_scale": 0.9,
+      "walk_scale": 0.96,
       "arm_swing": 0.105,
       "arm_reach": 0.87,
       "width": 0.032,
@@ -34,7 +34,7 @@
     },
     "Garota1": {
       "style": "girl_relaxed",
-      "walk_scale": 0.82,
+      "walk_scale": 0.96,
       "arm_swing": 0.095,
       "arm_reach": 0.88,
       "width": 0.019,
@@ -45,7 +45,7 @@
     },
     "Garota2": {
       "style": "girl_brisk",
-      "walk_scale": 0.84,
+      "walk_scale": 0.99,
       "arm_swing": 0.115,
       "arm_reach": 0.86,
       "width": 0.021,
@@ -78,7 +78,7 @@
     },
     "Zirico": {
       "style": "drunk",
-      "walk_scale": 0.82,
+      "walk_scale": 0.9,
       "run_scale": 0.9,
       "width": 0.05,
       "arm_swing": 0.145,
@@ -91,7 +91,7 @@
     },
     "Bryan": {
       "style": "restless_child",
-      "walk_scale": 0.76,
+      "walk_scale": 0.93,
       "run_scale": 0.86,
       "width": 0.018,
       "arm_swing": 0.155,
@@ -104,7 +104,7 @@
     },
     "Velha1": {
       "style": "older_woman",
-      "walk_scale": 0.9,
+      "walk_scale": 0.78,
       "run_scale": 0.85,
       "arm_swing": 0.065,
       "arm_reach": 0.88,
@@ -117,7 +117,7 @@
     },
     "Enemy": {
       "style": "threat",
-      "walk_scale": 0.96,
+      "walk_scale": 1.0,
       "run_scale": 1.0,
       "arm_swing": 0.17,
       "arm_reach": 0.84,

@@ -10,7 +10,7 @@ func _ready() -> void:
 	place_actor(app.world.player)
 	Input.action_press("forward")
 func place_actor(actor: DepotPlayer) -> void:
-	actor.global_position=Vector3(3.0,.01,1.0);actor.velocity=Vector3.ZERO;actor.visual.rotation.y=PI;actor.reset_physics_interpolation()
+	actor.global_position=Vector3(3.3,.01,-2.0);actor.velocity=Vector3.ZERO;actor.visual.rotation.y=PI;actor.reset_physics_interpolation()
 	actor.camera_rig.yaw=0;actor.camera_rig.pitch=-.12;actor.camera_rig.target_distance=2.5;actor.camera_rig.reset_follow()
 func _process(delta: float) -> void:
 	elapsed+=delta
