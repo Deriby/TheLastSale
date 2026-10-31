@@ -40,10 +40,12 @@ func _process_modification() -> void:
 		var hip: int=bones[side][0];var knee: int=bones[side][1];var foot: int=bones[side][2]
 		var a:=skeleton.get_bone_global_pose(hip);var b:=skeleton.get_bone_global_pose(knee);var c:=skeleton.get_bone_global_pose(foot)
 		var amount: float=corrections[side]
+		var free_swing:=motion!=null and motion.current_clip in motion.free_swing_clips
+		if free_swing:amount*=motion.foot_contact(side)
 		var world:=skeleton.global_transform*c.origin
 		var locked:=false
 		var contact_weight:=0.0
-		if motion!=null and motion.strides.has(motion.current_clip) and not motion.action_active and motion.filtered_speed>.15:
+		if motion!=null and not free_swing and motion.strides.has(motion.current_clip) and not motion.action_active and motion.filtered_speed>.15:
 			contact_weight=motion.foot_contact(side);locked=contact_weight>.05
 		if locked:
 			if not was_support[side]:anchors[side]=world

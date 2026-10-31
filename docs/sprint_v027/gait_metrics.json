@@ -1,0 +1,42 @@
+{
+  "Dery": {
+    "run": {
+      "cycle_seconds_at_game_speed": 0.604809833069642,
+      "max_foot_pitch_degrees": 25.7816519792815,
+      "max_foot_turn_degrees_at_30fps": 20.6644794942324,
+      "max_knee_turn_degrees_at_30fps": 19.5258664690238,
+      "pelvis_range_m": 0.0239379405975342,
+      "root_correction_range_m": 0.0,
+      "support_velocity_error_m": 0.000103282779455149
+    },
+    "walk": {
+      "cycle_seconds_at_game_speed": 0.711256363689899,
+      "max_foot_pitch_degrees": 14.3281573976004,
+      "max_foot_turn_degrees_at_30fps": 10.7468971165331,
+      "max_knee_turn_degrees_at_30fps": 18.374100207021,
+      "pelvis_range_m": 0.0400425791740417,
+      "root_correction_range_m": 0.0,
+      "support_velocity_error_m": 0.00023627018749714
+    }
+  },
+  "Felps": {
+    "run": {
+      "cycle_seconds_at_game_speed": 0.669572540529465,
+      "max_foot_pitch_degrees": 25.783094355435,
+      "max_foot_turn_degrees_at_30fps": 19.7761519209697,
+      "max_knee_turn_degrees_at_30fps": 24.0761538620119,
+      "pelvis_range_m": 0.0265012407257998,
+      "root_correction_range_m": 0.0,
+      "support_velocity_error_m": 7.96085111613443e-05
+    },
+    "walk": {
+      "cycle_seconds_at_game_speed": 0.771347566689943,
+      "max_foot_pitch_degrees": 14.3282341897818,
+      "max_foot_turn_degrees_at_30fps": 10.093269357304,
+      "max_knee_turn_degrees_at_30fps": 16.0704344943266,
+      "pelvis_range_m": 0.0443303039831804,
+      "root_correction_range_m": 0.0,
+      "support_velocity_error_m": 0.000248595884094066
+    }
+  }
+}

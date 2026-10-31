@@ -1,0 +1,25 @@
+{
+  "version": "0.27.0",
+  "godot": "4.4.1",
+  "protagonists": [
+    "Dery",
+    "Felps"
+  ],
+  "authored_stride_sampling_hz": 60,
+  "smoothness_regressions_passed": 30,
+  "contact_regressions_passed": 67,
+  "expected_full_suite_checks": 621,
+  "expected_full_suite_count": 10,
+  "full_clean_package_results": "../../downloads/project/release_verification.json",
+  "per_frame_root_reach_corrections_m": {
+    "Dery": 0,
+    "Felps": 0
+  },
+  "models_materials_textures_weights_changed": 0,
+  "other_character_animation_libraries_changed": 0,
+  "physics_camera_controls_inventory_energy_saves_world_and_shaders_changed": false,
+  "preview_fps": 30,
+  "default_frame_limit": 30,
+  "preview_includes_real_shift_running": true,
+  "native_radeon_r7_fps_measured": false
+}

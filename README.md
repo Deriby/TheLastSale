@@ -2,9 +2,17 @@
 
 Demonstração jogável em **Godot 4.4.1 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP, com uma primeira versão jogável da campanha de sexta a domingo. Acabamento e ritmo continuam em desenvolvimento.
 
-**[Baixar o projeto 0.26.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.26.0.zip)**
+**[Baixar o projeto 0.27.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.27.0.zip)**
 
 Extraia o ZIP, importe `project.godot` no Godot **4.4.1**, aguarde a importação dos modelos e pressione **F5**. O arquivo inclui os modelos animados, cenários, código e recursos usados no jogo. [Conteúdo e instruções do projeto](downloads/project/README.md).
+
+## Revisão 0.27.0 — passada e corrida de Deryk e Felps
+
+Os protagonistas receberam curvas próprias de passada, com apoio regular, recuperação do pé e impulso. O quadril usa um arco pequeno e contínuo; a perna no ar ganha espaço sem puxar o corpo para baixo. A corrida deixa de prender os pés nas âncoras da caminhada, e a troca de ritmo tem limites diferentes para entrar e sair.
+
+A revisão preserva os modelos, roupas, texturas, pesos, física, câmera, mecânicas, menu e o restante do elenco. [Comparação antes/depois, corrida na loja e validação](docs/sprint_v027/README.md).
+
+![Corrida de Deryk e Felps](docs/sprint_v027/run.png)
 
 ## Revisão 0.26.0 — nova base para as animações
 
@@ -268,7 +276,7 @@ A reconstrução 0.2 do interior recebeu gôndolas abastecidas por categoria, ge
 
 ## Jogar
 
-**[Baixar o projeto Godot 0.25.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.26.0.zip)**
+**[Baixar o projeto Godot 0.25.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.27.0.zip)**
 
 O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **0.24.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
 

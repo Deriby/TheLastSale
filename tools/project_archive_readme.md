@@ -1,4 +1,4 @@
-# The Last Sale — projeto Godot 0.26.0
+# The Last Sale — projeto Godot 0.27.0
 
 1. Extraia este ZIP em uma pasta nova.
 2. No Godot **4.4.1**, clique em **Importar** e escolha `project.godot`.
@@ -6,6 +6,12 @@
 4. Pressione **F5** e escolha **Iniciar expediente** para testar a rotina completa.
 
 Modelos animados, cenários, sons, texturas, código, testes e ferramentas estão incluídos. Blender não é necessário para jogar. O renderizador é Compatibility / OpenGL.
+
+## Passada dos protagonistas — 0.27.0
+
+Deryk e Felps têm novas curvas de caminhada e corrida, com apoio regular, recuperação do pé, balanço contido do quadril e braços próprios de corrida. A perna no ar não abaixa o corpo inteiro. A troca caminhada/corrida usa velocidades diferentes para entrar e sair; a corrida não prende os pés em âncoras de caminhada. As bibliotecas são prontas e não exigem Blender ou Python para jogar.
+
+Modelos, materiais, texturas, pesos, física, câmera, inventário, energia, saves, intro, menu e bibliotecas dos outros personagens foram preservados. Veja `docs/sprint_v027/README.md`. Extraia o ZIP em uma pasta nova para testar esta versão.
 
 ## Animações refeitas — 0.26.0
 

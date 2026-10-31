@@ -3,8 +3,10 @@ const PoseAuthor=preload("res://tools/reference_pose.gd")
 func _ready() -> void:call_deferred("bake")
 func bake() -> void:
 	DirAccess.make_dir_recursive_absolute("res://resources/motion")
-	var report:={}
+	var report: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://resources/motion/authoring.json"))
+	var selected:=OS.get_environment("MOTION_ACTORS").split(",",false)
 	for identity in ["Dery","Felps","Enemy","Bryan","Zirico","Garota1","Garota2","Velha1","Customer1","Customer2","Customer3"]:
+		if not selected.is_empty() and identity not in selected:continue
 		var visual:=CharacterModels.create(identity);add_child(visual)
 		var skeleton: Skeleton3D=visual.find_child("Skeleton3D",true,false)
 		var animator: AnimationPlayer=visual.find_child("AnimationPlayer",true,false)
@@ -23,7 +25,7 @@ func bake() -> void:
 				animation.track_set_path(position_track,bone_path);animation.track_set_path(rotation_track,bone_path)
 				var scale_track:=animation.add_track(Animation.TYPE_SCALE_3D);animation.track_set_path(scale_track,bone_path)
 				tracks.append(Vector3i(position_track,rotation_track,scale_track))
-			var frames:=roundi(animation.length*30)
+			var frames:=roundi(animation.length*(60 if author.clean_stride(clip) else 30))
 			var support: Array=[]
 			for frame in frames+1:
 				var time:=float(frame)/frames;var poses:=author.sample(clip,time)
@@ -36,11 +38,12 @@ func bake() -> void:
 			library.add_animation(clip,animation)
 			contacts[clip]=support
 			if PoseAuthor.GAITS.has(clip):strides[clip]=author.stride(clip)*author.stride_scale*author.actor_scale
-		library.set_meta("strides",strides);library.set_meta("revision",26);library.set_meta("style",author.profile.style);library.set_meta("source_model_sha256",FileAccess.get_sha256(visual.scene_file_path));library.set_meta("authoring","Quaternius CC0 reference, rig retargeting, per-shoe contact, offline 30 Hz")
+		library.set_meta("strides",strides);library.set_meta("revision",27);library.set_meta("style",author.profile.style);library.set_meta("source_model_sha256",FileAccess.get_sha256(visual.scene_file_path));library.set_meta("authoring","reference upper body; authored periodic protagonist strides at 60 Hz; original skin")
 		library.set_meta("contacts",contacts)
+		library.set_meta("free_swing_clips",["run"] if identity in ["Dery","Felps"] else [])
 		var error:=ResourceSaver.save(library,"res://resources/motion/"+identity+".res",ResourceSaver.FLAG_COMPRESS)
 		assert(error==OK)
-		report[identity]={"style":author.profile.style,"clips":library.get_animation_list().size(),"strides":strides,"bones":skeleton.get_bone_count(),"sole_samples":[author.soles.L.size(),author.soles.R.size()]}
+		report[identity]={"style":author.profile.style,"clips":library.get_animation_list().size(),"strides":strides,"bones":skeleton.get_bone_count(),"sole_samples":[author.soles.L.size(),author.soles.R.size()],"maximum_stride_reach_correction":author.reach_corrections}
 		visual.free();print("MOTION_BAKED ",identity)
 	var file:=FileAccess.open("res://resources/motion/authoring.json",FileAccess.WRITE);file.store_string(JSON.stringify(report,"  "));file.close();get_tree().quit()
 

@@ -20,6 +20,7 @@ var visual_meshes: Array[MeshInstance3D]=[]
 var last_view_state:=-1
 var profile: Dictionary={}
 var contacts: Dictionary={}
+var free_swing_clips: Array=[]
 var strides: Dictionary = {"walk":1.12,"walk_back":.80,"strafe_left":.82,"strafe_right":.82,"run":2.35,"crouch_walk":.62,"carry_walk":.86}
 const IDLE_VARIANTS: Array[String]=["idle_shift","idle_look","idle_adjust"]
 const LOOP_CLIPS: Array[String] = ["idle","idle_tired","walk","walk_back","strafe_left","strafe_right","run","crouch_idle","crouch_walk","carry","carry_walk","talk","cashier","cashier_idle","look","hold_bottle"]
@@ -49,6 +50,7 @@ func setup(visual: Node3D,actor: Node3D) -> void:
 		for clip in library.get_animation_list():clips[str(clip)]="natural/"+str(clip)
 		for key in library.get_meta("strides",{}):strides[key]=library.get_meta("strides")[key]
 		contacts=library.get_meta("contacts",{})
+		free_swing_clips=library.get_meta("free_swing_clips",[])
 	skeleton.skeleton_updated.connect(func():pose_updated.emit())
 	play("idle",0)
 func foot_contact(side: String) -> float:
@@ -82,7 +84,10 @@ func locomotion(delta: float,speed: float,crouch: bool,carrying: bool,tired: boo
 	var moving:=speed>(.075 if strides.has(current_clip) else .14)
 	if moving:
 		idle_time=0;ambient_active=false
-		var clip: String="carry_walk" if carrying else ("crouch_walk" if crouch else ("run" if speed>2.55 else direction))
+		# Separate entry/exit speeds prevent repeated walk/run changes when
+		# turning or brushing an obstacle near the old single threshold.
+		var running:=filtered_speed>(2.35 if current_clip=="run" else 2.75)
+		var clip: String="carry_walk" if carrying else ("crouch_walk" if crouch else ("run" if running else direction))
 		if not clips.has(clip):clip="walk" if clips.has("walk") else "idle"
 		play(clip,.20,true)
 		animator.speed_scale=clampf(filtered_speed*animator.get_animation(clips[clip]).length/float(strides.get(clip,1.12)),.25,2.7)

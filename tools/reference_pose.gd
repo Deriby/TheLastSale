@@ -1,4 +1,5 @@
 extends "res://tools/natural_pose.gd"
+const CleanStride=preload("res://tools/protagonist_stride.gd")
 ## Retarget authored CC0 animation onto the existing rigs. Meshes, bind poses and
 ## weights are untouched. Two-bone IK only adapts foot contact to each shoe.
 const MAP := {"pelvis":"DEF-hips","waist":"DEF-spine.001","spine":"DEF-spine.002","chest":"DEF-spine.003","upper_chest":"DEF-spine.003","neck":"DEF-neck","head":"DEF-head","shoulder_L":"DEF-shoulder.L","shoulder_R":"DEF-shoulder.R","arm_L":"DEF-upper_arm.L","arm_R":"DEF-upper_arm.R","forearm_L":"DEF-forearm.L","forearm_R":"DEF-forearm.R","hand_L":"DEF-hand.L","hand_R":"DEF-hand.R","thigh_L":"DEF-thigh.L","thigh_R":"DEF-thigh.R","shin_L":"DEF-shin.L","shin_R":"DEF-shin.R","foot_L":"DEF-foot.L","foot_R":"DEF-foot.R"}
@@ -8,6 +9,14 @@ var source_names: Dictionary={}
 var leg_ratio:=1.0
 var contacts: Dictionary={}
 var contact_vertices: Dictionary={"L":[],"R":[]}
+var reach_corrections: Dictionary={}
+var stride_offsets: Dictionary={}
+var fitting_stride:=false
+func clean_stride(clip: String) -> bool:
+	return identity in ["Dery","Felps"] and clip in ["walk","run","walk_back","strafe_left","strafe_right"]
+func clean_scale() -> float:return (leg_length("L")+leg_length("R"))*.5/.725
+func clean_length(clip: String) -> float:
+	return (leg_length("L")+leg_length("R"))*.5*(3.25*float(profile.run_scale) if clip=="run" else 1.55*float(profile.walk_scale))*(.72 if clip=="walk_back" else .65 if clip.begins_with("strafe") else 1.0)
 func init(sk: Skeleton3D,visual: Node3D,id: String) -> void:
 	super.init(sk,visual,id)
 	source=JSON.parse_string(FileAccess.get_file_as_string("res://tools/motion_reference/quaternius.json"))
@@ -37,17 +46,28 @@ func init(sk: Skeleton3D,visual: Node3D,id: String) -> void:
 						if weights[v*count+k]>.001:
 							var bind: int=bones[v*count+k];item.append([joints[bind],binds[bind]*vertices[v],weights[v*count+k]])
 					contact_vertices[side].append(item)
+	# Fit one constant pelvis height per gait. Per-frame reach clamping made the
+	# root bone jump whenever the limiting leg changed during the old sprint.
+	if identity in ["Dery","Felps"]:
+		fitting_stride=true
+		for clip in ["walk","run","walk_back","strafe_left","strafe_right"]:
+			for frame in 241:sample(clip,float(frame)/240)
+			stride_offsets[clip]=float(reach_corrections.get(clip,0))+.002
+		fitting_stride=false;reach_corrections.clear()
 func unpack(value: Array) -> Transform3D:
 	return Transform3D(Basis(Quaternion(value[3],value[4],value[5],value[6]).normalized()),Vector3(value[0],value[1],value[2]))
 func source_clip(clip: String) -> String:
+	if clean_stride(clip):return "Walk_Formal_Loop" if identity=="Felps" else "Walk_Loop"
 	if clip=="run":return "Sprint_Loop"
 	if clip=="crouch_walk":return "Crouch_Fwd_Loop"
 	if clip=="crouch_idle":return "Crouch_Idle_Loop"
 	if GAITS.has(clip):return "Walk_Formal_Loop" if identity in ["Felps","Garota2","Customer2"] else "Walk_Loop"
 	return "Idle_Talking_Loop" if clip=="talk" else "Idle_Loop"
 func duration(clip: String) -> float:
+	if clean_stride(clip) and clip=="run":return .72
 	return float(source.clips[source_clip(clip)].length) if GAITS.has(clip) or clip in ["idle","crouch_idle","talk"] else LOOPS[clip]
 func stride(clip: String) -> float:
+	if clean_stride(clip):return clean_length(clip)/stride_scale
 	var multiplier:=float(profile.run_scale if clip=="run" else profile.walk_scale)
 	if clip=="run":multiplier*=.60
 	if clip=="carry_walk":multiplier*=.88
@@ -57,6 +77,9 @@ func stride(clip: String) -> float:
 	# The baker applies the historical stride_scale after this return value.
 	return float(source.clips[source_clip(clip)].stride)*leg_ratio*multiplier/stride_scale
 func contact_weights(clip: String,time: float) -> Vector2:
+	if clean_stride(clip):
+		var phase:=1.0-time if clip=="walk_back" else time
+		return Vector2(CleanStride.foot(phase,clean_length(clip),clip=="run",clean_scale()).contact,CleanStride.foot(phase+.5,clean_length(clip),clip=="run",clean_scale()).contact)
 	var data: Dictionary=source.clips[source_clip(clip)]
 	var at: float=(1.0-time if clip=="walk_back" else time)*(data.soles.size()-1)
 	var low:=mini(int(at),data.soles.size()-1);var high:=mini(low+1,data.soles.size()-1)
@@ -79,10 +102,13 @@ func sample(clip: String,time: float) -> Array[Transform3D]:
 	if clip=="carry_walk":multiplier*=.88
 	if clip=="crouch_walk":multiplier=1.0
 	var root_delta: Vector3=(frame["DEF-hips"].origin-reference["DEF-hips"].origin)*leg_ratio
+	if clean_stride(clip):root_delta.y=CleanStride.pelvis(progress,clip=="run",clean_scale())-float(stride_offsets.get(clip,0))
 	if relaxed:root_delta.y*=.55
 	root_delta.x*=.65 if identity.begins_with("Garota") else .50
 	if drunk:root_delta.x+=.035*sin(phase)+.008*sin(phase*2)
 	var additions: Dictionary={}
+	if clean_stride(clip) and clip=="run":
+		additions["waist"]=Vector3(.035,0,0);additions["chest"]=Vector3(.04,0,0)
 	if not moving:
 		additions["waist"]=Vector3(.006*sin(phase),0,.003*sin(phase))
 		additions["upper_chest"]=Vector3(-.008*sin(phase),.003*cos(phase),0)
@@ -94,7 +120,7 @@ func sample(clip: String,time: float) -> Array[Transform3D]:
 		additions["chest"]=Vector3(.025,.025*sin(phase),0)
 		additions["head"]=Vector3(.018*sin(phase*2),.065*sin(phase*3),.018*sin(phase))
 	if identity=="Velha1":additions["chest"]=Vector3(.08,0,0)
-	if identity=="Felps":additions["chest"]=Vector3(.025,0,0)
+	if identity=="Felps":additions["chest"]=additions.get("chest",Vector3.ZERO)+Vector3(.025,0,0)
 	if identity.begins_with("Garota"):additions["pelvis"]=Vector3(0,.012*cos(phase),.013*sin(phase))
 	var base: Dictionary={}
 	for i in rests.size():
@@ -119,7 +145,7 @@ func sample(clip: String,time: float) -> Array[Transform3D]:
 			var local_pivot:=skeleton.get_bone_rest(i).origin+rests[parent].basis.inverse()*(pivot-rests[i].origin)
 			pose.origin=poses[parent]*local_pivot+pose.basis*rests[i].basis.inverse()*(rests[i].origin-pivot)
 		poses[i]=pose
-	var ankles: Dictionary={};var foot_rotations: Dictionary={}
+	var ankles: Dictionary={};var foot_rotations: Dictionary={};var desired_lifts: Dictionary={};var gait_support: Dictionary={}
 	for side in ["L","R"]:
 		var k:=0 if side=="L" else 1;var sign_value:=1.0 if side=="L" else -1.0
 		var name: String="foot_"+side;var foot: int=names[name]
@@ -139,23 +165,46 @@ func sample(clip: String,time: float) -> Array[Transform3D]:
 		# Keep a readable heel/toe roll but avoid the high stylized swing of the
 		# reference on these realistic shoes. This does not change support timing.
 		if moving and clip!="run":lift*=.70 if child else .55 if identity=="Velha1" else .70
+		if clean_stride(clip):
+			var gait:=CleanStride.foot(progress+(0 if side=="L" else .5),clean_length(clip),clip=="run",clean_scale())
+			gait_support[side]=fposmod(progress+(0 if side=="L" else .5),1)<(.25 if clip=="run" else .56)
+			lift=gait.lift;rotation=Basis.from_euler(Vector3(gait.pitch,sign_value*.025,0))
+			poses[foot].basis=rotation*rests[foot].basis
+			target.x=sign_value*(absf(rests[names["thigh_"+side]].origin.x)+.025)
+			target.z=rests[foot].origin.z+gait.z
+			if clip.begins_with("strafe"):
+				target.x+=gait.z*(-1 if clip=="strafe_left" else 1);target.z=rests[foot].origin.z
 		target.y=floor_height(side,rotation)+lift
-		ankles[side]=target;foot_rotations[side]=poses[foot].basis
+		ankles[side]=target;foot_rotations[side]=poses[foot].basis;desired_lifts[side]=lift
 		if not contacts.has(clip):contacts[clip]=[]
 	# Respect limb reach without stretching bones. A single pelvis offset adapts
 	# different hip/thigh proportions; the authored knee plane remains intact.
 	var lower:=0.0
 	for side in ["L","R"]:
+		if clean_stride(clip) and not gait_support[side]:continue
 		var hip: Vector3=poses[names["thigh_"+side]].origin;var target: Vector3=ankles[side]
 		var horizontal:=Vector2(hip.x-target.x,hip.z-target.z).length();var reach:=leg_length(side)*.997
 		lower=minf(lower,target.y+sqrt(maxf(.001,reach*reach-horizontal*horizontal))-hip.y)
 	if lower<0:
 		for i in poses:poses[i].origin.y+=lower
+	if clean_stride(clip):reach_corrections[clip]=maxf(float(reach_corrections.get(clip,0)),-lower)
+	if fitting_stride:return []
+	# A recovering foot can lift to stay in reach. Pulling the entire pelvis
+	# down to satisfy an airborne ankle produced the old crouch and root pop.
+	if clean_stride(clip):
+		for side in ["L","R"]:
+			if gait_support[side]:continue
+			var hip: Vector3=poses[names["thigh_"+side]].origin;var target: Vector3=ankles[side]
+			var horizontal:=Vector2(hip.x-target.x,hip.z-target.z).length();var reach:=leg_length(side)*.97
+			var minimum:=hip.y-sqrt(maxf(.001,reach*reach-horizontal*horizontal))
+			var gap:=target.y-minimum
+			var extra:=.5*(-gap+sqrt(gap*gap+.008*.008))
+			ankles[side].y+=extra;desired_lifts[side]+=extra
 	for side in ["L","R"]:
 		var thigh: int=names["thigh_"+side];var shin: int=names["shin_"+side];var foot: int=names["foot_"+side]
 		var hip: Vector3=poses[thigh].origin;var knee: Vector3=poses[shin].origin;var target: Vector3=ankles[side]
 		var l1:=rests[thigh].origin.distance_to(rests[shin].origin);var l2:=rests[shin].origin.distance_to(rests[foot].origin)
-		var solved:=solve(hip,target,l1,l2,knee+Vector3(0,0,.15))
+		var solved:=solve(hip,target,l1,l2,hip+Vector3(0,0,1) if clean_stride(clip) else knee+Vector3(0,0,.15))
 		var turn:=Quaternion((knee-hip).normalized(),(solved[0]-hip).normalized())
 		var lower_turn:=Quaternion((turn*(poses[foot].origin-knee)).normalized(),(solved[1]-solved[0]).normalized())
 		poses[thigh]=Transform3D(Basis(turn)*poses[thigh].basis,hip)
@@ -166,6 +215,10 @@ func sample(clip: String,time: float) -> Array[Transform3D]:
 		var arm: int=names["arm_"+side];var forearm: int=names["forearm_"+side];var wrist: int=names["hand_"+side]
 		var sign_value:=1.0 if side=="L" else -1.0
 		var hand: Vector3=poses[wrist].origin
+		if clean_stride(clip) and clip=="run":
+			var arm_length:=rests[arm].origin.distance_to(rests[forearm].origin)+rests[forearm].origin.distance_to(rests[wrist].origin)
+			var swing:=cos(phase+(0 if side=="L" else PI))
+			hand=poses[arm].origin+Vector3(sign_value*.045,-arm_length*.57+.025*(1-swing),.10-.16*swing)
 		if relaxed:
 			var arm_length:=rests[arm].origin.distance_to(rests[forearm].origin)+rests[forearm].origin.distance_to(rests[wrist].origin)
 			hand=poses[arm].origin+Vector3(sign_value*.035,-arm_length*.975,.025)
@@ -177,7 +230,7 @@ func sample(clip: String,time: float) -> Array[Transform3D]:
 		if carrying:hand=Vector3(sign_value*.335+root_delta.x,1.07,.26)
 		if clip in ["cashier","cashier_idle"]:hand=Vector3(.08+sign_value*.14,1.22+(.008*sin(phase*10+sign_value) if clip=="cashier" else 0),.27)
 		if clip in ["hold_bottle","browse","pay"] and side=="R":hand=Vector3(-.23,1.02 if clip=="hold_bottle" else 1.14,.16+.05*gesture)
-		if relaxed or drunk or child or carrying or clip in ["cashier","cashier_idle","hold_bottle","browse","pay"]:
+		if relaxed or drunk or child or carrying or clean_stride(clip) and clip=="run" or clip in ["cashier","cashier_idle","hold_bottle","browse","pay"]:
 			var shoulder: Vector3=poses[arm].origin;var elbow: Vector3=poses[forearm].origin
 			var reach:=solve(shoulder,hand,rests[arm].origin.distance_to(rests[forearm].origin),rests[forearm].origin.distance_to(rests[wrist].origin),elbow+Vector3(sign_value*.05,0,-.08))
 			var turn_arm:=Quaternion((elbow-shoulder).normalized(),(reach[0]-shoulder).normalized())
@@ -199,12 +252,13 @@ func sample(clip: String,time: float) -> Array[Transform3D]:
 		var k:=0 if side=="L" else 1
 		var lift: float=lerpf(data.soles[low][k],data.soles[high][k],weight)*leg_ratio
 		if moving and clip!="run":lift*=.70 if child else .55 if identity=="Velha1" else .70
+		if clean_stride(clip):lift=desired_lifts[side]
 		var adjustment:=lift-minimum+.001
 		if absf(adjustment)>.0003:
 			var thigh: int=names["thigh_"+side];var shin: int=names["shin_"+side];var foot: int=names["foot_"+side]
 			var hip: Vector3=poses[thigh].origin;var knee: Vector3=poses[shin].origin;var ankle: Vector3=poses[foot].origin
 			var target:=ankle+Vector3.UP*adjustment
-			var corrected:=solve(hip,target,hip.distance_to(knee),knee.distance_to(ankle),knee+Vector3(0,0,.15))
+			var corrected:=solve(hip,target,hip.distance_to(knee),knee.distance_to(ankle),hip+Vector3(0,0,1) if clean_stride(clip) else knee+Vector3(0,0,.15))
 			var turn:=Quaternion((knee-hip).normalized(),(corrected[0]-hip).normalized())
 			var lower_turn:=Quaternion((turn*(ankle-knee)).normalized(),(corrected[1]-corrected[0]).normalized())
 			poses[thigh]=Transform3D(Basis(turn)*poses[thigh].basis,hip)

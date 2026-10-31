@@ -1,0 +1,40 @@
+{
+  "before_version": "0.26.0",
+  "before_commit": "db713bd5a7bca5b8e6b026c9247443fb3d203fa4",
+  "after_version": "0.27.0",
+  "sampling": "241 phases per cycle; angular displacement over a 1/30 s interval at actual game speed",
+  "characters": {
+    "Dery": {
+      "before": {
+        "pelvis_range_m": 0.12086552381515503,
+        "max_foot_turn_degrees_at_30fps": 47.96893304416916,
+        "max_knee_turn_degrees_at_30fps": 42.17269036680636
+      },
+      "after": {
+        "cycle_seconds_at_game_speed": 0.604809833069642,
+        "max_foot_pitch_degrees": 25.7816519792815,
+        "max_foot_turn_degrees_at_30fps": 20.6644794942324,
+        "max_knee_turn_degrees_at_30fps": 19.5258664690238,
+        "pelvis_range_m": 0.0239379405975342,
+        "root_correction_range_m": 0.0,
+        "support_velocity_error_m": 0.000103282779455149
+      }
+    },
+    "Felps": {
+      "before": {
+        "pelvis_range_m": 0.133807705684185,
+        "max_foot_turn_degrees_at_30fps": 43.32998034400868,
+        "max_knee_turn_degrees_at_30fps": 37.78853833973404
+      },
+      "after": {
+        "cycle_seconds_at_game_speed": 0.669572540529465,
+        "max_foot_pitch_degrees": 25.783094355435,
+        "max_foot_turn_degrees_at_30fps": 19.7761519209697,
+        "max_knee_turn_degrees_at_30fps": 24.0761538620119,
+        "pelvis_range_m": 0.0265012407257998,
+        "root_correction_range_m": 0.0,
+        "support_velocity_error_m": 7.96085111613443e-05
+      }
+    }
+  }
+}
