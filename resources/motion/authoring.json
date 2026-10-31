@@ -1,14 +1,16 @@
 {
   "Bryan": {
     "bones": 72,
-    "clips": 10,
+    "clips": 11,
     "sole_samples": [
       1026,
       1065
     ],
     "strides": {
-      "walk": 0.828949879722211
-    }
+      "run": 1.19744400594248,
+      "walk": 0.630001908588881
+    },
+    "style": "restless_child"
   },
   "Customer1": {
     "bones": 19,
@@ -21,8 +23,9 @@
       "carry_walk": 1.08392902530473,
       "crouch_walk": 0.705576441000248,
       "run": 2.19853528717469,
-      "walk": 1.30889542678307
-    }
+      "walk": 1.23036170117608
+    },
+    "style": "man_casual"
   },
   "Customer2": {
     "bones": 19,
@@ -35,8 +38,9 @@
       "carry_walk": 1.08392902530473,
       "crouch_walk": 0.705576441000248,
       "run": 2.19853528717469,
-      "walk": 1.30889542678307
-    }
+      "walk": 1.23036170117608
+    },
+    "style": "man_work"
   },
   "Customer3": {
     "bones": 19,
@@ -49,8 +53,9 @@
       "carry_walk": 1.08392902530473,
       "crouch_walk": 0.705576441000248,
       "run": 2.19853528717469,
-      "walk": 1.30889542678307
-    }
+      "walk": 1.23036170117608
+    },
+    "style": "man_relaxed"
   },
   "Dery": {
     "bones": 72,
@@ -63,11 +68,12 @@
       "carry_walk": 1.06112842436495,
       "crouch_walk": 0.690734540388502,
       "run": 2.15228878526852,
-      "strafe_left": 0.941000678210423,
-      "strafe_right": 0.941000678210423,
-      "walk": 1.28136262564824,
-      "walk_back": 0.900958096158916
-    }
+      "strafe_left": 0.828080596825172,
+      "strafe_right": 0.828080596825172,
+      "walk": 1.12759911057045,
+      "walk_back": 0.792843124619846
+    },
+    "style": "protagonist_deryk"
   },
   "Enemy": {
     "bones": 72,
@@ -78,8 +84,9 @@
     ],
     "strides": {
       "run": 2.60162547291379,
-      "walk": 1.54887470015333
-    }
+      "walk": 1.48691971214719
+    },
+    "style": "threat"
   },
   "Felps": {
     "bones": 72,
@@ -92,54 +99,63 @@
       "carry_walk": 1.1747534780048,
       "crouch_walk": 0.764698018701237,
       "run": 2.38275469595313,
-      "strafe_left": 1.04176251823067,
-      "strafe_right": 1.04176251823067,
-      "walk": 1.4185702375907,
-      "walk_back": 0.997432198305961
-    }
+      "strafe_left": 0.937586266407604,
+      "strafe_right": 0.937586266407604,
+      "walk": 1.27671321383163,
+      "walk_back": 0.897688978475365
+    },
+    "style": "protagonist_felps"
   },
   "Garota1": {
     "bones": 72,
-    "clips": 10,
+    "clips": 11,
     "sole_samples": [
       875,
       983
     ],
     "strides": {
-      "walk": 1.41212291616578
-    }
+      "run": 2.37192521074721,
+      "walk": 1.15794079125594
+    },
+    "style": "girl_relaxed"
   },
   "Garota2": {
     "bones": 72,
-    "clips": 10,
+    "clips": 11,
     "sole_samples": [
       707,
       683
     ],
     "strides": {
-      "walk": 1.52883229868028
-    }
+      "run": 2.56796050168954,
+      "walk": 1.28421913089144
+    },
+    "style": "girl_brisk"
   },
   "Velha1": {
     "bones": 72,
-    "clips": 10,
+    "clips": 11,
     "sole_samples": [
       715,
       629
     ],
     "strides": {
-      "walk": 1.1435042455697
-    }
+      "run": 1.6326203193583,
+      "walk": 1.02915382101273
+    },
+    "style": "older_woman"
   },
   "Zirico": {
     "bones": 72,
-    "clips": 10,
+    "clips": 11,
     "sole_samples": [
       1329,
       1446
     ],
     "strides": {
-      "walk": 1.29139877341349
-    }
+      "run": 1.95223173949617,
+      "walk": 1.05894699419906
+    },
+    "style": "drunk"
   }
 }

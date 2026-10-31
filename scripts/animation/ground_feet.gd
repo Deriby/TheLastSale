@@ -7,6 +7,9 @@ var motion: LivingMotion
 var anchors: Dictionary={}
 var was_support: Dictionary={"L":false,"R":false}
 var bones: Dictionary={}
+var anchor_limit:=.06
+func reset_contacts() -> void:
+	anchors.clear();was_support={"L":false,"R":false}
 func _ready() -> void:
 	var sk:=get_skeleton()
 	for side in ["L","R"]:
@@ -46,9 +49,12 @@ func _process_modification() -> void:
 			if not was_support[side]:anchors[side]=world
 			var anchor: Vector3=anchors[side]
 			var offset:=Vector2(anchor.x-world.x,anchor.z-world.z)
-			if offset.length()>.10:
-				offset=offset.limit_length(.10);anchors[side]=world+Vector3(offset.x,0,offset.y)
-			world.x+=offset.x;world.z+=offset.y
+			if offset.length()>anchor_limit:
+				offset=offset.limit_length(anchor_limit);anchors[side]=world+Vector3(offset.x,0,offset.y)
+			var phase:=fposmod(motion.animator.current_animation_position/maxf(.001,motion.animator.current_animation_length)+(0 if side=="L" else .5),1.0)
+			var end:=.36 if motion.current_clip=="run" else .61
+			var weight:=smoothstep(0,.07,phase)*(1.0-smoothstep(end-.07,end,phase))
+			world.x+=offset.x*weight;world.z+=offset.y*weight
 		was_support[side]=locked
 		var target:=skeleton.to_local(world+Vector3.UP*amount)
 		if target.distance_to(c.origin)<.0002:continue

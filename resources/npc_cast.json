@@ -6,32 +6,32 @@
     {"id": "Velha1", "label": "Senhora", "motion": "living"},
     {
       "id": "ClienteBone", "label": "Cliente de boné", "placeholder": true,
-      "model": "res://assets/models/characters/Customer1.glb", "motion": "legacy",
+      "model": "res://assets/models/characters/Customer1.glb", "motion": "living",
       "colors": {"Roupa": "536c45", "Calca": "27384a", "Sapatos": "41362b"}
     },
     {
       "id": "ClienteTrabalho", "label": "Cliente de uniforme", "placeholder": true,
-      "model": "res://assets/models/characters/Customer2.glb", "motion": "legacy",
+      "model": "res://assets/models/characters/Customer2.glb", "motion": "living",
       "colors": {"Roupa": "355d7c", "Calca": "252b32", "Sapatos": "24201d"}
     },
     {
       "id": "ClienteVinho", "label": "Cliente de camiseta vinho", "placeholder": true,
-      "model": "res://assets/models/characters/Customer3.glb", "motion": "legacy",
+      "model": "res://assets/models/characters/Customer3.glb", "motion": "living",
       "colors": {"Roupa": "773e46", "Calca": "353b48", "Sapatos": "4b3e32"}
     },
     {
       "id": "ClienteMostarda", "label": "Cliente de camiseta mostarda", "placeholder": true,
-      "model": "res://assets/models/characters/Customer2.glb", "motion": "legacy",
+      "model": "res://assets/models/characters/Customer2.glb", "motion": "living",
       "colors": {"Roupa": "927445", "Calca": "35332d", "Sapatos": "514638"}
     },
     {
       "id": "ClienteCinza", "label": "Cliente de camiseta cinza", "placeholder": true,
-      "model": "res://assets/models/characters/Customer1.glb", "motion": "legacy",
+      "model": "res://assets/models/characters/Customer1.glb", "motion": "living",
       "colors": {"Roupa": "636767", "Calca": "34302f", "Sapatos": "33353c", "Cabelo": "302821"}
     },
     {
       "id": "ClienteVerde", "label": "Cliente de camiseta verde", "placeholder": true,
-      "model": "res://assets/models/characters/Customer3.glb", "motion": "legacy",
+      "model": "res://assets/models/characters/Customer3.glb", "motion": "living",
       "colors": {"Roupa": "3a6260", "Calca": "46413a", "Sapatos": "292e32", "Cabelo": "493c31"}
     }
   ]

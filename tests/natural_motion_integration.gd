@@ -47,7 +47,7 @@ func lowest(data: Array,sk: Skeleton3D) -> float:
 	return minimum
 func _ready() -> void:call_deferred("run")
 func run() -> void:
-	for identity in ["Dery","Felps","Enemy","Bryan","Zirico","Garota1","Garota2","Velha1","Customer2"]:
+	for identity in ["Dery","Felps","Enemy","Bryan","Zirico","Garota1","Garota2","Velha1","Customer1","Customer2","Customer3"]:
 		var actor:=Node3D.new();add_child(actor);var visual:=CharacterModels.create(identity);actor.add_child(visual)
 		var motion:=LivingMotion.new();actor.add_child(motion);motion.setup(visual,actor);motion.feet.active=false;motion.detail.active=false;motion.attention.active=false
 		var sk:=motion.skeleton;var sole:=samples(visual,sk)

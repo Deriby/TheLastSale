@@ -18,10 +18,12 @@ var locomotion_phase:=0.0
 var current_clip:=""
 var visual_meshes: Array[MeshInstance3D]=[]
 var last_view_state:=-1
+var profile: Dictionary={}
 var strides: Dictionary = {"walk":1.12,"walk_back":.80,"strafe_left":.82,"strafe_right":.82,"run":2.35,"crouch_walk":.62,"carry_walk":.86}
 const IDLE_VARIANTS: Array[String]=["idle_shift","idle_look","idle_adjust"]
 const LOOP_CLIPS: Array[String] = ["idle","idle_tired","walk","walk_back","strafe_left","strafe_right","run","crouch_idle","crouch_walk","carry","carry_walk","talk","cashier","cashier_idle","look","hold_bottle"]
 func setup(visual: Node3D,actor: Node3D) -> void:
+	profile=MotionProfiles.for_actor(str(visual.get_meta("character_identity",visual.scene_file_path.get_file().get_basename())),visual.scene_file_path)
 	animator=visual.find_child("AnimationPlayer",true,false)
 	skeleton=visual.find_child("Skeleton3D",true,false)
 	for mesh in skeleton.find_children("*","MeshInstance3D",true,false):visual_meshes.append(mesh)
@@ -35,6 +37,7 @@ func setup(visual: Node3D,actor: Node3D) -> void:
 	attention=HeadAttention.new();attention.visual=visual;skeleton.add_child(attention)
 	feet.motion=self
 	feet.clearance=float(visual.get_meta("foot_clearance",.1335))
+	feet.anchor_limit=.06*float(visual.get_meta("stride_scale",1.0))
 	attention.eye_height=float(visual.get_meta("height_m",1.78))*.89
 	var stride_scale: float=visual.get_meta("stride_scale",1.0)
 	for key in strides:strides[key]*=stride_scale
@@ -51,6 +54,7 @@ func play(clip: String,blend := .22,preserve_phase := false) -> void:
 	# Speech or another explicit pose can interrupt a one-shot idle variation.
 	if clip not in IDLE_VARIANTS:ambient_active=false
 	if current_clip==clip and animator.is_playing():return
+	if feet!=null:feet.reset_contacts()
 	var phase:=0.0
 	if preserve_phase and strides.has(current_clip) and animator.current_animation_length>0:phase=fmod(animator.current_animation_position/animator.current_animation_length,1)
 	current_clip=clip
@@ -67,7 +71,8 @@ func locomotion(delta: float,speed: float,crouch: bool,carrying: bool,tired: boo
 	if detail!=null:detail.speed=speed;detail.carrying=carrying
 	if action_active:return
 	filtered_speed=lerpf(filtered_speed,speed,1-exp(-delta*14))
-	if speed>.10:
+	var moving:=speed>(.075 if strides.has(current_clip) else .14)
+	if moving:
 		idle_time=0;ambient_active=false
 		var clip: String="carry_walk" if carrying else ("crouch_walk" if crouch else ("run" if speed>2.55 else direction))
 		if not clips.has(clip):clip="walk" if clips.has("walk") else "idle"
@@ -78,9 +83,10 @@ func locomotion(delta: float,speed: float,crouch: bool,carrying: bool,tired: boo
 		idle_time+=delta
 		if ambient_active:return
 		var clip: String="carry" if carrying else ("crouch_idle" if crouch else ("idle_tired" if tired else "idle"))
-		if clip=="idle" and idle_time>8.5:
+		if clip=="idle" and idle_time>float(profile.get("idle_after",8.5)):
 			var variants: Array[String]=[]
-			for candidate in IDLE_VARIANTS:
+			var choices: Array=["idle_adjust","idle_shift","idle_look"] if profile.get("style")=="restless_child" else IDLE_VARIANTS
+			for candidate in choices:
 				if clips.has(candidate):variants.append(candidate)
 			if not variants.is_empty():
 				clip=variants[variation_index%variants.size()];variation_index+=1;ambient_active=true

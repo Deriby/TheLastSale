@@ -9,6 +9,7 @@ var visit_time:=0.0
 var watching:=false
 var leaving:=false
 var exit_path:=PackedVector3Array()
+var actual_speed:=0.0
 func depart(path: PackedVector3Array) -> void:
 	leaving=true;watching=false;exit_path=path
 	interaction.process_mode=Node.PROCESS_MODE_DISABLED
@@ -35,9 +36,11 @@ func _physics_process(delta: float) -> void:
 		while not exit_path.is_empty() and Vector2(exit_path[0].x-position.x,exit_path[0].z-position.z).length()<.12:exit_path.remove_at(0)
 		if exit_path.is_empty():queue_free();return
 		var direction: Vector3=(exit_path[0]-position)*Vector3(1,0,1);direction=direction.normalized()
-		velocity=direction*1.1;velocity.y=-2;move_and_slide()
+		velocity=direction*1.1;velocity.y=-2
+		var before:=global_position;move_and_slide()
+		actual_speed=Vector2(global_position.x-before.x,global_position.z-before.z).length()/maxf(delta,.001)
 		visual.rotation.y=lerp_angle(visual.rotation.y,atan2(direction.x,direction.z),delta*8)
-		motion.locomotion(delta,1.1,false,false,false);return
+		motion.locomotion(delta,actual_speed,false,false,false);return
 	velocity=Vector3(0,-2,0);move_and_slide()
 	if watching:
 		var player:=get_tree().get_first_node_in_group("player") as Node3D
@@ -45,7 +48,4 @@ func _physics_process(delta: float) -> void:
 		return
 	visit_time+=delta
 	motion.locomotion(delta,0,false,false,false)
-	if identity=="Zirico":
-		# Restrained, uneven timing; the feet stay supported instead of falling over.
-		motion.animator.speed_scale=.82+.08*sin(visit_time*.63)
 	motion.look_at_position(Vector3.ZERO,false)

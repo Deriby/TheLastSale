@@ -12,8 +12,12 @@ var poses: Dictionary={}
 var soles: Dictionary={"L":[],"R":[]}
 var stride_scale:=1.0
 var actor_scale:=1.0
+var profile: Dictionary={}
+func stride(clip: String) -> float:
+	return float(GAITS[clip])*float(profile.run_scale if clip=="run" else profile.walk_scale if clip in ["walk","walk_back","strafe_left","strafe_right"] else 1.0)
 func init(sk: Skeleton3D,visual: Node3D,id: String) -> void:
 	skeleton=sk;identity=id;actor_scale=sk.global_basis.get_scale().x
+	profile=MotionProfiles.for_actor(id,visual.scene_file_path)
 	for i in sk.get_bone_count():
 		rests.append(sk.get_bone_global_rest(i));parents.append(sk.get_bone_parent(i));names[sk.get_bone_name(i)]=i
 	var length:=0.0
@@ -84,8 +88,10 @@ func sample(clip: String,time: float) -> Array[Transform3D]:
 	poses.clear()
 	var moving:=GAITS.has(clip);var running:=clip=="run";var crouch:=clip.begins_with("crouch");var carrying:=clip in ["carry","carry_walk"]
 	var phase:=time*TAU;var breath:=sin(time*TAU*2) if not moving else 0.0
-	var sway:=.004*sin(phase) if not moving else .009*sin(phase)
-	if identity=="Zirico":sway*=1.25
+	var drunk: bool=profile.style=="drunk"
+	var child: bool=profile.style=="restless_child"
+	var sway: float=float(profile.sway)*sin(phase) if moving else float(profile.sway)*.45*sin(phase)
+	if drunk:sway+=.012*sin(phase*2+.4)
 	var root: int=names.pelvis
 	var root_at: Vector3=rests[root].origin+Vector3(sway,-.012,0)
 	if clip=="idle_shift":root_at.x+=.014*sin(phase);root_at.y-=.004*pow(sin(phase),2)
@@ -94,27 +100,30 @@ func sample(clip: String,time: float) -> Array[Transform3D]:
 	for side in ["L","R"]:
 		var sign_value:=1.0 if side=="L" else -1.0
 		var foot: int=names["foot_"+side];var thigh: int=names["thigh_"+side]
-		var at:=Vector3(sign_value*clampf(absf(rests[thigh].origin.x)+.026,.10,.15),0,rests[foot].origin.z)
+		var at:=Vector3(sign_value*clampf(absf(rests[thigh].origin.x)+float(profile.width),.092,.17),0,rests[foot].origin.z)
 		var roll:=0.0
 		if moving:
 			var t:=fposmod(time+(0 if side=="L" else .5),1.0)
-			var stride: float=GAITS[clip]*stride_scale
-			var front:=stride*stance*.5;var back: float=-front;var distance:=0.0
+			var cycle_stride: float=stride(clip)*stride_scale
+			var front:=cycle_stride*stance*.5;var back: float=-front;var distance:=0.0
 			if t<stance:
 				var u:=t/stance;distance=lerpf(front,back,u)
-				roll=lerpf(-.14,0,eased(u/.15))+(.50 if running else .32)*eased((u-.68)/.32)
+				roll=lerpf(-.12,0,eased(u/.15))+(.46 if running else .24)*eased((u-.68)/.32)
 			else:
-				var u: float=(t-stance)/(1-stance);var tangent: float=-stride*(1-stance)
+				var u: float=(t-stance)/(1-stance);var tangent: float=-cycle_stride*(1-stance)
 				distance=(2*u*u*u-3*u*u+1)*back+(u*u*u-2*u*u+u)*tangent+(-2*u*u*u+3*u*u)*front+(u*u*u-u*u)*tangent
-				roll=(.50 if running else .32)*(1-eased(u/.28))-.14*eased((u-.72)/.28)
-				at.y+=(.125 if running else .035 if crouch else .045 if carrying else .055)*pow(sin(PI*u),1.35)
+				roll=(.46 if running else .24)*(1-eased(u/.28))-.12*eased((u-.72)/.28)
+				at.y+=(.13 if running else .035 if crouch else .045 if carrying else float(profile.lift))*pow(sin(PI*u),1.35)
+				if drunk:at.x+=sign_value*.045*sin(PI*u)
 			if clip.begins_with("strafe"):at.x+=distance*(-1 if clip=="strafe_left" else 1)
 			else:at.z+=distance*(-1 if clip=="walk_back" else 1)
-		var rotation:=Basis.from_euler(Vector3(roll,sign_value*.018,0))
+		if child and not moving:roll=.065*maxf(0,sin(phase*2+sign_value*PI*.5))
+		var rotation:=Basis.from_euler(Vector3(roll,sign_value*(.045 if drunk else .018),0))
 		at.y+=floor_height(side,rotation);ankles[side]=at;rolls[side]=rotation
 	# Raise the body between contacts, lowering only as far as the measured legs require.
 	# This replaces the same low hip height for every uploaded rig.
-	if moving and not crouch:root_at.y+=.008*(1-cos(phase*2))
+	if moving and not crouch:root_at.y+=(.014 if child else .008)*(1-cos(phase*2))
+	if child and not moving:root_at.y-=.008*(1-cos(phase*4))
 	for side in ["L","R"]:
 		var hip: Vector3=rests[names["thigh_"+side]].origin+(root_at-rests[root].origin)
 		var foot: Vector3=ankles[side];var horizontal:=Vector2(hip.x-foot.x,hip.z-foot.z).length()
@@ -122,10 +131,12 @@ func sample(clip: String,time: float) -> Array[Transform3D]:
 		var maximum:=foot.y+sqrt(maxf(.001,length*length-horizontal*horizontal))-(rests[names["thigh_"+side]].origin.y-rests[root].origin.y)
 		var softness:=maxf(.018-absf(root_at.y-maximum),0)/.018
 		root_at.y=minf(root_at.y,maximum)-softness*softness*.0045
-	var pelvis_rotation:=Vector3(0,.027*cos(phase) if moving else .004*breath,-.016*sin(phase) if moving else .003*breath)
+	var pelvis_rotation:=Vector3(0,float(profile.twist)*cos(phase) if moving else .004*breath,-.016*sin(phase) if moving else .003*breath)
+	if drunk:pelvis_rotation.z+=.08*sin(phase+.3)
 	poses[root]=Transform3D(Basis.from_euler(pelvis_rotation)*rests[root].basis,root_at)
-	var lean:=.12 if running else .45 if crouch else .025 if carrying else .018 if moving else .005
-	if identity=="Velha1":lean+=.035
+	var lean: float=.12 if running else .45 if crouch else .025 if carrying else float(profile.lean) if moving else .005
+	if profile.style=="older_woman" and not moving:lean+=.035
+	if drunk:lean+=.028*sin(phase*2+.4)
 	fk("waist",Vector3(lean*.30,0,.006*sin(phase)))
 	fk("spine",Vector3(lean*.32,-pelvis_rotation.y*.5,0))
 	fk("chest",Vector3(lean*.25+.005*breath,-pelvis_rotation.y*.45,.005*breath))
@@ -134,7 +145,8 @@ func sample(clip: String,time: float) -> Array[Transform3D]:
 	fk("upper_chest",Vector3(lean*.13,-pelvis_rotation.y*.2,0))
 	fk("neck",Vector3(-lean*.3,0,0))
 	var look:=.18*sin(phase)*pow(sin(PI*time),2) if clip in ["idle_look","look"] else .018*sin(phase)
-	fk("head",Vector3(.055 if clip in ["cashier","cashier_idle"] else .012*breath,look,0))
+	if child:look+=.10*sin(phase*3)
+	fk("head",Vector3(.055 if clip in ["cashier","cashier_idle"] else .012*breath,look,.12*sin(phase-.5) if drunk else 0.0))
 	for side in ["L","R"]:
 		var sign_value:=1.0 if side=="L" else -1.0
 		fk("shoulder_"+side,Vector3(.003*breath,-sign_value*.012*cos(phase) if moving else 0,0))
@@ -148,15 +160,19 @@ func sample(clip: String,time: float) -> Array[Transform3D]:
 		l1=rests[names["arm_"+side]].origin.distance_to(rests[names["forearm_"+side]].origin)
 		l2=rests[names["forearm_"+side]].origin.distance_to(rests[names["hand_"+side]].origin)
 		var swing: float=cos(phase+(0 if side=="L" else PI))
-		var hand:=Vector3(shoulder.x+sign_value*.045,shoulder.y-(l1+l2)*.965,shoulder.z+.025)
+		var hand:=Vector3(shoulder.x+sign_value*(.12 if drunk else .035),shoulder.y-(l1+l2)*float(profile.arm_reach),shoulder.z+.04)
 		if moving:
-			hand.z-=(.19 if running else .11)*swing
+			hand.z-=(.21 if running else float(profile.arm_swing))*swing
 			hand.y+=(.19 if running else .016)+(.055 if running else .012)*(1-swing)
+		if drunk:
+			hand.x+=sign_value*.035*sin(phase+.8);hand.y+=.045*sin(phase*2+sign_value)
+		if child and not moving:
+			hand.z+=.055*sin(phase*4+sign_value);hand.y+=.045*(1+sin(phase*3+sign_value))
 		if crouch:hand=Vector3(sign_value*.25,.62,.26)
 		if carrying:hand=Vector3(sign_value*.335+sway,1.07+.004*breath,.26)
 		if clip in ["cashier","cashier_idle"]:hand=Vector3(.08+sign_value*.14,1.22+(.009*sin(phase*10+sign_value) if clip=="cashier" else .003*breath),.27)
-		if clip=="talk" and side=="L":hand=Vector3(.25,1.0+.055*sin(phase*2),.17+.045*sin(phase))
-		if clip=="idle_adjust" and side=="R":hand=hand.lerp(Vector3(-.19,1.02,.13),pow(sin(PI*time),2))
+		if clip=="talk" and side=="L":hand=Vector3(.25,(shoulder.y-.12 if child else 1.0)+.055*sin(phase*2),(.32 if child else .17)+.045*sin(phase))
+		if clip=="idle_adjust" and side=="R":hand=hand.lerp(Vector3(-.08,shoulder.y-.04,.10) if child else Vector3(-.19,1.02,.13),pow(sin(PI*time),2))
 		if clip in ["hold_bottle","browse","pay"] and side=="R":hand=Vector3(-.23,1.02 if clip=="hold_bottle" else 1.14,.16+(.07*pow(sin(PI*time),2) if clip!="hold_bottle" else 0))
 		var arm:=solve(shoulder,hand,l1,l2,shoulder+Vector3(sign_value*.065,-.25,-.13))
 		segment("arm_"+side,shoulder,arm[0],"forearm_"+side);segment("forearm_"+side,arm[0],arm[1],"hand_"+side)

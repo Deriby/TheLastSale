@@ -6,7 +6,7 @@ import json
 import zipfile
 
 ROOT = Path(__file__).resolve().parent.parent
-VERSION = "0.24.2"
+VERSION = "0.25.0"
 
 
 def main():
@@ -31,7 +31,7 @@ def main():
         sources[name] = ROOT / name
     for gallery in ["optimization_v011", "friday_v018", "saturday_v019", "sunday_v020", "supplies_v021", "natural_v022", "npc_cast_draft"]:
         for path in sorted((ROOT / "docs" / gallery).rglob("*")):
-            if path.is_file():
+            if path.is_file() and path.name != "motion_comparison.mp4":
                 sources[path.relative_to(ROOT).as_posix()] = path
     # Keep the editor ZIP below GitHub's 100 MiB per-file limit. Full comparison
     # galleries remain published in the repository; include the PSX guide and two views.
@@ -49,6 +49,9 @@ def main():
         sources[relative] = ROOT / relative
     for name in ["README.md", "validation.json"]:
         relative = "docs/title_v0242/" + name
+        sources[relative] = ROOT / relative
+    for name in ["README.md", "validation.json", "kinematic_metrics.json", "sole_contact.json"]:
+        relative = "docs/motion_v025/" + name
         sources[relative] = ROOT / relative
     sources["README.md"] = ROOT / "tools/project_archive_readme.md"
     records = {name: {"bytes": path.stat().st_size,

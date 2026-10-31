@@ -25,6 +25,7 @@ var waited_seconds:=0.0
 var wait_comment:=0
 var bag: MeshInstance3D
 var reroutes:=0
+var actual_speed:=0.0
 func _ready() -> void:
 	add_to_group("customers")
 	collision_layer=2;collision_mask=1|2
@@ -32,11 +33,7 @@ func _ready() -> void:
 	identity="Customer3" if warned else NPCCast.customer_identity(appearance,identity)
 	visual=CharacterModels.create(identity);add_child(visual)
 	animation=visual.find_child("AnimationPlayer",true,false)
-	if not warned and visual.get_meta("motion_style","living")=="living":
-		motion=LivingMotion.new();add_child(motion);motion.setup(visual,self)
-	if animation:
-		for key in animation.get_animation_list():
-			if key.contains("idle") or key.contains("walk") or key.contains("carry"):animation.get_animation(key).loop_mode=Animation.LOOP_LINEAR
+	motion=LivingMotion.new();add_child(motion);motion.setup(visual,self)
 	product=MeshInstance3D.new();visual.add_child(product);product.mesh=ProductLibrary.mesh(basket_sku);product.material_override=ProductLibrary.material(basket_sku);product.position=Vector3(.23,.95,.3);product.visible=false
 	bag=Geo.box(visual,Vector3(.23,.73,.28),Vector3(.23,.32,.15),ProductLibrary.material("carton"),false);bag.visible=false
 	if motion:motion.pose_updated.connect(sync_product)
@@ -65,8 +62,9 @@ func _physics_process(delta: float) -> void:
 		else:
 			var dir:=diff.normalized();velocity.x=dir.x*1.15;velocity.z=dir.z*1.15;velocity.y=-2
 			var before:=global_position;move_and_slide()
+			actual_speed=Vector2(global_position.x-before.x,global_position.z-before.z).length()/maxf(delta,.001)
 			visual.rotation.y=lerp_angle(visual.rotation.y,atan2(dir.x,dir.z),delta*9)
-			if motion:motion.locomotion(delta,Vector2(velocity.x,velocity.z).length(),false,false,false)
+			if motion:motion.locomotion(delta,actual_speed,false,false,false)
 			else:play("walk")
 			blocked_time=blocked_time+delta if (global_position-before).dot(dir)<delta*.2 else 0
 			if blocked_time>2.5:

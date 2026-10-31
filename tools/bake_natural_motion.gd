@@ -13,7 +13,7 @@ func bake() -> void:
 		var root: Node=animator.get_node(animator.root_node);var path:=str(root.get_path_to(skeleton))
 		for clip in PoseAuthor.LOOPS:
 			# Missing NPC actions still use their existing authored actions.
-			if not animator.has_animation(clip) and not (identity=="Enemy" and clip=="run"):continue
+			if not animator.has_animation(clip) and clip!="run":continue
 			var animation:=Animation.new();animation.length=PoseAuthor.LOOPS[clip]
 			animation.loop_mode=Animation.LOOP_NONE if clip in ["idle_shift","idle_look","idle_adjust","browse","pay"] else Animation.LOOP_LINEAR
 			var tracks: Array[Vector3i]=[]
@@ -32,11 +32,11 @@ func bake() -> void:
 					animation.scale_track_insert_key(tracks[bone].z,time*animation.length,poses[bone].basis.get_scale())
 			simplify(animation)
 			library.add_animation(clip,animation)
-			if PoseAuthor.GAITS.has(clip):strides[clip]=PoseAuthor.GAITS[clip]*author.stride_scale*author.actor_scale
-		library.set_meta("strides",strides);library.set_meta("revision",22);library.set_meta("source_model_sha256",FileAccess.get_sha256(visual.scene_file_path));library.set_meta("authoring","rig measured stance/swing, offline 30 Hz")
+			if PoseAuthor.GAITS.has(clip):strides[clip]=author.stride(clip)*author.stride_scale*author.actor_scale
+		library.set_meta("strides",strides);library.set_meta("revision",25);library.set_meta("style",author.profile.style);library.set_meta("source_model_sha256",FileAccess.get_sha256(visual.scene_file_path));library.set_meta("authoring","identity profiles, measured stance/swing, offline 30 Hz")
 		var error:=ResourceSaver.save(library,"res://resources/motion/"+identity+".res",ResourceSaver.FLAG_COMPRESS)
 		assert(error==OK)
-		report[identity]={"clips":library.get_animation_list().size(),"strides":strides,"bones":skeleton.get_bone_count(),"sole_samples":[author.soles.L.size(),author.soles.R.size()]}
+		report[identity]={"style":author.profile.style,"clips":library.get_animation_list().size(),"strides":strides,"bones":skeleton.get_bone_count(),"sole_samples":[author.soles.L.size(),author.soles.R.size()]}
 		visual.free();print("MOTION_BAKED ",identity)
 	var file:=FileAccess.open("res://resources/motion/authoring.json",FileAccess.WRITE);file.store_string(JSON.stringify(report,"  "));file.close();get_tree().quit()
 

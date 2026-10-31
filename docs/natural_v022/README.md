@@ -4,7 +4,7 @@ A caminhada foi refeita a partir das proporções reais de cada rig. Os modelos,
 as texturas e os pesos recebidos do autor foram preservados. Novas bibliotecas
 substituem os clipes de locomoção, repouso e gestos comuns sem alterar os controles.
 
-[Vídeo comparativo de caminhada, corrida e transporte](motion_comparison.mp4)
+[Vídeo comparativo de caminhada, corrida e transporte](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/docs/natural_v022/motion_comparison.mp4)
 
 ## Movimento
 

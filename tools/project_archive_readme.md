@@ -1,4 +1,4 @@
-# The Last Sale — projeto Godot 0.24.2
+# The Last Sale — projeto Godot 0.25.0
 
 1. Extraia este ZIP em uma pasta nova.
 2. No Godot **4.4.1**, clique em **Importar** e escolha `project.godot`.
@@ -6,6 +6,14 @@
 4. Pressione **F5** e escolha **Iniciar expediente** para testar a rotina completa.
 
 Modelos animados, cenários, sons, texturas, código, testes e ferramentas estão incluídos. Blender não é necessário para jogar. O renderizador é Compatibility / OpenGL.
+
+## Movimento dos personagens — 0.25.0
+
+Há perfis próprios para Deryk e Felps, garotas, homens, senhora, Zirico bêbado e Bryan inquieto. Os 11 rigs têm bibliotecas de movimento medidas; as malhas, texturas e os pesos dos modelos não foram alterados. Os clientes homens e o cliente do aviso também usam esse controlador.
+
+A passada acompanha a distância realmente percorrida, para quando o corpo está bloqueado e volta quando o caminho abre. Gestos de repouso são finitos; Bryan tem gestos mais frequentes, enquanto Zirico usa base mais larga e braços de equilíbrio. As transições limpam apoios antigos e suavizam a estabilização horizontal dos pés. Ações de pegar, colocar, largar caixas e atacar conservam os clipes e tempos originais.
+
+Perfis ficam em `resources/locomotion_profiles.json`; as bibliotecas prontas estão em `resources/motion/`. Não é necessário Blender nem regenerar animações para jogar. Para refazer as bibliotecas, execute a cena `tools/bake_natural_motion.tscn` no Godot 4.4.1. Veja `docs/motion_v025/README.md`. Prévias em vídeo ficam no GitHub para manter o ZIP abaixo de 100 MiB.
 
 ## Intro retrô e menu de suspense — 0.24.2
 

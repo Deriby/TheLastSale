@@ -1,0 +1,245 @@
+{
+  "Bryan": {
+    "idle": {
+      "finite": true,
+      "penetration_m": 0.00265420833602548,
+      "support_gap_m": 0.000152293257997371
+    },
+    "run": {
+      "finite": true,
+      "penetration_m": 0.0159065704792738,
+      "support_gap_m": 0.00183786824345589
+    },
+    "walk": {
+      "finite": true,
+      "penetration_m": 0.00984334852546453,
+      "support_gap_m": 0.00130618934053928
+    }
+  },
+  "Customer1": {
+    "carry_walk": {
+      "finite": true,
+      "penetration_m": 0.00171800702810287,
+      "support_gap_m": 0.0000290032476186752
+    },
+    "crouch_walk": {
+      "finite": true,
+      "penetration_m": 0.000327484682202339,
+      "support_gap_m": 0.0000291839241981506
+    },
+    "idle": {
+      "finite": true,
+      "penetration_m": 0.000152947381138802,
+      "support_gap_m": 0.0000130310654640198
+    },
+    "run": {
+      "finite": true,
+      "penetration_m": 0.00110141932964325,
+      "support_gap_m": 0.0000301990658044815
+    },
+    "walk": {
+      "finite": true,
+      "penetration_m": 0.00292646139860153,
+      "support_gap_m": 0.0000287648290395737
+    }
+  },
+  "Customer2": {
+    "carry_walk": {
+      "finite": true,
+      "penetration_m": 0.00171500071883202,
+      "support_gap_m": 0.0000294093042612076
+    },
+    "crouch_walk": {
+      "finite": true,
+      "penetration_m": 0.000335689634084702,
+      "support_gap_m": 0.0000296290963888168
+    },
+    "idle": {
+      "finite": true,
+      "penetration_m": 0.000140268355607986,
+      "support_gap_m": 0.0000284016132354736
+    },
+    "run": {
+      "finite": true,
+      "penetration_m": 0.00110115855932236,
+      "support_gap_m": 0.0000307783484458923
+    },
+    "walk": {
+      "finite": true,
+      "penetration_m": 0.00292458385229111,
+      "support_gap_m": 0.000029299408197403
+    }
+  },
+  "Customer3": {
+    "carry_walk": {
+      "finite": true,
+      "penetration_m": 0.00172265060245991,
+      "support_gap_m": 0.0000280588865280151
+    },
+    "crouch_walk": {
+      "finite": true,
+      "penetration_m": 0.00034504197537899,
+      "support_gap_m": 0.0000284090638160706
+    },
+    "idle": {
+      "finite": true,
+      "penetration_m": 0.000218583270907402,
+      "support_gap_m": 0.0000386480242013931
+    },
+    "run": {
+      "finite": true,
+      "penetration_m": 0.00110176205635071,
+      "support_gap_m": 0.0000292528420686722
+    },
+    "walk": {
+      "finite": true,
+      "penetration_m": 0.00292935967445374,
+      "support_gap_m": 0.0000281836837530136
+    }
+  },
+  "Dery": {
+    "carry_walk": {
+      "finite": true,
+      "penetration_m": 0.00127747398801148,
+      "support_gap_m": 0.000205220232601278
+    },
+    "crouch_height_m": {
+      "height_m": 1.30946803092957
+    },
+    "crouch_walk": {
+      "finite": true,
+      "penetration_m": 0.000266082584857941,
+      "support_gap_m": 0.00133198127150536
+    },
+    "idle": {
+      "finite": true,
+      "penetration_m": 0.0000244895927608013,
+      "support_gap_m": 0.000260178407188505
+    },
+    "run": {
+      "finite": true,
+      "penetration_m": 0.0011621875455603,
+      "support_gap_m": 0.000544851121958345
+    },
+    "walk": {
+      "finite": true,
+      "penetration_m": 0.00193694839254022,
+      "support_gap_m": 0.000205662756343372
+    }
+  },
+  "Enemy": {
+    "idle": {
+      "finite": true,
+      "penetration_m": 0.00008058831008384,
+      "support_gap_m": 0.000144698264193721
+    },
+    "run": {
+      "finite": true,
+      "penetration_m": 0.00115178863052279,
+      "support_gap_m": 0.00313324993476272
+    },
+    "walk": {
+      "finite": true,
+      "penetration_m": 0.00324202724732459,
+      "support_gap_m": 0.00105119531508535
+    }
+  },
+  "Felps": {
+    "carry_walk": {
+      "finite": true,
+      "penetration_m": 0.00214535975828767,
+      "support_gap_m": 0.00408485857769847
+    },
+    "crouch_height_m": {
+      "height_m": 1.29289743704014
+    },
+    "crouch_walk": {
+      "finite": true,
+      "penetration_m": 0.000431800115620717,
+      "support_gap_m": 0.00473459996283054
+    },
+    "idle": {
+      "finite": true,
+      "penetration_m": 0.000590008043218404,
+      "support_gap_m": 0.0
+    },
+    "run": {
+      "finite": true,
+      "penetration_m": 0.00131386809516698,
+      "support_gap_m": 0.00541238533332944
+    },
+    "walk": {
+      "finite": true,
+      "penetration_m": 0.00286039803177118,
+      "support_gap_m": 0.00463115936145186
+    }
+  },
+  "Garota1": {
+    "idle": {
+      "finite": true,
+      "penetration_m": 0.0,
+      "support_gap_m": 0.00118353380821645
+    },
+    "run": {
+      "finite": true,
+      "penetration_m": 0.00371572677977383,
+      "support_gap_m": 0.0059576747007668
+    },
+    "walk": {
+      "finite": true,
+      "penetration_m": 0.00266843265853822,
+      "support_gap_m": 0.00422488618642092
+    }
+  },
+  "Garota2": {
+    "idle": {
+      "finite": true,
+      "penetration_m": 0.0,
+      "support_gap_m": 0.000731259933672845
+    },
+    "run": {
+      "finite": true,
+      "penetration_m": 0.0021202398929745,
+      "support_gap_m": 0.00412643793970346
+    },
+    "walk": {
+      "finite": true,
+      "penetration_m": 0.00202998891472816,
+      "support_gap_m": 0.00376611202955246
+    }
+  },
+  "Velha1": {
+    "idle": {
+      "finite": true,
+      "penetration_m": 0.0000560029438929632,
+      "support_gap_m": 0.0000669857836328447
+    },
+    "run": {
+      "finite": true,
+      "penetration_m": 0.00613728910684586,
+      "support_gap_m": 0.000191799248568714
+    },
+    "walk": {
+      "finite": true,
+      "penetration_m": 0.00375908613204956,
+      "support_gap_m": 0.000188455931493081
+    }
+  },
+  "Zirico": {
+    "idle": {
+      "finite": true,
+      "penetration_m": 0.000349609617842361,
+      "support_gap_m": 0.000364179897587746
+    },
+    "run": {
+      "finite": true,
+      "penetration_m": 0.00153475755359977,
+      "support_gap_m": 0.00979973189532757
+    },
+    "walk": {
+      "finite": true,
+      "penetration_m": 0.00281743076629937,
+      "support_gap_m": 0.00948646012693644
+    }
+  }
+}
