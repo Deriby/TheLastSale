@@ -115,7 +115,7 @@ func build_menu() -> void:
 	message.add_theme_font_override("font",TitlePresentation.TYPEWRITER);message.modulate=Color("a8a38f")
 	buttons=VBoxContainer.new();v.add_child(buttons);buttons.add_theme_constant_override("separation",7)
 	rebuild_buttons()
-	var footer:=label(v,"0.28.0  /  FONES DE OUVIDO RECOMENDADOS",16)
+	var footer:=label(v,"0.29.0  /  FONES DE OUVIDO RECOMENDADOS",16)
 	footer.add_theme_font_override("font",TitlePresentation.VCR);footer.modulate=Color("828473")
 	menu_motion=TitleMenuMotion.new(menu,v,buttons,title_lockup)
 	layout_menu()
@@ -193,6 +193,7 @@ func finish_title_launch(resume: bool) -> void:
 	if resume:continue_game.emit()
 	else:new_game.emit()
 	has_started=true;set_paused(false);menu.modulate.a=1
+	if not resume:get_parent().world.story.begin_arrival()
 
 func save_current() -> void:
 	var player:=get_tree().get_first_node_in_group("player") as DepotPlayer
@@ -345,12 +346,13 @@ func show_night_summary() -> void:
 	var report: Dictionary=Session.campaign.reports.get("saturday" if saturday else "friday",{})
 	label(column,"Os dois saíram juntos.\n%d atendimentos • Vendas %s"%[int(report.get("customers",0)),ShopSale.money(int(report.get("sales_cents",0)))],21)
 	var message_text:="A pane foi comunicada ao responsável pelo depósito.\nSábado: atenda os clientes, confira as câmeras\ne investigue os fundos com a dupla."
+	if not saturday and not str(Session.campaign.friday_story.recap).is_empty():message_text=Session.campaign.friday_story.recap+"\nSábado: confira as câmeras e investigue os fundos."
 	if saturday:
 		message_text="Registros: "+("cópia guardada" if Session.campaign.decisions.get("evidence","")=="copy" else "somente no gravador")
 		message_text+="\nContato: "+("responsável avisado" if Session.campaign.decisions.get("help","")=="contact" else "ainda sem aviso")
 		message_text+="\nSaída: "+("preparada" if Session.campaign.decisions.get("exit","")=="prepared" else "sem preparação")
 		message_text+="\nDomingo: recupere a gravação antiga, enfrente\na perseguição e decida como sair do depósito."
-	var note:=label(column,message_text,18);note.custom_minimum_size.x=610
+	var note:=label(column,message_text,18);note.custom_minimum_size.x=610;note.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
 	var proceed:=Button.new();column.add_child(proceed);proceed.text="COMEÇAR DOMINGO" if saturday else "COMEÇAR SÁBADO"
 	proceed.name="NextNight"
 	proceed.pressed.connect(func():night_panel.queue_free();night_panel=null;next_night.emit();set_paused(false))

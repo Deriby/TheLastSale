@@ -137,7 +137,9 @@ func activate(player: Node3D) -> bool:
 			if Dialogue.active or global_position.distance_to(player.global_position)>2.65:return false
 			if Session.greet():
 				Dialogue.play("greeting",[["Felps","Ô Dery. Dá uma completada na água pra mim? Separei duas caixas verdes lá atrás." if StockTasks.required_count()<2 else "A água já tá no jeito. Valeu, Dery."],["Dery","Pode deixar. Hoje a gente fecha no horário, hein."],["Felps","Se depender de mim... As devoluções tão no caminho. Anotei o resto no caderno."]])
-			else: Dialogue.play("smalltalk",[["Felps","Sextou, hein... pra quem não tá trabalhando."],["Dery","Nem me fala. Ainda falta chão até meia-noite."]])
+			else:
+				var shift:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
+				if shift!=null:shift.story.try_remark(player)
 			return true
 		"checkout":
 			var world:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
@@ -146,6 +148,9 @@ func activate(player: Node3D) -> bool:
 			if Dialogue.active:return false
 			var lines: Array
 			var visits:=int(Session.familiar_visits.get(identity,0));Session.familiar_visits[identity]=visits+1
+			var shift:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
+			if int(Session.campaign.night)==0 and shift!=null:
+				Dialogue.play("familiar_"+identity,shift.story.familiar_lines(identity,player,visits));Session.save_shift(player.global_position);return true
 			if identity=="Bryan":
 				if player.identity=="Felps":lines=[["Bryan","Ô, Felps! O Deryk tá aí também?"],["Felps","Tá cuidando do estoque. Fica aqui perto, Bryan."],["Dery","Já volto aí, moleque!"]]
 				elif visits>0:lines=[["Bryan","Vocês vão trabalhar até tarde hoje?"],["Dery","Até meia-noite. Tá uma correria, viu?"],["Felps","Depois a gente conversa com calma, Bryan."]]

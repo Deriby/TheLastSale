@@ -32,6 +32,7 @@ var saturday: SaturdayShift
 var surveillance_open:=false
 var supplies: SupplyGuide
 var everyday: EverydayHorror
+var story: FridayStory
 func _ready() -> void:
 	add_to_group("shift_world")
 	var legacy_carried:=Session.carried_id
@@ -99,6 +100,7 @@ func _ready() -> void:
 	sunday=SundayShift.new();sunday.world=self;add_child(sunday)
 	supplies=SupplyGuide.new();supplies.world=self;add_child(supplies)
 	everyday=EverydayHorror.new();everyday.world=self;add_child(everyday)
+	story=FridayStory.new();story.world=self;add_child(story)
 func update_enemy_visibility() -> void:
 	enemy_visual.process_mode=Node.PROCESS_MODE_INHERIT if enemy_visual.is_visible_in_tree() else Node.PROCESS_MODE_DISABLED
 func select_player(identity: String) -> void:
@@ -182,7 +184,7 @@ func checkout_step(action: String,value := 0) -> bool:
 			customer.purchase_complete=true;customer.product.hide();customer.bag.show()
 			if customer.warned and Session.can_warn():
 				warning_started=true;Session.stage=5;Session.changed.emit()
-				var lines: Array=JSON.parse_string(FileAccess.get_file_as_string("res://resources/warning.json"));Dialogue.play("warning",lines)
+				Dialogue.play("warning",story.warning_lines())
 			notice.emit("Compra entregue • "+ShopSale.money(sale.total())+" • Troco "+ShopSale.money(sale.selected_change()))
 			checkout_closed.emit();result=true
 	update_sale("register" if result and action=="receive" else ("cash" if result and action=="change" else ("bag" if result and action=="deliver" else "")))
@@ -272,8 +274,7 @@ func begin_checkout(who: Customer) -> void:
 		Dialogue.play("sale_order_"+str(sale.id),saturday.order_lines(who));return
 	var request: String="Boa noite! Vou levar: "+sale.describe().replace("\n",", ")+"."
 	if sale.needs_bulk():request="Boa noite! Separa uma caixa fechada de retornável pra mim?"
-	var replies: Array[String]=["Boa. Só um instante.","Tá na mão.","Mais alguma coisa? Fechou."]
-	Dialogue.play("sale_order_"+str(sale.id),[["Cliente",request],["Felps","O Deryk pega lá atrás pra você." if sale.needs_bulk() and not sale.bulk_supplied else replies[Session.customers_served%replies.size()]]])
+	Dialogue.play("sale_order_"+str(sale.id),story.order_lines(who,request))
 func on_departure(who: Customer) -> void:
 	if who.warned and warning_started:
 		Session.stage=4
@@ -303,7 +304,7 @@ func restore_transient() -> void:
 		spawn_customer(bool(state.get("warned",false)),state)
 		if Session.stage==5 and customer!=null and customer.warned:
 			warning_started=true
-			var lines: Array=JSON.parse_string(FileAccess.get_file_as_string("res://resources/warning.json"));Dialogue.play("warning",lines)
+			Dialogue.play("warning",story.warning_lines())
 	elif Session.stage==5:Session.stage=4
 	noise_pending=false
 	if friday!=null and Session.stage==6 and friday.phase()=="routine" and not Dialogue.active:friday.begin_outage()

@@ -52,7 +52,7 @@ func introduce(actor: DepotPlayer) -> bool:
 		if is_instance_valid(world.depot.crates.get(id)):world.depot.crates[id].queue_free()
 	if is_instance_valid(world.depot.crates.get("loose")):world.depot.crates.loose.position=Vector3(-3.8,.23,-13.8)
 	save()
-	Dialogue.play("saturday_intro",[["Felps","Avisei o responsável sobre a pane. Mandou a gente conferir o gravador e não mexer na instalação."],["Dery","Beleza. Eu olho o estoque. A rua não apagou ontem, aquilo foi só aqui."],["Felps","Tem dois pedidos antes de fechar. Aqui no caixa, C abre as câmeras e o caderno. A gente compara tudo depois."]])
+	Dialogue.play("saturday_intro",world.story.saturday_memory()+[["Felps","Avisei o responsável sobre a pane. Mandou a gente conferir o gravador e não mexer na instalação."],["Dery","Beleza. Eu olho o estoque. A rua não apagou ontem, aquilo foi só aqui."],["Felps","Tem dois pedidos antes de fechar. Aqui no caixa, C abre as câmeras e o caderno. A gente compara tudo depois."]])
 	return true
 func can_spawn() -> bool:return int(Session.campaign.night)==1 and phase()=="saturday_routine" and Session.customers_served<2
 func next_identity() -> String:return "ClienteTrabalho" if Session.customers_served==0 else "ClienteBone"

@@ -1,0 +1,31 @@
+{
+  "version": "0.29.0",
+  "godot": "4.4.1",
+  "new_story_checks": 36,
+  "full_suite_expected_checks": 702,
+  "full_suite_count": 12,
+  "mouse_wheel_third_person_retained": true,
+  "arrival_only_on_new_title_launch": true,
+  "optional_reactions_are_perception_gated": true,
+  "customer_question_recorded_on_display": true,
+  "friday_memories_survive_day_boundary": true,
+  "closing_preserves_original_tasks_and_shutters": true,
+  "summary_text_wraps_in_native_window": true,
+  "save_version": 5,
+  "previous_save_versions_supported": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "models_materials_textures_weights_changed": 0,
+  "animation_libraries_changed": 0,
+  "new_assets": 0,
+  "new_shadow_lights": 0,
+  "new_gameplay_viewports": 0,
+  "full_package_results": "../../downloads/project/release_verification.json",
+  "preview_fps": 30,
+  "preview_is_condensed": true,
+  "native_radeon_r7_fps_measured": false
+}

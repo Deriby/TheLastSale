@@ -99,6 +99,12 @@ func run() -> void:
 	Preferences.psx_vertices=2;Preferences.psx_affine=0;Preferences.save()
 	var saved:=ConfigFile.new();saved.load("user://settings.cfg")
 	check(saved.get_value("settings","psx_vertices")==2 and saved.get_value("settings","psx_affine")==0,"intensidades independentes persistem em settings.cfg")
+	# Uncapped headless frames can end before the spatial mixer starts/stops.
+	# Keep its viewport alive for a real cycle on each side of the stop.
+	get_tree().paused=false
+	await get_tree().create_timer(.15,true,false,true).timeout
+	app.world.sound.stop_all()
+	await get_tree().create_timer(.25,true,false,true).timeout
 	app.queue_free();await frames(5)
 	Geo.materials.clear();ProductLibrary.materials.clear();ProductLibrary.meshes.clear();CharacterModels.imported_materials.clear();CharacterModels.costume_materials.clear()
 	print("PSX RESULT ",checks-failures.size(),"/",checks," passed; failures=",failures)

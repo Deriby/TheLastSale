@@ -25,7 +25,8 @@ var saved_position := Vector3(3.8, 0.1, 1.8)
 var carried_id := ""
 const SAVE_PATH := "user://shift.json"
 func default_campaign() -> Dictionary:
-	return {"night":0,"phase":"routine","flags":{},"clues":{},"decisions":{},"evidence_archive":{},"records":[],"sunday":{},"ending":{},"completed_nights":[],"reports":{},"experience":default_experience()}
+	return {"night":0,"phase":"routine","flags":{},"clues":{},"decisions":{},"evidence_archive":{},"records":[],"sunday":{},"ending":{},"completed_nights":[],"reports":{},"experience":default_experience(),"friday_story":default_friday_story()}
+func default_friday_story() -> Dictionary:return {"events":{},"observations":{},"recap":""}
 func default_experience() -> Dictionary:return {"events":{},"event_times":{},"notes":[],"observer":{},"tension":0.0}
 func flag(id: String) -> bool:return bool(campaign.flags.get(id,false))
 func night_title() -> String:return ["SEXTA-FEIRA","SÁBADO","DOMINGO"][clampi(int(campaign.night),0,2)]
@@ -186,6 +187,10 @@ func load_shift() -> bool:
 					var night:=int(value)
 					if night>=0 and night<=2 and night not in completed:completed.append(night)
 		campaign.completed_nights=completed
+		if not campaign.friday_story is Dictionary:campaign.friday_story=default_friday_story()
+		for key in ["events","observations"]:
+			if not campaign.friday_story.get(key) is Dictionary:campaign.friday_story[key]={}
+		campaign.friday_story.recap=str(campaign.friday_story.get("recap",""))
 		if not campaign.experience is Dictionary:campaign.experience=default_experience()
 		for key in default_experience():
 			if not campaign.experience.has(key):campaign.experience[key]=default_experience()[key]

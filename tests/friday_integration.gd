@@ -105,6 +105,7 @@ func run() -> void:
 	Session.save_shift(world.player.global_position);await reload_world()
 	check(world.friday.phase()=="closing" and world.friday.ready_to_leave() and Session.flag("reunite") and world.friday.both_outside(),"retomada do fechamento preserva tarefas, encontro da dupla e posição na calçada")
 	check(find_interaction(world.friday.exit_control,"campaign").activate(world.player),"portas só podem baixar com os dois protagonistas do lado de fora")
+	clear_dialogue() # Finish the new shared closing exchange before the shutters.
 	app.interface.set_paused(true);await get_tree().create_timer(2.0,true).timeout
 	check(Session.campaign.phase=="closing" and app.interface.night_panel==null,"pausa congela o fechamento e impede que a noite termine com animação suspensa")
 	app.interface.set_paused(false)

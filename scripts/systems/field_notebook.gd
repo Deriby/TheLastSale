@@ -25,6 +25,7 @@ func _ready() -> void:
 	if int(Session.campaign.night)==1:text(column,world.saturday.journal(),16)
 	if int(Session.campaign.night)==2:text(column,Session.campaign_objective(),17)
 	text(column,"OBSERVAÇÕES",21)
+	if not str(Session.campaign.friday_story.recap).is_empty():text(column,Session.campaign.friday_story.recap,17)
 	var notes: Array=Session.campaign.experience.notes
 	if notes.is_empty():text(column,"Por enquanto, só mais um expediente.",17)
 	for entry in notes:

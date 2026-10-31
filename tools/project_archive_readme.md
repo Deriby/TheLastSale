@@ -1,4 +1,4 @@
-# The Last Sale — projeto Godot 0.28.0
+# The Last Sale — projeto Godot 0.29.0
 
 1. Extraia este ZIP em uma pasta nova.
 2. No Godot **4.4.1**, clique em **Importar** e escolha `project.godot`.
@@ -6,6 +6,16 @@
 4. Pressione **F5** e escolha **Iniciar expediente** para testar a rotina completa.
 
 Modelos animados, cenários, sons, texturas, código, testes e ferramentas estão incluídos. Blender não é necessário para jogar. O renderizador é Compatibility / OpenGL.
+
+## Primeira noite e memória dos irmãos — 0.29.0
+
+Ao escolher Iniciar, Deryk e Felps conversam sobre a mãe e voltar para casa depois do trabalho. Espaço avança; a câmera e a rodinha continuam livres. A conversa no balcão inicia as tarefas como antes. Continuar não repete a chegada.
+
+Os clientes e conhecidos têm falas próprias. A pergunta do cliente de boné só vira anotação quando é ouvida. Conversar com o irmão depois de perceber a pessoa na rua, o sino, passos ou o carro traz reações específicas, sem repetir em cada interação. As falas do aviso também reconhecem o que você viu.
+
+No fechamento, reúna os dois pela operação habitual. A dupla ouve passos no salão vazio; Espaço ou o avanço normal terminam a conversa e as portas baixam. O relato aparece no resumo e no caderno, e a abertura de sábado retoma as observações. Não há uma pista nova obrigatória. Saves anteriores continuam aceitos e não recebem acontecimentos inventados.
+
+Veja `docs/friday_story_v029/README.md`. Modelos, texturas, bibliotecas de animação, física, caixas, troco, energia, PS1 e câmera permanecem preservados.
 
 ## Apresentação e rotina — 0.28.0
 
@@ -125,7 +135,7 @@ O elenco inclui Dery, Felps, Killer, Bryan, Zirico, Garota 1, Garota 2 e Velha 1
 
 ## Validação
 
-As onze suítes reúnem 666 verificações da campanha, atendimento, reposição, animações, PS1, apresentação e nova rotina. Os resultados do pacote extraído e os 48 casos renderizados da câmera PS1 ficam na verificação de distribuição no GitHub, com notas em `docs/everyday_v028/validation.json`. `./tools/test.sh` roda as onze suítes; em outra máquina, abra pelo editor ou defina `GODOT_BIN` com o caminho do motor.
+As doze suítes reúnem 702 verificações da campanha, atendimento, reposição, animações, PS1, apresentação e nova rotina. Os resultados do pacote extraído e os 48 casos renderizados da câmera PS1 ficam na verificação de distribuição no GitHub, com notas em `docs/friday_story_v029/validation.json`. `./tools/test.sh` roda as doze suítes; em outra máquina, abra pelo editor ou defina `GODOT_BIN` com o caminho do motor.
 
 A Godot 4.4 tem Windows 10 como requisito oficial mínimo. Windows 7/Radeon R7 não foram validados nativamente. O modo Econômica reduz resolução, sombras e acabamento dos materiais.
 

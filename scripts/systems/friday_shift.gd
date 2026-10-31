@@ -115,6 +115,7 @@ func activate(action: String,actor: DepotPlayer) -> bool:
 			if not Session.flag("reunite"):
 				Session.campaign.flags.reunite=true;save();world.notice.emit(actor.display_name()+": vem pra frente, vamos sair juntos.");return true
 			if not both_outside():return false
+			if world.story.begin_closing_hook():return true
 			finish_friday();return true
 	return false
 func begin_outage() -> bool:

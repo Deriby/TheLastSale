@@ -20,6 +20,7 @@ func record(id: String,text: String="") -> bool:
 	if done(id):return false
 	state().events[id]=true
 	state().event_times[id]=Session.world_seconds
+	if world.story!=null:world.story.remember(id)
 	if not text.is_empty():state().notes.append({"id":str(Session.campaign.night)+":"+id,"night":int(Session.campaign.night),"time":Session.clock_text(),"text":text})
 	Session.changed.emit()
 	if world.active:Session.save_shift(world.player.global_position)
@@ -99,7 +100,10 @@ func capture() -> void:
 		state().observer=observer.snapshot();state().observer.present_time=present_time;state().observer.unseen_time=unseen_time
 func on_spoken(who: String,_text: String) -> void:
 	var person: Node3D=world.characters.get("Dery" if who=="Deryk" else who)
-	if who.begins_with("Cliente") and is_instance_valid(world.customer):person=world.customer
+	if (who.begins_with("Cliente") or who=="Senhora") and is_instance_valid(world.customer):person=world.customer
+	if who in ["Bryan","Zirico"]:
+		for friend in get_tree().get_nodes_in_group("familiar_npcs"):
+			if friend.identity==who:person=friend;break
 	for actor in world.characters.values():
 		actor.social_focus_enabled=is_instance_valid(person) and person!=actor and actor.position.distance_to(person.position)<5
 		if actor.social_focus_enabled:actor.social_focus=person.global_position+Vector3.UP*1.55

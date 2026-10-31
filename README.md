@@ -2,9 +2,19 @@
 
 Demonstração jogável em **Godot 4.4.1 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP, com uma primeira versão jogável da campanha de sexta a domingo. Acabamento e ritmo continuam em desenvolvimento.
 
-**[Baixar o projeto 0.28.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.28.0.zip)**
+**[Baixar o projeto 0.29.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.29.0.zip)**
 
 Extraia o ZIP, importe `project.godot` no Godot **4.4.1**, aguarde a importação dos modelos e pressione **F5**. O arquivo inclui os modelos animados, cenários, código e recursos usados no jogo. [Conteúdo e instruções do projeto](downloads/project/README.md).
+
+## Revisão 0.29.0 — os irmãos e a primeira noite
+
+A chegada pela opção Iniciar apresenta Deryk e Felps como irmãos, com uma conversa sobre voltar para casa depois do expediente. O jogador conserva a câmera e a rodinha. As tarefas começam pela conversa habitual no balcão.
+
+Clientes têm falas próprias: trânsito, corrida cancelada, família e a entrega do dia seguinte. O cliente de boné pergunta sobre a porta dos fundos, e a reação de Felps muda quando algo suspeito já foi percebido. Bryan tem humor de criança inquieta; Zirico comenta o sino quando esse acontecimento foi ouvido.
+
+Conversar com o irmão depois de ver a pessoa na rua, ouvir o sino ou notar outros sinais muda o diálogo. As reações são únicas e ficam no save. O fechamento reúne a dupla, traz passos no salão esvaziado e retoma a preocupação na abertura do sábado. [Prévia com som e validação](docs/friday_story_v029/README.md).
+
+![Conversa no balcão](docs/friday_story_v029/customer.png)
 
 ## Revisão 0.28.0 — rotina, primeira pessoa e suspense no depósito
 
@@ -287,9 +297,9 @@ A reconstrução 0.2 do interior recebeu gôndolas abastecidas por categoria, ge
 
 ## Jogar
 
-**[Baixar o projeto Godot 0.28.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.28.0.zip)**
+**[Baixar o projeto Godot 0.29.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.29.0.zip)**
 
-O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **0.28.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
+O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **0.29.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
 
 O download atual é o projeto para o editor. O diretório `downloads/windows` guarda apenas a entrega anterior 0.9.0.
 

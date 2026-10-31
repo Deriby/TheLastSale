@@ -41,7 +41,7 @@ func _ready() -> void:
 	animation=visual.find_child("AnimationPlayer",true,false)
 	motion=LivingMotion.new();add_child(motion);motion.setup(visual,self)
 	foot_audio=AudioStreamPlayer3D.new();add_child(foot_audio);foot_audio.stream=load("res://assets/audio/step_tile.wav");foot_audio.max_distance=11
-	Dialogue.spoken.connect(func(who: String,_text: String):talking=who.begins_with("Cliente"))
+	Dialogue.spoken.connect(func(who: String,_text: String):talking=who.begins_with("Cliente") or who=="Senhora")
 	product=MeshInstance3D.new();visual.add_child(product);product.mesh=ProductLibrary.mesh(basket_sku);product.material_override=ProductLibrary.material(basket_sku);product.position=Vector3(.23,.95,.3);product.visible=false
 	bag=Geo.box(visual,Vector3(.23,.73,.28),Vector3(.23,.32,.15),ProductLibrary.material("carton"),false);bag.visible=false
 	if motion:motion.pose_updated.connect(sync_product)

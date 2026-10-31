@@ -131,6 +131,9 @@ func run() -> void:
 	check(Session.campaign.phase=="saturday_intro" and Session.campaign.decisions.is_empty() and Session.campaign.records.is_empty(),"save da antiga prévia migra para sábado jogável com campos novos seguros")
 	clear_dialogue();print("SATURDAY RESULT ",checks-failures.size(),"/",checks," passed; failures=",failures)
 	# Retire spatial voices before freeing their listener's viewport.
+	# The last checkpoint was loaded only a few accelerated physics ticks ago;
+	# let the real-time mixer consume its pending starts before issuing stops.
+	await get_tree().create_timer(.15,true,false,true).timeout
 	app.world.sound.stop_all()
 	await get_tree().create_timer(.25,true,false,true).timeout
 	app.queue_free();await get_tree().process_frame
