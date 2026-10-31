@@ -1,0 +1,43 @@
+{
+  "version": "0.28.0",
+  "godot": "4.4.1",
+  "default_camera_distance": 0,
+  "mouse_wheel_third_person_retained": true,
+  "independent_saved_camera_per_protagonist": true,
+  "legacy_camera_migration_once": true,
+  "world_3d_audio_listener_enabled": true,
+  "default_immersive_hud": true,
+  "notebook_key": "J",
+  "notebook_pauses_world": true,
+  "minimum_routine_before_automatic_warning_seconds": 300,
+  "ordinary_sales_continue_before_warning": true,
+  "persistent_optional_events": [
+    "idling car",
+    "stock-room entry chime",
+    "stock footsteps",
+    "observer seen on street or CCTV",
+    "physical observer departure"
+  ],
+  "new_original_audio_clips": 4,
+  "new_shadow_lights": 0,
+  "new_gameplay_viewports": 0,
+  "previous_models_textures_materials_weights_files_changed": 0,
+  "animation_libraries_changed": 0,
+  "save_version": 5,
+  "previous_save_versions_supported": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "new_feature_checks": 45,
+  "full_suite_expected_checks": 666,
+  "full_suite_count": 11,
+  "full_package_results": "../../downloads/project/release_verification.json",
+  "preview_fps": 30,
+  "preview_duration_note": "condensed review; narrative time and locations advanced between shots",
+  "audio_peak_dbfs": -18.134267,
+  "audio_rms_dbfs": -45.646689,
+  "native_radeon_r7_fps_measured": false
+}

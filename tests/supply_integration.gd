@@ -75,9 +75,16 @@ func run() -> void:
 	check(world.checkout_step("deliver") and Session.sales_cents==7200 and Session.receipts.size()==1,"Felps finaliza venda de retornáveis e registra um único recibo")
 	world.supplies.refresh();check(not world.supplies.delivery.visible,"marcação da entrega some após receber a mercadoria")
 	Session.advance_to_saturday();app.build_world();world=app.world;world.active=true;await ticks(3)
+	# These last two transitions are staged within milliseconds by the test.
+	# Give each new viewport listener a real mixer cycle before replacing it.
+	await get_tree().create_timer(.15,true,false,true).timeout
 	check(not world.depot.crates.has("stock_1") and not world.depot.fridge_target.needs_restock and world.supplies.boards.is_empty(),"sábado não recria caixas de reposição da sexta nem sinaliza falta inexistente")
 	Session.advance_to_sunday();app.build_world();world=app.world;world.active=true;await ticks(3)
+	await get_tree().create_timer(.15,true,false,true).timeout
 	check(not world.depot.crates.has("stock_1") and not app.interface.supply_marker.visible,"domingo de investigação não oferece caixas de trabalho sem destino")
 	print("SUPPLY RESULT ",checks-failures.size(),"/",checks," passed; failures=",failures)
-	app.queue_free();await get_tree().process_frame;await get_tree().create_timer(.2).timeout
+	# Retire spatial voices before freeing their listener's viewport.
+	app.world.sound.stop_all()
+	await get_tree().create_timer(.25,true,false,true).timeout
+	app.queue_free();await get_tree().process_frame
 	Geo.materials.clear();CharacterModels.costume_materials.clear();CharacterModels.imported_materials.clear();get_tree().quit(0 if failures.is_empty() else 1)

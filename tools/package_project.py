@@ -6,7 +6,7 @@ import json
 import zipfile
 
 ROOT = Path(__file__).resolve().parent.parent
-VERSION = "0.27.0"
+VERSION = "0.28.0"
 
 
 def main():
@@ -58,6 +58,9 @@ def main():
         sources[relative] = ROOT / relative
     for name in ["README.md", "validation.json", "gait_metrics.json", "before_after.json"]:
         relative = "docs/sprint_v027/" + name
+        sources[relative] = ROOT / relative
+    for name in ["README.md", "validation.json"]:
+        relative = "docs/everyday_v028/" + name
         sources[relative] = ROOT / relative
     sources["README.md"] = ROOT / "tools/project_archive_readme.md"
     records = {name: {"bytes": path.stat().st_size,

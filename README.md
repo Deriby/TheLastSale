@@ -2,9 +2,20 @@
 
 Demonstração jogável em **Godot 4.4.1 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP, com uma primeira versão jogável da campanha de sexta a domingo. Acabamento e ritmo continuam em desenvolvimento.
 
-**[Baixar o projeto 0.27.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.27.0.zip)**
+**[Baixar o projeto 0.28.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.28.0.zip)**
 
 Extraia o ZIP, importe `project.godot` no Godot **4.4.1**, aguarde a importação dos modelos e pressione **F5**. O arquivo inclui os modelos animados, cenários, código e recursos usados no jogo. [Conteúdo e instruções do projeto](downloads/project/README.md).
+
+## Revisão 0.28.0 — rotina, primeira pessoa e suspense no depósito
+
+O jogo começa em primeira pessoa, com corpo visível e câmera mais estável. A rodinha continua afastando para terceira pessoa e aproximando de volta. **J** abre o caderno com tarefas, controles e observações; o HUD recolhe as instruções repetidas, com opção de mantê-las nas configurações.
+
+O salão ganhou luz mais fria de comércio e luminárias fluorescentes, enquanto o estoque tem sombras mais fechadas e a rua conserva a luz amarelada. A escuta 3D do viewport foi ativada: refrigeração localizada, rádio abafado nos fundos, sino da entrada, passos, motor de carro e sons distantes acompanham a posição do jogador.
+
+As vendas comuns continuam antes do aviso, disponível após cinco minutos de rotina e os requisitos originais. Um sino inesperado com Deryk no estoque, um carro ligado, passos nos fundos e uma pessoa observável na rua ou nas câmeras acrescentam tensão gradual. Os acontecimentos e anotações ficam no save; a pessoa sai andando pela navegação. Diálogos mais curtos, pausas e olhares dão espaço ao expediente. [Prévia com som, imagens e validação](docs/everyday_v028/README.md).
+
+![Primeira pessoa no depósito](docs/everyday_v028/shop.png)
+![Caderno do expediente](docs/everyday_v028/notebook.png)
 
 ## Revisão 0.27.0 — passada e corrida de Deryk e Felps
 
@@ -276,9 +287,9 @@ A reconstrução 0.2 do interior recebeu gôndolas abastecidas por categoria, ge
 
 ## Jogar
 
-**[Baixar o projeto Godot 0.25.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.27.0.zip)**
+**[Baixar o projeto Godot 0.28.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.28.0.zip)**
 
-O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **0.24.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
+O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **0.28.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
 
 O download atual é o projeto para o editor. O diretório `downloads/windows` guarda apenas a entrega anterior 0.9.0.
 
@@ -298,6 +309,7 @@ A Godot 4.4 tem Windows 10 como requisito oficial mínimo. **Windows 7/8 não s�
 | E | Interação contextual |
 | Q | Apoiar caixa em superfície livre |
 | Tab / C | Trocar protagonista / terminal de Felps no caixa |
+| J | Abrir/fechar o caderno do expediente, com o mundo pausado |
 | H / Ctrl + E | Acompanhar ou aguardar / cobertura próxima no domingo |
 | Espaço | Avançar uma fala |
 | Esc | Pausar, salvar e configurar |

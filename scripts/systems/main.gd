@@ -10,7 +10,7 @@ func _ready() -> void:
 	Controls.install()
 	var background:=ColorRect.new();background.name="LetterboxBackground";add_child(background);background.color=Color.BLACK;background.mouse_filter=Control.MOUSE_FILTER_IGNORE;background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	screen=SubViewportContainer.new();add_child(screen);screen.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);screen.mouse_filter=Control.MOUSE_FILTER_IGNORE;screen.stretch=true;screen.stretch_shrink=Preferences.pixel_scale;screen.texture_filter=CanvasItem.TEXTURE_FILTER_NEAREST
-	viewport=SubViewport.new();viewport.size=Vector2i(640,360);viewport.render_target_update_mode=SubViewport.UPDATE_ALWAYS;viewport.handle_input_locally=false;screen.add_child(viewport)
+	viewport=SubViewport.new();viewport.size=Vector2i(640,360);viewport.render_target_update_mode=SubViewport.UPDATE_ALWAYS;viewport.handle_input_locally=false;viewport.audio_listener_enable_3d=true;screen.add_child(viewport)
 	var layer:=CanvasLayer.new();layer.layer=2;add_child(layer)
 	var effect:=ColorRect.new();layer.add_child(effect);effect.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);effect.mouse_filter=Control.MOUSE_FILTER_IGNORE
 	retro=ShaderMaterial.new();retro.shader=load("res://shaders/retro.gdshader");effect.material=retro
@@ -57,9 +57,12 @@ func update_render_size() -> void:
 		screen.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	if retro!=null:retro.set_shader_parameter("game_bounds",bounds)
 func build_world() -> void:
-	interface.close_sunday_desk();interface.close_surveillance();interface.close_checkout()
+	interface.close_journal(false);interface.close_sunday_desk();interface.close_surveillance();interface.close_checkout()
 	if psx!=null:psx.restore()
 	if world!=null:
+		# Retire spatial playback while the old world still belongs to its audio
+		# viewport. EXIT_TREE runs after that relationship has been removed.
+		world.sound.stop_all()
 		viewport.remove_child(world);world.free()
 	world=ShiftWorld.new();viewport.add_child(world)
 	for actor in world.characters.values():actor.focused.connect(on_focused.bind(actor))
@@ -102,7 +105,7 @@ func start_next_night() -> void:
 func retry_sunday() -> void:
 	Session.save_retry();start_saved()
 func _unhandled_input(event: InputEvent) -> void:
-	if interface.paused or interface.checkout!=null or interface.surveillance!=null or interface.sunday_desk!=null or interface.campaign_panel!=null or world==null:return
+	if interface.paused or interface.notebook!=null or interface.checkout!=null or interface.surveillance!=null or interface.sunday_desk!=null or interface.campaign_panel!=null or world==null:return
 	if event.is_action_pressed("companion") and world.sunday!=null:
 		world.sunday.command_companion();get_viewport().set_input_as_handled();return
 	if event.is_action_pressed("surveillance"):

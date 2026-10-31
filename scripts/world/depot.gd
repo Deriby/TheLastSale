@@ -93,7 +93,7 @@ func add_crate(id: String,pos: Vector3) -> void:
 	crates[id]=c
 	interact(c,"crate",id)
 func build_stock() -> void:
-	var stock_light:=Geo.light(self,Vector3(0,3.3,-13.4),Color("c9ceb5"),.42,4.7);stock_light.name="StockLight"
+	var stock_light:=Geo.light(self,Vector3(0,3.3,-13.4),Color("c9ceb5"),.30,4.7);stock_light.name="StockLight"
 	var p:=prop("pallet",Vector3(-3.8,0,-13.8));interact(p,"pallet")
 	Geo.sign_text(self,"DEVOLUÇÕES",Vector3(-3.8,1.9,-14.5),26)
 	if int(Session.campaign.night)==0:

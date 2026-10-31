@@ -25,7 +25,8 @@ var saved_position := Vector3(3.8, 0.1, 1.8)
 var carried_id := ""
 const SAVE_PATH := "user://shift.json"
 func default_campaign() -> Dictionary:
-	return {"night":0,"phase":"routine","flags":{},"clues":{},"decisions":{},"evidence_archive":{},"records":[],"sunday":{},"ending":{},"completed_nights":[],"reports":{}}
+	return {"night":0,"phase":"routine","flags":{},"clues":{},"decisions":{},"evidence_archive":{},"records":[],"sunday":{},"ending":{},"completed_nights":[],"reports":{},"experience":default_experience()}
+func default_experience() -> Dictionary:return {"events":{},"event_times":{},"notes":[],"observer":{},"tension":0.0}
 func flag(id: String) -> bool:return bool(campaign.flags.get(id,false))
 func night_title() -> String:return ["SEXTA-FEIRA","SÁBADO","DOMINGO"][clampi(int(campaign.night),0,2)]
 func campaign_objective() -> String:
@@ -62,6 +63,8 @@ func advance_to_saturday() -> void:
 func advance_to_sunday() -> void:
 	start_day(2,"sunday_intro")
 func start_day(night: int,phase: String) -> void:
+	var notes: Array=campaign.get("experience",default_experience()).get("notes",[]).duplicate(true)
+	campaign.experience=default_experience();campaign.experience.notes=notes
 	campaign.night=night;campaign.phase=phase;campaign.flags={};campaign.records=[]
 	stage=0;stocked.clear();organized=false;customers_served=0;warning_delivered=false;finale_seen=false;world_seconds=0
 	character_states.clear();crate_states.clear();sale_state.clear();customer_state.clear();receipts.clear();sales_cents=0
@@ -152,6 +155,7 @@ func load_shift() -> bool:
 	var data=JSON.parse_string(FileAccess.get_file_as_string(SAVE_PATH))
 	if not data is Dictionary or int(data.get("version",0)) not in [1,2,3,4,5]:return false
 	if not data.get("position") is Array or data.position.size()!=3:return false
+	var old_presentation: bool=not data.get("campaign") is Dictionary or not data.campaign.has("experience")
 	retry_state=data.get("retry",{}).duplicate(true) if data.get("retry",{}) is Dictionary else {}
 	stage = clampi(int(data.get("stage",0)),0,7)
 	stocked.assign(data.get("stocked", []))
@@ -182,11 +186,23 @@ func load_shift() -> bool:
 					var night:=int(value)
 					if night>=0 and night<=2 and night not in completed:completed.append(night)
 		campaign.completed_nights=completed
+		if not campaign.experience is Dictionary:campaign.experience=default_experience()
+		for key in default_experience():
+			if not campaign.experience.has(key):campaign.experience[key]=default_experience()[key]
+		if not campaign.experience.events is Dictionary:campaign.experience.events={}
+		if not campaign.experience.event_times is Dictionary:campaign.experience.event_times={}
+		if not campaign.experience.notes is Array:campaign.experience.notes=[]
+		if not campaign.experience.observer is Dictionary:campaign.experience.observer={}
 		if int(campaign.night)==1 and campaign.phase in ["saturday_preview","saturday_preview_done"]:
 			campaign.phase="saturday_intro";stage=0
 		if int(campaign.night)==2 and campaign.phase=="sunday_preview":campaign.phase="sunday_intro";stage=0
 	elif stage>=6:
 		stage=6;finale_seen=false;campaign.phase="outage"
+	# Adopt the new default once for pre-0.28 checkpoints. Later saves retain
+	# the camera distance each protagonist chose with the mouse wheel.
+	if old_presentation:
+		for identity in character_states:
+			if character_states[identity] is Dictionary:character_states[identity].camera_distance=0.0
 	changed.emit()
 	return true
 func read_position(value: Variant,fallback: Vector3) -> Vector3:

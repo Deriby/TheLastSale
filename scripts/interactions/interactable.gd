@@ -136,7 +136,7 @@ func activate(player: Node3D) -> bool:
 		"talk":
 			if Dialogue.active or global_position.distance_to(player.global_position)>2.65:return false
 			if Session.greet():
-				Dialogue.play("greeting",[["Felps","Ô Dery! As caixas verdes R1 e R2 são pra geladeira G1, na parede esquerda. Abre e usa E de novo pra repor." if StockTasks.required_count()<2 else "Boa, Dery! Já vi a geladeira G1 abastecida."],["Felps","R3 tem salgadinhos pra prateleira P1, como reposição extra. A caixa CASCOS VAZIOS vai pro palete DEVOLUÇÕES."],["Dery","E a mercadoria dos pedidos?"],["Felps","Quando eu pedir, pega a caixa laranja VENDA com o número do pedido e traz na marca do balcão. Ela não é de reposição."]])
+				Dialogue.play("greeting",[["Felps","Ô Dery. Dá uma completada na água pra mim? Separei duas caixas verdes lá atrás." if StockTasks.required_count()<2 else "A água já tá no jeito. Valeu, Dery."],["Dery","Pode deixar. Hoje a gente fecha no horário, hein."],["Felps","Se depender de mim... As devoluções tão no caminho. Anotei o resto no caderno."]])
 			else: Dialogue.play("smalltalk",[["Felps","Sextou, hein... pra quem não tá trabalhando."],["Dery","Nem me fala. Ainda falta chão até meia-noite."]])
 			return true
 		"checkout":

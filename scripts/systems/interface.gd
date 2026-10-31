@@ -41,6 +41,11 @@ var title_second: Label
 var title_lockup: VBoxContainer
 var menu_motion: TitleMenuMotion
 var menu_exit_tween: Tween
+var notebook: FieldNotebook
+var objective_remaining:=8.0
+var character_remaining:=6.0
+var hud_seconds:=0.0
+const FULL_HINT:="WASD mover · MOUSE olhar · RODA câmera · E interagir · TAB trocar\nSHIFT correr · CTRL agachar · Q apoiar · J caderno · ESC pausa"
 func _ready() -> void:
 	process_mode=Node.PROCESS_MODE_ALWAYS
 	layer=5
@@ -79,8 +84,9 @@ func build_hud() -> void:
 	var sub:=VBoxContainer.new();sub.name="Subtitles";hud.add_child(sub);sub.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM);anchored_rect(sub,Rect2(-430,-133,860,125));sub.mouse_filter=Control.MOUSE_FILTER_IGNORE
 	speaker=label(sub,"",15);speaker.modulate=Color("c6b18b");speaker.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
 	subtitle=label(sub,"",21);subtitle.custom_minimum_size=Vector2(860,80);subtitle.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;subtitle.horizontal_alignment=HORIZONTAL_ALIGNMENT_CENTER
+	speaker.add_theme_font_override("font",TitlePresentation.TYPEWRITER);subtitle.add_theme_font_override("font",TitlePresentation.TYPEWRITER)
 	stamina=ProgressBar.new();hud.add_child(stamina);stamina.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT);anchored_rect(stamina,Rect2(34,-45,130,5));stamina.show_percentage=false;stamina.max_value=1
-	var hint:=label(hud,"WASD mover   SHIFT correr   CTRL agachar   E interagir   Q apoiar   TAB trocar\nMOUSE olhar   RODA primeira pessoa   F lanterna   C DVR   H chamar/aguardar   ESPAÇO fala   ESC pausa",13)
+	var hint:=label(hud,FULL_HINT,13)
 	hint.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;hint.name="ControlsHint";hint.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT);anchored_rect(hint,Rect2(-710,-92,680,85));hint.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT;hint.modulate=Color("babbaa")
 	supply_marker=PanelContainer.new();supply_marker.name="SupplyDestination";hud.add_child(supply_marker);supply_marker.mouse_filter=Control.MOUSE_FILTER_IGNORE;supply_marker.custom_minimum_size=Vector2(300,70)
 	supply_marker_text=label(supply_marker,"",16);supply_marker_text.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;supply_marker_text.custom_minimum_size.x=270
@@ -109,7 +115,7 @@ func build_menu() -> void:
 	message.add_theme_font_override("font",TitlePresentation.TYPEWRITER);message.modulate=Color("a8a38f")
 	buttons=VBoxContainer.new();v.add_child(buttons);buttons.add_theme_constant_override("separation",7)
 	rebuild_buttons()
-	var footer:=label(v,"0.27.0  /  FONES DE OUVIDO RECOMENDADOS",16)
+	var footer:=label(v,"0.28.0  /  FONES DE OUVIDO RECOMENDADOS",16)
 	footer.add_theme_font_override("font",TitlePresentation.VCR);footer.modulate=Color("828473")
 	menu_motion=TitleMenuMotion.new(menu,v,buttons,title_lockup)
 	layout_menu()
@@ -126,6 +132,9 @@ func layout_menu() -> void:
 	if menu_motion!=null:menu_motion.layout(at)
 	else:menu.position=at
 	if settings!=null:settings.position=((available-settings.custom_minimum_size)*.5).max(Vector2(12,12))
+	if notebook!=null:
+		var notebook_fit:=minf(1.0,minf((available.x-40)/760,(available.y-40)/560))
+		notebook.scale=Vector2.ONE*maxf(.45,notebook_fit);notebook.position=(available-notebook.size*notebook.scale)*.5
 
 func button(text: String,callback: Callable) -> Button:
 	var b:=Button.new();buttons.add_child(b);b.text=text;b.alignment=HORIZONTAL_ALIGNMENT_LEFT
@@ -195,7 +204,7 @@ func save_current() -> void:
 		message.text="Turno salvo." if err==OK else "Não foi possível salvar o turno."
 func set_paused(value: bool) -> void:
 	if value and presentation.departing:return
-	if value:close_surveillance();close_sunday_desk()
+	if value:close_journal(false);close_surveillance();close_sunday_desk()
 	paused=value;get_tree().paused=value
 	menu.visible=value;hud.visible=not value
 	Input.mouse_mode=Input.MOUSE_MODE_VISIBLE if value else Input.MOUSE_MODE_CAPTURED
@@ -232,7 +241,9 @@ func open_surveillance(world: ShiftWorld) -> void:
 	hud.hide();Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
 func close_surveillance() -> void:
 	if surveillance==null:return
-	if is_instance_valid(surveillance.world):surveillance.world.set_surveillance_open(false)
+	if is_instance_valid(surveillance.world):
+		surveillance.world.set_surveillance_open(false)
+		if surveillance.world.everyday!=null:surveillance.world.everyday.watched_camera=null
 	surveillance.feed.render_target_update_mode=SubViewport.UPDATE_DISABLED
 	root.remove_child(surveillance);surveillance.queue_free();surveillance=null
 	get_parent().viewport.render_target_update_mode=SubViewport.UPDATE_ALWAYS
@@ -264,6 +275,7 @@ func show_campaign(kind: String) -> void:
 	campaign_panel.retry.connect(func():close_campaign(false);retry_game.emit();set_paused(false))
 	campaign_panel.restart.connect(func():close_campaign(false);new_game.emit();has_started=true;set_paused(false))
 func update_objective() -> void:
+	var previous:=objective.text
 	night_label.text="FRANCA / "+Session.night_title()
 	var player:=get_tree().get_first_node_in_group("player") as DepotPlayer
 	var world:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
@@ -273,10 +285,12 @@ func update_objective() -> void:
 		objective.text="Pedido #%03d: pegue a caixa LARANJA VENDA no estoque e entregue na marca do balcão. [E] deixar para Felps."%world.sale.id
 	elif Session.campaign.phase!="routine":objective.text=Session.objective()
 	else:objective.text="Atenda os clientes no balcão. [Tab] Deryk cuida da reposição." if player!=null and player.identity=="Felps" and Session.stage in [1,2,3,4] else Session.objective()
+	if previous!=objective.text:objective_remaining=8.0
 func on_spoken(who: String,text: String) -> void:
-	speaker.text=who+"  •  [ESPAÇO] continuar" if not who.is_empty() else "";subtitle.text=text
+	speaker.text=("Deryk" if who=="Dery" else who)+"  •  [ESPAÇO] continuar" if not who.is_empty() else "";subtitle.text=text
 	hud.get_node("ControlsHint").visible=not Dialogue.active
 func set_character(actor: DepotPlayer,animate := true) -> void:
+	character_remaining=6.0
 	character_label.text="DERYK • REPOSIÇÃO   [TAB] FELPS" if actor.identity=="Dery" else "FELPS • ATENDIMENTO   [TAB] DERYK"
 	update_objective()
 	prompt.text="";carry_status.text=""
@@ -296,10 +310,29 @@ func _process(_delta: float) -> void:
 		carry_status.text=("Preparando a caixa…" if player.handling.busy or player.motion.action_active else StockTasks.crate_name(player.carried_id)+" • [Q] apoiar") if player.carried!=null else ""
 	update_supply_marker()
 
-	if not paused:
+	if not paused and notebook==null:
+		hud_seconds+=_delta;objective_remaining=maxf(0,objective_remaining-_delta);character_remaining=maxf(0,character_remaining-_delta)
 		notice_remaining=maxf(0,notice_remaining-_delta)
 		if notice_remaining==0:notice_label.text=""
+	objective.modulate.a=clampf(objective_remaining,0,1) if Preferences.immersive_hud else 1.0
+	character_label.modulate.a=clampf(character_remaining,0,1) if Preferences.immersive_hud else 1.0
+	night_label.modulate.a=clampf(12-hud_seconds,0,1) if Preferences.immersive_hud else 1.0
+	var hint:=hud.get_node("ControlsHint") as Label
+	hint.text=FULL_HINT if not Preferences.immersive_hud or hud_seconds<18 else "[J] CADERNO     RODA DO MOUSE • CÂMERA"
+	hint.visible=not Dialogue.active
 	clock.text=Session.clock_text()
+func open_journal() -> bool:
+	if paused or not has_started or notebook!=null or Dialogue.active or checkout!=null or surveillance!=null or sunday_desk!=null or campaign_panel!=null:return false
+	var world: ShiftWorld=get_parent().world
+	if world==null or not world.active:return false
+	notebook=FieldNotebook.new();notebook.world=world;notebook.current_task=objective.text;root.add_child(notebook);layout_menu()
+	notebook.closed.connect(close_journal);hud.hide();get_tree().paused=true;Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
+	return true
+func close_journal(restore:=true) -> void:
+	if notebook==null:return
+	root.remove_child(notebook);notebook.queue_free();notebook=null
+	if restore:
+		get_tree().paused=paused;hud.visible=not paused;Input.mouse_mode=Input.MOUSE_MODE_VISIBLE if paused else Input.MOUSE_MODE_CAPTURED
 func show_night_summary() -> void:
 	if night_panel!=null:return
 	close_checkout();set_paused(true);menu.hide();hud.hide()
@@ -326,6 +359,12 @@ func show_night_summary() -> void:
 func _input(event: InputEvent) -> void:
 	if presentation!=null and presentation.departing:return
 	if presentation!=null and presentation.intro_active:return
+	if notebook!=null:
+		if event.is_action_pressed("journal") or event.is_action_pressed("pause"):close_journal()
+		if event is InputEventKey:get_viewport().set_input_as_handled()
+		return
+	if event.is_action_pressed("journal"):
+		open_journal();get_viewport().set_input_as_handled();return
 	if settings!=null and event.is_action_pressed("pause"):
 		settings.closed.emit();get_viewport().set_input_as_handled();return
 	if campaign_panel!=null:
@@ -357,13 +396,14 @@ func _input(event: InputEvent) -> void:
 
 func update_supply_marker() -> void:
 	supply_marker.hide()
-	if paused or checkout!=null or surveillance!=null or sunday_desk!=null or campaign_panel!=null or Dialogue.active:return
+	if paused or notebook!=null or checkout!=null or surveillance!=null or sunday_desk!=null or campaign_panel!=null or Dialogue.active:return
 	var world: ShiftWorld=get_parent().world
 	if world==null or not world.active or world.supplies==null:return
 	var goal:=world.supplies.goal()
 	if goal.is_empty():return
 	var camera:=world.player.camera_rig.camera
 	var at: Vector3=goal.at
+	if Preferences.immersive_hud and objective_remaining<=0 and (world.player.carried==null or world.player.position.distance_to(at)>5):return
 	var display: Rect2=get_parent().screen.get_global_rect()
 	var projected: Vector2=camera.unproject_position(at)/Vector2(get_parent().viewport.size)
 	var point:=display.position+projected*display.size

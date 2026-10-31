@@ -31,6 +31,7 @@ var sunday: SundayShift
 var saturday: SaturdayShift
 var surveillance_open:=false
 var supplies: SupplyGuide
+var everyday: EverydayHorror
 func _ready() -> void:
 	add_to_group("shift_world")
 	var legacy_carried:=Session.carried_id
@@ -97,6 +98,7 @@ func _ready() -> void:
 	saturday=SaturdayShift.new();saturday.world=self;add_child(saturday)
 	sunday=SundayShift.new();sunday.world=self;add_child(sunday)
 	supplies=SupplyGuide.new();supplies.world=self;add_child(supplies)
+	everyday=EverydayHorror.new();everyday.world=self;add_child(everyday)
 func update_enemy_visibility() -> void:
 	enemy_visual.process_mode=Node.PROCESS_MODE_INHERIT if enemy_visual.is_visible_in_tree() else Node.PROCESS_MODE_DISABLED
 func select_player(identity: String) -> void:
@@ -132,6 +134,7 @@ func capture_state() -> void:
 		var at:=item.global_position
 		Session.crate_states[id]={"position":[at.x,at.y,at.z],"yaw":item.global_rotation.y}
 	if sunday!=null:sunday.capture()
+	if everyday!=null:everyday.capture()
 func on_handling_completed() -> void:
 	if active:Session.changed.emit();Session.save_shift(player.global_position)
 func can_checkout(actor: DepotPlayer) -> bool:
@@ -224,12 +227,13 @@ func _physics_process(delta: float) -> void:
 	if friday!=null:friday.tick(delta)
 	if saturday!=null:saturday.tick()
 	if sunday!=null:sunday.tick(delta)
+	if everyday!=null:everyday.tick(delta)
 	if sale_save_wait>=0:
 		sale_save_wait-=delta
 		if sale_save_wait<0:Session.save_shift(player.global_position)
 	if customer==null and Session.stage>0 and (friday.can_spawn() or saturday.can_spawn()) and not Dialogue.active:
 		spawn_wait-=delta
-		if spawn_wait<=0:spawn_customer(Session.can_warn())
+		if spawn_wait<=0:spawn_customer(Session.can_warn() and (everyday==null or everyday.warning_ready()))
 	if noise_pending and player.position.z> -8.0 and not Dialogue.active:
 		noise_pending=false
 		sound.play_at("knock",Vector3(0,1,-15.8))
@@ -268,7 +272,8 @@ func begin_checkout(who: Customer) -> void:
 		Dialogue.play("sale_order_"+str(sale.id),saturday.order_lines(who));return
 	var request: String="Boa noite! Vou levar: "+sale.describe().replace("\n",", ")+"."
 	if sale.needs_bulk():request="Boa noite! Separa uma caixa fechada de retornável pra mim?"
-	Dialogue.play("sale_order_"+str(sale.id),[["Cliente",request],["Felps","Fechou. O Deryk traz a caixa do estoque." if sale.needs_bulk() and not sale.bulk_supplied else "Beleza! Vou registrar aqui pra você."]])
+	var replies: Array[String]=["Boa. Só um instante.","Tá na mão.","Mais alguma coisa? Fechou."]
+	Dialogue.play("sale_order_"+str(sale.id),[["Cliente",request],["Felps","O Deryk pega lá atrás pra você." if sale.needs_bulk() and not sale.bulk_supplied else replies[Session.customers_served%replies.size()]]])
 func on_departure(who: Customer) -> void:
 	if who.warned and warning_started:
 		Session.stage=4

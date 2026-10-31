@@ -19,6 +19,8 @@ func _ready() -> void:
 	camera=Camera3D.new();camera.near=.055;camera.far=110;camera.current=true;arm.add_child(camera)
 	arm.add_excluded_object(get_parent().get_rid())
 	target_distance=Preferences.camera_distance;distance=target_distance;arm.spring_length=distance;camera.position.z=distance;arm.position.x=shoulder
+	first_person=distance<.2
+	if first_person:shoulder=0;arm.position.x=0
 func handle_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		yaw-=event.relative.x*Preferences.sensitivity
@@ -40,9 +42,12 @@ func _process(delta: float) -> void:
 	first_person=distance<.25 and target_distance<.2
 	var head:=player.motion.skeleton.get_bone_global_pose(player.motion.skeleton.find_bone("head"))
 	var eyes: Vector3=player.motion.skeleton.global_transform*head.origin+Vector3.UP*.15
+	var rest_eyes: float=player.motion.skeleton.get_bone_global_rest(player.motion.skeleton.find_bone("head")).origin.y*player.motion.skeleton.global_basis.get_scale().y+.15
 	var third_height:=1.15 if player.crouching else 1.55
 	var blend:=1-smoothstep(.15,1.0,distance)
-	var height:=lerpf(third_height,clampf(eyes.y-player.global_position.y,1.0,1.72),blend)
+	var eye_height:=eyes.y-player.global_position.y
+	if not player.crouching:eye_height=lerpf(rest_eyes,eye_height,.20)
+	var height:=lerpf(third_height,clampf(eye_height,1.0,1.72),blend)
 	var center:=player.get_global_transform_interpolated().origin
 	global_position=Vector3(center.x,lerpf(global_position.y,center.y+height,1-exp(-delta*16)),center.z)
 	shoulder=minf(shoulder,allowed_shoulder) if allowed_shoulder<shoulder else lerpf(shoulder,allowed_shoulder,1-exp(-delta*7))

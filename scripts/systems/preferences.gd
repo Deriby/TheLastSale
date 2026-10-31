@@ -10,26 +10,30 @@ var ps1_mode := false
 var ps1_high_resolution := false
 var psx_vertices := 1
 var psx_affine := 1
-var grain := 0.018
-var vhs := 0.0
-var camera_distance := 2.2
+var grain := 0.012
+var vhs := 0.045
+var camera_distance := 0.0
+var immersive_hud := true
+var experience_revision := 28
 var fullscreen := false
 var frame_limit := 30
 func _ready() -> void:
 	var c := ConfigFile.new()
 	if c.load("user://settings.cfg") == OK:
-		for key in ["sensitivity","fov","volume","effects_volume","music_volume","pixel_scale","ps1_mode","ps1_high_resolution","psx_vertices","psx_affine","grain","vhs","camera_distance","fullscreen","frame_limit"]:
+		for key in ["sensitivity","fov","volume","effects_volume","music_volume","pixel_scale","ps1_mode","ps1_high_resolution","psx_vertices","psx_affine","grain","vhs","camera_distance","fullscreen","frame_limit","immersive_hud"]:
 			set(key,c.get_value("settings",key,get(key)))
+		if int(c.get_value("settings","experience_revision",0))<28:camera_distance=0.0;save()
 	apply()
 func apply() -> void:
 	psx_vertices=clampi(int(psx_vertices),0,2)
 	psx_affine=clampi(int(psx_affine),0,2)
+	camera_distance=clampf(camera_distance,0,3.6)
 	Engine.max_fps=frame_limit
 	AudioServer.set_bus_volume_db(0,linear_to_db(maxf(volume,0.001)))
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN if fullscreen else DisplayServer.WINDOW_MODE_WINDOWED)
 	changed.emit()
 func save() -> void:
 	var c := ConfigFile.new()
-	for key in ["sensitivity","fov","volume","effects_volume","music_volume","pixel_scale","ps1_mode","ps1_high_resolution","psx_vertices","psx_affine","grain","vhs","camera_distance","fullscreen","frame_limit"]: c.set_value("settings",key,get(key))
+	for key in ["sensitivity","fov","volume","effects_volume","music_volume","pixel_scale","ps1_mode","ps1_high_resolution","psx_vertices","psx_affine","grain","vhs","camera_distance","fullscreen","frame_limit","immersive_hud","experience_revision"]: c.set_value("settings",key,get(key))
 	c.save("user://settings.cfg")
 	apply()

@@ -8,6 +8,8 @@ var input_locked:=false
 var carried_id:=""
 var drop_pending:=false
 var dialogue_speaker:=""
+var social_focus:=Vector3.ZERO
+var social_focus_enabled:=false
 var routine_time:=0.0
 var routine_index:=0
 var visual: Node3D
@@ -117,12 +119,13 @@ func _physics_process(delta: float) -> void:
 		motion.play(routines[routine_index%routines.size()],.35)
 	else:motion.locomotion(delta,actual_speed,crouching,carried!=null,stamina<.35,gait)
 	if controlled:
-		motion.look_at_position(global_position-Basis(Vector3.UP,camera_rig.yaw).z*4+Vector3.UP*1.6,not motion.action_active)
+		motion.look_at_position(social_focus if Dialogue.active and social_focus_enabled else global_position-Basis(Vector3.UP,camera_rig.yaw).z*4+Vector3.UP*1.6,not motion.action_active)
 		update_focus();handling.update_preview(delta)
 	else:
 		handling.hide_preview()
 		var other:=get_tree().get_first_node_in_group("player") as Node3D
-		motion.look_at_position(other.global_position+Vector3.UP*1.6 if other!=null else Vector3.ZERO,other!=null and global_position.distance_to(other.global_position)<3)
+		if Dialogue.active and social_focus_enabled:motion.look_at_position(social_focus)
+		else:motion.look_at_position(other.global_position+Vector3.UP*1.6 if other!=null else Vector3.ZERO,other!=null and global_position.distance_to(other.global_position)<3)
 	if drop_pending and not motion.action_active and not handling.busy:drop_carried()
 var last_step_half:=-1
 func update_footsteps() -> void:

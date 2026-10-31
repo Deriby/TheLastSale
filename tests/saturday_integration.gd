@@ -130,6 +130,9 @@ func run() -> void:
 	Session.save_shift(world.player.global_position);await reload_world()
 	check(Session.campaign.phase=="saturday_intro" and Session.campaign.decisions.is_empty() and Session.campaign.records.is_empty(),"save da antiga prévia migra para sábado jogável com campos novos seguros")
 	clear_dialogue();print("SATURDAY RESULT ",checks-failures.size(),"/",checks," passed; failures=",failures)
-	app.queue_free();await get_tree().process_frame;await get_tree().create_timer(.2).timeout
+	# Retire spatial voices before freeing their listener's viewport.
+	app.world.sound.stop_all()
+	await get_tree().create_timer(.25,true,false,true).timeout
+	app.queue_free();await get_tree().process_frame
 	Geo.materials.clear();CharacterModels.costume_materials.clear();CharacterModels.imported_materials.clear();await get_tree().process_frame
 	get_tree().quit(0 if failures.is_empty() else 1)

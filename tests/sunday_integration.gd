@@ -28,7 +28,11 @@ func reset_to_escape() -> void:
 func finish_test() -> void:
 	if not failures.is_empty():print("SUNDAY_FAILURE_STATE Dery=",world.characters.Dery.position," Felps=",world.characters.Felps.position," caught=",world.sunday.caught_identity if world.sunday!=null else ""," killer=",world.sunday.killer.position if is_instance_valid(world.sunday.killer) else Vector3.ZERO)
 	clear_dialogue();print("SUNDAY RESULT ",checks-failures.size(),"/",checks," passed; failures=",failures)
-	app.queue_free();await get_tree().process_frame;await get_tree().create_timer(.2).timeout
+	# Keep the listener's viewport alive while spatial voices retire on the
+	# mixer thread; its real-time drain is independent of the 4x test clock.
+	app.world.sound.stop_all()
+	await get_tree().create_timer(.25,true,false,true).timeout
+	app.queue_free();await get_tree().process_frame
 	Geo.materials.clear();CharacterModels.costume_materials.clear();CharacterModels.imported_materials.clear()
 	get_tree().quit(0 if failures.is_empty() else 1)
 func run() -> void:

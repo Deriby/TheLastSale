@@ -1,0 +1,721 @@
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+PASS elenco contém três modelos do autor e seis identidades provisórias com rig e caminhada
+PASS clientes provisórios têm seis roupas distintas sem alterar as malhas originais
+PASS checkpoints antigos sem identidade preservam as três aparências originais
+PASS identidade salva independe da ordem de chegada e a rotina inclui clientes provisórios
+PASS catálogo calcula pedidos variados em centavos e formata reais sem arredondamento
+PASS pagamento exato conclui a conferência sem exigir moeda de troco
+PASS pagamento e troco não podem ser repetidos fora da etapa correta
+PASS menu inicial pausa o mundo
+PASS luzes das doze geladeiras ficam restritas aos equipamentos sem iluminar o piso
+PASS nova iluminação preserva o orçamento de cinco luzes com sombras
+PASS reflexo das geladeiras captura uma vez em resolução limitada
+PASS neblina distante preserva o primeiro plano e oculta o fim da rua
+PASS primeiro início aproveita o cenário já carregado no menu
+PASS PS1 renderiza em 320×240 sem reduzir a janela
+PASS imagem PS1 é ampliada e centralizada em 4:3
+PASS menu e HUD preservam a resolução e cabem na janela grande
+PASS preferência PS1 é salva para a próxima abertura
+PASS redimensionar a janela para 4:3 mantém 320×240 internos
+PASS janela larga mantém a imagem PS1 sem esticar os personagens
+PASS PS1/2 renderiza em 640×480 sem alterar a janela
+PASS PS1/2 ocupa a mesma área 4:3 que PS1 e mantém o HUD em resolução normal
+PASS preferência PS1/2 é salva separadamente da resolução de 320×240
+PASS reabrir Configurações identifica o modo PS1/2 selecionado
+PASS PS1/2 mantém 640×480 internos e preenche a área 4:3 após redimensionar
+PASS voltar de PS1/2 para PS1 restaura 320×240 sem manter a escala anterior
+PASS retorno a Nítida preenche a janela sem deixar barras ou escala antigas
+PASS troca de resolução preserva o mundo e o progresso do turno
+PASS dois protagonistas físicos e apenas um controle ativo
+PASS comandos de interação, caixa e avisos ficam dentro da janela
+PASS legendas e lembrete de controles permanecem visíveis na parte inferior
+PASS Tab entrega câmera, controle e HUD ao Felps
+PASS WASD move só Felps enquanto Deryk mantém a posição
+PASS Felps também tem primeira pessoa com corpo e cabeça ocultada apenas da própria câmera
+PASS retornar a Deryk restaura sua câmera e a cabeça visível de Felps
+PASS troca fica bloqueada durante conversa
+PASS pausa bloqueia troca de personagem
+PASS assassino oculto não atualiza animações
+PASS assassino retoma processamento quando fica visível
+PASS cena principal e chão físico carregam
+PASS antigo caixa da direita está livre para circulação real
+PASS passos no salão usam contato seco de piso cerâmico
+PASS cobertura baixa fecha o teto sobre o caixa esquerdo
+PASS teto baixo esquerdo continua na mesma altura até os fundos
+PASS encontro lateral entre os dois níveis do telhado não tem vão
+PASS antigo degrau transversal do teto foi removido
+PASS fechamento lateral entre os tetos continua até os fundos
+PASS fiação da rua e cabos internos continuam visíveis sem projetar sombras
+PASS todas as garrafas do expositor apoiam nas bases dos engradados
+PASS gôndolas deixam pelo menos dois metros até as portas fechadas das geladeiras
+PASS giro das sete portas do fundo não invade gôndolas nem a geladeira do canto
+PASS portas abertas mantêm mais de um metro livre diante das gôndolas
+PASS jogador atravessa o corredor traseiro com as geladeiras abertas
+PASS porta do fundo é alcançável pela interação no corredor livre
+PASS E fecha a geladeira do fundo sem avançar as tarefas
+PASS sedã e hatch importados têm malhas detalhadas e escala de automóvel
+PASS rua tem declive físico contínuo entre os lados do quarteirão
+PASS balizadores da fachada têm colisão física
+PASS jogador desce o meio-fio e entra na rua sem cair pelo chão
+PASS passos na rua trocam para contato de asfalto
+PASS jogador sobe à calçada oposta sem ficar preso no meio-fio
+PASS rampa de garagem tem piso físico coerente com a altura de navegação
+PASS jogador atravessa a nova rampa com contato no piso sem cair ou travar
+PASS checkpoint na rampa acompanha o piso inclinado
+PASS fechamento físico protege o vão entre as oficinas junto à borda da calçada
+PASS Dery mantém os 71 ossos recebidos e um controle adicional de peito superior
+PASS 23 clipes de Dery importados
+PASS rig importado: Dery
+PASS material presente: Dery
+PASS textura original preservada na derivação: Dery
+PASS rig importado: Felps
+PASS material presente: Felps
+PASS textura original preservada na derivação: Felps
+PASS rig importado: Enemy
+PASS material presente: Enemy
+PASS textura original preservada na derivação: Enemy
+PASS rig importado: Bryan
+PASS material presente: Bryan
+PASS rig importado: Zirico
+PASS material presente: Zirico
+PASS rig importado: Garota1
+PASS material presente: Garota1
+PASS rig importado: Garota2
+PASS material presente: Garota2
+PASS rig importado: Velha1
+PASS material presente: Velha1
+PASS rig importado: Customer3
+PASS material presente: Customer3
+PASS Bryan e Zirico estão presentes como conhecidos dos protagonistas
+PASS Bryan tem escala infantil própria
+PASS Bryan tem conversa opcional com Dery e Felps
+PASS conversa interrompe variação de postura e o conhecido retoma o repouso
+PASS conversa com Bryan preserva o progresso do expediente
+PASS modo Econômica desliga os mapas normais dos novos FBX
+PASS modo Nítida restaura os mapas normais dos novos FBX
+PASS rótulo fosco e vidro da garrafa têm respostas distintas à luz
+PASS alumínio exposto e impressão da lata têm metalicidade própria
+PASS embalagens usam arte revisada e mipmaps para distância
+PASS verniz da bancada difere da madeira crua dos paletes
+PASS Econômica desliga mapas de acabamento e camada de verniz
+PASS Econômica desliga sombras, halo e iluminação/reflexo adicional das geladeiras
+PASS Nítida restaura os acabamentos nos materiais já instanciados
+PASS Nítida restaura a iluminação detalhada sem posterizar a imagem
+PASS contato dos pés usa a medida do modelo recebido
+PASS respiração altera a caixa torácica em repouso
+PASS cintura e peito superior articulam separadamente em repouso
+PASS cotovelos baixos e punhos abaixo do quadril no repouso
+PASS repouso tem base estreita e dois pés apoiados
+PASS Felps correto usa malha de cabeça separada
+PASS WASD move Dery com colisão real
+PASS corrida mais rápida que caminhada
+PASS agachamento altera colisão
+PASS roda do mouse chega à câmera pela viewport
+PASS movimento do mouse gira a câmera pela viewport
+PASS SpringArm encurta ao encostar na parede
+PASS câmera permanece do lado interno da parede
+PASS ombro recolhe lateralmente perto da parede
+PASS volume próximo da lente fica fora da parede
+PASS aproximação entra em primeira pessoa com corpo visível e cabeça apenas na sombra
+PASS afastamento retorna à terceira pessoa
+PASS Felps é alcançável pela interação sobre o balcão
+PASS tecla E conversa com Felps e libera tarefas
+PASS diálogo exibe falas reais
+PASS Felps gesticula enquanto fala
+PASS caixa errada não avança reposição
+PASS porta fechada bloqueia passagem
+PASS porta aberta libera passagem física
+PASS caixa distante exige aproximação antes de alcançar
+PASS Q durante a pegada agenda a soltura e Tab aguarda a animação
+PASS soltura agendada apoia a caixa em pé no chão sem perder o objeto
+PASS caixa largada pode ser pega novamente
+PASS parede impede apoiar a caixa do outro lado
+PASS Q sem espaço preserva a caixa e avisa o jogador
+PASS marca de colocação aparece verde sobre piso livre
+PASS trocar para Felps mantém a caixa fisicamente com Deryk
+PASS salvamento aceita Felps ativo enquanto Deryk segura caixa
+WARNING: [Physics interpolation] Non-interpolated instance triggered from physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@2597/Street/UphillTwoStoreyHouse/@Node3D@3169/@MeshInstance3D@3178" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:966)
+PASS continuar restaura Felps no balcão, Deryk e sua caixa sem duplicar personagens
+PASS caixa apoiada conserva sua posição ao salvar e continuar
+PASS pegar stock_1
+PASS pegar caixa começa com alcance antes da fixação
+PASS caixa presa ao transporte visível
+PASS mão permanece junto à pega lateral da caixa
+PASS repor stock_1
+PASS mãos livres após reposição
+PASS malha visível recebe novos produtos após reposição
+PASS pegar stock_2
+PASS pegar caixa começa com alcance antes da fixação
+PASS caixa presa ao transporte visível
+PASS mão permanece junto à pega lateral da caixa
+PASS repor stock_2
+PASS mãos livres após reposição
+PASS malha visível recebe novos produtos após reposição
+PASS duas reposições completam objetivo na ordem
+PASS organização move caixa para palete
+PASS caixa permanece materialmente no palete
+PASS aviso exige clientes atendidos além das tarefas
+PASS cliente aguarda atendimento e Deryk não conclui a venda no lugar de Felps
+PASS tela do caixa cabe na janela e impede caminhada enquanto recebe cliques
+PASS produto ou quantidade errada impede cobrança e recebe resposta do cliente
+PASS receber dinheiro abre a gaveta e libera a separação do troco
+PASS troco errado mantém venda pendente e permite corrigir sem cobrar outra vez
+WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@7733/Depot/@Node3D@9943/@MeshInstance3D@9947" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
+PASS continuar preserva cliente, registro, dinheiro recebido e troco parcial sem concluir ou duplicar venda
+PASS entrega cria recibo, sacola e receita uma única vez e libera a saída do cliente
+PASS pedido de caixa fechada aguarda mercadoria física e não inventa produto nas mãos do cliente
+PASS continuar com Deryk carregando a caixa do pedido preserva mercadoria, cliente e receita
+PASS cliente provisório mantém a identidade e o visual ao continuar com a caixa do pedido
+PASS Deryk percorre o estoque, pega a caixa e entrega no balcão antes de voltar a Felps
+WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@10307/@CharacterBody3D@12716/Customer1/@MeshInstance3D@12725" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
+PASS clientes atravessam loja, compram e saem
+PASS turno percorre registro, troco, retomada e trabalho dos dois personagens
+PASS receita do turno corresponde aos recibos sem duplicação após continuar
+PASS saída do cliente salva automaticamente o total de atendimentos concluídos
+PASS conhecidos mantêm variações de repouso que terminam durante o expediente longo
+PASS máquina de estados dos clientes executa o ciclo completo
+PASS todos os clientes são atendidos junto ao novo balcão esquerdo
+PASS aviso ocorre somente depois da rotina e da visita
+PASS aviso inicia pane de energia com reações e preserva assassino oculto na sexta
+PASS porta antiga continua trancada sem encerrar a sexta antes do fechamento
+PASS salvamento grava checkpoint
+PASS checkpoint restaura pane de energia, progressão e tarefas
+PASS continuar restaura posição no mundo
+PASS continuar não duplica caixas já repostas
+PASS continuar restaura produtos na malha da geladeira
+PASS checkpoint antigo dentro da gôndola migra para corredor próximo
+PASS checkpoint antigo na rua acompanha a nova cota do terreno
+WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@17883/Depot/@Node3D@19490/@MeshInstance3D@19507" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
+PASS checkpoint antigo no novo balcão restaura personagem fora dos móveis
+PASS pausa congela o relógio narrativo
+PASS pausa congela a deriva da névoa e as variações de luz
+PASS checkpoint antigo da versão 1 migra para a dupla preservando a caixa carregada
+PASS checkpoint da versão 2 preserva a dupla e caixas ao migrar para pedidos e dinheiro
+RESULT 188/188 passed; failures=[]
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+PASS sexta permite uma única pane recuperável durante atendimento em andamento
+PASS pane fecha o painel sem prender Felps nem repetir o evento
+PASS sem energia a cobrança para e preserva troco e etapa da venda
+PASS pane apaga luzes comerciais e sons dos equipamentos, mantendo emergência
+PASS alterar qualidade durante apagão não religa geladeiras
+PASS gerador exige chave e confirmação de Felps
+PASS Felps suspende o atendimento fisicamente no posto do caixa
+PASS Felps não recolhe a chave destinada a Deryk
+PASS Deryk alcança a porta do estoque durante o apagão
+PASS Deryk atravessa a porta aberta e chega ao suporte da chave
+PASS chave é recolhida por interação e desaparece do suporte
+PASS continuar durante pane preserva chave, tarefa de Felps e luzes apagadas
+PASS continuar mantém pedido, cliente provisório e troco interrompido
+PASS Deryk alcança a porta do pátio no fundo do estoque
+PASS Deryk sai por abertura real e caminha até o gerador externo
+PASS checkpoint no pátio mantém posição e contato com o chão
+PASS Deryk liga o gerador com a chave e a confirmação do salão
+PASS energia de reserva restaura equipamentos e inicia som local do gerador
+PASS observação da rua iluminada fica registrada e venda mantém o troco parcial
+PASS continuar depois de ligar o gerador não exige repetir a tarefa
+PASS Felps retoma o atendimento interrompido quando a energia volta
+PASS atendimento retomado entrega compra e credita um único recibo
+WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/FridayIntegration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@7298/@CharacterBody3D@9691/Customer2/@MeshInstance3D@9700" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
+PASS último cliente sai fisicamente antes de iniciar o fechamento
+PASS saída é bloqueada enquanto faltam tarefas de fechamento
+PASS Felps confere e fecha o caixa após terminar todas as vendas
+PASS Deryk retorna do gerador pelo pátio
+PASS Deryk volta ao estoque e verifica a área antiga sem atravessar paredes
+PASS inspeção da porta antiga conclui a conferência do estoque
+PASS quadro permite apagar o salão somente após caixa e estoque conferidos
+PASS fechamento silencia rádio e salão, preservando refrigeração
+PASS Felps alcança o comando das portas pelo lado de fora
+PASS chamar companheiro inicia encontro da dupla na calçada
+PASS companheiro percorre fisicamente o estoque e o salão até a calçada
+PASS Felps também sai autonomamente do posto quando Deryk chama o companheiro
+PASS retomada do fechamento preserva tarefas, encontro da dupla e posição na calçada
+PASS portas só podem baixar com os dois protagonistas do lado de fora
+PASS pausa congela o fechamento e impede que a noite termine com animação suspensa
+PASS sexta conclui com resumo, salvamento e passagem de dia
+PASS resumo e botão de transição cabem na janela com cenário PS1/PS1/2 independente
+PASS resumo conserva vendas e recibos da sexta sem duplicação
+WARNING: [Physics interpolation] Non-interpolated instance triggered from physics process: "/root/FridayIntegration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@12149/Street/UtilityPole/@Node3D@13261/@MeshInstance3D@13265" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:966)
+PASS transição prepara abertura de sábado e atualiza o dia no HUD
+PASS nova noite preserva pistas e histórico e reinicia o caixa diário
+PASS abertura de sábado reconhece sexta e libera a nova rotina após conversa no caixa
+PASS continuar no sábado retoma sua rotina sem reiniciar a sexta
+PASS checkpoint completo da versão 3 migra para a pane e permite continuar a sexta
+PASS save antigo após o aviso e antes do fim da demonstração migra para a pane
+PASS save versão 4 na transição após o aviso retoma o apagão sem bloquear a noite
+PASS transição em execução aguarda a conversa e retoma a pane mesmo sem callback anterior
+FRIDAY RESULT 48/48 passed; failures=[]
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+PASS Deryk não pode operar o monitor e a abertura exige conversa
+PASS Deryk alcança Felps e começa o sábado pelo diálogo físico
+PASS C no caixa abre o monitor real e bloqueia locomoção de Felps
+PASS monitor cabe na janela e mantém interface independente da resolução PS1
+PASS lente do CCTV exclui a própria carcaça física da imagem
+PASS câmera compartilha o mundo existente em resolução limitada
+PASS monitor usa um único viewport adicional e suspende a renderização encoberta
+PASS trocar os três canais reutiliza câmera e preserva a câmera do protagonista no viewport original
+PASS eventos são identificados como texto e param a renderização do canal
+PASS monitor bloqueia pistas inexistentes e decisões prematuras
+PASS troca e atendimento não vazam por baixo do monitor aberto
+PASS Esc libera movimento, mouse e renderização normal
+PASS C fecha o monitor sem deixar um viewport ativo
+PASS Tab sai do monitor e entrega controle a Deryk sem travar Felps
+PASS pausa externa fecha e desativa o canal de segurança
+PASS primeiro cliente percorre loja e espera com o novo pedido de sábado
+PASS Felps registra e entrega o primeiro pedido pela operação normal de caixa
+PASS cliente de boné da sexta volta como a mesma identidade substituível
+PASS cliente recorrente conclui compra após mencionar a porta interna
+PASS investigação só começa após a saída física do segundo cliente
+PASS recibo persistente identifica visita, noite e horário sem duplicar receita
+PASS Bryan sai antes da ameaça mesmo sem conversa opcional
+PASS consulta ao pátio mostra movimento físico na porta e registra observação uma única vez
+PASS voltar ao canal não repete o movimento nem duplica o registro
+PASS botões reais anotam evento e separam o recibo sem acusação conclusiva
+PASS DVR e recibo não substituem a inspeção física de Deryk
+WARNING: [Physics interpolation] Non-interpolated instance triggered from physics process: "/root/SaturdayIntegration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@2784/Depot/Architecture/@MeshInstance3D@4129" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:966)
+PASS continuar com monitor aberto fecha a interface e preserva recibos e registros
+PASS inspeção não pode ser ativada à distância
+PASS Deryk chega ao estoque pelo corredor real
+PASS percurso físico até os vestígios respeita porta e obstáculos
+PASS Deryk examina a tinta riscada da porta antiga
+PASS caixa deslocada tem interação própria e vestígios no chão
+PASS todas as pistas podem ser reunidas sem testemunhas opcionais
+PASS checkpoint de investigação preserva as quatro pistas e a etapa
+PASS decisões de esperar e não copiar são escolhas válidas e persistentes
+PASS jogador revisa decisões antes de sair e recebe confirmação visível
+PASS Felps prepara a saída fisicamente no comando das portas
+PASS três decisões iniciam tentativa na porta e fechamento tenso
+PASS pátio permanece trancado e saída exige conferência da dupla
+PASS retomada após tentativa conserva perigo e escolhas sem repetir evento
+PASS Felps retorna ao posto e fecha o caixa de sábado
+PASS Deryk confere a trava e encerra a inspeção antes de sair
+PASS quadro apaga o salão após as duas conferências
+PASS Deryk deixa o estoque e alcança a frente por rota contínua
+PASS chamada reúne a dupla para fechar sábado
+PASS ambos precisam chegar à calçada antes de baixar portas
+PASS sábado termina com relatório e campanha salva
+PASS resumo da segunda noite preserva suas decisões e os dois recibos
+WARNING: [Physics interpolation] Non-interpolated instance triggered from physics process: "/root/SaturdayIntegration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@10000/Depot/DepotLivedIn/@Node3D@12313/@Node3D@12330/@MeshInstance3D@12331" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:966)
+PASS passagem ao domingo conserva pistas e preparação e reinicia dados diários
+PASS cópia guarda dados reais de recibos e registros através da passagem de dia
+PASS histórico das noites concluídas permanece separado das vendas de domingo
+PASS retomada de domingo mantém o contato combinado no sábado
+PASS save da antiga prévia migra para sábado jogável com campos novos seguros
+SATURDAY RESULT 53/53 passed; failures=[]
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+PASS domingo inicia sem clientes ou criança no cenário de perigo
+PASS dupla inicia domingo por conversa no balcão
+PASS terminal exige recuperar e entregar o módulo físico antes do vídeo
+PASS Tab fecha o DVR de domingo e devolve controle a Deryk
+PASS Deryk abre a porta do estoque fisicamente
+PASS porta antiga abre para uma sala real de manutenção
+PASS acesso antigo possui piso, vão e navegação até o módulo sem atravessar paredes
+PASS módulo e cadastro são recolhidos pelo personagem presente
+PASS save retoma dentro da manutenção com porta e módulo corretos
+PASS Deryk volta da sala antiga ao balcão por todo o percurso físico
+PASS módulo precisa chegar ao balcão antes da recuperação
+PASS arquivo recuperado é vídeo Theora real, separado da câmera ao vivo
+PASS reprodução do fragmento libera análise sem depender de um temporizador de objetivo invisível
+PASS gravação e cadastro revelam ligação do cliente antes de qualquer perseguição
+PASS não preparar contato no sábado mantém a ajuda pendente no domingo
+PASS cópia do fragmento fica vinculada a Felps e pode sair com ele
+PASS contato e envio no domingo permitem preservar prova e obter ajuda mesmo sem preparo no sábado
+PASS uma cópia enviada não desaparece ao escolher deixar o gravador
+PASS Deryk retorna ao quadro enquanto Felps permanece no terminal
+WARNING: [Physics interpolation] Non-interpolated instance triggered from physics process: "/root/SundayIntegration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@2519/Dery/@Node3D@4857/@SpringArm3D@4858/@Camera3D@4859/@SpotLight3D@4863" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:966)
+PASS conferência inicia separação física, apagão e checkpoint de fuga
+PASS estoque fica realmente trancado e checkpoint precede a ameaça
+PASS modelo Killer fornecido é reutilizado como um único inimigo físico
+PASS Deryk alcança e abre o pátio enquanto o assassino está no mesmo mundo
+PASS rota até o gerador permanece física durante a fuga
+PASS gerador alimenta estoque e emite ruído no mundo da perseguição
+PASS Deryk consegue retornar ao estoque sob ameaça sem teleporte
+PASS Felps pode liberar a porta pelo terminal energizado sem abandonar seu posto
+PASS cooperação exige Deryk no gerador e Felps no terminal físico
+PASS H manda o companheiro acompanhar sem mover seu corpo instantaneamente
+PASS Felps conduz a fuga de volta à frente do depósito
+PASS comando manual inicia abertura progressiva da saída
+PASS pausa congela perseguição e mecanismo de saída
+PASS preparar a saída no sábado reduz a duração de abertura no domingo
+PASS jogador deixa o prédio e alcança o contato pela calçada
+PASS companheiro sai do estoque, percorre o salão e chega ao mesmo encontro
+PASS saída abre confirmação contextual sem encerrar a história automaticamente
+PASS dois sobreviventes com prova recebem o final do caso esclarecido
+PASS continuar depois do fim reabre o epílogo salvo
+PASS sem preparo no sábado, abertura manual exige permanecer por mais tempo
+PASS afastar-se do comando interrompe a abertura em vez de liberar saída remotamente
+PASS visão reconhece personagem exposto no cone sem consultar o personagem controlado
+PASS porta e parede bloqueiam detecção e captura através da divisão
+PASS ruído muda busca para a posição ouvida
+PASS Tab não reinicia nem teleporta o assassino ou apaga sua memória
+PASS lanterna aumenta alcance de detecção em um corredor escuro
+PASS save conserva posição de busca, tempo, estado e último ponto conhecido
+PASS save preserva alvo e tempo restante do golpe em preparação
+PASS captura abre derrota recuperável sem gravar final narrativo
+PASS retomar derrota volta a um checkpoint viável anterior aos mecanismos e mantém breve proteção
+PASS E entra em cobertura agachada sem teleporte e apaga a lanterna
+PASS salvar e continuar mantém corpo, colisão agachada e cobertura
+PASS mover-se sai da cobertura sem invisibilidade persistente
+PASS sair com os dois sem prova produz epílogo distinto do caso aberto
+PASS separação na saída exige confirmação explícita para abandonar companheiro
+PASS cancelar saída permite voltar para resgatar sem escolher final
+PASS confirmar saída sozinho registra apenas o sobrevivente que chegou
+PASS final sozinho persiste e não inicia uma quarta noite
+PASS reiniciar após o epílogo limpa ameaça, final e retry e volta à sexta
+PASS save 0.19 do domingo em prévia migra para abertura jogável sem iniciar perigo antes da hora
+SUNDAY RESULT 59/59 passed; failures=[]
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+PASS caixas distinguem reposição e cascos vazios antes de qualquer coleta
+PASS geladeira G1 e prateleira P1 mostram falta e caixa necessária
+PASS pega caixa identificada stock_1
+PASS pegar R1 troca objetivo de busca pelo destino correto
+PASS caixa carregada não oculta o foco da geladeira mesmo com câmera de ombro
+PASS primeiro E abre a geladeira sem consumir a caixa
+PASS segundo E repõe antes da conversa inicial sem bloqueio silencioso da etapa
+PASS necessidade de G1 diminui após entrega
+PASS conversa reconhece reposição antecipada e mantém somente a caixa restante
+PASS pega caixa identificada stock_shelf
+PASS caixa R3 na geladeira informa destino P1 e preserva mercadoria
+PASS prateleira correta tem foco alcançável com a caixa
+PASS R3 preenche lacuna visível da prateleira sem contar como reposição obrigatória de G1
+PASS continuar restaura destinos separados e não recria caixa já usada
+PASS pega caixa identificada stock_2
+PASS R2 completa G1 mesmo após a reposição extra e a retomada
+PASS pega caixa identificada loose
+PASS cascos vazios não viram mercadoria de geladeira nem desaparecem
+PASS marcação de devoluções recebe a caixa vazia por E
+PASS pedido de caixa fechada oferece chamada real de Deryk
+PASS chamada marca a caixa laranja daquele pedido
+PASS caixa de venda tem número diferente das caixas de reposição
+PASS pega caixa identificada order_2
+PASS caixa de venda não abastece geladeira e avisa onde entregar
+PASS transportar pedido mostra ponto físico e indicação de entrega no balcão
+PASS marcador de destino permanece legível e dentro da interface em PS1 320x240
+PASS PS1/2 640x480 mantém marcador na interface nativa
+PASS E no balcão prioriza entrega de Deryk em vez de conversa com Felps
+PASS entrega no balcão consome uma caixa e libera o pedido uma única vez
+PASS Felps retoma a venda depois da entrega de Deryk
+PASS mercadoria entregue permite conferir e cobrar
+PASS Felps finaliza venda de retornáveis e registra um único recibo
+PASS marcação da entrega some após receber a mercadoria
+PASS sábado não recria caixas de reposição da sexta nem sinaliza falta inexistente
+PASS domingo de investigação não oferece caixas de trabalho sem destino
+SUPPLY RESULT 35/35 passed; failures=[]
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+PASS Dery tem amostras reais da sola, com pesos do modelo
+PASS Dery usa caminhada medida para seu rig
+PASS Dery • idle mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.002)
+PASS Dery • walk mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.001)
+PASS Dery • run mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.002)
+PASS Dery • carry_walk mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.002)
+PASS Dery • crouch_walk mantém contato nas fases de apoio sem deformação inválida (pen=0.002, gap=0.002)
+PASS Dery • agachamento mantém cabeça próxima da cápsula baixa (1.087 m)
+PASS Felps tem amostras reais da sola, com pesos do modelo
+PASS Felps usa caminhada medida para seu rig
+PASS Felps • idle mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.001)
+PASS Felps • walk mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.002)
+PASS Felps • run mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.003)
+PASS Felps • carry_walk mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.003)
+PASS Felps • crouch_walk mantém contato nas fases de apoio sem deformação inválida (pen=0.002, gap=0.002)
+PASS Felps • agachamento mantém cabeça próxima da cápsula baixa (1.009 m)
+PASS Enemy tem amostras reais da sola, com pesos do modelo
+PASS Enemy usa caminhada medida para seu rig
+PASS Enemy • idle mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.002)
+PASS Enemy • walk mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.002)
+PASS Enemy • run mantém contato nas fases de apoio sem deformação inválida (pen=0.008, gap=0.021)
+PASS Bryan tem amostras reais da sola, com pesos do modelo
+PASS Bryan usa caminhada medida para seu rig
+PASS Bryan • idle mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.001)
+PASS Bryan • walk mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.001)
+PASS Bryan • run mantém contato nas fases de apoio sem deformação inválida (pen=0.004, gap=0.006)
+PASS Zirico tem amostras reais da sola, com pesos do modelo
+PASS Zirico usa caminhada medida para seu rig
+PASS Zirico • idle mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.004)
+PASS Zirico • walk mantém contato nas fases de apoio sem deformação inválida (pen=0.001, gap=0.021)
+PASS Zirico • run mantém contato nas fases de apoio sem deformação inválida (pen=0.007, gap=0.023)
+PASS Garota1 tem amostras reais da sola, com pesos do modelo
+PASS Garota1 usa caminhada medida para seu rig
+PASS Garota1 • idle mantém contato nas fases de apoio sem deformação inválida (pen=0.001, gap=0.003)
+PASS Garota1 • walk mantém contato nas fases de apoio sem deformação inválida (pen=0.001, gap=0.003)
+PASS Garota1 • run mantém contato nas fases de apoio sem deformação inválida (pen=0.008, gap=0.008)
+PASS Garota2 tem amostras reais da sola, com pesos do modelo
+PASS Garota2 usa caminhada medida para seu rig
+PASS Garota2 • idle mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.002)
+PASS Garota2 • walk mantém contato nas fases de apoio sem deformação inválida (pen=0.001, gap=0.003)
+PASS Garota2 • run mantém contato nas fases de apoio sem deformação inválida (pen=0.008, gap=0.002)
+PASS Velha1 tem amostras reais da sola, com pesos do modelo
+PASS Velha1 usa caminhada medida para seu rig
+PASS Velha1 • idle mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.001)
+PASS Velha1 • walk mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.002)
+PASS Velha1 • run mantém contato nas fases de apoio sem deformação inválida (pen=0.013, gap=0.013)
+PASS Customer1 tem amostras reais da sola, com pesos do modelo
+PASS Customer1 usa caminhada medida para seu rig
+PASS Customer1 • idle mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.002)
+PASS Customer1 • walk mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.002)
+PASS Customer1 • run mantém contato nas fases de apoio sem deformação inválida (pen=0.007, gap=0.016)
+PASS Customer1 • carry_walk mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.002)
+PASS Customer1 • crouch_walk mantém contato nas fases de apoio sem deformação inválida (pen=0.003, gap=0.003)
+PASS Customer2 tem amostras reais da sola, com pesos do modelo
+PASS Customer2 usa caminhada medida para seu rig
+PASS Customer2 • idle mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.002)
+PASS Customer2 • walk mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.003)
+PASS Customer2 • run mantém contato nas fases de apoio sem deformação inválida (pen=0.007, gap=0.016)
+PASS Customer2 • carry_walk mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.003)
+PASS Customer2 • crouch_walk mantém contato nas fases de apoio sem deformação inválida (pen=0.003, gap=0.003)
+PASS Customer3 tem amostras reais da sola, com pesos do modelo
+PASS Customer3 usa caminhada medida para seu rig
+PASS Customer3 • idle mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.002)
+PASS Customer3 • walk mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.002)
+PASS Customer3 • run mantém contato nas fases de apoio sem deformação inválida (pen=0.007, gap=0.016)
+PASS Customer3 • carry_walk mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.002)
+PASS Customer3 • crouch_walk mantém contato nas fases de apoio sem deformação inválida (pen=0.003, gap=0.003)
+NATURAL RESULT 67/67 passed; failures=[]
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+PASS Dery mantém corpo finito e ciclo sem salto de posição (0.0000 m)
+PASS Felps mantém corpo finito e ciclo sem salto de posição (0.0000 m)
+PASS Garota1 mantém corpo finito e ciclo sem salto de posição (0.0000 m)
+PASS Garota2 mantém corpo finito e ciclo sem salto de posição (0.0000 m)
+PASS Customer1 mantém corpo finito e ciclo sem salto de posição (0.0000 m)
+PASS Customer2 mantém corpo finito e ciclo sem salto de posição (0.0000 m)
+PASS Customer3 mantém corpo finito e ciclo sem salto de posição (0.0000 m)
+PASS Zirico mantém corpo finito e ciclo sem salto de posição (0.0000 m)
+PASS Bryan mantém corpo finito e ciclo sem salto de posição (0.0000 m)
+PASS Velha1 mantém corpo finito e ciclo sem salto de posição (0.0000 m)
+PASS Enemy mantém corpo finito e ciclo sem salto de posição (0.0000 m)
+PASS Customer1 mantém a raiz da manga junto ao ombro sem subir para o rosto
+PASS Customer2 mantém a raiz da manga junto ao ombro sem subir para o rosto
+PASS Customer3 mantém a raiz da manga junto ao ombro sem subir para o rosto
+PASS passada para trás acompanha o recuo sem inverter duas vezes o movimento dos pés
+PASS Zirico oscila o tronco de forma própria em vez de usar repouso genérico
+PASS Bryan tem gestos inquietos reais no repouso, proporcionais ao corpo infantil
+PASS Deryk e Felps não compartilham a mesma cadência de caminhada
+PASS ClienteBone usa o mesmo controlador medido das personagens importadas
+PASS ClienteTrabalho usa o mesmo controlador medido das personagens importadas
+PASS ClienteVinho usa o mesmo controlador medido das personagens importadas
+PASS ClienteMostarda usa o mesmo controlador medido das personagens importadas
+PASS ClienteCinza usa o mesmo controlador medido das personagens importadas
+PASS ClienteVerde usa o mesmo controlador medido das personagens importadas
+PASS cliente do aviso também usa caminhada medida sem alterar seu evento narrativo
+PASS modificadores em execução não acumulam escala nem deformam os corpos
+PASS ClienteBone para a passada ao ser bloqueado por uma parede
+PASS ClienteTrabalho para a passada ao ser bloqueado por uma parede
+PASS ClienteVinho para a passada ao ser bloqueado por uma parede
+PASS ClienteMostarda para a passada ao ser bloqueado por uma parede
+PASS ClienteCinza para a passada ao ser bloqueado por uma parede
+PASS ClienteVerde para a passada ao ser bloqueado por uma parede
+PASS Customer3 para a passada ao ser bloqueado por uma parede
+PASS Bryan também não caminha no lugar quando bloqueado
+PASS Zirico também não caminha no lugar quando bloqueado
+PASS ClienteBone retoma a passada quando o caminho volta a abrir
+PASS ClienteTrabalho retoma a passada quando o caminho volta a abrir
+PASS ClienteVinho retoma a passada quando o caminho volta a abrir
+PASS ClienteMostarda retoma a passada quando o caminho volta a abrir
+PASS ClienteCinza retoma a passada quando o caminho volta a abrir
+PASS ClienteVerde retoma a passada quando o caminho volta a abrir
+PASS Customer3 retoma a passada quando o caminho volta a abrir
+PASS Bryan retoma seu estilo ao voltar a se deslocar
+PASS Zirico retoma seu estilo ao voltar a se deslocar
+PASS gesto de repouso de cliente termina e retorna ao normal sem ficar preso em loop
+LOCOMOTION RESULT 45/45 passed; failures=[]
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+PASS Dery walk mantém arco vertical contido (0.040 m)
+PASS Dery walk não anima saltos de correção no osso raiz
+PASS Dery walk limita giro do pé entre quadros a 30 FPS (10.7°)
+PASS Dery walk dobra os joelhos sem os trancos anteriores (18.4°/quadro)
+PASS Dery walk mantém os sapatos em ângulos legíveis (14.3°)
+PASS Dery walk combina a velocidade do pé apoiado com a do corpo (erro 0.000 m)
+PASS Dery run mantém arco vertical contido (0.024 m)
+PASS Dery run não anima saltos de correção no osso raiz
+PASS Dery run limita giro do pé entre quadros a 30 FPS (20.7°)
+PASS Dery run dobra os joelhos sem os trancos anteriores (19.5°/quadro)
+PASS Dery run mantém os sapatos em ângulos legíveis (25.8°)
+PASS Dery run combina a velocidade do pé apoiado com a do corpo (erro 0.000 m)
+PASS Dery não alterna caminhada/corrida a cada oscilação em torno de 2,55 m/s
+PASS Dery volta a caminhar quando desacelera
+PASS Dery não prende a perna da corrida em uma âncora de caminhada
+PASS Felps walk mantém arco vertical contido (0.044 m)
+PASS Felps walk não anima saltos de correção no osso raiz
+PASS Felps walk limita giro do pé entre quadros a 30 FPS (10.1°)
+PASS Felps walk dobra os joelhos sem os trancos anteriores (16.1°/quadro)
+PASS Felps walk mantém os sapatos em ângulos legíveis (14.3°)
+PASS Felps walk combina a velocidade do pé apoiado com a do corpo (erro 0.000 m)
+PASS Felps run mantém arco vertical contido (0.027 m)
+PASS Felps run não anima saltos de correção no osso raiz
+PASS Felps run limita giro do pé entre quadros a 30 FPS (19.8°)
+PASS Felps run dobra os joelhos sem os trancos anteriores (24.1°/quadro)
+PASS Felps run mantém os sapatos em ângulos legíveis (25.8°)
+PASS Felps run combina a velocidade do pé apoiado com a do corpo (erro 0.000 m)
+PASS Felps não alterna caminhada/corrida a cada oscilação em torno de 2,55 m/s
+PASS Felps volta a caminhar quando desacelera
+PASS Felps não prende a perna da corrida em uma âncora de caminhada
+SPRINT RESULT 30/30 passed; failures=[]
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+PASS preferências antigas recebem intensidade Suave por padrão
+PASS Configurações expõe os dois efeitos separadamente
+PASS cada efeito oferece Desligada, Suave e Marcada
+PASS PS1 mantém cenário em 320×240
+PASS HUD continua no viewport em resolução plena
+PASS PS1 aplica efeitos às superfícies do cenário
+PASS Suave usa grade de meio pixel para vértices
+PASS Suave mistura interpolação afim a 35%
+PASS Marcada usa grade de 1,5 pixel e interpolação afim completa
+PASS precisão desligada preserva a seleção de texturas afins
+PASS texturas afins desligadas preservam a precisão selecionada
+PASS desligar os dois efeitos restaura os materiais originais
+PASS PS1/2 mantém cenário em 640×480
+PASS PS1/2 recebe os mesmos efeitos 3D
+PASS Nítida restaura o material original
+PASS Retrô restaura o material original
+PASS Econômica restaura o material original
+PASS efeitos não reconstroem nem modificam a geometria
+PASS rig e animações publicados permanecem intactos
+PASS trocas de intensidade preservam posição e formas de colisão
+PASS salão energizado mantém emissão no material adaptado
+PASS apagão desliga a emissão original e a adaptada
+PASS apagão preserva circuitos de luz e baterias
+PASS restabelecer energia religa materiais e desliga baterias
+PASS atribuição de material durante jogo é preservada ao sair de PS1
+PASS objetos novos recebem efeitos e marcador de apoio acompanha a cor válida/bloqueada
+PASS reconstruir o mundo renova efeitos e circuitos
+PASS intensidades independentes persistem em settings.cfg
+PSX RESULT 28/28 passed; failures=[]
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+PASS prévia de checkpoint versão 1 mostra noite e horário sem carregar a partida
+PASS prévia de checkpoint versão 2 mostra noite e horário sem carregar a partida
+PASS prévia de checkpoint versão 3 mostra noite e horário sem carregar a partida
+PASS prévia de checkpoint versão 4 mostra noite e horário sem carregar a partida
+PASS prévia de checkpoint versão 5 mostra noite e horário sem carregar a partida
+PASS prévia respeita o horário narrativo do fechamento
+PASS posição inválida não oferece um Continuar enganoso
+PASS save corrompido é tratado silenciosamente na prévia
+PASS ler metadados não modifica Session nem cria um save
+PASS cenas de revisão embutidas não iniciam a intro automaticamente
+PASS baixa taxa de quadros não prolonga artificialmente a intro
+PASS abertura pausa a campanha antes de qualquer interação
+PASS intro oculta menu e HUD até terminar
+PASS abertura usa câmera externa do próprio depósito
+PASS tela inicial mostra o depósito vazio sem remover os protagonistas
+PASS apresentação não acrescenta viewports nem luzes
+PASS tipografia da abertura permanece na resolução da interface
+PASS tempo, objetivos e progresso da campanha não avançam na intro
+PASS animação da fita continua com o mundo pausado
+PASS tempo gasto no primeiro carregamento não pula a abertura
+PASS intro apresenta o estúdio antes da localização
+PASS segundo cartão apresenta local e horário do jogo
+PASS Enter pula a intro e revela o menu
+PASS tecla usada para pular não começa uma partida por acidente
+PASS menu conserva ambiente sonoro e encerra a fita da intro
+PASS primeira ação do menu recebe foco de teclado
+PASS Continuar indica corretamente a disponibilidade do checkpoint
+PASS menu usa som ambiente e luzes existentes da fachada e do estoque
+PASS falha do letreiro é apenas visual e não modifica materiais ou progresso
+PASS ambiente do menu não religa uma luz desligada pelo circuito
+PASS luz do estoque se revela lentamente ao fundo
+PASS carro, cachorro distante e ruído metálico usam eventos espaçados
+PASS título aparece gradualmente com o mundo pausado e sem bloquear foco
+PASS entrada termina corretamente mesmo após um quadro longo
+PASS seleção de teclado ilumina a opção gradualmente
+PASS seleção se estabiliza e não destaca Continuar desabilitado
+PASS câmera se aproxima lentamente sem avançar o expediente
+PASS Configurações abre sobre o fundo do menu
+PASS Esc fecha Configurações antes da partida sem sair do menu
+PASS PS1 não reduz a resolução do menu nem da intro
+PASS PS1/2 permanece disponível no fundo do menu
+PASS menu cabe em uma janela de 800×600
+PASS redimensionar durante a entrada mantém o menu dentro da janela
+PASS abertura e menu respeitam os controles de música e efeitos
+PASS todos os novos sons respeitam Efeitos em zero
+PASS Espaço pula apenas a abertura
+PASS Esc também pula a abertura sem iniciar o jogo
+WARNING: An input event object is being parsed more than once in the same frame, which is unsafe.
+If you are generating events in a script, you have to instantiate a new event instead of sending the same one more than once, unless the original one was sent on an earlier frame.
+You can call duplicate() on the event to get a new instance with identical values.
+     at: parse_input_event (core/input/input.cpp:1145)
+PASS clique pula a abertura sem acionar um botão por baixo
+PASS fim natural da sequência revela o menu uma única vez
+PASS finalizar uma intro já encerrada não repete a transição
+PASS transição começa com o expediente parado e ignora acionamento duplo
+PASS entrada não atravessa a transição para abrir pausa ou configurações
+PASS entrar no jogo cancela a animação sem deixar fades pendentes
+PASS Iniciar expediente ativa o jogo normalmente
+PASS início aproveita o mundo carregado sem alterar a progressão
+PASS controle e câmera retornam ao protagonista
+PASS visibilidade dos protagonistas é restaurada ao entrar no jogo
+PASS áudio e intro encerram ao entrar no jogo
+PASS luzes, letreiro e sons são restaurados antes de entregar o controle
+PASS eventos do menu não reaparecem durante a partida
+PASS transição libera o HUD sem uma camada preta residual
+PASS pausa usa o novo menu sem repetir a abertura
+PASS pausa conserva a câmera e a posição do jogador
+PASS salvamento continua disponível depois da nova abertura
+PASS Continuar mostra a noite e o horário do save real
+PASS Continuar restaura o checkpoint e a câmera de jogo
+PASS Continuar não reproduz a intro outra vez
+PASS executar a cena principal inicia a intro automaticamente antes do menu
+TITLE RESULT 68/68 passed; failures=[]
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+PASS a revisão inicia em primeira pessoa por padrão
+PASS primeira pessoa mostra o corpo e mantém a cabeça fora da própria câmera
+PASS viewport do jogo realmente recebe os sons posicionais 3D
+PASS rodinha para baixo afasta e entrega terceira pessoa pelo caminho real de entrada
+PASS Tab continua trocando os protagonistas
+PASS Felps também começa em primeira pessoa com câmera independente
+PASS trocar de volta preserva a distância escolhida na rodinha
+PASS rodinha para cima volta suavemente à primeira pessoa
+PASS J abre caderno nativo e pausa o expediente
+PASS caderno mantém o objetivo completo disponível
+PASS ler o caderno não move personagens, não troca Tab e não avança eventos
+PASS Esc fecha o caderno e devolve controle sem abrir pausa por baixo
+PASS HUD discreto recolhe objetivo repetido e mantém acesso ao caderno
+PASS configuração permite voltar às instruções persistentes
+PASS legendas retrô e lembrete cabem na tela nativa
+PASS rotina continua com venda comum antes dos cinco minutos, sem liberar aviso cedo
+PASS aviso fica disponível após cinco minutos quando tarefas e vendas já permitem
+PASS atendimento do aviso continua usando a mecânica original
+PASS sino toca com Deryk no estoque e Felps pergunta se ele voltou
+PASS a cena usa sino posicional da entrada, sem mover os protagonistas
+PASS acontecimento e anotação são únicos durante a mesma sessão
+PASS continuar preserva o sino já ouvido e não repete a cena
+PASS pessoa aparece fora da visão no lado oposto da rua sem anotar algo ainda não visto
+PASS observador não vira cliente, não ocupa atendimento e não altera recibos
+PASS olhar para a pessoa com linha de visão registra a observação
+PASS pessoa sai andando pela rua, sem desaparecer ou saltar de posição
+PASS save retoma a pessoa em sua posição e trajetória de saída
+PASS chegar à saída conclui a presença sem salvar um fantasma em movimento
+PASS observador concluído não reaparece ao continuar
+PASS novos ambientes respeitam volume de efeitos
+PASS apagão original permanece acionável
+PASS apagão silencia refrigeração comercial além das luzes
+PASS gerador restaura energia pela ação original
+PASS gerador restaura também os compressores posicionais
+PASS apagar salão mantém refrigeração no circuito correto
+PASS cliente de boné demora a sair após receber a compra
+PASS hesitação retoma pelo save sem repetir recebimento ou entrega
+PASS pessoa também pode ser percebida na câmera ao vivo da fachada
+PASS DVR não desloca a escuta do jogador para a câmera de segurança
+PASS ler outra página não conta como observar a imagem ao vivo
+PASS fechar DVR remove a câmera observadora
+PASS falas automáticas têm uma pausa curta entre respostas
+PASS Espaço continua permitindo avançar falas sem esperar a pausa
+PASS saves versão 5 anteriores recebem anotações opcionais sem perder campanha
+PASS checkpoint anterior adota primeira pessoa uma vez, preservando posição e restante da campanha
+EVERYDAY RESULT 45/45 passed; failures=[]

@@ -1,4 +1,4 @@
-# The Last Sale — projeto Godot 0.27.0
+# The Last Sale — projeto Godot 0.28.0
 
 1. Extraia este ZIP em uma pasta nova.
 2. No Godot **4.4.1**, clique em **Importar** e escolha `project.godot`.
@@ -6,6 +6,16 @@
 4. Pressione **F5** e escolha **Iniciar expediente** para testar a rotina completa.
 
 Modelos animados, cenários, sons, texturas, código, testes e ferramentas estão incluídos. Blender não é necessário para jogar. O renderizador é Compatibility / OpenGL.
+
+## Apresentação e rotina — 0.28.0
+
+A câmera começa em primeira pessoa. **RODA para baixo** afasta até terceira pessoa; **RODA para cima** retorna à primeira. Cada personagem conserva sua escolha ao alternar por Tab e salvar. Checkpoints anteriores recebem a nova câmera uma vez; posição, inventário, dinheiro e campanha são mantidos. As próximas gravações preservam a escolha da rodinha.
+
+**J** abre o caderno com o objetivo completo, destinos das caixas, controles e observações percebidas. J ou Esc fecham. A leitura pausa o mundo. O HUD é discreto por padrão, e Configurações permite manter as instruções persistentes. C continua abrindo as câmeras e as decisões de investigação no posto de Felps.
+
+A rotina agora antecede o aviso por pelo menos cinco minutos: continuam chegando vendas comuns até que tempo, reposição, organização e atendimentos permitam avançar. Sons posicionais, luz de comércio, rádio abafado no estoque, conversas curtas e acontecimentos sutis dão ambiente ao expediente. Acontecimentos e anotações são únicos e retomam pelo save. A refrigeração acompanha a energia e continua ligada quando só o salão é apagado.
+
+Modelos, texturas, pesos e as onze bibliotecas de animação foram preservados, incluindo a corrida da 0.27.0. Intro Two Brothers Lab, menu retrô, física de movimento, caixas, troco, circuitos, investigação, perseguição e saves continuam presentes. Veja `docs/everyday_v028/README.md`. Não é necessário instalar Blender ou Python para jogar.
 
 ## Passada dos protagonistas — 0.27.0
 
@@ -101,6 +111,7 @@ O salvamento conserva pedido, cliente, registro, dinheiro recebido e troco parci
 - Q: apoiar caixa na marca verde; a marca vermelha indica bloqueio. Q durante a pegada agenda a soltura.
 - Roda do mouse: aproximar até primeira pessoa ou afastar.
 - Espaço: avançar diálogo. Esc: fechar monitor/caixa ou pausar. F: lanterna após o aviso narrativo.
+- J: abrir/fechar o caderno do expediente e pausar a rotina durante a leitura.
 
 Converse com Felps para iniciar. Reponha as duas caixas na geladeira e organize a caixa solta. A caixa fechada de um pedido tem identificação própria. Bryan e Zirico têm conversas opcionais.
 
@@ -114,7 +125,7 @@ O elenco inclui Dery, Felps, Killer, Bryan, Zirico, Garota 1, Garota 2 e Velha 1
 
 ## Validação
 
-Os resultados das seis suítes e a verificação da extração limpa ficam em `docs/natural_v022/validation.json` e na verificação de distribuição no GitHub. `./tools/test.sh` roda a suíte; em outra máquina, abra pelo editor ou defina `GODOT_BIN` com o caminho do motor.
+As onze suítes reúnem 666 verificações da campanha, atendimento, reposição, animações, PS1, apresentação e nova rotina. Os resultados do pacote extraído e os 48 casos renderizados da câmera PS1 ficam na verificação de distribuição no GitHub, com notas em `docs/everyday_v028/validation.json`. `./tools/test.sh` roda as onze suítes; em outra máquina, abra pelo editor ou defina `GODOT_BIN` com o caminho do motor.
 
 A Godot 4.4 tem Windows 10 como requisito oficial mínimo. Windows 7/Radeon R7 não foram validados nativamente. O modo Econômica reduz resolução, sombras e acabamento dos materiais.
 

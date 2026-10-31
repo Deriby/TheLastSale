@@ -372,6 +372,8 @@ func run() -> void:
 	# Keep the event going through the real viewport and application's input path.
 	var previous_mouse_mode:=Input.mouse_mode
 	Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
+	# Start away from the first-person limit before checking wheel-up routing.
+	player.camera_rig.target_distance=1.2
 	var previous_distance:=player.camera_rig.target_distance
 	var wheel:=InputEventMouseButton.new();wheel.button_index=MOUSE_BUTTON_WHEEL_UP;wheel.pressed=true;wheel.position=Vector2(640,360);wheel.global_position=wheel.position;Input.parse_input_event(wheel);await ticks(3)
 	check(player.camera_rig.target_distance<previous_distance,"roda do mouse chega à câmera pela viewport")

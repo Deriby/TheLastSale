@@ -1,12 +1,12 @@
 {
-  "version": "0.27.0",
+  "version": "0.28.0",
   "format": "Godot editor project ZIP",
   "godot": "4.4.1",
-  "file": "TheLastSale_Godot_0.27.0.zip",
-  "bytes": 104561047,
-  "sha256": "f6047e47ea24baca1c0607c66804bfa25b08a584aa192c6c78596d6a9e0e834f",
+  "file": "TheLastSale_Godot_0.28.0.zip",
+  "bytes": 104625008,
+  "sha256": "5bb26ce04a68f73220310dc2955019b7b920c1d4c99e10ec3110cac883e51d2f",
   "crc_verified": true,
-  "files_verified_against_manifest": 916,
+  "files_verified_against_manifest": 940,
   "manifest_files_changed_by_import_or_tests": 0,
   "all_packaged_sources_match_repository": true,
   "clean_extraction_import_exit_code": 0,
@@ -23,53 +23,84 @@
     "protagonist_gait": 30,
     "psx": 28,
     "title": 68,
-    "passed": 621,
-    "total": 621,
-    "suites": 10,
+    "everyday": 45,
+    "passed": 666,
+    "total": 666,
+    "suites": 11,
     "runtime_errors": 0
+  },
+  "integration_execution": {
+    "complete_clean_extraction_run": "everyday-028-final-clean",
+    "subsequent_source_changes": [
+      "tests/supply_integration.gd shutdown waits only"
+    ],
+    "unchanged_packaged_files_verified_before_reusing_results": 939,
+    "runtime_and_other_suite_sources_byte_identical": true,
+    "supply_suite_rerun_from_final_clean_extraction": true
   },
   "clean_extraction_psx_camera_motion": {
     "passed": 48,
     "total": 48,
     "runtime_or_shader_errors": 0
   },
+  "previous_version_commit": "4fc1960e78df98e4180a91152d165363c37fe0fb",
   "previous_asset_files_byte_identical": 442,
-  "updated_resources": [
-    "resources/motion/Dery.res",
-    "resources/motion/Felps.res",
-    "resources/motion/authoring.json"
-  ],
-  "other_character_libraries_byte_identical": 9,
+  "previous_resource_files_byte_identical": 32,
+  "animation_libraries_byte_identical": 11,
   "models_materials_textures_weights_changed": 0,
-  "physics_camera_controls_inventory_energy_saves_world_and_shaders_unchanged": true,
+  "physical_movement_code_unchanged": true,
+  "box_handling_story_energy_core_and_psx_shaders_unchanged": true,
+  "default_camera": "first person",
+  "mouse_wheel_retains_third_person": true,
+  "independent_character_cameras": true,
+  "legacy_camera_migration_once": true,
+  "world_3d_audio_listener_enabled": true,
+  "new_original_audio_clips": 4,
+  "new_shadow_lights": 0,
+  "new_gameplay_viewports": 0,
+  "default_immersive_hud": true,
+  "notebook_key": "J",
+  "notebook_pauses_world": true,
+  "optional_events_saved_without_replay": true,
+  "observer_uses_physical_navigation": true,
+  "ordinary_customers_continue_before_automatic_warning_seconds": 300,
   "save_version": 5,
+  "previous_save_versions_supported": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
   "default_frame_limit": 30,
   "project_zip_only": true,
   "executable_exports": 0,
   "below_github_100_mib_limit": true,
   "preview": {
-    "path": "docs/sprint_v027/sprint_comparison.mp4",
-    "sha256": "9d21c8a570ea680cd4517e0d1b9e8d45d77fce18f8d566c00cca424bef9c953f",
-    "bytes": 13385309,
-    "duration_seconds": 22.6,
+    "path": "docs/everyday_v028/everyday_preview.mp4",
+    "sha256": "d9260190a0f287d3297754d1f13679cfa653693e64bd7cef593bc1349410ca04",
+    "bytes": 4679533,
+    "duration_seconds": 20.666667,
     "width": 1280,
     "height": 720,
     "capture_fps": 30,
     "video_codec": "H.264",
     "audio_codec": "AAC",
-    "parts": [
-      "0.26.0 running baseline",
-      "0.27.0 continuous running with transitions and stop",
-      "actual W/Shift gameplay in the depot"
-    ],
-    "actual_game_running_seconds_above_3_4_mps": {
-      "Dery": 1.86666666666666,
-      "Felps": 1.86666666666666
+    "audio_peak_dbfs": -18.134267,
+    "audio_rms_dbfs": -45.646689,
+    "actual_gameplay_capture": true,
+    "condensed_review_with_time_and_location_advanced_between_shots": true,
+    "verified_in_capture": {
+      "audio_listener": true,
+      "camera_wheel": true,
+      "cctv": true,
+      "chime": true,
+      "notebook": true
     }
   },
   "native_radeon_r7_fps_measured": false,
-  "report": "docs/sprint_v027/validation.json",
-  "clean_extraction_log": "validation_0.27.0.log",
-  "clean_import_log": "clean_import_0.27.0.log",
-  "motion_log": "psx_motion_0.27.0.log"
+  "report": "docs/everyday_v028/validation.json",
+  "clean_extraction_log": "validation_0.28.0.log",
+  "clean_import_log": "clean_import_0.28.0.log",
+  "motion_log": "psx_motion_0.28.0.log"
 }

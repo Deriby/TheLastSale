@@ -73,6 +73,7 @@ func _ready() -> void:
 	Session.changed.connect(refresh);select_channel(0);show_page(0)
 func show_page(value: int) -> void:
 	page=value
+	if world.everyday!=null:world.everyday.watched_camera=camera if page==0 else null
 	for i in pages.size():pages[i].visible=i==page
 	feed.render_target_update_mode=SubViewport.UPDATE_ONCE if page==0 else SubViewport.UPDATE_DISABLED
 	refresh()
