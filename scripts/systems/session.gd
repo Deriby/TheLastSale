@@ -25,7 +25,8 @@ var saved_position := Vector3(3.8, 0.1, 1.8)
 var carried_id := ""
 const SAVE_PATH := "user://shift.json"
 func default_campaign() -> Dictionary:
-	return {"night":0,"phase":"routine","flags":{},"clues":{},"decisions":{},"evidence_archive":{},"records":[],"sunday":{},"ending":{},"completed_nights":[],"reports":{},"experience":default_experience(),"friday_story":default_friday_story()}
+	return {"night":0,"phase":"routine","flags":{},"clues":{},"decisions":{},"evidence_archive":{},"records":[],"sunday":{},"ending":{},"completed_nights":[],"reports":{},"experience":default_experience(),"friday_story":default_friday_story(),"friday_scares":default_friday_scares()}
+func default_friday_scares() -> Dictionary:return {"events":{},"last_event":-1000.0,"last_scare":-1000.0,"door_phase":"","door_time":0.0,"prank":{},"intruder":{},"return_armed":false,"dim_time":0.0}
 func default_friday_story() -> Dictionary:return {"events":{},"observations":{},"recap":""}
 func default_experience() -> Dictionary:return {"events":{},"event_times":{},"notes":[],"observer":{},"tension":0.0}
 func flag(id: String) -> bool:return bool(campaign.flags.get(id,false))
@@ -187,6 +188,11 @@ func load_shift() -> bool:
 					var night:=int(value)
 					if night>=0 and night<=2 and night not in completed:completed.append(night)
 		campaign.completed_nights=completed
+		if not campaign.friday_scares is Dictionary:campaign.friday_scares=default_friday_scares()
+		for key in default_friday_scares():
+			if not campaign.friday_scares.has(key):campaign.friday_scares[key]=default_friday_scares()[key]
+		for key in ["events","prank","intruder"]:
+			if not campaign.friday_scares[key] is Dictionary:campaign.friday_scares[key]={}
 		if not campaign.friday_story is Dictionary:campaign.friday_story=default_friday_story()
 		for key in ["events","observations"]:
 			if not campaign.friday_story.get(key) is Dictionary:campaign.friday_story[key]={}

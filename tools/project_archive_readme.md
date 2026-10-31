@@ -1,4 +1,4 @@
-# The Last Sale — projeto Godot 0.29.0
+# The Last Sale — projeto Godot 0.30.0
 
 1. Extraia este ZIP em uma pasta nova.
 2. No Godot **4.4.1**, clique em **Importar** e escolha `project.godot`.
@@ -6,6 +6,16 @@
 4. Pressione **F5** e escolha **Iniciar expediente** para testar a rotina completa.
 
 Modelos animados, cenários, sons, texturas, código, testes e ferramentas estão incluídos. Blender não é necessário para jogar. O renderizador é Compatibility / OpenGL.
+
+## Terror e sustos — 0.30.0
+
+A primeira noite inclui arrasto e maçaneta na porta antiga, Bryan batendo na vitrine e uma pessoa atravessando o salão depois que Deryk volta do gerador. Eles dependem de posição, percepção e progresso, com intervalos de calma. A câmera continua livre e a rodinha mantém primeira e terceira pessoa. Não há tarefas novas obrigatórias.
+
+O arrasto para ao se aproximar. Bryan chega caminhando à vitrine; conversar com ele traz o alívio depois da brincadeira. A figura começa fora da visão desobstruída e usa corpo físico, colisões e navegação para seguir pelo estoque ao pátio. A porta só bate depois que ela e os protagonistas ficam fora da área de giro. Felps só comenta a travessia se Deryk a percebeu.
+
+A luz comercial baixa por alguns segundos e se recupera; geladeiras e gerador continuam funcionando. Salvar no meio conserva maçaneta, rota de Bryan, percurso da figura e progresso. Caderno J e pausa congelam os eventos. O fechamento e o sábado reconhecem a ameaça percebida. Sons originais e ferramentas de síntese estão incluídos; não é necessário instalar ferramentas extras para jogar.
+
+Veja `docs/scares_v030/README.md`. Modelos, texturas, bibliotecas de animação, física dos protagonistas, caixas, troco, circuitos e finais continuam preservados. Saves anteriores são aceitos.
 
 ## Primeira noite e memória dos irmãos — 0.29.0
 
@@ -135,7 +145,7 @@ O elenco inclui Dery, Felps, Killer, Bryan, Zirico, Garota 1, Garota 2 e Velha 1
 
 ## Validação
 
-As doze suítes reúnem 702 verificações da campanha, atendimento, reposição, animações, PS1, apresentação e nova rotina. Os resultados do pacote extraído e os 48 casos renderizados da câmera PS1 ficam na verificação de distribuição no GitHub, com notas em `docs/friday_story_v029/validation.json`. `./tools/test.sh` roda as doze suítes; em outra máquina, abra pelo editor ou defina `GODOT_BIN` com o caminho do motor.
+As treze suítes reúnem 744 verificações da campanha, atendimento, reposição, animações, PS1, apresentação e nova rotina. Os resultados do pacote extraído e os 48 casos renderizados da câmera PS1 ficam na verificação de distribuição no GitHub, com notas em `docs/scares_v030/validation.json`. `./tools/test.sh` roda as treze suítes; em outra máquina, abra pelo editor ou defina `GODOT_BIN` com o caminho do motor.
 
 A Godot 4.4 tem Windows 10 como requisito oficial mínimo. Windows 7/Radeon R7 não foram validados nativamente. O modo Econômica reduz resolução, sombras e acabamento dos materiais.
 

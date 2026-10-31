@@ -94,6 +94,7 @@ func activate(action: String,actor: DepotPlayer) -> bool:
 		"generator":
 			if not is_outage() or actor.identity!="Dery" or not Session.flag("generator_key") or not Session.flag("counter_secured"):return false
 			Session.campaign.flags.generator_running=true;Session.campaign.phase="restored";Session.campaign.clues.local_outage=true
+			if world.scary!=null:world.scary.arm_return()
 			actor.motion.action("place");save()
 			Dialogue.play("power_restored",[["Dery","Pegou! Felps, voltou aí?"],["Felps","Voltou. Termina aí que eu confiro o atendimento. Depois a gente fecha."],["Zirico","Engraçado... a rua toda continuou acesa, viu?"]])
 			return true

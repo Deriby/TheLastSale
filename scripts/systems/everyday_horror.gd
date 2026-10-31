@@ -27,6 +27,7 @@ func record(id: String,text: String="") -> bool:
 	return true
 func warning_ready() -> bool:return Session.world_seconds>=ROUTINE_SECONDS
 func safe_to_speak() -> bool:
+	if world.scary!=null and world.scary.blocks_ambient():return false
 	if Dialogue.active or world.cashier_open or world.surveillance_open or world.sunday.desk_open:return false
 	for actor in world.characters.values():
 		if actor.motion.action_active or actor.handling.busy:return false
