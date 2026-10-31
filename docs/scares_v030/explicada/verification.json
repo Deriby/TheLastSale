@@ -1,0 +1,127 @@
+{
+  "game_version": "0.30.0",
+  "game_commit": "c8ec0336e75ffb5c8397af6a30f8c001d1773a4c",
+  "game_zip_sha256": "be08d0dc557f8404de1dd7694f1c23a7b5cd9c6281f9fd3c96e4b154dceed9a9",
+  "all_972_packaged_sources_match_repository": true,
+  "presentation_only": true,
+  "cards_separate_locations": true,
+  "handle_marker_only_in_preview": true,
+  "hud_hidden_only_in_preview": true,
+  "capture_field_of_view_degrees": 80,
+  "footage_is_staged_not_a_continuous_playthrough": true,
+  "actual_events_verified": {
+    "aftermath": true,
+    "bryan": true,
+    "crossing": true,
+    "handle": true,
+    "slam": true
+  },
+  "timeline": [
+    {
+      "event": "card",
+      "scene": 0,
+      "time": 3.03333333333333
+    },
+    {
+      "event": "play",
+      "scene": 0,
+      "time": 6.06666666666665
+    },
+    {
+      "event": "end",
+      "scene": 0,
+      "time": 10.9
+    },
+    {
+      "event": "card",
+      "scene": 1,
+      "time": 10.9
+    },
+    {
+      "event": "play",
+      "scene": 1,
+      "time": 13.9333333333333
+    },
+    {
+      "event": "tap",
+      "scene": 1,
+      "time": 14.5333333333333
+    },
+    {
+      "event": "end",
+      "scene": 1,
+      "time": 16.5333333333333
+    },
+    {
+      "event": "card",
+      "scene": 2,
+      "time": 16.5333333333333
+    },
+    {
+      "event": "play",
+      "scene": 2,
+      "time": 19.5666666666668
+    },
+    {
+      "event": "crossing",
+      "scene": 2,
+      "time": 22.8333333333336
+    },
+    {
+      "event": "aftermath",
+      "scene": 2,
+      "time": 29.433333333334
+    },
+    {
+      "event": "end",
+      "scene": 2,
+      "time": 37.2666666666671
+    }
+  ],
+  "files": [
+    {
+      "file": "previa_explicada.mp4",
+      "bytes": 4437328,
+      "sha256": "da582d88ea4ac1c7d13ce7429e74b703ad4d95b8b9310a8ecf3d8128512c5e56",
+      "duration_seconds": 37.7,
+      "video": "H.264",
+      "audio": "AAC",
+      "fps": 30,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "file": "01_estoque.mp4",
+      "bytes": 601246,
+      "sha256": "d3bb9fedf22663501ba49741f11157234e397a49e8f4769f63a5ff2fdc39c888",
+      "duration_seconds": 7.866667,
+      "video": "H.264",
+      "audio": "AAC",
+      "fps": 30,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "file": "02_bryan.mp4",
+      "bytes": 560526,
+      "sha256": "83d13aec421500bf9adbbcdfb1a9d121eb8b6e331fa5a1faf420612101bbe765",
+      "duration_seconds": 5.633333,
+      "video": "H.264",
+      "audio": "AAC",
+      "fps": 30,
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "file": "03_figura.mp4",
+      "bytes": 3218954,
+      "sha256": "5eab4925e349889bfffc218c7013b82c09bacb9c06cbee78cfdbdd9c6f93ac66",
+      "duration_seconds": 20.733333,
+      "video": "H.264",
+      "audio": "AAC",
+      "fps": 30,
+      "width": 1280,
+      "height": 720
+    }
+  ]
+}

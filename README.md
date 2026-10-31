@@ -10,7 +10,7 @@ Extraia o ZIP, importe `project.godot` no Godot **4.4.1**, aguarde a importaçã
 
 O estoque ganhou um arrasto atrás da porta antiga: ao se aproximar, o som para e a maçaneta começa a girar. Bryan caminha até a vitrine e dá uma batida como brincadeira. Na volta do gerador, uma figura atravessa o salão e segue fisicamente pelos fundos; a porta do pátio bate depois de sua passagem. Felps reage ao que Deryk realmente percebeu.
 
-Os momentos dependem da posição e das ações, têm pausas entre si e ficam salvos sem repetir ao continuar. A câmera permanece livre, com terceira pessoa pela rodinha. A iluminação do salão oscila brevemente na travessia; refrigeração, gerador e circuitos continuam operando. [Prévia com som e validação](docs/scares_v030/README.md).
+Os momentos dependem da posição e das ações, têm pausas entre si e ficam salvos sem repetir ao continuar. A câmera permanece livre, com terceira pessoa pela rodinha. A iluminação do salão oscila brevemente na travessia; refrigeração, gerador e circuitos continuam operando. [Prévia explicada, em três cenas](docs/scares_v030/explicada/README.md) · [Detalhes e validação](docs/scares_v030/README.md).
 
 ![Susto no estoque](docs/scares_v030/handle.png)
 
