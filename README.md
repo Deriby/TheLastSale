@@ -2,9 +2,17 @@
 
 Demonstração jogável em **Godot 4.4.1 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP, com uma primeira versão jogável da campanha de sexta a domingo. Acabamento e ritmo continuam em desenvolvimento.
 
-**[Baixar o projeto 0.24.1 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.24.1.zip)**
+**[Baixar o projeto 0.24.2 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.24.2.zip)**
 
 Extraia o ZIP, importe `project.godot` no Godot **4.4.1**, aguarde a importação dos modelos e pressione **F5**. O arquivo inclui os modelos animados, cenários, código e recursos usados no jogo. [Conteúdo e instruções do projeto](downloads/project/README.md).
+
+## Revisão 0.24.2 — suspense no cenário e entrada no expediente
+
+A fachada agora tem falhas discretas de iluminação, uma luz se revela ao fundo e sons originais de rua dão profundidade ao menu: carro, cachorro distante, metal e zumbido elétrico. Os eventos têm intervalos variáveis e respeitam o volume de Efeitos. O título menor e as opções mais espaçadas deixam o depósito aparecer mais.
+
+**Continuar** mostra a noite e o horário do checkpoint sem carregar a campanha. Ao iniciar, as letras se apagam, a fita estala e a troca de câmera acontece sob uma transição curta. Luzes, letreiro e personagens são restaurados antes de entregar o controle. [Prévia com som, imagens e validação](docs/title_v0242/README.md).
+
+![Menu com atmosfera e mais espaço](docs/title_v0242/menu.png)
 
 ## Revisão 0.24.1 — tipografia e movimento do menu
 
@@ -244,7 +252,7 @@ A reconstrução 0.2 do interior recebeu gôndolas abastecidas por categoria, ge
 
 ## Jogar
 
-**[Baixar o projeto Godot 0.24.1 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.24.1.zip)**
+**[Baixar o projeto Godot 0.24.2 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.24.2.zip)**
 
 O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **0.24.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
 

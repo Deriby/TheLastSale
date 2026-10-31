@@ -31,6 +31,11 @@ var transition_tween: Tween
 var drone: AudioStreamPlayer
 var tape: AudioStreamPlayer
 var select_audio: AudioStreamPlayer
+var stop_audio: AudioStreamPlayer
+var ambience: TitleAmbience
+var departing := false
+var departure_tween: Tween
+var menu_gain := 1.0
 
 func _ready() -> void:
 	process_mode=Node.PROCESS_MODE_ALWAYS
@@ -57,6 +62,8 @@ func _ready() -> void:
 	var loop: AudioStreamOggVorbis=drone.stream.duplicate();loop.loop=true;drone.stream=loop
 	tape=audio("res://assets/audio/title/intro_tape.ogg")
 	select_audio=audio("res://assets/audio/title/select.wav")
+	stop_audio=audio("res://assets/audio/title/ambient/tape_stop.ogg")
+	ambience=TitleAmbience.new();add_child(ambience)
 	Preferences.changed.connect(apply_audio)
 	apply_audio();intro.hide();hide()
 
@@ -78,12 +85,21 @@ func audio(path: String) -> AudioStreamPlayer:
 
 func apply_audio() -> void:
 	if drone==null:return
-	drone.volume_db=-80 if Preferences.music_volume<=0 else -10+linear_to_db(Preferences.music_volume)
+	drone.volume_db=-80 if Preferences.music_volume<=0 or menu_gain<=0 else -10+linear_to_db(Preferences.music_volume*menu_gain)
 	tape.volume_db=-15+linear_to_db(maxf(Preferences.effects_volume,.001))
 	select_audio.volume_db=-25+linear_to_db(maxf(Preferences.effects_volume,.001))
+	stop_audio.volume_db=-80 if Preferences.effects_volume<=0 else -16+linear_to_db(Preferences.effects_volume)
+	ambience.apply_audio(Preferences.effects_volume,menu_gain)
+
+func set_menu_gain(value: float) -> void:
+	menu_gain=value;apply_audio()
 
 func begin(world: ShiftWorld) -> void:
+	if departure_tween!=null:departure_tween.kill();departure_tween=null
+	if transition_tween!=null:transition_tween.kill();transition_tween=null
+	departing=false;set_menu_gain(1)
 	restore_camera()
+	ambience.bind(world)
 	previous_camera=world.player.camera_rig.camera
 	# An empty storefront gives the title its atmosphere; restore every visibility
 	# flag before gameplay, including the initially hidden enemy/character parts.
@@ -123,9 +139,19 @@ func update_intro() -> void:
 
 func finish_intro() -> void:
 	if not intro_active:return
-	intro_active=false;elapsed=DURATION;menu_time=0;intro.hide();tape.stop();intro_finished.emit()
+	intro_active=false;elapsed=DURATION;menu_time=0;intro.hide();tape.stop();ambience.start();intro_finished.emit()
+
+func depart(callback: Callable) -> void:
+	if departing:return
+	departing=true;intro_active=false;intro.hide();stop_audio.play()
+	departure_tween=create_tween().set_parallel(true)
+	departure_tween.tween_property(transition,"color:a",1.0,.34).set_trans(Tween.TRANS_SINE)
+	departure_tween.tween_method(set_menu_gain,menu_gain,0.0,.34)
+	if is_instance_valid(camera):departure_tween.tween_property(camera,"fov",camera.fov-1.2,.34)
+	departure_tween.chain().tween_callback(callback)
 
 func restore_camera() -> void:
+	if ambience!=null:ambience.restore()
 	for actor in hidden_actors:
 		if is_instance_valid(actor.node):actor.node.visible=actor.visible
 	hidden_actors.clear()
@@ -135,9 +161,11 @@ func restore_camera() -> void:
 	previous_camera=null
 
 func dismiss(animate := false) -> void:
+	if departure_tween!=null:departure_tween.kill();departure_tween=null
+	departing=false
 	var was_title:=title_active
 	intro_active=false;title_active=false;intro.hide();osd.hide();atmosphere.hide();restore_camera()
-	drone.stop();tape.stop()
+	drone.stop();tape.stop();stop_audio.stop();set_menu_gain(1)
 	if transition_tween!=null:transition_tween.kill()
 	if animate and was_title:
 		show();transition.color.a=1
@@ -152,9 +180,10 @@ func pause_backdrop() -> void:
 	show();atmosphere.show();osd.hide()
 
 func select_sound() -> void:
-	if is_inside_tree() and is_visible_in_tree():select_audio.play()
+	if not departing and is_inside_tree() and is_visible_in_tree():select_audio.play()
 
 func _input(event: InputEvent) -> void:
+	if departing:get_viewport().set_input_as_handled();return
 	if not intro_active:return
 	var skip: bool=event is InputEventKey and event.pressed and not event.echo and event.physical_keycode in [KEY_ESCAPE,KEY_SPACE,KEY_ENTER,KEY_KP_ENTER]
 	skip=skip or (event is InputEventMouseButton and event.pressed and event.button_index==MOUSE_BUTTON_LEFT)
@@ -177,8 +206,8 @@ func _process(delta: float) -> void:
 			if intro_active:tape.play()
 	if title_active:
 		title_time+=step
-		if not intro_active:menu_time+=step
-		if is_instance_valid(camera):
+		if not intro_active and not departing:menu_time+=step;ambience.update(step)
+		if is_instance_valid(camera) and not departing:
 			var push:=smoothstep(0,14,menu_time)
 			var direction: Vector3=(CAMERA_TARGET-CAMERA_POSITION).normalized()
 			camera.position=CAMERA_POSITION+direction*push*.65+Vector3(sin(title_time*.1)*.16,sin(title_time*.16)*.018,cos(title_time*.1)*.06)
@@ -190,5 +219,5 @@ func _process(delta: float) -> void:
 		if elapsed>=DURATION:finish_intro()
 
 func _exit_tree() -> void:
-	if is_instance_valid(drone):drone.stop();tape.stop();select_audio.stop()
+	if is_instance_valid(drone):drone.stop();tape.stop();select_audio.stop();stop_audio.stop()
 	restore_camera()

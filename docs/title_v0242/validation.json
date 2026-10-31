@@ -1,0 +1,51 @@
+{
+  "version": "0.24.2",
+  "godot": "4.4.1",
+  "base_commit": "bfb64510c247475cd5ee4b4059780af8b586ea21",
+  "studio": "Two Brothers Lab",
+  "title_checks": 68,
+  "integration_checks": 527,
+  "psx_camera_checks": 48,
+  "ambience": {
+    "existing_lights_only": true,
+    "short_sign_flicker": true,
+    "stock_light_reveal": true,
+    "circuit_visibility_and_flags_unchanged": true,
+    "energies_and_sign_visibility_restored_before_play": true,
+    "materials_and_collisions_unchanged": true,
+    "variable_intervals_after_first_events": true,
+    "original_synthesized_stereo_audio": true,
+    "effects_volume_respected": true
+  },
+  "save_preview": {
+    "read_only": true,
+    "versions_tested": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "night_and_narrative_clock": true,
+    "invalid_file_preserved": true
+  },
+  "departure": {
+    "fade_out_seconds": 0.34,
+    "fade_in_seconds": 0.5,
+    "world_paused_until_handoff": true,
+    "double_activation_blocked": true,
+    "input_consumed": true
+  },
+  "minimum_window": [
+    800,
+    600
+  ],
+  "new_viewports": 0,
+  "new_lights": 0,
+  "previous_assets_and_resources_preserved": 462,
+  "models_animations_physics_energy_save_hud_and_floor_code_unchanged": true,
+  "save_version": 5,
+  "default_frame_limit": 30,
+  "preview": "intro_menu.mp4",
+  "native_radeon_r7_fps_measured": false
+}

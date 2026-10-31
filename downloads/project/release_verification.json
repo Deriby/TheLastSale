@@ -1,12 +1,12 @@
 {
   "format": "Godot editor project ZIP",
-  "version": "0.24.1",
+  "version": "0.24.2",
   "godot": "4.4.1",
-  "file": "TheLastSale_Godot_0.24.1.zip",
-  "bytes": 104333927,
-  "sha256": "91bd139a3aea24e43e1d67bb6ec300600c896996f18121a14507618edec31b62",
+  "file": "TheLastSale_Godot_0.24.2.zip",
+  "bytes": 104516666,
+  "sha256": "a715caa52678fabd42903218a686826acf6ed36539465dd0184a6fc32fd73abf",
   "crc_verified": true,
-  "files_verified_against_manifest": 858,
+  "files_verified_against_manifest": 876,
   "manifest_files_changed_by_import_or_tests": 0,
   "all_packaged_sources_match_repository": true,
   "clean_extraction_import_exit_code": 0,
@@ -20,14 +20,14 @@
     "supply": 35,
     "natural_motion": 48,
     "psx": 28,
-    "title": 48,
-    "passed": 507,
-    "total": 507,
+    "title": 68,
+    "passed": 527,
+    "total": 527,
     "runtime_errors": 0
   },
   "clean_extraction_rendered_title": {
-    "passed": 48,
-    "total": 48,
+    "passed": 68,
+    "total": 68,
     "runtime_or_shader_errors": 0
   },
   "clean_extraction_psx_camera_motion": {
@@ -60,16 +60,9 @@
       800,
       600
     ],
-    "save_continue_pause_and_audio_settings_verified": true,
-    "animation": {
-      "staggered_entrance": true,
-      "smooth_keyboard_and_mouse_selection": true,
-      "short_pause_and_settings_return": true,
-      "slow_camera_dolly": true,
-      "long_frame_resize_and_gameplay_cancellation_checked": true
-    }
+    "save_continue_pause_and_audio_settings_verified": true
   },
-  "previous_asset_and_resource_files_byte_identical": 452,
+  "previous_asset_and_resource_files_byte_identical": 462,
   "models_and_animations_modified": 0,
   "gameplay_physics_energy_save_and_floor_shader_unchanged": true,
   "default_frame_limit": 30,
@@ -79,25 +72,58 @@
   "below_github_100_mib_limit": true,
   "native_radeon_r7_fps_measured": false,
   "preview": {
-    "path": "docs/title_v0241/intro_menu.mp4",
-    "duration_seconds": 16.866667,
-    "bytes": 1775970,
+    "path": "docs/title_v0242/intro_menu.mp4",
+    "duration_seconds": 27.866667,
+    "bytes": 3416220,
     "video_codec": "H.264",
     "audio_codec": "AAC",
     "capture_fps": 15,
     "capture_quality": "Retrô",
-    "audio_peak_dbfs": -26.5
+    "audio_peak_dbfs": -26.5,
+    "audio_mean_dbfs": -40.3
   },
-  "report": "docs/title_v0241/validation.json",
-  "clean_extraction_log": "validation_0.24.1.log",
-  "clean_import_log": "clean_import_0.24.1.log",
-  "rendered_title_log": "title_rendered_0.24.1.log",
-  "motion_log": "psx_motion_0.24.1.log",
+  "report": "docs/title_v0242/validation.json",
+  "clean_extraction_log": "validation_0.24.2.log",
+  "clean_import_log": "clean_import_0.24.2.log",
+  "rendered_title_log": "title_rendered_0.24.2.log",
+  "motion_log": "psx_motion_0.24.2.log",
   "import_note": "Clean headless import reports the same 14 GLB texture preview t=null messages as 0.23.1; no script errors. Runtime, rendered title and PSX camera-motion checks passed without errors.",
-  "fonts": {
-    "display": "Bebas Neue",
-    "typewriter": "Special Elite",
-    "vcr": "VT323",
-    "bundled_with_licenses": true
+  "ambience": {
+    "existing_lights_only": true,
+    "short_sign_flicker": true,
+    "stock_light_reveal": true,
+    "circuit_visibility_and_flags_unchanged": true,
+    "energies_and_sign_visibility_restored_before_play": true,
+    "materials_and_collisions_unchanged": true,
+    "variable_intervals_after_first_events": true,
+    "original_synthesized_stereo_audio": true,
+    "effects_volume_respected": true
+  },
+  "save_preview": {
+    "read_only": true,
+    "versions_tested": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "night_and_narrative_clock": true,
+    "invalid_file_preserved": true
+  },
+  "departure": {
+    "fade_out_seconds": 0.34,
+    "fade_in_seconds": 0.5,
+    "world_paused_until_handoff": true,
+    "double_activation_blocked": true,
+    "input_consumed": true
+  },
+  "validation_execution": {
+    "first_seven_integration_suites": "Passed in isolated execution; byte-identical sources and runtime verified against previous archive manifest.",
+    "title_suite": "Repeated from final extracted ZIP after asynchronous audio teardown fix, headless with frame_limit=0 and with rendering.",
+    "initial_parallel_camera_checks_failed": 2,
+    "isolated_camera_checks_passed": true,
+    "initial_parallel_log": "docs/title_v0242/parallel_camera_attempt.log",
+    "psx_motion": "48 comparisons passed; runtime/shaders byte-identical to the final archive."
   }
 }

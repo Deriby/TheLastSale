@@ -17,10 +17,27 @@ func key(code: Key) -> bool:
 	return handled
 func _ready() -> void:
 	process_mode=Node.PROCESS_MODE_ALWAYS;call_deferred("run")
+func preview_checks() -> void:
+	var path:="user://title_preview_%d.json"%Time.get_ticks_usec()
+	var before:=Session.snapshot_data()
+	for version in [1,2,3,4,5]:
+		var data:={"version":version,"position":[1,0,2],"seconds":280,"stage":0,"campaign":{"night":1,"phase":"saturday_routine"}}
+		FileAccess.open(path,FileAccess.WRITE).store_string(JSON.stringify(data))
+		var preview:=TitleSavePreview.read(path)
+		check(preview.valid and preview.clock=="22:15" and preview.night==(1 if version>=4 else 0),"prévia de checkpoint versão %d mostra noite e horário sem carregar a partida"%version)
+	FileAccess.open(path,FileAccess.WRITE).store_string('{"version":5,"position":[0,0,0],"campaign":{"night":2,"phase":"closing"}}')
+	check(TitleSavePreview.read(path).label=="CONTINUAR — DOMINGO, 23:40","prévia respeita o horário narrativo do fechamento")
+	FileAccess.open(path,FileAccess.WRITE).store_string('{"version":5,"position":["inválido",0,0]}')
+	check(not TitleSavePreview.read(path).valid,"posição inválida não oferece um Continuar enganoso")
+	FileAccess.open(path,FileAccess.WRITE).store_string('{arquivo interrompido')
+	check(not TitleSavePreview.read(path).valid,"save corrompido é tratado silenciosamente na prévia")
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
+	check(not TitleSavePreview.read(path).valid and Session.snapshot_data()==before,"ler metadados não modifica Session nem cria um save")
 func run() -> void:
 	var had_save:=FileAccess.file_exists(Session.SAVE_PATH)
 	var old_save:=FileAccess.get_file_as_bytes(Session.SAVE_PATH) if had_save else PackedByteArray()
 	Session.new_shift()
+	preview_checks()
 	app=load("res://scenes/main/main.tscn").instantiate();add_child(app);await frames()
 	var ui: ShiftInterface=app.interface
 	var title_screen: TitlePresentation=ui.presentation
@@ -59,7 +76,24 @@ func run() -> void:
 	var first: Button=ui.buttons.get_child(0)
 	check(first.has_focus(),"primeira ação do menu recebe foco de teclado")
 	var continue_button: Button=ui.buttons.get_child(1)
-	check(continue_button.disabled==not had_save,"Continuar indica corretamente a disponibilidade do checkpoint")
+	check(continue_button.disabled==not TitleSavePreview.read().valid,"Continuar indica corretamente a disponibilidade do checkpoint")
+	var ambience: TitleAmbience=title_screen.ambience
+	check(ambience.active and ambience.hum.playing and ambience.lights.size()>=5,"menu usa som ambiente e luzes existentes da fachada e do estoque")
+	var sign_material: Material=ambience.sign.material_override
+	var circuit_light: Light3D=ambience.lights[0].node
+	var circuit_state: Variant=circuit_light.get_meta("circuit_on",null)
+	var original_visibility:=circuit_light.visible
+	ambience.elapsed=3.25;ambience.update(0)
+	check(not ambience.sign.visible and ambience.sign.material_override==sign_material and Session.world_seconds==time_before,"falha do letreiro é apenas visual e não modifica materiais ou progresso")
+	circuit_light.hide();ambience.elapsed=10.2;ambience.update(0)
+	check(not circuit_light.visible and circuit_light.get_meta("circuit_on",null)==circuit_state,"ambiente do menu não religa uma luz desligada pelo circuito")
+	circuit_light.visible=original_visibility
+	var stock_bright:=false
+	for entry in ambience.lights:
+		if entry.role=="stock":stock_bright=is_equal_approx(entry.node.light_energy,entry.energy)
+	check(stock_bright,"luz do estoque se revela lentamente ao fundo")
+	ambience.elapsed=13.4;ambience.update(0)
+	check(ambience.car.playing and ambience.dog.playing and ambience.metal.playing,"carro, cachorro distante e ruído metálico usam eventos espaçados")
 	ui.menu_motion.reveal();ui.menu_motion.update(.2)
 	check(ui.title_lockup.modulate.a>0 and ui.title_lockup.modulate.a<1 and ui.menu_motion.entering,"título aparece gradualmente com o mundo pausado e sem bloquear foco")
 	ui.menu_motion.update(3)
@@ -92,6 +126,7 @@ func run() -> void:
 	var old_music: float=Preferences.music_volume;var old_effects: float=Preferences.effects_volume
 	Preferences.music_volume=0;Preferences.effects_volume=0;Preferences.apply()
 	check(title_screen.drone.volume_db<=-80 and title_screen.tape.volume_db<=-74,"abertura e menu respeitam os controles de música e efeitos")
+	check(ambience.hum.volume_db<=-80 and ambience.car.volume_db<=-80 and ambience.dog.volume_db<=-80 and ambience.metal.volume_db<=-80 and title_screen.stop_audio.volume_db<=-80,"todos os novos sons respeitam Efeitos em zero")
 	Preferences.music_volume=old_music;Preferences.effects_volume=old_effects;Preferences.apply()
 	ui.begin_title(app.world);title_screen.elapsed=.4;key(KEY_SPACE);await frames()
 	check(not title_screen.intro_active and intro_events==2 and starts==0,"Espaço pula apenas a abertura")
@@ -105,13 +140,24 @@ func run() -> void:
 	check(not title_screen.intro_active and intro_events==5 and ui.menu.visible,"fim natural da sequência revela o menu uma única vez")
 	title_screen.finish_intro()
 	check(intro_events==5,"finalizar uma intro já encerrada não repete a transição")
-	ui.menu_motion.reveal();ui.start_from_title();await frames(5)
+	var staged_lights:=ambience.lights.duplicate()
+	var staged_sign: MeshInstance3D=ambience.sign
+	var sign_visibility:=ambience.sign_visible
+	ui.menu_motion.reveal();ui.start_from_title();ui.start_from_title()
+	check(title_screen.departing and starts==0 and get_tree().paused,"transição começa com o expediente parado e ignora acionamento duplo")
+	check(key(KEY_ESCAPE) and get_tree().paused and ui.settings==null,"entrada não atravessa a transição para abrir pausa ou configurações")
+	await get_tree().create_timer(.45,true).timeout;await frames(5)
 	check(not ui.menu_motion.entering and ui.title_lockup.modulate.a==1,"entrar no jogo cancela a animação sem deixar fades pendentes")
 	check(starts==1 and ui.has_started and not get_tree().paused and app.world.active,"Iniciar expediente ativa o jogo normalmente")
 	check(app.world.get_instance_id()==world_id and Session.stage==0,"início aproveita o mundo carregado sem alterar a progressão")
 	check(app.viewport.get_camera_3d()==app.world.player.camera_rig.camera and title_screen.camera==null,"controle e câmera retornam ao protagonista")
 	check(app.world.characters.Dery.visible and app.world.characters.Felps.visible,"visibilidade dos protagonistas é restaurada ao entrar no jogo")
 	check(not title_screen.drone.playing and not title_screen.tape.playing and not title_screen.intro_active,"áudio e intro encerram ao entrar no jogo")
+	var restored:=not ambience.active and staged_sign.visible==sign_visibility
+	for entry in staged_lights:restored=restored and is_equal_approx(entry.node.light_energy,entry.energy)
+	check(restored and not ambience.hum.playing and not ambience.car.playing and not ambience.dog.playing and not ambience.metal.playing,"luzes, letreiro e sons são restaurados antes de entregar o controle")
+	ambience.update(90)
+	check(not ambience.active and not ambience.metal.playing,"eventos do menu não reaparecem durante a partida")
 	await get_tree().create_timer(.6,true).timeout
 	check(ui.hud.visible and not ui.menu.visible and not title_screen.visible,"transição libera o HUD sem uma camada preta residual")
 	ui.set_paused(true);await frames()
@@ -119,7 +165,9 @@ func run() -> void:
 	check(app.viewport.get_camera_3d()==app.world.player.camera_rig.camera,"pausa conserva a câmera e a posição do jogador")
 	var saved_position: Vector3=app.world.player.global_position
 	check(Session.save_shift(saved_position)==OK,"salvamento continua disponível depois da nova abertura")
-	ui.rebuild_buttons();ui.continue_from_title();await frames(5)
+	ui.rebuild_buttons()
+	check((ui.buttons.get_child(1) as Button).text==TitleSavePreview.read().label,"Continuar mostra a noite e o horário do save real")
+	ui.continue_from_title();await frames(5)
 	check(app.world.get_instance_id()!=world_id and ui.has_started and app.world.player.global_position.distance_to(saved_position)<.08,"Continuar restaura o checkpoint e a câmera de jogo")
 	check(not title_screen.intro_active and not title_screen.title_active,"Continuar não reproduz a intro outra vez")
 	app.queue_free();await frames(5)
@@ -127,6 +175,9 @@ func run() -> void:
 	var launched: Node=load("res://scenes/main/main.tscn").instantiate();get_tree().root.add_child(launched);await frames()
 	check(launched.interface.presentation.intro_active and get_tree().paused and not launched.interface.has_started,"executar a cena principal inicia a intro automaticamente antes do menu")
 	launched.queue_free();await frames(5)
+	# With an uncapped headless loop, five frames can finish before the audio
+	# mixer consumes the stop commands. Let its asynchronous playbacks retire.
+	await get_tree().create_timer(.12,true).timeout
 	if had_save:FileAccess.open(Session.SAVE_PATH,FileAccess.WRITE).store_buffer(old_save)
 	elif FileAccess.file_exists(Session.SAVE_PATH):DirAccess.remove_absolute(ProjectSettings.globalize_path(Session.SAVE_PATH))
 	Geo.materials.clear();ProductLibrary.materials.clear();ProductLibrary.meshes.clear();CharacterModels.imported_materials.clear();CharacterModels.costume_materials.clear()
