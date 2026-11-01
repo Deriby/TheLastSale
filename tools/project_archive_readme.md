@@ -1,4 +1,4 @@
-# The Last Sale — projeto Godot 0.30.1
+# The Last Sale — projeto Godot 0.30.2
 
 1. Extraia este ZIP em uma pasta nova.
 2. No Godot **4.4.1**, clique em **Importar** e escolha `project.godot`.
@@ -6,6 +6,12 @@
 4. Pressione **F5** e escolha **Iniciar expediente** para testar a rotina completa.
 
 Modelos animados, cenários, sons, texturas, código, testes e ferramentas estão incluídos. Blender não é necessário para jogar. O renderizador é Compatibility / OpenGL.
+
+## Uma presença breve nos fundos — 0.30.2
+
+A figura não atravessa mais o salão. O modelo original do assassino aparece parcialmente atrás do batente do estoque, durante uma olhada periférica, e recua fisicamente para trás da parede. O ponto precisa estar fora da vista dos outros personagens e clientes; pessoas próximas também bloqueiam a aparição. Não há piscada de iluminação, batida de porta ou conversa automática para explicá-la. Se o jogador não percebe, não ganha uma anotação de algo que não viu. As conversas opcionais e a memória do sábado mantêm a dúvida.
+
+A posição e o progresso do vulto retomam pelo save. Checkpoints antigos da travessia são consumidos sem recriar um homem exposto no salão e sem apagar observações ou tarefas já salvas. Câmera, rodinha, energia e perseguição de domingo continuam disponíveis. Veja `docs/subtle_v0302/README.md`.
 
 ## Assassino na aparição — 0.30.1
 
@@ -151,7 +157,7 @@ O elenco inclui Dery, Felps, Killer, Bryan, Zirico, Garota 1, Garota 2 e Velha 1
 
 ## Validação
 
-A base 0.30 tem 744 verificações da campanha, atendimento, reposição, animações e apresentação, mais 48 casos renderizados da câmera PS1. A correção 0.30.1 valida de novo as suítes de sustos e perseguição, totalizando 101 verificações, além da extração limpa do ZIP. Os resultados ficam na verificação de distribuição no GitHub, com notas em `docs/killer_v0301/validation.json`. `./tools/test.sh` roda as treze suítes; em outra máquina, abra pelo editor ou defina `GODOT_BIN` com o caminho do motor.
+A base 0.30 tem 744 verificações da campanha e 48 casos renderizados de câmera PS1. A correção 0.30.2 valida o pacote extraído nas suítes de sustos, sexta-feira, narrativa da sexta e domingo. O relatório de distribuição no GitHub separa os resultados novos da validação histórica e registra eventuais avisos de importação ou encerramento. Veja `docs/subtle_v0302/validation.json`. `./tools/test.sh` roda as treze suítes.
 
 A Godot 4.4 tem Windows 10 como requisito oficial mínimo. Windows 7/Radeon R7 não foram validados nativamente. O modo Econômica reduz resolução, sombras e acabamento dos materiais.
 

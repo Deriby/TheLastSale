@@ -1,125 +1,99 @@
 {
-  "version": "0.30.1",
+  "version": "0.30.2",
   "format": "Godot editor project ZIP",
   "godot": "4.4.1",
-  "file": "TheLastSale_Godot_0.30.1.zip",
-  "bytes": 104694041,
-  "sha256": "b483932fe6a3ce4d5fec3cc92a4d4eaae4034eb47351694ea8b9de803898a4be",
+  "file": "TheLastSale_Godot_0.30.2.zip",
+  "bytes": 104697909,
+  "sha256": "a6233bd7f4dd635d5f86e56960a1991459f9ff33c01966b82b40f8ad5c85ba39",
   "crc_verified": true,
-  "files_verified_against_manifest": 974,
+  "files_verified_against_manifest": 976,
   "manifest_files_changed_by_import_or_tests": 0,
   "all_packaged_sources_match_repository": true,
   "clean_extraction_import_exit_code": 0,
   "import_script_errors": 0,
   "known_headless_glb_texture_preview_messages": 14,
   "clean_extraction_targeted_integration": {
-    "scares": 42,
-    "sunday": 59,
-    "passed": 101,
-    "total": 101,
-    "suites": 2,
+    "suites": {
+      "scares_integration": 54,
+      "friday_integration": 48,
+      "friday_story_integration": 36,
+      "sunday_integration": 59
+    },
+    "passed": 197,
+    "total": 197,
     "script_or_shader_errors": 0,
     "error_lines_before_suite_results": 0,
-    "known_sunday_audio_shutdown_error_lines": 1,
+    "known_audio_shutdown_diagnostics": [
+      {
+        "suite": "sunday_integration",
+        "after_result": true,
+        "error": "ERROR: 1 resources still in use at exit.",
+        "resource": "assets/audio/everyday/compressor.ogg::OggPacketSequence_l015c",
+        "matches_previous_release_diagnostic": true
+      }
+    ],
     "all_results_executed_from_this_final_archive": true
   },
-  "previous_full_validation": {
+  "previous_version_commit": "c80ee12987ce78cdd9f39086e80ef04b7ce541fc",
+  "previous_version_targeted_checks": 101,
+  "earlier_full_validation_not_rerun": {
     "version": "0.30.0",
-    "game_commit": "c8ec0336e75ffb5c8397af6a30f8c001d1773a4c",
     "integration_passed": 744,
-    "rendered_psx_motion_passed": 48,
-    "rerun_for_this_patch": false,
-    "report": "https://github.com/Deriby/TheLastSale/blob/dd5fde7e30240b1a7782d55229e940418a49bb61/downloads/project/release_verification.json"
+    "rendered_psx_motion_passed": 48
   },
-  "previous_version_commit": "dd5fde7e30240b1a7782d55229e940418a49bb61",
   "previous_asset_files_byte_identical": 460,
   "previous_resource_files_byte_identical": 32,
   "animation_libraries_byte_identical": 11,
   "models_materials_textures_weights_changed": 0,
-  "appearance_model": "res://assets/models/characters/Enemy.glb",
-  "animation_library": "res://resources/motion/Enemy.res",
-  "same_asset_as_existing_sunday_killer": true,
-  "friday_intruder_runtime_diff": "CharacterModels.create(\"ClienteCinza\") -> CharacterModels.create(\"Enemy\")",
-  "friday_intruder_route_collision_animation_controller_unchanged": true,
-  "sunday_ai_and_pursuit_unchanged": true,
-  "player_physics_camera_and_mouse_wheel_unchanged": true,
-  "friday_events_power_navigation_and_soundscape_unchanged": true,
+  "player_physics_camera_wheel_and_animation_controllers_unchanged": true,
+  "sunday_pursuit_friday_power_and_soundscape_unchanged": true,
   "save_version": 5,
+  "staging": {
+    "only_inside_stockroom": true,
+    "no_commercial_floor_crossing": true,
+    "no_added_light_flash_door_slam_or_forced_dialogue": true,
+    "physical_cover_and_offscreen_retirement": true,
+    "npc_proximity_facing_and_line_of_sight_guards": true,
+    "unobserved_glimpse_does_not_record_perception": true,
+    "position_phase_timing_and_door_state_resume": true,
+    "old_public_crossing_checkpoints_consumed_without_recreating_actor": true,
+    "optional_dialogue_and_saturday_recall_preserve_uncertainty": true
+  },
   "project_zip_only": true,
   "executable_exports": 0,
   "below_github_100_mib_limit": true,
   "preview": {
-    "path": "docs/killer_v0301/assassino_preview.mp4",
-    "sha256": "9f0b20e415604b5028d0d6b527109ae662b28d776eed034259ad268d17aa58c8",
-    "bytes": 3583430,
-    "duration_seconds": 24.2,
+    "path": "docs/subtle_v0302/aparicao_sutil.mp4",
+    "sha256": "83b31ed766ebdc76280baf0de02d62b13f1352b998e131c91dc0a4f23b299e84",
+    "bytes": 1114137,
+    "duration_seconds": 9.933333,
     "width": 1280,
     "height": 720,
     "capture_fps": 30,
     "video_codec": "H.264",
     "audio_codec": "AAC",
-    "audio_peak_dbfs": -18.51011,
-    "audio_rms_dbfs": -48.96569,
+    "audio_peak_dbfs": -42.226949,
+    "audio_rms_dbfs": -50.459101,
     "actual_gameplay_capture": true,
-    "staged_progress_time_and_camera_position_for_demonstration": true,
+    "speed": 1,
+    "progress_and_camera_turn_staged_for_demonstration": true,
     "verified_in_capture": {
       "animation_library": "res://resources/motion/Enemy.res",
-      "duration": 23.766666666667,
-      "fov": 80,
+      "door_slam": false,
+      "duration": 9.53333333333331,
+      "forced_dialogue": false,
+      "fov": 70,
+      "glimpsed": true,
+      "gone": true,
       "model": "res://assets/models/characters/Enemy.glb",
-      "run_available": true,
-      "same_model_as_sunday": true,
-      "timeline": [
-        {
-          "event": "card",
-          "scene": 2,
-          "time": 3.03333333333333
-        },
-        {
-          "event": "play",
-          "scene": 2,
-          "time": 6.06666666666665
-        },
-        {
-          "event": "crossing",
-          "scene": 2,
-          "time": 9.33333333333331
-        },
-        {
-          "event": "aftermath",
-          "scene": 2,
-          "time": 15.9333333333333
-        },
-        {
-          "event": "end",
-          "scene": 2,
-          "time": 23.766666666667
-        }
-      ],
-      "verified": {
-        "aftermath": true,
-        "bryan": false,
-        "crossing": true,
-        "handle": false,
-        "slam": true
-      }
+      "retired_out_of_view": true,
+      "stock_max_z": -12.3999996185303,
+      "stock_min_z": -12.3999996185303,
+      "visible_seconds": 0.633333333333333
     }
   },
   "native_radeon_r7_fps_measured": false,
-  "report": "docs/killer_v0301/validation.json",
-  "clean_extraction_log": "validation_0.30.1.log",
-  "clean_import_log": "clean_import_0.30.1.log",
-  "shutdown_diagnostic": {
-    "first_sunday_attempt_checks_passed": 59,
-    "first_sunday_attempt_exit_resource_message": "1 resources still in use at exit",
-    "sunday_repeated_with_verbose_logging_from_same_unchanged_extraction": true,
-    "repeat_checks_passed": 59,
-    "repeat_shutdown_resource_messages": 1,
-    "resource": "res://assets/audio/everyday/compressor.ogg::OggPacketSequence_l015c",
-    "only_audio_playback_types_reported": true,
-    "matching_shutdown_resource_message_found_in_prior_work_session_diagnostic": true,
-    "soundscape_and_all_audio_assets_byte_identical_to_published_base": true,
-    "scope": "After SUNDAY RESULT and engine XR teardown, with Dummy audio; no errors before the test result. Kept as an explicit validation caveat; audio implementation unchanged by this model-only patch.",
-    "first_attempt_log": "sunday_first_attempt_0.30.1.log"
-  }
+  "report": "docs/subtle_v0302/validation.json",
+  "clean_extraction_log": "validation_0.30.2.log",
+  "clean_import_log": "clean_import_0.30.2.log"
 }

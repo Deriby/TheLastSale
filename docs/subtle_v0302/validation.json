@@ -1,0 +1,22 @@
+{
+  "version": "0.30.2",
+  "godot": "4.4.1",
+  "model": "res://assets/models/characters/Enemy.glb",
+  "animation_library": "res://resources/motion/Enemy.res",
+  "staging": "partly concealed stockroom glimpse; no shop-floor crossing",
+  "no_forced_camera_or_dialogue": true,
+  "no_light_flash_or_door_slam": true,
+  "npc_guards": "proximity, broad facing cone and physical line of sight",
+  "save_version": 5,
+  "old_crossing_checkpoint": "consume old staging, preserve progress and observations",
+  "targeted_suites": [
+    "scares_integration",
+    "friday_integration",
+    "friday_story_integration",
+    "sunday_integration"
+  ],
+  "package_results": "../../downloads/project/release_verification.json",
+  "preview_is_staged": true,
+  "preview_speed": 1,
+  "native_radeon_r7_fps_measured": false
+}

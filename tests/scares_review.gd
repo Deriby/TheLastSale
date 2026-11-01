@@ -1,73 +1,56 @@
 extends Node
-## Condensed real-game review. Narrative time and player locations are staged.
+## Staged progress and camera turn for review; normal game timing and occlusion.
 var app: Node
-var phase:=0
-var clock:=0.0
-var total:=0.0
-var moved:=false
-var capture_wait:=-1.0
-var shown: Dictionary={}
-var caption: Label
-var after_lines:=0
-var prank_seen:=false
+var seconds:=0.0
+var visible_seconds:=0.0
+var min_z:=0.0
+var max_z:=-1000.0
+var shot_taken:=false
+var label: Label
+var card: ColorRect
+var model_path:=""
+var library_path:=""
+var retired_hidden:=false
+var watched:=false
+var doors_opened:=false
 func _ready() -> void:
  process_mode=Node.PROCESS_MODE_ALWAYS
- Preferences.camera_distance=0;Preferences.pixel_scale=2;Preferences.ps1_mode=false;Preferences.frame_limit=30;Preferences.apply();Session.new_shift()
- app=load("res://scenes/main/main.tscn").instantiate();app.process_mode=Node.PROCESS_MODE_PAUSABLE;add_child(app);app.start_new();app.interface.has_started=true;app.interface.set_paused(false);app.world.spawn_wait=999;Session.greet();Session.world_seconds=60
- place(Vector3(2.8,.01,-12.2),atan2(2.8,3.62),-.16)
- var layer:=CanvasLayer.new();layer.layer=8;add_child(layer);caption=Label.new();layer.add_child(caption);caption.position=Vector2(905,25);caption.add_theme_font_override("font",TitlePresentation.VCR);caption.add_theme_font_size_override("font_size",23);caption.add_theme_color_override("font_color",Color("e9dec6"));caption.add_theme_color_override("font_shadow_color",Color.BLACK);caption.add_theme_constant_override("shadow_offset_x",2);caption.add_theme_constant_override("shadow_offset_y",2);caption.text="0.30.0 / ESTOQUE\nUm arrasto atrás da porta"
- caption.position=Vector2(540,25);caption.size=Vector2(240,110);caption.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
-func place(at: Vector3,yaw: float,pitch: float=-.10) -> void:
- var actor: DepotPlayer=app.world.player;actor.position=at;actor.velocity=Vector3.ZERO;actor.reset_physics_interpolation();actor.camera_rig.yaw=yaw;actor.camera_rig.pitch=pitch;actor.camera_rig.reset_follow()
-func open_doors() -> void:
- for door in [app.world.depot.stock_door,app.world.depot.service_door]:
-  for child in door.get_children():
-   if child is Interaction and child.kind=="door" and not child.open and not child.busy:child.activate(app.world.player)
-func space() -> void:
- var event:=InputEventKey.new();event.physical_keycode=KEY_SPACE;event.keycode=KEY_SPACE;event.pressed=true;Input.parse_input_event(event);Input.flush_buffered_events()
- event=InputEventKey.new();event.physical_keycode=KEY_SPACE;event.keycode=KEY_SPACE;event.pressed=false;Input.parse_input_event(event);Input.flush_buffered_events()
-func shot(id: String) -> void:
- if shown.has(id):return
- shown[id]=true;call_deferred("capture",id)
+ Preferences.camera_distance=0;Preferences.pixel_scale=2;Preferences.fov=70;Preferences.ps1_mode=false;Preferences.frame_limit=30;Preferences.apply();Session.new_shift()
+ app=load("res://scenes/main/main.tscn").instantiate();app.process_mode=Node.PROCESS_MODE_PAUSABLE;add_child(app);app.start_new();app.interface.has_started=true;app.interface.set_paused(false);app.interface.hud.hide();app.world.spawn_wait=999;Session.greet();Dialogue.clear()
+ app.world.friday.begin_outage();Dialogue.clear();Session.campaign.flags.generator_key=true;Session.campaign.flags.counter_secured=true
+ app.world.player.position=Vector3(4.35,.01,-19.4);app.world.friday.activate("generator",app.world.player);Dialogue.clear();Session.world_seconds=420
+ var actor: DepotPlayer=app.world.player;actor.position=Vector3(4.25,.01,-6.4);actor.velocity=Vector3.ZERO;actor.reset_physics_interpolation();actor.camera_rig.yaw=-1.4;actor.camera_rig.pitch=-.10;actor.camera_rig.reset_follow()
+ var layer:=CanvasLayer.new();layer.layer=12;add_child(layer)
+ card=ColorRect.new();card.size=Vector2(1280,720);card.color=Color.BLACK;layer.add_child(card)
+ label=Label.new();layer.add_child(label);label.position=Vector2(80,210);label.size=Vector2(1120,300);label.add_theme_font_size_override("font_size",32);label.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;label.text="0.30.2 — APARIÇÃO SUTIL\n\nUm instante junto ao batente do estoque.\nGravação da cena real, em velocidade normal."
 func _process(delta: float) -> void:
- clock+=delta;total+=delta
- if total>38:call_deferred("finish");set_process(false);return
- match phase:
-  0:
-   if clock>1.4 and not moved:moved=true;place(Vector3(.7,.01,-14.0),atan2(.25,1.8),-.20);caption.text="0.30.0 / ESTOQUE\nO som parou."
-   if app.world.scary.state().door_phase=="handle":
-    if capture_wait<0:capture_wait=.35
-    capture_wait-=delta
-    if capture_wait<=0:shot("handle")
-   if app.world.scary.state().door_phase=="done":
-    phase=1;clock=0;place(Vector3(-3.1,.01,-2.8),PI,-.10);Session.world_seconds=float(app.world.scary.state().last_event)+40;caption.text="0.30.0 / VITRINE\nBryan foi aprontar"
-  1:
-   if app.world.scary.done("bryan_prank"):
-    if not prank_seen:prank_seen=true;clock=0
-    if clock>.35:shot("bryan")
-    if clock>1.25:
-     phase=2;clock=0;app.world.friday.begin_outage();Dialogue.clear();Session.campaign.flags.generator_key=true;Session.campaign.flags.counter_secured=true;place(Vector3(4.35,.01,-19.4),-PI/2);app.world.friday.activate("generator",app.world.player);Dialogue.clear();caption.text="0.30.0 / GERADOR\nA energia voltou"
-  2:
-   if clock>1.25:
-    open_doors();Session.world_seconds=float(app.world.scary.state().last_scare)+40;place(Vector3(3.2,.01,-7.5),atan2(-1.45,1.0),-.08);phase=3;clock=0;caption.text="0.30.0 / A VOLTA\nPassos no salão"
-  3:
-   if app.world.scary.done("return_intruder"):shot("crossing")
-   if is_instance_valid(app.world.scary.intruder) and app.world.scary.intruder.position.z< -12.5:shot("stock_route")
-   if app.world.scary.done("yard_slam"):shot("slam")
-   if app.world.scary.done("return_aftermath"):
-    phase=4;clock=0;caption.text="0.30.0 / FELPS\nNinguém veio pela frente"
-  4:
-   if clock>1.5 and after_lines==0:after_lines=1;space()
-   if clock>2.8 and after_lines==1:after_lines=2;space()
-   if clock>4.1 and after_lines==2:after_lines=3;space();shot("aftermath")
-   if clock>6:set_process(false);call_deferred("finish")
+ seconds+=delta;app.interface.hud.hide()
+ if not doors_opened and not app.world.player.motion.action_active:
+  doors_opened=true
+  for door in [app.world.depot.stock_door,app.world.depot.service_door]:
+   for child in door.get_children():
+    if child is Interaction and child.kind=="door" and not child.open:child.activate(app.world.player)
+ if seconds>3 and card.visible:
+  card.hide();label.position=Vector2(26,22);label.size=Vector2(1000,35);label.add_theme_font_size_override("font_size",20);label.text="0.30.2  /  TEMPO NORMAL  /  sem travessia pelo salão"
+ if seconds>4 and seconds<4.65:
+  app.world.player.camera_rig.yaw=lerpf(-1.4,-.40,smoothstep(4,4.6,seconds))
+ if is_instance_valid(app.world.scary.intruder):
+  var actor: FrightIntruder=app.world.scary.intruder
+  if not watched:
+   watched=true;model_path=actor.visual.scene_file_path;library_path=actor.motion.animator.get_animation_library("natural").resource_path
+   actor.departed.connect(func():retired_hidden=not app.world.scary.player_sees_body(actor.position) and not app.world.scary.other_witnesses(actor.position))
+  min_z=minf(min_z,actor.position.z);max_z=maxf(max_z,actor.position.z)
+  if app.world.scary.player_sees_body(actor.position):visible_seconds+=delta
+  if actor.seen_time>.24 and not shot_taken:shot_taken=true;call_deferred("capture","vulto")
+ if seconds>9.5:set_process(false);call_deferred("finish")
 func capture(id: String) -> void:
  await RenderingServer.frame_post_draw
  var output:=OS.get_environment("SCARES_REVIEW_PATH")
  if not output.is_empty():DirAccess.make_dir_recursive_absolute(output);get_viewport().get_texture().get_image().save_png(output+"/"+id+".png")
- print("SCARES CAPTURE ",id)
 func finish() -> void:
- print("SCARES REVIEW ",JSON.stringify({"handle":app.world.scary.done("stock_handle"),"bryan":app.world.scary.done("bryan_prank"),"crossing":app.world.scary.done("return_intruder"),"slam":app.world.scary.done("yard_slam"),"aftermath":app.world.scary.done("return_aftermath")}))
+ var result:={"model":model_path,"animation_library":library_path,"glimpsed":app.world.scary.done("return_intruder"),"gone":app.world.scary.done("intruder_gone"),"retired_out_of_view":retired_hidden,"visible_seconds":visible_seconds,"stock_min_z":min_z,"stock_max_z":max_z,"forced_dialogue":Dialogue.active,"door_slam":app.world.scary.done("yard_slam"),"fov":70,"duration":seconds}
+ print("SUBTLE REVIEW ",JSON.stringify(result))
+ print("REVIEW STATE ",Session.campaign.phase," ",app.world.scary.state()," player=",app.world.player.position," yaw=",app.world.player.camera_rig.yaw," safe=",app.world.scary.safe()," witness=",app.world.scary.other_witnesses(FrightIntruder.EDGE)," hidden=",app.world.scary.player_sees_body(FrightIntruder.HIDDEN)," edge=",app.world.scary.can_see(FrightIntruder.EDGE+Vector3(.2,1.5,0)))
  Dialogue.clear();app.world.sound.stop_all();await get_tree().create_timer(.25,true,false,true).timeout;app.queue_free()
  for frame in 5:await get_tree().process_frame
- Geo.materials.clear();ProductLibrary.materials.clear();ProductLibrary.meshes.clear();CharacterModels.imported_materials.clear();CharacterModels.costume_materials.clear();get_tree().quit()
+ Geo.materials.clear();ProductLibrary.materials.clear();ProductLibrary.meshes.clear();CharacterModels.imported_materials.clear();CharacterModels.costume_materials.clear();get_tree().quit(0 if result.glimpsed and result.gone else 1)

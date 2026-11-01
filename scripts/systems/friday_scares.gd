@@ -6,11 +6,7 @@ var handle: Node3D
 var drag: AudioStreamPlayer3D
 var intruder: FrightIntruder
 var bryan: FamiliarNPC
-var ceiling: Array[Dictionary]=[]
-var dim_remaining:=0.0
 const WINDOW:=Vector3(-3.0,0,.80)
-const START:=Vector3(-4.35,0,-8.5)
-const CROSS_POINT:=Vector3(4.2,1.4,-8.5)
 func state() -> Dictionary:return Session.campaign.friday_scares
 func done(id: String) -> bool:return bool(state().events.get(id,false))
 func mark(id: String,note: String="") -> void:
@@ -27,23 +23,25 @@ func _ready() -> void:
 	drag=AudioStreamPlayer3D.new();world.sound.add_child(drag);drag.set_meta("loop_base_db",-13);drag.set_meta("music_loop",false);world.sound.loop_players.append(drag);drag.position=world.depot.old_door.global_position+Vector3(0,.25,0);drag.max_distance=12;drag.unit_size=2.5
 	var stream: AudioStreamOggVorbis=load("res://assets/audio/scares/stock_drag.ogg").duplicate();stream.loop=true;drag.stream=stream;drag.attenuation_filter_cutoff_hz=2100
 	Preferences.changed.connect(refresh_volume);refresh_volume();Dialogue.completed.connect(on_completed)
-	for light in world.friday.lights:
-		if light.name in ["CeilingFill","CeilingPool"]:ceiling.append({"light":light,"energy":light.light_energy})
 	for friend in get_tree().get_nodes_in_group("familiar_npcs"):
 		if friend.identity=="Bryan" and not friend.is_queued_for_deletion():bryan=friend
 	if int(Session.campaign.night)!=0:return
-	dim_remaining=float(state().dim_time)
+	restore_glimpse_doors()
 	if done("bryan_left") and is_instance_valid(bryan):bryan.queue_free();bryan=null
 	elif is_instance_valid(bryan) and state().prank.get("phase","") in ["walking","waiting","returning"]:
 		bryan.position=world.navigation.restore_position(Session.read_position(state().prank.get("position"),bryan.position));bryan.reset_physics_interpolation()
 		if state().prank.phase!="waiting":move_bryan(WINDOW if state().prank.phase=="walking" else Vector3(-2.8,0,-.1))
 		else:bryan.scare_pose="talk" if done("bryan_prank") else "idle"
-	if state().intruder.get("state","") in ["crossing","hiding","leaving"]:spawn_intruder(state().intruder)
+	# Saves from the old public crossing must not recreate that staging.
+	if state().intruder.get("state","") in ["crossing","hiding","leaving"]:
+		state().intruder={"state":"gone","kind":"legacy_crossing"};state().events.intruder_gone=true;state().events.return_crossing=true;state().return_armed=false
+	elif state().intruder.get("kind","")=="stock_glimpse" and state().intruder.get("state","") in ["emerging","waiting","retreating"]:spawn_intruder(state().intruder)
+	state().dim_time=0.0
 	if Session.flag("generator_running") and Session.campaign.phase=="restored" and not done("return_crossing"):state().return_armed=true
 func refresh_volume() -> void:
 	if drag!=null:drag.volume_db=-13+linear_to_db(maxf(.001,Preferences.effects_volume))
 func blocks_ambient() -> bool:
-	return state().door_phase in ["dragging","quiet","handle"] and world.player.position.z< -11.5 or state().prank.get("phase","")=="waiting" and done("bryan_prank") or is_instance_valid(intruder) and intruder.state=="crossing"
+	return state().door_phase in ["dragging","quiet","handle"] and world.player.position.z< -11.5 or state().prank.get("phase","")=="waiting" and done("bryan_prank") or is_instance_valid(intruder)
 func safe() -> bool:
 	if Dialogue.active or world.cashier_open or world.surveillance_open or world.sunday.desk_open or world.friday.finishing:return false
 	for actor in world.characters.values():
@@ -53,9 +51,26 @@ func can_see(point: Vector3) -> bool:
 	var camera:=world.player.camera_rig.camera
 	if not camera.is_position_in_frustum(point):return false
 	return world.get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(camera.global_position,point,1)).is_empty()
+func body_points(at: Vector3) -> Array[Vector3]:
+	return [at+Vector3(0,1.7,0),at+Vector3(.38,1.4,0),at+Vector3(-.38,1.4,0),at+Vector3(.38,.75,0),at+Vector3(-.38,.75,0),at+Vector3(0,.25,0)]
+func player_sees_body(at: Vector3) -> bool:
+	for point in body_points(at):
+		if can_see(point):return true
+	return false
+func other_witnesses(at: Vector3) -> bool:
+	for group in ["protagonists","customers","familiar_npcs"]:
+		for person in get_tree().get_nodes_in_group(group):
+			if person==world.player or person.is_queued_for_deletion():continue
+			if person.global_position.distance_to(at)<3.5:return true
+			var toward: Vector3=((at-person.global_position)*Vector3(1,0,1)).normalized()
+			# Body orientation provides a broad peripheral cone for background NPCs.
+			if person.visual.global_basis.z.normalized().dot(toward)<.35:continue
+			var eye: Vector3=person.global_position+Vector3.UP*(1.0 if person.get("identity")=="Bryan" else 1.55)
+			for point in body_points(at):
+				if world.get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(eye,point,1)).is_empty():return true
+	return false
 func tick(delta: float) -> void:
 	if not world.active or int(Session.campaign.night)!=0 or drag.stream==null:return
-	update_dim(delta)
 	if Session.campaign.phase!="routine":
 		drag.stop()
 		if state().door_phase in ["dragging","quiet","handle"]:state().door_phase="done";handle.rotation.z=0
@@ -63,11 +78,9 @@ func tick(delta: float) -> void:
 		tick_stock(delta);tick_prank(delta)
 	if bool(state().return_armed) and Session.campaign.phase in ["restored","closing"]:tick_return()
 	if is_instance_valid(intruder):
-		if not done("return_intruder") and safe() and can_see(intruder.global_position+Vector3.UP*1.5):mark("return_intruder","Vi uma pessoa atravessar o salão depois de ligar o gerador. Ela seguiu em direção ao estoque.")
-		# The door opens into the yard: clear its full sweep before closing it.
-		if intruder.position.z< -18.15 and not done("yard_slam"):try_slam()
-		if done("return_intruder") and intruder.state in ["hiding","leaving"] and not done("return_aftermath") and safe():
-			mark("return_aftermath");Dialogue.play("friday_return_aftermath",[["Dery","Felps! Quem era aquele cara?"],["Felps","Que cara?"],["Dery","Passou aqui. Foi pros fundos."],["Felps","Não vi ninguém passar pela frente. Volta pra cá. Não vai atrás sozinho."]])
+		if safe() and player_sees_body(intruder.position):
+			intruder.seen_time+=delta
+			if not done("return_intruder") and intruder.seen_time>.10:mark("return_intruder","Tive a impressão de ver alguém recuando atrás do batente do estoque. Foi rápido demais para distinguir.")
 func tick_stock(delta: float) -> void:
 	var dery: DepotPlayer=world.characters.Dery
 	if dery.position.z>=-11.5:drag.stop();return
@@ -115,33 +128,46 @@ func tick_return() -> void:
 	if done("return_crossing") or not safe() or world.player.identity!="Dery" or world.player.carried!=null:return
 	if Session.world_seconds-float(state().last_scare)<25:return
 	var at:=world.player.position
-	if at.z< -9.15 or at.z> -5.5:return
-	if not done("return_cue"):world.sound.play_spatial("res://assets/audio/everyday/stock_steps.ogg",Vector3(-2.7,.1,-9.2),-15,true);mark("return_cue")
-	# The actor enters from outside the clear view and crosses a visible aisle.
-	if not can_see(CROSS_POINT) or can_see(START+Vector3.UP*1.5):return
-	mark("return_crossing");state().return_armed=false;spawn_intruder();dim_remaining=3.4;Session.save_shift(world.player.position)
+	if at.z< -9.0 or at.z> -5.5 or at.x<2.7:return
+	var open:=false
+	for child in world.depot.stock_door.get_children():
+		if child is Interaction and child.kind=="door":open=child.open and not child.busy
+	if not open or other_witnesses(FrightIntruder.EDGE) or player_sees_body(FrightIntruder.HIDDEN):return
+	var camera:=world.player.camera_rig.camera
+	var point:=FrightIntruder.EDGE+Vector3(.2,1.5,0)
+	if not can_see(point):return
+	var screen: Vector2=camera.unproject_position(point)/camera.get_viewport().get_visible_rect().size
+	# A chance glance at the edge of the view, rather than a centred reveal.
+	if screen.x<.16 or screen.x>.84 or absf(screen.x-.5)<.14:return
+	state().events.quiet_return=true;state().return_armed=false;spawn_intruder();mark("return_crossing")
 func spawn_intruder(saved: Dictionary={}) -> void:
 	if is_instance_valid(intruder):return
-	intruder=FrightIntruder.new();intruder.world=world;intruder.name="FridayIntruder";intruder.position=world.navigation.nearest_walkable(START);world.add_child(intruder)
+	intruder=FrightIntruder.new();intruder.world=world;intruder.name="FridayIntruder";intruder.position=FrightIntruder.HIDDEN;world.add_child(intruder)
 	if not saved.is_empty():intruder.restore(saved)
-	intruder.departed.connect(func():state().intruder={"state":"gone"};mark("intruder_gone"))
+	intruder.departed.connect(func():
+		state().intruder={"state":"gone","kind":"stock_glimpse"}
+		if done("return_intruder"):state().events.return_aftermath=true
+		mark("intruder_gone"))
 	capture()
-func try_slam() -> void:
-	var door:=world.depot.service_door
-	for actor in world.characters.values():
-		if actor.position.distance_to(door.global_position+Vector3(.85,0,0))<2.5:return
-	if is_instance_valid(world.customer) and world.customer.position.distance_to(door.global_position)<2:return
-	for child in door.get_children():
-		if child is Interaction and child.kind=="door" and not child.busy:
-			if child.open and not child.activate(intruder):return
-			world.sound.play_spatial("res://assets/audio/scares/door_slam.ogg",door.global_position+Vector3.UP,3);mark("yard_slam");return
-func update_dim(delta: float) -> void:
-	dim_remaining=maxf(0,dim_remaining-delta)
-	var factor:=.28 if dim_remaining>.7 else lerpf(1.0,.28,dim_remaining/.7)
-	for data in ceiling:
-		if is_instance_valid(data.light):data.light.light_energy=float(data.energy)*factor
+func restore_glimpse_doors() -> void:
+	var doors: Dictionary=state().get("quiet_doors",{})
+	for door in [world.depot.stock_door,world.depot.service_door]:
+		var data: Dictionary=doors.get(str(door.name),{})
+		if data.is_empty():continue
+		for child in door.get_children():
+			if not child is Interaction or child.kind!="door":continue
+			child.open=bool(data.get("open",false))
+			var target: float=(1.45 if child.identity=="service" else -1.45) if child.open else 0.0
+			door.rotation.y=clampf(float(data.get("angle",target)),-1.45,1.45)
+			if absf(door.rotation.y-target)>.01:
+				child.busy=true
+				child.create_tween().tween_property(door,"rotation:y",target,.5*absf(door.rotation.y-target)/1.45).finished.connect(func():child.busy=false)
 func capture() -> void:
-	state().dim_time=dim_remaining
+	if done("quiet_return"):
+		state().quiet_doors={}
+		for door in [world.depot.stock_door,world.depot.service_door]:
+			for child in door.get_children():
+				if child is Interaction and child.kind=="door":state().quiet_doors[str(door.name)]={"open":child.open,"angle":door.rotation.y}
 	if done("intruder_gone"):state().intruder={"state":"gone"}
 	elif is_instance_valid(intruder):state().intruder=intruder.snapshot()
 	if is_instance_valid(bryan) and state().prank.get("phase","") in ["walking","waiting","returning"]:state().prank.position=[bryan.position.x,bryan.position.y,bryan.position.z]
@@ -151,5 +177,4 @@ func on_completed(id: String) -> void:
 		if is_instance_valid(bryan):bryan.scare_moving=false;bryan.depart(world.navigation.path(bryan.position,Vector3(18,0,1.8)))
 func stop_all() -> void:
 	if is_instance_valid(drag):drag.stop();drag.stream=null
-	dim_remaining=0;update_dim(0)
 func _exit_tree() -> void:stop_all()

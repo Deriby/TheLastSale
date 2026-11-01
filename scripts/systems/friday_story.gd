@@ -28,12 +28,13 @@ func remember(id: String) -> void:
 func noticed(id: String) -> bool:
 	return bool(state().observations.get(id,false)) or int(Session.campaign.night)==0 and world.everyday.done(id)
 func try_remark(actor: DepotPlayer) -> bool:
-	if int(Session.campaign.night)!=0 or Dialogue.active or world.cashier_open or world.surveillance_open or Session.campaign.phase!="routine":return false
+	if int(Session.campaign.night)!=0 or Dialogue.active or world.cashier_open or world.surveillance_open or Session.campaign.phase not in ["routine","restored"]:return false
 	for id in OBSERVATIONS:
 		if not noticed(id) or done("remark_"+id):continue
 		var lines: Array
 		match id:
-			"return_intruder":lines=[["Dery","Eu vi ele passando. Não era sombra da lanterna."],["Felps","Eu acredito em ti. Fica aqui perto de mim."],["Dery","Na hora de fechar a gente sai junto."]]
+			"return_intruder":
+				lines=[["Dery","Achei que tinha alguém no batente do estoque."],["Felps","Quer que eu vá contigo?"],["Dery","Não sei. Olhei de novo e não tinha nada."]] if bool(Session.campaign.friday_scares.events.get("quiet_return",false)) else [["Dery","Eu vi ele passando. Não era sombra da lanterna."],["Felps","Eu acredito em ti. Fica aqui perto de mim."],["Dery","Na hora de fechar a gente sai junto."]]
 			"stock_handle":lines=[["Dery","A maçaneta da porta velha mexeu, Felps."],["Felps","Tu não encostou nela?"],["Dery","Eu tava do outro lado do estoque."]]
 			"observer_seen":lines=[["Dery","Tem um cara do outro lado olhando pra cá faz tempo."],["Felps","Ele entrou?"],["Dery","Não. É isso que tá me incomodando."]]
 			"empty_chime":lines=[["Dery","Na hora do sino, tu viu alguém entrando?"],["Felps","Olhei na mesma hora. Só vi a porta."],["Dery","Se tocar de novo, me chama antes de sair do caixa."]]
@@ -84,6 +85,7 @@ func begin_closing_hook() -> bool:
 	var lines: Array=[["Felps","Pera. Escuta."]]
 	if noticed("return_intruder"):
 		lines=[["Dery","Tranca direito. E não volta aí sozinho."],["Felps","Amanhã a gente confere a câmera. Hoje nós dois vamos pra casa."]]
+		if bool(Session.campaign.friday_scares.events.get("quiet_return",false)):lines=[["Dery","Amanhã dá uma olhada na câmera do estoque?"],["Felps","Dou. Vamos pra casa."]]
 	elif noticed("observer_seen"):
 		lines.append(["Dery","O cara da rua não chegou a entrar, né?"])
 		lines.append(["Felps","Não. E agora tá todo mundo aqui fora."])
@@ -95,6 +97,7 @@ func begin_closing_hook() -> bool:
 		lines.append(["Felps","Conferi. Amanhã a gente olha a gravação. Vamos juntos."])
 	state().recap="Na calçada, os dois ouviram passos no salão que acabavam de esvaziar. Felps combinou conferir o gravador no sábado."
 	if noticed("return_intruder"):state().recap="Uma pessoa atravessou o salão após a volta do gerador e seguiu para os fundos. Os irmãos decidiram conferir as imagens no sábado."
+	if noticed("return_intruder") and bool(Session.campaign.friday_scares.events.get("quiet_return",false)):state().recap="Deryk achou ter visto alguém recuando no batente do estoque. Os irmãos combinaram olhar a gravação, sem ter certeza do que era."
 	save_event("closing_hook")
 	if not noticed("return_intruder"):world.sound.play_spatial("res://assets/audio/everyday/stock_steps.ogg",Vector3(.7,.15,-1.3),-14,true)
 	return Dialogue.play("friday_closing_hook",lines)
@@ -103,6 +106,7 @@ func saturday_memory() -> Array:
 	if done("closing_hook"):lines.append(["Felps","Fiquei pensando naqueles passos depois que a gente saiu."])
 	if noticed("return_intruder"):
 		lines=[["Felps","Vamos conferir as câmeras antes de entrar nos fundos."],["Dery","Quero saber de onde saiu o cara que eu vi ontem."]]
+		if bool(Session.campaign.friday_scares.events.get("quiet_return",false)):lines=[["Felps","Separei a gravação de ontem."],["Dery","Volta um pouco na hora que eu saí do estoque. Achei que vi alguma coisa."]]
 	elif noticed("observer_seen"):lines.append(["Dery","E no cara do outro lado da rua. Quero ver a hora em que ele chegou."])
 	elif noticed("empty_chime"):lines.append(["Dery","Confere também a hora do sino. Eu tava no estoque, lembra?"])
 	elif noticed("customer_back_door"):lines.append(["Dery","E se aquele cliente voltar a perguntar dos fundos, me chama."])
