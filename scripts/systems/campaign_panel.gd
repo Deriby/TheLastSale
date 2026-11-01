@@ -6,6 +6,10 @@ signal retry
 signal restart
 var world: ShiftWorld
 var kind:="escape"
+var aftermath: VBoxContainer
+var epilogue: VBoxContainer
+var air: AudioStreamPlayer
+var reveal_age:=0.0
 func text(parent: Node,value: String,size:=20) -> Label:
 	var item:=Label.new();parent.add_child(item);item.text=value;item.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;item.size_flags_horizontal=Control.SIZE_EXPAND_FILL;item.add_theme_font_size_override("font_size",size);return item
 func button(parent: Node,id: String,title: String,callback: Callable) -> Button:
@@ -29,6 +33,12 @@ func _ready() -> void:
 			button(body,"RetrySunday","RETOMAR CHECKPOINT DA FUGA",func():retry.emit()).grab_focus()
 			button(body,"QuitDefeat","SAIR • CHECKPOINT SALVO",func():get_tree().quit())
 		"ending":
+			var container:=body
+			aftermath=VBoxContainer.new();container.add_child(aftermath);aftermath.add_theme_constant_override("separation",24)
+			aftermath.alignment=BoxContainer.ALIGNMENT_END;aftermath.custom_minimum_size.y=480
+			var read_button:=button(aftermath,"ReadEpilogue","LER O RELATO [ENTER]",finish_aftermath)
+			read_button.size_flags_horizontal=Control.SIZE_SHRINK_CENTER;read_button.grab_focus()
+			epilogue=VBoxContainer.new();container.add_child(epilogue);epilogue.add_theme_constant_override("separation",15);body=epilogue
 			var ending: Dictionary=Session.campaign.ending
 			match str(ending.get("id","unresolved")):
 				"resolved":
@@ -46,3 +56,39 @@ func _ready() -> void:
 			text(body,"FIM • SEXTA / SÁBADO / DOMINGO",18)
 			button(body,"RestartCampaign","REINICIAR CAMPANHA",func():restart.emit()).grab_focus()
 			button(body,"QuitEnding","SAIR • FINAL SALVO",func():get_tree().quit())
+			begin_aftermath()
+
+func begin_aftermath() -> void:
+	var saved: Dictionary=world.sunday.climax.state()
+	if bool(saved.aftermath_seen):aftermath.hide();reveal_age=1.2;return
+	add_theme_stylebox_override("panel",StyleBoxEmpty.new())
+	epilogue.hide();aftermath.get_node("ReadEpilogue").grab_focus()
+	air=AudioStreamPlayer.new();add_child(air)
+	var stream: AudioStreamWAV=load("res://assets/audio/neighborhood_air.wav").duplicate()
+	stream.loop_mode=AudioStreamWAV.LOOP_FORWARD;stream.loop_end=stream.data.size()/2;air.stream=stream
+	air.volume_db=-23+linear_to_db(maxf(.001,Preferences.effects_volume));air.play()
+	Preferences.changed.connect(refresh_aftermath)
+func refresh_aftermath() -> void:
+	if is_instance_valid(air):air.volume_db=-23+linear_to_db(maxf(.001,Preferences.effects_volume))
+func _input(event: InputEvent) -> void:
+	if kind!="ending" or epilogue==null or epilogue.visible:return
+	if event is InputEventKey and event.pressed and not event.echo and (event.keycode in [KEY_ENTER,KEY_KP_ENTER] or event.physical_keycode in [KEY_ENTER,KEY_KP_ENTER]):
+		finish_aftermath();get_viewport().set_input_as_handled()
+func finish_aftermath() -> void:
+	if epilogue==null or epilogue.visible:return
+	var saved: Dictionary=world.sunday.climax.state();saved.aftermath_left=0;saved.aftermath_seen=true
+	remove_theme_stylebox_override("panel")
+	aftermath.hide();epilogue.show();modulate.a=0;epilogue.get_node("RestartCampaign").grab_focus();reveal_age=0
+	Session.save_shift(world.player.position)
+func _process(delta: float) -> void:
+	if kind!="ending" or epilogue==null or not is_instance_valid(world) or int(Session.campaign.night)!=2 or Session.campaign.phase!="campaign_complete":return
+	if not epilogue.visible:
+		var saved: Dictionary=world.sunday.climax.state();saved.aftermath_left=maxf(0,float(saved.aftermath_left)-delta)
+		if float(saved.aftermath_left)<=0:finish_aftermath()
+	else:
+		reveal_age=minf(1.2,reveal_age+delta);modulate.a=smoothstep(0,1.2,reveal_age)
+		if is_instance_valid(air):
+			air.volume_db=-23+linear_to_db(maxf(.001,Preferences.effects_volume))+linear_to_db(maxf(.001,1-reveal_age/1.2))
+			if reveal_age>=1.2:air.stop();air.stream=null
+func _exit_tree() -> void:
+	if is_instance_valid(air):air.stop();air.stream=null

@@ -81,6 +81,9 @@ func _process(delta: float) -> void:
 		var stock:=1.0-smoothstep(-12.5,-10.8,player.global_position.z)
 		radio.volume_db=-19-unease_amount*15-stock*6+linear_to_db(maxf(Preferences.music_volume,.001))
 		radio.attenuation_filter_cutoff_hz=lerpf(8500,1600,stock)
+	# Sunday's investigation keeps real powered equipment and outdoor air, with
+	# no scheduled dog/metal/settling cues filling every gap in the quiet.
+	if int(Session.campaign.night)==2 and Session.campaign.phase in ["sunday_intro","sunday_investigation","sunday_prepare"]:return
 	ambient_wait-=delta
 	if ambient_wait>0:return
 	ambient_index+=1;ambient_wait=[38.0,55.0,47.0,66.0][ambient_index%4]

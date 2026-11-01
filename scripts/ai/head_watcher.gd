@@ -5,6 +5,7 @@ signal withdrawn
 signal prepared
 signal rejected
 var world: ShiftWorld
+var director: WatchingPresence
 var site: Dictionary={}
 var visual: Node3D
 var motion: LivingMotion
@@ -19,6 +20,7 @@ var pose_revision:=0
 var started:=false
 var resume: Dictionary={}
 func _ready() -> void:
+	if director==null:director=world.presence
 	add_to_group("atmosphere_actor");collision_layer=2;collision_mask=3
 	var shape:=CollisionShape3D.new();var capsule:=CapsuleShape3D.new();capsule.height=1.7;capsule.radius=.22;shape.shape=capsule;shape.position.y=.85;add_child(shape)
 	visual=CharacterModels.create("Enemy");add_child(visual)
@@ -35,7 +37,6 @@ func set_amount(value: float) -> void:
 	lean.crouch=lerpf(float(site.get("base_crouch",1.0)),float(site.get("peak_crouch",0.0)),amount) if site.get("style","")=="rise" else 0.0
 func _physics_process(delta: float) -> void:
 	if not world.active or world.is_queued_for_deletion():return
-	var director: WatchingPresence=world.presence
 	frames+=1
 	if phase=="peak_probe":
 		if lean.revision<pose_revision+2:return
@@ -45,7 +46,7 @@ func _physics_process(delta: float) -> void:
 		if lean.revision<pose_revision+2:return
 		if director.any_clear(body_points()+head_points()) or director.witnesses(self):director.last_rejection="base_visible_or_witness";rejected.emit();queue_free();return
 		phase="emerging";started=true;age=0;visual.show();prepared.emit();return
-	if not director.safe() or director.witnesses(self) or world.player.position.distance_to(position)<3.9:retreating=true
+	if not director.safe() or director.witnesses(self) or world.player.position.distance_to(position)<float(site.get("minimum_distance",3.9)):retreating=true
 	if retreating and phase!="withdrawing":phase="withdrawing";age=0
 	age+=delta
 	match phase:

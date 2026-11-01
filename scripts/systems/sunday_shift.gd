@@ -3,6 +3,7 @@ extends Node3D
 ## Complete third night. All positions, evidence and pursuit memory share one save.
 var world: ShiftWorld
 var killer: KillerAgent
+var climax: SundayClimax
 var desk_open:=false
 var stopped:=false
 var caught_identity:=""
@@ -27,6 +28,7 @@ func _ready() -> void:
 	world.depot.interact(world.depot.access.evidence,"sunday","module")
 	if phase()=="sunday_escape":spawn_killer()
 	Preferences.changed.connect(apply_scene);apply_scene()
+	climax=SundayClimax.new();climax.world=world;add_child(climax)
 func control(at: Vector3,title: String,id: String) -> Node3D:
 	var node:=Node3D.new();add_child(node);node.position=at
 	Geo.box(node,Vector3(0,1.1,0),Vector3(.22,.30,.10),Geo.material(Color("626f60")),false)
@@ -189,11 +191,13 @@ func activate(action: String,actor: DepotPlayer) -> bool:
 		save();return true
 	return false
 func begin_escape() -> void:
+	if climax!=null:climax.before_escape()
 	Session.campaign.phase="sunday_escape";Session.stage=6
 	state().doors.stock=false;state().generator_mode="off";state().orders={"Dery":"hold","Felps":"hold"}
 	for actor in world.characters.values():actor.torch.show()
 	spawn_killer();apply_scene();save();Session.checkpoint()
-	Dialogue.play("sunday_trap",[["","O DISJUNTOR CAI. A PORTA DO ESTOQUE TRAVA."],["Dery","Felps! Fechou atrás de mim. Tem alguém naquela passagem."],["Felps","Tô no salão. Liga o circuito do estoque no gerador; eu destravo daqui. Não corre sem olhar!"],["","F lanterna • agachar reduz ruído • E nas coberturas • Tab troca • H acompanhar/aguardar."]])
+	world.sound.play_at("knock",world.depot.stock_door.global_position)
+	Dialogue.play("sunday_trap",[["Dery","Felps... A porta travou."],["Felps","Liga o circuito do estoque no gerador. Eu destravo daqui. A gente sai junto."]])
 func on_noise(at: Vector3,strength: float) -> void:
 	if is_instance_valid(killer):killer.hear(at,strength)
 func command_companion() -> bool:

@@ -1,4 +1,4 @@
-# The Last Sale — projeto Godot 0.32.0
+# The Last Sale — projeto Godot 0.33.0
 
 1. Extraia este ZIP em uma pasta nova.
 2. No Godot **4.4.1**, clique em **Importar** e escolha `project.godot`.
@@ -6,6 +6,16 @@
 4. Pressione **F5** e escolha **Iniciar expediente** para testar a rotina completa.
 
 Modelos animados, cenários, sons, texturas, código, testes e ferramentas estão incluídos. Blender não é necessário para jogar. O renderizador é Compatibility / OpenGL.
+
+## O clímax de domingo — 0.33.0
+
+A investigação mantém o ar da rua e os equipamentos reais, com espaço entre os acontecimentos. Uma única oportunidade de cabeça entre as caixas fica disponível após recuperar o módulo e um período de rotina; não é necessário esperar nem percebê-la para concluir a noite. A câmera permanece livre. A aparição se recolhe antes de o perseguidor existente ficar visível, sem criar outro homem andando pelo salão.
+
+Os passos do assassino acompanham seu deslocamento físico e são abafados por paredes e portas. Perder a dupla faz o perseguidor chegar ao último ponto conhecido, olhar em volta e verificar até três pontos alcançáveis próximos. A busca tem limite e não lê a posição de alguém escondido. Pose da cabeça, oportunidades consumidas, memória, etapa de busca e intervalos ficam salvos no formato v5.
+
+No HUD discreto, o jogo deixa o movimento e o som indicarem a detecção. O HUD completo mantém os avisos de ajuda. O disjuntor e a trava continuam físicos, com diálogo curto de coordenação. As decisões de sábado, o gerador, os circuitos e as rotas da dupla permanecem disponíveis.
+
+Depois da confirmação da saída, a ameaça para e o ambiente da rua acompanha alguns segundos antes do epílogo entrar suavemente. Enter ou o botão de leitura pode adiantar esse instante; o save conserva a etapa e não repete o respiro já concluído. Sobreviventes, provas e três finais continuam seguindo as condições originais. Consulte `docs/climax_v033/README.md`.
 
 ## Vestígios no sábado — 0.32.0
 
@@ -173,7 +183,7 @@ O elenco inclui Dery, Felps, Killer, Bryan, Zirico, Garota 1, Garota 2 e Velha 1
 
 ## Validação
 
-A versão 0.32.0 acrescenta a suíte dos vestígios de sábado e roda as quinze suítes com `./tools/test.sh`. O relatório de distribuição no GitHub registra os resultados do ZIP extraído, a captura real e avisos de importação ou encerramento. A validação histórica renderizada de câmera PS1 permanece no relatório anterior; shaders, controlador de câmera e física dos protagonistas não foram alterados nesta atualização. Veja `docs/watching_v031/validation.json`.
+A versão 0.33.0 acrescenta a suíte do clímax e roda as dezesseis suítes com `./tools/test.sh`. O relatório de distribuição no GitHub registra os resultados do ZIP extraído, a captura real e avisos de importação ou encerramento. A validação histórica renderizada de câmera PS1 permanece no relatório anterior; shaders, controlador de câmera e física dos protagonistas não foram alterados nesta atualização. Veja `docs/climax_v033/validation.json`.
 
 A Godot 4.4 tem Windows 10 como requisito oficial mínimo. Windows 7/Radeon R7 não foram validados nativamente. O modo Econômica reduz resolução, sombras e acabamento dos materiais.
 

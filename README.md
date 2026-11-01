@@ -2,9 +2,17 @@
 
 Demonstração jogável em **Godot 4.4.1 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP, com uma primeira versão jogável da campanha de sexta a domingo. Acabamento e ritmo continuam em desenvolvimento.
 
-**[Baixar o projeto 0.32.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.32.0.zip)**
+**[Baixar o projeto 0.33.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.33.0.zip)**
 
 Extraia o ZIP, importe `project.godot` no Godot **4.4.1**, aguarde a importação dos modelos e pressione **F5**. O arquivo inclui os modelos animados, cenários, código e recursos usados no jogo. [Conteúdo e instruções do projeto](downloads/project/README.md).
+
+## Revisão 0.33.0 — o clímax de domingo
+
+A investigação de domingo fica mais silenciosa, mantendo os equipamentos e o ar da rua. Uma única cabeça pode ser percebida entre as caixas, depois de recuperar o módulo e antes da fuga. O momento é breve, pode passar inteiro fora da vista e não cria uma nota ou fala confirmando a aparição.
+
+Na perseguição, os passos vêm da posição real do assassino e ficam abafados por portas e paredes. Quando perde a dupla, ele chega ao último ponto conhecido e verifica lugares próximos, sem consultar onde alguém se escondeu. O HUD discreto deixa a detecção para os movimentos e sons; o HUD completo conserva as instruções. Depois de confirmar a saída, há alguns segundos de ambiente da rua antes da entrada suave do epílogo, com opção de adiantar a leitura.
+
+[Prévia real com quatro cenas e áudio](docs/climax_v033/domingo_preview.mp4) · [Detalhes e validação](docs/climax_v033/README.md).
 
 ## Revisão 0.32.0 — vestígios no sábado
 
@@ -335,9 +343,9 @@ A reconstrução 0.2 do interior recebeu gôndolas abastecidas por categoria, ge
 
 ## Jogar
 
-**[Baixar o projeto Godot 0.32.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.32.0.zip)**
+**[Baixar o projeto Godot 0.33.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.33.0.zip)**
 
-O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **0.32.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
+O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **0.33.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
 
 O download atual é o projeto para o editor. O diretório `downloads/windows` guarda apenas a entrega anterior 0.9.0.
 
