@@ -39,6 +39,7 @@ func safe() -> bool:
 	if not world.active or world.is_queued_for_deletion() or int(Session.campaign.night)>=2 or not world.scary.safe():return false
 	if Session.campaign.phase not in ["routine","restored","closing","saturday_routine","saturday_investigation","saturday_decisions"]:return false
 	if is_instance_valid(world.everyday.observer):return false
+	if int(Session.campaign.night)==1 and world.saturday.unease!=null and world.saturday.unease.blocks_watching():return false
 	if int(Session.campaign.night)==0:
 		if world.scary.blocks_ambient() or world.scary.state().prank.get("phase","") in ["walking","waiting","returning"]:return false
 	return true

@@ -1,4 +1,4 @@
-# The Last Sale — projeto Godot 0.31.0
+# The Last Sale — projeto Godot 0.32.0
 
 1. Extraia este ZIP em uma pasta nova.
 2. No Godot **4.4.1**, clique em **Importar** e escolha `project.godot`.
@@ -6,6 +6,14 @@
 4. Pressione **F5** e escolha **Iniciar expediente** para testar a rotina completa.
 
 Modelos animados, cenários, sons, texturas, código, testes e ferramentas estão incluídos. Blender não é necessário para jogar. O renderizador é Compatibility / OpenGL.
+
+## Vestígios no sábado — 0.32.0
+
+O sábado recebe marcas discretas nos fundos, dois passos no pátio e um ruído de tecido atrás da porta antiga. Depois de inspecionada, a caixa pode mudar ligeiramente quando ninguém está próximo ou olhando; sua marca no pó permanece no lugar. O objeto e a navegação mudam juntos. Não há nova pista obrigatória, anotação automática ou fala confirmando os novos acontecimentos.
+
+Depois de um período de silêncio, uma única oportunidade opcional pode revelar o assassino original dentro do sedã já estacionado. A janela precisa estar fora da vista para preparar o momento; o jogador vira a própria câmera e pode perder o rosto. O modelo se abaixa atrás da carroceria, sem atravessar a loja. Posição, tempo e oportunidade consumida ficam salvos. As falas automáticas do começo e do fim da investigação foram reduzidas: o movimento da maçaneta continua físico, sem legenda explicando a ameaça.
+
+As quatro pistas de sábado, as decisões e o fechamento continuam disponíveis. Modelos, texturas, onze bibliotecas de animação, circuitos, física dos protagonistas e rodinha permanecem preservados. Quinze suítes incluem 40 verificações novas. Consulte `docs/unease_v032/README.md` e a verificação da distribuição no GitHub.
 
 ## Ser observado sem confirmação — 0.31.0
 
@@ -165,7 +173,7 @@ O elenco inclui Dery, Felps, Killer, Bryan, Zirico, Garota 1, Garota 2 e Velha 1
 
 ## Validação
 
-A versão 0.31.0 acrescenta a suíte das cabeças e roda as quatorze suítes com `./tools/test.sh`. O relatório de distribuição no GitHub registra os resultados do ZIP extraído, a captura real e avisos de importação ou encerramento. A validação histórica renderizada de câmera PS1 permanece no relatório anterior; shaders, controlador de câmera e física dos protagonistas não foram alterados nesta atualização. Veja `docs/watching_v031/validation.json`.
+A versão 0.32.0 acrescenta a suíte dos vestígios de sábado e roda as quinze suítes com `./tools/test.sh`. O relatório de distribuição no GitHub registra os resultados do ZIP extraído, a captura real e avisos de importação ou encerramento. A validação histórica renderizada de câmera PS1 permanece no relatório anterior; shaders, controlador de câmera e física dos protagonistas não foram alterados nesta atualização. Veja `docs/watching_v031/validation.json`.
 
 A Godot 4.4 tem Windows 10 como requisito oficial mínimo. Windows 7/Radeon R7 não foram validados nativamente. O modo Econômica reduz resolução, sombras e acabamento dos materiais.
 

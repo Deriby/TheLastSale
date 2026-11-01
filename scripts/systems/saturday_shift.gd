@@ -4,6 +4,7 @@ extends Node3D
 var world: ShiftWorld
 var board: Node3D
 var latch: Node3D
+var unease: SaturdayUnease
 const REQUIRED: Array[String]=["dvr_service","door_marks","moved_boxes","visitor_receipt"]
 const CAMERAS: Array[Dictionary]=[
 	{"name":"01 • FACHADA","at":Vector3(-5.55,3.1,-.15),"target":Vector3(1,.8,4.5)},
@@ -26,8 +27,8 @@ func _ready() -> void:
 	world.depot.blockers.append(Rect2(-1.52,-15.07,.74,.55))
 	world.navigation.configure(world.depot.blockers+world.street.blockers,Street.surface_height)
 	var dust:=Geo.material(Color("77796b"))
-	for x in [-.35,.35]:Geo.box(board,Vector3(x,.006,.42),Vector3(.025,.009,.65),dust,false)
-	Geo.box(board,Vector3(0,.006,.74),Vector3(.72,.009,.025),dust,false)
+	for x in [-.35,.35]:Geo.box(board,Vector3(x,.006,.42),Vector3(.025,.009,.65),dust,false).set_meta("stationary_dust",true)
+	Geo.box(board,Vector3(0,.006,.74),Vector3(.72,.009,.025),dust,false).set_meta("stationary_dust",true)
 	world.depot.interact(board,"investigation","boxes")
 	var yard_light: OmniLight3D=world.depot.yard.get_node("YardBatteryLight")
 	yard_light.omni_range=5.5;yard_light.light_energy=.65
@@ -40,6 +41,7 @@ func _ready() -> void:
 		mark.rotation.z=-.25
 	if phase() in ["saturday_investigation","saturday_decisions","closing","complete"]:
 		for friend in get_tree().get_nodes_in_group("familiar_npcs"):friend.queue_free()
+	unease=SaturdayUnease.new();unease.world=world;add_child(unease)
 func phase() -> String:return str(Session.campaign.phase)
 func save() -> void:
 	Session.changed.emit();Session.save_shift(world.player.global_position)
@@ -75,7 +77,7 @@ func begin_investigation() -> void:
 	for friend in get_tree().get_nodes_in_group("familiar_npcs"):
 		if not friend.leaving:friend.depart(world.navigation.path(friend.global_position,Vector3(18,0,1.8)))
 	if not Dialogue.active:
-		Dialogue.play("saturday_investigate",[["Felps","O cara sabia da porta que nem dá pra ver da rua. Deixei o recibo separado."],["Dery","E essa caixa não tava aqui. Vou olhar os fundos. Você confere o gravador."],["Felps","Bryan já foi pra casa. Vamos conferir sem deixar ninguém entrar."]])
+		Dialogue.play("saturday_investigate",[["Felps","Terminei aqui. Você olha os fundos enquanto eu confiro o gravador?"],["Dery","Beleza. Deixa o recibo separado."]])
 func can_open(actor: DepotPlayer) -> bool:
 	return int(Session.campaign.night)==1 and phase() in ["saturday_routine","saturday_investigation","saturday_decisions"] and actor.identity=="Felps" and actor.global_position.distance_to(CheckoutFixture.STAFF_POSITION)<1.4 and not Dialogue.active and actor.carried==null
 func at_console() -> bool:return world.surveillance_open and can_open(world.player)
@@ -123,7 +125,7 @@ func inspect(action: String,actor: DepotPlayer) -> bool:
 		Dialogue.play("saturday_door",[["Dery","A tinta tá riscada junto da fechadura. Isso aqui é recente."],["Felps","Não abre. Confere se tem outra marca no chão e volta pra cá."]])
 	else:
 		discover("moved_boxes")
-		Dialogue.play("saturday_boxes",[["Dery","Tem uma marca limpa no pó. Arrastaram a caixa pra liberar essa porta."],["Felps","Então não foi só a luz. Anota isso junto com as imagens."]])
+		Dialogue.play("saturday_boxes",[["Dery","Tem uma marca limpa no pó. Essa caixa ficava mais pra lá, né?"],["Felps","Acho que sim. Vou conferir as anotações."]])
 	return true
 func familiar(identity: String,actor: DepotPlayer) -> bool:
 	if int(Session.campaign.night)!=1 or Dialogue.active or phase() not in ["saturday_intro","saturday_routine"]:return false
@@ -163,13 +165,12 @@ func tick() -> void:
 	for angle in [-.35,.18,-.25,0.0]:rattle.tween_property(latch,"rotation:z",angle,.14)
 	world.sound.play_at("knock",door.global_position)
 	save()
-	Dialogue.play("saturday_attempt",[["","ALGUÉM FORÇA A PORTA DO PÁTIO."],["Dery","Felps. A maçaneta mexeu. Não era uma caixa caindo."],["Felps","Não vai atrás! Confere a trava daí. Eu fecho o caixa e a gente sai junto pela frente."]])
 func journal() -> String:
 	var lines: Array[String]=["CADERNO • SÁBADO",""]
-	var labels: Dictionary={"local_outage":"Sexta: a falha atingiu só o depósito.","dvr_service":"DVR: movimento no pátio antes da abertura; rosto não identificado.","door_marks":"Tinta removida junto à fechadura antiga.","moved_boxes":"Caixa deslocada: o caminho até a porta foi liberado.","visitor_receipt":"Recibo do cliente de boné separado; ele conhece a área interna.","witness_Bryan":"Bryan viu alguém no portão fora do expediente.","witness_Zirico":"Zirico notou movimento na lateral."}
+	var labels: Dictionary={"local_outage":"Sexta: a falha atingiu só o depósito.","dvr_service":"DVR: movimento no pátio antes da abertura; rosto não identificado.","door_marks":"Tinta removida junto à fechadura antiga.","moved_boxes":"Caixa fora da marca deixada no pó.","visitor_receipt":"Recibo do cliente de boné separado; ele conhece a área interna.","witness_Bryan":"Bryan viu alguém no portão fora do expediente.","witness_Zirico":"Zirico notou movimento na lateral."}
 	for id in labels:
 		if Session.campaign.clues.get(id,false):lines.append("• "+labels[id])
-	lines.append("\nIsso confirma uma tentativa de acesso, não a identidade de quem estava lá.")
+	lines.append("\nComparar os horários com as marcas dos fundos. Os registros não identificam ninguém.")
 	lines.append("\nPREPARAÇÃO PARA DOMINGO")
 	var choices: Dictionary={"copy":"Cópia dos registros e recibo guardada fora do gravador.","recorder":"Registros deixados somente no gravador.","contact":"Responsável avisado; contato combinado para domingo.","wait":"A dupla decidiu esperar antes de comunicar a suspeita.","prepared":"Saída da frente conferida; ponto de encontro combinado.","unchanged":"Saída ainda sem preparação."}
 	for key in ["evidence","help","exit"]:
