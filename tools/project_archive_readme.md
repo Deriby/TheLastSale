@@ -1,4 +1,4 @@
-# The Last Sale — projeto Godot 0.30.2
+# The Last Sale — projeto Godot 0.31.0
 
 1. Extraia este ZIP em uma pasta nova.
 2. No Godot **4.4.1**, clique em **Importar** e escolha `project.godot`.
@@ -6,6 +6,14 @@
 4. Pressione **F5** e escolha **Iniciar expediente** para testar a rotina completa.
 
 Modelos animados, cenários, sons, texturas, código, testes e ferramentas estão incluídos. Blender não é necessário para jogar. O renderizador é Compatibility / OpenGL.
+
+## Ser observado sem confirmação — 0.31.0
+
+O assassino original agora pode espiar com a cabeça por cantos e por cima de gôndolas e caixas, em oportunidades espaçadas durante a sexta e o sábado. O modelo inteiro continua atrás da cobertura: uma pose própria de espiar ou se abaixar é aplicada só a esse ator, sem alterar as bibliotecas de animação publicadas. Corpo encoberto, espaço livre, chão, distância, pessoas próximas e olhar direto de outros personagens são verificados antes de mostrar a cabeça.
+
+O tempo não espera o jogador perceber. As oportunidades também acontecem quando a câmera está voltada para outro lado; muitas podem passar despercebidas. Não há música de susto, aviso, fala ou nota de percepção para confirmá-las. A antiga aparição narrada do gerador deixa de iniciar em partidas novas; observações já salvas continuam preservadas. Os eventos do estoque, Bryan e a campanha permanecem disponíveis.
+
+O save conserva a sequência, o tempo, a pose da oportunidade em andamento e o limite por noite, sem repetir uma oportunidade concluída ao carregar. Domingo usa a ameaça existente. A câmera continua livre e a rodinha mantém terceira pessoa. Veja `docs/watching_v031/README.md`.
 
 ## Uma presença breve nos fundos — 0.30.2
 
@@ -157,7 +165,7 @@ O elenco inclui Dery, Felps, Killer, Bryan, Zirico, Garota 1, Garota 2 e Velha 1
 
 ## Validação
 
-A base 0.30 tem 744 verificações da campanha e 48 casos renderizados de câmera PS1. A correção 0.30.2 valida o pacote extraído nas suítes de sustos, sexta-feira, narrativa da sexta e domingo. O relatório de distribuição no GitHub separa os resultados novos da validação histórica e registra eventuais avisos de importação ou encerramento. Veja `docs/subtle_v0302/validation.json`. `./tools/test.sh` roda as treze suítes.
+A versão 0.31.0 acrescenta a suíte das cabeças e roda as quatorze suítes com `./tools/test.sh`. O relatório de distribuição no GitHub registra os resultados do ZIP extraído, a captura real e avisos de importação ou encerramento. A validação histórica renderizada de câmera PS1 permanece no relatório anterior; shaders, controlador de câmera e física dos protagonistas não foram alterados nesta atualização. Veja `docs/watching_v031/validation.json`.
 
 A Godot 4.4 tem Windows 10 como requisito oficial mínimo. Windows 7/Radeon R7 não foram validados nativamente. O modo Econômica reduz resolução, sombras e acabamento dos materiais.
 

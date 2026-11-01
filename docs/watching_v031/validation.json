@@ -1,0 +1,38 @@
+{
+  "version": "0.31.0",
+  "godot": "4.4.1",
+  "model": "res://assets/models/characters/Enemy.glb",
+  "animation_library": "res://resources/motion/Enemy.res",
+  "candidate_locations": 13,
+  "maximum_opportunities_per_night": 8,
+  "maximum_uses_of_one_location_per_night": 2,
+  "back_to_back_same_location": false,
+  "normal_cooldown_seconds": [
+    28,
+    55
+  ],
+  "brief_hold_seconds": [
+    0.14,
+    0.34
+  ],
+  "occasional_distant_hold_seconds": [
+    0.7,
+    1.15
+  ],
+  "full_original_model_behind_physical_cover": true,
+  "new_pose_modifiers_only_for_watcher": true,
+  "existing_assets_and_animation_libraries_changed": 0,
+  "no_added_note_dialogue_hud_stinger_camera_control": true,
+  "opportunity_window_does_not_wait_for_observation": true,
+  "save_version": 5,
+  "enabled_nights": [
+    0,
+    1
+  ],
+  "sunday_pursuit_unchanged": true,
+  "project_suite_count": 14,
+  "package_results": "../../downloads/project/release_verification.json",
+  "preview_is_staged_montage": true,
+  "preview_speed": 1,
+  "native_radeon_r7_fps_measured": false
+}

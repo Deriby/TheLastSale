@@ -33,11 +33,10 @@ func _ready() -> void:
 		if state().prank.phase!="waiting":move_bryan(WINDOW if state().prank.phase=="walking" else Vector3(-2.8,0,-.1))
 		else:bryan.scare_pose="talk" if done("bryan_prank") else "idle"
 	# Saves from the old public crossing must not recreate that staging.
-	if state().intruder.get("state","") in ["crossing","hiding","leaving"]:
+	if state().intruder.get("state","") in ["crossing","hiding","leaving","emerging","waiting","retreating"]:
 		state().intruder={"state":"gone","kind":"legacy_crossing"};state().events.intruder_gone=true;state().events.return_crossing=true;state().return_armed=false
-	elif state().intruder.get("kind","")=="stock_glimpse" and state().intruder.get("state","") in ["emerging","waiting","retreating"]:spawn_intruder(state().intruder)
 	state().dim_time=0.0
-	if Session.flag("generator_running") and Session.campaign.phase=="restored" and not done("return_crossing"):state().return_armed=true
+	state().return_armed=false
 func refresh_volume() -> void:
 	if drag!=null:drag.volume_db=-13+linear_to_db(maxf(.001,Preferences.effects_volume))
 func blocks_ambient() -> bool:
@@ -76,11 +75,6 @@ func tick(delta: float) -> void:
 		if state().door_phase in ["dragging","quiet","handle"]:state().door_phase="done";handle.rotation.z=0
 	else:
 		tick_stock(delta);tick_prank(delta)
-	if bool(state().return_armed) and Session.campaign.phase in ["restored","closing"]:tick_return()
-	if is_instance_valid(intruder):
-		if safe() and player_sees_body(intruder.position):
-			intruder.seen_time+=delta
-			if not done("return_intruder") and intruder.seen_time>.10:mark("return_intruder","Tive a impressão de ver alguém recuando atrás do batente do estoque. Foi rápido demais para distinguir.")
 func tick_stock(delta: float) -> void:
 	var dery: DepotPlayer=world.characters.Dery
 	if dery.position.z>=-11.5:drag.stop();return
@@ -123,7 +117,8 @@ func tick_prank(delta: float) -> void:
 			if float(state().prank.time)>4:state().prank.phase="returning";move_bryan(Vector3(-2.8,0,-.1))
 	elif phase=="returning" and not bryan.scare_moving:state().prank.phase="done"
 func arm_return() -> void:
-	if int(Session.campaign.night)==0 and not done("return_crossing"):state().return_armed=true
+	# The new watching opportunities have their own silent, non-narrative schedule.
+	state().return_armed=false
 func tick_return() -> void:
 	if done("return_crossing") or not safe() or world.player.identity!="Dery" or world.player.carried!=null:return
 	if Session.world_seconds-float(state().last_scare)<25:return

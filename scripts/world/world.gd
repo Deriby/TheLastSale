@@ -34,6 +34,7 @@ var supplies: SupplyGuide
 var everyday: EverydayHorror
 var story: FridayStory
 var scary: FridayScares
+var presence: WatchingPresence
 func _ready() -> void:
 	add_to_group("shift_world")
 	var legacy_carried:=Session.carried_id
@@ -103,6 +104,7 @@ func _ready() -> void:
 	everyday=EverydayHorror.new();everyday.world=self;add_child(everyday)
 	story=FridayStory.new();story.world=self;add_child(story)
 	scary=FridayScares.new();scary.world=self;add_child(scary)
+	presence=WatchingPresence.new();presence.world=self;add_child(presence)
 func update_enemy_visibility() -> void:
 	enemy_visual.process_mode=Node.PROCESS_MODE_INHERIT if enemy_visual.is_visible_in_tree() else Node.PROCESS_MODE_DISABLED
 func select_player(identity: String) -> void:
@@ -140,6 +142,7 @@ func capture_state() -> void:
 	if sunday!=null:sunday.capture()
 	if everyday!=null:everyday.capture()
 	if scary!=null:scary.capture()
+	if presence!=null:presence.capture()
 func on_handling_completed() -> void:
 	if active:Session.changed.emit();Session.save_shift(player.global_position)
 func can_checkout(actor: DepotPlayer) -> bool:
@@ -234,6 +237,7 @@ func _physics_process(delta: float) -> void:
 	if sunday!=null:sunday.tick(delta)
 	if scary!=null:scary.tick(delta)
 	if everyday!=null:everyday.tick(delta)
+	if presence!=null:presence.tick(delta)
 	if sale_save_wait>=0:
 		sale_save_wait-=delta
 		if sale_save_wait<0:Session.save_shift(player.global_position)

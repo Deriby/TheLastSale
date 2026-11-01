@@ -1,0 +1,2615 @@
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+PASS elenco contém três modelos do autor e seis identidades provisórias com rig e caminhada
+PASS clientes provisórios têm seis roupas distintas sem alterar as malhas originais
+PASS checkpoints antigos sem identidade preservam as três aparências originais
+PASS identidade salva independe da ordem de chegada e a rotina inclui clientes provisórios
+PASS catálogo calcula pedidos variados em centavos e formata reais sem arredondamento
+PASS pagamento exato conclui a conferência sem exigir moeda de troco
+PASS pagamento e troco não podem ser repetidos fora da etapa correta
+PASS menu inicial pausa o mundo
+PASS luzes das doze geladeiras ficam restritas aos equipamentos sem iluminar o piso
+PASS nova iluminação preserva o orçamento de cinco luzes com sombras
+PASS reflexo das geladeiras captura uma vez em resolução limitada
+PASS neblina distante preserva o primeiro plano e oculta o fim da rua
+PASS primeiro início aproveita o cenário já carregado no menu
+PASS PS1 renderiza em 320×240 sem reduzir a janela
+PASS imagem PS1 é ampliada e centralizada em 4:3
+PASS menu e HUD preservam a resolução e cabem na janela grande
+PASS preferência PS1 é salva para a próxima abertura
+PASS redimensionar a janela para 4:3 mantém 320×240 internos
+PASS janela larga mantém a imagem PS1 sem esticar os personagens
+PASS PS1/2 renderiza em 640×480 sem alterar a janela
+PASS PS1/2 ocupa a mesma área 4:3 que PS1 e mantém o HUD em resolução normal
+PASS preferência PS1/2 é salva separadamente da resolução de 320×240
+PASS reabrir Configurações identifica o modo PS1/2 selecionado
+PASS PS1/2 mantém 640×480 internos e preenche a área 4:3 após redimensionar
+PASS voltar de PS1/2 para PS1 restaura 320×240 sem manter a escala anterior
+PASS retorno a Nítida preenche a janela sem deixar barras ou escala antigas
+PASS troca de resolução preserva o mundo e o progresso do turno
+PASS dois protagonistas físicos e apenas um controle ativo
+PASS comandos de interação, caixa e avisos ficam dentro da janela
+PASS legendas e lembrete de controles permanecem visíveis na parte inferior
+PASS Tab entrega câmera, controle e HUD ao Felps
+PASS WASD move só Felps enquanto Deryk mantém a posição
+PASS Felps também tem primeira pessoa com corpo e cabeça ocultada apenas da própria câmera
+PASS retornar a Deryk restaura sua câmera e a cabeça visível de Felps
+PASS troca fica bloqueada durante conversa
+PASS pausa bloqueia troca de personagem
+PASS assassino oculto não atualiza animações
+PASS assassino retoma processamento quando fica visível
+PASS cena principal e chão físico carregam
+PASS antigo caixa da direita está livre para circulação real
+PASS passos no salão usam contato seco de piso cerâmico
+PASS cobertura baixa fecha o teto sobre o caixa esquerdo
+PASS teto baixo esquerdo continua na mesma altura até os fundos
+PASS encontro lateral entre os dois níveis do telhado não tem vão
+PASS antigo degrau transversal do teto foi removido
+PASS fechamento lateral entre os tetos continua até os fundos
+PASS fiação da rua e cabos internos continuam visíveis sem projetar sombras
+PASS todas as garrafas do expositor apoiam nas bases dos engradados
+PASS gôndolas deixam pelo menos dois metros até as portas fechadas das geladeiras
+PASS giro das sete portas do fundo não invade gôndolas nem a geladeira do canto
+PASS portas abertas mantêm mais de um metro livre diante das gôndolas
+PASS jogador atravessa o corredor traseiro com as geladeiras abertas
+PASS porta do fundo é alcançável pela interação no corredor livre
+PASS E fecha a geladeira do fundo sem avançar as tarefas
+PASS sedã e hatch importados têm malhas detalhadas e escala de automóvel
+PASS rua tem declive físico contínuo entre os lados do quarteirão
+PASS balizadores da fachada têm colisão física
+PASS jogador desce o meio-fio e entra na rua sem cair pelo chão
+PASS passos na rua trocam para contato de asfalto
+PASS jogador sobe à calçada oposta sem ficar preso no meio-fio
+PASS rampa de garagem tem piso físico coerente com a altura de navegação
+PASS jogador atravessa a nova rampa com contato no piso sem cair ou travar
+PASS checkpoint na rampa acompanha o piso inclinado
+PASS fechamento físico protege o vão entre as oficinas junto à borda da calçada
+PASS Dery mantém os 71 ossos recebidos e um controle adicional de peito superior
+PASS 23 clipes de Dery importados
+PASS rig importado: Dery
+PASS material presente: Dery
+PASS textura original preservada na derivação: Dery
+PASS rig importado: Felps
+PASS material presente: Felps
+PASS textura original preservada na derivação: Felps
+PASS rig importado: Enemy
+PASS material presente: Enemy
+PASS textura original preservada na derivação: Enemy
+PASS rig importado: Bryan
+PASS material presente: Bryan
+PASS rig importado: Zirico
+PASS material presente: Zirico
+PASS rig importado: Garota1
+PASS material presente: Garota1
+PASS rig importado: Garota2
+PASS material presente: Garota2
+PASS rig importado: Velha1
+PASS material presente: Velha1
+PASS rig importado: Customer3
+PASS material presente: Customer3
+PASS Bryan e Zirico estão presentes como conhecidos dos protagonistas
+PASS Bryan tem escala infantil própria
+PASS Bryan tem conversa opcional com Dery e Felps
+PASS conversa interrompe variação de postura e o conhecido retoma o repouso
+PASS conversa com Bryan preserva o progresso do expediente
+PASS modo Econômica desliga os mapas normais dos novos FBX
+PASS modo Nítida restaura os mapas normais dos novos FBX
+PASS rótulo fosco e vidro da garrafa têm respostas distintas à luz
+PASS alumínio exposto e impressão da lata têm metalicidade própria
+PASS embalagens usam arte revisada e mipmaps para distância
+PASS verniz da bancada difere da madeira crua dos paletes
+PASS Econômica desliga mapas de acabamento e camada de verniz
+PASS Econômica desliga sombras, halo e iluminação/reflexo adicional das geladeiras
+PASS Nítida restaura os acabamentos nos materiais já instanciados
+PASS Nítida restaura a iluminação detalhada sem posterizar a imagem
+PASS contato dos pés usa a medida do modelo recebido
+PASS respiração altera a caixa torácica em repouso
+PASS cintura e peito superior articulam separadamente em repouso
+PASS cotovelos baixos e punhos abaixo do quadril no repouso
+PASS repouso tem base estreita e dois pés apoiados
+PASS Felps correto usa malha de cabeça separada
+PASS WASD move Dery com colisão real
+PASS corrida mais rápida que caminhada
+PASS agachamento altera colisão
+PASS roda do mouse chega à câmera pela viewport
+PASS movimento do mouse gira a câmera pela viewport
+PASS SpringArm encurta ao encostar na parede
+PASS câmera permanece do lado interno da parede
+PASS ombro recolhe lateralmente perto da parede
+PASS volume próximo da lente fica fora da parede
+PASS aproximação entra em primeira pessoa com corpo visível e cabeça apenas na sombra
+PASS afastamento retorna à terceira pessoa
+PASS Felps é alcançável pela interação sobre o balcão
+PASS tecla E conversa com Felps e libera tarefas
+PASS diálogo exibe falas reais
+PASS Felps gesticula enquanto fala
+PASS caixa errada não avança reposição
+PASS porta fechada bloqueia passagem
+PASS porta aberta libera passagem física
+PASS caixa distante exige aproximação antes de alcançar
+PASS Q durante a pegada agenda a soltura e Tab aguarda a animação
+PASS soltura agendada apoia a caixa em pé no chão sem perder o objeto
+PASS caixa largada pode ser pega novamente
+PASS parede impede apoiar a caixa do outro lado
+PASS Q sem espaço preserva a caixa e avisa o jogador
+PASS marca de colocação aparece verde sobre piso livre
+PASS trocar para Felps mantém a caixa fisicamente com Deryk
+PASS salvamento aceita Felps ativo enquanto Deryk segura caixa
+WARNING: [Physics interpolation] Non-interpolated instance triggered from physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@2603/Street/UphillTwoStoreyHouse/@Node3D@3175/@MeshInstance3D@3184" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:966)
+PASS continuar restaura Felps no balcão, Deryk e sua caixa sem duplicar personagens
+PASS caixa apoiada conserva sua posição ao salvar e continuar
+PASS pegar stock_1
+PASS pegar caixa começa com alcance antes da fixação
+PASS caixa presa ao transporte visível
+PASS mão permanece junto à pega lateral da caixa
+PASS repor stock_1
+PASS mãos livres após reposição
+PASS malha visível recebe novos produtos após reposição
+PASS pegar stock_2
+PASS pegar caixa começa com alcance antes da fixação
+PASS caixa presa ao transporte visível
+PASS mão permanece junto à pega lateral da caixa
+PASS repor stock_2
+PASS mãos livres após reposição
+PASS malha visível recebe novos produtos após reposição
+PASS duas reposições completam objetivo na ordem
+PASS organização move caixa para palete
+PASS caixa permanece materialmente no palete
+PASS aviso exige clientes atendidos além das tarefas
+PASS cliente aguarda atendimento e Deryk não conclui a venda no lugar de Felps
+PASS tela do caixa cabe na janela e impede caminhada enquanto recebe cliques
+PASS produto ou quantidade errada impede cobrança e recebe resposta do cliente
+PASS receber dinheiro abre a gaveta e libera a separação do troco
+PASS troco errado mantém venda pendente e permite corrigir sem cobrar outra vez
+WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@7783/Depot/@Node3D@10000/@MeshInstance3D@10005" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
+PASS continuar preserva cliente, registro, dinheiro recebido e troco parcial sem concluir ou duplicar venda
+PASS entrega cria recibo, sacola e receita uma única vez e libera a saída do cliente
+PASS pedido de caixa fechada aguarda mercadoria física e não inventa produto nas mãos do cliente
+PASS continuar com Deryk carregando a caixa do pedido preserva mercadoria, cliente e receita
+PASS cliente provisório mantém a identidade e o visual ao continuar com a caixa do pedido
+PASS Deryk percorre o estoque, pega a caixa e entrega no balcão antes de voltar a Felps
+WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@10427/@CharacterBody3D@12842/Customer1/@MeshInstance3D@12851" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
+PASS clientes atravessam loja, compram e saem
+PASS turno percorre registro, troco, retomada e trabalho dos dois personagens
+PASS receita do turno corresponde aos recibos sem duplicação após continuar
+PASS saída do cliente salva automaticamente o total de atendimentos concluídos
+PASS conhecidos mantêm variações de repouso que terminam durante o expediente longo
+PASS máquina de estados dos clientes executa o ciclo completo
+PASS todos os clientes são atendidos junto ao novo balcão esquerdo
+PASS aviso ocorre somente depois da rotina e da visita
+PASS aviso inicia pane de energia com reações e preserva assassino oculto na sexta
+PASS porta antiga continua trancada sem encerrar a sexta antes do fechamento
+PASS salvamento grava checkpoint
+PASS checkpoint restaura pane de energia, progressão e tarefas
+PASS continuar restaura posição no mundo
+PASS continuar não duplica caixas já repostas
+PASS continuar restaura produtos na malha da geladeira
+PASS checkpoint antigo dentro da gôndola migra para corredor próximo
+PASS checkpoint antigo na rua acompanha a nova cota do terreno
+WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/Integration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@18077/Depot/Fridge/@MeshInstance3D@19727" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
+PASS checkpoint antigo no novo balcão restaura personagem fora dos móveis
+PASS pausa congela o relógio narrativo
+PASS pausa congela a deriva da névoa e as variações de luz
+PASS checkpoint antigo da versão 1 migra para a dupla preservando a caixa carregada
+PASS checkpoint da versão 2 preserva a dupla e caixas ao migrar para pedidos e dinheiro
+RESULT 188/188 passed; failures=[]
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+PASS sexta permite uma única pane recuperável durante atendimento em andamento
+PASS pane fecha o painel sem prender Felps nem repetir o evento
+PASS sem energia a cobrança para e preserva troco e etapa da venda
+PASS pane apaga luzes comerciais e sons dos equipamentos, mantendo emergência
+PASS alterar qualidade durante apagão não religa geladeiras
+PASS gerador exige chave e confirmação de Felps
+PASS Felps suspende o atendimento fisicamente no posto do caixa
+PASS Felps não recolhe a chave destinada a Deryk
+PASS Deryk alcança a porta do estoque durante o apagão
+PASS Deryk atravessa a porta aberta e chega ao suporte da chave
+PASS chave é recolhida por interação e desaparece do suporte
+PASS continuar durante pane preserva chave, tarefa de Felps e luzes apagadas
+PASS continuar mantém pedido, cliente provisório e troco interrompido
+PASS Deryk alcança a porta do pátio no fundo do estoque
+PASS Deryk sai por abertura real e caminha até o gerador externo
+PASS checkpoint no pátio mantém posição e contato com o chão
+PASS Deryk liga o gerador com a chave e a confirmação do salão
+PASS energia de reserva restaura equipamentos e inicia som local do gerador
+PASS observação da rua iluminada fica registrada e venda mantém o troco parcial
+PASS continuar depois de ligar o gerador não exige repetir a tarefa
+PASS Felps retoma o atendimento interrompido quando a energia volta
+PASS atendimento retomado entrega compra e credita um único recibo
+WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/FridayIntegration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@7316/@CharacterBody3D@9715/Customer2/@MeshInstance3D@9724" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
+PASS último cliente sai fisicamente antes de iniciar o fechamento
+PASS saída é bloqueada enquanto faltam tarefas de fechamento
+PASS Felps confere e fecha o caixa após terminar todas as vendas
+PASS Deryk retorna do gerador pelo pátio
+PASS Deryk volta ao estoque e verifica a área antiga sem atravessar paredes
+PASS inspeção da porta antiga conclui a conferência do estoque
+PASS quadro permite apagar o salão somente após caixa e estoque conferidos
+PASS fechamento silencia rádio e salão, preservando refrigeração
+PASS Felps alcança o comando das portas pelo lado de fora
+PASS chamar companheiro inicia encontro da dupla na calçada
+PASS companheiro percorre fisicamente o estoque e o salão até a calçada
+PASS Felps também sai autonomamente do posto quando Deryk chama o companheiro
+PASS retomada do fechamento preserva tarefas, encontro da dupla e posição na calçada
+PASS portas só podem baixar com os dois protagonistas do lado de fora
+PASS pausa congela o fechamento e impede que a noite termine com animação suspensa
+PASS sexta conclui com resumo, salvamento e passagem de dia
+PASS resumo e botão de transição cabem na janela com cenário PS1/PS1/2 independente
+PASS resumo conserva vendas e recibos da sexta sem duplicação
+WARNING: [Physics interpolation] Non-interpolated instance triggered from physics process: "/root/FridayIntegration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@12203/Street/@Node3D@13212/@Node3D@13213/@MeshInstance3D@13221" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:966)
+PASS transição prepara abertura de sábado e atualiza o dia no HUD
+PASS nova noite preserva pistas e histórico e reinicia o caixa diário
+PASS abertura de sábado reconhece sexta e libera a nova rotina após conversa no caixa
+PASS continuar no sábado retoma sua rotina sem reiniciar a sexta
+PASS checkpoint completo da versão 3 migra para a pane e permite continuar a sexta
+PASS save antigo após o aviso e antes do fim da demonstração migra para a pane
+PASS save versão 4 na transição após o aviso retoma o apagão sem bloquear a noite
+PASS transição em execução aguarda a conversa e retoma a pane mesmo sem callback anterior
+FRIDAY RESULT 48/48 passed; failures=[]
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+PASS Deryk não pode operar o monitor e a abertura exige conversa
+PASS Deryk alcança Felps e começa o sábado pelo diálogo físico
+PASS C no caixa abre o monitor real e bloqueia locomoção de Felps
+PASS monitor cabe na janela e mantém interface independente da resolução PS1
+PASS lente do CCTV exclui a própria carcaça física da imagem
+PASS câmera compartilha o mundo existente em resolução limitada
+PASS monitor usa um único viewport adicional e suspende a renderização encoberta
+PASS trocar os três canais reutiliza câmera e preserva a câmera do protagonista no viewport original
+PASS eventos são identificados como texto e param a renderização do canal
+PASS monitor bloqueia pistas inexistentes e decisões prematuras
+PASS troca e atendimento não vazam por baixo do monitor aberto
+PASS Esc libera movimento, mouse e renderização normal
+PASS C fecha o monitor sem deixar um viewport ativo
+PASS Tab sai do monitor e entrega controle a Deryk sem travar Felps
+PASS pausa externa fecha e desativa o canal de segurança
+PASS primeiro cliente percorre loja e espera com o novo pedido de sábado
+PASS Felps registra e entrega o primeiro pedido pela operação normal de caixa
+PASS cliente de boné da sexta volta como a mesma identidade substituível
+PASS cliente recorrente conclui compra após mencionar a porta interna
+PASS investigação só começa após a saída física do segundo cliente
+PASS recibo persistente identifica visita, noite e horário sem duplicar receita
+PASS Bryan sai antes da ameaça mesmo sem conversa opcional
+PASS consulta ao pátio mostra movimento físico na porta e registra observação uma única vez
+PASS voltar ao canal não repete o movimento nem duplica o registro
+PASS botões reais anotam evento e separam o recibo sem acusação conclusiva
+PASS DVR e recibo não substituem a inspeção física de Deryk
+WARNING: [Physics interpolation] Non-interpolated instance triggered from physics process: "/root/SaturdayIntegration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@3030/Depot/Architecture/@MeshInstance3D@4375" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:966)
+PASS continuar com monitor aberto fecha a interface e preserva recibos e registros
+PASS inspeção não pode ser ativada à distância
+PASS Deryk chega ao estoque pelo corredor real
+PASS percurso físico até os vestígios respeita porta e obstáculos
+PASS Deryk examina a tinta riscada da porta antiga
+PASS caixa deslocada tem interação própria e vestígios no chão
+PASS todas as pistas podem ser reunidas sem testemunhas opcionais
+PASS checkpoint de investigação preserva as quatro pistas e a etapa
+PASS decisões de esperar e não copiar são escolhas válidas e persistentes
+PASS jogador revisa decisões antes de sair e recebe confirmação visível
+PASS Felps prepara a saída fisicamente no comando das portas
+PASS três decisões iniciam tentativa na porta e fechamento tenso
+PASS pátio permanece trancado e saída exige conferência da dupla
+PASS retomada após tentativa conserva perigo e escolhas sem repetir evento
+PASS Felps retorna ao posto e fecha o caixa de sábado
+PASS Deryk confere a trava e encerra a inspeção antes de sair
+PASS quadro apaga o salão após as duas conferências
+PASS Deryk deixa o estoque e alcança a frente por rota contínua
+PASS chamada reúne a dupla para fechar sábado
+PASS ambos precisam chegar à calçada antes de baixar portas
+PASS sábado termina com relatório e campanha salva
+PASS resumo da segunda noite preserva suas decisões e os dois recibos
+WARNING: [Physics interpolation] Non-interpolated instance triggered from physics process: "/root/SaturdayIntegration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@10320/Depot/DepotLivedIn/@Node3D@12633/@Node3D@12650/@MeshInstance3D@12651" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:966)
+PASS passagem ao domingo conserva pistas e preparação e reinicia dados diários
+PASS cópia guarda dados reais de recibos e registros através da passagem de dia
+PASS histórico das noites concluídas permanece separado das vendas de domingo
+PASS retomada de domingo mantém o contato combinado no sábado
+PASS save da antiga prévia migra para sábado jogável com campos novos seguros
+SATURDAY RESULT 53/53 passed; failures=[]
+WorkerThreadPool: 3 threads, 1 max low-priority.
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+TextServer: Added interface "Dummy"
+TextServer: Added interface "ICU / HarfBuzz / Graphite (Built-in)"
+JoypadLinux: udev enabled and loaded successfully.
+Using "default" pen tablet driver...
+
+TextServer: Primary interface set to: "ICU / HarfBuzz / Graphite (Built-in)".
+CORE API HASH: 4052744068
+EDITOR API HASH: 910296392
+Loading resource: res://scripts/systems/session.gd
+Loading resource: res://scripts/systems/dialogue.gd
+Loading resource: res://scripts/systems/preferences.gd
+Loaded system CA certificates
+Loading resource: res://tests/sunday_integration.tscn
+Loading resource: res://tests/sunday_integration.gd
+Loading resource: res://assets/audio/step_tile.wav
+Loading resource: res://.godot/imported/step_tile.wav-f3d0ee314abba1a9a2ebc0738e56f386.sample
+Loading resource: res://assets/audio/step_asphalt.wav
+Loading resource: res://.godot/imported/step_asphalt.wav-269a91ddca27ec0748d446265046f353.sample
+Loading resource: res://scenes/main/main.tscn
+Loading resource: res://scripts/systems/main.gd
+Loading resource: res://assets/fonts/title/retro/SpecialElite-Regular.ttf
+Loading resource: res://.godot/imported/SpecialElite-Regular.ttf-5b5efc2c14fe5bba7cd972f92d685429.fontdata
+Loading resource: res://assets/fonts/title/retro/VT323-Regular.ttf
+Loading resource: res://.godot/imported/VT323-Regular.ttf-e11352695bd6520ee5f39bd18d150885.fontdata
+Loading resource: res://assets/fonts/title/retro/BebasNeue-Regular.ttf
+Loading resource: res://.godot/imported/BebasNeue-Regular.ttf-ca17de4902126997ebee498a7de0129f.fontdata
+Loading resource: res://shaders/retro.gdshader
+Loading resource: res://shaders/title_atmosphere.gdshader
+Loading resource: res://assets/audio/title/title_drone.ogg
+Loading resource: res://.godot/imported/title_drone.ogg-feb31798187b1a61a5b83096006e7860.oggvorbisstr
+Loading resource: res://assets/audio/title/intro_tape.ogg
+Loading resource: res://.godot/imported/intro_tape.ogg-f408cfab07bb6fd07fd16b4c97981717.oggvorbisstr
+Loading resource: res://assets/audio/title/select.wav
+Loading resource: res://.godot/imported/select.wav-e1d143675c0d1ce442f4c38d8f69223f.sample
+Loading resource: res://assets/audio/title/ambient/tape_stop.ogg
+Loading resource: res://.godot/imported/tape_stop.ogg-c59b2c846d6c3954e4d60b701dfb7331.oggvorbisstr
+Loading resource: res://assets/audio/title/ambient/neon_hum.ogg
+Loading resource: res://.godot/imported/neon_hum.ogg-b999806128e60de6cff780f9e0f2cab3.oggvorbisstr
+Loading resource: res://assets/audio/title/ambient/street_car.ogg
+Loading resource: res://.godot/imported/street_car.ogg-fada1854a774f96cacd2a287d1d2393b.oggvorbisstr
+Loading resource: res://assets/audio/title/ambient/distant_dog.ogg
+Loading resource: res://.godot/imported/distant_dog.ogg-314dcf78091aa16f0e48cc8088148929.oggvorbisstr
+Loading resource: res://assets/audio/title/ambient/metal_creak.ogg
+Loading resource: res://.godot/imported/metal_creak.ogg-55a99b5d75d2a27e3f33ec126b1b005d.oggvorbisstr
+Loading resource: res://assets/textures/mood/night_sky.png
+Loading resource: res://.godot/imported/night_sky.png-a9827fa1d4e08d406570b2419a1835ae.ctex
+Loading resource: res://assets/textures/surfaces/asphalt_albedo.png
+Loading resource: res://.godot/imported/asphalt_albedo.png-fc0bd11ac4c0beb3c7e8bb55bbc78411.ctex
+Loading resource: res://assets/textures/surfaces/asphalt_orm.png
+Loading resource: res://.godot/imported/asphalt_orm.png-977e9aaf40bb1e265d29e57300cf7f74.ctex
+Loading resource: res://assets/textures/surfaces/asphalt_normal.png
+Loading resource: res://.godot/imported/asphalt_normal.png-ab244e2c3545fe383e8137914145756f.ctex
+Loading resource: res://assets/textures/surfaces/paving_albedo.png
+Loading resource: res://.godot/imported/paving_albedo.png-62aa7241fb489c05032a3a810e27fd84.ctex
+Loading resource: res://assets/textures/surfaces/paving_orm.png
+Loading resource: res://.godot/imported/paving_orm.png-5ceb8cf8b7974abc5ea69751d9530948.ctex
+Loading resource: res://assets/textures/surfaces/paving_normal.png
+Loading resource: res://.godot/imported/paving_normal.png-3e5472f1d62fe23026346bf1ae8815d6.ctex
+Loading resource: res://assets/textures/surfaces/plaster_albedo.png
+Loading resource: res://.godot/imported/plaster_albedo.png-03f7684b50b4c89bced580a0056a77ef.ctex
+Loading resource: res://assets/textures/surfaces/plaster_orm.png
+Loading resource: res://.godot/imported/plaster_orm.png-bba6d5e3c3b18b7983a1c6f5dafa4dd5.ctex
+Loading resource: res://assets/textures/surfaces/plaster_normal.png
+Loading resource: res://.godot/imported/plaster_normal.png-e75afbd1b951691287d3547851b13703.ctex
+Loading resource: res://assets/textures/surfaces/painted_metal_albedo.png
+Loading resource: res://.godot/imported/painted_metal_albedo.png-b7143b728608b4a5eba0c2ecf89bda74.ctex
+Loading resource: res://assets/textures/surfaces/painted_metal_orm.png
+Loading resource: res://.godot/imported/painted_metal_orm.png-457c635b11376a20c1da57462d74aef5.ctex
+Loading resource: res://assets/textures/surfaces/painted_metal_normal.png
+Loading resource: res://.godot/imported/painted_metal_normal.png-c6a48ccf153709c476def31301876a6e.ctex
+Loading resource: res://assets/textures/mood/wall_base.png
+Loading resource: res://.godot/imported/wall_base.png-343e08e30543401ba403a85e3ae12b5d.ctex
+Loading resource: res://assets/textures/street/terracotta.png
+Loading resource: res://.godot/imported/terracotta.png-5078c7f06b462e0d1f520d6795aa25aa.ctex
+Loading resource: res://assets/textures/mood/curtain.png
+Loading resource: res://.godot/imported/curtain.png-6e4d5d3635e222b529540a4aa0f6feb7.ctex
+Loading resource: res://assets/textures/mood/lamp_halo.png
+Loading resource: res://.godot/imported/lamp_halo.png-380a2c799479d9d0ade3516581acbc05.ctex
+Loading resource: res://assets/textures/street/market_sign.png
+Loading resource: res://.godot/imported/market_sign.png-33af1bba33568239448b4320b307f883.ctex
+Loading resource: res://assets/textures/surfaces/brick_albedo.png
+Loading resource: res://.godot/imported/brick_albedo.png-ac49a252e1ea7546e06a15d1d3ff9cf9.ctex
+Loading resource: res://assets/textures/surfaces/brick_orm.png
+Loading resource: res://.godot/imported/brick_orm.png-da5077070c4ff353823ddd3a35c886ff.ctex
+Loading resource: res://assets/textures/surfaces/brick_normal.png
+Loading resource: res://.godot/imported/brick_normal.png-4253d4f02825030169387c0ba24a7cf6.ctex
+Loading resource: res://assets/textures/surfaces/steel_albedo.png
+Loading resource: res://.godot/imported/steel_albedo.png-6d6970be3735f4dc798c5e0d661099ae.ctex
+Loading resource: res://assets/textures/surfaces/steel_orm.png
+Loading resource: res://.godot/imported/steel_orm.png-b0ea49a0d4de33eeaa8515ff0221f78e.ctex
+Loading resource: res://assets/textures/surfaces/steel_normal.png
+Loading resource: res://.godot/imported/steel_normal.png-0665173d685d1d0e50820d7ddd67dc02.ctex
+Loading resource: res://assets/textures/surfaces/rubber_albedo.png
+Loading resource: res://.godot/imported/rubber_albedo.png-58fc8b6722331642d4be15bb95850e4a.ctex
+Loading resource: res://assets/textures/surfaces/rubber_orm.png
+Loading resource: res://.godot/imported/rubber_orm.png-1da05e4a3266da74463cf328e3bd589c.ctex
+Loading resource: res://assets/textures/surfaces/rubber_normal.png
+Loading resource: res://.godot/imported/rubber_normal.png-2a8b2d8d217fe1b0b0fff59894919fd6.ctex
+Loading resource: res://assets/textures/surfaces/plastic_albedo.png
+Loading resource: res://.godot/imported/plastic_albedo.png-1ee1b12ec4ecb5574e8a0416bb53385c.ctex
+Loading resource: res://assets/textures/surfaces/plastic_orm.png
+Loading resource: res://.godot/imported/plastic_orm.png-fbcfb5d242cd82e1a9ef0a8028813967.ctex
+Loading resource: res://assets/textures/surfaces/plastic_normal.png
+Loading resource: res://.godot/imported/plastic_normal.png-c0624e7603153411dcd8d2dc8b81612c.ctex
+Loading resource: res://assets/textures/surfaces/azulejo_albedo.png
+Loading resource: res://.godot/imported/azulejo_albedo.png-0e14ea45d0f900994fa61aad986e1e6a.ctex
+Loading resource: res://assets/textures/surfaces/azulejo_orm.png
+Loading resource: res://.godot/imported/azulejo_orm.png-6659ca2e25b433db2f6856e64e46fd9a.ctex
+Loading resource: res://assets/textures/surfaces/azulejo_normal.png
+Loading resource: res://.godot/imported/azulejo_normal.png-80332e9ac9c7759936fdc7682d164ebd.ctex
+Loading resource: res://assets/textures/street/cassiano.png
+Loading resource: res://.godot/imported/cassiano.png-1354a55c55a079d4496d44ed949e7872.ctex
+Loading resource: res://assets/textures/surfaces/bark_albedo.png
+Loading resource: res://.godot/imported/bark_albedo.png-e0215605da6d78775a22cc780ede2a25.ctex
+Loading resource: res://assets/textures/surfaces/bark_orm.png
+Loading resource: res://.godot/imported/bark_orm.png-80f145246590e5af3d779a2aa9667ff7.ctex
+Loading resource: res://assets/textures/surfaces/bark_normal.png
+Loading resource: res://.godot/imported/bark_normal.png-03995879708c254f7754b6fefdb9ba8c.ctex
+Loading resource: res://shaders/foliage.gdshader
+Loading resource: res://assets/textures/mood/leaves.png
+Loading resource: res://.godot/imported/leaves.png-30f8db11514a7ed259fdd467198df990.ctex
+Loading resource: res://assets/models/environment/sedan.glb
+Loading resource: res://.godot/imported/sedan.glb-de247e04806a8def12995e9017dc390a.scn
+Loading resource: res://assets/textures/surfaces/carpaint_orm.png
+Loading resource: res://.godot/imported/carpaint_orm.png-6fb54af379287f0b2a12910dac5b05a9.ctex
+Loading resource: res://assets/textures/surfaces/carpaint_normal.png
+Loading resource: res://.godot/imported/carpaint_normal.png-6a95d84f2339f98f03931fdf9dedd95e.ctex
+Loading resource: res://assets/textures/surfaces/glass_orm.png
+Loading resource: res://.godot/imported/glass_orm.png-0e5fe4c72a8893f59bfbfd1f8b16e915.ctex
+Loading resource: res://assets/textures/surfaces/glass_normal.png
+Loading resource: res://.godot/imported/glass_normal.png-4a7c987057f3e809e9871ed49da6e454.ctex
+Loading resource: res://assets/models/environment/user_car.glb
+Loading resource: res://.godot/imported/user_car.glb-277ce69e96b15c401a85e6bb7b6b2d69.scn
+Loading resource: res://assets/models/environment/user_car_texture_pbr_20250901.png
+Loading resource: res://.godot/imported/user_car_texture_pbr_20250901.png-8df8e96a81ee0d6ce558a4f2d009cec2.ctex
+Loading resource: res://assets/models/environment/user_car_texture_pbr_20250901_metallic-texture_pbr_20250901_roughness.png
+Loading resource: res://.godot/imported/user_car_texture_pbr_20250901_metallic-texture_pbr_20250901_roughness.png-b9a7e51adfb7e2481f2a6a9c5c4e581f.ctex
+Loading resource: res://assets/models/environment/user_car_texture_pbr_20250901_normal.png
+Loading resource: res://.godot/imported/user_car_texture_pbr_20250901_normal.png-e032a5f9a2b5ba5b8e43bb4b3e3c1f63.ctex
+Loading resource: res://assets/textures/details/cracks.png
+Loading resource: res://.godot/imported/cracks.png-6e07de1a316b9c210e7004b44e66eeff.ctex
+Loading resource: res://shaders/street_haze.gdshader
+Loading resource: res://assets/textures/finish/haze_noise.png
+Loading resource: res://.godot/imported/haze_noise.png-c8711b90b416282f2b07914bfbc91603.ctex
+Loading resource: res://assets/textures/depot/contact.png
+Loading resource: res://.godot/imported/contact.png-44d327f6a0cac0122d18525bf941081b.ctex
+Loading resource: res://assets/textures/surfaces/wall_albedo.png
+Loading resource: res://.godot/imported/wall_albedo.png-c9c45015a4adeed3a8dc2e8dc6ff44e9.ctex
+Loading resource: res://assets/textures/surfaces/wall_orm.png
+Loading resource: res://.godot/imported/wall_orm.png-d8fcad96ca0eda9ed5582326be72b70c.ctex
+Loading resource: res://assets/textures/surfaces/wall_normal.png
+Loading resource: res://.godot/imported/wall_normal.png-761a35d8f291014b9645cc99bf5ef1ea.ctex
+Loading resource: res://assets/textures/surfaces/ceramic_albedo.png
+Loading resource: res://.godot/imported/ceramic_albedo.png-c6ca53fe4948e7b25229b8e9120fa469.ctex
+Loading resource: res://assets/textures/surfaces/ceramic_orm.png
+Loading resource: res://.godot/imported/ceramic_orm.png-b0c34ccef591f3b140f2b00ab426d427.ctex
+Loading resource: res://assets/textures/surfaces/ceramic_normal.png
+Loading resource: res://.godot/imported/ceramic_normal.png-09d1fc7f32ee305e929191609899c9a4.ctex
+Loading resource: res://assets/textures/metal.png
+Loading resource: res://.godot/imported/metal.png-a72f9c7f956f4d02b133075ae81d5989.ctex
+Loading resource: res://assets/textures/street/ja_mural.png
+Loading resource: res://.godot/imported/ja_mural.png-804ff6d3f239bb0710dff229c4294b15.ctex
+Loading resource: res://assets/textures/street/contact_icon.png
+Loading resource: res://.godot/imported/contact_icon.png-91386acbad96180250cd6c744df80eea.ctex
+Loading resource: res://assets/textures/finish/open_sign.png
+Loading resource: res://.godot/imported/open_sign.png-89549b4dfb0f4a6fd8b1e1575c59cb3a.ctex
+Loading resource: res://shaders/illuminated_sign.gdshader
+Loading resource: res://assets/textures/finish/cold_sign.png
+Loading resource: res://.godot/imported/cold_sign.png-509d5ee6bc368a136dbfedcfaefcde9d.ctex
+Loading resource: res://assets/textures/depot/roof.png
+Loading resource: res://.godot/imported/roof.png-d42ccf2e3a4201714e663340be378128.ctex
+Loading resource: res://assets/textures/depot/poster.png
+Loading resource: res://.godot/imported/poster.png-7865dc66caf9043ea482b18035b11976.ctex
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://assets/textures/depot/price.png
+Loading resource: res://.godot/imported/price.png-0fc797e4d660799a1cf27e1af6595b0d.ctex
+Loading resource: res://assets/textures/depot/snack_0.png
+Loading resource: res://.godot/imported/snack_0.png-e788b19f60e65e66da161a636bb72eed.ctex
+Loading resource: res://assets/textures/depot/snack_0_orm.png
+Loading resource: res://.godot/imported/snack_0_orm.png-d5bff98ef75f522e2b51f7e1e8fcac0e.ctex
+Loading resource: res://assets/textures/depot/snack_1.png
+Loading resource: res://.godot/imported/snack_1.png-95dbc3b92dc838aaa4a82495247e2066.ctex
+Loading resource: res://assets/textures/depot/snack_1_orm.png
+Loading resource: res://.godot/imported/snack_1_orm.png-807209b58a8e50be010f53ebbebf9c78.ctex
+Loading resource: res://assets/textures/depot/snack_2.png
+Loading resource: res://.godot/imported/snack_2.png-8ccf584d50375b849fccc06dfc49867a.ctex
+Loading resource: res://assets/textures/depot/snack_2_orm.png
+Loading resource: res://.godot/imported/snack_2_orm.png-93ee9cb6417f9172d5d995591b358e66.ctex
+Loading resource: res://assets/textures/depot/snack_3.png
+Loading resource: res://.godot/imported/snack_3.png-f2076656a4cde180480f5b85d90d4490.ctex
+Loading resource: res://assets/textures/depot/snack_3_orm.png
+Loading resource: res://.godot/imported/snack_3_orm.png-91d98c0d8e1d2a476c805eaaca425f7c.ctex
+Loading resource: res://assets/textures/depot/snack_4.png
+Loading resource: res://.godot/imported/snack_4.png-cf3b6ee26e5dd4311c9991d447ab8d03.ctex
+Loading resource: res://assets/textures/depot/snack_4_orm.png
+Loading resource: res://.godot/imported/snack_4_orm.png-28f06c27f53b5e415cdb09a9d61a15e0.ctex
+Loading resource: res://assets/textures/depot/snack_5.png
+Loading resource: res://.godot/imported/snack_5.png-b5c9a4a474c9529b1a1ae53a8858f4b0.ctex
+Loading resource: res://assets/textures/depot/snack_5_orm.png
+Loading resource: res://.godot/imported/snack_5_orm.png-7195e911727ae189fb1d7a7914f1bb7b.ctex
+Loading resource: res://assets/textures/depot/can_0.png
+Loading resource: res://.godot/imported/can_0.png-34c9e055bd990e921a43c9b607ba707f.ctex
+Loading resource: res://assets/textures/depot/can_0_orm.png
+Loading resource: res://.godot/imported/can_0_orm.png-4783958a7feb6a5dc9fb8eb3bc7f2edc.ctex
+Loading resource: res://assets/textures/depot/can_1.png
+Loading resource: res://.godot/imported/can_1.png-6fe2baff7d2dbb29ee53c8c10b27bb6d.ctex
+Loading resource: res://assets/textures/depot/can_1_orm.png
+Loading resource: res://.godot/imported/can_1_orm.png-0566caad94e1101ba07906f5d49c4165.ctex
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://assets/textures/depot/beer_0.png
+Loading resource: res://.godot/imported/beer_0.png-261a4d88e7c1b6cb7aa1e3f5fff88485.ctex
+Loading resource: res://assets/textures/depot/beer_0_orm.png
+Loading resource: res://.godot/imported/beer_0_orm.png-d4de555458f921cceaec018236e171dc.ctex
+Loading resource: res://assets/textures/depot/beer_1.png
+Loading resource: res://.godot/imported/beer_1.png-f50983756e31eec30a5654fee76f6aa0.ctex
+Loading resource: res://assets/textures/depot/beer_1_orm.png
+Loading resource: res://.godot/imported/beer_1_orm.png-f866e059d309bc690ff3b5709c3a68bc.ctex
+Loading resource: res://assets/textures/depot/water.png
+Loading resource: res://.godot/imported/water.png-7a2b447f74e2b892bc8756931afd6bc9.ctex
+Loading resource: res://assets/textures/depot/water_orm.png
+Loading resource: res://.godot/imported/water_orm.png-07ffc88c2555a2234f911fff8e669e95.ctex
+Loading resource: res://assets/textures/depot/spirits.png
+Loading resource: res://.godot/imported/spirits.png-1a444a5bae5dc596a27f9693665d1ab1.ctex
+Loading resource: res://assets/textures/depot/spirits_orm.png
+Loading resource: res://.godot/imported/spirits_orm.png-d5347315e027fc6dd52f0b7b191ca39c.ctex
+Loading resource: res://assets/textures/depot/soda_0.png
+Loading resource: res://.godot/imported/soda_0.png-188aeb4cbd83efba252862b637dd2262.ctex
+Loading resource: res://assets/textures/depot/soda_0_orm.png
+Loading resource: res://.godot/imported/soda_0_orm.png-23bf16ba7f2f48514b82b4b4cce50158.ctex
+Loading resource: res://assets/textures/depot/soda_1.png
+Loading resource: res://.godot/imported/soda_1.png-de3ca87e8e6697dc543cd005a8bfe245.ctex
+Loading resource: res://assets/textures/depot/soda_1_orm.png
+Loading resource: res://.godot/imported/soda_1_orm.png-575ef67e91315ad9e614d2372430a9b6.ctex
+Loading resource: res://scenes/world/props/endcap.tscn
+Loading resource: res://assets/textures/depot/toy_0.png
+Loading resource: res://.godot/imported/toy_0.png-d26a2ae5b28f35ffe7dc49cd58f31181.ctex
+Loading resource: res://assets/textures/depot/toy_1.png
+Loading resource: res://.godot/imported/toy_1.png-416e0afc51a22824af1e4412a2b11422.ctex
+Loading resource: res://assets/textures/depot/toy_2.png
+Loading resource: res://.godot/imported/toy_2.png-ed89b918bd18caf3b7ab9305ee096013.ctex
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://assets/textures/depot/soda_2.png
+Loading resource: res://.godot/imported/soda_2.png-3d683ce146e5ec4d9bdaeecea72f3a6f.ctex
+Loading resource: res://assets/textures/depot/soda_2_orm.png
+Loading resource: res://.godot/imported/soda_2_orm.png-6720ff369831c21063fddb4908d8d9b1.ctex
+Loading resource: res://assets/textures/details/cup_0.png
+Loading resource: res://.godot/imported/cup_0.png-0f49fa1eff2b93fb7ebdcb68399e6fab.ctex
+Loading resource: res://assets/textures/details/cup_1.png
+Loading resource: res://.godot/imported/cup_1.png-717bad07c7dd4960d136cf377f0601b5.ctex
+Loading resource: res://assets/textures/details/cup_2.png
+Loading resource: res://.godot/imported/cup_2.png-c110b9b3c0a7b1c25735a83d54620e8b.ctex
+Loading resource: res://assets/textures/details/cup_3.png
+Loading resource: res://.godot/imported/cup_3.png-bc7501624ae564daae57cbc8baaf946d.ctex
+Loading resource: res://assets/textures/details/cup_4.png
+Loading resource: res://.godot/imported/cup_4.png-ccbf4d9ce854f93aca88939552745a3e.ctex
+Loading resource: res://assets/textures/details/cup_offer.png
+Loading resource: res://.godot/imported/cup_offer.png-803897a6848b43221f37878b9c345f60.ctex
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://assets/textures/depot/beer_banner.png
+Loading resource: res://.godot/imported/beer_banner.png-74858d0fc9a987e411a716a332d678a7.ctex
+Loading resource: res://assets/textures/surfaces/glass_albedo.png
+Loading resource: res://.godot/imported/glass_albedo.png-421a7dc714924936a1e43638d6853a42.ctex
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://assets/textures/depot/soda_banner.png
+Loading resource: res://.godot/imported/soda_banner.png-b19f956356d85a6308ab9f2007f1fa0d.ctex
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://assets/textures/depot/can_2.png
+Loading resource: res://.godot/imported/can_2.png-5485acce8df95ddb37a6da3be3de3b62.ctex
+Loading resource: res://assets/textures/depot/can_2_orm.png
+Loading resource: res://.godot/imported/can_2_orm.png-21979867ae6bd9876e0d2bfb6698518d.ctex
+Loading resource: res://assets/textures/depot/water_banner.png
+Loading resource: res://.godot/imported/water_banner.png-02caff2d713832b1955f6221a8bbaa65.ctex
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://assets/textures/surfaces/wood_albedo.png
+Loading resource: res://.godot/imported/wood_albedo.png-50c315250983b177846cb44a0fced945.ctex
+Loading resource: res://assets/textures/surfaces/wood_orm.png
+Loading resource: res://.godot/imported/wood_orm.png-b139dc84c65f642df1ecd44d7918bdb6.ctex
+Loading resource: res://assets/textures/surfaces/wood_normal.png
+Loading resource: res://.godot/imported/wood_normal.png-9e11a04490f7cc1f3c9e3579c678a7f2.ctex
+Loading resource: res://assets/textures/details/payment_screen.png
+Loading resource: res://.godot/imported/payment_screen.png-60af7a8a2437c01af4e09f243fad554f.ctex
+Loading resource: res://assets/textures/details/counter_notice.png
+Loading resource: res://.godot/imported/counter_notice.png-658a094da4aac9552f8f0475d4f8a077.ctex
+Loading resource: res://assets/textures/details/spirits_0.png
+Loading resource: res://.godot/imported/spirits_0.png-e1cdef4c24347612898eb39b441e1227.ctex
+Loading resource: res://assets/textures/details/spirits_1.png
+Loading resource: res://.godot/imported/spirits_1.png-95148a17da66b12714576515f9017061.ctex
+Loading resource: res://assets/textures/details/spirits_2.png
+Loading resource: res://.godot/imported/spirits_2.png-326dea6fc81ec56d58838239552a5645.ctex
+Loading resource: res://assets/textures/details/ice_freezer.png
+Loading resource: res://.godot/imported/ice_freezer.png-4e915a99c5966448a7c0b0078d984c12.ctex
+Loading resource: res://assets/textures/details/tv_screen.png
+Loading resource: res://.godot/imported/tv_screen.png-cc4a40744a01569190fc8dcf30c830d5.ctex
+Loading resource: res://assets/textures/details/floor_wear.png
+Loading resource: res://.godot/imported/floor_wear.png-55d19869252fb82ba9d834103e196b2f.ctex
+Loading resource: res://assets/textures/finish/charcoal_bag.png
+Loading resource: res://.godot/imported/charcoal_bag.png-0839fa38ceff8f8726e5c58370cfda64.ctex
+Loading resource: res://assets/textures/finish/ice_offer.png
+Loading resource: res://.godot/imported/ice_offer.png-e21b1bfcfd46c2a685a5cc842cc8a033.ctex
+Loading resource: res://assets/textures/finish/plastic_film.png
+Loading resource: res://.godot/imported/plastic_film.png-174a389b1b97f8dd99b1bf19ed345041.ctex
+Loading resource: res://scenes/world/props/freezer.tscn
+Loading resource: res://assets/textures/surfaces/pallet_wood_albedo.png
+Loading resource: res://.godot/imported/pallet_wood_albedo.png-d2db7674bb303479ffbe9b18d1edd876.ctex
+Loading resource: res://assets/textures/surfaces/pallet_wood_orm.png
+Loading resource: res://.godot/imported/pallet_wood_orm.png-355d1bafce83f96225e1d9a9637a67ad.ctex
+Loading resource: res://assets/textures/surfaces/pallet_wood_normal.png
+Loading resource: res://.godot/imported/pallet_wood_normal.png-53c61a8ea6af321c7a96761689a655d0.ctex
+Loading resource: res://scenes/world/props/pallet.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://assets/textures/depot/carton.png
+Loading resource: res://.godot/imported/carton.png-b1c685856af98e691d84575bee1bb323.ctex
+Loading resource: res://assets/textures/depot/carton_orm.png
+Loading resource: res://.godot/imported/carton_orm.png-31ef1a2fd5ea3571d035b0df09712898.ctex
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://assets/models/characters/Felps.glb
+Loading resource: res://.godot/imported/Felps.glb-20b515bccbcd2351cccbdf387185350b.scn
+Loading resource: res://assets/models/characters/Felps_Material_Diffuse.png
+Loading resource: res://.godot/imported/Felps_Material_Diffuse.png-55ae86405edc19a31c58d251063382ab.ctex
+Loading resource: res://assets/models/characters/Felps_Material_Normal.png
+Loading resource: res://.godot/imported/Felps_Material_Normal.png-cb5c1a31c4ecc4ef232b8dbfd9a6764f.ctex
+Loading resource: res://resources/motion/Felps.res
+Loading resource: res://assets/models/characters/Dery.glb
+Loading resource: res://.godot/imported/Dery.glb-8ab9ded77c29e345b13938a0b6bbfd8c.scn
+Loading resource: res://assets/models/characters/Dery_Material_Diffuse.png
+Loading resource: res://.godot/imported/Dery_Material_Diffuse.png-ecfcb4e62e97d8c217df6420b78c012b.ctex
+Loading resource: res://assets/models/characters/Dery_Material_Normal.png
+Loading resource: res://.godot/imported/Dery_Material_Normal.png-7dfb5d88d5dc1ced253c1e4ac784f0d6.ctex
+Loading resource: res://resources/motion/Dery.res
+Loading resource: res://assets/audio/hum.wav
+Loading resource: res://.godot/imported/hum.wav-3e8cb3ba3785f99343e3a053b39d59c0.sample
+Loading resource: res://assets/audio/radio.wav
+Loading resource: res://.godot/imported/radio.wav-7a878d7f142b03f7325c024c723436a0.sample
+Loading resource: res://assets/audio/neighborhood_air.wav
+Loading resource: res://.godot/imported/neighborhood_air.wav-4a56729dfa613a930a24e440cc249a5d.sample
+Loading resource: res://assets/audio/pole_ballast.wav
+Loading resource: res://.godot/imported/pole_ballast.wav-295b3822a5337ada2de747b6e7862580.sample
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/car_idle.ogg
+Loading resource: res://.godot/imported/car_idle.ogg-77cf2c076484e796f009fe0bbcb9f9a4.oggvorbisstr
+Loading resource: res://assets/models/characters/Enemy.glb
+Loading resource: res://.godot/imported/Enemy.glb-6fd530bbebbce3f332ec1943c265ad31.scn
+Loading resource: res://assets/models/characters/Enemy_Material_Diffuse.png
+Loading resource: res://.godot/imported/Enemy_Material_Diffuse.png-27b98f7b9d142e80b7a4789537271796.ctex
+Loading resource: res://assets/models/characters/Enemy_Material_Normal.png
+Loading resource: res://.godot/imported/Enemy_Material_Normal.png-31728038d5f2ac09a2652037d41ab116.ctex
+Loading resource: res://assets/audio/hum.wav
+Loading resource: res://.godot/imported/hum.wav-3e8cb3ba3785f99343e3a053b39d59c0.sample
+Loading resource: res://assets/models/characters/Zirico.glb
+Loading resource: res://.godot/imported/Zirico.glb-e382a95d64deb1676dbb820b078014e9.scn
+Loading resource: res://assets/models/characters/Zirico_Material_Diffuse.png
+Loading resource: res://.godot/imported/Zirico_Material_Diffuse.png-7ade2eb39479d76771fa84d3d9aab016.ctex
+Loading resource: res://assets/models/characters/Zirico_Material_Normal.png
+Loading resource: res://.godot/imported/Zirico_Material_Normal.png-62edd3d501c4d94f66f0adf7277b2b03.ctex
+Loading resource: res://resources/motion/Zirico.res
+Loading resource: res://assets/audio/scares/stock_drag.ogg
+Loading resource: res://.godot/imported/stock_drag.ogg-4fc2b0fdb7ca5b21f7e0eaaf6f761eb9.oggvorbisstr
+PASS domingo inicia sem clientes ou criança no cenário de perigo
+PASS dupla inicia domingo por conversa no balcão
+Loading resource: res://assets/video/dvr_wednesday.ogv
+PASS terminal exige recuperar e entregar o módulo físico antes do vídeo
+PASS Tab fecha o DVR de domingo e devolve controle a Deryk
+PASS Deryk abre a porta do estoque fisicamente
+PASS porta antiga abre para uma sala real de manutenção
+PASS acesso antigo possui piso, vão e navegação até o módulo sem atravessar paredes
+PASS módulo e cadastro são recolhidos pelo personagem presente
+Loading resource: res://assets/textures/mood/night_sky.png
+Loading resource: res://.godot/imported/night_sky.png-a9827fa1d4e08d406570b2419a1835ae.ctex
+Loading resource: res://assets/textures/mood/wall_base.png
+Loading resource: res://.godot/imported/wall_base.png-343e08e30543401ba403a85e3ae12b5d.ctex
+Loading resource: res://assets/textures/mood/curtain.png
+Loading resource: res://.godot/imported/curtain.png-6e4d5d3635e222b529540a4aa0f6feb7.ctex
+Loading resource: res://assets/textures/mood/lamp_halo.png
+Loading resource: res://.godot/imported/lamp_halo.png-380a2c799479d9d0ade3516581acbc05.ctex
+Loading resource: res://assets/textures/street/market_sign.png
+Loading resource: res://.godot/imported/market_sign.png-33af1bba33568239448b4320b307f883.ctex
+Loading resource: res://assets/textures/street/cassiano.png
+Loading resource: res://.godot/imported/cassiano.png-1354a55c55a079d4496d44ed949e7872.ctex
+Loading resource: res://shaders/foliage.gdshader
+Loading resource: res://assets/textures/mood/leaves.png
+Loading resource: res://.godot/imported/leaves.png-30f8db11514a7ed259fdd467198df990.ctex
+Loading resource: res://assets/models/environment/sedan.glb
+Loading resource: res://.godot/imported/sedan.glb-de247e04806a8def12995e9017dc390a.scn
+Loading resource: res://assets/models/environment/user_car.glb
+Loading resource: res://.godot/imported/user_car.glb-277ce69e96b15c401a85e6bb7b6b2d69.scn
+Loading resource: res://assets/textures/details/cracks.png
+Loading resource: res://.godot/imported/cracks.png-6e07de1a316b9c210e7004b44e66eeff.ctex
+Loading resource: res://shaders/street_haze.gdshader
+Loading resource: res://assets/textures/finish/haze_noise.png
+Loading resource: res://.godot/imported/haze_noise.png-c8711b90b416282f2b07914bfbc91603.ctex
+Loading resource: res://assets/textures/street/ja_mural.png
+Loading resource: res://.godot/imported/ja_mural.png-804ff6d3f239bb0710dff229c4294b15.ctex
+Loading resource: res://assets/textures/street/contact_icon.png
+Loading resource: res://.godot/imported/contact_icon.png-91386acbad96180250cd6c744df80eea.ctex
+Loading resource: res://assets/textures/finish/open_sign.png
+Loading resource: res://.godot/imported/open_sign.png-89549b4dfb0f4a6fd8b1e1575c59cb3a.ctex
+Loading resource: res://shaders/illuminated_sign.gdshader
+Loading resource: res://assets/textures/finish/cold_sign.png
+Loading resource: res://.godot/imported/cold_sign.png-509d5ee6bc368a136dbfedcfaefcde9d.ctex
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/endcap.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://assets/textures/details/cup_offer.png
+Loading resource: res://.godot/imported/cup_offer.png-803897a6848b43221f37878b9c345f60.ctex
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://assets/textures/details/payment_screen.png
+Loading resource: res://.godot/imported/payment_screen.png-60af7a8a2437c01af4e09f243fad554f.ctex
+Loading resource: res://assets/textures/details/counter_notice.png
+Loading resource: res://.godot/imported/counter_notice.png-658a094da4aac9552f8f0475d4f8a077.ctex
+Loading resource: res://assets/textures/details/ice_freezer.png
+Loading resource: res://.godot/imported/ice_freezer.png-4e915a99c5966448a7c0b0078d984c12.ctex
+Loading resource: res://assets/textures/details/tv_screen.png
+Loading resource: res://.godot/imported/tv_screen.png-cc4a40744a01569190fc8dcf30c830d5.ctex
+Loading resource: res://assets/textures/details/floor_wear.png
+Loading resource: res://.godot/imported/floor_wear.png-55d19869252fb82ba9d834103e196b2f.ctex
+Loading resource: res://assets/textures/finish/ice_offer.png
+Loading resource: res://.godot/imported/ice_offer.png-e21b1bfcfd46c2a685a5cc842cc8a033.ctex
+Loading resource: res://assets/textures/finish/plastic_film.png
+Loading resource: res://.godot/imported/plastic_film.png-174a389b1b97f8dd99b1bf19ed345041.ctex
+Loading resource: res://scenes/world/props/freezer.tscn
+Loading resource: res://scenes/world/props/pallet.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://assets/models/characters/Felps.glb
+Loading resource: res://.godot/imported/Felps.glb-20b515bccbcd2351cccbdf387185350b.scn
+Loading resource: res://resources/motion/Felps.res
+Loading resource: res://assets/models/characters/Dery.glb
+Loading resource: res://.godot/imported/Dery.glb-8ab9ded77c29e345b13938a0b6bbfd8c.scn
+Loading resource: res://resources/motion/Dery.res
+Loading resource: res://assets/audio/hum.wav
+Loading resource: res://.godot/imported/hum.wav-3e8cb3ba3785f99343e3a053b39d59c0.sample
+Loading resource: res://assets/audio/radio.wav
+Loading resource: res://.godot/imported/radio.wav-7a878d7f142b03f7325c024c723436a0.sample
+Loading resource: res://assets/audio/neighborhood_air.wav
+Loading resource: res://.godot/imported/neighborhood_air.wav-4a56729dfa613a930a24e440cc249a5d.sample
+Loading resource: res://assets/audio/pole_ballast.wav
+Loading resource: res://.godot/imported/pole_ballast.wav-295b3822a5337ada2de747b6e7862580.sample
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/car_idle.ogg
+Loading resource: res://.godot/imported/car_idle.ogg-77cf2c076484e796f009fe0bbcb9f9a4.oggvorbisstr
+Loading resource: res://assets/models/characters/Enemy.glb
+Loading resource: res://.godot/imported/Enemy.glb-6fd530bbebbce3f332ec1943c265ad31.scn
+Loading resource: res://assets/audio/hum.wav
+Loading resource: res://.godot/imported/hum.wav-3e8cb3ba3785f99343e3a053b39d59c0.sample
+Loading resource: res://assets/models/characters/Zirico.glb
+Loading resource: res://.godot/imported/Zirico.glb-e382a95d64deb1676dbb820b078014e9.scn
+Loading resource: res://resources/motion/Zirico.res
+Loading resource: res://assets/audio/scares/stock_drag.ogg
+Loading resource: res://.godot/imported/stock_drag.ogg-4fc2b0fdb7ca5b21f7e0eaaf6f761eb9.oggvorbisstr
+PASS save retoma dentro da manutenção com porta e módulo corretos
+PASS Deryk volta da sala antiga ao balcão por todo o percurso físico
+PASS módulo precisa chegar ao balcão antes da recuperação
+Loading resource: res://assets/video/dvr_wednesday.ogv
+PASS arquivo recuperado é vídeo Theora real, separado da câmera ao vivo
+PASS reprodução do fragmento libera análise sem depender de um temporizador de objetivo invisível
+PASS gravação e cadastro revelam ligação do cliente antes de qualquer perseguição
+PASS não preparar contato no sábado mantém a ajuda pendente no domingo
+PASS cópia do fragmento fica vinculada a Felps e pode sair com ele
+PASS contato e envio no domingo permitem preservar prova e obter ajuda mesmo sem preparo no sábado
+PASS uma cópia enviada não desaparece ao escolher deixar o gravador
+PASS Deryk retorna ao quadro enquanto Felps permanece no terminal
+WARNING: [Physics interpolation] Non-interpolated instance triggered from physics process: "/root/SundayIntegration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@2525/Dery/@Node3D@4863/@SpringArm3D@4864/@Camera3D@4865/@SpotLight3D@4869" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:966)
+Loading resource: res://resources/motion/Enemy.res
+PASS conferência inicia separação física, apagão e checkpoint de fuga
+PASS estoque fica realmente trancado e checkpoint precede a ameaça
+PASS modelo Killer fornecido é reutilizado como um único inimigo físico
+PASS Deryk alcança e abre o pátio enquanto o assassino está no mesmo mundo
+PASS rota até o gerador permanece física durante a fuga
+PASS gerador alimenta estoque e emite ruído no mundo da perseguição
+PASS Deryk consegue retornar ao estoque sob ameaça sem teleporte
+Loading resource: res://assets/video/dvr_wednesday.ogv
+PASS Felps pode liberar a porta pelo terminal energizado sem abandonar seu posto
+PASS cooperação exige Deryk no gerador e Felps no terminal físico
+PASS H manda o companheiro acompanhar sem mover seu corpo instantaneamente
+PASS Felps conduz a fuga de volta à frente do depósito
+PASS comando manual inicia abertura progressiva da saída
+PASS pausa congela perseguição e mecanismo de saída
+PASS preparar a saída no sábado reduz a duração de abertura no domingo
+PASS jogador deixa o prédio e alcança o contato pela calçada
+PASS companheiro sai do estoque, percorre o salão e chega ao mesmo encontro
+PASS saída abre confirmação contextual sem encerrar a história automaticamente
+PASS dois sobreviventes com prova recebem o final do caso esclarecido
+Loading resource: res://assets/textures/mood/night_sky.png
+Loading resource: res://.godot/imported/night_sky.png-a9827fa1d4e08d406570b2419a1835ae.ctex
+Loading resource: res://assets/textures/mood/wall_base.png
+Loading resource: res://.godot/imported/wall_base.png-343e08e30543401ba403a85e3ae12b5d.ctex
+Loading resource: res://assets/textures/mood/curtain.png
+Loading resource: res://.godot/imported/curtain.png-6e4d5d3635e222b529540a4aa0f6feb7.ctex
+Loading resource: res://assets/textures/mood/lamp_halo.png
+Loading resource: res://.godot/imported/lamp_halo.png-380a2c799479d9d0ade3516581acbc05.ctex
+Loading resource: res://assets/textures/street/market_sign.png
+Loading resource: res://.godot/imported/market_sign.png-33af1bba33568239448b4320b307f883.ctex
+Loading resource: res://assets/textures/street/cassiano.png
+Loading resource: res://.godot/imported/cassiano.png-1354a55c55a079d4496d44ed949e7872.ctex
+Loading resource: res://shaders/foliage.gdshader
+Loading resource: res://assets/textures/mood/leaves.png
+Loading resource: res://.godot/imported/leaves.png-30f8db11514a7ed259fdd467198df990.ctex
+Loading resource: res://assets/models/environment/sedan.glb
+Loading resource: res://.godot/imported/sedan.glb-de247e04806a8def12995e9017dc390a.scn
+Loading resource: res://assets/models/environment/user_car.glb
+Loading resource: res://.godot/imported/user_car.glb-277ce69e96b15c401a85e6bb7b6b2d69.scn
+Loading resource: res://assets/textures/details/cracks.png
+Loading resource: res://.godot/imported/cracks.png-6e07de1a316b9c210e7004b44e66eeff.ctex
+Loading resource: res://shaders/street_haze.gdshader
+Loading resource: res://assets/textures/finish/haze_noise.png
+Loading resource: res://.godot/imported/haze_noise.png-c8711b90b416282f2b07914bfbc91603.ctex
+Loading resource: res://assets/textures/street/ja_mural.png
+Loading resource: res://.godot/imported/ja_mural.png-804ff6d3f239bb0710dff229c4294b15.ctex
+Loading resource: res://assets/textures/street/contact_icon.png
+Loading resource: res://.godot/imported/contact_icon.png-91386acbad96180250cd6c744df80eea.ctex
+Loading resource: res://assets/textures/finish/open_sign.png
+Loading resource: res://.godot/imported/open_sign.png-89549b4dfb0f4a6fd8b1e1575c59cb3a.ctex
+Loading resource: res://shaders/illuminated_sign.gdshader
+Loading resource: res://assets/textures/finish/cold_sign.png
+Loading resource: res://.godot/imported/cold_sign.png-509d5ee6bc368a136dbfedcfaefcde9d.ctex
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/endcap.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://assets/textures/details/cup_offer.png
+Loading resource: res://.godot/imported/cup_offer.png-803897a6848b43221f37878b9c345f60.ctex
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://assets/textures/details/payment_screen.png
+Loading resource: res://.godot/imported/payment_screen.png-60af7a8a2437c01af4e09f243fad554f.ctex
+Loading resource: res://assets/textures/details/counter_notice.png
+Loading resource: res://.godot/imported/counter_notice.png-658a094da4aac9552f8f0475d4f8a077.ctex
+Loading resource: res://assets/textures/details/ice_freezer.png
+Loading resource: res://.godot/imported/ice_freezer.png-4e915a99c5966448a7c0b0078d984c12.ctex
+Loading resource: res://assets/textures/details/tv_screen.png
+Loading resource: res://.godot/imported/tv_screen.png-cc4a40744a01569190fc8dcf30c830d5.ctex
+Loading resource: res://assets/textures/details/floor_wear.png
+Loading resource: res://.godot/imported/floor_wear.png-55d19869252fb82ba9d834103e196b2f.ctex
+Loading resource: res://assets/textures/finish/ice_offer.png
+Loading resource: res://.godot/imported/ice_offer.png-e21b1bfcfd46c2a685a5cc842cc8a033.ctex
+Loading resource: res://assets/textures/finish/plastic_film.png
+Loading resource: res://.godot/imported/plastic_film.png-174a389b1b97f8dd99b1bf19ed345041.ctex
+Loading resource: res://scenes/world/props/freezer.tscn
+Loading resource: res://scenes/world/props/pallet.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://assets/models/characters/Felps.glb
+Loading resource: res://.godot/imported/Felps.glb-20b515bccbcd2351cccbdf387185350b.scn
+Loading resource: res://resources/motion/Felps.res
+Loading resource: res://assets/models/characters/Dery.glb
+Loading resource: res://.godot/imported/Dery.glb-8ab9ded77c29e345b13938a0b6bbfd8c.scn
+Loading resource: res://resources/motion/Dery.res
+Loading resource: res://assets/audio/hum.wav
+Loading resource: res://.godot/imported/hum.wav-3e8cb3ba3785f99343e3a053b39d59c0.sample
+Loading resource: res://assets/audio/radio.wav
+Loading resource: res://.godot/imported/radio.wav-7a878d7f142b03f7325c024c723436a0.sample
+Loading resource: res://assets/audio/neighborhood_air.wav
+Loading resource: res://.godot/imported/neighborhood_air.wav-4a56729dfa613a930a24e440cc249a5d.sample
+Loading resource: res://assets/audio/pole_ballast.wav
+Loading resource: res://.godot/imported/pole_ballast.wav-295b3822a5337ada2de747b6e7862580.sample
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/car_idle.ogg
+Loading resource: res://.godot/imported/car_idle.ogg-77cf2c076484e796f009fe0bbcb9f9a4.oggvorbisstr
+Loading resource: res://assets/models/characters/Enemy.glb
+Loading resource: res://.godot/imported/Enemy.glb-6fd530bbebbce3f332ec1943c265ad31.scn
+Loading resource: res://assets/audio/hum.wav
+Loading resource: res://.godot/imported/hum.wav-3e8cb3ba3785f99343e3a053b39d59c0.sample
+Loading resource: res://assets/models/characters/Zirico.glb
+Loading resource: res://.godot/imported/Zirico.glb-e382a95d64deb1676dbb820b078014e9.scn
+Loading resource: res://resources/motion/Zirico.res
+Loading resource: res://assets/audio/scares/stock_drag.ogg
+Loading resource: res://.godot/imported/stock_drag.ogg-4fc2b0fdb7ca5b21f7e0eaaf6f761eb9.oggvorbisstr
+PASS continuar depois do fim reabre o epílogo salvo
+Loading resource: res://assets/textures/mood/night_sky.png
+Loading resource: res://.godot/imported/night_sky.png-a9827fa1d4e08d406570b2419a1835ae.ctex
+Loading resource: res://assets/textures/mood/wall_base.png
+Loading resource: res://.godot/imported/wall_base.png-343e08e30543401ba403a85e3ae12b5d.ctex
+Loading resource: res://assets/textures/mood/curtain.png
+Loading resource: res://.godot/imported/curtain.png-6e4d5d3635e222b529540a4aa0f6feb7.ctex
+Loading resource: res://assets/textures/mood/lamp_halo.png
+Loading resource: res://.godot/imported/lamp_halo.png-380a2c799479d9d0ade3516581acbc05.ctex
+Loading resource: res://assets/textures/street/market_sign.png
+Loading resource: res://.godot/imported/market_sign.png-33af1bba33568239448b4320b307f883.ctex
+Loading resource: res://assets/textures/street/cassiano.png
+Loading resource: res://.godot/imported/cassiano.png-1354a55c55a079d4496d44ed949e7872.ctex
+Loading resource: res://shaders/foliage.gdshader
+Loading resource: res://assets/textures/mood/leaves.png
+Loading resource: res://.godot/imported/leaves.png-30f8db11514a7ed259fdd467198df990.ctex
+Loading resource: res://assets/models/environment/sedan.glb
+Loading resource: res://.godot/imported/sedan.glb-de247e04806a8def12995e9017dc390a.scn
+Loading resource: res://assets/models/environment/user_car.glb
+Loading resource: res://.godot/imported/user_car.glb-277ce69e96b15c401a85e6bb7b6b2d69.scn
+Loading resource: res://assets/textures/details/cracks.png
+Loading resource: res://.godot/imported/cracks.png-6e07de1a316b9c210e7004b44e66eeff.ctex
+Loading resource: res://shaders/street_haze.gdshader
+Loading resource: res://assets/textures/finish/haze_noise.png
+Loading resource: res://.godot/imported/haze_noise.png-c8711b90b416282f2b07914bfbc91603.ctex
+Loading resource: res://assets/textures/street/ja_mural.png
+Loading resource: res://.godot/imported/ja_mural.png-804ff6d3f239bb0710dff229c4294b15.ctex
+Loading resource: res://assets/textures/street/contact_icon.png
+Loading resource: res://.godot/imported/contact_icon.png-91386acbad96180250cd6c744df80eea.ctex
+Loading resource: res://assets/textures/finish/open_sign.png
+Loading resource: res://.godot/imported/open_sign.png-89549b4dfb0f4a6fd8b1e1575c59cb3a.ctex
+Loading resource: res://shaders/illuminated_sign.gdshader
+Loading resource: res://assets/textures/finish/cold_sign.png
+Loading resource: res://.godot/imported/cold_sign.png-509d5ee6bc368a136dbfedcfaefcde9d.ctex
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/endcap.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://assets/textures/details/cup_offer.png
+Loading resource: res://.godot/imported/cup_offer.png-803897a6848b43221f37878b9c345f60.ctex
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://assets/textures/details/payment_screen.png
+Loading resource: res://.godot/imported/payment_screen.png-60af7a8a2437c01af4e09f243fad554f.ctex
+Loading resource: res://assets/textures/details/counter_notice.png
+Loading resource: res://.godot/imported/counter_notice.png-658a094da4aac9552f8f0475d4f8a077.ctex
+Loading resource: res://assets/textures/details/ice_freezer.png
+Loading resource: res://.godot/imported/ice_freezer.png-4e915a99c5966448a7c0b0078d984c12.ctex
+Loading resource: res://assets/textures/details/tv_screen.png
+Loading resource: res://.godot/imported/tv_screen.png-cc4a40744a01569190fc8dcf30c830d5.ctex
+Loading resource: res://assets/textures/details/floor_wear.png
+Loading resource: res://.godot/imported/floor_wear.png-55d19869252fb82ba9d834103e196b2f.ctex
+Loading resource: res://assets/textures/finish/ice_offer.png
+Loading resource: res://.godot/imported/ice_offer.png-e21b1bfcfd46c2a685a5cc842cc8a033.ctex
+Loading resource: res://assets/textures/finish/plastic_film.png
+Loading resource: res://.godot/imported/plastic_film.png-174a389b1b97f8dd99b1bf19ed345041.ctex
+Loading resource: res://scenes/world/props/freezer.tscn
+Loading resource: res://scenes/world/props/pallet.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://assets/models/characters/Felps.glb
+Loading resource: res://.godot/imported/Felps.glb-20b515bccbcd2351cccbdf387185350b.scn
+Loading resource: res://resources/motion/Felps.res
+Loading resource: res://assets/models/characters/Dery.glb
+Loading resource: res://.godot/imported/Dery.glb-8ab9ded77c29e345b13938a0b6bbfd8c.scn
+Loading resource: res://resources/motion/Dery.res
+Loading resource: res://assets/audio/hum.wav
+Loading resource: res://.godot/imported/hum.wav-3e8cb3ba3785f99343e3a053b39d59c0.sample
+Loading resource: res://assets/audio/radio.wav
+Loading resource: res://.godot/imported/radio.wav-7a878d7f142b03f7325c024c723436a0.sample
+Loading resource: res://assets/audio/neighborhood_air.wav
+Loading resource: res://.godot/imported/neighborhood_air.wav-4a56729dfa613a930a24e440cc249a5d.sample
+Loading resource: res://assets/audio/pole_ballast.wav
+Loading resource: res://.godot/imported/pole_ballast.wav-295b3822a5337ada2de747b6e7862580.sample
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/car_idle.ogg
+Loading resource: res://.godot/imported/car_idle.ogg-77cf2c076484e796f009fe0bbcb9f9a4.oggvorbisstr
+Loading resource: res://assets/models/characters/Enemy.glb
+Loading resource: res://.godot/imported/Enemy.glb-6fd530bbebbce3f332ec1943c265ad31.scn
+Loading resource: res://assets/audio/hum.wav
+Loading resource: res://.godot/imported/hum.wav-3e8cb3ba3785f99343e3a053b39d59c0.sample
+Loading resource: res://assets/models/characters/Zirico.glb
+Loading resource: res://.godot/imported/Zirico.glb-e382a95d64deb1676dbb820b078014e9.scn
+Loading resource: res://resources/motion/Zirico.res
+Loading resource: res://resources/motion/Enemy.res
+Loading resource: res://assets/audio/scares/stock_drag.ogg
+Loading resource: res://.godot/imported/stock_drag.ogg-4fc2b0fdb7ca5b21f7e0eaaf6f761eb9.oggvorbisstr
+PASS sem preparo no sábado, abertura manual exige permanecer por mais tempo
+PASS afastar-se do comando interrompe a abertura em vez de liberar saída remotamente
+Loading resource: res://assets/textures/mood/night_sky.png
+Loading resource: res://.godot/imported/night_sky.png-a9827fa1d4e08d406570b2419a1835ae.ctex
+Loading resource: res://assets/textures/mood/wall_base.png
+Loading resource: res://.godot/imported/wall_base.png-343e08e30543401ba403a85e3ae12b5d.ctex
+Loading resource: res://assets/textures/mood/curtain.png
+Loading resource: res://.godot/imported/curtain.png-6e4d5d3635e222b529540a4aa0f6feb7.ctex
+Loading resource: res://assets/textures/mood/lamp_halo.png
+Loading resource: res://.godot/imported/lamp_halo.png-380a2c799479d9d0ade3516581acbc05.ctex
+Loading resource: res://assets/textures/street/market_sign.png
+Loading resource: res://.godot/imported/market_sign.png-33af1bba33568239448b4320b307f883.ctex
+Loading resource: res://assets/textures/street/cassiano.png
+Loading resource: res://.godot/imported/cassiano.png-1354a55c55a079d4496d44ed949e7872.ctex
+Loading resource: res://shaders/foliage.gdshader
+Loading resource: res://assets/textures/mood/leaves.png
+Loading resource: res://.godot/imported/leaves.png-30f8db11514a7ed259fdd467198df990.ctex
+Loading resource: res://assets/models/environment/sedan.glb
+Loading resource: res://.godot/imported/sedan.glb-de247e04806a8def12995e9017dc390a.scn
+Loading resource: res://assets/models/environment/user_car.glb
+Loading resource: res://.godot/imported/user_car.glb-277ce69e96b15c401a85e6bb7b6b2d69.scn
+Loading resource: res://assets/textures/details/cracks.png
+Loading resource: res://.godot/imported/cracks.png-6e07de1a316b9c210e7004b44e66eeff.ctex
+Loading resource: res://shaders/street_haze.gdshader
+Loading resource: res://assets/textures/finish/haze_noise.png
+Loading resource: res://.godot/imported/haze_noise.png-c8711b90b416282f2b07914bfbc91603.ctex
+Loading resource: res://assets/textures/street/ja_mural.png
+Loading resource: res://.godot/imported/ja_mural.png-804ff6d3f239bb0710dff229c4294b15.ctex
+Loading resource: res://assets/textures/street/contact_icon.png
+Loading resource: res://.godot/imported/contact_icon.png-91386acbad96180250cd6c744df80eea.ctex
+Loading resource: res://assets/textures/finish/open_sign.png
+Loading resource: res://.godot/imported/open_sign.png-89549b4dfb0f4a6fd8b1e1575c59cb3a.ctex
+Loading resource: res://shaders/illuminated_sign.gdshader
+Loading resource: res://assets/textures/finish/cold_sign.png
+Loading resource: res://.godot/imported/cold_sign.png-509d5ee6bc368a136dbfedcfaefcde9d.ctex
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/endcap.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://assets/textures/details/cup_offer.png
+Loading resource: res://.godot/imported/cup_offer.png-803897a6848b43221f37878b9c345f60.ctex
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://assets/textures/details/payment_screen.png
+Loading resource: res://.godot/imported/payment_screen.png-60af7a8a2437c01af4e09f243fad554f.ctex
+Loading resource: res://assets/textures/details/counter_notice.png
+Loading resource: res://.godot/imported/counter_notice.png-658a094da4aac9552f8f0475d4f8a077.ctex
+Loading resource: res://assets/textures/details/ice_freezer.png
+Loading resource: res://.godot/imported/ice_freezer.png-4e915a99c5966448a7c0b0078d984c12.ctex
+Loading resource: res://assets/textures/details/tv_screen.png
+Loading resource: res://.godot/imported/tv_screen.png-cc4a40744a01569190fc8dcf30c830d5.ctex
+Loading resource: res://assets/textures/details/floor_wear.png
+Loading resource: res://.godot/imported/floor_wear.png-55d19869252fb82ba9d834103e196b2f.ctex
+Loading resource: res://assets/textures/finish/ice_offer.png
+Loading resource: res://.godot/imported/ice_offer.png-e21b1bfcfd46c2a685a5cc842cc8a033.ctex
+Loading resource: res://assets/textures/finish/plastic_film.png
+Loading resource: res://.godot/imported/plastic_film.png-174a389b1b97f8dd99b1bf19ed345041.ctex
+Loading resource: res://scenes/world/props/freezer.tscn
+Loading resource: res://scenes/world/props/pallet.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://assets/models/characters/Felps.glb
+Loading resource: res://.godot/imported/Felps.glb-20b515bccbcd2351cccbdf387185350b.scn
+Loading resource: res://resources/motion/Felps.res
+Loading resource: res://assets/models/characters/Dery.glb
+Loading resource: res://.godot/imported/Dery.glb-8ab9ded77c29e345b13938a0b6bbfd8c.scn
+Loading resource: res://resources/motion/Dery.res
+Loading resource: res://assets/audio/hum.wav
+Loading resource: res://.godot/imported/hum.wav-3e8cb3ba3785f99343e3a053b39d59c0.sample
+Loading resource: res://assets/audio/radio.wav
+Loading resource: res://.godot/imported/radio.wav-7a878d7f142b03f7325c024c723436a0.sample
+Loading resource: res://assets/audio/neighborhood_air.wav
+Loading resource: res://.godot/imported/neighborhood_air.wav-4a56729dfa613a930a24e440cc249a5d.sample
+Loading resource: res://assets/audio/pole_ballast.wav
+Loading resource: res://.godot/imported/pole_ballast.wav-295b3822a5337ada2de747b6e7862580.sample
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/car_idle.ogg
+Loading resource: res://.godot/imported/car_idle.ogg-77cf2c076484e796f009fe0bbcb9f9a4.oggvorbisstr
+Loading resource: res://assets/models/characters/Enemy.glb
+Loading resource: res://.godot/imported/Enemy.glb-6fd530bbebbce3f332ec1943c265ad31.scn
+Loading resource: res://assets/audio/hum.wav
+Loading resource: res://.godot/imported/hum.wav-3e8cb3ba3785f99343e3a053b39d59c0.sample
+Loading resource: res://assets/models/characters/Zirico.glb
+Loading resource: res://.godot/imported/Zirico.glb-e382a95d64deb1676dbb820b078014e9.scn
+Loading resource: res://resources/motion/Zirico.res
+Loading resource: res://resources/motion/Enemy.res
+Loading resource: res://assets/audio/scares/stock_drag.ogg
+Loading resource: res://.godot/imported/stock_drag.ogg-4fc2b0fdb7ca5b21f7e0eaaf6f761eb9.oggvorbisstr
+PASS visão reconhece personagem exposto no cone sem consultar o personagem controlado
+PASS porta e parede bloqueiam detecção e captura através da divisão
+PASS ruído muda busca para a posição ouvida
+PASS Tab não reinicia nem teleporta o assassino ou apaga sua memória
+PASS lanterna aumenta alcance de detecção em um corredor escuro
+Loading resource: res://assets/textures/mood/night_sky.png
+Loading resource: res://.godot/imported/night_sky.png-a9827fa1d4e08d406570b2419a1835ae.ctex
+Loading resource: res://assets/textures/mood/wall_base.png
+Loading resource: res://.godot/imported/wall_base.png-343e08e30543401ba403a85e3ae12b5d.ctex
+Loading resource: res://assets/textures/mood/curtain.png
+Loading resource: res://.godot/imported/curtain.png-6e4d5d3635e222b529540a4aa0f6feb7.ctex
+Loading resource: res://assets/textures/mood/lamp_halo.png
+Loading resource: res://.godot/imported/lamp_halo.png-380a2c799479d9d0ade3516581acbc05.ctex
+Loading resource: res://assets/textures/street/market_sign.png
+Loading resource: res://.godot/imported/market_sign.png-33af1bba33568239448b4320b307f883.ctex
+Loading resource: res://assets/textures/street/cassiano.png
+Loading resource: res://.godot/imported/cassiano.png-1354a55c55a079d4496d44ed949e7872.ctex
+Loading resource: res://shaders/foliage.gdshader
+Loading resource: res://assets/textures/mood/leaves.png
+Loading resource: res://.godot/imported/leaves.png-30f8db11514a7ed259fdd467198df990.ctex
+Loading resource: res://assets/models/environment/sedan.glb
+Loading resource: res://.godot/imported/sedan.glb-de247e04806a8def12995e9017dc390a.scn
+Loading resource: res://assets/models/environment/user_car.glb
+Loading resource: res://.godot/imported/user_car.glb-277ce69e96b15c401a85e6bb7b6b2d69.scn
+Loading resource: res://assets/textures/details/cracks.png
+Loading resource: res://.godot/imported/cracks.png-6e07de1a316b9c210e7004b44e66eeff.ctex
+Loading resource: res://shaders/street_haze.gdshader
+Loading resource: res://assets/textures/finish/haze_noise.png
+Loading resource: res://.godot/imported/haze_noise.png-c8711b90b416282f2b07914bfbc91603.ctex
+Loading resource: res://assets/textures/street/ja_mural.png
+Loading resource: res://.godot/imported/ja_mural.png-804ff6d3f239bb0710dff229c4294b15.ctex
+Loading resource: res://assets/textures/street/contact_icon.png
+Loading resource: res://.godot/imported/contact_icon.png-91386acbad96180250cd6c744df80eea.ctex
+Loading resource: res://assets/textures/finish/open_sign.png
+Loading resource: res://.godot/imported/open_sign.png-89549b4dfb0f4a6fd8b1e1575c59cb3a.ctex
+Loading resource: res://shaders/illuminated_sign.gdshader
+Loading resource: res://assets/textures/finish/cold_sign.png
+Loading resource: res://.godot/imported/cold_sign.png-509d5ee6bc368a136dbfedcfaefcde9d.ctex
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/endcap.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://assets/textures/details/cup_offer.png
+Loading resource: res://.godot/imported/cup_offer.png-803897a6848b43221f37878b9c345f60.ctex
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://assets/textures/details/payment_screen.png
+Loading resource: res://.godot/imported/payment_screen.png-60af7a8a2437c01af4e09f243fad554f.ctex
+Loading resource: res://assets/textures/details/counter_notice.png
+Loading resource: res://.godot/imported/counter_notice.png-658a094da4aac9552f8f0475d4f8a077.ctex
+Loading resource: res://assets/textures/details/ice_freezer.png
+Loading resource: res://.godot/imported/ice_freezer.png-4e915a99c5966448a7c0b0078d984c12.ctex
+Loading resource: res://assets/textures/details/tv_screen.png
+Loading resource: res://.godot/imported/tv_screen.png-cc4a40744a01569190fc8dcf30c830d5.ctex
+Loading resource: res://assets/textures/details/floor_wear.png
+Loading resource: res://.godot/imported/floor_wear.png-55d19869252fb82ba9d834103e196b2f.ctex
+Loading resource: res://assets/textures/finish/ice_offer.png
+Loading resource: res://.godot/imported/ice_offer.png-e21b1bfcfd46c2a685a5cc842cc8a033.ctex
+Loading resource: res://assets/textures/finish/plastic_film.png
+Loading resource: res://.godot/imported/plastic_film.png-174a389b1b97f8dd99b1bf19ed345041.ctex
+Loading resource: res://scenes/world/props/freezer.tscn
+Loading resource: res://scenes/world/props/pallet.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://assets/models/characters/Felps.glb
+Loading resource: res://.godot/imported/Felps.glb-20b515bccbcd2351cccbdf387185350b.scn
+Loading resource: res://resources/motion/Felps.res
+Loading resource: res://assets/models/characters/Dery.glb
+Loading resource: res://.godot/imported/Dery.glb-8ab9ded77c29e345b13938a0b6bbfd8c.scn
+Loading resource: res://resources/motion/Dery.res
+Loading resource: res://assets/audio/hum.wav
+Loading resource: res://.godot/imported/hum.wav-3e8cb3ba3785f99343e3a053b39d59c0.sample
+Loading resource: res://assets/audio/radio.wav
+Loading resource: res://.godot/imported/radio.wav-7a878d7f142b03f7325c024c723436a0.sample
+Loading resource: res://assets/audio/neighborhood_air.wav
+Loading resource: res://.godot/imported/neighborhood_air.wav-4a56729dfa613a930a24e440cc249a5d.sample
+Loading resource: res://assets/audio/pole_ballast.wav
+Loading resource: res://.godot/imported/pole_ballast.wav-295b3822a5337ada2de747b6e7862580.sample
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/car_idle.ogg
+Loading resource: res://.godot/imported/car_idle.ogg-77cf2c076484e796f009fe0bbcb9f9a4.oggvorbisstr
+Loading resource: res://assets/models/characters/Enemy.glb
+Loading resource: res://.godot/imported/Enemy.glb-6fd530bbebbce3f332ec1943c265ad31.scn
+Loading resource: res://assets/audio/hum.wav
+Loading resource: res://.godot/imported/hum.wav-3e8cb3ba3785f99343e3a053b39d59c0.sample
+Loading resource: res://assets/models/characters/Zirico.glb
+Loading resource: res://.godot/imported/Zirico.glb-e382a95d64deb1676dbb820b078014e9.scn
+Loading resource: res://resources/motion/Zirico.res
+Loading resource: res://resources/motion/Enemy.res
+Loading resource: res://assets/audio/scares/stock_drag.ogg
+Loading resource: res://.godot/imported/stock_drag.ogg-4fc2b0fdb7ca5b21f7e0eaaf6f761eb9.oggvorbisstr
+PASS save conserva posição de busca, tempo, estado e último ponto conhecido
+Loading resource: res://assets/textures/mood/night_sky.png
+Loading resource: res://.godot/imported/night_sky.png-a9827fa1d4e08d406570b2419a1835ae.ctex
+Loading resource: res://assets/textures/mood/wall_base.png
+Loading resource: res://.godot/imported/wall_base.png-343e08e30543401ba403a85e3ae12b5d.ctex
+Loading resource: res://assets/textures/mood/curtain.png
+Loading resource: res://.godot/imported/curtain.png-6e4d5d3635e222b529540a4aa0f6feb7.ctex
+Loading resource: res://assets/textures/mood/lamp_halo.png
+Loading resource: res://.godot/imported/lamp_halo.png-380a2c799479d9d0ade3516581acbc05.ctex
+Loading resource: res://assets/textures/street/market_sign.png
+Loading resource: res://.godot/imported/market_sign.png-33af1bba33568239448b4320b307f883.ctex
+Loading resource: res://assets/textures/street/cassiano.png
+Loading resource: res://.godot/imported/cassiano.png-1354a55c55a079d4496d44ed949e7872.ctex
+Loading resource: res://shaders/foliage.gdshader
+Loading resource: res://assets/textures/mood/leaves.png
+Loading resource: res://.godot/imported/leaves.png-30f8db11514a7ed259fdd467198df990.ctex
+Loading resource: res://assets/models/environment/sedan.glb
+Loading resource: res://.godot/imported/sedan.glb-de247e04806a8def12995e9017dc390a.scn
+Loading resource: res://assets/models/environment/user_car.glb
+Loading resource: res://.godot/imported/user_car.glb-277ce69e96b15c401a85e6bb7b6b2d69.scn
+Loading resource: res://assets/textures/details/cracks.png
+Loading resource: res://.godot/imported/cracks.png-6e07de1a316b9c210e7004b44e66eeff.ctex
+Loading resource: res://shaders/street_haze.gdshader
+Loading resource: res://assets/textures/finish/haze_noise.png
+Loading resource: res://.godot/imported/haze_noise.png-c8711b90b416282f2b07914bfbc91603.ctex
+Loading resource: res://assets/textures/street/ja_mural.png
+Loading resource: res://.godot/imported/ja_mural.png-804ff6d3f239bb0710dff229c4294b15.ctex
+Loading resource: res://assets/textures/street/contact_icon.png
+Loading resource: res://.godot/imported/contact_icon.png-91386acbad96180250cd6c744df80eea.ctex
+Loading resource: res://assets/textures/finish/open_sign.png
+Loading resource: res://.godot/imported/open_sign.png-89549b4dfb0f4a6fd8b1e1575c59cb3a.ctex
+Loading resource: res://shaders/illuminated_sign.gdshader
+Loading resource: res://assets/textures/finish/cold_sign.png
+Loading resource: res://.godot/imported/cold_sign.png-509d5ee6bc368a136dbfedcfaefcde9d.ctex
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/endcap.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://assets/textures/details/cup_offer.png
+Loading resource: res://.godot/imported/cup_offer.png-803897a6848b43221f37878b9c345f60.ctex
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://assets/textures/details/payment_screen.png
+Loading resource: res://.godot/imported/payment_screen.png-60af7a8a2437c01af4e09f243fad554f.ctex
+Loading resource: res://assets/textures/details/counter_notice.png
+Loading resource: res://.godot/imported/counter_notice.png-658a094da4aac9552f8f0475d4f8a077.ctex
+Loading resource: res://assets/textures/details/ice_freezer.png
+Loading resource: res://.godot/imported/ice_freezer.png-4e915a99c5966448a7c0b0078d984c12.ctex
+Loading resource: res://assets/textures/details/tv_screen.png
+Loading resource: res://.godot/imported/tv_screen.png-cc4a40744a01569190fc8dcf30c830d5.ctex
+Loading resource: res://assets/textures/details/floor_wear.png
+Loading resource: res://.godot/imported/floor_wear.png-55d19869252fb82ba9d834103e196b2f.ctex
+Loading resource: res://assets/textures/finish/ice_offer.png
+Loading resource: res://.godot/imported/ice_offer.png-e21b1bfcfd46c2a685a5cc842cc8a033.ctex
+Loading resource: res://assets/textures/finish/plastic_film.png
+Loading resource: res://.godot/imported/plastic_film.png-174a389b1b97f8dd99b1bf19ed345041.ctex
+Loading resource: res://scenes/world/props/freezer.tscn
+Loading resource: res://scenes/world/props/pallet.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://assets/models/characters/Felps.glb
+Loading resource: res://.godot/imported/Felps.glb-20b515bccbcd2351cccbdf387185350b.scn
+Loading resource: res://resources/motion/Felps.res
+Loading resource: res://assets/models/characters/Dery.glb
+Loading resource: res://.godot/imported/Dery.glb-8ab9ded77c29e345b13938a0b6bbfd8c.scn
+Loading resource: res://resources/motion/Dery.res
+Loading resource: res://assets/audio/hum.wav
+Loading resource: res://.godot/imported/hum.wav-3e8cb3ba3785f99343e3a053b39d59c0.sample
+Loading resource: res://assets/audio/radio.wav
+Loading resource: res://.godot/imported/radio.wav-7a878d7f142b03f7325c024c723436a0.sample
+Loading resource: res://assets/audio/neighborhood_air.wav
+Loading resource: res://.godot/imported/neighborhood_air.wav-4a56729dfa613a930a24e440cc249a5d.sample
+Loading resource: res://assets/audio/pole_ballast.wav
+Loading resource: res://.godot/imported/pole_ballast.wav-295b3822a5337ada2de747b6e7862580.sample
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/car_idle.ogg
+Loading resource: res://.godot/imported/car_idle.ogg-77cf2c076484e796f009fe0bbcb9f9a4.oggvorbisstr
+Loading resource: res://assets/models/characters/Enemy.glb
+Loading resource: res://.godot/imported/Enemy.glb-6fd530bbebbce3f332ec1943c265ad31.scn
+Loading resource: res://assets/audio/hum.wav
+Loading resource: res://.godot/imported/hum.wav-3e8cb3ba3785f99343e3a053b39d59c0.sample
+Loading resource: res://assets/models/characters/Zirico.glb
+Loading resource: res://.godot/imported/Zirico.glb-e382a95d64deb1676dbb820b078014e9.scn
+Loading resource: res://resources/motion/Zirico.res
+Loading resource: res://resources/motion/Enemy.res
+Loading resource: res://assets/audio/scares/stock_drag.ogg
+Loading resource: res://.godot/imported/stock_drag.ogg-4fc2b0fdb7ca5b21f7e0eaaf6f761eb9.oggvorbisstr
+PASS save preserva alvo e tempo restante do golpe em preparação
+PASS captura abre derrota recuperável sem gravar final narrativo
+Loading resource: res://assets/textures/mood/night_sky.png
+Loading resource: res://.godot/imported/night_sky.png-a9827fa1d4e08d406570b2419a1835ae.ctex
+Loading resource: res://assets/textures/mood/wall_base.png
+Loading resource: res://.godot/imported/wall_base.png-343e08e30543401ba403a85e3ae12b5d.ctex
+Loading resource: res://assets/textures/mood/curtain.png
+Loading resource: res://.godot/imported/curtain.png-6e4d5d3635e222b529540a4aa0f6feb7.ctex
+Loading resource: res://assets/textures/mood/lamp_halo.png
+Loading resource: res://.godot/imported/lamp_halo.png-380a2c799479d9d0ade3516581acbc05.ctex
+Loading resource: res://assets/textures/street/market_sign.png
+Loading resource: res://.godot/imported/market_sign.png-33af1bba33568239448b4320b307f883.ctex
+Loading resource: res://assets/textures/street/cassiano.png
+Loading resource: res://.godot/imported/cassiano.png-1354a55c55a079d4496d44ed949e7872.ctex
+Loading resource: res://shaders/foliage.gdshader
+Loading resource: res://assets/textures/mood/leaves.png
+Loading resource: res://.godot/imported/leaves.png-30f8db11514a7ed259fdd467198df990.ctex
+Loading resource: res://assets/models/environment/sedan.glb
+Loading resource: res://.godot/imported/sedan.glb-de247e04806a8def12995e9017dc390a.scn
+Loading resource: res://assets/models/environment/user_car.glb
+Loading resource: res://.godot/imported/user_car.glb-277ce69e96b15c401a85e6bb7b6b2d69.scn
+Loading resource: res://assets/textures/details/cracks.png
+Loading resource: res://.godot/imported/cracks.png-6e07de1a316b9c210e7004b44e66eeff.ctex
+Loading resource: res://shaders/street_haze.gdshader
+Loading resource: res://assets/textures/finish/haze_noise.png
+Loading resource: res://.godot/imported/haze_noise.png-c8711b90b416282f2b07914bfbc91603.ctex
+Loading resource: res://assets/textures/street/ja_mural.png
+Loading resource: res://.godot/imported/ja_mural.png-804ff6d3f239bb0710dff229c4294b15.ctex
+Loading resource: res://assets/textures/street/contact_icon.png
+Loading resource: res://.godot/imported/contact_icon.png-91386acbad96180250cd6c744df80eea.ctex
+Loading resource: res://assets/textures/finish/open_sign.png
+Loading resource: res://.godot/imported/open_sign.png-89549b4dfb0f4a6fd8b1e1575c59cb3a.ctex
+Loading resource: res://shaders/illuminated_sign.gdshader
+Loading resource: res://assets/textures/finish/cold_sign.png
+Loading resource: res://.godot/imported/cold_sign.png-509d5ee6bc368a136dbfedcfaefcde9d.ctex
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/endcap.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://assets/textures/details/cup_offer.png
+Loading resource: res://.godot/imported/cup_offer.png-803897a6848b43221f37878b9c345f60.ctex
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://assets/textures/details/payment_screen.png
+Loading resource: res://.godot/imported/payment_screen.png-60af7a8a2437c01af4e09f243fad554f.ctex
+Loading resource: res://assets/textures/details/counter_notice.png
+Loading resource: res://.godot/imported/counter_notice.png-658a094da4aac9552f8f0475d4f8a077.ctex
+Loading resource: res://assets/textures/details/ice_freezer.png
+Loading resource: res://.godot/imported/ice_freezer.png-4e915a99c5966448a7c0b0078d984c12.ctex
+Loading resource: res://assets/textures/details/tv_screen.png
+Loading resource: res://.godot/imported/tv_screen.png-cc4a40744a01569190fc8dcf30c830d5.ctex
+Loading resource: res://assets/textures/details/floor_wear.png
+Loading resource: res://.godot/imported/floor_wear.png-55d19869252fb82ba9d834103e196b2f.ctex
+Loading resource: res://assets/textures/finish/ice_offer.png
+Loading resource: res://.godot/imported/ice_offer.png-e21b1bfcfd46c2a685a5cc842cc8a033.ctex
+Loading resource: res://assets/textures/finish/plastic_film.png
+Loading resource: res://.godot/imported/plastic_film.png-174a389b1b97f8dd99b1bf19ed345041.ctex
+Loading resource: res://scenes/world/props/freezer.tscn
+Loading resource: res://scenes/world/props/pallet.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://assets/models/characters/Felps.glb
+Loading resource: res://.godot/imported/Felps.glb-20b515bccbcd2351cccbdf387185350b.scn
+Loading resource: res://resources/motion/Felps.res
+Loading resource: res://assets/models/characters/Dery.glb
+Loading resource: res://.godot/imported/Dery.glb-8ab9ded77c29e345b13938a0b6bbfd8c.scn
+Loading resource: res://resources/motion/Dery.res
+Loading resource: res://assets/audio/hum.wav
+Loading resource: res://.godot/imported/hum.wav-3e8cb3ba3785f99343e3a053b39d59c0.sample
+Loading resource: res://assets/audio/radio.wav
+Loading resource: res://.godot/imported/radio.wav-7a878d7f142b03f7325c024c723436a0.sample
+Loading resource: res://assets/audio/neighborhood_air.wav
+Loading resource: res://.godot/imported/neighborhood_air.wav-4a56729dfa613a930a24e440cc249a5d.sample
+Loading resource: res://assets/audio/pole_ballast.wav
+Loading resource: res://.godot/imported/pole_ballast.wav-295b3822a5337ada2de747b6e7862580.sample
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/car_idle.ogg
+Loading resource: res://.godot/imported/car_idle.ogg-77cf2c076484e796f009fe0bbcb9f9a4.oggvorbisstr
+Loading resource: res://assets/models/characters/Enemy.glb
+Loading resource: res://.godot/imported/Enemy.glb-6fd530bbebbce3f332ec1943c265ad31.scn
+Loading resource: res://assets/audio/hum.wav
+Loading resource: res://.godot/imported/hum.wav-3e8cb3ba3785f99343e3a053b39d59c0.sample
+Loading resource: res://assets/models/characters/Zirico.glb
+Loading resource: res://.godot/imported/Zirico.glb-e382a95d64deb1676dbb820b078014e9.scn
+Loading resource: res://resources/motion/Zirico.res
+Loading resource: res://resources/motion/Enemy.res
+Loading resource: res://assets/audio/scares/stock_drag.ogg
+Loading resource: res://.godot/imported/stock_drag.ogg-4fc2b0fdb7ca5b21f7e0eaaf6f761eb9.oggvorbisstr
+PASS retomar derrota volta a um checkpoint viável anterior aos mecanismos e mantém breve proteção
+PASS E entra em cobertura agachada sem teleporte e apaga a lanterna
+Loading resource: res://assets/textures/mood/night_sky.png
+Loading resource: res://.godot/imported/night_sky.png-a9827fa1d4e08d406570b2419a1835ae.ctex
+Loading resource: res://assets/textures/mood/wall_base.png
+Loading resource: res://.godot/imported/wall_base.png-343e08e30543401ba403a85e3ae12b5d.ctex
+Loading resource: res://assets/textures/mood/curtain.png
+Loading resource: res://.godot/imported/curtain.png-6e4d5d3635e222b529540a4aa0f6feb7.ctex
+Loading resource: res://assets/textures/mood/lamp_halo.png
+Loading resource: res://.godot/imported/lamp_halo.png-380a2c799479d9d0ade3516581acbc05.ctex
+Loading resource: res://assets/textures/street/market_sign.png
+Loading resource: res://.godot/imported/market_sign.png-33af1bba33568239448b4320b307f883.ctex
+Loading resource: res://assets/textures/street/cassiano.png
+Loading resource: res://.godot/imported/cassiano.png-1354a55c55a079d4496d44ed949e7872.ctex
+Loading resource: res://shaders/foliage.gdshader
+Loading resource: res://assets/textures/mood/leaves.png
+Loading resource: res://.godot/imported/leaves.png-30f8db11514a7ed259fdd467198df990.ctex
+Loading resource: res://assets/models/environment/sedan.glb
+Loading resource: res://.godot/imported/sedan.glb-de247e04806a8def12995e9017dc390a.scn
+Loading resource: res://assets/models/environment/user_car.glb
+Loading resource: res://.godot/imported/user_car.glb-277ce69e96b15c401a85e6bb7b6b2d69.scn
+Loading resource: res://assets/textures/details/cracks.png
+Loading resource: res://.godot/imported/cracks.png-6e07de1a316b9c210e7004b44e66eeff.ctex
+Loading resource: res://shaders/street_haze.gdshader
+Loading resource: res://assets/textures/finish/haze_noise.png
+Loading resource: res://.godot/imported/haze_noise.png-c8711b90b416282f2b07914bfbc91603.ctex
+Loading resource: res://assets/textures/street/ja_mural.png
+Loading resource: res://.godot/imported/ja_mural.png-804ff6d3f239bb0710dff229c4294b15.ctex
+Loading resource: res://assets/textures/street/contact_icon.png
+Loading resource: res://.godot/imported/contact_icon.png-91386acbad96180250cd6c744df80eea.ctex
+Loading resource: res://assets/textures/finish/open_sign.png
+Loading resource: res://.godot/imported/open_sign.png-89549b4dfb0f4a6fd8b1e1575c59cb3a.ctex
+Loading resource: res://shaders/illuminated_sign.gdshader
+Loading resource: res://assets/textures/finish/cold_sign.png
+Loading resource: res://.godot/imported/cold_sign.png-509d5ee6bc368a136dbfedcfaefcde9d.ctex
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/endcap.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://assets/textures/details/cup_offer.png
+Loading resource: res://.godot/imported/cup_offer.png-803897a6848b43221f37878b9c345f60.ctex
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://assets/textures/details/payment_screen.png
+Loading resource: res://.godot/imported/payment_screen.png-60af7a8a2437c01af4e09f243fad554f.ctex
+Loading resource: res://assets/textures/details/counter_notice.png
+Loading resource: res://.godot/imported/counter_notice.png-658a094da4aac9552f8f0475d4f8a077.ctex
+Loading resource: res://assets/textures/details/ice_freezer.png
+Loading resource: res://.godot/imported/ice_freezer.png-4e915a99c5966448a7c0b0078d984c12.ctex
+Loading resource: res://assets/textures/details/tv_screen.png
+Loading resource: res://.godot/imported/tv_screen.png-cc4a40744a01569190fc8dcf30c830d5.ctex
+Loading resource: res://assets/textures/details/floor_wear.png
+Loading resource: res://.godot/imported/floor_wear.png-55d19869252fb82ba9d834103e196b2f.ctex
+Loading resource: res://assets/textures/finish/ice_offer.png
+Loading resource: res://.godot/imported/ice_offer.png-e21b1bfcfd46c2a685a5cc842cc8a033.ctex
+Loading resource: res://assets/textures/finish/plastic_film.png
+Loading resource: res://.godot/imported/plastic_film.png-174a389b1b97f8dd99b1bf19ed345041.ctex
+Loading resource: res://scenes/world/props/freezer.tscn
+Loading resource: res://scenes/world/props/pallet.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://assets/models/characters/Felps.glb
+Loading resource: res://.godot/imported/Felps.glb-20b515bccbcd2351cccbdf387185350b.scn
+Loading resource: res://resources/motion/Felps.res
+Loading resource: res://assets/models/characters/Dery.glb
+Loading resource: res://.godot/imported/Dery.glb-8ab9ded77c29e345b13938a0b6bbfd8c.scn
+Loading resource: res://resources/motion/Dery.res
+Loading resource: res://assets/audio/hum.wav
+Loading resource: res://.godot/imported/hum.wav-3e8cb3ba3785f99343e3a053b39d59c0.sample
+Loading resource: res://assets/audio/radio.wav
+Loading resource: res://.godot/imported/radio.wav-7a878d7f142b03f7325c024c723436a0.sample
+Loading resource: res://assets/audio/neighborhood_air.wav
+Loading resource: res://.godot/imported/neighborhood_air.wav-4a56729dfa613a930a24e440cc249a5d.sample
+Loading resource: res://assets/audio/pole_ballast.wav
+Loading resource: res://.godot/imported/pole_ballast.wav-295b3822a5337ada2de747b6e7862580.sample
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/car_idle.ogg
+Loading resource: res://.godot/imported/car_idle.ogg-77cf2c076484e796f009fe0bbcb9f9a4.oggvorbisstr
+Loading resource: res://assets/models/characters/Enemy.glb
+Loading resource: res://.godot/imported/Enemy.glb-6fd530bbebbce3f332ec1943c265ad31.scn
+Loading resource: res://assets/audio/hum.wav
+Loading resource: res://.godot/imported/hum.wav-3e8cb3ba3785f99343e3a053b39d59c0.sample
+Loading resource: res://assets/models/characters/Zirico.glb
+Loading resource: res://.godot/imported/Zirico.glb-e382a95d64deb1676dbb820b078014e9.scn
+Loading resource: res://resources/motion/Zirico.res
+Loading resource: res://resources/motion/Enemy.res
+Loading resource: res://assets/audio/scares/stock_drag.ogg
+Loading resource: res://.godot/imported/stock_drag.ogg-4fc2b0fdb7ca5b21f7e0eaaf6f761eb9.oggvorbisstr
+PASS salvar e continuar mantém corpo, colisão agachada e cobertura
+PASS mover-se sai da cobertura sem invisibilidade persistente
+PASS sair com os dois sem prova produz epílogo distinto do caso aberto
+Loading resource: res://assets/textures/mood/night_sky.png
+Loading resource: res://.godot/imported/night_sky.png-a9827fa1d4e08d406570b2419a1835ae.ctex
+Loading resource: res://assets/textures/mood/wall_base.png
+Loading resource: res://.godot/imported/wall_base.png-343e08e30543401ba403a85e3ae12b5d.ctex
+Loading resource: res://assets/textures/mood/curtain.png
+Loading resource: res://.godot/imported/curtain.png-6e4d5d3635e222b529540a4aa0f6feb7.ctex
+Loading resource: res://assets/textures/mood/lamp_halo.png
+Loading resource: res://.godot/imported/lamp_halo.png-380a2c799479d9d0ade3516581acbc05.ctex
+Loading resource: res://assets/textures/street/market_sign.png
+Loading resource: res://.godot/imported/market_sign.png-33af1bba33568239448b4320b307f883.ctex
+Loading resource: res://assets/textures/street/cassiano.png
+Loading resource: res://.godot/imported/cassiano.png-1354a55c55a079d4496d44ed949e7872.ctex
+Loading resource: res://shaders/foliage.gdshader
+Loading resource: res://assets/textures/mood/leaves.png
+Loading resource: res://.godot/imported/leaves.png-30f8db11514a7ed259fdd467198df990.ctex
+Loading resource: res://assets/models/environment/sedan.glb
+Loading resource: res://.godot/imported/sedan.glb-de247e04806a8def12995e9017dc390a.scn
+Loading resource: res://assets/models/environment/user_car.glb
+Loading resource: res://.godot/imported/user_car.glb-277ce69e96b15c401a85e6bb7b6b2d69.scn
+Loading resource: res://assets/textures/details/cracks.png
+Loading resource: res://.godot/imported/cracks.png-6e07de1a316b9c210e7004b44e66eeff.ctex
+Loading resource: res://shaders/street_haze.gdshader
+Loading resource: res://assets/textures/finish/haze_noise.png
+Loading resource: res://.godot/imported/haze_noise.png-c8711b90b416282f2b07914bfbc91603.ctex
+Loading resource: res://assets/textures/street/ja_mural.png
+Loading resource: res://.godot/imported/ja_mural.png-804ff6d3f239bb0710dff229c4294b15.ctex
+Loading resource: res://assets/textures/street/contact_icon.png
+Loading resource: res://.godot/imported/contact_icon.png-91386acbad96180250cd6c744df80eea.ctex
+Loading resource: res://assets/textures/finish/open_sign.png
+Loading resource: res://.godot/imported/open_sign.png-89549b4dfb0f4a6fd8b1e1575c59cb3a.ctex
+Loading resource: res://shaders/illuminated_sign.gdshader
+Loading resource: res://assets/textures/finish/cold_sign.png
+Loading resource: res://.godot/imported/cold_sign.png-509d5ee6bc368a136dbfedcfaefcde9d.ctex
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/endcap.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://assets/textures/details/cup_offer.png
+Loading resource: res://.godot/imported/cup_offer.png-803897a6848b43221f37878b9c345f60.ctex
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://assets/textures/details/payment_screen.png
+Loading resource: res://.godot/imported/payment_screen.png-60af7a8a2437c01af4e09f243fad554f.ctex
+Loading resource: res://assets/textures/details/counter_notice.png
+Loading resource: res://.godot/imported/counter_notice.png-658a094da4aac9552f8f0475d4f8a077.ctex
+Loading resource: res://assets/textures/details/ice_freezer.png
+Loading resource: res://.godot/imported/ice_freezer.png-4e915a99c5966448a7c0b0078d984c12.ctex
+Loading resource: res://assets/textures/details/tv_screen.png
+Loading resource: res://.godot/imported/tv_screen.png-cc4a40744a01569190fc8dcf30c830d5.ctex
+Loading resource: res://assets/textures/details/floor_wear.png
+Loading resource: res://.godot/imported/floor_wear.png-55d19869252fb82ba9d834103e196b2f.ctex
+Loading resource: res://assets/textures/finish/ice_offer.png
+Loading resource: res://.godot/imported/ice_offer.png-e21b1bfcfd46c2a685a5cc842cc8a033.ctex
+Loading resource: res://assets/textures/finish/plastic_film.png
+Loading resource: res://.godot/imported/plastic_film.png-174a389b1b97f8dd99b1bf19ed345041.ctex
+Loading resource: res://scenes/world/props/freezer.tscn
+Loading resource: res://scenes/world/props/pallet.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://assets/models/characters/Felps.glb
+Loading resource: res://.godot/imported/Felps.glb-20b515bccbcd2351cccbdf387185350b.scn
+Loading resource: res://resources/motion/Felps.res
+Loading resource: res://assets/models/characters/Dery.glb
+Loading resource: res://.godot/imported/Dery.glb-8ab9ded77c29e345b13938a0b6bbfd8c.scn
+Loading resource: res://resources/motion/Dery.res
+Loading resource: res://assets/audio/hum.wav
+Loading resource: res://.godot/imported/hum.wav-3e8cb3ba3785f99343e3a053b39d59c0.sample
+Loading resource: res://assets/audio/radio.wav
+Loading resource: res://.godot/imported/radio.wav-7a878d7f142b03f7325c024c723436a0.sample
+Loading resource: res://assets/audio/neighborhood_air.wav
+Loading resource: res://.godot/imported/neighborhood_air.wav-4a56729dfa613a930a24e440cc249a5d.sample
+Loading resource: res://assets/audio/pole_ballast.wav
+Loading resource: res://.godot/imported/pole_ballast.wav-295b3822a5337ada2de747b6e7862580.sample
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/car_idle.ogg
+Loading resource: res://.godot/imported/car_idle.ogg-77cf2c076484e796f009fe0bbcb9f9a4.oggvorbisstr
+Loading resource: res://assets/models/characters/Enemy.glb
+Loading resource: res://.godot/imported/Enemy.glb-6fd530bbebbce3f332ec1943c265ad31.scn
+Loading resource: res://assets/audio/hum.wav
+Loading resource: res://.godot/imported/hum.wav-3e8cb3ba3785f99343e3a053b39d59c0.sample
+Loading resource: res://assets/models/characters/Zirico.glb
+Loading resource: res://.godot/imported/Zirico.glb-e382a95d64deb1676dbb820b078014e9.scn
+Loading resource: res://resources/motion/Zirico.res
+Loading resource: res://resources/motion/Enemy.res
+Loading resource: res://assets/audio/scares/stock_drag.ogg
+Loading resource: res://.godot/imported/stock_drag.ogg-4fc2b0fdb7ca5b21f7e0eaaf6f761eb9.oggvorbisstr
+PASS separação na saída exige confirmação explícita para abandonar companheiro
+PASS cancelar saída permite voltar para resgatar sem escolher final
+PASS confirmar saída sozinho registra apenas o sobrevivente que chegou
+Loading resource: res://assets/textures/mood/night_sky.png
+Loading resource: res://.godot/imported/night_sky.png-a9827fa1d4e08d406570b2419a1835ae.ctex
+Loading resource: res://assets/textures/mood/wall_base.png
+Loading resource: res://.godot/imported/wall_base.png-343e08e30543401ba403a85e3ae12b5d.ctex
+Loading resource: res://assets/textures/mood/curtain.png
+Loading resource: res://.godot/imported/curtain.png-6e4d5d3635e222b529540a4aa0f6feb7.ctex
+Loading resource: res://assets/textures/mood/lamp_halo.png
+Loading resource: res://.godot/imported/lamp_halo.png-380a2c799479d9d0ade3516581acbc05.ctex
+Loading resource: res://assets/textures/street/market_sign.png
+Loading resource: res://.godot/imported/market_sign.png-33af1bba33568239448b4320b307f883.ctex
+Loading resource: res://assets/textures/street/cassiano.png
+Loading resource: res://.godot/imported/cassiano.png-1354a55c55a079d4496d44ed949e7872.ctex
+Loading resource: res://shaders/foliage.gdshader
+Loading resource: res://assets/textures/mood/leaves.png
+Loading resource: res://.godot/imported/leaves.png-30f8db11514a7ed259fdd467198df990.ctex
+Loading resource: res://assets/models/environment/sedan.glb
+Loading resource: res://.godot/imported/sedan.glb-de247e04806a8def12995e9017dc390a.scn
+Loading resource: res://assets/models/environment/user_car.glb
+Loading resource: res://.godot/imported/user_car.glb-277ce69e96b15c401a85e6bb7b6b2d69.scn
+Loading resource: res://assets/textures/details/cracks.png
+Loading resource: res://.godot/imported/cracks.png-6e07de1a316b9c210e7004b44e66eeff.ctex
+Loading resource: res://shaders/street_haze.gdshader
+Loading resource: res://assets/textures/finish/haze_noise.png
+Loading resource: res://.godot/imported/haze_noise.png-c8711b90b416282f2b07914bfbc91603.ctex
+Loading resource: res://assets/textures/street/ja_mural.png
+Loading resource: res://.godot/imported/ja_mural.png-804ff6d3f239bb0710dff229c4294b15.ctex
+Loading resource: res://assets/textures/street/contact_icon.png
+Loading resource: res://.godot/imported/contact_icon.png-91386acbad96180250cd6c744df80eea.ctex
+Loading resource: res://assets/textures/finish/open_sign.png
+Loading resource: res://.godot/imported/open_sign.png-89549b4dfb0f4a6fd8b1e1575c59cb3a.ctex
+Loading resource: res://shaders/illuminated_sign.gdshader
+Loading resource: res://assets/textures/finish/cold_sign.png
+Loading resource: res://.godot/imported/cold_sign.png-509d5ee6bc368a136dbfedcfaefcde9d.ctex
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/endcap.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://assets/textures/details/cup_offer.png
+Loading resource: res://.godot/imported/cup_offer.png-803897a6848b43221f37878b9c345f60.ctex
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://assets/textures/details/payment_screen.png
+Loading resource: res://.godot/imported/payment_screen.png-60af7a8a2437c01af4e09f243fad554f.ctex
+Loading resource: res://assets/textures/details/counter_notice.png
+Loading resource: res://.godot/imported/counter_notice.png-658a094da4aac9552f8f0475d4f8a077.ctex
+Loading resource: res://assets/textures/details/ice_freezer.png
+Loading resource: res://.godot/imported/ice_freezer.png-4e915a99c5966448a7c0b0078d984c12.ctex
+Loading resource: res://assets/textures/details/tv_screen.png
+Loading resource: res://.godot/imported/tv_screen.png-cc4a40744a01569190fc8dcf30c830d5.ctex
+Loading resource: res://assets/textures/details/floor_wear.png
+Loading resource: res://.godot/imported/floor_wear.png-55d19869252fb82ba9d834103e196b2f.ctex
+Loading resource: res://assets/textures/finish/ice_offer.png
+Loading resource: res://.godot/imported/ice_offer.png-e21b1bfcfd46c2a685a5cc842cc8a033.ctex
+Loading resource: res://assets/textures/finish/plastic_film.png
+Loading resource: res://.godot/imported/plastic_film.png-174a389b1b97f8dd99b1bf19ed345041.ctex
+Loading resource: res://scenes/world/props/freezer.tscn
+Loading resource: res://scenes/world/props/pallet.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://assets/models/characters/Felps.glb
+Loading resource: res://.godot/imported/Felps.glb-20b515bccbcd2351cccbdf387185350b.scn
+Loading resource: res://resources/motion/Felps.res
+Loading resource: res://assets/models/characters/Dery.glb
+Loading resource: res://.godot/imported/Dery.glb-8ab9ded77c29e345b13938a0b6bbfd8c.scn
+Loading resource: res://resources/motion/Dery.res
+Loading resource: res://assets/audio/hum.wav
+Loading resource: res://.godot/imported/hum.wav-3e8cb3ba3785f99343e3a053b39d59c0.sample
+Loading resource: res://assets/audio/radio.wav
+Loading resource: res://.godot/imported/radio.wav-7a878d7f142b03f7325c024c723436a0.sample
+Loading resource: res://assets/audio/neighborhood_air.wav
+Loading resource: res://.godot/imported/neighborhood_air.wav-4a56729dfa613a930a24e440cc249a5d.sample
+Loading resource: res://assets/audio/pole_ballast.wav
+Loading resource: res://.godot/imported/pole_ballast.wav-295b3822a5337ada2de747b6e7862580.sample
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/car_idle.ogg
+Loading resource: res://.godot/imported/car_idle.ogg-77cf2c076484e796f009fe0bbcb9f9a4.oggvorbisstr
+Loading resource: res://assets/models/characters/Enemy.glb
+Loading resource: res://.godot/imported/Enemy.glb-6fd530bbebbce3f332ec1943c265ad31.scn
+Loading resource: res://assets/audio/hum.wav
+Loading resource: res://.godot/imported/hum.wav-3e8cb3ba3785f99343e3a053b39d59c0.sample
+Loading resource: res://assets/models/characters/Zirico.glb
+Loading resource: res://.godot/imported/Zirico.glb-e382a95d64deb1676dbb820b078014e9.scn
+Loading resource: res://resources/motion/Zirico.res
+Loading resource: res://assets/audio/scares/stock_drag.ogg
+Loading resource: res://.godot/imported/stock_drag.ogg-4fc2b0fdb7ca5b21f7e0eaaf6f761eb9.oggvorbisstr
+PASS final sozinho persiste e não inicia uma quarta noite
+Loading resource: res://assets/textures/mood/night_sky.png
+Loading resource: res://.godot/imported/night_sky.png-a9827fa1d4e08d406570b2419a1835ae.ctex
+Loading resource: res://assets/textures/mood/wall_base.png
+Loading resource: res://.godot/imported/wall_base.png-343e08e30543401ba403a85e3ae12b5d.ctex
+Loading resource: res://assets/textures/mood/curtain.png
+Loading resource: res://.godot/imported/curtain.png-6e4d5d3635e222b529540a4aa0f6feb7.ctex
+Loading resource: res://assets/textures/mood/lamp_halo.png
+Loading resource: res://.godot/imported/lamp_halo.png-380a2c799479d9d0ade3516581acbc05.ctex
+Loading resource: res://assets/textures/street/market_sign.png
+Loading resource: res://.godot/imported/market_sign.png-33af1bba33568239448b4320b307f883.ctex
+Loading resource: res://assets/textures/street/cassiano.png
+Loading resource: res://.godot/imported/cassiano.png-1354a55c55a079d4496d44ed949e7872.ctex
+Loading resource: res://shaders/foliage.gdshader
+Loading resource: res://assets/textures/mood/leaves.png
+Loading resource: res://.godot/imported/leaves.png-30f8db11514a7ed259fdd467198df990.ctex
+Loading resource: res://assets/models/environment/sedan.glb
+Loading resource: res://.godot/imported/sedan.glb-de247e04806a8def12995e9017dc390a.scn
+Loading resource: res://assets/models/environment/user_car.glb
+Loading resource: res://.godot/imported/user_car.glb-277ce69e96b15c401a85e6bb7b6b2d69.scn
+Loading resource: res://assets/textures/details/cracks.png
+Loading resource: res://.godot/imported/cracks.png-6e07de1a316b9c210e7004b44e66eeff.ctex
+Loading resource: res://shaders/street_haze.gdshader
+Loading resource: res://assets/textures/finish/haze_noise.png
+Loading resource: res://.godot/imported/haze_noise.png-c8711b90b416282f2b07914bfbc91603.ctex
+Loading resource: res://assets/textures/street/ja_mural.png
+Loading resource: res://.godot/imported/ja_mural.png-804ff6d3f239bb0710dff229c4294b15.ctex
+Loading resource: res://assets/textures/street/contact_icon.png
+Loading resource: res://.godot/imported/contact_icon.png-91386acbad96180250cd6c744df80eea.ctex
+Loading resource: res://assets/textures/finish/open_sign.png
+Loading resource: res://.godot/imported/open_sign.png-89549b4dfb0f4a6fd8b1e1575c59cb3a.ctex
+Loading resource: res://shaders/illuminated_sign.gdshader
+Loading resource: res://assets/textures/finish/cold_sign.png
+Loading resource: res://.godot/imported/cold_sign.png-509d5ee6bc368a136dbfedcfaefcde9d.ctex
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/endcap.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://assets/textures/details/cup_offer.png
+Loading resource: res://.godot/imported/cup_offer.png-803897a6848b43221f37878b9c345f60.ctex
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://assets/textures/details/payment_screen.png
+Loading resource: res://.godot/imported/payment_screen.png-60af7a8a2437c01af4e09f243fad554f.ctex
+Loading resource: res://assets/textures/details/counter_notice.png
+Loading resource: res://.godot/imported/counter_notice.png-658a094da4aac9552f8f0475d4f8a077.ctex
+Loading resource: res://assets/textures/details/ice_freezer.png
+Loading resource: res://.godot/imported/ice_freezer.png-4e915a99c5966448a7c0b0078d984c12.ctex
+Loading resource: res://assets/textures/details/tv_screen.png
+Loading resource: res://.godot/imported/tv_screen.png-cc4a40744a01569190fc8dcf30c830d5.ctex
+Loading resource: res://assets/textures/details/floor_wear.png
+Loading resource: res://.godot/imported/floor_wear.png-55d19869252fb82ba9d834103e196b2f.ctex
+Loading resource: res://assets/textures/finish/ice_offer.png
+Loading resource: res://.godot/imported/ice_offer.png-e21b1bfcfd46c2a685a5cc842cc8a033.ctex
+Loading resource: res://assets/textures/finish/plastic_film.png
+Loading resource: res://.godot/imported/plastic_film.png-174a389b1b97f8dd99b1bf19ed345041.ctex
+Loading resource: res://scenes/world/props/freezer.tscn
+Loading resource: res://scenes/world/props/pallet.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://assets/models/characters/Felps.glb
+Loading resource: res://.godot/imported/Felps.glb-20b515bccbcd2351cccbdf387185350b.scn
+Loading resource: res://resources/motion/Felps.res
+Loading resource: res://assets/models/characters/Dery.glb
+Loading resource: res://.godot/imported/Dery.glb-8ab9ded77c29e345b13938a0b6bbfd8c.scn
+Loading resource: res://resources/motion/Dery.res
+Loading resource: res://assets/audio/hum.wav
+Loading resource: res://.godot/imported/hum.wav-3e8cb3ba3785f99343e3a053b39d59c0.sample
+Loading resource: res://assets/audio/radio.wav
+Loading resource: res://.godot/imported/radio.wav-7a878d7f142b03f7325c024c723436a0.sample
+Loading resource: res://assets/audio/neighborhood_air.wav
+Loading resource: res://.godot/imported/neighborhood_air.wav-4a56729dfa613a930a24e440cc249a5d.sample
+Loading resource: res://assets/audio/pole_ballast.wav
+Loading resource: res://.godot/imported/pole_ballast.wav-295b3822a5337ada2de747b6e7862580.sample
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/car_idle.ogg
+Loading resource: res://.godot/imported/car_idle.ogg-77cf2c076484e796f009fe0bbcb9f9a4.oggvorbisstr
+Loading resource: res://assets/models/characters/Bryan.glb
+Loading resource: res://.godot/imported/Bryan.glb-f7cbf8a2f694c8a86a8c007160eff360.scn
+Loading resource: res://assets/models/characters/Bryan_Material_Diffuse.png
+Loading resource: res://.godot/imported/Bryan_Material_Diffuse.png-4b9c84161193fc726836e41804462fb8.ctex
+Loading resource: res://assets/models/characters/Bryan_Material_Normal.png
+Loading resource: res://.godot/imported/Bryan_Material_Normal.png-0379faa138840eec5ddd87259cfee492.ctex
+Loading resource: res://resources/motion/Bryan.res
+Loading resource: res://assets/models/characters/Zirico.glb
+Loading resource: res://.godot/imported/Zirico.glb-e382a95d64deb1676dbb820b078014e9.scn
+Loading resource: res://resources/motion/Zirico.res
+Loading resource: res://assets/models/characters/Enemy.glb
+Loading resource: res://.godot/imported/Enemy.glb-6fd530bbebbce3f332ec1943c265ad31.scn
+Loading resource: res://assets/audio/hum.wav
+Loading resource: res://.godot/imported/hum.wav-3e8cb3ba3785f99343e3a053b39d59c0.sample
+Loading resource: res://assets/audio/scares/stock_drag.ogg
+Loading resource: res://.godot/imported/stock_drag.ogg-4fc2b0fdb7ca5b21f7e0eaaf6f761eb9.oggvorbisstr
+PASS reiniciar após o epílogo limpa ameaça, final e retry e volta à sexta
+Loading resource: res://assets/textures/mood/night_sky.png
+Loading resource: res://.godot/imported/night_sky.png-a9827fa1d4e08d406570b2419a1835ae.ctex
+Loading resource: res://assets/textures/mood/wall_base.png
+Loading resource: res://.godot/imported/wall_base.png-343e08e30543401ba403a85e3ae12b5d.ctex
+Loading resource: res://assets/textures/mood/curtain.png
+Loading resource: res://.godot/imported/curtain.png-6e4d5d3635e222b529540a4aa0f6feb7.ctex
+Loading resource: res://assets/textures/mood/lamp_halo.png
+Loading resource: res://.godot/imported/lamp_halo.png-380a2c799479d9d0ade3516581acbc05.ctex
+Loading resource: res://assets/textures/street/market_sign.png
+Loading resource: res://.godot/imported/market_sign.png-33af1bba33568239448b4320b307f883.ctex
+Loading resource: res://assets/textures/street/cassiano.png
+Loading resource: res://.godot/imported/cassiano.png-1354a55c55a079d4496d44ed949e7872.ctex
+Loading resource: res://shaders/foliage.gdshader
+Loading resource: res://assets/textures/mood/leaves.png
+Loading resource: res://.godot/imported/leaves.png-30f8db11514a7ed259fdd467198df990.ctex
+Loading resource: res://assets/models/environment/sedan.glb
+Loading resource: res://.godot/imported/sedan.glb-de247e04806a8def12995e9017dc390a.scn
+Loading resource: res://assets/models/environment/user_car.glb
+Loading resource: res://.godot/imported/user_car.glb-277ce69e96b15c401a85e6bb7b6b2d69.scn
+Loading resource: res://assets/textures/details/cracks.png
+Loading resource: res://.godot/imported/cracks.png-6e07de1a316b9c210e7004b44e66eeff.ctex
+Loading resource: res://shaders/street_haze.gdshader
+Loading resource: res://assets/textures/finish/haze_noise.png
+Loading resource: res://.godot/imported/haze_noise.png-c8711b90b416282f2b07914bfbc91603.ctex
+Loading resource: res://assets/textures/street/ja_mural.png
+Loading resource: res://.godot/imported/ja_mural.png-804ff6d3f239bb0710dff229c4294b15.ctex
+Loading resource: res://assets/textures/street/contact_icon.png
+Loading resource: res://.godot/imported/contact_icon.png-91386acbad96180250cd6c744df80eea.ctex
+Loading resource: res://assets/textures/finish/open_sign.png
+Loading resource: res://.godot/imported/open_sign.png-89549b4dfb0f4a6fd8b1e1575c59cb3a.ctex
+Loading resource: res://shaders/illuminated_sign.gdshader
+Loading resource: res://assets/textures/finish/cold_sign.png
+Loading resource: res://.godot/imported/cold_sign.png-509d5ee6bc368a136dbfedcfaefcde9d.ctex
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/endcap.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://scenes/world/props/shelf.tscn
+Loading resource: res://assets/textures/details/cup_offer.png
+Loading resource: res://.godot/imported/cup_offer.png-803897a6848b43221f37878b9c345f60.ctex
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://scenes/world/props/fridge.tscn
+Loading resource: res://assets/textures/details/payment_screen.png
+Loading resource: res://.godot/imported/payment_screen.png-60af7a8a2437c01af4e09f243fad554f.ctex
+Loading resource: res://assets/textures/details/counter_notice.png
+Loading resource: res://.godot/imported/counter_notice.png-658a094da4aac9552f8f0475d4f8a077.ctex
+Loading resource: res://assets/textures/details/ice_freezer.png
+Loading resource: res://.godot/imported/ice_freezer.png-4e915a99c5966448a7c0b0078d984c12.ctex
+Loading resource: res://assets/textures/details/tv_screen.png
+Loading resource: res://.godot/imported/tv_screen.png-cc4a40744a01569190fc8dcf30c830d5.ctex
+Loading resource: res://assets/textures/details/floor_wear.png
+Loading resource: res://.godot/imported/floor_wear.png-55d19869252fb82ba9d834103e196b2f.ctex
+Loading resource: res://assets/textures/finish/ice_offer.png
+Loading resource: res://.godot/imported/ice_offer.png-e21b1bfcfd46c2a685a5cc842cc8a033.ctex
+Loading resource: res://assets/textures/finish/plastic_film.png
+Loading resource: res://.godot/imported/plastic_film.png-174a389b1b97f8dd99b1bf19ed345041.ctex
+Loading resource: res://scenes/world/props/freezer.tscn
+Loading resource: res://scenes/world/props/pallet.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://scenes/world/props/crate.tscn
+Loading resource: res://assets/models/characters/Felps.glb
+Loading resource: res://.godot/imported/Felps.glb-20b515bccbcd2351cccbdf387185350b.scn
+Loading resource: res://resources/motion/Felps.res
+Loading resource: res://assets/models/characters/Dery.glb
+Loading resource: res://.godot/imported/Dery.glb-8ab9ded77c29e345b13938a0b6bbfd8c.scn
+Loading resource: res://resources/motion/Dery.res
+Loading resource: res://assets/audio/hum.wav
+Loading resource: res://.godot/imported/hum.wav-3e8cb3ba3785f99343e3a053b39d59c0.sample
+Loading resource: res://assets/audio/radio.wav
+Loading resource: res://.godot/imported/radio.wav-7a878d7f142b03f7325c024c723436a0.sample
+Loading resource: res://assets/audio/neighborhood_air.wav
+Loading resource: res://.godot/imported/neighborhood_air.wav-4a56729dfa613a930a24e440cc249a5d.sample
+Loading resource: res://assets/audio/pole_ballast.wav
+Loading resource: res://.godot/imported/pole_ballast.wav-295b3822a5337ada2de747b6e7862580.sample
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/compressor.ogg
+Loading resource: res://.godot/imported/compressor.ogg-3f0e38da2dad85854fd588bf2d31013c.oggvorbisstr
+Loading resource: res://assets/audio/everyday/car_idle.ogg
+Loading resource: res://.godot/imported/car_idle.ogg-77cf2c076484e796f009fe0bbcb9f9a4.oggvorbisstr
+Loading resource: res://assets/models/characters/Enemy.glb
+Loading resource: res://.godot/imported/Enemy.glb-6fd530bbebbce3f332ec1943c265ad31.scn
+Loading resource: res://assets/audio/hum.wav
+Loading resource: res://.godot/imported/hum.wav-3e8cb3ba3785f99343e3a053b39d59c0.sample
+Loading resource: res://assets/models/characters/Zirico.glb
+Loading resource: res://.godot/imported/Zirico.glb-e382a95d64deb1676dbb820b078014e9.scn
+Loading resource: res://resources/motion/Zirico.res
+Loading resource: res://assets/audio/scares/stock_drag.ogg
+Loading resource: res://.godot/imported/stock_drag.ogg-4fc2b0fdb7ca5b21f7e0eaaf6f761eb9.oggvorbisstr
+PASS save 0.19 do domingo em prévia migra para abertura jogável sem iniciar perigo antes da hora
+SUNDAY RESULT 59/59 passed; failures=[]
+XR: Clearing primary interface
+XR: Removed interface "Native mobile"
+XR: Removed interface "OpenXR"
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+     at: cleanup (core/object/object.cpp:2378)
+Leaked instance: AudioStreamPlaybackWAV:9223374421903808852
+Leaked instance: AudioStreamPlaybackWAV:9223374422340016474
+Leaked instance: AudioStreamWAV:9223374421887031644 - Resource path:
+Leaked instance: AudioStreamWAV:9223374422323239269 - Resource path:
+Leaked instance: AudioStreamPlaybackWAV:9223374422558120337
+Leaked instance: AudioStreamPlaybackOggVorbis:9223374423447313047
+Leaked instance: AudioStreamPlaybackOggVorbis:9223374423178877738
+Leaked instance: AudioStreamOggVorbis:9223374423413758777 - Resource path:
+Leaked instance: AudioStreamPlaybackOggVorbis:9223374422910442303
+Leaked instance: OggPacketSequence:9223374308137507665 - Resource path: res://assets/audio/everyday/compressor.ogg::OggPacketSequence_l015c
+Leaked instance: OggPacketSequencePlayback:9223374422927219610
+Leaked instance: OggPacketSequencePlayback:9223374423464090525
+Leaked instance: OggPacketSequencePlayback:9223374423195655071
+Leaked instance: AudioStreamOggVorbis:9223374422876887971 - Resource path:
+Leaked instance: AudioStreamWAV:9223374422541343665 - Resource path:
+Leaked instance: AudioStreamOggVorbis:9223374423145323532 - Resource path:
+Hint: Leaked instances typically happen when nodes are removed from the scene tree (with `remove_child()`) but not freed (with `free()` or `queue_free()`).
+ERROR: 1 resources still in use at exit.
+   at: clear (core/io/resource.cpp:609)
+Resource still in use: res://assets/audio/everyday/compressor.ogg::OggPacketSequence_l015c (OggPacketSequence)
+Orphan StringName: _mix (static: 0, total: 6)
+Orphan StringName: _set_path_cache (static: 0, total: 7)
+Orphan StringName: _reset_state (static: 0, total: 7)
+Orphan StringName: _stop (static: 0, total: 6)
+Orphan StringName: _setup_local_to_scene (static: 0, total: 7)
+Orphan StringName: _get_beat_count (static: 0, total: 6)
+Orphan StringName: _mix_resampled (static: 0, total: 3)
+Orphan StringName: _get_stream_sampling_rate (static: 0, total: 3)
+Orphan StringName: _get_playback_position (static: 0, total: 6)
+Orphan StringName: _get_stream_name (static: 0, total: 6)
+Orphan StringName: _get_parameter (static: 0, total: 6)
+Orphan StringName: _start (static: 0, total: 6)
+Orphan StringName: _has_loop (static: 0, total: 6)
+Orphan StringName: _is_playing (static: 0, total: 6)
+Orphan StringName: _get_bar_beats (static: 0, total: 6)
+Orphan StringName: _is_monophonic (static: 0, total: 6)
+Orphan StringName: Master (static: 0, total: 6)
+Orphan StringName: _get_bpm (static: 0, total: 6)
+Orphan StringName: _get_parameter_list (static: 0, total: 6)
+Orphan StringName: _instantiate_playback (static: 0, total: 6)
+Orphan StringName: _set_parameter (static: 0, total: 6)
+Orphan StringName: _tag_used_streams (static: 0, total: 6)
+Orphan StringName: _seek (static: 0, total: 6)
+Orphan StringName: _get_rid (static: 0, total: 7)
+Orphan StringName: _get_length (static: 0, total: 6)
+Orphan StringName: _get_loop_count (static: 0, total: 6)
+StringName: 26 unclaimed string names at exit.
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+PASS caixas distinguem reposição e cascos vazios antes de qualquer coleta
+PASS geladeira G1 e prateleira P1 mostram falta e caixa necessária
+PASS pega caixa identificada stock_1
+PASS pegar R1 troca objetivo de busca pelo destino correto
+PASS caixa carregada não oculta o foco da geladeira mesmo com câmera de ombro
+PASS primeiro E abre a geladeira sem consumir a caixa
+PASS segundo E repõe antes da conversa inicial sem bloqueio silencioso da etapa
+PASS necessidade de G1 diminui após entrega
+PASS conversa reconhece reposição antecipada e mantém somente a caixa restante
+PASS pega caixa identificada stock_shelf
+PASS caixa R3 na geladeira informa destino P1 e preserva mercadoria
+PASS prateleira correta tem foco alcançável com a caixa
+PASS R3 preenche lacuna visível da prateleira sem contar como reposição obrigatória de G1
+PASS continuar restaura destinos separados e não recria caixa já usada
+PASS pega caixa identificada stock_2
+PASS R2 completa G1 mesmo após a reposição extra e a retomada
+PASS pega caixa identificada loose
+PASS cascos vazios não viram mercadoria de geladeira nem desaparecem
+PASS marcação de devoluções recebe a caixa vazia por E
+PASS pedido de caixa fechada oferece chamada real de Deryk
+PASS chamada marca a caixa laranja daquele pedido
+PASS caixa de venda tem número diferente das caixas de reposição
+PASS pega caixa identificada order_2
+PASS caixa de venda não abastece geladeira e avisa onde entregar
+PASS transportar pedido mostra ponto físico e indicação de entrega no balcão
+PASS marcador de destino permanece legível e dentro da interface em PS1 320x240
+PASS PS1/2 640x480 mantém marcador na interface nativa
+PASS E no balcão prioriza entrega de Deryk em vez de conversa com Felps
+PASS entrega no balcão consome uma caixa e libera o pedido uma única vez
+PASS Felps retoma a venda depois da entrega de Deryk
+PASS mercadoria entregue permite conferir e cobrar
+PASS Felps finaliza venda de retornáveis e registra um único recibo
+PASS marcação da entrega some após receber a mercadoria
+PASS sábado não recria caixas de reposição da sexta nem sinaliza falta inexistente
+PASS domingo de investigação não oferece caixas de trabalho sem destino
+SUPPLY RESULT 35/35 passed; failures=[]
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+PASS Dery tem amostras reais da sola, com pesos do modelo
+PASS Dery usa caminhada medida para seu rig
+PASS Dery • idle mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.002)
+PASS Dery • walk mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.001)
+PASS Dery • run mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.002)
+PASS Dery • carry_walk mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.002)
+PASS Dery • crouch_walk mantém contato nas fases de apoio sem deformação inválida (pen=0.002, gap=0.002)
+PASS Dery • agachamento mantém cabeça próxima da cápsula baixa (1.087 m)
+PASS Felps tem amostras reais da sola, com pesos do modelo
+PASS Felps usa caminhada medida para seu rig
+PASS Felps • idle mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.001)
+PASS Felps • walk mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.002)
+PASS Felps • run mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.003)
+PASS Felps • carry_walk mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.003)
+PASS Felps • crouch_walk mantém contato nas fases de apoio sem deformação inválida (pen=0.002, gap=0.002)
+PASS Felps • agachamento mantém cabeça próxima da cápsula baixa (1.009 m)
+PASS Enemy tem amostras reais da sola, com pesos do modelo
+PASS Enemy usa caminhada medida para seu rig
+PASS Enemy • idle mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.002)
+PASS Enemy • walk mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.002)
+PASS Enemy • run mantém contato nas fases de apoio sem deformação inválida (pen=0.008, gap=0.021)
+PASS Bryan tem amostras reais da sola, com pesos do modelo
+PASS Bryan usa caminhada medida para seu rig
+PASS Bryan • idle mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.001)
+PASS Bryan • walk mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.001)
+PASS Bryan • run mantém contato nas fases de apoio sem deformação inválida (pen=0.004, gap=0.006)
+PASS Zirico tem amostras reais da sola, com pesos do modelo
+PASS Zirico usa caminhada medida para seu rig
+PASS Zirico • idle mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.004)
+PASS Zirico • walk mantém contato nas fases de apoio sem deformação inválida (pen=0.001, gap=0.021)
+PASS Zirico • run mantém contato nas fases de apoio sem deformação inválida (pen=0.007, gap=0.023)
+PASS Garota1 tem amostras reais da sola, com pesos do modelo
+PASS Garota1 usa caminhada medida para seu rig
+PASS Garota1 • idle mantém contato nas fases de apoio sem deformação inválida (pen=0.001, gap=0.003)
+PASS Garota1 • walk mantém contato nas fases de apoio sem deformação inválida (pen=0.001, gap=0.003)
+PASS Garota1 • run mantém contato nas fases de apoio sem deformação inválida (pen=0.008, gap=0.008)
+PASS Garota2 tem amostras reais da sola, com pesos do modelo
+PASS Garota2 usa caminhada medida para seu rig
+PASS Garota2 • idle mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.002)
+PASS Garota2 • walk mantém contato nas fases de apoio sem deformação inválida (pen=0.001, gap=0.003)
+PASS Garota2 • run mantém contato nas fases de apoio sem deformação inválida (pen=0.008, gap=0.002)
+PASS Velha1 tem amostras reais da sola, com pesos do modelo
+PASS Velha1 usa caminhada medida para seu rig
+PASS Velha1 • idle mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.001)
+PASS Velha1 • walk mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.002)
+PASS Velha1 • run mantém contato nas fases de apoio sem deformação inválida (pen=0.013, gap=0.013)
+PASS Customer1 tem amostras reais da sola, com pesos do modelo
+PASS Customer1 usa caminhada medida para seu rig
+PASS Customer1 • idle mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.002)
+PASS Customer1 • walk mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.002)
+PASS Customer1 • run mantém contato nas fases de apoio sem deformação inválida (pen=0.007, gap=0.016)
+PASS Customer1 • carry_walk mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.002)
+PASS Customer1 • crouch_walk mantém contato nas fases de apoio sem deformação inválida (pen=0.003, gap=0.003)
+PASS Customer2 tem amostras reais da sola, com pesos do modelo
+PASS Customer2 usa caminhada medida para seu rig
+PASS Customer2 • idle mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.002)
+PASS Customer2 • walk mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.003)
+PASS Customer2 • run mantém contato nas fases de apoio sem deformação inválida (pen=0.007, gap=0.016)
+PASS Customer2 • carry_walk mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.003)
+PASS Customer2 • crouch_walk mantém contato nas fases de apoio sem deformação inválida (pen=0.003, gap=0.003)
+PASS Customer3 tem amostras reais da sola, com pesos do modelo
+PASS Customer3 usa caminhada medida para seu rig
+PASS Customer3 • idle mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.002)
+PASS Customer3 • walk mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.002)
+PASS Customer3 • run mantém contato nas fases de apoio sem deformação inválida (pen=0.007, gap=0.016)
+PASS Customer3 • carry_walk mantém contato nas fases de apoio sem deformação inválida (pen=0.000, gap=0.002)
+PASS Customer3 • crouch_walk mantém contato nas fases de apoio sem deformação inválida (pen=0.003, gap=0.003)
+NATURAL RESULT 67/67 passed; failures=[]
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+PASS Dery mantém corpo finito e ciclo sem salto de posição (0.0000 m)
+PASS Felps mantém corpo finito e ciclo sem salto de posição (0.0000 m)
+PASS Garota1 mantém corpo finito e ciclo sem salto de posição (0.0000 m)
+PASS Garota2 mantém corpo finito e ciclo sem salto de posição (0.0000 m)
+PASS Customer1 mantém corpo finito e ciclo sem salto de posição (0.0000 m)
+PASS Customer2 mantém corpo finito e ciclo sem salto de posição (0.0000 m)
+PASS Customer3 mantém corpo finito e ciclo sem salto de posição (0.0000 m)
+PASS Zirico mantém corpo finito e ciclo sem salto de posição (0.0000 m)
+PASS Bryan mantém corpo finito e ciclo sem salto de posição (0.0000 m)
+PASS Velha1 mantém corpo finito e ciclo sem salto de posição (0.0000 m)
+PASS Enemy mantém corpo finito e ciclo sem salto de posição (0.0000 m)
+PASS Customer1 mantém a raiz da manga junto ao ombro sem subir para o rosto
+PASS Customer2 mantém a raiz da manga junto ao ombro sem subir para o rosto
+PASS Customer3 mantém a raiz da manga junto ao ombro sem subir para o rosto
+PASS passada para trás acompanha o recuo sem inverter duas vezes o movimento dos pés
+PASS Zirico oscila o tronco de forma própria em vez de usar repouso genérico
+PASS Bryan tem gestos inquietos reais no repouso, proporcionais ao corpo infantil
+PASS Deryk e Felps não compartilham a mesma cadência de caminhada
+PASS ClienteBone usa o mesmo controlador medido das personagens importadas
+PASS ClienteTrabalho usa o mesmo controlador medido das personagens importadas
+PASS ClienteVinho usa o mesmo controlador medido das personagens importadas
+PASS ClienteMostarda usa o mesmo controlador medido das personagens importadas
+PASS ClienteCinza usa o mesmo controlador medido das personagens importadas
+PASS ClienteVerde usa o mesmo controlador medido das personagens importadas
+PASS cliente do aviso também usa caminhada medida sem alterar seu evento narrativo
+PASS modificadores em execução não acumulam escala nem deformam os corpos
+PASS ClienteBone para a passada ao ser bloqueado por uma parede
+PASS ClienteTrabalho para a passada ao ser bloqueado por uma parede
+PASS ClienteVinho para a passada ao ser bloqueado por uma parede
+PASS ClienteMostarda para a passada ao ser bloqueado por uma parede
+PASS ClienteCinza para a passada ao ser bloqueado por uma parede
+PASS ClienteVerde para a passada ao ser bloqueado por uma parede
+PASS Customer3 para a passada ao ser bloqueado por uma parede
+PASS Bryan também não caminha no lugar quando bloqueado
+PASS Zirico também não caminha no lugar quando bloqueado
+PASS ClienteBone retoma a passada quando o caminho volta a abrir
+PASS ClienteTrabalho retoma a passada quando o caminho volta a abrir
+PASS ClienteVinho retoma a passada quando o caminho volta a abrir
+PASS ClienteMostarda retoma a passada quando o caminho volta a abrir
+PASS ClienteCinza retoma a passada quando o caminho volta a abrir
+PASS ClienteVerde retoma a passada quando o caminho volta a abrir
+PASS Customer3 retoma a passada quando o caminho volta a abrir
+PASS Bryan retoma seu estilo ao voltar a se deslocar
+PASS Zirico retoma seu estilo ao voltar a se deslocar
+PASS gesto de repouso de cliente termina e retorna ao normal sem ficar preso em loop
+LOCOMOTION RESULT 45/45 passed; failures=[]
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+PASS Dery walk mantém arco vertical contido (0.040 m)
+PASS Dery walk não anima saltos de correção no osso raiz
+PASS Dery walk limita giro do pé entre quadros a 30 FPS (10.7°)
+PASS Dery walk dobra os joelhos sem os trancos anteriores (18.4°/quadro)
+PASS Dery walk mantém os sapatos em ângulos legíveis (14.3°)
+PASS Dery walk combina a velocidade do pé apoiado com a do corpo (erro 0.000 m)
+PASS Dery run mantém arco vertical contido (0.024 m)
+PASS Dery run não anima saltos de correção no osso raiz
+PASS Dery run limita giro do pé entre quadros a 30 FPS (20.7°)
+PASS Dery run dobra os joelhos sem os trancos anteriores (19.5°/quadro)
+PASS Dery run mantém os sapatos em ângulos legíveis (25.8°)
+PASS Dery run combina a velocidade do pé apoiado com a do corpo (erro 0.000 m)
+PASS Dery não alterna caminhada/corrida a cada oscilação em torno de 2,55 m/s
+PASS Dery volta a caminhar quando desacelera
+PASS Dery não prende a perna da corrida em uma âncora de caminhada
+PASS Felps walk mantém arco vertical contido (0.044 m)
+PASS Felps walk não anima saltos de correção no osso raiz
+PASS Felps walk limita giro do pé entre quadros a 30 FPS (10.1°)
+PASS Felps walk dobra os joelhos sem os trancos anteriores (16.1°/quadro)
+PASS Felps walk mantém os sapatos em ângulos legíveis (14.3°)
+PASS Felps walk combina a velocidade do pé apoiado com a do corpo (erro 0.000 m)
+PASS Felps run mantém arco vertical contido (0.027 m)
+PASS Felps run não anima saltos de correção no osso raiz
+PASS Felps run limita giro do pé entre quadros a 30 FPS (19.8°)
+PASS Felps run dobra os joelhos sem os trancos anteriores (24.1°/quadro)
+PASS Felps run mantém os sapatos em ângulos legíveis (25.8°)
+PASS Felps run combina a velocidade do pé apoiado com a do corpo (erro 0.000 m)
+PASS Felps não alterna caminhada/corrida a cada oscilação em torno de 2,55 m/s
+PASS Felps volta a caminhar quando desacelera
+PASS Felps não prende a perna da corrida em uma âncora de caminhada
+SPRINT RESULT 30/30 passed; failures=[]
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+PASS preferências antigas recebem intensidade Suave por padrão
+PASS Configurações expõe os dois efeitos separadamente
+PASS cada efeito oferece Desligada, Suave e Marcada
+PASS PS1 mantém cenário em 320×240
+PASS HUD continua no viewport em resolução plena
+PASS PS1 aplica efeitos às superfícies do cenário
+PASS Suave usa grade de meio pixel para vértices
+PASS Suave mistura interpolação afim a 35%
+PASS Marcada usa grade de 1,5 pixel e interpolação afim completa
+PASS precisão desligada preserva a seleção de texturas afins
+PASS texturas afins desligadas preservam a precisão selecionada
+PASS desligar os dois efeitos restaura os materiais originais
+PASS PS1/2 mantém cenário em 640×480
+PASS PS1/2 recebe os mesmos efeitos 3D
+PASS Nítida restaura o material original
+PASS Retrô restaura o material original
+PASS Econômica restaura o material original
+PASS efeitos não reconstroem nem modificam a geometria
+PASS rig e animações publicados permanecem intactos
+PASS trocas de intensidade preservam posição e formas de colisão
+PASS salão energizado mantém emissão no material adaptado
+PASS apagão desliga a emissão original e a adaptada
+PASS apagão preserva circuitos de luz e baterias
+PASS restabelecer energia religa materiais e desliga baterias
+PASS atribuição de material durante jogo é preservada ao sair de PS1
+PASS objetos novos recebem efeitos e marcador de apoio acompanha a cor válida/bloqueada
+PASS reconstruir o mundo renova efeitos e circuitos
+PASS intensidades independentes persistem em settings.cfg
+PSX RESULT 28/28 passed; failures=[]
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+PASS prévia de checkpoint versão 1 mostra noite e horário sem carregar a partida
+PASS prévia de checkpoint versão 2 mostra noite e horário sem carregar a partida
+PASS prévia de checkpoint versão 3 mostra noite e horário sem carregar a partida
+PASS prévia de checkpoint versão 4 mostra noite e horário sem carregar a partida
+PASS prévia de checkpoint versão 5 mostra noite e horário sem carregar a partida
+PASS prévia respeita o horário narrativo do fechamento
+PASS posição inválida não oferece um Continuar enganoso
+PASS save corrompido é tratado silenciosamente na prévia
+PASS ler metadados não modifica Session nem cria um save
+PASS cenas de revisão embutidas não iniciam a intro automaticamente
+PASS baixa taxa de quadros não prolonga artificialmente a intro
+PASS abertura pausa a campanha antes de qualquer interação
+PASS intro oculta menu e HUD até terminar
+PASS abertura usa câmera externa do próprio depósito
+PASS tela inicial mostra o depósito vazio sem remover os protagonistas
+PASS apresentação não acrescenta viewports nem luzes
+PASS tipografia da abertura permanece na resolução da interface
+PASS tempo, objetivos e progresso da campanha não avançam na intro
+PASS animação da fita continua com o mundo pausado
+PASS tempo gasto no primeiro carregamento não pula a abertura
+PASS intro apresenta o estúdio antes da localização
+PASS segundo cartão apresenta local e horário do jogo
+PASS Enter pula a intro e revela o menu
+PASS tecla usada para pular não começa uma partida por acidente
+PASS menu conserva ambiente sonoro e encerra a fita da intro
+PASS primeira ação do menu recebe foco de teclado
+PASS Continuar indica corretamente a disponibilidade do checkpoint
+PASS menu usa som ambiente e luzes existentes da fachada e do estoque
+PASS falha do letreiro é apenas visual e não modifica materiais ou progresso
+PASS ambiente do menu não religa uma luz desligada pelo circuito
+PASS luz do estoque se revela lentamente ao fundo
+PASS carro, cachorro distante e ruído metálico usam eventos espaçados
+PASS título aparece gradualmente com o mundo pausado e sem bloquear foco
+PASS entrada termina corretamente mesmo após um quadro longo
+PASS seleção de teclado ilumina a opção gradualmente
+PASS seleção se estabiliza e não destaca Continuar desabilitado
+PASS câmera se aproxima lentamente sem avançar o expediente
+PASS Configurações abre sobre o fundo do menu
+PASS Esc fecha Configurações antes da partida sem sair do menu
+PASS PS1 não reduz a resolução do menu nem da intro
+PASS PS1/2 permanece disponível no fundo do menu
+PASS menu cabe em uma janela de 800×600
+PASS redimensionar durante a entrada mantém o menu dentro da janela
+PASS abertura e menu respeitam os controles de música e efeitos
+PASS todos os novos sons respeitam Efeitos em zero
+PASS Espaço pula apenas a abertura
+PASS Esc também pula a abertura sem iniciar o jogo
+WARNING: An input event object is being parsed more than once in the same frame, which is unsafe.
+If you are generating events in a script, you have to instantiate a new event instead of sending the same one more than once, unless the original one was sent on an earlier frame.
+You can call duplicate() on the event to get a new instance with identical values.
+     at: parse_input_event (core/input/input.cpp:1145)
+PASS clique pula a abertura sem acionar um botão por baixo
+PASS fim natural da sequência revela o menu uma única vez
+PASS finalizar uma intro já encerrada não repete a transição
+PASS transição começa com o expediente parado e ignora acionamento duplo
+PASS entrada não atravessa a transição para abrir pausa ou configurações
+PASS entrar no jogo cancela a animação sem deixar fades pendentes
+PASS Iniciar expediente ativa o jogo normalmente
+PASS início aproveita o mundo carregado sem alterar a progressão
+PASS controle e câmera retornam ao protagonista
+PASS visibilidade dos protagonistas é restaurada ao entrar no jogo
+PASS áudio e intro encerram ao entrar no jogo
+PASS luzes, letreiro e sons são restaurados antes de entregar o controle
+PASS eventos do menu não reaparecem durante a partida
+PASS transição libera o HUD sem uma camada preta residual
+PASS pausa usa o novo menu sem repetir a abertura
+PASS pausa conserva a câmera e a posição do jogador
+PASS salvamento continua disponível depois da nova abertura
+PASS Continuar mostra a noite e o horário do save real
+PASS Continuar restaura o checkpoint e a câmera de jogo
+PASS Continuar não reproduz a intro outra vez
+PASS executar a cena principal inicia a intro automaticamente antes do menu
+TITLE RESULT 68/68 passed; failures=[]
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+PASS a revisão inicia em primeira pessoa por padrão
+PASS primeira pessoa mostra o corpo e mantém a cabeça fora da própria câmera
+PASS viewport do jogo realmente recebe os sons posicionais 3D
+PASS rodinha para baixo afasta e entrega terceira pessoa pelo caminho real de entrada
+PASS Tab continua trocando os protagonistas
+PASS Felps também começa em primeira pessoa com câmera independente
+PASS trocar de volta preserva a distância escolhida na rodinha
+PASS rodinha para cima volta suavemente à primeira pessoa
+PASS J abre caderno nativo e pausa o expediente
+PASS caderno mantém o objetivo completo disponível
+PASS ler o caderno não move personagens, não troca Tab e não avança eventos
+PASS Esc fecha o caderno e devolve controle sem abrir pausa por baixo
+PASS HUD discreto recolhe objetivo repetido e mantém acesso ao caderno
+PASS configuração permite voltar às instruções persistentes
+PASS legendas retrô e lembrete cabem na tela nativa
+PASS rotina continua com venda comum antes dos cinco minutos, sem liberar aviso cedo
+PASS aviso fica disponível após cinco minutos quando tarefas e vendas já permitem
+PASS atendimento do aviso continua usando a mecânica original
+PASS sino toca com Deryk no estoque e Felps pergunta se ele voltou
+PASS a cena usa sino posicional da entrada, sem mover os protagonistas
+PASS acontecimento e anotação são únicos durante a mesma sessão
+PASS continuar preserva o sino já ouvido e não repete a cena
+PASS pessoa aparece fora da visão no lado oposto da rua sem anotar algo ainda não visto
+PASS observador não vira cliente, não ocupa atendimento e não altera recibos
+PASS olhar para a pessoa com linha de visão registra a observação
+PASS pessoa sai andando pela rua, sem desaparecer ou saltar de posição
+PASS save retoma a pessoa em sua posição e trajetória de saída
+PASS chegar à saída conclui a presença sem salvar um fantasma em movimento
+PASS observador concluído não reaparece ao continuar
+PASS novos ambientes respeitam volume de efeitos
+PASS apagão original permanece acionável
+PASS apagão silencia refrigeração comercial além das luzes
+PASS gerador restaura energia pela ação original
+PASS gerador restaura também os compressores posicionais
+PASS apagar salão mantém refrigeração no circuito correto
+PASS cliente de boné demora a sair após receber a compra
+PASS hesitação retoma pelo save sem repetir recebimento ou entrega
+PASS pessoa também pode ser percebida na câmera ao vivo da fachada
+PASS DVR não desloca a escuta do jogador para a câmera de segurança
+PASS ler outra página não conta como observar a imagem ao vivo
+PASS fechar DVR remove a câmera observadora
+PASS falas automáticas têm uma pausa curta entre respostas
+PASS Espaço continua permitindo avançar falas sem esperar a pausa
+PASS saves versão 5 anteriores recebem anotações opcionais sem perder campanha
+PASS checkpoint anterior adota primeira pessoa uma vez, preservando posição e restante da campanha
+EVERYDAY RESULT 45/45 passed; failures=[]
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+PASS iniciar pelo menu apresenta a chegada e a relação entre os irmãos
+PASS chegada acontece na calçada sem concluir a conversa de trabalho
+PASS rodinha continua abrindo terceira pessoa durante a chegada
+PASS chegada não teleporta o personagem nem força o enquadramento
+PASS Espaço avança a conversa inicial normalmente
+PASS chegada é única e não toca outra vez na mesma partida
+PASS continuar preserva a chegada sem repetir a apresentação
+PASS continuar mantém a câmera escolhida pela rodinha
+PASS sem observação os irmãos conversam sobre a família, sem inventar suspeitas
+PASS observação percebida alimenta a memória narrativa
+PASS conversar depois de observar a rua muda a fala dos irmãos
+PASS reação específica não se repete a cada interação
+PASS conversa opcional não interrompe um atendimento aberto
+PASS reação própria ao acontecimento empty_chime
+PASS reação própria ao acontecimento stock_steps
+PASS reação própria ao acontecimento car_noticed
+PASS observações e conversas não alteram vendas nem dinheiro
+PASS cliente de boné mantém o pedido completo e provoca uma resposta desconfiada
+PASS montar uma fila de diálogo não registra fala ainda não ouvida
+PASS pergunta só vira memória quando a fala é realmente exibida
+PASS pergunta não cria anotações duplicadas nos próximos atendimentos
+PASS clientes têm conversas próprias sem trocar seus modelos ou pedidos
+PASS Bryan tem humor de criança inquieta e reconhece visitas repetidas
+PASS Zirico reage ao sino que foi percebido
+PASS aviso original conserva conteúdo e distingue o relato do cliente da pessoa vista na rua
+PASS save conserva reações já ouvidas e pergunta do cliente
+PASS fechamento tem conversa tensa antes de baixar as portas
+PASS gancho usa o que foi percebido e um ruído físico atrás da dupla
+PASS pausa congela o gancho sem finalizar a noite
+PASS terminar a conversa permite que as portas baixem e conclui a sexta
+PASS resumo com gancho narrativo cabe na janela nativa
+PASS relato do fechamento fica salvo para a próxima noite
+PASS mudança de noite preserva a memória da sexta apesar do reset de eventos ambientais
+PASS abertura de sábado retoma a experiência concreta dos irmãos
+PASS continuar no sábado conserva narrativa e mecânicas de investigação
+PASS save anterior à revisão recebe campos opcionais sem perder a campanha
+FRIDAY STORY RESULT 36/36 passed; failures=[]
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+PASS entrar no estoque inicia um arrasto atrás da porta antiga
+PASS arrasto vem da posição física da porta
+PASS continuar retoma arrasto em andamento
+PASS aproximar-se faz o arrasto parar antes do susto
+PASS depois do silêncio a maçaneta reage
+PASS animação mexe a maçaneta e mantém a porta e sua colisão no lugar
+PASS susto não gira nem afasta a câmera do jogador
+PASS save no susto conclui a maçaneta sem repetir o arrasto
+PASS observação da porta não se duplica
+PASS há intervalo de calma antes da brincadeira de Bryan
+PASS Bryan precisa caminhar até a vitrine
+PASS save retoma Bryan na rota da brincadeira sem teleporte
+PASS Bryan esperando fora da visão não bloqueia outros acontecimentos
+PASS Bryan chega fisicamente e dá a batida na vitrine
+PASS falso susto revela Bryan sem travar o controle
+PASS a conversa opcional traz o alívio depois da brincadeira
+PASS continuar não repete a batida nem sua anotação
+PASS apagão mantém a entrada original da missão do gerador
+PASS gerador continua exigindo a ação original de Deryk
+PASS gerador não anuncia nem agenda a antiga figura de corpo inteiro
+PASS refrigeração e energia voltam normalmente
+PASS save antigo não recria a figura exposta nem a antiga anotação automática
+PASS migração não inventa uma observação que o jogador não teve
+PASS rodinha continua permitindo terceira pessoa
+PASS fechamento reconhece a invasão e preserva o gancho para sábado
+PASS os sustos não bloqueiam o fechamento original
+PASS sábado não recria sustos nem o invasor da sexta
+PASS sábado não explica aparições silenciosas que o jogador pode ter perdido
+PASS save anterior recebe campos opcionais sem perder a campanha
+SCARES RESULT 29/29 passed; failures=[]
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+WATCH SITE stock_jamb prepared=true rejected=false visible=true body=false seconds=0.36666666666667 retired=true
+PASS cabeça pode ser percebida em stock_jamb
+PASS tronco e pernas ficam encobertos em stock_jamb
+PASS retirada encoberta e tempo curto em stock_jamb
+WATCH SITE east_frontage prepared=true rejected=false visible=true body=false seconds=0.35 retired=true
+PASS cabeça pode ser percebida em east_frontage
+PASS tronco e pernas ficam encobertos em east_frontage
+PASS retirada encoberta e tempo curto em east_frontage
+WATCH SITE west_frontage prepared=true rejected=false visible=true body=false seconds=0.43333333333333 retired=true
+PASS cabeça pode ser percebida em west_frontage
+PASS tronco e pernas ficam encobertos em west_frontage
+PASS retirada encoberta e tempo curto em west_frontage
+WATCH SITE rear_right_outer prepared=true rejected=false visible=true body=false seconds=0.56666666666667 retired=true
+PASS cabeça pode ser percebida em rear_right_outer
+PASS tronco e pernas ficam encobertos em rear_right_outer
+PASS retirada encoberta e tempo curto em rear_right_outer
+WATCH SITE rear_right_inner prepared=true rejected=false visible=true body=false seconds=0.56666666666667 retired=true
+PASS cabeça pode ser percebida em rear_right_inner
+PASS tronco e pernas ficam encobertos em rear_right_inner
+PASS retirada encoberta e tempo curto em rear_right_inner
+WATCH SITE rear_left_outer prepared=true rejected=false visible=true body=false seconds=0.56666666666667 retired=true
+PASS cabeça pode ser percebida em rear_left_outer
+PASS tronco e pernas ficam encobertos em rear_left_outer
+PASS retirada encoberta e tempo curto em rear_left_outer
+WATCH SITE rear_left_inner prepared=true rejected=false visible=true body=false seconds=0.56666666666667 retired=true
+PASS cabeça pode ser percebida em rear_left_inner
+PASS tronco e pernas ficam encobertos em rear_left_inner
+PASS retirada encoberta e tempo curto em rear_left_inner
+WATCH SITE front_right_outer prepared=true rejected=false visible=true body=false seconds=0.56666666666667 retired=true
+PASS cabeça pode ser percebida em front_right_outer
+PASS tronco e pernas ficam encobertos em front_right_outer
+PASS retirada encoberta e tempo curto em front_right_outer
+WATCH SITE front_right_inner prepared=true rejected=false visible=true body=false seconds=0.56666666666667 retired=true
+PASS cabeça pode ser percebida em front_right_inner
+PASS tronco e pernas ficam encobertos em front_right_inner
+PASS retirada encoberta e tempo curto em front_right_inner
+WATCH SITE front_left_outer prepared=true rejected=false visible=true body=false seconds=0.56666666666667 retired=true
+PASS cabeça pode ser percebida em front_left_outer
+PASS tronco e pernas ficam encobertos em front_left_outer
+PASS retirada encoberta e tempo curto em front_left_outer
+WATCH SITE front_left_inner prepared=true rejected=false visible=true body=false seconds=0.56666666666667 retired=true
+PASS cabeça pode ser percebida em front_left_inner
+PASS tronco e pernas ficam encobertos em front_left_inner
+PASS retirada encoberta e tempo curto em front_left_inner
+WATCH SITE stock_crates_middle prepared=true rejected=false visible=true body=false seconds=0.63333333333333 retired=true
+PASS cabeça pode ser percebida em stock_crates_middle
+PASS tronco e pernas ficam encobertos em stock_crates_middle
+PASS retirada encoberta e tempo curto em stock_crates_middle
+WATCH SITE stock_crates_west prepared=true rejected=false visible=true body=false seconds=0.63333333333333 retired=true
+PASS cabeça pode ser percebida em stock_crates_west
+PASS tronco e pernas ficam encobertos em stock_crates_west
+PASS retirada encoberta e tempo curto em stock_crates_west
+PASS abaixar e erguer a cabeça mantém os pés plantados atrás da cobertura
+PASS aparições não escrevem pistas nem confirmam uma observação
+PASS várias cabeças não geram conversa ou confirmação narrativa
+PASS uma aparição pode terminar inteira fora da vista sem esperar o jogador olhar
+PASS perder a aparição não gera pista, fala ou aviso substituto
+PASS olhar direto de outro personagem impede a cabeça de aparecer
+PASS caixa aberto impede uma nova aparição
+PASS prepara oportunidade em andamento para testar retomada
+PASS save retoma cabeça, duração e oportunidade sem contar de novo
+PASS caderno pausa corpo e tempo da aparição
+PASS retirada concluída limpa o ator do próximo checkpoint
+WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/WatchingIntegration/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@5032/Depot/@Node3D@6862/DoorHinge/@MeshInstance3D@6881" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
+PASS continuar após a retirada não repete a mesma oportunidade
+PASS limite por noite evita cabeças em toda virada de câmera
+PASS terceira pessoa continua disponível pela rodinha
+PASS save anterior recebe oportunidades opcionais sem perder a campanha
+PASS sábado tem novas oportunidades sem repetir os contadores da sexta
+PASS estado antigo de Bryan na sexta não bloqueia uma cabeça no sábado
+PASS domingo conserva somente a ameaça da perseguição existente
+WATCHING RESULT 57/57 passed; failures=[]
