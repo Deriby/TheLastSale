@@ -1,4 +1,4 @@
-# The Last Sale — projeto Godot 0.30.0
+# The Last Sale — projeto Godot 0.30.1
 
 1. Extraia este ZIP em uma pasta nova.
 2. No Godot **4.4.1**, clique em **Importar** e escolha `project.godot`.
@@ -6,6 +6,12 @@
 4. Pressione **F5** e escolha **Iniciar expediente** para testar a rotina completa.
 
 Modelos animados, cenários, sons, texturas, código, testes e ferramentas estão incluídos. Blender não é necessário para jogar. O renderizador é Compatibility / OpenGL.
+
+## Assassino na aparição — 0.30.1
+
+A figura da volta do gerador usa agora o assassino original, com o mesmo `Enemy.glb` e a mesma biblioteca de animação usados na perseguição de domingo. O cliente que representava essa aparição na 0.30 foi substituído. Os arquivos do modelo e das animações permanecem originais.
+
+A cena conserva deslocamento físico, passagem pelas portas e sua posição ao salvar e continuar. A câmera continua livre e a rodinha mantém terceira pessoa. A perseguição de domingo conserva o funcionamento existente. Veja `docs/killer_v0301/README.md`.
 
 ## Terror e sustos — 0.30.0
 
@@ -145,7 +151,7 @@ O elenco inclui Dery, Felps, Killer, Bryan, Zirico, Garota 1, Garota 2 e Velha 1
 
 ## Validação
 
-As treze suítes reúnem 744 verificações da campanha, atendimento, reposição, animações, PS1, apresentação e nova rotina. Os resultados do pacote extraído e os 48 casos renderizados da câmera PS1 ficam na verificação de distribuição no GitHub, com notas em `docs/scares_v030/validation.json`. `./tools/test.sh` roda as treze suítes; em outra máquina, abra pelo editor ou defina `GODOT_BIN` com o caminho do motor.
+A base 0.30 tem 744 verificações da campanha, atendimento, reposição, animações e apresentação, mais 48 casos renderizados da câmera PS1. A correção 0.30.1 valida de novo as suítes de sustos e perseguição, totalizando 101 verificações, além da extração limpa do ZIP. Os resultados ficam na verificação de distribuição no GitHub, com notas em `docs/killer_v0301/validation.json`. `./tools/test.sh` roda as treze suítes; em outra máquina, abra pelo editor ou defina `GODOT_BIN` com o caminho do motor.
 
 A Godot 4.4 tem Windows 10 como requisito oficial mínimo. Windows 7/Radeon R7 não foram validados nativamente. O modo Econômica reduz resolução, sombras e acabamento dos materiais.
 

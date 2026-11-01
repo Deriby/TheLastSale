@@ -1,6 +1,6 @@
 class_name FrightIntruder
 extends CharacterBody3D
-## A physical Friday glimpse. The later Sunday antagonist remains independent.
+## An early appearance of the existing killer; SundayShift owns the later pursuit.
 signal reached_yard
 signal departed
 var world: ShiftWorld
@@ -17,7 +17,7 @@ var foot: AudioStreamPlayer3D
 func _ready() -> void:
 	add_to_group("atmosphere_actor");collision_layer=2;collision_mask=3
 	var shape:=CollisionShape3D.new();var capsule:=CapsuleShape3D.new();capsule.height=1.70;capsule.radius=.23;shape.shape=capsule;shape.position.y=.85;add_child(shape)
-	visual=CharacterModels.create("ClienteCinza");add_child(visual)
+	visual=CharacterModels.create("Enemy");add_child(visual)
 	for mesh in visual.find_children("*","MeshInstance3D",true,false):mesh.layers=2
 	motion=LivingMotion.new();add_child(motion);motion.setup(visual,self)
 	foot=AudioStreamPlayer3D.new();world.sound.add_child(foot);foot.set_meta("loop_base_db",-11);foot.set_meta("music_loop",false);world.sound.loop_players.append(foot);foot.stream=load("res://assets/audio/step_tile.wav");foot.max_distance=17

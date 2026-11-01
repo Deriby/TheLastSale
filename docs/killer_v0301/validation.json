@@ -1,0 +1,20 @@
+{
+  "version": "0.30.1",
+  "godot": "4.4.1",
+  "appearance_model": "res://assets/models/characters/Enemy.glb",
+  "animation_library": "res://resources/motion/Enemy.res",
+  "same_model_as_sunday_pursuer": true,
+  "existing_asset_files_changed": 0,
+  "animation_libraries_changed": 0,
+  "camera_and_mouse_wheel_unchanged": true,
+  "save_version": 5,
+  "targeted_suites": [
+    "scares_integration",
+    "sunday_integration"
+  ],
+  "targeted_expected_checks": 101,
+  "full_package_results": "../../downloads/project/release_verification.json",
+  "preview_is_staged": true,
+  "preview_fov": 80,
+  "native_radeon_r7_fps_measured": false
+}
