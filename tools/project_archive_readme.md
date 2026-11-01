@@ -1,4 +1,4 @@
-# The Last Sale — projeto Godot 0.33.0
+# The Last Sale — projeto Godot 0.34.0
 
 1. Extraia este ZIP em uma pasta nova.
 2. No Godot **4.4.1**, clique em **Importar** e escolha `project.godot`.
@@ -6,6 +6,16 @@
 4. Pressione **F5** e escolha **Iniciar expediente** para testar a rotina completa.
 
 Modelos animados, cenários, sons, texturas, código, testes e ferramentas estão incluídos. Blender não é necessário para jogar. O renderizador é Compatibility / OpenGL.
+
+## O computador do depósito — 0.34.0
+
+Câmeras e recuperação de arquivos usam uma área de trabalho inspirada no XP, com barras azuis, botão Iniciar, ícones originais, janelas com relevo e tipografia própria. Abertura e troca de página têm animações curtas. Os menus, os atalhos da área de trabalho e a barra de tarefas permitem abrir, minimizar, restaurar e maximizar; a barra azul permite arrastar a janela sem perder os controles.
+
+O CCTV conserva um único canal renderizado por vez. A troca mostra uma sincronização breve e a identificação do canal. Minimizar, ler outra página ou abrir um documento sobre a imagem suspende a renderização e a observação do feed. Os eventos antigos continuam claramente identificados como registros escritos, separados do vídeo recuperado no domingo.
+
+O player de domingo reproduz o Theora original, com pausa, retomada e progresso real até o fim. Minimizar pausa a reprodução e restaurar respeita a pausa escolhida pelo jogador. O cadastro abre como uma segunda janela de documento. Operações de prova mantêm seus efeitos e recebem confirmação visual. ESC fecha primeiro o documento; ESC/C sai do computador e TAB continua trocando de personagem. As janelas permanecem nítidas nos modos PS1.
+
+Modelos, animações, controles dos protagonistas, energia, campanha e saves v5 permanecem. Consulte `docs/desktop_v034/README.md`.
 
 ## O clímax de domingo — 0.33.0
 
@@ -183,7 +193,7 @@ O elenco inclui Dery, Felps, Killer, Bryan, Zirico, Garota 1, Garota 2 e Velha 1
 
 ## Validação
 
-A versão 0.33.0 acrescenta a suíte do clímax e roda as dezesseis suítes com `./tools/test.sh`. O relatório de distribuição no GitHub registra os resultados do ZIP extraído, a captura real e avisos de importação ou encerramento. A validação histórica renderizada de câmera PS1 permanece no relatório anterior; shaders, controlador de câmera e física dos protagonistas não foram alterados nesta atualização. Veja `docs/climax_v033/validation.json`.
+A versão 0.34.0 acrescenta a suíte do computador e roda as dezessete suítes com `./tools/test.sh`. O relatório de distribuição no GitHub registra os resultados do ZIP extraído, a captura real e avisos de importação ou encerramento. A validação histórica renderizada de câmera PS1 permanece no relatório anterior; shaders, controlador de câmera e física dos protagonistas não foram alterados nesta atualização. Veja `docs/desktop_v034/validation.json`.
 
 A Godot 4.4 tem Windows 10 como requisito oficial mínimo. Windows 7/Radeon R7 não foram validados nativamente. O modo Econômica reduz resolução, sombras e acabamento dos materiais.
 

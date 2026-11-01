@@ -115,7 +115,7 @@ func build_menu() -> void:
 	message.add_theme_font_override("font",TitlePresentation.TYPEWRITER);message.modulate=Color("a8a38f")
 	buttons=VBoxContainer.new();v.add_child(buttons);buttons.add_theme_constant_override("separation",7)
 	rebuild_buttons()
-	var footer:=label(v,"0.33.0  /  FONES DE OUVIDO RECOMENDADOS",16)
+	var footer:=label(v,"0.34.0  /  FONES DE OUVIDO RECOMENDADOS",16)
 	footer.add_theme_font_override("font",TitlePresentation.VCR);footer.modulate=Color("828473")
 	menu_motion=TitleMenuMotion.new(menu,v,buttons,title_lockup)
 	layout_menu()
@@ -235,7 +235,7 @@ func close_checkout() -> void:
 func open_surveillance(world: ShiftWorld) -> void:
 	if paused or checkout!=null or surveillance!=null or not world.saturday.can_open(world.player):return
 	world.set_surveillance_open(true)
-	surveillance=SurveillancePanel.new();surveillance.world=world;root.add_child(surveillance);surveillance.position=Vector2(60,35)
+	surveillance=SurveillancePanel.new();surveillance.world=world;root.add_child(surveillance);surveillance.position=Vector2.ZERO
 	surveillance.closed.connect(close_surveillance)
 	# The security viewport renders instead of the covered player viewport.
 	get_parent().viewport.render_target_update_mode=SubViewport.UPDATE_DISABLED
@@ -252,7 +252,7 @@ func close_surveillance() -> void:
 func open_sunday_desk(world: ShiftWorld) -> void:
 	if paused or sunday_desk!=null or campaign_panel!=null or not world.sunday.can_open(world.player):return
 	world.sunday.desk_open=true;world.characters.Felps.input_locked=true
-	sunday_desk=SundayDesk.new();sunday_desk.world=world;root.add_child(sunday_desk);sunday_desk.position=Vector2(100,35)
+	sunday_desk=SundayDesk.new();sunday_desk.world=world;root.add_child(sunday_desk);sunday_desk.position=Vector2.ZERO
 	sunday_desk.closed.connect(close_sunday_desk)
 	get_parent().viewport.render_target_update_mode=SubViewport.UPDATE_DISABLED
 	hud.hide();Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
@@ -374,11 +374,13 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_pressed("pause") or event.is_action_pressed("switch_character"):get_viewport().set_input_as_handled()
 		return
 	if sunday_desk!=null:
+		if event.is_action_pressed("pause") and sunday_desk.dismiss_document():get_viewport().set_input_as_handled();return
 		if event.is_action_pressed("pause") or event.is_action_pressed("surveillance"):
 			close_sunday_desk();get_viewport().set_input_as_handled();return
 		if event.is_action_pressed("switch_character"):
 			var world:=sunday_desk.world;close_sunday_desk();world.switch_player();get_viewport().set_input_as_handled();return
 	if surveillance!=null:
+		if event.is_action_pressed("pause") and surveillance.dismiss_document():get_viewport().set_input_as_handled();return
 		if event.is_action_pressed("pause") or event.is_action_pressed("surveillance"):
 			close_surveillance();get_viewport().set_input_as_handled();return
 		if event.is_action_pressed("switch_character"):
