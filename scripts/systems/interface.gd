@@ -115,7 +115,7 @@ func build_menu() -> void:
 	message.add_theme_font_override("font",TitlePresentation.TYPEWRITER);message.modulate=Color("a8a38f")
 	buttons=VBoxContainer.new();v.add_child(buttons);buttons.add_theme_constant_override("separation",7)
 	rebuild_buttons()
-	var footer:=label(v,"0.34.0  /  FONES DE OUVIDO RECOMENDADOS",16)
+	var footer:=label(v,"0.35.0  /  FONES DE OUVIDO RECOMENDADOS",16)
 	footer.add_theme_font_override("font",TitlePresentation.VCR);footer.modulate=Color("828473")
 	menu_motion=TitleMenuMotion.new(menu,v,buttons,title_lockup)
 	layout_menu()
@@ -280,13 +280,15 @@ func update_objective() -> void:
 	night_label.text="FRANCA / "+Session.night_title()
 	var player:=get_tree().get_first_node_in_group("player") as DepotPlayer
 	var world:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
-	if player!=null and int(Session.campaign.night)<2 and not player.carried_id.is_empty():
+	if player!=null and int(Session.campaign.night)<2 and Session.campaign.phase in ["routine","saturday_routine","restored"] and not player.carried_id.is_empty():
 		objective.text=StockTasks.crate_name(player.carried_id)+"\nDestino: "+StockTasks.destination(player.carried_id)+". [E] usar no destino; [Q] apoiar."
 	elif player!=null and player.identity=="Dery" and world!=null and world.supplies!=null and world.supplies.active_order() and Session.campaign.phase in ["routine","saturday_routine"]:
 		objective.text="Pedido #%03d: pegue a caixa LARANJA VENDA no estoque e entregue na marca do balcão. [E] deixar para Felps."%world.sale.id
 	elif Session.campaign.phase!="routine":objective.text=Session.objective()
 	else:objective.text="Atenda os clientes no balcão. [Tab] Deryk cuida da reposição." if player!=null and player.identity=="Felps" and Session.stage in [1,2,3,4] else Session.objective()
-	if previous!=objective.text:objective_remaining=8.0
+	if previous!=objective.text:
+		var quiet:=world!=null and world.supplies!=null and world.supplies.quiet_routine() and (Session.stage>0 or player!=null and player.carried!=null) and not world.supplies.active_order()
+		objective_remaining=0.0 if quiet else 8.0
 func on_spoken(who: String,text: String) -> void:
 	speaker.text=("Deryk" if who=="Dery" else who)+"  •  [ESPAÇO] continuar" if not who.is_empty() else "";subtitle.text=text
 	hud.get_node("ControlsHint").visible=not Dialogue.active
@@ -326,6 +328,7 @@ func open_journal() -> bool:
 	if paused or not has_started or notebook!=null or Dialogue.active or checkout!=null or surveillance!=null or sunday_desk!=null or campaign_panel!=null:return false
 	var world: ShiftWorld=get_parent().world
 	if world==null or not world.active:return false
+	update_objective()
 	notebook=FieldNotebook.new();notebook.world=world;notebook.current_task=objective.text;root.add_child(notebook);layout_menu()
 	notebook.closed.connect(close_journal);hud.hide();get_tree().paused=true;Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
 	return true
@@ -405,6 +408,7 @@ func update_supply_marker() -> void:
 	if world==null or not world.active or world.supplies==null:return
 	var goal:=world.supplies.goal()
 	if goal.is_empty():return
+	if world.supplies.quiet_routine() and not world.supplies.active_order() and not world.player.carried_id.begins_with("order_"):return
 	var camera:=world.player.camera_rig.camera
 	var at: Vector3=goal.at
 	if Preferences.immersive_hud and objective_remaining<=0 and (world.player.carried==null or world.player.position.distance_to(at)>5):return

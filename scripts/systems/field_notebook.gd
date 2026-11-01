@@ -17,6 +17,8 @@ func _ready() -> void:
 	text(column,Session.night_title()+" / "+Session.clock_text(),16).modulate=Color("c4b18b")
 	text(column,"AGORA",21);var task:=text(column,current_task);task.name="CurrentTask"
 	if int(Session.campaign.night)==0:
+		text(column,"PELO DEPÓSITO",21)
+		text(column,"A porta ESTOQUE fica no fundo do corredor. R1 e R2 vão na primeira geladeira da parede esquerda, G1. R3 vai na P1, prateleira de salgadinhos perto da entrada. O palete DEVOLUÇÕES fica no fundo esquerdo do estoque. A lista presa ao balcão pode ser consultada com E.",16)
 		text(column,"REPOSIÇÃO / FECHAMENTO",21)
 		for job in [["stock_1","R1 — geladeira G1"],["stock_2","R2 — geladeira G1"],["stock_shelf","R3 — salgadinhos da prateleira P1 (extra)"]]:
 			text(column,("[x] " if job[0] in Session.stocked else "[ ] ")+job[1],17)

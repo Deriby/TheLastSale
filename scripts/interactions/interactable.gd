@@ -1,6 +1,6 @@
 class_name Interaction
 extends Node3D
-@export_enum("crate","fridge","door","pallet","talk","note","switch","familiar","checkout","campaign","investigation","sunday","shelf") var kind := "crate"
+@export_enum("crate","fridge","door","pallet","talk","note","switch","familiar","checkout","campaign","investigation","sunday","shelf","guidance") var kind := "crate"
 @export var identity := ""
 var open := false
 var busy := false
@@ -18,6 +18,7 @@ func prompt(player: Node3D) -> String:
 			if kind=="campaign":return world.sunday.prompt("shutter" if identity=="exit" else identity,player)
 			if kind=="door" and identity!="service" and Session.campaign.phase=="sunday_escape" and not Session.flag("stock_released"):return "Estoque travado • Felps precisa liberar pelo salão"
 	match kind:
+		"guidance":return "Ler lista do turno"
 		"crate":
 			if player.identity!="Dery":return "[Tab] Deryk cuida das caixas e da reposição"
 			if player.carried!=null:return "Mãos ocupadas • Q para apoiar a caixa"
@@ -52,6 +53,8 @@ func prompt(player: Node3D) -> String:
 		"switch": return "Acender luz" if not open else "Apagar luz"
 	return "Interagir"
 func available_for(player: DepotPlayer) -> bool:
+	# The small paper uses direct aim, so it never steals the counter conversation.
+	if kind=="guidance":return false
 	if kind=="checkout":return int(Session.campaign.night)==2 or player.identity=="Felps" or player.carried_id.begins_with("order_")
 	if kind=="talk":return get_parent()!=player
 	if kind=="familiar":return not get_parent().leaving
@@ -60,6 +63,7 @@ func activate(player: Node3D) -> bool:
 	if busy or player.motion.action_active: return false
 	var chapter:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
 	if chapter!=null and (chapter.surveillance_open or chapter.sunday!=null and chapter.sunday.desk_open):return false
+	if kind=="guidance":return chapter!=null and chapter.supplies.read_shift_sheet(player)
 	if int(Session.campaign.night)==2 and chapter!=null and chapter.sunday!=null:
 		if kind=="talk":
 			if global_position.distance_to(player.global_position)>2.65:return false
@@ -119,7 +123,9 @@ func activate(player: Node3D) -> bool:
 			player.consume_carried(at,func():
 				if target=="G1":destination.replenish(StockTasks.REQUIRED.find(id))
 				else:destination.replenish())
-			reject("Reposição concluída: "+target+" • "+str(StockTasks.JOBS[id].product)+".");return true
+			if not Preferences.immersive_hud or int(Session.campaign.night)!=0:reject("Reposição concluída: "+target+" • "+str(StockTasks.JOBS[id].product)+".")
+			elif chapter!=null:chapter.notice.emit("")
+			return true
 		"door":
 			open = not open
 			busy = true
@@ -136,7 +142,7 @@ func activate(player: Node3D) -> bool:
 		"talk":
 			if Dialogue.active or global_position.distance_to(player.global_position)>2.65:return false
 			if Session.greet():
-				Dialogue.play("greeting",[["Felps","Ô Dery. Dá uma completada na água pra mim? Separei duas caixas verdes lá atrás." if StockTasks.required_count()<2 else "A água já tá no jeito. Valeu, Dery."],["Dery","Pode deixar. Hoje a gente fecha no horário, hein."],["Felps","Se depender de mim... As devoluções tão no caminho. Anotei o resto no caderno."]])
+				Dialogue.play("greeting",[["Felps","Ô Dery. Dá uma completada nos retornáveis pra mim? Separei R1 e R2 no estoque, pela porta no fundo do corredor. São pra G1, a primeira geladeira da parede esquerda." if StockTasks.required_count()<2 else "Os retornáveis já tão no jeito. Valeu, Dery."],["Dery","Pode deixar. Hoje a gente fecha no horário, hein."],["Felps","Se depender de mim... Os cascos vão no palete DEVOLUÇÕES, lá no estoque. Deixei a lista no balcão e no caderno."]])
 			else:
 				var shift:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
 				if shift!=null:shift.story.try_remark(player)

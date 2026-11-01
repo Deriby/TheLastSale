@@ -1,4 +1,4 @@
-# The Last Sale — projeto Godot 0.34.0
+# The Last Sale — projeto Godot 0.35.0
 
 1. Extraia este ZIP em uma pasta nova.
 2. No Godot **4.4.1**, clique em **Importar** e escolha `project.godot`.
@@ -6,6 +6,12 @@
 4. Pressione **F5** e escolha **Iniciar expediente** para testar a rotina completa.
 
 Modelos animados, cenários, sons, texturas, código, testes e ferramentas estão incluídos. Blender não é necessário para jogar. O renderizador é Compatibility / OpenGL.
+
+## Orientação pelo cenário — 0.35.0
+
+Na sexta-feira, etiquetas R1/R2, G1 e P1 ficam presas aos objetos. Uma lista no balcão pode ser lida com E para ouvir uma orientação curta sobre a tarefa que falta, a caixa carregada ou o gerador. A conversa de abertura usa referências do depósito e J conserva o objetivo completo, o checklist e os controles.
+
+O HUD discreto tira as setas e as confirmações repetidas da reposição. A preferência já salva é respeitada; desative “HUD discreto / orientação pelo cenário [J]” para manter as indicações completas. Pedidos dos clientes continuam assistidos e erros de destino continuam explicados. Consultar a lista não conclui tarefas nem acrescenta requisitos. O sistema de computador da 0.34.0 permanece, assim como modelos, animações, câmera/rodinha, física, energia e saves v5. Consulte `docs/guidance_v035/README.md`.
 
 ## O computador do depósito — 0.34.0
 
@@ -193,7 +199,7 @@ O elenco inclui Dery, Felps, Killer, Bryan, Zirico, Garota 1, Garota 2 e Velha 1
 
 ## Validação
 
-A versão 0.34.0 acrescenta a suíte do computador e roda as dezessete suítes com `./tools/test.sh`. O relatório de distribuição no GitHub registra os resultados do ZIP extraído, a captura real e avisos de importação ou encerramento. A validação histórica renderizada de câmera PS1 permanece no relatório anterior; shaders, controlador de câmera e física dos protagonistas não foram alterados nesta atualização. Veja `docs/desktop_v034/validation.json`.
+A versão 0.35.0 acrescenta 40 verificações de orientação e roda as dezoito suítes (941 verificações) com `./tools/test.sh`. O relatório de distribuição no GitHub registra os resultados do ZIP extraído, a captura real e avisos de importação ou encerramento. A validação histórica renderizada de câmera PS1 permanece no relatório anterior; shaders, controlador de câmera e física dos protagonistas não foram alterados nesta atualização. Veja `docs/guidance_v035/validation.json`.
 
 A Godot 4.4 tem Windows 10 como requisito oficial mínimo. Windows 7/Radeon R7 não foram validados nativamente. O modo Econômica reduz resolução, sombras e acabamento dos materiais.
 

@@ -16,7 +16,7 @@ func _ready() -> void:
 	add_slider("Sensibilidade do mouse","sensitivity",.001,.006,.0002)
 	add_slider("Campo de visão","fov",55,90,1)
 	add_slider("Câmera inicial (0 = primeira pessoa)","camera_distance",0,3.6,.2)
-	var immersive:=CheckButton.new();immersive.name="ImmersiveHUD";immersive.text="HUD discreto / tarefas no caderno [J]";immersive.button_pressed=Preferences.immersive_hud;rows.add_child(immersive)
+	var immersive:=CheckButton.new();immersive.name="ImmersiveHUD";immersive.text="HUD discreto / orientação pelo cenário [J]";immersive.button_pressed=Preferences.immersive_hud;rows.add_child(immersive)
 	immersive.toggled.connect(func(value):Preferences.immersive_hud=value;Preferences.save())
 	add_slider("Granulação","grain",0,.10,.005)
 	add_slider("Interferência VHS","vhs",0,1,.05)
