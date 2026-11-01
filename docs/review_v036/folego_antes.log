@@ -1,0 +1,14 @@
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+PASS Esc em Configurações conserva FOV alterado no arquivo de preferências
+PASS volume e sensibilidade também persistem ao sair pelo teclado
+PASS configurações cabem em janela 800×600 com rolagem acessível
+PASS caixa cabe inteiro em janela 800×600
+PASS redimensionar recentraliza o caixa
+PASS confirmação de saída explica quando a cópia está com o irmão que ficou no depósito
+PASS prova já enviada permanece confirmada mesmo com a dupla separada
+PASS confirmação de fuga acompanha janela menor
+PASS relatório entre noites cabe na janela menor
+FAIL exaustão mantém caminhada estável em vez de alternar corrida e regeneração a cada quadro
+PASS recuperar fôlego permite voltar à velocidade normal de corrida
+REVIEW RESULT 10/11 passed; failures=["exaustão mantém caminhada estável em vez de alternar corrida e regeneração a cada quadro"]

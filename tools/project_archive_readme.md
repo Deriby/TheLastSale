@@ -1,4 +1,4 @@
-# The Last Sale — projeto Godot 0.35.0
+# The Last Sale — projeto Godot 0.36.0
 
 1. Extraia este ZIP em uma pasta nova.
 2. No Godot **4.4.1**, clique em **Importar** e escolha `project.godot`.
@@ -6,6 +6,12 @@
 4. Pressione **F5** e escolha **Iniciar expediente** para testar a rotina completa.
 
 Modelos animados, cenários, sons, texturas, código, testes e ferramentas estão incluídos. Blender não é necessário para jogar. O renderizador é Compatibility / OpenGL.
+
+## Revisão da campanha — 0.36.0
+
+Configurações fechadas com Esc agora salvam volume, sensibilidade, FOV e os demais valores. Na confirmação de fuga, uma cópia carregada pelo irmão que ficou no depósito não aparece como já preservada pelo personagem que vai sair. A corrida deixa de alternar entre gasto e regeneração de fôlego a cada quadro perto da exaustão: depois de esgotar, é preciso recuperar uma pequena reserva antes de voltar a correr. Velocidades, acelerações, colisões, controles, modelos e curvas das animações permanecem.
+
+A revisão acrescenta 12 regressões de menus e fôlego, e uma rota contínua desde uma campanha nova até o epílogo, com 29 verificações e cinco retomadas. A rota movimenta os personagens pela física, usa os botões por teclado e não preenche objetivos, dinheiro ou posições. O relógio do teste corre a 4×, com 60 passos de física por segundo de jogo; diálogos são adiantados. O teste renderizado do piso PS1 também é executado no pacote extraído. Consulte `docs/review_v036/README.md` e a verificação da distribuição no GitHub. Não foi medida a placa de vídeo do jogador.
 
 ## Orientação pelo cenário — 0.35.0
 
@@ -199,7 +205,7 @@ O elenco inclui Dery, Felps, Killer, Bryan, Zirico, Garota 1, Garota 2 e Velha 1
 
 ## Validação
 
-A versão 0.35.0 acrescenta 40 verificações de orientação e roda as dezoito suítes (941 verificações) com `./tools/test.sh`. O relatório de distribuição no GitHub registra os resultados do ZIP extraído, a captura real e avisos de importação ou encerramento. A validação histórica renderizada de câmera PS1 permanece no relatório anterior; shaders, controlador de câmera e física dos protagonistas não foram alterados nesta atualização. Veja `docs/guidance_v035/validation.json`.
+A versão 0.36.0 roda vinte suítes de integração (982 verificações) com `./tools/test.sh`. A verificação renderizada `tests/psx_motion_integration.tscn` acrescenta 48 casos e requer uma tela OpenGL. O relatório de distribuição no GitHub registra os resultados do ZIP extraído, a captura real e avisos de importação ou encerramento. A validação histórica renderizada de câmera PS1 permanece no relatório anterior; shaders, câmera, colisões e velocidades permanecem; o controle de recuperação de fôlego foi corrigido. Veja `docs/review_v036/validation.json`.
 
 A Godot 4.4 tem Windows 10 como requisito oficial mínimo. Windows 7/Radeon R7 não foram validados nativamente. O modo Econômica reduz resolução, sombras e acabamento dos materiais.
 

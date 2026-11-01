@@ -23,7 +23,10 @@ func _ready() -> void:
 			text(body,"A SAÍDA ESTÁ AQUI",30)
 			var together:=world.sunday.together_at_exit()
 			text(body,"Os dois chegaram. Você pode encerrar a fuga junto do companheiro." if together else "Seu companheiro ainda está no depósito ou no caminho. Sair agora encerra a campanha sem resgatá-lo.")
-			text(body,"Prova preservada: "+("sim" if world.sunday.proof_preserved(["Dery","Felps"]) else "não. Os dois podem sobreviver, mas o caso ficará aberto."),18)
+			var departing: Array[String]=[];departing.assign(["Dery","Felps"] if together else [world.player.identity])
+			var proof_text:="Prova preservada: sim" if world.sunday.proof_preserved(departing) else "Prova preservada: não. Sem uma cópia, o caso ficará aberto."
+			if not together and world.sunday.state().proof=="carried" and str(world.sunday.state().get("proof_carrier",""))!=world.player.identity:proof_text="Prova com o companheiro: reúna a dupla para levá-la."
+			text(body,proof_text,18)
 			var both:=button(body,"EscapeTogether","FUGIR COM OS DOIS",func():escape.emit(false));both.disabled=not together
 			if not together:button(body,"LeaveAlone","CONFIRMAR: SAIR SEM O COMPANHEIRO",func():escape.emit(true))
 			button(body,"CancelEscape","VOLTAR E REUNIR A DUPLA",func():cancel.emit()).grab_focus()

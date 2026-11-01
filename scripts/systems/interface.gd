@@ -115,7 +115,7 @@ func build_menu() -> void:
 	message.add_theme_font_override("font",TitlePresentation.TYPEWRITER);message.modulate=Color("a8a38f")
 	buttons=VBoxContainer.new();v.add_child(buttons);buttons.add_theme_constant_override("separation",7)
 	rebuild_buttons()
-	var footer:=label(v,"0.35.0  /  FONES DE OUVIDO RECOMENDADOS",16)
+	var footer:=label(v,"0.36.0  /  FONES DE OUVIDO RECOMENDADOS",16)
 	footer.add_theme_font_override("font",TitlePresentation.VCR);footer.modulate=Color("828473")
 	menu_motion=TitleMenuMotion.new(menu,v,buttons,title_lockup)
 	layout_menu()
@@ -221,7 +221,7 @@ func set_paused(value: bool) -> void:
 func open_settings() -> void:
 	if presentation.departing:return
 	menu_motion.cancel();menu.hide();settings=SettingsPanel.new();root.add_child(settings);layout_menu()
-	settings.closed.connect(func():settings.queue_free();settings=null;menu.show();layout_menu();menu_motion.reveal(true);focus_menu())
+	settings.closed.connect(func():Preferences.save();settings.queue_free();settings=null;menu.show();layout_menu();menu_motion.reveal(true);focus_menu())
 func open_checkout(world: ShiftWorld) -> void:
 	if paused or checkout!=null or surveillance!=null or sunday_desk!=null or campaign_panel!=null:return
 	checkout=CheckoutPanel.new();checkout.world=world;root.add_child(checkout);checkout.position=Vector2(160,30)

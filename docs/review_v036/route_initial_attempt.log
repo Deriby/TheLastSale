@@ -1,0 +1,55 @@
+Godot Engine v4.4.1.stable.official.49a5bc7b6 - https://godotengine.org
+
+PASS campanha nova começa pela conversa real no balcão
+PASS trajeto completo de reposição: stock_1
+WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/CampaignRoute/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@61/@CharacterBody3D@2478/Garota1/@MeshInstance3D@2486" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
+PASS trajeto completo de reposição: stock_2
+PASS cascos no palete completam o trabalho por ações físicas
+PASS retomada contínua: sexta após reposição
+WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/CampaignRoute/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@2524/@CharacterBody3D@4934/Garota1/@MeshInstance3D@4943" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
+WARNING: [Physics interpolation] Non-interpolated instance triggered from physics process: "/root/CampaignRoute/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@2524/Dery/@Node3D@4834/order_2/@MeshInstance3D@5222" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:966)
+WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/CampaignRoute/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@2524/@CharacterBody3D@5487/Garota2/@MeshInstance3D@5495" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
+PASS atendimentos de sexta produzem recibos únicos na mesma campanha
+PASS rotina respeita o intervalo do aviso e chega à pane sem forçar progresso
+PASS Felps suspende o caixa durante a pane contínua
+WARNING: [Physics interpolation] Non-interpolated instance triggered from physics process: "/root/CampaignRoute/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@5910/Depot/@Node3D@7793/Products/@MeshInstance3D@7799" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:966)
+PASS retomada contínua: pane com chave e caixa suspenso
+PASS gerador físico restaura refrigeração e permite encerrar sexta
+PASS atendimento após a pane permite encerrar a primeira noite
+WARNING: [Physics interpolation] Non-interpolated instance triggered from physics process: "/root/CampaignRoute/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@5910/Dery/@Node3D@8217/@SpringArm3D@8218/@Camera3D@8219/@SpotLight3D@8223" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:966)
+PASS fechamento confere caixa, estoque e circuitos
+PASS fechamento físico e resumo da noite 0
+PASS percurso contínuo de sexta chega ao sábado
+WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/CampaignRoute/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@8584/@CharacterBody3D@11004/Customer2/@MeshInstance3D@11013" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
+PASS sábado atende as duas visitas e só depois libera investigação
+PASS quatro pistas vêm do DVR, recibo e inspeções físicas
+PASS retomada contínua: sábado com quatro pistas
+PASS fechamento confere caixa, estoque e circuitos
+PASS fechamento físico e resumo da noite 1
+WARNING: [Physics interpolation] Non-interpolated instance triggered from physics process: "/root/CampaignRoute/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@14122/Depot/@Node3D@15737/Products/@MeshInstance3D@15742" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:966)
+PASS percurso contínuo de sábado chega ao domingo
+PASS domingo recebe contato e cópia decididos no sábado real
+PASS retomada contínua: domingo com módulo recolhido
+PASS vídeo real, análise e envio preservam prova antes da fuga
+PASS dupla foge por rotas reais com o perseguidor ativo
+PASS uma mesma campanha nova chega ao final com dois sobreviventes e prova
+WARNING: [Physics interpolation] Interpolated instance triggered from outside physics process: "/root/CampaignRoute/AUltimaVenda/@SubViewportContainer@2/@SubViewport@3/@Node3D@19345/Depot/@Node3D@21264/DoorHinge/@MeshInstance3D@21282" (possibly benign).
+     at: instance_set_transform (servers/rendering/renderer_scene_cull.cpp:1032)
+PASS retomada contínua: epílogo da campanha completa
+PASS percurso contínuo de domingo chega ao epílogo
+PASS protagonistas não sofrem saltos de posição ao caminhar, correr ou acompanhar
+PASS os dois protagonistas usam corrida real durante a fuga
+CAMPAIGN ROUTE {"max_step_m":0.0657226368784904,"nights":[0,1,2],"receipts":{"0":5,"1":2},"run_seconds":{"Dery":5.44999999999999,"Felps":3.14999999999999}}
+ROUTE RESULT 29/29 passed; failures=[]
+WARNING: ObjectDB instances leaked at exit (run with --verbose for details).
+     at: cleanup (core/object/object.cpp:2378)
+ERROR: 1 resources still in use at exit (run with --verbose for details).
+   at: clear (core/io/resource.cpp:614)

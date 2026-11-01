@@ -1,0 +1,36 @@
+{
+  "clear": {
+    "measurement": "decoded mesh arrays and startup work; not a hardware FPS benchmark",
+    "menu_build_ms": 1706.974,
+    "pixel_scale": 1,
+    "start_shift_ms": 0.108,
+    "structure": {
+      "indices": 2010264,
+      "mesh_buffer_bytes": 44369752,
+      "mesh_instances": 1448,
+      "mesh_resources": 1448,
+      "nodes": 2622,
+      "shadow_lights": 5,
+      "triangles": 673186,
+      "vertices": 705046
+    }
+  },
+  "eco": {
+    "measurement": "decoded mesh arrays and startup work; not a hardware FPS benchmark",
+    "menu_build_ms": 1641.022,
+    "pixel_scale": 3,
+    "start_shift_ms": 0.11,
+    "structure": {
+      "indices": 2010264,
+      "mesh_buffer_bytes": 44369752,
+      "mesh_instances": 1448,
+      "mesh_resources": 1448,
+      "nodes": 2622,
+      "shadow_lights": 0,
+      "triangles": 673186,
+      "vertices": 705046
+    }
+  },
+  "measurement": "Headless structure, decoded mesh buffers and startup timings; not hardware FPS, total RAM or VRAM",
+  "target_gpu_measured": false
+}

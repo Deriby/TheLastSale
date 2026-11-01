@@ -22,6 +22,7 @@ var concealed:=false
 var assisted_speed:=1.55
 var crouching := false
 var stamina := 1.0
+var sprint_recovering:=false
 var motion: LivingMotion
 var handling: BoxHandling
 var action_facing:=Vector3.ZERO
@@ -90,7 +91,10 @@ func _physics_process(delta: float) -> void:
 	if not controlled and not input_locked and not Dialogue.active and not motion.action_active:
 		while not assisted_path.is_empty() and Vector2(assisted_path[0].x-position.x,assisted_path[0].z-position.z).length()<.10:assisted_path.remove_at(0)
 		if not assisted_path.is_empty():direction=(assisted_path[0]-position)*Vector3(1,0,1);direction=direction.normalized()
-	var running:=controlled and Input.is_action_pressed("sprint") and not crouching and carried==null and stamina>.05 and input.length()>.1
+	# Separate exhaustion and recovery thresholds prevent frame-by-frame toggling.
+	if stamina<=.05:sprint_recovering=true
+	elif stamina>=.22:sprint_recovering=false
+	var running:=controlled and Input.is_action_pressed("sprint") and not crouching and carried==null and not sprint_recovering and input.length()>.1
 	stamina=clampf(stamina+delta*(-.18 if running else .16),0,1)
 	var speed:=3.9 if running else (.85 if crouching else (1.15 if carried!=null else 1.55))
 	if not controlled and not crouching:speed=assisted_speed

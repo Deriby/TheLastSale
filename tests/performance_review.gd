@@ -46,5 +46,7 @@ func review() -> void:
 	report["measurement"]="decoded mesh arrays and startup work; not a hardware FPS benchmark"
 	print("PROFILE_STRUCTURE ",JSON.stringify(report.structure))
 	FileAccess.open("/tmp/"+prefix+".json",FileAccess.WRITE).store_string(JSON.stringify(report,"\t"))
+	app.world.sound.stop_all()
+	await get_tree().create_timer(.25,true,false,true).timeout
 	app.queue_free();await frames(4)
 	Geo.materials.clear();ProductLibrary.materials.clear();ProductLibrary.meshes.clear();CharacterModels.imported_materials.clear();await frames(4);get_tree().quit()

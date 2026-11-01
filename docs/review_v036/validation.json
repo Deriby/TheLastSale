@@ -1,0 +1,33 @@
+{
+  "version": "0.36.0",
+  "godot": "4.4.1",
+  "new_suites": {
+    "release_review_integration": 12,
+    "campaign_route_integration": 29
+  },
+  "full_suite_count": 20,
+  "full_expected_checks": 982,
+  "rendered_psx_checks": 48,
+  "total_expected_checks": 1030,
+  "validation_source": "downloads/project/release_verification.json",
+  "base_commit": "4697c4785ef8f95185ce457ec1944f2413a1758b",
+  "original_asset_files_preserved": 463,
+  "resource_files_preserved": 32,
+  "motion_libraries_preserved": 11,
+  "fixed_settings_persist_on_escape": true,
+  "fixed_proof_status_when_carrier_absent": true,
+  "fixed_stamina_sprint_oscillation": true,
+  "camera_collision_geometry_speeds_and_animation_resources_preserved": true,
+  "mouse_wheel_third_person_preserved": true,
+  "save_version": 5,
+  "project_only_no_exe": true,
+  "preview": "docs/review_v036/revisao_preview.mp4",
+  "preview_staged_views": true,
+  "preview_speed": 1,
+  "preview_internal_pixel_scale": 2,
+  "campaign_route_fresh_start_without_progress_or_position_assignments": true,
+  "campaign_route_clock_scale": 4,
+  "campaign_route_physics_steps_per_game_second": 60,
+  "human_realtime_full_campaign_playtest": false,
+  "target_gpu_fps_measured": false
+}

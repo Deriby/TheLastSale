@@ -42,7 +42,7 @@ func _ready() -> void:
 	limit.item_selected.connect(func(i):Preferences.frame_limit=limit.get_item_id(i);Preferences.save())
 	var screen:=CheckButton.new();screen.text="Tela cheia";screen.button_pressed=Preferences.fullscreen;rows.add_child(screen)
 	screen.toggled.connect(func(v):Preferences.fullscreen=v;Preferences.save())
-	var back:=Button.new();back.text="VOLTAR";rows.add_child(back);back.pressed.connect(func():Preferences.save();closed.emit())
+	var back:=Button.new();back.text="VOLTAR";rows.add_child(back);back.pressed.connect(func():closed.emit())
 func add_slider(title: String,key: String,lo: float,hi: float,step: float) -> void:
 	var row:=HBoxContainer.new();rows.add_child(row)
 	var label:=Label.new();label.text=title;label.custom_minimum_size.x=280;row.add_child(label)

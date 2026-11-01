@@ -24,3 +24,9 @@ G1 recebe R1/R2, P1 recebe R3 como reposição extra, pedidos recebem caixas lar
 ## Locomoção e acabamento — revisão 0.22.0
 
 Novas bibliotecas medidas para cada rig reduzem a marcha rígida, a elevação dos pés e o quadril permanentemente baixo. Corpo e respiração reagem ao movimento; contato dos pés e transporte continuam verificados. Novos detalhes estáticos entram no depósito e na calçada. Curvas de dedos, giros muito rápidos e gestos específicos ainda admitem acabamento manual. [Comparação e validação](natural_v022/README.md).
+
+## Revisão da campanha — 0.36.0
+
+A revisão acrescenta uma rota automatizada desde uma campanha nova até o epílogo, com trabalho, vendas, pane, investigação, cinco retomadas e fuga cooperativa. Os três finais e retry continuam na suíte de domingo. Foram corrigidos o salvamento das configurações ao sair com Esc, a indicação da cópia com um companheiro ausente na fuga e a oscilação da corrida na exaustão. Modelos, bibliotecas de animação e controles de câmera permanecem. [Escopo, evidências e limitações](review_v036/README.md).
+
+Desempenho na GPU do jogador e avaliação humana em tempo normal ainda precisam de teste no PC de destino. Os NPCs provisórios continuam identificados como tal; esta revisão valida o protótipo existente, sem substituir a arte aprovada ou acrescentar novas mecânicas.
