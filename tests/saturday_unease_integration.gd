@@ -3,7 +3,7 @@ var event: SaturdayUnease
 func reload() -> void:
  Session.save_shift(world.player.position);app.start_saved();world=app.world;world.spawn_wait=999;event=world.saturday.unease;event.set_physics_process(false);world.presence.state().next_at=99999;await ticks(4)
 func eligible() -> void:
- event.state().quiet_until=0;event.state().head_quiet=0;event.cue=""
+ event.state().quiet_until=0;event.state().head_quiet=0;event.cue="";world.horror.state().quiet_until=0
 func run() -> void:
  Preferences.camera_distance=0;Preferences.frame_limit=60;Preferences.apply();Session.new_shift();Session.advance_to_saturday()
  app=load("res://scenes/main/main.tscn").instantiate();app.process_mode=Node.PROCESS_MODE_PAUSABLE;add_child(app);app.interface.has_started=true;app.interface.set_paused(false);world=app.world;world.active=true;world.spawn_wait=999;event=world.saturday.unease;event.set_physics_process(false);world.presence.state().next_at=99999;Dialogue.clear();Session.campaign.phase="saturday_investigation";Session.world_seconds=300
@@ -73,21 +73,21 @@ func run() -> void:
  for frame in 50:
   await ticks(1)
   if not is_instance_valid(event.figure) or event.figure.phase=="holding":break
- check(is_instance_valid(event.figure) and event.figure.phase=="holding","virar a própria câmera revela a cabeça brevemente através do vidro")
+ check(is_instance_valid(event.figure) and event.figure.phase=="holding","enquadramento revela a cabeça através do vidro")
  if is_instance_valid(event.figure):
   var amount: float=event.figure.amount;await reload()
   check(is_instance_valid(event.figure) and event.figure.amount>.95 and bool(event.state().face_used),"save no instante do rosto retoma a pose sem rearmar oportunidade")
   if is_instance_valid(event.figure):
    var age: float=event.figure.age;app.interface.set_paused(true);await ticks(8)
    check(is_equal_approx(event.figure.age,age),"pausa congela o instante do encontro")
-   app.interface.set_paused(false);await ticks(75)
+   app.interface.set_paused(false);await ticks(110)
  check(not is_instance_valid(event.figure) and event.state().face.is_empty(),"assassino abaixa atrás da carroceria e libera o checkpoint")
  await reload();eligible();event._physics_process(1)
  check(not is_instance_valid(event.figure) and bool(event.state().face_used),"rosto não reaparece depois de continuar nem a cada virada")
  event.state().face_used=false;event.state().turn_wait=0;eligible();world.player.camera_rig.yaw+=PI;world.player.camera_rig.reset_follow();await ticks(3);event._physics_process(.7)
  check(is_instance_valid(event.figure),"prepara outra linha de teste com a janela fora da vista")
  await ticks(230)
- check(not is_instance_valid(event.figure) and bool(event.state().face_used),"sem virar a câmera, o momento acaba e é consumido mesmo assim")
+ check(not is_instance_valid(event.figure) and bool(event.state().face_used),"encontro próximo dirige a câmera e termina mesmo sem giro manual")
  check(not Dialogue.active and Session.campaign.experience.notes.size()==notes and Session.campaign.records==records,"novos vestígios e aparições não geram aviso, fala ou registro automático")
  clues.moved_boxes=true
  check(Session.campaign.clues==clues and int(Session.snapshot_data().version)==5,"nenhuma pista obrigatória extra e save mantém compatibilidade")

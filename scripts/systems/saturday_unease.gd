@@ -92,7 +92,7 @@ func _physics_process(delta: float) -> void:
 	if Session.campaign.phase not in ["saturday_investigation","saturday_decisions","closing"]:return
 	if float(state().entered)<0:state().entered=now
 	if bool(Session.campaign.clues.get("moved_boxes",false)) and float(state().inspected)<0:state().inspected=now
-	if not base_safe() or now<float(state().quiet_until) or now<float(state().head_quiet) or is_instance_valid(figure):return
+	if not base_safe() or now<float(state().quiet_until) or now<float(state().head_quiet) or is_instance_valid(figure) or world.horror.ambient_blocked():return
 	if world.presence!=null and is_instance_valid(world.presence.watcher):return
 	if not bool(state().shifted) and float(state().inspected)>=0 and now-float(state().inspected)>32 and can_shift():
 		state().shifted=true;apply_board_shift();state().quiet_until=now+20;save();return

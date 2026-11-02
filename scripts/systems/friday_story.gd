@@ -75,7 +75,7 @@ func warning_lines() -> Array:
 	return lines
 func familiar_lines(identity: String,actor: DepotPlayer,visits: int) -> Array:
 	if identity=="Bryan":
-		if world.scary!=null and world.scary.done("bryan_prank") and not world.scary.done("bryan_left"):return [["Bryan","Hahaha! Cê pulou igual quando a mãe te chama bravo!"],[actor.identity,"Quer me matar do coração, menino?"],["Felps","Por hoje deu de brincadeira. Vai pra casa antes que escureça mais."]]
+		if world.scary!=null and world.scary.done("bryan_prank") and not world.scary.done("bryan_left"):return [["Bryan","Hahaha! Fiquei escondido nas caixas lá dos fundos só esperando tu voltar!"],[actor.identity,"Quer me matar do coração, menino? Sai de trás dessas caixas!"],["Felps","Por hoje deu de brincadeira. Vai pra casa antes que escureça mais."]]
 		if visits==0:return [["Bryan","Posso apertar um botão do caixa? Um só."],["Felps","Da última vez tu abriu a gaveta três vezes."],["Bryan","Tava testando se funcionava!"],[actor.identity,"Testa ir pra casa antes da tua mãe vir te buscar."]]
 		return [["Bryan","Se eu levar uma garrafinha, vocês me dão desconto?"],[actor.identity,"Se tu devolver as que tão na tua mochila, a gente conversa."],["Bryan","Cês lembram de tudo, hein."]]
 	if noticed("empty_chime"):return [["Zirico","Quem entrou quando o sino tocou? Eu tava olhando pra porta."],[actor.identity,"Não entrou ninguém, Zirico."],["Zirico","Então não foi só eu que achei esquisito."]]

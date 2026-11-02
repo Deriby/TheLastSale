@@ -16,6 +16,8 @@ var voices: Array[AudioStreamPlayer3D]=[]
 var voice_index:=0
 var unease_amount:=0.0
 var loop_players: Array[AudioStreamPlayer3D]=[]
+var occlusion_wait:=0.0
+var focus_duck:=0.0
 func set_store_power(value: bool,radio_on := true) -> void:
 	store_powered=value;radio_powered=value and radio_on
 	if hum!=null:
@@ -53,8 +55,8 @@ func set_engine_active(value: bool) -> void:
 	elif not value:engine.stop()
 func play_spatial(path: String,at: Vector3,db: float=-12.0,muffled:=false) -> void:
 	var player:=voices[voice_index%voices.size()];voice_index+=1
-	player.global_position=at;player.stream=load(path);player.set_meta("base_db",db)
-	player.volume_db=db+linear_to_db(maxf(Preferences.effects_volume,.001))
+	player.global_position=at;player.stream=load(path);player.set_meta("base_db",db);player.set_meta("forced_muffled",muffled);player.set_meta("occluded",muffled)
+	player.volume_db=db+linear_to_db(maxf(Preferences.effects_volume,.00001))
 	player.attenuation_filter_cutoff_hz=1800 if muffled else 10000;player.play()
 func loop_sound(id: String,at: Vector3,db: float,distance_value: float) -> AudioStreamPlayer3D:
 	var p:=AudioStreamPlayer3D.new();add_child(p);p.position=at;p.max_distance=distance_value;p.volume_db=db
@@ -66,21 +68,35 @@ func loop_sound(id: String,at: Vector3,db: float,distance_value: float) -> Audio
 func refresh() -> void:
 	for player in loop_players:player.volume_db=float(player.get_meta("loop_base_db"))+linear_to_db(maxf(.001,Preferences.music_volume if player.get_meta("music_loop",false) else Preferences.effects_volume))
 	radio.volume_db=-19-unease_amount*15+linear_to_db(maxf(Preferences.music_volume,.001))
-	hum.volume_db=-17+linear_to_db(maxf(Preferences.effects_volume,.001))
-	night.volume_db=-15+linear_to_db(maxf(Preferences.effects_volume,.001))
-	ballast.volume_db=-18+linear_to_db(maxf(Preferences.effects_volume,.001))
-	for player in compressors:player.volume_db=-25+linear_to_db(maxf(Preferences.effects_volume,.001))
-	if engine!=null:engine.volume_db=-19+linear_to_db(maxf(Preferences.effects_volume,.001))
-	for player in voices:player.volume_db=float(player.get_meta("base_db",-5))+linear_to_db(maxf(Preferences.effects_volume,.001))
+	hum.volume_db=-17+linear_to_db(maxf(Preferences.effects_volume,.00001))
+	night.volume_db=-15+linear_to_db(maxf(Preferences.effects_volume,.00001))
+	ballast.volume_db=-18+linear_to_db(maxf(Preferences.effects_volume,.00001))
+	for player in compressors:player.volume_db=-25+linear_to_db(maxf(Preferences.effects_volume,.00001))
+	if engine!=null:engine.volume_db=-19+linear_to_db(maxf(Preferences.effects_volume,.00001))
+	for player in voices:player.volume_db=float(player.get_meta("base_db",-5))-(4.0 if player.get_meta("occluded",false) else 0.0)+linear_to_db(maxf(Preferences.effects_volume,.00001))
 func _process(delta: float) -> void:
+	var world:=get_parent() as ShiftWorld
+	var quiet:=world!=null and world.horror!=null and world.horror.ambient_blocked()
+	focus_duck=move_toward(focus_duck,1.0 if world!=null and world.horror!=null and world.horror.busy() else 0.0,delta*3)
+	occlusion_wait-=delta
+	if occlusion_wait<=0 and world!=null:
+		occlusion_wait=.12
+		for voice in voices:
+			if not voice.playing:continue
+			var hit:=get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(world.player.camera_rig.camera.global_position,voice.global_position,1))
+			var muffled: bool=voice.get_meta("forced_muffled",false) or not hit.is_empty() and hit.position.distance_to(voice.global_position)>.18
+			voice.set_meta("occluded",muffled)
+			voice.attenuation_filter_cutoff_hz=1600 if muffled else 10000
+			voice.volume_db=float(voice.get_meta("base_db",-12))-(4.0 if muffled else 0.0)+linear_to_db(maxf(Preferences.effects_volume,.00001))
 	var player:=get_tree().get_first_node_in_group("player") as Node3D
 	if player!=null:
 		var inside:=smoothstep(-.5,3.0,player.global_position.z)
-		night.volume_db=-21+inside*10+linear_to_db(maxf(Preferences.effects_volume,.001))
+		night.volume_db=-21+inside*10+linear_to_db(maxf(Preferences.effects_volume,.00001))
 		night.attenuation_filter_cutoff_hz=lerpf(1800,7500,inside)
 		var stock:=1.0-smoothstep(-12.5,-10.8,player.global_position.z)
-		radio.volume_db=-19-unease_amount*15-stock*6+linear_to_db(maxf(Preferences.music_volume,.001))
+		radio.volume_db=-19-unease_amount*15-stock*6-focus_duck*7+linear_to_db(maxf(Preferences.music_volume,.001))
 		radio.attenuation_filter_cutoff_hz=lerpf(8500,1600,stock)
+	if quiet:return
 	# Sunday's investigation keeps real powered equipment and outdoor air, with
 	# no scheduled dog/metal/settling cues filling every gap in the quiet.
 	if int(Session.campaign.night)==2 and Session.campaign.phase in ["sunday_intro","sunday_investigation","sunday_prepare"]:return
@@ -89,7 +105,7 @@ func _process(delta: float) -> void:
 	ambient_index+=1;ambient_wait=[38.0,55.0,47.0,66.0][ambient_index%4]
 	var paths: Array[String]=["res://assets/audio/distant_traffic.wav","res://assets/audio/title/ambient/distant_dog.ogg","res://assets/audio/store_settle.wav","res://assets/audio/title/ambient/metal_creak.ogg"]
 	ambience.position=[Vector3(-25,1,7),Vector3(24,1,14),Vector3(-2,1,-14),Vector3(15,1,11)][ambient_index%4]
-	ambience.stream=load(paths[ambient_index%4]);ambience.volume_db=(-15 if ambient_index%4<2 else -24)+linear_to_db(maxf(Preferences.effects_volume,.001));ambience.play()
+	ambience.stream=load(paths[ambient_index%4]);ambience.volume_db=(-15 if ambient_index%4<2 else -24)+linear_to_db(maxf(Preferences.effects_volume,.00001));ambience.play()
 func play_at(id: String,at: Vector3) -> void:
 	play_spatial("res://assets/audio/"+id+".wav",at,-5)
 func unease() -> void:

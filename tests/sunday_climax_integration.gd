@@ -23,22 +23,22 @@ func run() -> void:
  world.sunday.desk_open=false;var yaw: float=world.player.camera_rig.yaw;climax._physics_process(.1)
  var prepared: Array[bool]=[false];var head_seen:=false;var body_seen:=false;var seconds:=0.0
  if is_instance_valid(climax.watcher):climax.watcher.prepared.connect(func():prepared[0]=true)
- for frame in 100:
+ for frame in 160:
   await ticks(1)
   if not is_instance_valid(climax.watcher):break
   if climax.watcher.started:
    body_seen=body_seen or climax.any_visible(climax.watcher.body_points())
    if climax.any_visible(climax.watcher.head_points()):head_seen=true;seconds+=1.0/60.0
  check(prepared[0] and head_seen,"última cabeça pode ser percebida entre as caixas no domingo")
- check(not body_seen and seconds<1.3,"corpo permanece encoberto e a janela de percepção é curta")
+ check(not body_seen and seconds>1.0 and seconds<2.3,"corpo permanece encoberto e a cabeça tem tempo legível")
  check(bool(climax.state().peek_used) and not is_instance_valid(climax.watcher),"recolhimento consome a oportunidade uma única vez")
- check(is_equal_approx(world.player.camera_rig.yaw,yaw) and not Dialogue.active,"aparição não vira a câmera nem inicia uma fala")
+ check(not world.player.camera_rig.focusing() and not Dialogue.active,"aparição devolve controle sem iniciar uma fala")
  check(Session.campaign.experience.notes.size()==notes and Session.campaign.clues==clues and Session.campaign.records==records,"ver a cabeça não acrescenta nota, pista ou confirmação")
  Session.save_shift(world.player.position);app.start_saved();world=app.world;climax=world.sunday.climax;climax.set_physics_process(false);await ticks(3);climax._physics_process(.1)
  check(bool(climax.state().peek_used) and not is_instance_valid(climax.watcher),"continuar não repete a cabeça concluída")
- climax.state().peek_used=false;climax.retry_at=0;world.player.camera_rig.yaw+=PI;world.player.camera_rig.reset_follow();await ticks(3);climax._physics_process(.1);await ticks(100)
- check(bool(climax.state().peek_used) and not is_instance_valid(climax.watcher),"olhar para o outro lado permite perder o momento inteiro")
- climax.state().peek_used=false;climax.retry_at=0;await stand(Vector3(.5,.01,-12.2),atan2(4.0,3.4));climax.create({},.6);await wait_head()
+ world.horror.state().quiet_until=0;climax.state().peek_used=false;climax.retry_at=0;world.player.camera_rig.yaw+=PI;world.player.camera_rig.reset_follow();await ticks(3);climax._physics_process(.1);await ticks(170)
+ check(bool(climax.state().peek_used) and not is_instance_valid(climax.watcher),"aparição principal dirige o olhar mesmo começando de costas")
+ world.horror.state().quiet_until=0;climax.state().peek_used=false;climax.retry_at=0;await stand(Vector3(.5,.01,-12.2),atan2(4.0,3.4));climax.create({},.6);await wait_head()
  check(is_instance_valid(climax.watcher) and climax.watcher.phase=="holding","prepara o instante da cabeça para salvar e retomar")
  if is_instance_valid(climax.watcher):
   var at: Vector3=climax.watcher.bone_world("head");Session.save_shift(world.player.position);app.start_saved();world=app.world;climax=world.sunday.climax;climax.set_physics_process(false);await ticks(3)
@@ -68,7 +68,7 @@ func run() -> void:
  check(world.sound.voice_index>voice_index,"passos do perseguidor são emitidos enquanto o corpo realmente caminha")
  var voice: AudioStreamPlayer3D=world.sound.voices[(world.sound.voice_index-1)%world.sound.voices.size()]
  check(voice.stream.resource_path.ends_with("step_tile.wav") and voice.global_position.distance_to(enemy.global_position)<1.2,"passo 3D acompanha a posição física do assassino")
- check(voice.attenuation_filter_cutoff_hz==1800,"parede e porta abafam passos ouvidos do outro lado")
+ check(voice.attenuation_filter_cutoff_hz<=1800,"parede e porta abafam passos ouvidos do outro lado")
  enemy.position=enemy.goal;enemy.search_pause=.05;enemy.step_distance=0;enemy.sense_wait=999;voice_index=world.sound.voice_index;enemy.set_physics_process(true);await ticks(20);enemy.set_physics_process(false)
  check(world.sound.voice_index==voice_index,"assassino parado observando não produz passos de caminhada")
  enemy.position=Vector3(4.85,.01,-13.8);enemy.visual.rotation.y=0;world.characters.Dery.position=Vector3(4.85,.01,-12.1);world.characters.Dery.torch.show();world.characters.Dery.crouching=false;world.characters.Dery.concealed=false

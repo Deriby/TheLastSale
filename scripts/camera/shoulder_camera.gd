@@ -11,6 +11,14 @@ var shoulder:=.36
 var allowed_shoulder:=.36
 var occluded:=false
 var probe: SphereShape3D
+var focus_remaining:=0.0
+var focus_target:=Vector3.ZERO
+var focus_speed:=13.0
+var focus_fov:=60.0
+func focusing() -> bool:return focus_remaining>0.0
+func focus_on(point: Vector3,seconds: float=1.5,speed: float=13.0,lens: float=60.0) -> void:
+	focus_target=point;focus_remaining=seconds;focus_speed=speed;focus_fov=minf(Preferences.fov,lens)
+func cancel_focus() -> void:focus_remaining=0.0
 func _ready() -> void:
 	top_level=true;physics_interpolation_mode=Node.PHYSICS_INTERPOLATION_MODE_OFF
 	position.y=1.58
@@ -22,7 +30,7 @@ func _ready() -> void:
 	first_person=distance<.2
 	if first_person:shoulder=0;arm.position.x=0
 func handle_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and not focusing():
 		yaw-=event.relative.x*Preferences.sensitivity
 		pitch=clampf(pitch-event.relative.y*Preferences.sensitivity,-1.03,.86)
 	if event is InputEventMouseButton and event.pressed:
@@ -37,6 +45,12 @@ func _physics_process(_delta: float) -> void:
 	allowed_shoulder=desired*(maxf(0,result[0]-.06) if result.size()>0 else 1.0)
 func _process(delta: float) -> void:
 	var player: DepotPlayer=get_parent()
+	if focusing():
+		var toward:=focus_target-global_position
+		if toward.length()>.1:
+			yaw=lerp_angle(yaw,atan2(-toward.x,-toward.z),1-exp(-delta*focus_speed))
+			pitch=lerpf(pitch,clampf(asin(toward.normalized().y),-1.03,.86),1-exp(-delta*focus_speed))
+		focus_remaining=maxf(0,focus_remaining-delta)
 	rotation=Vector3(pitch,yaw,0)
 	distance=lerpf(distance,target_distance,1-exp(-delta*13))
 	first_person=distance<.25 and target_distance<.2
@@ -51,10 +65,10 @@ func _process(delta: float) -> void:
 	var center:=player.get_global_transform_interpolated().origin
 	global_position=Vector3(center.x,lerpf(global_position.y,center.y+height,1-exp(-delta*16)),center.z)
 	shoulder=minf(shoulder,allowed_shoulder) if allowed_shoulder<shoulder else lerpf(shoulder,allowed_shoulder,1-exp(-delta*7))
-	arm.position.x=shoulder
+	arm.position.x=lerpf(arm.position.x,0.0 if focusing() else shoulder,1-exp(-delta*18))
 	arm.position.z=-.16*blend
 	arm.spring_length=maxf(0,distance)
-	camera.fov=lerpf(camera.fov,Preferences.fov,1-exp(-delta*8))
+	camera.fov=lerpf(camera.fov,focus_fov if focusing() else Preferences.fov,1-exp(-delta*(14 if focusing() else 8)))
 	var actual: float=camera.global_position.distance_to(global_position)
 	if not first_person:
 		if actual<.46:occluded=true

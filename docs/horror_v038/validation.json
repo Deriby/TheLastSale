@@ -1,0 +1,29 @@
+{
+  "version": "0.38.0",
+  "godot": "4.7",
+  "base_commit": "c0aaa2d761391db42895f9f73e8035c80c0bb09b",
+  "full_suite_count": 22,
+  "full_expected_checks": 1046,
+  "rendered_psx_expected_checks": 48,
+  "new_suite": "horror_direction_integration",
+  "new_checks": 45,
+  "camera_focus": [
+    "old_door_handle",
+    "bryan_in_rear_stock",
+    "return_door_bang",
+    "selected_killer_heads",
+    "car_window",
+    "stock_door_ajar"
+  ],
+  "proximity_required": true,
+  "third_person_wheel_preserved": true,
+  "full_bryan_walk_with_collisions_tested": true,
+  "save_version": 5,
+  "existing_models_textures_and_motion_libraries_preserved": true,
+  "original_uploaded_mp3_preserved": true,
+  "project_only_no_exe": true,
+  "preview": "docs/horror_v038/sustos_preview.mp4",
+  "preview_uses_staged_campaign_conditions_between_clips": true,
+  "validation_source": "downloads/project/release_verification.json",
+  "target_gpu_fps_measured": false
+}

@@ -35,6 +35,7 @@ var everyday: EverydayHorror
 var story: FridayStory
 var scary: FridayScares
 var presence: WatchingPresence
+var horror: HorrorDirection
 func _ready() -> void:
 	add_to_group("shift_world")
 	var legacy_carried:=Session.carried_id
@@ -103,6 +104,7 @@ func _ready() -> void:
 	supplies=SupplyGuide.new();supplies.world=self;add_child(supplies)
 	everyday=EverydayHorror.new();everyday.world=self;add_child(everyday)
 	story=FridayStory.new();story.world=self;add_child(story)
+	horror=HorrorDirection.new();horror.world=self;add_child(horror)
 	scary=FridayScares.new();scary.world=self;add_child(scary)
 	presence=WatchingPresence.new();presence.world=self;add_child(presence)
 func update_enemy_visibility() -> void:
@@ -113,7 +115,7 @@ func select_player(identity: String) -> void:
 	Session.active_character=player.identity;Session.carried_id=player.carried_id
 	depot.set_counter_role(player.identity);player_changed.emit(player)
 func switch_player() -> bool:
-	if not active or get_tree().paused or surveillance_open or sunday!=null and sunday.desk_open:return false
+	if not active or get_tree().paused or horror!=null and horror.busy() or surveillance_open or sunday!=null and sunday.desk_open:return false
 	if Dialogue.active:
 		notice.emit("Termine a conversa antes de trocar de personagem.");return false
 	for actor in characters.values():
@@ -148,6 +150,7 @@ func on_handling_completed() -> void:
 func can_checkout(actor: DepotPlayer) -> bool:
 	return not surveillance_open and (friday==null or not friday.is_outage() and friday.phase() not in ["closing","complete"]) and actor.identity=="Felps" and actor.global_position.distance_to(CheckoutFixture.STAFF_POSITION)<1.4 and is_instance_valid(customer) and customer.state==Customer.State.WAITING and not customer.purchase_complete
 func try_surveillance() -> bool:
+	if horror!=null and horror.busy():return false
 	if int(Session.campaign.night)==2:
 		if sunday==null or sunday.desk_open or not sunday.can_open(player):return false
 		terminal_requested.emit();return sunday.desk_open
@@ -156,7 +159,7 @@ func try_surveillance() -> bool:
 func set_surveillance_open(value: bool) -> void:
 	surveillance_open=value;characters.Felps.input_locked=value
 func try_checkout(actor: DepotPlayer) -> bool:
-	if not can_checkout(actor) or Dialogue.active or sale==null:return false
+	if horror!=null and horror.busy() or not can_checkout(actor) or Dialogue.active or sale==null:return false
 	if not customer.service_started:
 		customer.service_started=true;begin_checkout(customer)
 	else:checkout_requested.emit()

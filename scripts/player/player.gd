@@ -77,8 +77,9 @@ func finish_action() -> void:
 func play_clip(clip: String) -> void:
 	motion.play(clip)
 func _physics_process(delta: float) -> void:
-	if controlled and concealed and not Dialogue.active and Input.get_vector("left","right","forward","backward").length()>.1:concealed=false
-	if controlled and not input_locked and not Dialogue.active:crouching=(concealed or Input.is_action_pressed("crouch")) and carried==null and not motion.action_active
+	var attention_locked:=controlled and camera_rig.focusing()
+	if controlled and not attention_locked and concealed and not Dialogue.active and Input.get_vector("left","right","forward","backward").length()>.1:concealed=false
+	if controlled and not attention_locked and not input_locked and not Dialogue.active:crouching=(concealed or Input.is_action_pressed("crouch")) and carried==null and not motion.action_active
 	if not controlled:crouching=concealed
 	if concealed:crouching=true
 	if not crouching and capsule.height<1.7:
@@ -86,9 +87,9 @@ func _physics_process(delta: float) -> void:
 		if not get_world_3d().direct_space_state.intersect_ray(ray).is_empty():crouching=true
 	capsule.height=1.30 if crouching else 1.74
 	get_child(0).position.y=capsule.height*.5
-	var input:=Input.get_vector("left","right","forward","backward") if controlled and not input_locked and not motion.action_active and not Dialogue.active else Vector2.ZERO
+	var input:=Input.get_vector("left","right","forward","backward") if controlled and not attention_locked and not input_locked and not motion.action_active and not Dialogue.active else Vector2.ZERO
 	var direction:=Basis(Vector3.UP,camera_rig.yaw)*Vector3(input.x,0,input.y)
-	if not controlled and not input_locked and not Dialogue.active and not motion.action_active:
+	if not controlled and not attention_locked and not input_locked and not Dialogue.active and not motion.action_active:
 		while not assisted_path.is_empty() and Vector2(assisted_path[0].x-position.x,assisted_path[0].z-position.z).length()<.10:assisted_path.remove_at(0)
 		if not assisted_path.is_empty():direction=(assisted_path[0]-position)*Vector3(1,0,1);direction=direction.normalized()
 	# Separate exhaustion and recovery thresholds prevent frame-by-frame toggling.
@@ -102,6 +103,7 @@ func _physics_process(delta: float) -> void:
 	velocity.x=move_toward(velocity.x,direction.x*speed,delta*acceleration)
 	velocity.z=move_toward(velocity.z,direction.z*speed,delta*acceleration)
 	velocity.y=velocity.y-18*delta if not is_on_floor() else 0.0
+	if attention_locked:velocity.x=0;velocity.z=0
 	var before:=global_position;move_and_slide()
 	actual_speed=Vector2(global_position.x-before.x,global_position.z-before.z).length()/maxf(delta,.001)
 	if motion.action_active and action_facing.length()>.1:
@@ -143,6 +145,7 @@ func update_footsteps() -> void:
 	last_step_half=half
 func update_focus() -> void:
 	target=null
+	if camera_rig.focusing():focused.emit("");return
 	var current_world:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
 	if current_world!=null and current_world.supplies!=null:
 		target=current_world.supplies.priority_focus(self)
@@ -187,7 +190,7 @@ func update_focus() -> void:
 			best=dot;target=candidate
 	focused.emit("[E]  "+target.prompt(self) if target!=null else "")
 func handle_input(event: InputEvent) -> void:
-	if not controlled or input_locked or Dialogue.active:return
+	if not controlled or input_locked or camera_rig.focusing() or Dialogue.active:return
 	if event.is_action_pressed("drop"):
 		drop_carried();return
 	if motion.action_active or handling.busy:return

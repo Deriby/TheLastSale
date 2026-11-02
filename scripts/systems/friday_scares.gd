@@ -1,12 +1,15 @@
 class_name FridayScares
 extends Node
-## Position-driven, persistent scares. No camera writes or mandatory new tasks.
+## Position-driven, persistent scares with short, nearby camera beats.
 var world: ShiftWorld
 var handle: Node3D
 var drag: AudioStreamPlayer3D
 var intruder: FrightIntruder
 var bryan: FamiliarNPC
-const WINDOW:=Vector3(-3.0,0,.80)
+const WINDOW:=Vector3(-3.0,0,.80) # Old saves only.
+const BRYAN_HIDE:=Vector3(-5.25,0,-15.5)
+const BRYAN_REVEAL:=Vector3(-5.25,0,-14.05)
+const BRYAN_HOME:=Vector3(-2.8,0,-.1)
 func state() -> Dictionary:return Session.campaign.friday_scares
 func done(id: String) -> bool:return bool(state().events.get(id,false))
 func mark(id: String,note: String="") -> void:
@@ -28,19 +31,28 @@ func _ready() -> void:
 	if int(Session.campaign.night)!=0:return
 	restore_glimpse_doors()
 	if done("bryan_left") and is_instance_valid(bryan):bryan.queue_free();bryan=null
-	elif is_instance_valid(bryan) and state().prank.get("phase","") in ["walking","waiting","returning"]:
+	elif is_instance_valid(bryan) and not state().prank.is_empty():
 		bryan.position=world.navigation.restore_position(Session.read_position(state().prank.get("position"),bryan.position));bryan.reset_physics_interpolation()
-		if state().prank.phase!="waiting":move_bryan(WINDOW if state().prank.phase=="walking" else Vector3(-2.8,0,-.1))
-		else:bryan.scare_pose="talk" if done("bryan_prank") else "idle"
+		var phase:=str(state().prank.get("phase",""))
+		if done("bryan_prank"):
+			state().prank.phase="returning";move_bryan(BRYAN_HOME)
+		else:
+			# A legacy window prank becomes a walk to the rear; no actor teleport.
+			if int(state().prank.get("revision",0))<38:phase="walking";state().prank.phase=phase
+			state().prank.revision=38
+			if phase=="walking":move_bryan(BRYAN_HIDE)
+			elif phase=="emerging":move_bryan(BRYAN_REVEAL,2.6)
+			else:state().prank.phase="hidden";bryan.scare_pose="crouch_idle"
+
 	# Saves from the old public crossing must not recreate that staging.
 	if state().intruder.get("state","") in ["crossing","hiding","leaving","emerging","waiting","retreating"]:
 		state().intruder={"state":"gone","kind":"legacy_crossing"};state().events.intruder_gone=true;state().events.return_crossing=true;state().return_armed=false
 	state().dim_time=0.0
 	state().return_armed=false
 func refresh_volume() -> void:
-	if drag!=null:drag.volume_db=-13+linear_to_db(maxf(.001,Preferences.effects_volume))
+	if drag!=null:drag.volume_db=-13+linear_to_db(maxf(.00001,Preferences.effects_volume))
 func blocks_ambient() -> bool:
-	return state().door_phase in ["dragging","quiet","handle"] and world.player.position.z< -11.5 or state().prank.get("phase","")=="waiting" and done("bryan_prank") or is_instance_valid(intruder)
+	return state().door_phase in ["dragging","quiet","handle"] and world.player.position.z< -11.5 or state().prank.get("phase","") in ["cue","emerging","startled"] or is_instance_valid(intruder)
 func safe() -> bool:
 	if Dialogue.active or world.cashier_open or world.surveillance_open or world.sunday.desk_open or world.friday.finishing:return false
 	for actor in world.characters.values():
@@ -74,7 +86,8 @@ func tick(delta: float) -> void:
 		drag.stop()
 		if state().door_phase in ["dragging","quiet","handle"]:state().door_phase="done";handle.rotation.z=0
 	else:
-		tick_stock(delta);tick_prank(delta)
+		tick_stock(delta)
+	if Session.campaign.phase!="complete":tick_prank(delta)
 func tick_stock(delta: float) -> void:
 	var dery: DepotPlayer=world.characters.Dery
 	if dery.position.z>=-11.5:drag.stop();return
@@ -91,6 +104,8 @@ func tick_stock(delta: float) -> void:
 	elif state().door_phase=="quiet":
 		state().door_time+=delta
 		if float(state().door_time)>.55:
+			var point:=handle.global_position+Vector3(0,.04,.08)
+			if not world.horror.focus("stock_handle",point,1.75,3.0):return
 			state().door_phase="handle";state().door_time=0.0
 			world.sound.play_spatial("res://assets/audio/scares/handle_rattle.ogg",handle.global_position,-3)
 			mark("stock_handle","A maçaneta da porta antiga mexeu quando me aproximei. O arrasto do outro lado tinha acabado de parar.")
@@ -98,24 +113,73 @@ func tick_stock(delta: float) -> void:
 		state().door_time+=delta
 		handle.rotation.z=sin(float(state().door_time)*13)*.38*maxf(0,1-float(state().door_time)/2.0)
 		if float(state().door_time)>2:state().door_phase="done";handle.rotation.z=0
-func move_bryan(goal: Vector3) -> void:
-	if is_instance_valid(bryan):bryan.scare_pose="";bryan.scare_path=world.navigation.path(bryan.global_position,goal);bryan.scare_moving=true
+func move_bryan(goal: Vector3,speed: float=1.45) -> void:
+	if is_instance_valid(bryan):
+		bryan.scare_pose="";bryan.scare_speed=speed
+		bryan.scare_goal=goal;bryan.scare_blocked=0.0
+		var obstacles: Array[Rect2]=[Rect2(3.65,-11.0,.38,1.8),Rect2(-4.5,-14.35,1.4,1.1)]
+		for crate in world.depot.crates.values():
+			if is_instance_valid(crate) and crate!=world.player.carried:obstacles.append(Rect2(Vector2(crate.position.x-.29,crate.position.z-.24),Vector2(.58,.48)))
+		for actor in world.characters.values():
+			obstacles.append(Rect2(Vector2(actor.position.x-.25,actor.position.z-.25),Vector2(.5,.5)))
+		var points: Array=[]
+		if (bryan.position.z< -11)!=(goal.z< -11):
+			points=[Vector3(4.85,0,-12.2),Vector3(4.85,0,-9.8)] if bryan.position.z< -11 else [Vector3(4.85,0,-9.8),Vector3(4.85,0,-12.2)]
+		points.append(goal);bryan.scare_path.clear()
+		var from:=bryan.position
+		for point in points:
+			bryan.scare_path.append_array(world.navigation.path_with_obstacles(from,point,obstacles));from=point
+		bryan.scare_moving=true
+func open_bryan_door() -> void:
+	if bryan.position.distance_to(world.depot.stock_door.position+Vector3(.85,0,0))>2.8:return
+	for child in world.depot.stock_door.get_children():
+		if child is Interaction and child.kind=="door" and not child.open and not child.busy:child.activate(world.player)
+func bryan_visible() -> bool:
+	var head:=bryan.global_position+Vector3.UP*1.0
+	return can_see(head) or can_see(bryan.global_position+Vector3.UP*.7)
 func tick_prank(delta: float) -> void:
 	if not is_instance_valid(bryan) or bryan.leaving:return
 	var phase: String=str(state().prank.get("phase",""))
-	if phase=="" and done("stock_handle") and Session.world_seconds-float(state().last_event)>35 and safe() and world.player.position.z> -5 and world.player.position.distance_to(WINDOW)<8:
-		state().prank={"phase":"walking","time":0.0};move_bryan(WINDOW);capture();Session.save_shift(world.player.position)
-	elif phase=="walking" and not bryan.scare_moving:
-		if bryan.position.distance_to(WINDOW)>.55:move_bryan(WINDOW)
-		else:state().prank.phase="waiting";state().prank.time=0.0;bryan.scare_pose="idle"
-	elif phase=="waiting":
-		if not done("bryan_prank") and safe() and world.player.position.distance_to(WINDOW)<8 and world.player.camera_rig.camera.is_position_in_frustum(bryan.position+Vector3.UP*1.0):
-			bryan.visual.rotation.y=PI;bryan.scare_pose="talk";world.sound.play_spatial("res://assets/audio/scares/glass_tap.ogg",bryan.position+Vector3.UP,2)
-			mark("bryan_prank","A batida na vitrine era Bryan fazendo uma brincadeira.");world.notice.emit("Bryan: hahaha! Cês tinham que ver a cara de vocês!")
-		if done("bryan_prank"):
-			state().prank.time=float(state().prank.get("time",0))+delta
-			if float(state().prank.time)>4:state().prank.phase="returning";move_bryan(Vector3(-2.8,0,-.1))
-	elif phase=="returning" and not bryan.scare_moving:state().prank.phase="done"
+	if phase=="" and Session.campaign.phase in ["routine","restored"] and done("stock_handle") and Session.world_seconds-float(state().last_event)>35 and safe() and world.player.position.z> -10:
+		state().prank={"phase":"walking","time":0.0,"revision":38};move_bryan(BRYAN_HIDE);capture();Session.save_shift(world.player.position)
+	elif phase=="walking":
+		open_bryan_door()
+		if not bryan.scare_moving:
+			if bryan.position.distance_to(BRYAN_HIDE)>.25:move_bryan(BRYAN_HIDE)
+			else:
+				state().prank.phase="hidden";bryan.scare_pose="crouch_idle";capture();Session.save_shift(world.player.position)
+	elif phase=="hidden":
+		if world.player.identity!="Dery" or not safe() or not world.horror.ready_for(BRYAN_REVEAL+Vector3.UP,4.1):return
+		if world.player.position.z> -12.1:return
+		# First a scuff locates the boxes. The reveal itself waits for actual sight.
+		var point:=BRYAN_REVEAL+Vector3.UP*.9
+		if not world.horror.focus("bryan_boxes",point,.65,4.1):return
+		state().prank.phase="cue";state().prank.time=0.0
+		world.sound.play_spatial("res://assets/audio/saturday/cloth_brush.ogg",BRYAN_HIDE,-9,true)
+	elif phase=="cue":
+		state().prank.time=float(state().prank.get("time",0))+delta
+		if float(state().prank.time)>.68:state().prank.phase="emerging";state().prank.time=0.0;move_bryan(BRYAN_REVEAL,2.6)
+	elif phase=="emerging":
+		state().prank.time=float(state().prank.get("time",0))+delta
+		if bryan.position.distance_to(BRYAN_REVEAL)<.35 and bryan_visible() and world.player.identity=="Dery" and world.player.position.distance_to(bryan.position)<4.4 and not world.horror.busy():
+			# Same short beat: bypass its own quiet interval, never a second event.
+			world.horror.state().quiet_until=Session.world_seconds
+			if not world.horror.focus("bryan_jump",bryan.position+Vector3.UP*1.03,1.25,4.5):return
+			bryan.scare_moving=false;bryan.velocity=Vector3.ZERO;bryan.scare_pose="talk";bryan.scare_pop=0.0
+			var toward:=world.player.position-bryan.position;bryan.visual.rotation.y=atan2(toward.x,toward.z)
+			state().prank.phase="startled";state().prank.time=0.0
+			world.sound.play_spatial("res://assets/audio/scares/bryan_pop.ogg",bryan.position+Vector3.UP*.7,0)
+			mark("bryan_prank","Bryan se escondeu atrás das caixas nos fundos para dar um susto em Deryk.")
+			world.notice.emit("Bryan: BU! Hahaha! Te peguei, Deryk!")
+		elif float(state().prank.time)>5.0:
+			# An interrupted approach may be retried; do not consume an unseen joke.
+			state().prank.phase="walking";move_bryan(BRYAN_HIDE)
+	elif phase=="startled":
+		state().prank.time=float(state().prank.get("time",0))+delta
+		if float(state().prank.time)>3.5:state().prank.phase="returning";move_bryan(BRYAN_HOME)
+	elif phase=="returning":
+		open_bryan_door()
+		if not bryan.scare_moving:state().prank.phase="done"
 func arm_return() -> void:
 	# The new watching opportunities have their own silent, non-narrative schedule.
 	state().return_armed=false
@@ -165,7 +229,7 @@ func capture() -> void:
 				if child is Interaction and child.kind=="door":state().quiet_doors[str(door.name)]={"open":child.open,"angle":door.rotation.y}
 	if done("intruder_gone"):state().intruder={"state":"gone"}
 	elif is_instance_valid(intruder):state().intruder=intruder.snapshot()
-	if is_instance_valid(bryan) and state().prank.get("phase","") in ["walking","waiting","returning"]:state().prank.position=[bryan.position.x,bryan.position.y,bryan.position.z]
+	if is_instance_valid(bryan) and state().prank.get("phase","") in ["walking","hidden","cue","emerging","startled","returning"]:state().prank.position=[bryan.position.x,bryan.position.y,bryan.position.z]
 func on_completed(id: String) -> void:
 	if id=="familiar_Bryan" and done("bryan_prank") and not done("bryan_left"):
 		mark("bryan_left")

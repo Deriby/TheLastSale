@@ -28,7 +28,7 @@ func run() -> void:
  await ticks(42)
  check(world.scary.done("stock_handle") and world.scary.state().door_phase=="handle","depois do silêncio a maçaneta reage")
  check(absf(world.scary.handle.rotation.z)>.005 and world.depot.old_door.transform==door_at,"animação mexe a maçaneta e mantém a porta e sua colisão no lugar")
- check(is_equal_approx(world.player.camera_rig.yaw,yaw) and is_equal_approx(world.player.camera_rig.target_distance,distance),"susto não gira nem afasta a câmera do jogador")
+ check(world.player.camera_rig.focusing() and is_equal_approx(world.player.camera_rig.target_distance,distance),"maçaneta recebe foco breve sem mudar a distância da câmera")
  await reload();await ticks(140)
  check(world.scary.done("stock_handle") and world.scary.state().door_phase=="done" and not world.scary.drag.playing,"save no susto conclui a maçaneta sem repetir o arrasto")
  var note_count: int=Session.campaign.experience.notes.size();await ticks(20)
@@ -37,20 +37,22 @@ func run() -> void:
  await stand(Vector3(-3.1,.01,-2.8),PI)
  check(world.scary.state().prank.is_empty(),"há intervalo de calma antes da brincadeira de Bryan")
  Session.world_seconds=float(world.scary.state().last_event)+40;await ticks(3)
- check(world.scary.state().prank.get("phase")=="walking" and world.scary.bryan.scare_moving,"Bryan precisa caminhar até a vitrine")
+ check(world.scary.state().prank.get("phase")=="walking" and world.scary.bryan.scare_moving,"Bryan precisa caminhar até os fundos")
  var bryan_at:=world.scary.bryan.position;await reload()
  check(world.scary.bryan.position.distance_to(bryan_at)<.25 and world.scary.bryan.scare_moving,"save retoma Bryan na rota da brincadeira sem teleporte")
- var prank_phase: String=world.scary.state().prank.phase
- world.scary.state().prank.phase="waiting"
- check(not world.scary.blocks_ambient(),"Bryan esperando fora da visão não bloqueia outros acontecimentos")
- world.scary.state().prank.phase=prank_phase
  var continuous:=true;var before:=world.scary.bryan.position
- for frame in 650:
+ for frame in 2100:
   await ticks(1)
   continuous=continuous and world.scary.bryan.position.distance_to(before)<.18;before=world.scary.bryan.position
+  if world.scary.state().prank.phase=="hidden":break
+ check(continuous and world.scary.state().prank.phase=="hidden","Bryan chega fisicamente ao esconderijo nos fundos")
+ check(not world.scary.done("bryan_prank"),"Bryan escondido aguarda Deryk chegar perto")
+ await stand(Vector3(-2.7,.01,-13.2),0)
+ for frame in 300:
+  await ticks(1)
   if world.scary.done("bryan_prank"):break
- check(continuous and world.scary.done("bryan_prank"),"Bryan chega fisicamente e dá a batida na vitrine")
- check(world.scary.bryan.position.distance_to(FridayScares.WINDOW)<.55 and not Dialogue.active,"falso susto revela Bryan sem travar o controle")
+ check(world.scary.done("bryan_prank") and world.player.camera_rig.focusing(),"Bryan sai das caixas e o jumpscare enquadra a criança")
+ check(world.scary.bryan.position.distance_to(FridayScares.BRYAN_REVEAL)<1 and not Dialogue.active,"peça termina nos fundos sem diálogo obrigatório")
  check(JSON.stringify(world.story.familiar_lines("Bryan",world.player,0)).contains("coração"),"a conversa opcional traz o alívio depois da brincadeira")
  await reload();note_count=Session.campaign.experience.notes.size();await ticks(30)
  check(world.scary.done("bryan_prank") and Session.campaign.experience.notes.size()==note_count,"continuar não repete a batida nem sua anotação")

@@ -1,0 +1,14 @@
+Godot Engine v4.7.stable.official.5b4e0cb0f - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+Movie Maker mode enabled, recording movie in 1280×720 @ 30 FPS...
+HORROR REVIEW [{"event":"handle","focus":true,"occurred":true},{"event":"bryan","focus":true,"occurred":true},{"event":"head","focus":true,"occurred":true},{"event":"car","focus":true,"occurred":true},{"event":"ajar","focus":true,"occurred":true}]
+--------------------------------------------------------------------------------
+Done recording movie at path: /workspace/work/horror-preview.avi
+876 frames at 30 FPS (movie length: 00:00:29:06), recorded in 00:02:14 (21% of real-time speed).
+CPU render time: 48.95 seconds (average: 55.88 ms/frame)
+GPU render time: 35.47 seconds (average: 40.49 ms/frame)
+Encoding time: 11.81 seconds (average: 13.48 ms/frame)
+--------------------------------------------------------------------------------

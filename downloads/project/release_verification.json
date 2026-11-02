@@ -1,19 +1,17 @@
 {
-  "version": "0.37.0",
-  "format": "Godot editor project ZIP",
+  "version": "0.38.0",
   "godot": "4.7",
   "godot_build": "4.7.stable.official.5b4e0cb0f",
-  "official_engine_download_sha512_verified": true,
-  "file": "TheLastSale_Godot_0.37.0.zip",
-  "bytes": 101776836,
-  "sha256": "c626ed7027aa04cb691577072906875730aca927f4923902a2f6079193f5e652",
+  "format": "Godot editor project ZIP",
+  "file": "TheLastSale_Godot_0.38.0.zip",
+  "bytes": 101800340,
+  "sha256": "d7796a3f91346f806208b99cba84135b6108f7e933eb8549c8c6278f12359b3d",
   "crc_verified": true,
-  "files_verified_against_manifest": 1045,
-  "manifest_files_changed_by_import_or_tests": 0,
+  "files_verified_against_manifest": 1058,
   "all_packaged_sources_match_repository": true,
+  "manifest_files_changed_by_import_or_tests": 0,
   "clean_extraction_import_exit_code": 0,
   "import_error_lines": 0,
-  "import_script_errors": 0,
   "clean_extraction_full_integration": {
     "suites": {
       "integration": 188,
@@ -28,7 +26,7 @@
       "title_integration": 68,
       "everyday_integration": 45,
       "friday_story_integration": 36,
-      "scares_integration": 29,
+      "scares_integration": 30,
       "watching_integration": 57,
       "saturday_unease_integration": 40,
       "sunday_climax_integration": 38,
@@ -36,20 +34,18 @@
       "guidance_integration": 40,
       "release_review_integration": 12,
       "campaign_route_integration": 29,
-      "title_music_integration": 18
+      "title_music_integration": 18,
+      "horror_direction_integration": 45
     },
-    "passed": 1000,
-    "total": 1000,
-    "suite_count": 21,
+    "passed": 1046,
+    "total": 1046,
+    "suite_count": 22,
     "script_or_shader_errors": 0,
-    "error_lines_before_suite_results": 0,
     "known_audio_shutdown_diagnostics": [
       {
         "suite": "sunday_integration",
-        "after_result": true,
-        "error": "ERROR: 1 resources still in use at exit.",
         "resource": "assets/audio/everyday/compressor.ogg::OggPacketSequence_l015c",
-        "matches_preceding_release_diagnostic": true
+        "after_result": true
       }
     ],
     "all_results_executed_from_this_final_archive": true
@@ -57,72 +53,29 @@
   "clean_extraction_rendered_psx_motion": {
     "passed": 48,
     "total": 48,
-    "renderer": "Godot 4.7 OpenGL / llvmpipe software",
-    "script_or_shader_errors": 0,
+    "renderer": "Godot 4.7 OpenGL / Mesa llvmpipe software",
     "all_results_executed_from_this_final_archive": true,
-    "measurements": "docs/music_v037/psx_motion_validation.json"
+    "measurements": "docs/horror_v038/psx_motion_validation.json"
   },
-  "all_check_count": 1048,
-  "campaign_test_teardown_waits_for_audio_mixer_after_scene_free": true,
-  "initial_campaign_test_exit_resource": "assets/audio/title/select.wav",
-  "initial_campaign_test_all_29_assertions_passed": true,
-  "initial_campaign_test_log": "docs/music_v037/audio_shutdown_before.log",
-  "previous_version_commit": "1680af58b142dd839003b9ef569bd6c5cf1815d3",
-  "previous_asset_file_count": 463,
-  "previous_asset_files_still_byte_identical": 273,
-  "previous_asset_data_files_byte_identical": 240,
-  "import_metadata_updated_for_godot_4_7": 190,
-  "previous_import_values_removed_or_replaced": 0,
+  "all_check_count": 1094,
+  "previous_version_commit": "c0aaa2d761391db42895f9f73e8035c80c0bb09b",
+  "previous_asset_files_byte_identical_excluding_credits": 464,
+  "asset_credit_updates": [
+    "assets/audio/scares/README.txt"
+  ],
   "previous_resource_files_byte_identical": 32,
   "animation_libraries_byte_identical": 11,
-  "models_textures_audio_and_animation_data_changed": 0,
-  "new_uploaded_audio_files": 1,
+  "models_textures_and_animation_data_changed": 0,
+  "import_metadata_changed": 0,
+  "new_original_foley_files": 1,
+  "uploaded_title_mp3_unchanged": true,
   "physics_backend": "GodotPhysics3D",
-  "player_camera_animation_ai_world_shaders_and_gameplay_sources_unchanged": true,
   "mouse_wheel_third_person_preserved": true,
-  "computer_screens_and_energy_rules_preserved": true,
-  "title_music": {
-    "name": "Uncanny Valley",
-    "asset": "assets/audio/title/uncanny_valley.mp3",
-    "bytes": 3693799,
-    "sha256": "cd72bcda91a6bf1d6d7e46ad5bff937969716541cb749021c16abc586dd9371e",
-    "uploaded_file_unchanged": true,
-    "duration_seconds": 159.6,
-    "native_mp3_loop": true,
-    "fade_in_seconds": 0.8,
-    "fade_out_seconds": 0.34,
-    "continues_between_intro_skip_menu_and_settings": true,
-    "volume_music_effects_and_master_verified": true,
-    "stops_before_start_or_continue_gameplay": true,
-    "does_not_restart_on_gameplay_pause": true,
-    "rendered_audio_compared_with_uploaded_track": {
-      "comparison": "Decoded audio of the published preview versus the uploaded MP3; original track was not recoded in the project",
-      "sample_rate_for_comparison": 12000,
-      "segments": [
-        {
-          "name": "intro",
-          "source_seconds": [
-            3.0,
-            7.0
-          ],
-          "correlation": 0.9138953397502004,
-          "offset_seconds": 0.044083333333333474,
-          "estimated_recording_gain_db": -22.092108509449705
-        },
-        {
-          "name": "menu",
-          "source_seconds": [
-            12.0,
-            18.0
-          ],
-          "correlation": 0.9281362654364798,
-          "offset_seconds": 0.04408333333333303,
-          "estimated_recording_gain_db": -22.372480210772917
-        }
-      ],
-      "continuous_across_intro_and_menu": true
-    }
-  },
+  "original_campaign_energy_and_killer_logic_sources_unchanged": true,
+  "camera_focus_is_brief_and_proximity_driven": true,
+  "horror_suite_checks": 45,
+  "bryan_walks_to_rear_hiding_place_with_collisions": true,
+  "save_version": 5,
   "campaign_route": {
     "max_step_m": 0.0657226368784904,
     "nights": [
@@ -140,40 +93,52 @@
     }
   },
   "all_three_endings_defeat_and_retry_covered_by_sunday_suite": true,
-  "historical_screenshots_only_omitted_from_project_zip": [
-    "TheLastSale/docs/friday_v018/friday_summary.png",
-    "TheLastSale/docs/friday_v018/generator_off.png",
-    "TheLastSale/docs/friday_v018/generator_running.png",
-    "TheLastSale/docs/friday_v018/outage.png",
-    "TheLastSale/docs/friday_v018/power_restored.png",
-    "TheLastSale/docs/friday_v018/saturday_preview.png",
-    "TheLastSale/docs/friday_v018/store_powered.png"
-  ],
-  "omitted_screenshots_preserved_in_repository": true,
-  "runtime_project_files_removed": 0,
-  "save_version": 5,
   "project_zip_only": true,
   "executable_exports": 0,
   "below_github_100_mib_limit": true,
   "preview": {
-    "path": "docs/music_v037/uncanny_valley_preview.mp4",
-    "sha256": "69a449ecc9bfa21f146700dd002a4123585b244d3282e2705e697fc2a64e5eb1",
-    "bytes": 5084660,
-    "duration_seconds": 27.533333,
+    "path": "docs/horror_v038/sustos_preview.mp4",
+    "sha256": "ec054185e235478d39ee5f3c32ce81af00422d0561b25b263e52e651f6508219",
+    "bytes": 6841632,
+    "duration_seconds": 29.2,
     "width": 1280,
     "height": 720,
     "capture_fps": 30,
     "video_codec": "H.264",
     "audio_codec": "AAC",
-    "audio_peak_dbfs": -22.531792,
-    "audio_rms_dbfs": -37.588729,
     "actual_gameplay_capture": true,
     "speed": 1,
-    "internal_pixel_scale": 2,
-    "intro_menu_and_departure_captured": true
+    "separate_staged_campaign_conditions": true,
+    "scenes": [
+      {
+        "event": "handle",
+        "focus": true,
+        "occurred": true
+      },
+      {
+        "event": "bryan",
+        "focus": true,
+        "occurred": true
+      },
+      {
+        "event": "head",
+        "focus": true,
+        "occurred": true
+      },
+      {
+        "event": "car",
+        "focus": true,
+        "occurred": true
+      },
+      {
+        "event": "ajar",
+        "focus": true,
+        "occurred": true
+      }
+    ]
   },
   "target_gpu_fps_measured": false,
-  "report": "docs/music_v037/validation.json",
-  "clean_extraction_log": "validation_0.37.0.log",
-  "clean_import_log": "clean_import_0.37.0.log"
+  "report": "docs/horror_v038/validation.json",
+  "clean_extraction_log": "validation_0.38.0.log",
+  "clean_import_log": "clean_import_0.38.0.log"
 }

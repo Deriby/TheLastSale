@@ -28,18 +28,25 @@ func _physics_process(delta: float) -> void:
 	if not owner_event.base_safe() and phase!="withdrawing":phase="withdrawing";age=0
 	match phase:
 		"waiting":
-			if owner_event.window_visible():phase="rising";age=0
+			if owner_event.near_window() and world.horror.focus("car_window",owner_event.window_point(),1.8,4.0,owner_event.car_bodies):
+				phase="aiming";age=0
 			elif age>3.0:phase="withdrawing";age=0
+		"aiming":
+			if age>.25:
+				phase="rising";age=0;world.sound.play_spatial("res://assets/audio/scares/glass_tap.ogg",owner_event.window_point(),-5)
 		"rising":
 			amount=smoothstep(0,.12,age)
 			if age>=.12:phase="holding";age=0
 		"holding":
-			if age>.42:phase="withdrawing";age=0
+			if age>1.10:phase="withdrawing";age=0
 		"withdrawing":
 			amount=move_toward(amount,0,delta/.22)
 			if amount<.001 and pose.revision>2:
 				var head: Vector3=pose.points.get("head",global_position)
-				if get_parent().to_local(head+pose.head_up*.28).y<.94 or not owner_event.window_visible():phase="done";finished.emit();queue_free()
+				if get_parent().to_local(head+pose.head_up*.28).y<.94 or not owner_event.window_visible():
+					phase="done"
+					if world.horror.focused_event=="car_window":world.player.camera_rig.cancel_focus()
+					finished.emit();queue_free()
 	pose.crouch=lerpf(2.3,1.05,amount)
 func snapshot() -> Dictionary:
 	return {"phase":next_phase if phase=="preparing" else phase,"age":age,"amount":amount}

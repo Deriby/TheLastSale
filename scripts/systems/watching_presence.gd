@@ -45,6 +45,21 @@ func safe() -> bool:
 	return true
 func clear_ray(origin: Vector3,point: Vector3) -> bool:
 	return world.get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(origin,point,1)).is_empty()
+func clear_face_view(point: Vector3) -> bool:
+	var origin:=world.player.camera_rig.camera.global_position
+	if not clear_ray(origin,point):return false
+	# Products are rendered without individual physics colliders. Their source
+	# transforms must also be checked before promising a readable face reveal.
+	for fixture in world.depot.central_shelves:
+		for data in fixture.products.groups.values():
+			var node: MeshInstance3D=data.node
+			var bounds: AABB=node.global_transform*node.get_aabb()
+			if bounds.intersects_segment(origin,point)==null:continue
+			var source: AABB=data.source_mesh.get_aabb()
+			for transform_value in data.transforms:
+				var item: AABB=(fixture.products.global_transform*transform_value)*source
+				if item.intersects_segment(origin,point)!=null:return false
+	return true
 func any_clear(points: Array[Vector3]) -> bool:
 	for point in points:
 		if clear_ray(world.player.camera_rig.camera.global_position,point):return true
@@ -80,9 +95,12 @@ func peak_allowed(actor: HeadWatcher) -> bool:
 	if not world.get_world_3d().direct_space_state.intersect_shape(query).is_empty():last_rejection="occupied";return false
 	if any_clear(actor.body_points()):last_rejection="body";return false
 	if not any_clear(actor.head_points()):last_rejection="head";return false
+	if actor.directed:
+		for point in actor.face_points():
+			if not clear_face_view(point):last_rejection="face_covered";return false
 	return true
 func tick(delta: float) -> void:
-	if int(Session.campaign.night)>=2 or not safe() or is_instance_valid(watcher):return
+	if int(Session.campaign.night)>=2 or not safe() or is_instance_valid(watcher) or world.horror.ambient_blocked():return
 	scan_wait-=delta
 	if scan_wait>0:return
 	scan_wait=.3
@@ -94,15 +112,22 @@ func tick(delta: float) -> void:
 	var distance: float=world.player.position.distance_to(site.pos)
 	if int(state().used.get(site.id,0))>=2 or state().last==site.id or distance<4.5 or distance>17:return
 	if clear_ray(world.player.camera_rig.camera.global_position,site.pos+Vector3.UP*1.25):return
-	var hold:=.14+draw()*.20
-	if distance>8 and draw()<.25:hold=.7+draw()*.45
-	create(site,hold)
-func create(site: Dictionary,hold: float,resume: Dictionary={}) -> void:
-	watcher=HeadWatcher.new();watcher.world=world;watcher.site=site;watcher.position=site.pos;watcher.hold=hold;watcher.resume=resume;world.add_child(watcher)
+	var hold:=.20+draw()*.22
+	var directed:=not bool(state().get("directed_seen",false)) and distance<9 and distance>4.5 and (bool(world.horror.state().terminal_seen) or int(state().count)>=2)
+	if int(state().count)>=5 and not bool(state().get("directed_seen",false)) and not directed:return
+	if directed:
+		if not world.horror.ready_for(site.pos+Vector3.UP*1.7,9):return
+		hold=1.45
+	elif draw()<.35:hold=1.0+draw()*.65
+	create(site,hold,{},directed)
+func create(site: Dictionary,hold: float,resume: Dictionary={},directed: bool=false) -> void:
+	if directed and site.get("peak_crouch",0.0)>.2:site=site.duplicate();site.peak_crouch=.22
+	watcher=HeadWatcher.new();watcher.world=world;watcher.site=site;watcher.position=site.pos;watcher.hold=hold;watcher.resume=resume;watcher.directed=directed;world.add_child(watcher)
 	watcher.prepared.connect(func():
+		if watcher.directed:state().directed_seen=true
 		state().count=int(state().count)+1;state().used[site.id]=int(state().used.get(site.id,0))+1;state().last=site.id;capture();Session.save_shift(world.player.position))
 	watcher.rejected.connect(func():state().next_at=Session.world_seconds+2.0)
-	watcher.withdrawn.connect(func():state().active={};state().next_at=Session.world_seconds+28+draw()*27;Session.save_shift(world.player.position))
+	watcher.withdrawn.connect(func():state().active={};state().next_at=Session.world_seconds+42+draw()*38;Session.save_shift(world.player.position))
 func capture() -> void:
 	if int(Session.campaign.night)>=2:return
 	state().active=watcher.snapshot() if is_instance_valid(watcher) and watcher.started and not watcher.is_queued_for_deletion() else {}
