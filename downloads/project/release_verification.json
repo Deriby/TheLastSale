@@ -1,13 +1,13 @@
 {
-  "version": "0.38.0",
+  "version": "0.39.0",
   "godot": "4.7",
   "godot_build": "4.7.stable.official.5b4e0cb0f",
   "format": "Godot editor project ZIP",
-  "file": "TheLastSale_Godot_0.38.0.zip",
-  "bytes": 101800340,
-  "sha256": "d7796a3f91346f806208b99cba84135b6108f7e933eb8549c8c6278f12359b3d",
+  "file": "TheLastSale_Godot_0.39.0.zip",
+  "bytes": 101815537,
+  "sha256": "faf37ca60ad159ee6fa67a8051aba3ece2e03556b3a2406b7f212327d0173757",
   "crc_verified": true,
-  "files_verified_against_manifest": 1058,
+  "files_verified_against_manifest": 1068,
   "all_packaged_sources_match_repository": true,
   "manifest_files_changed_by_import_or_tests": 0,
   "clean_extraction_import_exit_code": 0,
@@ -35,19 +35,14 @@
       "release_review_integration": 12,
       "campaign_route_integration": 29,
       "title_music_integration": 18,
-      "horror_direction_integration": 45
+      "horror_direction_integration": 45,
+      "panels_integration": 30
     },
-    "passed": 1046,
-    "total": 1046,
-    "suite_count": 22,
+    "passed": 1076,
+    "total": 1076,
+    "suite_count": 23,
     "script_or_shader_errors": 0,
-    "known_audio_shutdown_diagnostics": [
-      {
-        "suite": "sunday_integration",
-        "resource": "assets/audio/everyday/compressor.ogg::OggPacketSequence_l015c",
-        "after_result": true
-      }
-    ],
+    "known_audio_shutdown_diagnostics": [],
     "all_results_executed_from_this_final_archive": true
   },
   "clean_extraction_rendered_psx_motion": {
@@ -55,25 +50,27 @@
     "total": 48,
     "renderer": "Godot 4.7 OpenGL / Mesa llvmpipe software",
     "all_results_executed_from_this_final_archive": true,
-    "measurements": "docs/horror_v038/psx_motion_validation.json"
+    "measurements": "docs/panels_v039/psx_motion_validation.json"
   },
-  "all_check_count": 1094,
-  "previous_version_commit": "c0aaa2d761391db42895f9f73e8035c80c0bb09b",
-  "previous_asset_files_byte_identical_excluding_credits": 464,
-  "asset_credit_updates": [
-    "assets/audio/scares/README.txt"
-  ],
+  "all_check_count": 1124,
+  "previous_version_commit": "7a968be40e1e17181670108417e9ee5eff5bbbbe",
+  "previous_asset_files_byte_identical": 467,
+  "asset_credit_updates": [],
   "previous_resource_files_byte_identical": 32,
   "animation_libraries_byte_identical": 11,
   "models_textures_and_animation_data_changed": 0,
   "import_metadata_changed": 0,
-  "new_original_foley_files": 1,
+  "new_original_foley_files": 0,
   "uploaded_title_mp3_unchanged": true,
   "physics_backend": "GodotPhysics3D",
   "mouse_wheel_third_person_preserved": true,
   "original_campaign_energy_and_killer_logic_sources_unchanged": true,
   "camera_focus_is_brief_and_proximity_driven": true,
   "horror_suite_checks": 45,
+  "panels_suite_checks": 30,
+  "notebook_tabs_do_not_mutate_campaign": true,
+  "checkout_button_identity_and_keyboard_focus_preserved": true,
+  "all_published_fonts_reused": true,
   "bryan_walks_to_rear_hiding_place_with_collisions": true,
   "save_version": 5,
   "campaign_route": {
@@ -97,10 +94,10 @@
   "executable_exports": 0,
   "below_github_100_mib_limit": true,
   "preview": {
-    "path": "docs/horror_v038/sustos_preview.mp4",
-    "sha256": "ec054185e235478d39ee5f3c32ce81af00422d0561b25b263e52e651f6508219",
-    "bytes": 6841632,
-    "duration_seconds": 29.2,
+    "path": "docs/panels_v039/interfaces_preview.mp4",
+    "sha256": "c16464df6baec527f02f0d856b1db08ae07ae68e52885980456c7d8eccaf7752",
+    "bytes": 1380613,
+    "duration_seconds": 20.7,
     "width": 1280,
     "height": 720,
     "capture_fps": 30,
@@ -110,35 +107,19 @@
     "speed": 1,
     "separate_staged_campaign_conditions": true,
     "scenes": [
-      {
-        "event": "handle",
-        "focus": true,
-        "occurred": true
-      },
-      {
-        "event": "bryan",
-        "focus": true,
-        "occurred": true
-      },
-      {
-        "event": "head",
-        "focus": true,
-        "occurred": true
-      },
-      {
-        "event": "car",
-        "focus": true,
-        "occurred": true
-      },
-      {
-        "event": "ajar",
-        "focus": true,
-        "occurred": true
-      }
+      "caixa_produtos",
+      "caixa_pagamento",
+      "caixa_troco",
+      "caixa_entrega",
+      "missoes",
+      "registros",
+      "configuracoes",
+      "relatorio",
+      "saida"
     ]
   },
   "target_gpu_fps_measured": false,
-  "report": "docs/horror_v038/validation.json",
-  "clean_extraction_log": "validation_0.38.0.log",
-  "clean_import_log": "clean_import_0.38.0.log"
+  "report": "docs/panels_v039/validation.json",
+  "clean_extraction_log": "validation_0.39.0.log",
+  "clean_import_log": "clean_import_0.39.0.log"
 }

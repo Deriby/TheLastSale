@@ -1,0 +1,28 @@
+{
+  "version": "0.39.0",
+  "godot": "4.7",
+  "base_commit": "7a968be40e1e17181670108417e9ee5eff5bbbbe",
+  "new_suite": "panels_integration",
+  "new_checks": 30,
+  "full_suite_count": 23,
+  "full_expected_checks": 1076,
+  "rendered_psx_expected_checks": 48,
+  "expected_total_checks": 1124,
+  "panels": [
+    "checkout",
+    "missions_notebook",
+    "settings",
+    "night_reports",
+    "escape_defeat_epilogue"
+  ],
+  "native_clicks_and_focus_verified": true,
+  "transaction_values_and_phases_preserved": true,
+  "notebook_does_not_complete_tasks_or_add_clues": true,
+  "camera_scares_energy_models_animations_and_uploaded_music_preserved": true,
+  "save_version": 5,
+  "project_only_no_exe": true,
+  "preview": "docs/panels_v039/interfaces_preview.mp4",
+  "preview_campaign_state_staged_between_views": true,
+  "validation_source": "downloads/project/release_verification.json",
+  "target_gpu_fps_measured": false
+}

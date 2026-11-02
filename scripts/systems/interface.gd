@@ -30,6 +30,7 @@ var supply_marker: PanelContainer
 var supply_marker_text: Label
 var notice_label: Label
 var notice_remaining:=0.0
+var modal_shade: ColorRect
 var switch_fade: ColorRect
 var fade_tween: Tween
 var night_label: Label
@@ -54,20 +55,14 @@ func _ready() -> void:
 	switch_fade=ColorRect.new();root.add_child(switch_fade);switch_fade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);switch_fade.color=Color(0,0,0,0);switch_fade.mouse_filter=Control.MOUSE_FILTER_IGNORE
 	presentation=TitlePresentation.new();root.add_child(presentation)
 	presentation.intro_finished.connect(on_intro_finished)
+	modal_shade=ColorRect.new();root.add_child(modal_shade);modal_shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT);modal_shade.color=Color(.01,.025,.018,.72);modal_shade.mouse_filter=Control.MOUSE_FILTER_IGNORE;modal_shade.hide()
 	build_hud();build_menu()
 	root.resized.connect(layout_menu);call_deferred("layout_menu")
 	Session.changed.connect(update_objective)
 	Dialogue.spoken.connect(on_spoken)
 	update_objective()
 func make_theme() -> Theme:
-	var t:=Theme.new();t.default_font_size=18
-	var style:=StyleBoxFlat.new();style.bg_color=Color(.045,.055,.052,.96);style.border_color=Color("675c45");style.set_border_width_all(1);style.content_margin_left=16;style.content_margin_right=16;style.content_margin_top=11;style.content_margin_bottom=11
-	t.set_stylebox("panel","PanelContainer",style)
-	var normal:=style.duplicate();normal.bg_color=Color(.12,.14,.13,.92);normal.border_color=Color("4c5148")
-	var hover:=normal.duplicate();hover.bg_color=Color("393e30");hover.border_color=Color("ad9d79")
-	t.set_stylebox("normal","Button",normal);t.set_stylebox("hover","Button",hover);t.set_stylebox("focus","Button",hover);t.set_stylebox("pressed","Button",hover)
-	t.set_color("font_color","Label",Color("e4decb"));t.set_color("font_color","Button",Color("e4decb"))
-	return t
+	return GamePanels.theme()
 func label(parent: Node,text: String,font_size: int) -> Label:
 	var l:=Label.new();l.text=text;l.add_theme_font_size_override("font_size",font_size);l.add_theme_color_override("font_shadow_color",Color.BLACK);l.add_theme_constant_override("shadow_offset_x",1);l.add_theme_constant_override("shadow_offset_y",2);parent.add_child(l);l.mouse_filter=Control.MOUSE_FILTER_IGNORE;return l
 func build_hud() -> void:
@@ -115,7 +110,7 @@ func build_menu() -> void:
 	message.add_theme_font_override("font",TitlePresentation.TYPEWRITER);message.modulate=Color("a8a38f")
 	buttons=VBoxContainer.new();v.add_child(buttons);buttons.add_theme_constant_override("separation",7)
 	rebuild_buttons()
-	var footer:=label(v,"0.38.0  /  FONES DE OUVIDO RECOMENDADOS",16)
+	var footer:=label(v,"0.39.0  /  FONES DE OUVIDO RECOMENDADOS",16)
 	footer.add_theme_font_override("font",TitlePresentation.VCR);footer.modulate=Color("828473")
 	menu_motion=TitleMenuMotion.new(menu,v,buttons,title_lockup)
 	layout_menu()
@@ -131,10 +126,11 @@ func layout_menu() -> void:
 	var at:=Vector2(maxf(28,available.x*.075),(available.y-menu.size.y*menu.scale.y)*.5)
 	if menu_motion!=null:menu_motion.layout(at)
 	else:menu.position=at
-	if settings!=null:settings.position=((available-settings.custom_minimum_size)*.5).max(Vector2(12,12))
-	if notebook!=null:
-		var notebook_fit:=minf(1.0,minf((available.x-40)/760,(available.y-40)/560))
-		notebook.scale=Vector2.ONE*maxf(.45,notebook_fit);notebook.position=(available-notebook.size*notebook.scale)*.5
+	if settings!=null:GamePanels.fit(settings,Vector2(640,minf(660,available.y-50)),available)
+	if notebook!=null:GamePanels.fit(notebook,Vector2(940,620),available)
+	if checkout!=null:GamePanels.fit(checkout,Vector2(1060,650),available)
+	if campaign_panel!=null:GamePanels.fit(campaign_panel,Vector2(800,560),available)
+	if night_panel!=null:GamePanels.fit(night_panel,Vector2(760,560),available)
 
 func button(text: String,callback: Callable) -> Button:
 	var b:=Button.new();buttons.add_child(b);b.text=text;b.alignment=HORIZONTAL_ALIGNMENT_LEFT
@@ -224,7 +220,7 @@ func open_settings() -> void:
 	settings.closed.connect(func():Preferences.save();settings.queue_free();settings=null;menu.show();layout_menu();menu_motion.reveal(true);focus_menu())
 func open_checkout(world: ShiftWorld) -> void:
 	if paused or checkout!=null or surveillance!=null or sunday_desk!=null or campaign_panel!=null:return
-	checkout=CheckoutPanel.new();checkout.world=world;root.add_child(checkout);checkout.position=Vector2(160,30)
+	checkout=CheckoutPanel.new();checkout.world=world;root.add_child(checkout);checkout.position=Vector2(160,30);layout_menu()
 	checkout.closed.connect(close_checkout)
 	world.set_register_open(true);hud.hide();Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
 func close_checkout() -> void:
@@ -268,7 +264,7 @@ func close_campaign(unpause:=true) -> void:
 func show_campaign(kind: String) -> void:
 	close_campaign(false);close_sunday_desk();close_checkout();set_paused(true);menu.hide();hud.hide()
 	campaign_panel=CampaignPanel.new();campaign_panel.world=get_parent().world;campaign_panel.kind=kind
-	root.add_child(campaign_panel);campaign_panel.position=Vector2(260,100)
+	root.add_child(campaign_panel);campaign_panel.position=Vector2(260,100);layout_menu()
 	campaign_panel.cancel.connect(func():close_campaign())
 	campaign_panel.escape.connect(func(alone: bool):
 		var world:=campaign_panel.world;close_campaign(false)
@@ -306,6 +302,10 @@ func show_notice(text: String) -> void:
 	if checkout!=null and is_instance_valid(checkout.world) and checkout.world.sale!=null:
 		checkout.world.sale.message=text;checkout.queue_refresh()
 func _process(_delta: float) -> void:
+	var small_modal:=settings!=null or notebook!=null or checkout!=null or night_panel!=null or campaign_panel!=null
+	if campaign_panel!=null and campaign_panel.kind=="ending" and campaign_panel.epilogue!=null and not campaign_panel.epilogue.visible:small_modal=false
+	modal_shade.visible=small_modal
+	if small_modal:layout_menu()
 	if menu_motion!=null:menu_motion.update(_delta)
 	var player:=get_tree().get_first_node_in_group("player") as DepotPlayer
 	if player!=null:
@@ -340,14 +340,21 @@ func close_journal(restore:=true) -> void:
 func show_night_summary() -> void:
 	if night_panel!=null:return
 	close_checkout();set_paused(true);menu.hide();hud.hide()
-	night_panel=PanelContainer.new();root.add_child(night_panel);night_panel.position=Vector2(310,155);night_panel.custom_minimum_size=Vector2(660,410)
-	var scroll:=ScrollContainer.new();night_panel.add_child(scroll);scroll.custom_minimum_size=Vector2(628,388)
+	night_panel=PanelContainer.new();root.add_child(night_panel);night_panel.position=Vector2(310,155);night_panel.custom_minimum_size=Vector2(760,560);night_panel.theme=GamePanels.theme(true)
+	var scroll:=ScrollContainer.new();night_panel.add_child(scroll);scroll.size_flags_vertical=Control.SIZE_EXPAND_FILL
 	scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;scroll.follow_focus=true
 	var column:=VBoxContainer.new();scroll.add_child(column);column.size_flags_horizontal=Control.SIZE_EXPAND_FILL;column.add_theme_constant_override("separation",18)
 	var saturday:=int(Session.campaign.night)==1
-	label(column,"SÁBADO CONCLUÍDO" if saturday else "SEXTA-FEIRA CONCLUÍDA",31)
+	GamePanels.label(column,"DEPÓSITO JA / RELATÓRIO DO EXPEDIENTE",13,Color("7f6742"),GamePanels.MONO)
+	GamePanels.label(column,"SÁBADO CONCLUÍDO" if saturday else "SEXTA-FEIRA CONCLUÍDA",42,GamePanels.INK,TitlePresentation.DISPLAY)
+	GamePanels.rule(column,Color("b5a581"))
 	var report: Dictionary=Session.campaign.reports.get("saturday" if saturday else "friday",{})
-	label(column,"Os dois saíram juntos.\n%d atendimentos • Vendas %s"%[int(report.get("customers",0)),ShopSale.money(int(report.get("sales_cents",0)))],21)
+	GamePanels.label(column,"Os dois saíram juntos.",18)
+	var totals:=HBoxContainer.new();column.add_child(totals)
+	for i in 2:
+		var metric:=GamePanels.card(totals,GamePanels.PAPER,true)
+		GamePanels.label(metric,"ATENDIMENTOS" if i==0 else "VENDAS DO TURNO",12,Color("71664f"),GamePanels.MONO)
+		GamePanels.label(metric,str(int(report.get("customers",0))) if i==0 else ShopSale.money(int(report.get("sales_cents",0))),36,GamePanels.INK,TitlePresentation.VCR)
 	var message_text:="A pane foi comunicada ao responsável pelo depósito.\nSábado: atenda os clientes, confira as câmeras\ne investigue os fundos com a dupla."
 	if not saturday and not str(Session.campaign.friday_story.recap).is_empty():message_text=Session.campaign.friday_story.recap+"\nSábado: confira as câmeras e investigue os fundos."
 	if saturday:
@@ -355,12 +362,11 @@ func show_night_summary() -> void:
 		message_text+="\nContato: "+("responsável avisado" if Session.campaign.decisions.get("help","")=="contact" else "ainda sem aviso")
 		message_text+="\nSaída: "+("preparada" if Session.campaign.decisions.get("exit","")=="prepared" else "sem preparação")
 		message_text+="\nDomingo: recupere a gravação antiga, enfrente\na perseguição e decida como sair do depósito."
-	var note:=label(column,message_text,18);note.custom_minimum_size.x=610;note.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
-	var proceed:=Button.new();column.add_child(proceed);proceed.text="COMEÇAR DOMINGO" if saturday else "COMEÇAR SÁBADO"
+	var note:=GamePanels.label(column,message_text,17);note.custom_minimum_size.x=590;note.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART
+	var proceed:=GamePanels.button(column,"NextNight","COMEÇAR DOMINGO" if saturday else "COMEÇAR SÁBADO",func():night_panel.queue_free();night_panel=null;next_night.emit();set_paused(false))
 	proceed.name="NextNight"
-	proceed.pressed.connect(func():night_panel.queue_free();night_panel=null;next_night.emit();set_paused(false))
-	var leave:=Button.new();column.add_child(leave);leave.text="SAIR • CAMPANHA SALVA";leave.pressed.connect(func():get_tree().quit())
-	proceed.grab_focus()
+	GamePanels.button(column,"QuitShiftReport","SAIR • CAMPANHA SALVA",func():get_tree().quit())
+	proceed.grab_focus();layout_menu();GamePanels.enter(night_panel)
 func _input(event: InputEvent) -> void:
 	if presentation!=null and presentation.departing:return
 	if presentation!=null and presentation.intro_active:return

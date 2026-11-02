@@ -10,16 +10,19 @@ var aftermath: VBoxContainer
 var epilogue: VBoxContainer
 var air: AudioStreamPlayer
 var reveal_age:=0.0
+var reading_scroll: ScrollContainer
 func text(parent: Node,value: String,size:=20) -> Label:
-	var item:=Label.new();parent.add_child(item);item.text=value;item.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;item.size_flags_horizontal=Control.SIZE_EXPAND_FILL;item.add_theme_font_size_override("font_size",size);return item
+	return GamePanels.label(parent,value,size,Color("ece7d5"),TitlePresentation.DISPLAY if size>=30 else null)
 func button(parent: Node,id: String,title: String,callback: Callable) -> Button:
-	var item:=Button.new();parent.add_child(item);item.name=id;item.text=title;item.pressed.connect(callback);return item
+	return GamePanels.button(parent,id,title,callback,id in ["EscapeTogether","RetrySunday","RestartCampaign"])
 func _ready() -> void:
-	name="CampaignPanel";custom_minimum_size=Vector2(760,520);size=custom_minimum_size
-	var scroll:=ScrollContainer.new();add_child(scroll);scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;scroll.follow_focus=true
+	name="CampaignPanel";custom_minimum_size=Vector2(800,560);size=custom_minimum_size;theme=GamePanels.theme()
+	if kind!="ending":GamePanels.enter(self)
+	var scroll:=ScrollContainer.new();reading_scroll=scroll;add_child(scroll);scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;scroll.follow_focus=true
 	var body:=VBoxContainer.new();scroll.add_child(body);body.size_flags_horizontal=Control.SIZE_EXPAND_FILL;body.add_theme_constant_override("separation",15)
 	match kind:
 		"escape":
+			GamePanels.label(body,"DOMINGO / CONFIRMAÇÃO DE SAÍDA",13,GamePanels.GOLD,GamePanels.MONO);GamePanels.rule(body)
 			text(body,"A SAÍDA ESTÁ AQUI",30)
 			var together:=world.sunday.together_at_exit()
 			text(body,"Os dois chegaram. Você pode encerrar a fuga junto do companheiro." if together else "Seu companheiro ainda está no depósito ou no caminho. Sair agora encerra a campanha sem resgatá-lo.")
@@ -31,6 +34,7 @@ func _ready() -> void:
 			if not together:button(body,"LeaveAlone","CONFIRMAR: SAIR SEM O COMPANHEIRO",func():escape.emit(true))
 			button(body,"CancelEscape","VOLTAR E REUNIR A DUPLA",func():cancel.emit()).grab_focus()
 		"defeat":
+			GamePanels.label(body,"DOMINGO / ÚLTIMO CHECKPOINT",13,Color("db9a7f"),GamePanels.MONO);GamePanels.rule(body,Color("985e4b"))
 			text(body,"A FUGA FOI INTERROMPIDA",30)
 			text(body,("Deryk" if world.sunday.caught_identity=="Dery" else "Felps")+" foi alcançado. Isso não é um final da história. Retome o checkpoint no início da fuga e tente outra rota.")
 			button(body,"RetrySunday","RETOMAR CHECKPOINT DA FUGA",func():retry.emit()).grab_focus()
@@ -42,6 +46,7 @@ func _ready() -> void:
 			var read_button:=button(aftermath,"ReadEpilogue","LER O RELATO [ENTER]",finish_aftermath)
 			read_button.size_flags_horizontal=Control.SIZE_SHRINK_CENTER;read_button.grab_focus()
 			epilogue=VBoxContainer.new();container.add_child(epilogue);epilogue.add_theme_constant_override("separation",15);body=epilogue
+			GamePanels.label(body,"ARQUIVO DO CASO / DEPOIS DO FECHAMENTO",13,GamePanels.GOLD,GamePanels.MONO);GamePanels.rule(body)
 			var ending: Dictionary=Session.campaign.ending
 			match str(ending.get("id","unresolved")):
 				"resolved":
@@ -83,6 +88,10 @@ func finish_aftermath() -> void:
 	remove_theme_stylebox_override("panel")
 	aftermath.hide();epilogue.show();modulate.a=0;epilogue.get_node("RestartCampaign").grab_focus();reveal_age=0
 	Session.save_shift(world.player.position)
+	call_deferred("start_reading")
+func start_reading() -> void:
+	await get_tree().process_frame
+	if is_instance_valid(reading_scroll):reading_scroll.scroll_vertical=0
 func _process(delta: float) -> void:
 	if kind!="ending" or epilogue==null or not is_instance_valid(world) or int(Session.campaign.night)!=2 or Session.campaign.phase!="campaign_complete":return
 	if not epilogue.visible:

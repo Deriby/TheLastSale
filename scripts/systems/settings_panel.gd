@@ -3,13 +3,14 @@ extends PanelContainer
 signal closed
 var rows: VBoxContainer
 func _ready() -> void:
-	custom_minimum_size=Vector2(570,minf(660,maxf(300,get_viewport_rect().size.y-70)))
+	theme=GamePanels.theme();custom_minimum_size=Vector2(640,minf(660,maxf(300,get_viewport_rect().size.y-70)))
 	var margin:=MarginContainer.new();add_child(margin)
 	for side in ["left","top","right","bottom"]:margin.add_theme_constant_override("margin_"+side,24)
 	var scroll:=ScrollContainer.new();scroll.name="SettingsScroll";margin.add_child(scroll)
 	scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;scroll.follow_focus=true
 	rows=VBoxContainer.new();rows.size_flags_horizontal=Control.SIZE_EXPAND_FILL;rows.add_theme_constant_override("separation",11);scroll.add_child(rows)
-	var heading:=Label.new();heading.text="CONFIGURAÇÕES";heading.add_theme_font_size_override("font_size",24);rows.add_child(heading)
+	GamePanels.title(rows,"AJUSTES DO EXPEDIENTE","CONFIGURAÇÕES")
+	section("SOM E CÂMERA")
 	add_slider("Volume geral","volume",0,1,.05)
 	add_slider("Música / rádio","music_volume",0,1,.05)
 	add_slider("Efeitos e ambiente","effects_volume",0,1,.05)
@@ -18,6 +19,7 @@ func _ready() -> void:
 	add_slider("Câmera inicial (0 = primeira pessoa)","camera_distance",0,3.6,.2)
 	var immersive:=CheckButton.new();immersive.name="ImmersiveHUD";immersive.text="HUD discreto / orientação pelo cenário [J]";immersive.button_pressed=Preferences.immersive_hud;rows.add_child(immersive)
 	immersive.toggled.connect(func(value):Preferences.immersive_hud=value;Preferences.save())
+	section("IMAGEM E DESEMPENHO")
 	add_slider("Granulação","grain",0,.10,.005)
 	add_slider("Interferência VHS","vhs",0,1,.05)
 	var label:=Label.new();label.text="Resolução interna / qualidade";rows.add_child(label)
@@ -42,12 +44,21 @@ func _ready() -> void:
 	limit.item_selected.connect(func(i):Preferences.frame_limit=limit.get_item_id(i);Preferences.save())
 	var screen:=CheckButton.new();screen.text="Tela cheia";screen.button_pressed=Preferences.fullscreen;rows.add_child(screen)
 	screen.toggled.connect(func(v):Preferences.fullscreen=v;Preferences.save())
-	var back:=Button.new();back.text="VOLTAR";rows.add_child(back);back.pressed.connect(func():closed.emit())
+	GamePanels.button(rows,"CloseSettings","VOLTAR [ESC]",func():closed.emit(),true)
+	GamePanels.enter(self)
+func section(value: String) -> void:
+	GamePanels.rule(rows);GamePanels.label(rows,value,13,GamePanels.GOLD,GamePanels.MONO)
+func slider_text(key: String,value: float) -> String:
+	if key=="fov":return "%d°"%int(value)
+	if key=="sensitivity":return "%.1f"%(value*1000)
+	if key=="camera_distance":return "1ª pessoa" if value<.1 else "%.1f m"%value
+	return "%d%%"%int(round(value*100))
 func add_slider(title: String,key: String,lo: float,hi: float,step: float) -> void:
-	var row:=HBoxContainer.new();rows.add_child(row)
-	var label:=Label.new();label.text=title;label.custom_minimum_size.x=280;row.add_child(label)
-	var slider:=HSlider.new();slider.min_value=lo;slider.max_value=hi;slider.step=step;slider.value=Preferences.get(key);slider.size_flags_horizontal=Control.SIZE_EXPAND_FILL;row.add_child(slider)
-	slider.value_changed.connect(func(v):Preferences.set(key,v);Preferences.apply())
+	var row:=VBoxContainer.new();rows.add_child(row);row.add_theme_constant_override("separation",4)
+	var heading:=HBoxContainer.new();row.add_child(heading);GamePanels.label(heading,title,15)
+	var value:=GamePanels.label(heading,slider_text(key,Preferences.get(key)),15,GamePanels.GOLD,GamePanels.MONO);value.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
+	var slider:=HSlider.new();slider.name=key;slider.min_value=lo;slider.max_value=hi;slider.step=step;slider.value=Preferences.get(key);slider.size_flags_horizontal=Control.SIZE_EXPAND_FILL;slider.custom_minimum_size.y=22;row.add_child(slider)
+	slider.value_changed.connect(func(v):Preferences.set(key,v);Preferences.apply();value.text=slider_text(key,v))
 
 func add_psx_option(title: String,id: String,key: String) -> void:
 	var label:=Label.new();label.text=title;rows.add_child(label)

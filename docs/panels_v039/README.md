@@ -1,0 +1,15 @@
+# 0.39.0 — caixa, missões e painéis do expediente
+
+[Prévia real das interfaces](https://raw.githubusercontent.com/Deriby/TheLastSale/main/docs/panels_v039/interfaces_preview.mp4) · [Projeto Godot 4.7 sem EXE](../../downloads/project/TheLastSale_Godot_0.39.0.zip).
+
+O caixa recebe um terminal verde escuro, títulos retrô, valores em visor digital, indicação das quatro etapas e um comprovante em papel ao lado. O pedido e o total permanecem visíveis ao registrar, receber, separar o troco e entregar. A gaveta organiza notas e moedas por valor. Erros continuam impedindo a cobrança ou a entrega; o aviso aparece no próprio painel. Os controles permanecem na árvore durante a mesma etapa: cliques e teclado conservam o foco, sem reconstruir a tela a cada unidade ou moeda. Trocar de etapa anima apenas a área de trabalho. O fechamento, a chamada de Deryk e os identificadores dos controles conservam as ações do jogo.
+
+O caderno [J] vira uma pasta de expediente com abas Missões, Registros e Controles. A primeira página mantém o objetivo atual, o checklist baseado nos estados reais e as referências físicas G1, R1/R2, P1, ESTOQUE e DEVOLUÇÕES. R3 continua extra. A lista muda entre reposição, pane, fechamento, investigação e fuga. As outras páginas reúnem apenas observações já registradas e os controles. Navegar não conclui tarefas nem cria pistas; a simulação permanece pausada. As escolhas de investigação continuam no computador [C].
+
+Configurações recebem grupos, barras visíveis e valores numéricos. Relatórios entre noites usam papel, títulos e blocos para atendimentos e vendas reais. Confirmação de fuga, derrota e epílogo recebem o mesmo acabamento escuro e hierarquia de texto. As condições de prova e de saída permanecem. O relato abre no começo, sem saltar para o botão ao fim da rolagem. A pausa de ambiente antes do epílogo continua mostrando o cenário.
+
+Uma sombra de fundo destaca os painéis pequenos. Aberturas, trocas de etapa e de aba têm transições breves. Os painéis se centralizam e se ajustam à área disponível, com rolagem, foco visível e atalhos de teclado. A interface continua em resolução independente dos modos PS1. As fontes já publicadas são reutilizadas; nenhum modelo, textura, animação, áudio ou shader foi substituído.
+
+A prévia percorre nove vistas do jogo real: produtos, pagamento, troco incorreto, entrega, missões, registros, configurações, relatório e saída. A venda usa os controles reais; progresso da campanha e registros são preparados entre trechos. A velocidade é normal. A captura usa Godot 4.7 / Compatibility / Mesa llvmpipe e não mede FPS na placa do jogador. As capturas individuais ficam nesta galeria; o ZIP inclui o guia e o escopo de validação.
+
+A distribuição valida o projeto extraído, entradas reais do mouse, foco estável, soma e correção de troco, missão e registros sem alterações, janelas menores, abertura e fechamento, epílogo, campanha e texturas PSX. [Escopo](validation.json) · [Relatório do ZIP](../../downloads/project/release_verification.json).

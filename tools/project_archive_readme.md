@@ -1,4 +1,4 @@
-# The Last Sale — projeto Godot 0.38.0
+# The Last Sale — projeto Godot 0.39.0
 
 1. Extraia este ZIP em uma pasta nova.
 2. No Godot **4.7**, clique em **Importar** e escolha `project.godot`.
@@ -6,6 +6,10 @@
 4. Pressione **F5** e escolha **Iniciar expediente** para testar a rotina completa.
 
 Modelos animados, cenários, sons, texturas, código, testes e ferramentas estão incluídos. Blender não é necessário para jogar. O renderizador é Compatibility / OpenGL.
+
+## Interfaces do expediente — 0.39.0
+
+Caixa com comprovante, visor de valores e etapas da venda; caderno de Missões, Registros e Controles; novos acabamentos de configurações, relatórios e fuga. As transições são breves, os controles preservam foco e os painéis se ajustam à janela. Consulte `docs/panels_v039/README.md`. Mecânicas e assets anteriores permanecem.
 
 ## Sustos com direção — 0.38.0
 
@@ -215,7 +219,7 @@ O elenco inclui Dery, Felps, Killer, Bryan, Zirico, Garota 1, Garota 2 e Velha 1
 
 ## Validação
 
-A versão 0.38.0 roda vinte e duas suítes de integração (1.046 verificações) com `./tools/test.sh`. A verificação renderizada `tests/psx_motion_integration.tscn` acrescenta 48 casos e requer uma tela OpenGL. O relatório de distribuição no GitHub registra os resultados do ZIP extraído, a captura real e avisos de importação ou encerramento. A validação histórica renderizada de câmera PS1 permanece no relatório anterior; shaders, colisões e velocidades permanecem; a câmera recebe focos breves nos sustos principais; o controle de recuperação de fôlego foi corrigido. Veja `docs/horror_v038/validation.json`.
+A versão 0.39.0 roda vinte e três suítes de integração (1.076 verificações) com `./tools/test.sh`. A verificação renderizada `tests/psx_motion_integration.tscn` acrescenta 48 casos e requer uma tela OpenGL. O relatório de distribuição no GitHub registra os resultados do ZIP extraído, a captura real e avisos de importação ou encerramento. A validação histórica renderizada de câmera PS1 permanece no relatório anterior; shaders, colisões e velocidades permanecem; a câmera recebe focos breves nos sustos principais; o controle de recuperação de fôlego foi corrigido. Veja `docs/panels_v039/validation.json`.
 
 A Godot 4.4 tem Windows 10 como requisito oficial mínimo. Windows 7/Radeon R7 não foram validados nativamente. O modo Econômica reduz resolução, sombras e acabamento dos materiais.
 
