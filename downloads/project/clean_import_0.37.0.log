@@ -1,0 +1,946 @@
+Godot Engine v4.7.stable.official.5b4e0cb0f - https://godotengine.org
+
+[   0% ] first_scan_filesystem | Started Project initialization (5 steps)
+[   0% ] first_scan_filesystem | Scanning file structure...
+[  16% ] first_scan_filesystem | Loading global class names...
+[  33% ] first_scan_filesystem | Verifying GDExtensions...
+[  50% ] first_scan_filesystem | Creating autoload scripts...
+[  66% ] first_scan_filesystem | Initializing plugins...
+[  83% ] first_scan_filesystem | Starting file scan...
+[ DONE ] first_scan_filesystem
+
+[   0% ] update_scripts_classes | Started Registering global classes... (155 steps)
+[   0% ] update_scripts_classes | AisleNavigation
+[   0% ] update_scripts_classes | CarWindowPresence
+[   1% ] update_scripts_classes | Customer
+[   1% ] update_scripts_classes | FamiliarNPC
+[   2% ] update_scripts_classes | FrightIntruder
+[   3% ] update_scripts_classes | HeadWatcher
+[   3% ] update_scripts_classes | KillerAgent
+[   4% ] update_scripts_classes | NPCCast
+[   5% ] update_scripts_classes | QuietObserver
+[   5% ] update_scripts_classes | WatcherLean
+[   6% ] update_scripts_classes | CharacterModels
+[   7% ] update_scripts_classes | FelpsActor
+[   7% ] update_scripts_classes | GroundFeet
+[   8% ] update_scripts_classes | HeadAttention
+[   8% ] update_scripts_classes | LivingMotion
+[   9% ] update_scripts_classes | MotionDetail
+[  10% ] update_scripts_classes | MotionProfiles
+[  10% ] update_scripts_classes | ShoulderCamera
+[  11% ] update_scripts_classes | Interaction
+[  12% ] update_scripts_classes | BoxHandling
+[  12% ] update_scripts_classes | DepotPlayer
+[  13% ] update_scripts_classes | CampaignPanel
+[  14% ] update_scripts_classes | CheckoutPanel
+[  14% ] update_scripts_classes | Controls
+[  15% ] update_scripts_classes |
+[  16% ] update_scripts_classes | EverydayHorror
+[  16% ] update_scripts_classes | FieldNotebook
+[  17% ] update_scripts_classes | FridayScares
+[  17% ] update_scripts_classes | FridayShift
+[  18% ] update_scripts_classes | FridayStory
+[  19% ] update_scripts_classes | ShiftInterface
+[  19% ] update_scripts_classes |
+[  20% ] update_scripts_classes |
+[  21% ] update_scripts_classes | PSXMaterials
+[  21% ] update_scripts_classes | RetroDesktop
+[  22% ] update_scripts_classes | SaturdayShift
+[  23% ] update_scripts_classes | SaturdayUnease
+[  23% ] update_scripts_classes |
+[  24% ] update_scripts_classes | SettingsPanel
+[  25% ] update_scripts_classes | ShopSale
+[  25% ] update_scripts_classes | Soundscape
+[  26% ] update_scripts_classes | StockTasks
+[  26% ] update_scripts_classes | SundayClimax
+[  27% ] update_scripts_classes | SundayDesk
+[  28% ] update_scripts_classes | SundayShift
+[  28% ] update_scripts_classes | SupplyGuide
+[  29% ] update_scripts_classes | SurveillancePanel
+[  30% ] update_scripts_classes | TitleAmbience
+[  30% ] update_scripts_classes | TitleMenuMotion
+[  31% ] update_scripts_classes | TitlePresentation
+[  32% ] update_scripts_classes | TitleSavePreview
+[  32% ] update_scripts_classes | WatchingPresence
+[  33% ] update_scripts_classes | CheckoutFixture
+[  33% ] update_scripts_classes | Depot
+[  34% ] update_scripts_classes | DepotFacade
+[  35% ] update_scripts_classes | DepotRoof
+[  35% ] update_scripts_classes | DepotShell
+[  36% ] update_scripts_classes | FoliageWind
+[  37% ] update_scripts_classes | Geo
+[  37% ] update_scripts_classes | LivedInDetails
+[  38% ] update_scripts_classes | NeighborhoodCar
+[  39% ] update_scripts_classes | NeighborhoodFrontages
+[  39% ] update_scripts_classes | NeighborhoodLights
+[  40% ] update_scripts_classes | NeighborhoodProps
+[  41% ] update_scripts_classes | NeighborhoodServices
+[  41% ] update_scripts_classes | NeonFinish
+[  42% ] update_scripts_classes | NightAtmosphere
+[  42% ] update_scripts_classes | ProductLibrary
+[  43% ] update_scripts_classes | DepotProp
+[  44% ] update_scripts_classes | PropBatch
+[  44% ] update_scripts_classes | RetailDetails
+[  45% ] update_scripts_classes | RetailFinish
+[  46% ] update_scripts_classes | RoofTiles
+[  46% ] update_scripts_classes | SceneDetail
+[  47% ] update_scripts_classes | ServiceYard
+[  48% ] update_scripts_classes | ShopDetails
+[  48% ] update_scripts_classes | Street
+[  49% ] update_scripts_classes | StreetAccents
+[  50% ] update_scripts_classes | StreetBuildings
+[  50% ] update_scripts_classes | StreetDetail
+[  51% ] update_scripts_classes | StreetFurniture
+[  51% ] update_scripts_classes | StreetHaze
+[  52% ] update_scripts_classes | SundayAccess
+[  53% ] update_scripts_classes | SurfaceMaterials
+[  53% ] update_scripts_classes | ShiftWorld
+[  54% ] update_scripts_classes |
+[  55% ] update_scripts_classes |
+[  55% ] update_scripts_classes |
+[  56% ] update_scripts_classes |
+[  57% ] update_scripts_classes |
+[  57% ] update_scripts_classes |
+[  58% ] update_scripts_classes |
+[  58% ] update_scripts_classes |
+[  59% ] update_scripts_classes |
+[  60% ] update_scripts_classes |
+[  60% ] update_scripts_classes |
+[  61% ] update_scripts_classes |
+[  62% ] update_scripts_classes |
+[  62% ] update_scripts_classes |
+[  63% ] update_scripts_classes |
+[  64% ] update_scripts_classes |
+[  64% ] update_scripts_classes |
+[  65% ] update_scripts_classes |
+[  66% ] update_scripts_classes |
+[  66% ] update_scripts_classes |
+[  67% ] update_scripts_classes |
+[  67% ] update_scripts_classes |
+[  68% ] update_scripts_classes |
+[  69% ] update_scripts_classes |
+[  69% ] update_scripts_classes |
+[  70% ] update_scripts_classes |
+[  71% ] update_scripts_classes |
+[  71% ] update_scripts_classes |
+[  72% ] update_scripts_classes |
+[  73% ] update_scripts_classes |
+[  73% ] update_scripts_classes |
+[  74% ] update_scripts_classes |
+[  75% ] update_scripts_classes |
+[  75% ] update_scripts_classes |
+[  76% ] update_scripts_classes |
+[  76% ] update_scripts_classes |
+[  77% ] update_scripts_classes |
+[  78% ] update_scripts_classes |
+[  78% ] update_scripts_classes |
+[  79% ] update_scripts_classes |
+[  80% ] update_scripts_classes |
+[  80% ] update_scripts_classes |
+[  81% ] update_scripts_classes |
+[  82% ] update_scripts_classes |
+[  82% ] update_scripts_classes |
+[  83% ] update_scripts_classes |
+[  83% ] update_scripts_classes |
+[  84% ] update_scripts_classes |
+[  85% ] update_scripts_classes |
+[  85% ] update_scripts_classes |
+[  86% ] update_scripts_classes |
+[  87% ] update_scripts_classes |
+[  87% ] update_scripts_classes |
+[  88% ] update_scripts_classes |
+[  89% ] update_scripts_classes |
+[  89% ] update_scripts_classes |
+[  90% ] update_scripts_classes |
+[  91% ] update_scripts_classes |
+[  91% ] update_scripts_classes |
+[  92% ] update_scripts_classes |
+[  92% ] update_scripts_classes |
+[  93% ] update_scripts_classes |
+[  94% ] update_scripts_classes |
+[  94% ] update_scripts_classes |
+[  95% ] update_scripts_classes |
+[  96% ] update_scripts_classes |
+[  96% ] update_scripts_classes |
+[  97% ] update_scripts_classes |
+[  98% ] update_scripts_classes |
+[  98% ] update_scripts_classes |
+[ DONE ] update_scripts_classes
+
+[   0% ] _update_scan_actions | Started Scanning actions... (224 steps)
+[   0% ] _update_scan_actions | car_idle.ogg
+[   0% ] _update_scan_actions | compressor.ogg
+[   0% ] _update_scan_actions | entry_chime.ogg
+[   1% ] _update_scan_actions | stock_steps.ogg
+[   1% ] _update_scan_actions | cloth_brush.ogg
+[   2% ] _update_scan_actions | door_slam.ogg
+[   2% ] _update_scan_actions | glass_tap.ogg
+[   3% ] _update_scan_actions | handle_rattle.ogg
+[   3% ] _update_scan_actions | stock_drag.ogg
+[   4% ] _update_scan_actions | distant_dog.ogg
+[   4% ] _update_scan_actions | metal_creak.ogg
+[   4% ] _update_scan_actions | neon_hum.ogg
+[   5% ] _update_scan_actions | street_car.ogg
+[   5% ] _update_scan_actions | tape_stop.ogg
+[   6% ] _update_scan_actions | intro_tape.ogg
+[   6% ] _update_scan_actions | select.wav
+[   7% ] _update_scan_actions | title_drone.ogg
+[   7% ] _update_scan_actions | uncanny_valley.mp3
+[   8% ] _update_scan_actions | bag.wav
+[   8% ] _update_scan_actions | cash.wav
+[   8% ] _update_scan_actions | crate.wav
+[   9% ] _update_scan_actions | distant_traffic.wav
+[   9% ] _update_scan_actions | hum.wav
+[  10% ] _update_scan_actions | knock.wav
+[  10% ] _update_scan_actions | neighborhood_air.wav
+[  11% ] _update_scan_actions | night.wav
+[  11% ] _update_scan_actions | pole_ballast.wav
+[  12% ] _update_scan_actions | radio.wav
+[  12% ] _update_scan_actions | register.wav
+[  12% ] _update_scan_actions | scanner.wav
+[  13% ] _update_scan_actions | step.wav
+[  13% ] _update_scan_actions | step_asphalt.wav
+[  14% ] _update_scan_actions | step_tile.wav
+[  14% ] _update_scan_actions | store_settle.wav
+[  15% ] _update_scan_actions | BebasNeue-Regular.ttf
+[  15% ] _update_scan_actions | SpecialElite-Regular.ttf
+[  16% ] _update_scan_actions | VT323-Regular.ttf
+[  16% ] _update_scan_actions | TitleMono.ttf
+[  16% ] _update_scan_actions | TitleSerif.ttf
+[  17% ] _update_scan_actions | Bryan.glb
+[  17% ] _update_scan_actions | Bryan_Material_Diffuse.png
+[  18% ] _update_scan_actions | Bryan_Material_Normal.png
+[  18% ] _update_scan_actions | Customer1.glb
+[  19% ] _update_scan_actions | Customer2.glb
+[  19% ] _update_scan_actions | Customer3.glb
+[  20% ] _update_scan_actions | Dery.glb
+[  20% ] _update_scan_actions | Dery_Material_Diffuse.png
+[  20% ] _update_scan_actions | Dery_Material_Normal.png
+[  21% ] _update_scan_actions | Dery_texture_pbr_20250901.png
+[  21% ] _update_scan_actions | Enemy.glb
+[  22% ] _update_scan_actions | Enemy_Material_Diffuse.png
+[  22% ] _update_scan_actions | Enemy_Material_Normal.png
+[  23% ] _update_scan_actions | Enemy_texture_pbr_20250901.png
+[  23% ] _update_scan_actions | Felps.glb
+[  24% ] _update_scan_actions | Felps_Material_Diffuse.png
+[  24% ] _update_scan_actions | Felps_Material_Normal.png
+[  24% ] _update_scan_actions | Felps_texture_pbr_20250901.png
+[  25% ] _update_scan_actions | Garota1.glb
+[  25% ] _update_scan_actions | Garota1_Material_Diffuse.png
+[  26% ] _update_scan_actions | Garota1_Material_Normal.png
+[  26% ] _update_scan_actions | Garota2.glb
+[  27% ] _update_scan_actions | Garota2_Material_Diffuse.png
+[  27% ] _update_scan_actions | Garota2_Material_Normal.png
+[  28% ] _update_scan_actions | Velha1.glb
+[  28% ] _update_scan_actions | Velha1_Material_Diffuse.png
+[  28% ] _update_scan_actions | Velha1_Material_Normal.png
+[  29% ] _update_scan_actions | Zirico.glb
+[  29% ] _update_scan_actions | Zirico_Material_Diffuse.png
+[  30% ] _update_scan_actions | Zirico_Material_Normal.png
+[  30% ] _update_scan_actions | hatchback.glb
+[  31% ] _update_scan_actions | sedan.glb
+[  31% ] _update_scan_actions | user_car.glb
+[  32% ] _update_scan_actions | user_car_texture_pbr_20250901.png
+[  32% ] _update_scan_actions | user_car_texture_pbr_20250901_metallic-texture_pbr_20250901_roughness.png
+[  32% ] _update_scan_actions | user_car_texture_pbr_20250901_normal.png
+[  33% ] _update_scan_actions | beer_0.png
+[  33% ] _update_scan_actions | beer_0_orm.png
+[  34% ] _update_scan_actions | beer_1.png
+[  34% ] _update_scan_actions | beer_1_orm.png
+[  35% ] _update_scan_actions | beer_banner.png
+[  35% ] _update_scan_actions | can_0.png
+[  36% ] _update_scan_actions | can_0_orm.png
+[  36% ] _update_scan_actions | can_1.png
+[  36% ] _update_scan_actions | can_1_orm.png
+[  37% ] _update_scan_actions | can_2.png
+[  37% ] _update_scan_actions | can_2_orm.png
+[  38% ] _update_scan_actions | carton.png
+[  38% ] _update_scan_actions | carton_orm.png
+[  39% ] _update_scan_actions | contact.png
+[  39% ] _update_scan_actions | counter.png
+[  40% ] _update_scan_actions | floor.png
+[  40% ] _update_scan_actions | pix_sign.png
+[  40% ] _update_scan_actions | poster.png
+[  41% ] _update_scan_actions | price.png
+[  41% ] _update_scan_actions | register_screen.png
+[  42% ] _update_scan_actions | roof.png
+[  42% ] _update_scan_actions | snack_0.png
+[  43% ] _update_scan_actions | snack_0_orm.png
+[  43% ] _update_scan_actions | snack_1.png
+[  44% ] _update_scan_actions | snack_1_orm.png
+[  44% ] _update_scan_actions | snack_2.png
+[  44% ] _update_scan_actions | snack_2_orm.png
+[  45% ] _update_scan_actions | snack_3.png
+[  45% ] _update_scan_actions | snack_3_orm.png
+[  46% ] _update_scan_actions | snack_4.png
+[  46% ] _update_scan_actions | snack_4_orm.png
+[  47% ] _update_scan_actions | snack_5.png
+[  47% ] _update_scan_actions | snack_5_orm.png
+[  48% ] _update_scan_actions | soda_0.png
+[  48% ] _update_scan_actions | soda_0_orm.png
+[  48% ] _update_scan_actions | soda_1.png
+[  49% ] _update_scan_actions | soda_1_orm.png
+[  49% ] _update_scan_actions | soda_2.png
+[  50% ] _update_scan_actions | soda_2_orm.png
+[  50% ] _update_scan_actions | soda_banner.png
+[  51% ] _update_scan_actions | spirits.png
+[  51% ] _update_scan_actions | spirits_orm.png
+[  52% ] _update_scan_actions | toy_0.png
+[  52% ] _update_scan_actions | toy_1.png
+[  52% ] _update_scan_actions | toy_2.png
+[  53% ] _update_scan_actions | wall.png
+[  53% ] _update_scan_actions | water.png
+[  54% ] _update_scan_actions | water_banner.png
+[  54% ] _update_scan_actions | water_orm.png
+[  55% ] _update_scan_actions | wood.png
+[  55% ] _update_scan_actions | charcoal.png
+[  56% ] _update_scan_actions | counter_notice.png
+[  56% ] _update_scan_actions | cracks.png
+[  56% ] _update_scan_actions | cup_0.png
+[  57% ] _update_scan_actions | cup_1.png
+[  57% ] _update_scan_actions | cup_2.png
+[  58% ] _update_scan_actions | cup_3.png
+[  58% ] _update_scan_actions | cup_4.png
+[  59% ] _update_scan_actions | cup_offer.png
+[  59% ] _update_scan_actions | floor_wear.png
+[  60% ] _update_scan_actions | ice_freezer.png
+[  60% ] _update_scan_actions | payment_screen.png
+[  60% ] _update_scan_actions | pos_screen.png
+[  61% ] _update_scan_actions | spirits_0.png
+[  61% ] _update_scan_actions | spirits_1.png
+[  62% ] _update_scan_actions | spirits_2.png
+[  62% ] _update_scan_actions | tv_screen.png
+[  63% ] _update_scan_actions | worktop.png
+[  63% ] _update_scan_actions | charcoal_bag.png
+[  64% ] _update_scan_actions | cold_sign.png
+[  64% ] _update_scan_actions | haze_noise.png
+[  64% ] _update_scan_actions | ice_offer.png
+[  65% ] _update_scan_actions | open_sign.png
+[  65% ] _update_scan_actions | plastic_film.png
+[  66% ] _update_scan_actions | asphalt.png
+[  66% ] _update_scan_actions | curtain.png
+[  67% ] _update_scan_actions | lamp_halo.png
+[  67% ] _update_scan_actions | leaves.png
+[  68% ] _update_scan_actions | night_sky.png
+[  68% ] _update_scan_actions | paving.png
+[  68% ] _update_scan_actions | plaster.png
+[  69% ] _update_scan_actions | tile.png
+[  69% ] _update_scan_actions | wall_base.png
+[  70% ] _update_scan_actions | asphalt.png
+[  70% ] _update_scan_actions | cassiano.png
+[  71% ] _update_scan_actions | contact_icon.png
+[  71% ] _update_scan_actions | cream.png
+[  72% ] _update_scan_actions | gate.png
+[  72% ] _update_scan_actions | ja_mural.png
+[  72% ] _update_scan_actions | market_sign.png
+[  73% ] _update_scan_actions | render.png
+[  73% ] _update_scan_actions | shutter.png
+[  74% ] _update_scan_actions | sidewalk.png
+[  74% ] _update_scan_actions | stained.png
+[  75% ] _update_scan_actions | terracotta.png
+[  75% ] _update_scan_actions | asphalt_albedo.png
+[  76% ] _update_scan_actions | asphalt_normal.png
+[  76% ] _update_scan_actions | asphalt_orm.png
+[  76% ] _update_scan_actions | azulejo_albedo.png
+[  77% ] _update_scan_actions | azulejo_normal.png
+[  77% ] _update_scan_actions | azulejo_orm.png
+[  78% ] _update_scan_actions | bark_albedo.png
+[  78% ] _update_scan_actions | bark_normal.png
+[  79% ] _update_scan_actions | bark_orm.png
+[  79% ] _update_scan_actions | brick_albedo.png
+[  80% ] _update_scan_actions | brick_normal.png
+[  80% ] _update_scan_actions | brick_orm.png
+[  80% ] _update_scan_actions | carpaint_albedo.png
+[  81% ] _update_scan_actions | carpaint_normal.png
+[  81% ] _update_scan_actions | carpaint_orm.png
+[  82% ] _update_scan_actions | ceramic_albedo.png
+[  82% ] _update_scan_actions | ceramic_normal.png
+[  83% ] _update_scan_actions | ceramic_orm.png
+[  83% ] _update_scan_actions | glass_albedo.png
+[  84% ] _update_scan_actions | glass_normal.png
+[  84% ] _update_scan_actions | glass_orm.png
+[  84% ] _update_scan_actions | painted_metal_albedo.png
+[  85% ] _update_scan_actions | painted_metal_normal.png
+[  85% ] _update_scan_actions | painted_metal_orm.png
+[  86% ] _update_scan_actions | pallet_wood_albedo.png
+[  86% ] _update_scan_actions | pallet_wood_normal.png
+[  87% ] _update_scan_actions | pallet_wood_orm.png
+[  87% ] _update_scan_actions | paving_albedo.png
+[  88% ] _update_scan_actions | paving_normal.png
+[  88% ] _update_scan_actions | paving_orm.png
+[  88% ] _update_scan_actions | plaster_albedo.png
+[  89% ] _update_scan_actions | plaster_normal.png
+[  89% ] _update_scan_actions | plaster_orm.png
+[  90% ] _update_scan_actions | plastic_albedo.png
+[  90% ] _update_scan_actions | plastic_normal.png
+[  91% ] _update_scan_actions | plastic_orm.png
+[  91% ] _update_scan_actions | rubber_albedo.png
+[  92% ] _update_scan_actions | rubber_normal.png
+[  92% ] _update_scan_actions | rubber_orm.png
+[  92% ] _update_scan_actions | steel_albedo.png
+[  93% ] _update_scan_actions | steel_normal.png
+[  93% ] _update_scan_actions | steel_orm.png
+[  94% ] _update_scan_actions | wall_albedo.png
+[  94% ] _update_scan_actions | wall_normal.png
+[  95% ] _update_scan_actions | wall_orm.png
+[  95% ] _update_scan_actions | wood_albedo.png
+[  96% ] _update_scan_actions | wood_normal.png
+[  96% ] _update_scan_actions | wood_orm.png
+[  96% ] _update_scan_actions | asphalt.png
+[  97% ] _update_scan_actions | cardboard.png
+[  97% ] _update_scan_actions | concrete.png
+[  98% ] _update_scan_actions | metal.png
+[  98% ] _update_scan_actions | plaster.png
+[  99% ] _update_scan_actions | tile.png
+[ DONE ] _update_scan_actions
+
+[   0% ] reimport | Started (Re)Importing Assets (224 steps)
+[   0% ] reimport | Preparing files to reimport...
+[   0% ] reimport | Preparing files to reimport...
+[   0% ] reimport | Preparing files to reimport...
+[   1% ] reimport | Preparing files to reimport...
+[   1% ] reimport | Preparing files to reimport...
+[   2% ] reimport | Preparing files to reimport...
+[   2% ] reimport | Preparing files to reimport...
+[   3% ] reimport | Preparing files to reimport...
+[   3% ] reimport | Preparing files to reimport...
+[   4% ] reimport | Preparing files to reimport...
+[   4% ] reimport | Preparing files to reimport...
+[   4% ] reimport | Preparing files to reimport...
+[   5% ] reimport | Preparing files to reimport...
+[   5% ] reimport | Preparing files to reimport...
+[   6% ] reimport | Preparing files to reimport...
+[   6% ] reimport | Preparing files to reimport...
+[   7% ] reimport | Preparing files to reimport...
+[   7% ] reimport | Preparing files to reimport...
+[   8% ] reimport | Preparing files to reimport...
+[   8% ] reimport | Preparing files to reimport...
+[   8% ] reimport | Preparing files to reimport...
+[   9% ] reimport | Preparing files to reimport...
+[   9% ] reimport | Preparing files to reimport...
+[  10% ] reimport | Preparing files to reimport...
+[  10% ] reimport | Preparing files to reimport...
+[  11% ] reimport | Preparing files to reimport...
+[  11% ] reimport | Preparing files to reimport...
+[  12% ] reimport | Preparing files to reimport...
+[  12% ] reimport | Preparing files to reimport...
+[  12% ] reimport | Preparing files to reimport...
+[  13% ] reimport | Preparing files to reimport...
+[  13% ] reimport | Preparing files to reimport...
+[  14% ] reimport | Preparing files to reimport...
+[  14% ] reimport | Preparing files to reimport...
+[  15% ] reimport | Preparing files to reimport...
+[  15% ] reimport | Preparing files to reimport...
+[  16% ] reimport | Preparing files to reimport...
+[  16% ] reimport | Preparing files to reimport...
+[  16% ] reimport | Preparing files to reimport...
+[  17% ] reimport | Preparing files to reimport...
+[  17% ] reimport | Preparing files to reimport...
+[  18% ] reimport | Preparing files to reimport...
+[  18% ] reimport | Preparing files to reimport...
+[  19% ] reimport | Preparing files to reimport...
+[  19% ] reimport | Preparing files to reimport...
+[  20% ] reimport | Preparing files to reimport...
+[  20% ] reimport | Preparing files to reimport...
+[  20% ] reimport | Preparing files to reimport...
+[  21% ] reimport | Preparing files to reimport...
+[  21% ] reimport | Preparing files to reimport...
+[  22% ] reimport | Preparing files to reimport...
+[  22% ] reimport | Preparing files to reimport...
+[  23% ] reimport | Preparing files to reimport...
+[  23% ] reimport | Preparing files to reimport...
+[  24% ] reimport | Preparing files to reimport...
+[  24% ] reimport | Preparing files to reimport...
+[  24% ] reimport | Preparing files to reimport...
+[  25% ] reimport | Preparing files to reimport...
+[  25% ] reimport | Preparing files to reimport...
+[  26% ] reimport | Preparing files to reimport...
+[  26% ] reimport | Preparing files to reimport...
+[  27% ] reimport | Preparing files to reimport...
+[  27% ] reimport | Preparing files to reimport...
+[  28% ] reimport | Preparing files to reimport...
+[  28% ] reimport | Preparing files to reimport...
+[  28% ] reimport | Preparing files to reimport...
+[  29% ] reimport | Preparing files to reimport...
+[  29% ] reimport | Preparing files to reimport...
+[  30% ] reimport | Preparing files to reimport...
+[  30% ] reimport | Preparing files to reimport...
+[  31% ] reimport | Preparing files to reimport...
+[  31% ] reimport | Preparing files to reimport...
+[  32% ] reimport | Preparing files to reimport...
+[  32% ] reimport | Preparing files to reimport...
+[  32% ] reimport | Preparing files to reimport...
+[  33% ] reimport | Preparing files to reimport...
+[  33% ] reimport | Preparing files to reimport...
+[  34% ] reimport | Preparing files to reimport...
+[  34% ] reimport | Preparing files to reimport...
+[  35% ] reimport | Preparing files to reimport...
+[  35% ] reimport | Preparing files to reimport...
+[  36% ] reimport | Preparing files to reimport...
+[  36% ] reimport | Preparing files to reimport...
+[  36% ] reimport | Preparing files to reimport...
+[  37% ] reimport | Preparing files to reimport...
+[  37% ] reimport | Preparing files to reimport...
+[  38% ] reimport | Preparing files to reimport...
+[  38% ] reimport | Preparing files to reimport...
+[  39% ] reimport | Preparing files to reimport...
+[  39% ] reimport | Preparing files to reimport...
+[  40% ] reimport | Preparing files to reimport...
+[  40% ] reimport | Preparing files to reimport...
+[  40% ] reimport | Preparing files to reimport...
+[  41% ] reimport | Preparing files to reimport...
+[  41% ] reimport | Preparing files to reimport...
+[  42% ] reimport | Preparing files to reimport...
+[  42% ] reimport | Preparing files to reimport...
+[  43% ] reimport | Preparing files to reimport...
+[  43% ] reimport | Preparing files to reimport...
+[  44% ] reimport | Preparing files to reimport...
+[  44% ] reimport | Preparing files to reimport...
+[  44% ] reimport | Preparing files to reimport...
+[  45% ] reimport | Preparing files to reimport...
+[  45% ] reimport | Preparing files to reimport...
+[  46% ] reimport | Preparing files to reimport...
+[  46% ] reimport | Preparing files to reimport...
+[  47% ] reimport | Preparing files to reimport...
+[  47% ] reimport | Preparing files to reimport...
+[  48% ] reimport | Preparing files to reimport...
+[  48% ] reimport | Preparing files to reimport...
+[  48% ] reimport | Preparing files to reimport...
+[  49% ] reimport | Preparing files to reimport...
+[  49% ] reimport | Preparing files to reimport...
+[  50% ] reimport | Preparing files to reimport...
+[  50% ] reimport | Preparing files to reimport...
+[  51% ] reimport | Preparing files to reimport...
+[  51% ] reimport | Preparing files to reimport...
+[  52% ] reimport | Preparing files to reimport...
+[  52% ] reimport | Preparing files to reimport...
+[  52% ] reimport | Preparing files to reimport...
+[  53% ] reimport | Preparing files to reimport...
+[  53% ] reimport | Preparing files to reimport...
+[  54% ] reimport | Preparing files to reimport...
+[  54% ] reimport | Preparing files to reimport...
+[  55% ] reimport | Preparing files to reimport...
+[  55% ] reimport | Preparing files to reimport...
+[  56% ] reimport | Preparing files to reimport...
+[  56% ] reimport | Preparing files to reimport...
+[  56% ] reimport | Preparing files to reimport...
+[  57% ] reimport | Preparing files to reimport...
+[  57% ] reimport | Preparing files to reimport...
+[  58% ] reimport | Preparing files to reimport...
+[  58% ] reimport | Preparing files to reimport...
+[  59% ] reimport | Preparing files to reimport...
+[  59% ] reimport | Preparing files to reimport...
+[  60% ] reimport | Preparing files to reimport...
+[  60% ] reimport | Preparing files to reimport...
+[  60% ] reimport | Preparing files to reimport...
+[  61% ] reimport | Preparing files to reimport...
+[  61% ] reimport | Preparing files to reimport...
+[  62% ] reimport | Preparing files to reimport...
+[  62% ] reimport | Preparing files to reimport...
+[  63% ] reimport | Preparing files to reimport...
+[  63% ] reimport | Preparing files to reimport...
+[  64% ] reimport | Preparing files to reimport...
+[  64% ] reimport | Preparing files to reimport...
+[  64% ] reimport | Preparing files to reimport...
+[  65% ] reimport | Preparing files to reimport...
+[  65% ] reimport | Preparing files to reimport...
+[  66% ] reimport | Preparing files to reimport...
+[  66% ] reimport | Preparing files to reimport...
+[  67% ] reimport | Preparing files to reimport...
+[  67% ] reimport | Preparing files to reimport...
+[  68% ] reimport | Preparing files to reimport...
+[  68% ] reimport | Preparing files to reimport...
+[  68% ] reimport | Preparing files to reimport...
+[  69% ] reimport | Preparing files to reimport...
+[  69% ] reimport | Preparing files to reimport...
+[  70% ] reimport | Preparing files to reimport...
+[  70% ] reimport | Preparing files to reimport...
+[  71% ] reimport | Preparing files to reimport...
+[  71% ] reimport | Preparing files to reimport...
+[  72% ] reimport | Preparing files to reimport...
+[  72% ] reimport | Preparing files to reimport...
+[  72% ] reimport | Preparing files to reimport...
+[  73% ] reimport | Preparing files to reimport...
+[  73% ] reimport | Preparing files to reimport...
+[  74% ] reimport | Preparing files to reimport...
+[  74% ] reimport | Preparing files to reimport...
+[  75% ] reimport | Preparing files to reimport...
+[  75% ] reimport | Preparing files to reimport...
+[  76% ] reimport | Preparing files to reimport...
+[  76% ] reimport | Preparing files to reimport...
+[  76% ] reimport | Preparing files to reimport...
+[  77% ] reimport | Preparing files to reimport...
+[  77% ] reimport | Preparing files to reimport...
+[  78% ] reimport | Preparing files to reimport...
+[  78% ] reimport | Preparing files to reimport...
+[  79% ] reimport | Preparing files to reimport...
+[  79% ] reimport | Preparing files to reimport...
+[  80% ] reimport | Preparing files to reimport...
+[  80% ] reimport | Preparing files to reimport...
+[  80% ] reimport | Preparing files to reimport...
+[  81% ] reimport | Preparing files to reimport...
+[  81% ] reimport | Preparing files to reimport...
+[  82% ] reimport | Preparing files to reimport...
+[  82% ] reimport | Preparing files to reimport...
+[  83% ] reimport | Preparing files to reimport...
+[  83% ] reimport | Preparing files to reimport...
+[  84% ] reimport | Preparing files to reimport...
+[  84% ] reimport | Preparing files to reimport...
+[  84% ] reimport | Preparing files to reimport...
+[  85% ] reimport | Preparing files to reimport...
+[  85% ] reimport | Preparing files to reimport...
+[  86% ] reimport | Preparing files to reimport...
+[  86% ] reimport | Preparing files to reimport...
+[  87% ] reimport | Preparing files to reimport...
+[  87% ] reimport | Preparing files to reimport...
+[  88% ] reimport | Preparing files to reimport...
+[  88% ] reimport | Preparing files to reimport...
+[  88% ] reimport | Preparing files to reimport...
+[  89% ] reimport | Preparing files to reimport...
+[  89% ] reimport | Preparing files to reimport...
+[  90% ] reimport | Preparing files to reimport...
+[  90% ] reimport | Preparing files to reimport...
+[  91% ] reimport | Preparing files to reimport...
+[  91% ] reimport | Preparing files to reimport...
+[  92% ] reimport | Preparing files to reimport...
+[  92% ] reimport | Preparing files to reimport...
+[  92% ] reimport | Preparing files to reimport...
+[  93% ] reimport | Preparing files to reimport...
+[  93% ] reimport | Preparing files to reimport...
+[  94% ] reimport | Preparing files to reimport...
+[  94% ] reimport | Preparing files to reimport...
+[  95% ] reimport | Preparing files to reimport...
+[  95% ] reimport | Preparing files to reimport...
+[  96% ] reimport | Preparing files to reimport...
+[  96% ] reimport | Preparing files to reimport...
+[  96% ] reimport | Preparing files to reimport...
+[  97% ] reimport | Preparing files to reimport...
+[  97% ] reimport | Preparing files to reimport...
+[  98% ] reimport | Preparing files to reimport...
+[  98% ] reimport | Preparing files to reimport...
+[  99% ] reimport | Preparing files to reimport...
+[   0% ] reimport | Executing pre-reimport operations...
+[   0% ] preload_reimporting_scene | Started Preparing scenes for reload (1 steps)
+[   0% ] preload_reimporting_scene | Analyzing scene [empty]
+[  50% ] preload_reimporting_scene | Preparation done.
+[ DONE ] preload_reimporting_scene
+
+[   0% ] reimport | TitleSerif.ttf
+[   0% ] reimport | TitleMono.ttf
+[   0% ] reimport | VT323-Regular.ttf
+[   1% ] reimport | SpecialElite-Regular.ttf
+[   1% ] reimport | BebasNeue-Regular.ttf
+[   2% ] reimport | uncanny_valley.mp3
+[   2% ] reimport | TitleSerif.ttf
+[   3% ] reimport | TitleMono.ttf
+[   3% ] reimport | VT323-Regular.ttf
+[   4% ] reimport | SpecialElite-Regular.ttf
+[   4% ] reimport | BebasNeue-Regular.ttf
+[   4% ] reimport | uncanny_valley.mp3
+[   5% ] reimport | title_drone.ogg
+[   5% ] reimport | intro_tape.ogg
+[   6% ] reimport | tape_stop.ogg
+[   6% ] reimport | street_car.ogg
+[   7% ] reimport | neon_hum.ogg
+[   7% ] reimport | metal_creak.ogg
+[   8% ] reimport | distant_dog.ogg
+[   8% ] reimport | stock_drag.ogg
+[   8% ] reimport | handle_rattle.ogg
+[   9% ] reimport | glass_tap.ogg
+[   9% ] reimport | TitleSerif.ttf
+[  10% ] reimport | TitleMono.ttf
+[  10% ] reimport | VT323-Regular.ttf
+[  11% ] reimport | SpecialElite-Regular.ttf
+[  11% ] reimport | BebasNeue-Regular.ttf
+[  12% ] reimport | uncanny_valley.mp3
+[  12% ] reimport | title_drone.ogg
+[  12% ] reimport | intro_tape.ogg
+[  13% ] reimport | tape_stop.ogg
+[  13% ] reimport | street_car.ogg
+[  14% ] reimport | neon_hum.ogg
+[  14% ] reimport | metal_creak.ogg
+[  15% ] reimport | distant_dog.ogg
+[  15% ] reimport | stock_drag.ogg
+[  16% ] reimport | handle_rattle.ogg
+[  16% ] reimport | glass_tap.ogg
+[  16% ] reimport | door_slam.ogg
+[  17% ] reimport | cloth_brush.ogg
+[  17% ] reimport | stock_steps.ogg
+[  18% ] reimport | entry_chime.ogg
+[  18% ] reimport | compressor.ogg
+[  19% ] reimport | car_idle.ogg
+[  19% ] reimport | wall_base.png
+[  20% ] reimport | tile.png
+[  20% ] reimport | plaster.png
+[  20% ] reimport | paving.png
+[  21% ] reimport | night_sky.png
+[  21% ] reimport | leaves.png
+[  22% ] reimport | lamp_halo.png
+[  22% ] reimport | curtain.png
+[  23% ] reimport | asphalt.png
+[  23% ] reimport | plastic_film.png
+[  24% ] reimport | asphalt.png
+[  24% ] reimport | cassiano.png
+[  24% ] reimport | contact_icon.png
+[  25% ] reimport | cream.png
+[  25% ] reimport | gate.png
+[  26% ] reimport | ja_mural.png
+[  26% ] reimport | market_sign.png
+[  27% ] reimport | render.png
+[  27% ] reimport | shutter.png
+[  28% ] reimport | sidewalk.png
+[  28% ] reimport | stained.png
+[  28% ] reimport | terracotta.png
+[  29% ] reimport | asphalt_albedo.png
+[  29% ] reimport | asphalt_normal.png
+[  30% ] reimport | asphalt_orm.png
+[  30% ] reimport | water_orm.png
+[  31% ] reimport | wood.png
+[  31% ] reimport | charcoal.png
+[  32% ] reimport | counter_notice.png
+[  32% ] reimport | cracks.png
+[  32% ] reimport | cup_0.png
+[  33% ] reimport | cup_1.png
+[  33% ] reimport | cup_2.png
+[  34% ] reimport | cup_3.png
+[  34% ] reimport | cup_4.png
+[  35% ] reimport | cup_offer.png
+[  35% ] reimport | floor_wear.png
+[  36% ] reimport | ice_freezer.png
+[  36% ] reimport | payment_screen.png
+[  36% ] reimport | pos_screen.png
+[  37% ] reimport | spirits_0.png
+[  37% ] reimport | spirits_1.png
+[  38% ] reimport | spirits_2.png
+[  38% ] reimport | tv_screen.png
+[  39% ] reimport | worktop.png
+[  39% ] reimport | charcoal_bag.png
+[  40% ] reimport | cold_sign.png
+[  40% ] reimport | haze_noise.png
+[  40% ] reimport | ice_offer.png
+[  41% ] reimport | open_sign.png
+[  41% ] reimport | paving_orm.png
+[  42% ] reimport | plaster_albedo.png
+[  42% ] reimport | plaster_normal.png
+[  43% ] reimport | plaster_orm.png
+[  43% ] reimport | plastic_albedo.png
+[  44% ] reimport | plastic_normal.png
+[  44% ] reimport | plastic_orm.png
+[  44% ] reimport | rubber_albedo.png
+[  45% ] reimport | rubber_normal.png
+[  45% ] reimport | rubber_orm.png
+[  46% ] reimport | steel_albedo.png
+[  46% ] reimport | steel_normal.png
+[  47% ] reimport | steel_orm.png
+[  47% ] reimport | wall_albedo.png
+[  48% ] reimport | wall_normal.png
+[  48% ] reimport | wall_orm.png
+[  48% ] reimport | wood_albedo.png
+[  49% ] reimport | wood_normal.png
+[  49% ] reimport | wood_orm.png
+[  50% ] reimport | asphalt.png
+[  50% ] reimport | cardboard.png
+[  51% ] reimport | concrete.png
+[  51% ] reimport | metal.png
+[  52% ] reimport | plaster.png
+[  52% ] reimport | tile.png
+[  52% ] reimport | azulejo_albedo.png
+[  53% ] reimport | azulejo_normal.png
+[  53% ] reimport | azulejo_orm.png
+[  54% ] reimport | bark_albedo.png
+[  54% ] reimport | bark_normal.png
+[  55% ] reimport | bark_orm.png
+[  55% ] reimport | brick_albedo.png
+[  56% ] reimport | brick_normal.png
+[  56% ] reimport | brick_orm.png
+[  56% ] reimport | carpaint_albedo.png
+[  57% ] reimport | carpaint_normal.png
+[  57% ] reimport | carpaint_orm.png
+[  58% ] reimport | ceramic_albedo.png
+[  58% ] reimport | ceramic_normal.png
+[  59% ] reimport | ceramic_orm.png
+[  59% ] reimport | glass_albedo.png
+[  60% ] reimport | glass_normal.png
+[  60% ] reimport | glass_orm.png
+[  60% ] reimport | painted_metal_albedo.png
+[  61% ] reimport | painted_metal_normal.png
+[  61% ] reimport | painted_metal_orm.png
+[  62% ] reimport | pallet_wood_albedo.png
+[  62% ] reimport | pallet_wood_normal.png
+[  63% ] reimport | pallet_wood_orm.png
+[  63% ] reimport | paving_albedo.png
+[  64% ] reimport | paving_normal.png
+[  64% ] reimport | Zirico_Material_Normal.png
+[  64% ] reimport | user_car_texture_pbr_20250901.png
+[  65% ] reimport | user_car_texture_pbr_20250901_metallic-texture_pbr_20250901_roughness.png
+[  65% ] reimport | user_car_texture_pbr_20250901_normal.png
+[  66% ] reimport | beer_0.png
+[  66% ] reimport | beer_0_orm.png
+[  67% ] reimport | beer_1.png
+[  67% ] reimport | beer_1_orm.png
+[  68% ] reimport | beer_banner.png
+[  68% ] reimport | can_0.png
+[  68% ] reimport | can_0_orm.png
+[  69% ] reimport | can_1.png
+[  69% ] reimport | can_1_orm.png
+[  70% ] reimport | can_2.png
+[  70% ] reimport | can_2_orm.png
+[  71% ] reimport | carton.png
+[  71% ] reimport | carton_orm.png
+[  72% ] reimport | Bryan_Material_Diffuse.png
+[  72% ] reimport | Bryan_Material_Normal.png
+[  72% ] reimport | Dery_Material_Diffuse.png
+[  73% ] reimport | Dery_Material_Normal.png
+[  73% ] reimport | Dery_texture_pbr_20250901.png
+[  74% ] reimport | Enemy_Material_Diffuse.png
+[  74% ] reimport | Enemy_Material_Normal.png
+[  75% ] reimport | Enemy_texture_pbr_20250901.png
+[  75% ] reimport | Felps_Material_Diffuse.png
+[  76% ] reimport | Felps_Material_Normal.png
+[  76% ] reimport | Felps_texture_pbr_20250901.png
+[  76% ] reimport | Garota1_Material_Diffuse.png
+[  77% ] reimport | Garota1_Material_Normal.png
+[  77% ] reimport | Garota2_Material_Diffuse.png
+[  78% ] reimport | Garota2_Material_Normal.png
+[  78% ] reimport | Velha1_Material_Diffuse.png
+[  79% ] reimport | Velha1_Material_Normal.png
+[  79% ] reimport | Zirico_Material_Diffuse.png
+[  80% ] reimport | snack_4.png
+[  80% ] reimport | snack_4_orm.png
+[  80% ] reimport | snack_5.png
+[  81% ] reimport | snack_5_orm.png
+[  81% ] reimport | soda_0.png
+[  82% ] reimport | soda_0_orm.png
+[  82% ] reimport | soda_1.png
+[  83% ] reimport | soda_1_orm.png
+[  83% ] reimport | soda_2.png
+[  84% ] reimport | soda_2_orm.png
+[  84% ] reimport | soda_banner.png
+[  84% ] reimport | spirits.png
+[  85% ] reimport | spirits_orm.png
+[  85% ] reimport | TitleSerif.ttf
+[  86% ] reimport | TitleMono.ttf
+[  86% ] reimport | VT323-Regular.ttf
+[  87% ] reimport | SpecialElite-Regular.ttf
+[  87% ] reimport | BebasNeue-Regular.ttf
+[  88% ] reimport | uncanny_valley.mp3
+[  88% ] reimport | title_drone.ogg
+[  88% ] reimport | intro_tape.ogg
+[  89% ] reimport | tape_stop.ogg
+[  89% ] reimport | street_car.ogg
+[  90% ] reimport | neon_hum.ogg
+[  90% ] reimport | metal_creak.ogg
+[  91% ] reimport | distant_dog.ogg
+[  91% ] reimport | stock_drag.ogg
+[  92% ] reimport | handle_rattle.ogg
+[  92% ] reimport | glass_tap.ogg
+[  92% ] reimport | door_slam.ogg
+[  93% ] reimport | Bryan.glb
+[   0% ] import | Started Import Scene (104 steps)
+[   0% ] import | Importing Scene...
+[   1% ] import | Running Custom Script...
+[  99% ] import | Saving...
+[ DONE ] import
+
+[  93% ] reimport | Customer1.glb
+[   0% ] import | Started Import Scene (104 steps)
+[   0% ] import | Importing Scene...
+[   1% ] import | Running Custom Script...
+[  99% ] import | Saving...
+[ DONE ] import
+
+[  94% ] reimport | Customer2.glb
+[   0% ] import | Started Import Scene (104 steps)
+[   0% ] import | Importing Scene...
+[   1% ] import | Running Custom Script...
+[  99% ] import | Saving...
+[ DONE ] import
+
+[  94% ] reimport | Customer3.glb
+[   0% ] import | Started Import Scene (104 steps)
+[   0% ] import | Importing Scene...
+[   1% ] import | Running Custom Script...
+[  99% ] import | Saving...
+[ DONE ] import
+
+[  95% ] reimport | Dery.glb
+[   0% ] import | Started Import Scene (104 steps)
+[   0% ] import | Importing Scene...
+[   1% ] import | Running Custom Script...
+[  99% ] import | Saving...
+[ DONE ] import
+
+[  95% ] reimport | Enemy.glb
+[   0% ] import | Started Import Scene (104 steps)
+[   0% ] import | Importing Scene...
+[   1% ] import | Running Custom Script...
+[  99% ] import | Saving...
+[ DONE ] import
+
+[  96% ] reimport | Felps.glb
+[   0% ] import | Started Import Scene (104 steps)
+[   0% ] import | Importing Scene...
+[   1% ] import | Running Custom Script...
+[  99% ] import | Saving...
+[ DONE ] import
+
+[  96% ] reimport | Garota1.glb
+[   0% ] import | Started Import Scene (104 steps)
+[   0% ] import | Importing Scene...
+[   1% ] import | Running Custom Script...
+[  99% ] import | Saving...
+[ DONE ] import
+
+[  96% ] reimport | Garota2.glb
+[   0% ] import | Started Import Scene (104 steps)
+[   0% ] import | Importing Scene...
+[   1% ] import | Running Custom Script...
+[  99% ] import | Saving...
+[ DONE ] import
+
+[  97% ] reimport | Velha1.glb
+[   0% ] import | Started Import Scene (104 steps)
+[   0% ] import | Importing Scene...
+[   1% ] import | Running Custom Script...
+[  99% ] import | Saving...
+[ DONE ] import
+
+[  97% ] reimport | user_car.glb
+[   0% ] import | Started Import Scene (104 steps)
+[   0% ] import | Importing Scene...
+[   1% ] import | Running Custom Script...
+[  99% ] import | Saving...
+[ DONE ] import
+
+[  98% ] reimport | Zirico.glb
+[   0% ] import | Started Import Scene (104 steps)
+[   0% ] import | Importing Scene...
+[   1% ] import | Running Custom Script...
+[  99% ] import | Saving...
+[ DONE ] import
+
+[  98% ] reimport | sedan.glb
+[   0% ] import | Started Import Scene (104 steps)
+[   0% ] import | Importing Scene...
+[   1% ] import | Running Custom Script...
+[  99% ] import | Saving...
+[ DONE ] import
+
+[  99% ] reimport | hatchback.glb
+[   0% ] import | Started Import Scene (104 steps)
+[   0% ] import | Importing Scene...
+[   1% ] import | Running Custom Script...
+[  99% ] import | Saving...
+[ DONE ] import
+
+[  99% ] reimport | Finalizing Asset Import...
+[ DONE ] reimport
+
+[   0% ] reimport | Started (Re)Importing Assets (224 steps)
+[   0% ] reimport | Executing post-reimport operations...
+[ DONE ] reimport
+
+[   0% ] loading_editor_layout | Started Loading editor (5 steps)
+[   0% ] loading_editor_layout | Loading editor layout...
+[  16% ] loading_editor_layout | Loading docks...
+[ DONE ] loading_editor_layout

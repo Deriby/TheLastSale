@@ -36,6 +36,7 @@ var ambience: TitleAmbience
 var departing := false
 var departure_tween: Tween
 var menu_gain := 1.0
+var music_gain := 0.0
 
 func _ready() -> void:
 	process_mode=Node.PROCESS_MODE_ALWAYS
@@ -58,8 +59,8 @@ func _ready() -> void:
 	caption=text(intro,"",20);center(caption,Rect2(-500,36,1000,50))
 	skip_hint=text(intro,"ESPAÇO / ENTER / ESC  ·  PULAR INTRO",17);skip_hint.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT);skip_hint.offset_left=-520;skip_hint.offset_right=-48;skip_hint.offset_top=-43;skip_hint.offset_bottom=-18;skip_hint.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT
 	transition=ColorRect.new();transition.z_index=110;add_child(transition);fill(transition);transition.color=Color(0,0,0,0)
-	drone=audio("res://assets/audio/title/title_drone.ogg")
-	var loop: AudioStreamOggVorbis=drone.stream.duplicate();loop.loop=true;drone.stream=loop
+	drone=audio("res://assets/audio/title/uncanny_valley.mp3")
+	var loop: AudioStreamMP3=drone.stream.duplicate();loop.loop=true;drone.stream=loop
 	tape=audio("res://assets/audio/title/intro_tape.ogg")
 	select_audio=audio("res://assets/audio/title/select.wav")
 	stop_audio=audio("res://assets/audio/title/ambient/tape_stop.ogg")
@@ -85,7 +86,7 @@ func audio(path: String) -> AudioStreamPlayer:
 
 func apply_audio() -> void:
 	if drone==null:return
-	drone.volume_db=-80 if Preferences.music_volume<=0 or menu_gain<=0 else -10+linear_to_db(Preferences.music_volume*menu_gain)
+	drone.volume_db=-80 if Preferences.music_volume<=0 or menu_gain<=0 or music_gain<=0 else -10+linear_to_db(Preferences.music_volume*menu_gain*music_gain)
 	tape.volume_db=-15+linear_to_db(maxf(Preferences.effects_volume,.001))
 	select_audio.volume_db=-25+linear_to_db(maxf(Preferences.effects_volume,.001))
 	stop_audio.volume_db=-80 if Preferences.effects_volume<=0 else -16+linear_to_db(Preferences.effects_volume)
@@ -97,7 +98,7 @@ func set_menu_gain(value: float) -> void:
 func begin(world: ShiftWorld) -> void:
 	if departure_tween!=null:departure_tween.kill();departure_tween=null
 	if transition_tween!=null:transition_tween.kill();transition_tween=null
-	departing=false;set_menu_gain(1)
+	departing=false;music_gain=0;set_menu_gain(1)
 	restore_camera()
 	ambience.bind(world)
 	previous_camera=world.player.camera_rig.camera
@@ -205,6 +206,8 @@ func _process(delta: float) -> void:
 			drone.play()
 			if intro_active:tape.play()
 	if title_active:
+		if drone.playing and not departing:
+			music_gain=minf(1,music_gain+step/.8);apply_audio()
 		title_time+=step
 		if not intro_active and not departing:menu_time+=step;ambience.update(step)
 		if is_instance_valid(camera) and not departing:

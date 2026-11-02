@@ -1,17 +1,19 @@
 {
-  "version": "0.36.0",
+  "version": "0.37.0",
   "format": "Godot editor project ZIP",
-  "godot": "4.4.1",
-  "file": "TheLastSale_Godot_0.36.0.zip",
-  "bytes": 104793601,
-  "sha256": "41c399410d584823ccb8ea1889146f8b3b5e1d8cbd789c3da4d1c80dca1bc947",
+  "godot": "4.7",
+  "godot_build": "4.7.stable.official.5b4e0cb0f",
+  "official_engine_download_sha512_verified": true,
+  "file": "TheLastSale_Godot_0.37.0.zip",
+  "bytes": 101776836,
+  "sha256": "c626ed7027aa04cb691577072906875730aca927f4923902a2f6079193f5e652",
   "crc_verified": true,
   "files_verified_against_manifest": 1045,
   "manifest_files_changed_by_import_or_tests": 0,
   "all_packaged_sources_match_repository": true,
   "clean_extraction_import_exit_code": 0,
+  "import_error_lines": 0,
   "import_script_errors": 0,
-  "known_headless_glb_texture_preview_messages": 14,
   "clean_extraction_full_integration": {
     "suites": {
       "integration": 188,
@@ -33,131 +35,145 @@
       "desktop_integration": 35,
       "guidance_integration": 40,
       "release_review_integration": 12,
-      "campaign_route_integration": 29
+      "campaign_route_integration": 29,
+      "title_music_integration": 18
     },
-    "passed": 982,
-    "total": 982,
-    "suite_count": 20,
+    "passed": 1000,
+    "total": 1000,
+    "suite_count": 21,
     "script_or_shader_errors": 0,
     "error_lines_before_suite_results": 0,
-    "known_audio_shutdown_diagnostics": [],
+    "known_audio_shutdown_diagnostics": [
+      {
+        "suite": "sunday_integration",
+        "after_result": true,
+        "error": "ERROR: 1 resources still in use at exit.",
+        "resource": "assets/audio/everyday/compressor.ogg::OggPacketSequence_l015c",
+        "matches_preceding_release_diagnostic": true
+      }
+    ],
     "all_results_executed_from_this_final_archive": true
   },
   "clean_extraction_rendered_psx_motion": {
     "passed": 48,
     "total": 48,
-    "renderer": "OpenGL / llvmpipe software",
+    "renderer": "Godot 4.7 OpenGL / llvmpipe software",
     "script_or_shader_errors": 0,
     "all_results_executed_from_this_final_archive": true,
-    "measurements": "docs/review_v036/psx_motion_validation.json"
+    "measurements": "docs/music_v037/psx_motion_validation.json"
   },
-  "all_check_count": 1030,
-  "campaign_route_initial_attempt_shutdown": {
-    "all_29_assertions_passed": true,
-    "diagnostic": "ERROR: 1 resources still in use at exit (run with --verbose for details).",
-    "resource_identified_in_first_attempt": false,
-    "verbose_repeat_log": "docs/review_v036/route_verbose.log",
-    "initial_log": "docs/review_v036/route_initial_attempt.log",
-    "verbose_repeat_exit_code": 0,
-    "verbose_repeat_shutdown_error_lines": 0,
-    "resource_identification": "Not reproduced in the verbose repeat; initial resource not identified",
-    "note": "All 29 assertions passed in both runs. First generic shutdown message is preserved separately; it is not attributed to the compressor or another resource without evidence."
-  },
-  "previous_version_commit": "4697c4785ef8f95185ce457ec1944f2413a1758b",
-  "previous_asset_files_byte_identical": 463,
+  "all_check_count": 1048,
+  "campaign_test_teardown_waits_for_audio_mixer_after_scene_free": true,
+  "initial_campaign_test_exit_resource": "assets/audio/title/select.wav",
+  "initial_campaign_test_all_29_assertions_passed": true,
+  "initial_campaign_test_log": "docs/music_v037/audio_shutdown_before.log",
+  "previous_version_commit": "1680af58b142dd839003b9ef569bd6c5cf1815d3",
+  "previous_asset_file_count": 463,
+  "previous_asset_files_still_byte_identical": 273,
+  "previous_asset_data_files_byte_identical": 240,
+  "import_metadata_updated_for_godot_4_7": 190,
+  "previous_import_values_removed_or_replaced": 0,
   "previous_resource_files_byte_identical": 32,
   "animation_libraries_byte_identical": 11,
-  "models_materials_textures_weights_changed": 0,
-  "player_diff_verified_limited_to_stamina_exhaustion_recovery_latch": true,
-  "walk_run_carry_crouch_speeds_acceleration_gravity_collision_and_box_handling_unchanged": true,
-  "camera_wheel_and_animation_controllers_and_shaders_unchanged": true,
-  "campaign_ai_scares_power_soundscape_and_xp_desktop_sources_unchanged": true,
-  "fixed_settings_persist_on_escape": true,
-  "fixed_proof_message_when_carrier_absent": true,
-  "fixed_frame_by_frame_sprint_regeneration_oscillation": true,
-  "original_stamina_drain_and_recovery_rates_preserved": true,
-  "holding_shift_resumes_after_recovery_verified": true,
-  "fresh_campaign_route": {
-    "start": "Session.new_shift",
-    "end": "resolved ending; both brothers; proof sent",
-    "progress_money_or_position_assignments_to_skip_tasks": false,
-    "physical_movement_and_nearby_interactions": true,
-    "gui_actions_via_keyboard_input": true,
-    "clock_scale": 4,
-    "physics_steps_per_game_second": 60,
-    "dialogue_advanced": true,
-    "save_resume_count": 5,
-    "killer_active_during_escape": true,
-    "result": {
-      "max_step_m": 0.0657226368784904,
-      "nights": [
-        0,
-        1,
-        2
+  "models_textures_audio_and_animation_data_changed": 0,
+  "new_uploaded_audio_files": 1,
+  "physics_backend": "GodotPhysics3D",
+  "player_camera_animation_ai_world_shaders_and_gameplay_sources_unchanged": true,
+  "mouse_wheel_third_person_preserved": true,
+  "computer_screens_and_energy_rules_preserved": true,
+  "title_music": {
+    "name": "Uncanny Valley",
+    "asset": "assets/audio/title/uncanny_valley.mp3",
+    "bytes": 3693799,
+    "sha256": "cd72bcda91a6bf1d6d7e46ad5bff937969716541cb749021c16abc586dd9371e",
+    "uploaded_file_unchanged": true,
+    "duration_seconds": 159.6,
+    "native_mp3_loop": true,
+    "fade_in_seconds": 0.8,
+    "fade_out_seconds": 0.34,
+    "continues_between_intro_skip_menu_and_settings": true,
+    "volume_music_effects_and_master_verified": true,
+    "stops_before_start_or_continue_gameplay": true,
+    "does_not_restart_on_gameplay_pause": true,
+    "rendered_audio_compared_with_uploaded_track": {
+      "comparison": "Decoded audio of the published preview versus the uploaded MP3; original track was not recoded in the project",
+      "sample_rate_for_comparison": 12000,
+      "segments": [
+        {
+          "name": "intro",
+          "source_seconds": [
+            3.0,
+            7.0
+          ],
+          "correlation": 0.9138953397502004,
+          "offset_seconds": 0.044083333333333474,
+          "estimated_recording_gain_db": -22.092108509449705
+        },
+        {
+          "name": "menu",
+          "source_seconds": [
+            12.0,
+            18.0
+          ],
+          "correlation": 0.9281362654364798,
+          "offset_seconds": 0.04408333333333303,
+          "estimated_recording_gain_db": -22.372480210772917
+        }
       ],
-      "receipts": {
-        "0": 5,
-        "1": 2
-      },
-      "run_seconds": {
-        "Dery": 5.44999999999999,
-        "Felps": 3.14999999999999
-      }
+      "continuous_across_intro_and_menu": true
+    }
+  },
+  "campaign_route": {
+    "max_step_m": 0.0657226368784904,
+    "nights": [
+      0,
+      1,
+      2
+    ],
+    "receipts": {
+      "0": 5,
+      "1": 2
+    },
+    "run_seconds": {
+      "Dery": 5.44999999999999,
+      "Felps": 3.14999999999999
     }
   },
   "all_three_endings_defeat_and_retry_covered_by_sunday_suite": true,
-  "protagonist_gait_measured_at_30fps": "docs/review_v036/gait_metrics.json",
-  "small_window_menus_and_live_resize_verified": true,
-  "performance_structure_and_startup_audit": "docs/review_v036/performance.json",
-  "human_realtime_full_campaign_playtest": false,
-  "target_gpu_fps_measured": false,
+  "historical_screenshots_only_omitted_from_project_zip": [
+    "TheLastSale/docs/friday_v018/friday_summary.png",
+    "TheLastSale/docs/friday_v018/generator_off.png",
+    "TheLastSale/docs/friday_v018/generator_running.png",
+    "TheLastSale/docs/friday_v018/outage.png",
+    "TheLastSale/docs/friday_v018/power_restored.png",
+    "TheLastSale/docs/friday_v018/saturday_preview.png",
+    "TheLastSale/docs/friday_v018/store_powered.png"
+  ],
+  "omitted_screenshots_preserved_in_repository": true,
+  "runtime_project_files_removed": 0,
   "save_version": 5,
   "project_zip_only": true,
   "executable_exports": 0,
   "below_github_100_mib_limit": true,
   "preview": {
-    "path": "docs/review_v036/revisao_preview.mp4",
-    "sha256": "ea2d1adf276362d6f953b4be4e5ebc56011c7e0b2422baa4e3c3c1d3aa2d5096",
-    "bytes": 8848556,
-    "duration_seconds": 23.366667,
+    "path": "docs/music_v037/uncanny_valley_preview.mp4",
+    "sha256": "69a449ecc9bfa21f146700dd002a4123585b244d3282e2705e697fc2a64e5eb1",
+    "bytes": 5084660,
+    "duration_seconds": 27.533333,
     "width": 1280,
     "height": 720,
     "capture_fps": 30,
     "video_codec": "H.264",
     "audio_codec": "AAC",
-    "audio_peak_dbfs": -25.466379,
-    "audio_rms_dbfs": -46.574407,
+    "audio_peak_dbfs": -22.531792,
+    "audio_rms_dbfs": -37.588729,
     "actual_gameplay_capture": true,
     "speed": 1,
-    "staged_views_for_review": true,
-    "continuous_campaign_capture": false,
     "internal_pixel_scale": 2,
-    "explanatory_captions_only_in_review": true,
-    "scene_count": 11,
-    "all_eleven_shots_visually_inspected": true,
-    "verified_in_capture": {
-      "run_seconds": {
-        "Dery": 1.98333333333333,
-        "Felps": 1.86666666666666
-      },
-      "shots": [
-        "menu",
-        "deryk_correndo",
-        "felps_correndo",
-        "cliente",
-        "zirico",
-        "bryan",
-        "configuracoes",
-        "pane",
-        "cameras",
-        "gravacao",
-        "prova_na_saida"
-      ],
-      "speed": 1,
-      "staged_views": true
-    }
+    "intro_menu_and_departure_captured": true
   },
-  "report": "docs/review_v036/validation.json",
-  "clean_extraction_log": "validation_0.36.0.log",
-  "clean_import_log": "clean_import_0.36.0.log"
+  "target_gpu_fps_measured": false,
+  "report": "docs/music_v037/validation.json",
+  "clean_extraction_log": "validation_0.37.0.log",
+  "clean_import_log": "clean_import_0.37.0.log"
 }

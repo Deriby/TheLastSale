@@ -1,10 +1,18 @@
 # A Última Venda — Depois do Fechamento
 
-Demonstração jogável em **Godot 4.4.1 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP, com uma primeira versão jogável da campanha de sexta a domingo. Acabamento e ritmo continuam em desenvolvimento.
+Demonstração jogável em **Godot 4.7 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP, com uma primeira versão jogável da campanha de sexta a domingo. Acabamento e ritmo continuam em desenvolvimento.
 
-**[Baixar o projeto 0.36.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.36.0.zip)**
+**[Baixar o projeto 0.37.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.37.0.zip)**
 
-Extraia o ZIP, importe `project.godot` no Godot **4.4.1**, aguarde a importação dos modelos e pressione **F5**. O arquivo inclui os modelos animados, cenários, código e recursos usados no jogo. [Conteúdo e instruções do projeto](downloads/project/README.md).
+Extraia o ZIP, importe `project.godot` no Godot **4.7**, aguarde a importação dos modelos e pressione **F5**. O arquivo inclui os modelos animados, cenários, código e recursos usados no jogo. [Conteúdo e instruções do projeto](downloads/project/README.md).
+
+## Revisão 0.37.0 — Uncanny Valley na intro e no menu / Godot 4.7
+
+A faixa enviada toca inteira na abertura e continua no menu sem reiniciar, inclusive ao pular a intro ou abrir as configurações. Ela entra gradualmente, repete ao terminar e sai suavemente ao iniciar ou continuar o expediente. O controle **Música / rádio** ajusta a faixa; **Efeitos e ambiente** mantém os sons de fita, botões e rua separados.
+
+O projeto passa a usar **Godot 4.7 / Compatibility**. Os metadados de importação recebem os campos padrão dessa versão; os dados originais dos modelos, texturas e animações ficam preservados. GodotPhysics3D é definido explicitamente para manter o backend usado pelo projeto. As sete capturas históricas da sexta 0.18 permanecem na galeria do GitHub, abrindo espaço para a música completa no ZIP.
+
+[Ouvir a prévia no jogo](docs/music_v037/uncanny_valley_preview.mp4) · [Detalhes e validação](docs/music_v037/README.md).
 
 ## Revisão 0.36.0 — revisão da campanha
 
@@ -367,13 +375,13 @@ A reconstrução 0.2 do interior recebeu gôndolas abastecidas por categoria, ge
 
 ## Jogar
 
-**[Baixar o projeto Godot 0.36.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.36.0.zip)**
+**[Baixar o projeto Godot 0.37.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.37.0.zip)**
 
-O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.4.1. O menu mostra **0.36.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
+O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.7. O menu mostra **0.37.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
 
 O download atual é o projeto para o editor. O diretório `downloads/windows` guarda apenas a entrega anterior 0.9.0.
 
-**Editor:** importe `project.godot` na Godot **4.4.1**, aguarde a importação dos GLBs e pressione **F6** em `scenes/main/main.tscn` ou **F5**. Não é necessário instalar Blender para jogar ou editar os sistemas.
+**Editor:** importe `project.godot` na Godot **4.7**, aguarde a importação dos GLBs e pressione **F6** em `scenes/main/main.tscn` ou **F5**. Não é necessário instalar Blender para jogar ou editar os sistemas.
 
 **Nuvem/Linux:** `./tools/setup_cloud.sh`, depois `./tools/godot.sh --editor` em uma sessão com display. Para iniciar diretamente: `./tools/godot.sh`. Sem display: `./tools/test.sh` verifica o fluxo com física real. O wrapper mantém caches e saves em `/workspace/.runtime` no ambiente gerenciado, sem alterar HOME.
 
@@ -449,6 +457,6 @@ O ambiente de revisão usa Mesa/llvmpipe em Linux. FPS nativo na Radeon R7 não 
 - `./tools/godot.sh --fixed-fps 30 --write-movie /tmp/exterior.avi res://tests/exterior_walkthrough.tscn`: grava o passeio de câmera de 32 segundos pelo cenário noturno.
 - `python tools/make_textures.py`: regenera texturas e sons originais determinísticos.
 
-Para exportar, instale os templates oficiais 4.4.1 no editor e use o preset **Windows Desktop**. Os originais e ferramentas ficam fora do pacote de jogo. Resultados e limites dos testes: [docs/VALIDACAO.md](docs/VALIDACAO.md).
+Para exportar, instale os templates oficiais 4.7 no editor e use o preset **Windows Desktop**. Os originais e ferramentas ficam fora do pacote de jogo. Resultados e limites dos testes: [docs/VALIDACAO.md](docs/VALIDACAO.md).
 
 Os modelos e fotografias são fornecidos pelo usuário. A publicação deste projeto foi solicitada pelo autor; nenhuma licença geral de reutilização por terceiros foi definida. Os sons, modelos ambientais procedurais e artes de embalagens foram criados para esta entrega. As bases de quatro materiais são CC0, da Poly Haven; [fontes, autores e hashes](resources/material_sources/LICENSE.md).

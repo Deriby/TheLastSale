@@ -236,6 +236,6 @@ func run() -> void:
 func finish_test() -> void:
  if not failures.is_empty():print("ROUTE FAILURE active=",world.active," stopped=",world.sunday.stopped," caught=",world.sunday.caught_identity," modal=",app.interface.campaign_panel.kind if app.interface.campaign_panel!=null else ""," Dery=",world.characters.Dery.position," Felps=",world.characters.Felps.position," killer=",world.sunday.killer.position if is_instance_valid(world.sunday.killer) else Vector3.ZERO)
  print("CAMPAIGN ROUTE ",JSON.stringify(route_data))
- clear_dialogue();get_tree().paused=false;Input.action_release("forward");Input.action_release("sprint");world.sound.stop_all();await get_tree().create_timer(.25,true,false,true).timeout;app.queue_free();await ticks(5)
+ clear_dialogue();get_tree().paused=false;Input.action_release("forward");Input.action_release("sprint");world.sound.stop_all();await get_tree().create_timer(.25,true,false,true).timeout;app.queue_free();await get_tree().process_frame;await get_tree().create_timer(.25,true,false,true).timeout;await ticks(5)
  Geo.materials.clear();ProductLibrary.materials.clear();ProductLibrary.meshes.clear();CharacterModels.imported_materials.clear();CharacterModels.costume_materials.clear()
  print("ROUTE RESULT ",checks-failures.size(),"/",checks," passed; failures=",failures);get_tree().quit(0 if failures.is_empty() else 1)

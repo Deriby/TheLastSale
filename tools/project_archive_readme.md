@@ -1,11 +1,17 @@
-# The Last Sale — projeto Godot 0.36.0
+# The Last Sale — projeto Godot 0.37.0
 
 1. Extraia este ZIP em uma pasta nova.
-2. No Godot **4.4.1**, clique em **Importar** e escolha `project.godot`.
+2. No Godot **4.7**, clique em **Importar** e escolha `project.godot`.
 3. Aguarde a importação dos modelos e texturas.
 4. Pressione **F5** e escolha **Iniciar expediente** para testar a rotina completa.
 
 Modelos animados, cenários, sons, texturas, código, testes e ferramentas estão incluídos. Blender não é necessário para jogar. O renderizador é Compatibility / OpenGL.
+
+## Música da abertura e do menu / Godot 4.7 — 0.37.0
+
+Uncanny Valley, enviada pelo autor, toca durante a intro e continua no menu sem reiniciar. Pular a intro ou abrir as configurações mantém a reprodução. A faixa completa repete ao terminar, entra gradualmente e sai suavemente ao iniciar ou continuar o expediente. Ajuste-a em Música / rádio; sons de fita, botões e ambiente continuam em Efeitos e ambiente. A pausa do expediente conserva o áudio do jogo e não reinicia a abertura.
+
+O MP3 original está incluído, sem recodificação. Os dados originais dos modelos, texturas e animações permanecem; os metadados de importação receberam apenas campos padrão do Godot 4.7. GodotPhysics3D é escolhido explicitamente para manter o backend anterior. As sete capturas históricas de sexta 0.18 ficam na galeria do GitHub; todos os arquivos usados pelo jogo estão no projeto. Consulte `docs/music_v037/README.md`.
 
 ## Revisão da campanha — 0.36.0
 
@@ -205,7 +211,7 @@ O elenco inclui Dery, Felps, Killer, Bryan, Zirico, Garota 1, Garota 2 e Velha 1
 
 ## Validação
 
-A versão 0.36.0 roda vinte suítes de integração (982 verificações) com `./tools/test.sh`. A verificação renderizada `tests/psx_motion_integration.tscn` acrescenta 48 casos e requer uma tela OpenGL. O relatório de distribuição no GitHub registra os resultados do ZIP extraído, a captura real e avisos de importação ou encerramento. A validação histórica renderizada de câmera PS1 permanece no relatório anterior; shaders, câmera, colisões e velocidades permanecem; o controle de recuperação de fôlego foi corrigido. Veja `docs/review_v036/validation.json`.
+A versão 0.37.0 roda vinte e uma suítes de integração (1.000 verificações) com `./tools/test.sh`. A verificação renderizada `tests/psx_motion_integration.tscn` acrescenta 48 casos e requer uma tela OpenGL. O relatório de distribuição no GitHub registra os resultados do ZIP extraído, a captura real e avisos de importação ou encerramento. A validação histórica renderizada de câmera PS1 permanece no relatório anterior; shaders, câmera, colisões e velocidades permanecem; o controle de recuperação de fôlego foi corrigido. Veja `docs/music_v037/validation.json`.
 
 A Godot 4.4 tem Windows 10 como requisito oficial mínimo. Windows 7/Radeon R7 não foram validados nativamente. O modo Econômica reduz resolução, sombras e acabamento dos materiais.
 

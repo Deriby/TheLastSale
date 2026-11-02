@@ -6,7 +6,7 @@ import json
 import zipfile
 
 ROOT = Path(__file__).resolve().parent.parent
-VERSION = "0.36.0"
+VERSION = "0.37.0"
 
 
 def main():
@@ -31,8 +31,10 @@ def main():
         sources[name] = ROOT / name
     for gallery in ["optimization_v011", "friday_v018", "saturday_v019", "sunday_v020", "supplies_v021", "natural_v022", "npc_cast_draft"]:
         for path in sorted((ROOT / "docs" / gallery).rglob("*")):
-            if path.is_file() and path.name != "motion_comparison.mp4":
+            if path.is_file() and path.name != "motion_comparison.mp4" and not (gallery == "friday_v018" and path.suffix.lower() == ".png"):
                 sources[path.relative_to(ROOT).as_posix()] = path
+    # The Friday 0.18 screenshots remain in the GitHub gallery; reserve room
+    # in the project ZIP for the full uploaded title song.
     # Keep the editor ZIP below GitHub's 100 MiB per-file limit. Full comparison
     # galleries remain published in the repository; include the PSX guide and two views.
     for name in ["README.md", "validation.json", "ps1_soft.png", "settings.png"]:
@@ -92,12 +94,15 @@ def main():
     for name in ["README.md", "validation.json"]:
         relative = "docs/review_v036/" + name
         sources[relative] = ROOT / relative
+    for name in ["README.md", "validation.json"]:
+        relative = "docs/music_v037/" + name
+        sources[relative] = ROOT / relative
     sources["README.md"] = ROOT / "tools/project_archive_readme.md"
     records = {name: {"bytes": path.stat().st_size,
                        "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
                for name, path in sorted(sources.items())}
     manifest = {"project": "Deriby/TheLastSale", "version": VERSION,
-                "godot": "4.4.1", "entry": "project.godot", "files": records}
+                "godot": "4.7", "entry": "project.godot", "files": records}
     args.output.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(args.output, "w", zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
         for name, path in sorted(sources.items()):

@@ -1,0 +1,27 @@
+{
+  "comparison": "Decoded audio of the published preview versus the uploaded MP3; original track was not recoded in the project",
+  "sample_rate_for_comparison": 12000,
+  "segments": [
+    {
+      "name": "intro",
+      "source_seconds": [
+        3.0,
+        7.0
+      ],
+      "correlation": 0.9138953397502004,
+      "offset_seconds": 0.044083333333333474,
+      "estimated_recording_gain_db": -22.092108509449705
+    },
+    {
+      "name": "menu",
+      "source_seconds": [
+        12.0,
+        18.0
+      ],
+      "correlation": 0.9281362654364798,
+      "offset_seconds": 0.04408333333333303,
+      "estimated_recording_gain_db": -22.372480210772917
+    }
+  ],
+  "continuous_across_intro_and_menu": true
+}
