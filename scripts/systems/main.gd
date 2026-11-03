@@ -34,7 +34,7 @@ func apply_settings() -> void:
 	if viewport!=null:viewport.msaa_3d=Viewport.MSAA_2X if Preferences.pixel_scale==1 else Viewport.MSAA_DISABLED
 	if retro!=null:
 		retro.set_shader_parameter("grain",Preferences.grain);retro.set_shader_parameter("vhs",Preferences.vhs)
-		retro.set_shader_parameter("bloom_strength",.30 if Preferences.pixel_scale<3 else 0.0)
+		retro.set_shader_parameter("bloom_strength",.22 if Preferences.pixel_scale<3 else 0.0)
 		retro.set_shader_parameter("posterize",Preferences.pixel_scale>1)
 func update_render_size() -> void:
 	if screen==null or viewport==null:return

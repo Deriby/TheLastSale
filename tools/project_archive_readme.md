@@ -1,4 +1,4 @@
-# The Last Sale — projeto Godot 0.39.0
+# The Last Sale — projeto Godot 0.40.0
 
 1. Extraia este ZIP em uma pasta nova.
 2. No Godot **4.7**, clique em **Importar** e escolha `project.godot`.
@@ -6,6 +6,10 @@
 4. Pressione **F5** e escolha **Iniciar expediente** para testar a rotina completa.
 
 Modelos animados, cenários, sons, texturas, código, testes e ferramentas estão incluídos. Blender não é necessário para jogar. O renderizador é Compatibility / OpenGL.
+
+## Luz e atmosfera do bairro — 0.40.0
+
+Luz quente no balcão e fria na rua, neon com menos halo, pintura baixa envelhecida e marcas discretas de uso. O estoque recebe luz de serviço e a porta conserva sua geometria física. O cartaz do expositor reutiliza a arte do próprio jogo. Os novos rebates acompanham panes e setores do gerador; Econômica recolhe os detalhes extras. Modelos, animações, música, controles, câmera e campanha permanecem. Consulte `docs/visual_v040/README.md` para a prévia real e as comparações no GitHub.
 
 ## Interfaces do expediente — 0.39.0
 
@@ -219,7 +223,7 @@ O elenco inclui Dery, Felps, Killer, Bryan, Zirico, Garota 1, Garota 2 e Velha 1
 
 ## Validação
 
-A versão 0.39.0 roda vinte e três suítes de integração (1.076 verificações) com `./tools/test.sh`. A verificação renderizada `tests/psx_motion_integration.tscn` acrescenta 48 casos e requer uma tela OpenGL. O relatório de distribuição no GitHub registra os resultados do ZIP extraído, a captura real e avisos de importação ou encerramento. A validação histórica renderizada de câmera PS1 permanece no relatório anterior; shaders, colisões e velocidades permanecem; a câmera recebe focos breves nos sustos principais; o controle de recuperação de fôlego foi corrigido. Veja `docs/panels_v039/validation.json`.
+A versão 0.40.0 roda vinte e quatro suítes de integração (1.100 verificações) com `./tools/test.sh`. A verificação renderizada `tests/psx_motion_integration.tscn` acrescenta 48 casos e requer uma tela OpenGL. O relatório de distribuição no GitHub registra os resultados do ZIP extraído, a captura real e avisos de importação ou encerramento. A revisão visual verifica colisões, qualidade, luzes, panes e separação dos setores de energia. Veja `docs/visual_v040/validation.json`.
 
 A Godot 4.4 tem Windows 10 como requisito oficial mínimo. Windows 7/Radeon R7 não foram validados nativamente. O modo Econômica reduz resolução, sombras e acabamento dos materiais.
 

@@ -48,16 +48,16 @@ func build_roof() -> void:
 			cable.cast_shadow=GeometryInstance3D.SHADOW_CASTING_SETTING_OFF;cable.add_to_group("non_shadow_cables")
 			Geo.cylinder(self,Vector3(x,mid_y,z),.255,.20,Geo.material(Color("adb9ad")),.07)
 			Geo.cylinder(self,Vector3(x,mid_y-.105,z),.226,.025,Geo.material(Color("e8eee0"),"",1.0))
-			var lamp:=Geo.light(self,Vector3(x,mid_y-.29,z),Color("dce6d7"),.12,3.8)
+			var lamp:=Geo.light(self,Vector3(x,mid_y-.29,z),Color("e9e0c9"),.095,3.8)
 			lamp.name="CeilingFill";lamp.omni_attenuation=1.4
-			lamp.set_meta("normal_energy",.12)
+			lamp.set_meta("normal_energy",.095)
 			if x<0 and z==-9.0:fluorescent=lamp
 			if z==-5.7 or x<0 and z==-2.0:
 				var spot:=SpotLight3D.new();add_child(spot);spot.position=Vector3(x,mid_y-.32,z);spot.rotation.x=-PI/2
-				spot.name="CeilingPool";spot.light_color=Color("e3eadb") if x<0 else Color("d4e3dc")
-				spot.light_energy=.88 if x<0 else 1.02;spot.spot_range=6.8;spot.spot_angle=46;spot.spot_attenuation=1.3
+				spot.name="CeilingPool";spot.light_color=Color("f1dfbd") if x<0 else Color("e0e6df")
+				spot.light_energy=1.16 if x<0 else 1.28;spot.spot_range=6.8;spot.spot_angle=46;spot.spot_attenuation=1.3
 				if x<0 and z==-2.0:
-					spot.light_energy=.82;spot.look_at_from_position(spot.position,Vector3(-4.35,1.0,-2.8))
+					spot.light_energy=1.38;spot.look_at_from_position(spot.position,Vector3(-4.35,1.0,-2.8))
 				spot.shadow_enabled=true;spot.shadow_bias=.06;spot.shadow_normal_bias=.7;spot.set_meta("mood_shadow",true)
 				spot.light_cull_mask=1
 	# Two visible fluorescent battens share the existing commercial circuit.

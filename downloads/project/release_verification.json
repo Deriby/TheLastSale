@@ -1,13 +1,13 @@
 {
-  "version": "0.39.0",
+  "version": "0.40.0",
   "godot": "4.7",
   "godot_build": "4.7.stable.official.5b4e0cb0f",
   "format": "Godot editor project ZIP",
-  "file": "TheLastSale_Godot_0.39.0.zip",
-  "bytes": 101815537,
-  "sha256": "faf37ca60ad159ee6fa67a8051aba3ece2e03556b3a2406b7f212327d0173757",
+  "file": "TheLastSale_Godot_0.40.0.zip",
+  "bytes": 101826783,
+  "sha256": "049b8d584c8d0e1f168d70c0fbf70d3bb746943d6313f17d9fc2897e898cfe94",
   "crc_verified": true,
-  "files_verified_against_manifest": 1068,
+  "files_verified_against_manifest": 1078,
   "all_packaged_sources_match_repository": true,
   "manifest_files_changed_by_import_or_tests": 0,
   "clean_extraction_import_exit_code": 0,
@@ -36,11 +36,12 @@
       "campaign_route_integration": 29,
       "title_music_integration": 18,
       "horror_direction_integration": 45,
-      "panels_integration": 30
+      "panels_integration": 30,
+      "visual_direction_integration": 24
     },
-    "passed": 1076,
-    "total": 1076,
-    "suite_count": 23,
+    "passed": 1100,
+    "total": 1100,
+    "suite_count": 24,
     "script_or_shader_errors": 0,
     "known_audio_shutdown_diagnostics": [],
     "all_results_executed_from_this_final_archive": true
@@ -50,10 +51,26 @@
     "total": 48,
     "renderer": "Godot 4.7 OpenGL / Mesa llvmpipe software",
     "all_results_executed_from_this_final_archive": true,
-    "measurements": "docs/panels_v039/psx_motion_validation.json"
+    "measurements": "docs/visual_v040/psx_motion_validation.json"
   },
-  "all_check_count": 1124,
-  "previous_version_commit": "7a968be40e1e17181670108417e9ee5eff5bbbbe",
+  "all_check_count": 1148,
+  "validation_resumed_after_environment_restart": true,
+  "completed_suites_reused_after_restart": {
+    "integration": 188,
+    "friday_integration": 48,
+    "saturday_integration": 53,
+    "sunday_integration": 59,
+    "supply_integration": 35,
+    "natural_motion_integration": 67,
+    "locomotion_integration": 45,
+    "protagonist_gait_integration": 30,
+    "psx_integration": 28,
+    "title_integration": 68,
+    "everyday_integration": 45,
+    "friday_story_integration": 36,
+    "scares_integration": 30
+  },
+  "previous_version_commit": "17f96fe6c6a1fa669b4489a5d59f6f227128eeaf",
   "previous_asset_files_byte_identical": 467,
   "asset_credit_updates": [],
   "previous_resource_files_byte_identical": 32,
@@ -68,6 +85,53 @@
   "camera_focus_is_brief_and_proximity_driven": true,
   "horror_suite_checks": 45,
   "panels_suite_checks": 30,
+  "visual_suite_checks": 24,
+  "cosmetic_layers_have_no_colliders": true,
+  "new_shadow_lights": 0,
+  "bounce_lights_follow_existing_circuits": true,
+  "all_other_world_and_shader_sources_unchanged": true,
+  "matched_comparison_images": {
+    "docs/visual_v040/before/salao.png": {
+      "bytes": 1093759,
+      "sha256": "64edb4edcd9985b500ac686283b5b5f9ea147f72817171a2310a65618045a649"
+    },
+    "docs/visual_v040/before/caixa.png": {
+      "bytes": 1123680,
+      "sha256": "9c25b9b1688164d64242fdde9019b247e2ea291e73946e3e0eb7540e917d3b21"
+    },
+    "docs/visual_v040/before/estoque.png": {
+      "bytes": 928419,
+      "sha256": "a1085651784fcf0b7db9fa608bd40375d5fa751977b47462fca0d0b0c0e5e0a2"
+    },
+    "docs/visual_v040/before/fachada.png": {
+      "bytes": 1143292,
+      "sha256": "3fe4cac81b557037db01dfc7b89cabb4e019a38dafe16d1451d203f4a2526bc5"
+    },
+    "docs/visual_v040/before/rua.png": {
+      "bytes": 1067589,
+      "sha256": "2f4f244ed1bfb859e7a9002071081046d3f43ffa8647158bdd8f68397336467d"
+    },
+    "docs/visual_v040/after/salao.png": {
+      "bytes": 1078170,
+      "sha256": "9ff36a277e71ff93bbd98c22acf006ed35b7b26a9f06af0a5e6bbef91d8d234e"
+    },
+    "docs/visual_v040/after/caixa.png": {
+      "bytes": 1150411,
+      "sha256": "0bd9baca8c418a92f60c2b0a3cc33e0273812f6b87957eee611b623253b6a11a"
+    },
+    "docs/visual_v040/after/estoque.png": {
+      "bytes": 937330,
+      "sha256": "d69de4a6aed9be931baab4d8abc64670bef32b83ed6f1c52740fa954d599540f"
+    },
+    "docs/visual_v040/after/fachada.png": {
+      "bytes": 1136068,
+      "sha256": "d204e6af109e9fdbc3e796464bb63cf69dd0a943597425dca3e97d58d945d0cc"
+    },
+    "docs/visual_v040/after/rua.png": {
+      "bytes": 1067736,
+      "sha256": "d46a2d16fca7ac9a0e780553131057b28d0fab97f1b3371434e6c0524948693b"
+    }
+  },
   "notebook_tabs_do_not_mutate_campaign": true,
   "checkout_button_identity_and_keyboard_focus_preserved": true,
   "all_published_fonts_reused": true,
@@ -94,32 +158,44 @@
   "executable_exports": 0,
   "below_github_100_mib_limit": true,
   "preview": {
-    "path": "docs/panels_v039/interfaces_preview.mp4",
-    "sha256": "c16464df6baec527f02f0d856b1db08ae07ae68e52885980456c7d8eccaf7752",
-    "bytes": 1380613,
-    "duration_seconds": 20.7,
+    "path": "docs/visual_v040/direcao_visual_preview.mp4",
+    "sha256": "678e8d24e6f9df73336bf18e2e2c990a131770c63f9517eefc445ce200ef08ab",
+    "bytes": 4556142,
+    "duration_seconds": 14.2,
     "width": 1280,
     "height": 720,
-    "capture_fps": 30,
+    "capture_fps": 15,
     "video_codec": "H.264",
     "audio_codec": "AAC",
     "actual_gameplay_capture": true,
     "speed": 1,
-    "separate_staged_campaign_conditions": true,
+    "fixed_views_and_gentle_camera_pans": true,
+    "camera_settings": {
+      "fov": 68.0,
+      "grain": 0.012,
+      "matched_views": true,
+      "native_first_person": true,
+      "pixel_scale": 1,
+      "shots": [
+        "salao",
+        "caixa",
+        "estoque",
+        "fachada",
+        "rua"
+      ],
+      "speed": 1,
+      "vhs": 0.045
+    },
     "scenes": [
-      "caixa_produtos",
-      "caixa_pagamento",
-      "caixa_troco",
-      "caixa_entrega",
-      "missoes",
-      "registros",
-      "configuracoes",
-      "relatorio",
-      "saida"
+      "salao",
+      "caixa",
+      "estoque",
+      "fachada",
+      "rua"
     ]
   },
   "target_gpu_fps_measured": false,
-  "report": "docs/panels_v039/validation.json",
-  "clean_extraction_log": "validation_0.39.0.log",
-  "clean_import_log": "clean_import_0.39.0.log"
+  "report": "docs/visual_v040/validation.json",
+  "clean_extraction_log": "validation_0.40.0.log",
+  "clean_import_log": "clean_import_0.40.0.log"
 }

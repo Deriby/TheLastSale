@@ -12,8 +12,8 @@ void fragment() {
  uv.x+=sin(uv.y*180.0+TIME*2.0)*vhs*0.0015;
  vec3 color=texture(screen_texture,uv).rgb;
  float lightness=dot(color,vec3(.2126,.7152,.0722));
- color=mix(vec3(lightness),color,.90);
- color*=mix(vec3(.94,.98,1.035),vec3(1.015,1.0,.975),smoothstep(.035,.72,lightness));
+ color=mix(vec3(lightness),color,.95);
+ color*=mix(vec3(.955,.985,1.025),vec3(1.045,1.015,.955),smoothstep(.05,.65,lightness));
  if(bloom_strength>0.){
   vec3 bloom=vec3(0.);
   for(int i=0;i<4;i++){

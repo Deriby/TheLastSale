@@ -12,8 +12,8 @@ func _ready() -> void:
 		batch.add_box(Vector3(x,3.67,-.33),Vector3(width-.20,.025,.025),white)
 	for x in [-4.1,3.4]:
 		var light:=SpotLight3D.new();light.name="NeonRedSpill";add_child(light);light.position=Vector3(x,3.78,.48);light.look_at_from_position(light.position,Vector3(x,.3,2.7))
-		light.light_color=Color(1,.045,.055);light.light_energy=1.2;light.spot_range=7;light.spot_angle=53;light.light_cull_mask=14
-		var wall_wash:=Geo.light(self,Vector3(x,3.85,.70),Color(1,.035,.045),.30,2.1)
+		light.light_color=Color(1,.16,.09);light.light_energy=.78;light.spot_range=7;light.spot_angle=53;light.light_cull_mask=14
+		var wall_wash:=Geo.light(self,Vector3(x,3.85,.70),Color(1,.12,.075),.20,2.1)
 		wall_wash.name="NeonWallWash";wall_wash.light_cull_mask=4;wall_wash.set_meta("detail_light",true)
 	# Illuminated original lettering, not a replacement business identity.
 	var open:=SceneDetail.panel(self,Vector3(-3.1,2.48,-.18),Vector2(1.23,.41),"finish/open_sign",0,.85)

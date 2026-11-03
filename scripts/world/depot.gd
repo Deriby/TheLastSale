@@ -25,6 +25,7 @@ func _ready() -> void:
 		access=SundayAccess.new();add_child(access);blockers.append_array(access.blockers)
 	build_staff()
 	add_child(LivedInDetails.new())
+	add_child(AnalogFinish.new())
 func solid(pos: Vector3,size: Vector3,mat: Material,nav := true) -> MeshInstance3D:
 	if nav and pos.y-size.y/2<1.8:blockers.append(Rect2(Vector2(pos.x-size.x/2,pos.z-size.z/2),Vector2(size.x,size.z)))
 	return Geo.box(self,pos,size,mat)
@@ -93,7 +94,7 @@ func add_crate(id: String,pos: Vector3) -> void:
 	crates[id]=c
 	interact(c,"crate",id)
 func build_stock() -> void:
-	var stock_light:=Geo.light(self,Vector3(0,3.3,-13.4),Color("c9ceb5"),.30,4.7);stock_light.name="StockLight"
+	var stock_light:=Geo.light(self,Vector3(0,3.3,-13.4),Color("e5d6b5"),.42,5.5);stock_light.name="StockLight";stock_light.light_cull_mask=3
 	var p:=prop("pallet",Vector3(-3.8,0,-13.8));interact(p,"pallet")
 	Geo.sign_text(self,"DEVOLUÇÕES",Vector3(-3.8,1.9,-14.5),26)
 	if int(Session.campaign.night)==0:

@@ -12,10 +12,10 @@ static func configure(env: Environment) -> void:
 	var panorama:=PanoramaSkyMaterial.new();panorama.panorama=load("res://assets/textures/mood/night_sky.png")
 	var sky:=Sky.new();sky.radiance_size=Sky.RADIANCE_SIZE_32;sky.sky_material=panorama;env.sky=sky
 	env.background_color=Color("1b2329")
-	env.ambient_light_source=Environment.AMBIENT_SOURCE_COLOR;env.ambient_light_color=Color("a0adbf");env.ambient_light_energy=.080
+	env.ambient_light_source=Environment.AMBIENT_SOURCE_COLOR;env.ambient_light_color=Color("91a3bc");env.ambient_light_energy=.065
 	env.tonemap_mode=Environment.TONE_MAPPER_FILMIC
 	env.fog_enabled=true;env.fog_mode=Environment.FOG_MODE_DEPTH
-	env.fog_light_color=Color("1b2329");env.fog_light_energy=1.0
+	env.fog_light_color=Color("1a2230");env.fog_light_energy=1.0
 	env.fog_depth_begin=18;env.fog_depth_end=76;env.fog_depth_curve=1.55
 	env.fog_sky_affect=.25;env.fog_sun_scatter=0
 func _ready() -> void:

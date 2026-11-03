@@ -23,6 +23,7 @@ static func configure(mat: StandardMaterial3D,id: String) -> void:
 	mat.ao_texture=orm;mat.ao_texture_channel=BaseMaterial3D.TEXTURE_CHANNEL_RED;mat.ao_light_affect=0
 	mat.normal_texture=load(ART+id+"_normal.png");mat.normal_scale=.65 if id in ["wall","glass","carpaint"] else 1.0
 	if id=="wood":mat.normal_scale=.28
+	elif id=="ceramic":mat.normal_scale=.58
 	elif id in ["asphalt","plaster","paving"]:mat.normal_scale=.55
 	mat.uv1_triplanar=id not in ["wood","pallet_wood"];mat.uv1_world_triplanar=mat.uv1_triplanar;mat.uv1_scale=Vector3.ONE/float(METERS[id])
 	if not mat.uv1_triplanar:mat.uv1_scale=Vector3.ONE
@@ -38,7 +39,7 @@ static func quality(mat: StandardMaterial3D) -> void:
 	mat.normal_enabled=detailed and id!="glass"
 	mat.ao_enabled=detailed
 	mat.clearcoat_enabled=detailed and id in ["wood","carpaint"]
-	mat.clearcoat=.18 if id=="wood" else .3;mat.clearcoat_roughness=.35
+	mat.clearcoat=.11 if id=="wood" else .3;mat.clearcoat_roughness=.35
 	mat.texture_filter=BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC if detailed else BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 static func apply_quality() -> void:
 	for mat in Geo.materials.values():

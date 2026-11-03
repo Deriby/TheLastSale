@@ -1,0 +1,41 @@
+{
+  "version": "0.40.0",
+  "godot": "4.7",
+  "base_commit": "17f96fe6c6a1fa669b4489a5d59f6f227128eeaf",
+  "new_suite": "visual_direction_integration",
+  "new_checks": 24,
+  "full_suite_count": 24,
+  "full_expected_checks": 1100,
+  "rendered_psx_expected_checks": 48,
+  "expected_total_checks": 1148,
+  "visual_changes": [
+    "warm_counter_and_cool_street",
+    "restrained_neon_spill_and_bloom",
+    "aged_low_wall_paint",
+    "static_wall_and_floor_patina",
+    "old_handle_plate",
+    "reuse_original_display_poster"
+  ],
+  "new_shadow_lights": 0,
+  "shadow_light_budget": 5,
+  "cosmetic_layers_have_no_colliders": true,
+  "bounce_lights_follow_existing_power_circuits": true,
+  "economy_hides_optional_layers_and_bounce_lights": true,
+  "world_texture_mapping_unchanged": true,
+  "models_textures_and_animation_data_changed": 0,
+  "uploaded_music_unchanged": true,
+  "camera_wheel_third_person_and_horror_sources_preserved": true,
+  "save_version": 5,
+  "project_only_no_exe": true,
+  "preview": "docs/visual_v040/direcao_visual_preview.mp4",
+  "preview_fixed_views_and_gentle_camera_pans": true,
+  "preview_uses_actual_game_rendering": true,
+  "comparison_matched_camera_and_settings": {
+    "pixel_scale": 1,
+    "fov": 68,
+    "grain": 0.012,
+    "vhs": 0.045
+  },
+  "validation_source": "downloads/project/release_verification.json",
+  "target_gpu_fps_measured": false
+}

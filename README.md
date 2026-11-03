@@ -2,9 +2,15 @@
 
 Demonstração jogável em **Godot 4.7 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP, com uma primeira versão jogável da campanha de sexta a domingo. Acabamento e ritmo continuam em desenvolvimento.
 
-**[Baixar o projeto 0.39.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.39.0.zip)**
+**[Baixar o projeto 0.40.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.40.0.zip)**
 
 Extraia o ZIP, importe `project.godot` no Godot **4.7**, aguarde a importação dos modelos e pressione **F5**. O arquivo inclui os modelos animados, cenários, código e recursos usados no jogo. [Conteúdo e instruções do projeto](downloads/project/README.md).
+
+## Revisão 0.40.0 — luz e atmosfera do bairro
+
+A loja ganha luz mais quente no balcão, sombras frias no bairro e menos halo no neon. Pintura baixa envelhecida, marcas discretas de uso, uma placa na maçaneta e o cartaz original no verso do expositor dão mais história ao espaço. O estoque mantém a luz de serviço para ler portas e aparições. A direção busca o terror cotidiano e a nostalgia de Fears to Fathom e do começo de Stranger Things, mantendo o depósito brasileiro e sua época.
+
+[Ver a prévia real](docs/visual_v040/direcao_visual_preview.mp4) · [Comparar antes/depois e ver a validação](docs/visual_v040/README.md).
 
 ## Revisão 0.39.0 — caixa e missões
 
@@ -387,9 +393,9 @@ A reconstrução 0.2 do interior recebeu gôndolas abastecidas por categoria, ge
 
 ## Jogar
 
-**[Baixar o projeto Godot 0.39.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.39.0.zip)**
+**[Baixar o projeto Godot 0.40.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.40.0.zip)**
 
-O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.7. O menu mostra **0.39.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
+O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.7. O menu mostra **0.40.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
 
 O download atual é o projeto para o editor. O diretório `downloads/windows` guarda apenas a entrega anterior 0.9.0.
 
