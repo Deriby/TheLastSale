@@ -137,7 +137,7 @@ func run() -> void:
 	world.sunday.save();await reload_sunday();app.interface.set_paused(false);enemy=world.sunday.killer
 	check(enemy.mode=="attack" and enemy.target_identity=="Felps" and is_equal_approx(enemy.attack_time,.5),"save preserva alvo e tempo restante do golpe em preparação")
 	enemy.grace=0;enemy.position=world.characters.Felps.position+Vector3(0,0,-.65);enemy.attack_time=.2
-	await ticks(25)
+	await ticks(110)
 	check(app.interface.campaign_panel!=null and app.interface.campaign_panel.kind=="defeat" and Session.campaign.phase=="sunday_escape" and Session.campaign.ending.is_empty(),"captura abre derrota recuperável sem gravar final narrativo")
 	app.interface.campaign_panel.find_child("RetrySunday",true,false).pressed.emit();world=app.world;await ticks(3)
 	check(world.sunday.killer.grace>0 and not Session.flag("generator_running") and not Session.flag("stock_released"),"retomar derrota volta a um checkpoint viável anterior aos mecanismos e mantém breve proteção")

@@ -1,4 +1,4 @@
-# The Last Sale — projeto Godot 0.40.0
+# The Last Sale — projeto Godot 0.41.0
 
 1. Extraia este ZIP em uma pasta nova.
 2. No Godot **4.7**, clique em **Importar** e escolha `project.godot`.
@@ -6,6 +6,12 @@
 4. Pressione **F5** e escolha **Iniciar expediente** para testar a rotina completa.
 
 Modelos animados, cenários, sons, texturas, código, testes e ferramentas estão incluídos. Blender não é necessário para jogar. O renderizador é Compatibility / OpenGL.
+
+## Novas emboscadas e contato próximo — 0.41.0
+
+O assassino original aparece por trás de dois batentes novos: na volta do gerador, na sexta, e ao sair do estoque depois da tentativa de entrada, no sábado. Cada encontro exige proximidade e passagem aberta, respeita outras pessoas e não cria pistas obrigatórias. Bryan fica só na peça atrás das caixas; sai fisicamente do esconderijo e avança perto de Deryk. Não há interação de Bryan no vidro.
+
+Um golpe fatal confirmado recebe uma sequência curta antes da derrota e do checkpoint de fuga. Foco no rosto animado, braços, tranco breve, distorção nas bordas e um impacto original dão leitura ao contato. A rodinha e a terceira pessoa permanecem, assim como energia, modelos, música e bibliotecas de animação. Veja `docs/contact_v041/README.md` para os cinco exemplos reais publicados no GitHub.
 
 ## Luz e atmosfera do bairro — 0.40.0
 
@@ -223,7 +229,7 @@ O elenco inclui Dery, Felps, Killer, Bryan, Zirico, Garota 1, Garota 2 e Velha 1
 
 ## Validação
 
-A versão 0.40.0 roda vinte e quatro suítes de integração (1.100 verificações) com `./tools/test.sh`. A verificação renderizada `tests/psx_motion_integration.tscn` acrescenta 48 casos e requer uma tela OpenGL. O relatório de distribuição no GitHub registra os resultados do ZIP extraído, a captura real e avisos de importação ou encerramento. A revisão visual verifica colisões, qualidade, luzes, panes e separação dos setores de energia. Veja `docs/visual_v040/validation.json`.
+A versão 0.41.0 roda vinte e seis suítes de integração (1.174 verificações) com `./tools/test.sh`. A verificação renderizada `tests/psx_motion_integration.tscn` acrescenta 48 casos e requer uma tela OpenGL. O relatório de distribuição no GitHub registra os resultados do ZIP extraído, a captura real e avisos de importação ou encerramento. A revisão visual verifica colisões, qualidade, luzes, panes e separação dos setores de energia. Veja `docs/contact_v041/validation.json`.
 
 A Godot 4.4 tem Windows 10 como requisito oficial mínimo. Windows 7/Radeon R7 não foram validados nativamente. O modo Econômica reduz resolução, sombras e acabamento dos materiais.
 

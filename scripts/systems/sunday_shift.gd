@@ -282,6 +282,9 @@ func caught(identity: String) -> void:
 	caught_identity=identity;stopped=true;world.active=false
 	for actor in world.characters.values():actor.input_locked=true;actor.assisted_path.clear()
 	Session.save_retry();world.notice.emit(("Deryk" if identity=="Dery" else "Felps")+" foi alcançado.")
+	if world.horror.begin_capture(killer,world.characters[identity]):return
+	finish_caught()
+func finish_caught() -> void:
 	world.campaign_event.emit("defeat")
 func apply_scene() -> void:
 	if int(Session.campaign.night)!=2:return

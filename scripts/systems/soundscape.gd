@@ -18,6 +18,8 @@ var unease_amount:=0.0
 var loop_players: Array[AudioStreamPlayer3D]=[]
 var occlusion_wait:=0.0
 var focus_duck:=0.0
+var contact: AudioStreamPlayer
+var contact_strength:=0.0
 func set_store_power(value: bool,radio_on := true) -> void:
 	store_powered=value;radio_powered=value and radio_on
 	if hum!=null:
@@ -31,6 +33,7 @@ func set_store_power(value: bool,radio_on := true) -> void:
 		elif not store_powered:player.stop()
 	refresh()
 func _ready() -> void:
+	contact=AudioStreamPlayer.new();contact.name="ContactSting";add_child(contact);contact.stream=load("res://assets/audio/scares/contact_sting.wav")
 	hum=loop_sound("hum",Vector3(-4,1,-6),-17,14)
 	radio=loop_sound("radio",Vector3(-5.4,1.7,-2.7),-19,22);radio.unit_size=2.5
 	night=loop_sound("neighborhood_air",Vector3(0,1,7),-11,38)
@@ -66,6 +69,7 @@ func loop_sound(id: String,at: Vector3,db: float,distance_value: float) -> Audio
 	stream.loop_mode=AudioStreamWAV.LOOP_FORWARD;stream.loop_end=stream.data.size()/2
 	p.stream=stream;p.play();return p
 func refresh() -> void:
+	if contact!=null:contact.volume_db=-8+contact_strength*6+linear_to_db(maxf(.00001,Preferences.effects_volume))
 	for player in loop_players:player.volume_db=float(player.get_meta("loop_base_db"))+linear_to_db(maxf(.001,Preferences.music_volume if player.get_meta("music_loop",false) else Preferences.effects_volume))
 	radio.volume_db=-19-unease_amount*15+linear_to_db(maxf(Preferences.music_volume,.001))
 	hum.volume_db=-17+linear_to_db(maxf(Preferences.effects_volume,.00001))
@@ -108,10 +112,12 @@ func _process(delta: float) -> void:
 	ambience.stream=load(paths[ambient_index%4]);ambience.volume_db=(-15 if ambient_index%4<2 else -24)+linear_to_db(maxf(Preferences.effects_volume,.00001));ambience.play()
 func play_at(id: String,at: Vector3) -> void:
 	play_spatial("res://assets/audio/"+id+".wav",at,-5)
+func play_contact(strength: float) -> void:
+	contact_strength=clampf(strength,0,1);contact.volume_db=-8+contact_strength*6+linear_to_db(maxf(.00001,Preferences.effects_volume));contact.play()
 func unease() -> void:
 	create_tween().tween_property(self,"unease_amount",1.0,4)
 func stop_all() -> void:
-	for player in [hum,radio,night,effect,ambience,ballast,engine]+compressors+voices+loop_players:
+	for player in [hum,radio,night,effect,ambience,ballast,engine,contact]+compressors+voices+loop_players:
 		if is_instance_valid(player):
 			player.stop()
 			player.stream=null

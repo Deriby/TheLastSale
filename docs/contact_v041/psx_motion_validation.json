@@ -1,0 +1,342 @@
+{
+  "checks": 48,
+  "measurements": [
+    {
+      "high_resolution": false,
+      "intensity": 1,
+      "mapping": "uv",
+      "maximum_color_error": 0.00784313678741455,
+      "yaw_degrees": -155.0
+    },
+    {
+      "high_resolution": false,
+      "intensity": 1,
+      "mapping": "uv",
+      "maximum_color_error": 0.00784313678741455,
+      "yaw_degrees": -90.0
+    },
+    {
+      "high_resolution": false,
+      "intensity": 1,
+      "mapping": "uv",
+      "maximum_color_error": 0.00784313678741455,
+      "yaw_degrees": -20.0
+    },
+    {
+      "high_resolution": false,
+      "intensity": 1,
+      "mapping": "uv",
+      "maximum_color_error": 0.00784313678741455,
+      "yaw_degrees": 25.0
+    },
+    {
+      "high_resolution": false,
+      "intensity": 1,
+      "mapping": "uv",
+      "maximum_color_error": 0.00784313678741455,
+      "yaw_degrees": 95.0
+    },
+    {
+      "high_resolution": false,
+      "intensity": 1,
+      "mapping": "uv",
+      "maximum_color_error": 0.00784313678741455,
+      "yaw_degrees": 165.0
+    },
+    {
+      "high_resolution": false,
+      "intensity": 2,
+      "mapping": "uv",
+      "maximum_color_error": 0.0274510085582733,
+      "yaw_degrees": -155.0
+    },
+    {
+      "high_resolution": false,
+      "intensity": 2,
+      "mapping": "uv",
+      "maximum_color_error": 0.0274510085582733,
+      "yaw_degrees": -90.0
+    },
+    {
+      "high_resolution": false,
+      "intensity": 2,
+      "mapping": "uv",
+      "maximum_color_error": 0.0274510085582733,
+      "yaw_degrees": -20.0
+    },
+    {
+      "high_resolution": false,
+      "intensity": 2,
+      "mapping": "uv",
+      "maximum_color_error": 0.0274510085582733,
+      "yaw_degrees": 25.0
+    },
+    {
+      "high_resolution": false,
+      "intensity": 2,
+      "mapping": "uv",
+      "maximum_color_error": 0.0274510085582733,
+      "yaw_degrees": 95.0
+    },
+    {
+      "high_resolution": false,
+      "intensity": 2,
+      "mapping": "uv",
+      "maximum_color_error": 0.0274510085582733,
+      "yaw_degrees": 165.0
+    },
+    {
+      "high_resolution": true,
+      "intensity": 1,
+      "mapping": "uv",
+      "maximum_color_error": 0.00784313678741455,
+      "yaw_degrees": -155.0
+    },
+    {
+      "high_resolution": true,
+      "intensity": 1,
+      "mapping": "uv",
+      "maximum_color_error": 0.00784313678741455,
+      "yaw_degrees": -90.0
+    },
+    {
+      "high_resolution": true,
+      "intensity": 1,
+      "mapping": "uv",
+      "maximum_color_error": 0.00784313678741455,
+      "yaw_degrees": -20.0
+    },
+    {
+      "high_resolution": true,
+      "intensity": 1,
+      "mapping": "uv",
+      "maximum_color_error": 0.00784313678741455,
+      "yaw_degrees": 25.0
+    },
+    {
+      "high_resolution": true,
+      "intensity": 1,
+      "mapping": "uv",
+      "maximum_color_error": 0.00784313678741455,
+      "yaw_degrees": 95.0
+    },
+    {
+      "high_resolution": true,
+      "intensity": 1,
+      "mapping": "uv",
+      "maximum_color_error": 0.00784313678741455,
+      "yaw_degrees": 165.0
+    },
+    {
+      "high_resolution": true,
+      "intensity": 2,
+      "mapping": "uv",
+      "maximum_color_error": 0.0274510085582733,
+      "yaw_degrees": -155.0
+    },
+    {
+      "high_resolution": true,
+      "intensity": 2,
+      "mapping": "uv",
+      "maximum_color_error": 0.0274510085582733,
+      "yaw_degrees": -90.0
+    },
+    {
+      "high_resolution": true,
+      "intensity": 2,
+      "mapping": "uv",
+      "maximum_color_error": 0.0274510085582733,
+      "yaw_degrees": -20.0
+    },
+    {
+      "high_resolution": true,
+      "intensity": 2,
+      "mapping": "uv",
+      "maximum_color_error": 0.0274510085582733,
+      "yaw_degrees": 25.0
+    },
+    {
+      "high_resolution": true,
+      "intensity": 2,
+      "mapping": "uv",
+      "maximum_color_error": 0.0274510085582733,
+      "yaw_degrees": 95.0
+    },
+    {
+      "high_resolution": true,
+      "intensity": 2,
+      "mapping": "uv",
+      "maximum_color_error": 0.0274510085582733,
+      "yaw_degrees": 165.0
+    },
+    {
+      "high_resolution": false,
+      "intensity": 1,
+      "mapping": "world",
+      "maximum_color_error": 0.0,
+      "yaw_degrees": -155.0
+    },
+    {
+      "high_resolution": false,
+      "intensity": 1,
+      "mapping": "world",
+      "maximum_color_error": 0.0,
+      "yaw_degrees": -90.0
+    },
+    {
+      "high_resolution": false,
+      "intensity": 1,
+      "mapping": "world",
+      "maximum_color_error": 0.0,
+      "yaw_degrees": -20.0
+    },
+    {
+      "high_resolution": false,
+      "intensity": 1,
+      "mapping": "world",
+      "maximum_color_error": 0.0,
+      "yaw_degrees": 25.0
+    },
+    {
+      "high_resolution": false,
+      "intensity": 1,
+      "mapping": "world",
+      "maximum_color_error": 0.0,
+      "yaw_degrees": 95.0
+    },
+    {
+      "high_resolution": false,
+      "intensity": 1,
+      "mapping": "world",
+      "maximum_color_error": 0.0,
+      "yaw_degrees": 165.0
+    },
+    {
+      "high_resolution": false,
+      "intensity": 2,
+      "mapping": "world",
+      "maximum_color_error": 0.0,
+      "yaw_degrees": -155.0
+    },
+    {
+      "high_resolution": false,
+      "intensity": 2,
+      "mapping": "world",
+      "maximum_color_error": 0.0,
+      "yaw_degrees": -90.0
+    },
+    {
+      "high_resolution": false,
+      "intensity": 2,
+      "mapping": "world",
+      "maximum_color_error": 0.0,
+      "yaw_degrees": -20.0
+    },
+    {
+      "high_resolution": false,
+      "intensity": 2,
+      "mapping": "world",
+      "maximum_color_error": 0.0,
+      "yaw_degrees": 25.0
+    },
+    {
+      "high_resolution": false,
+      "intensity": 2,
+      "mapping": "world",
+      "maximum_color_error": 0.0,
+      "yaw_degrees": 95.0
+    },
+    {
+      "high_resolution": false,
+      "intensity": 2,
+      "mapping": "world",
+      "maximum_color_error": 0.0,
+      "yaw_degrees": 165.0
+    },
+    {
+      "high_resolution": true,
+      "intensity": 1,
+      "mapping": "world",
+      "maximum_color_error": 0.0,
+      "yaw_degrees": -155.0
+    },
+    {
+      "high_resolution": true,
+      "intensity": 1,
+      "mapping": "world",
+      "maximum_color_error": 0.0,
+      "yaw_degrees": -90.0
+    },
+    {
+      "high_resolution": true,
+      "intensity": 1,
+      "mapping": "world",
+      "maximum_color_error": 0.0,
+      "yaw_degrees": -20.0
+    },
+    {
+      "high_resolution": true,
+      "intensity": 1,
+      "mapping": "world",
+      "maximum_color_error": 0.0,
+      "yaw_degrees": 25.0
+    },
+    {
+      "high_resolution": true,
+      "intensity": 1,
+      "mapping": "world",
+      "maximum_color_error": 0.0,
+      "yaw_degrees": 95.0
+    },
+    {
+      "high_resolution": true,
+      "intensity": 1,
+      "mapping": "world",
+      "maximum_color_error": 0.0,
+      "yaw_degrees": 165.0
+    },
+    {
+      "high_resolution": true,
+      "intensity": 2,
+      "mapping": "world",
+      "maximum_color_error": 0.0,
+      "yaw_degrees": -155.0
+    },
+    {
+      "high_resolution": true,
+      "intensity": 2,
+      "mapping": "world",
+      "maximum_color_error": 0.0,
+      "yaw_degrees": -90.0
+    },
+    {
+      "high_resolution": true,
+      "intensity": 2,
+      "mapping": "world",
+      "maximum_color_error": 0.0,
+      "yaw_degrees": -20.0
+    },
+    {
+      "high_resolution": true,
+      "intensity": 2,
+      "mapping": "world",
+      "maximum_color_error": 0.0,
+      "yaw_degrees": 25.0
+    },
+    {
+      "high_resolution": true,
+      "intensity": 2,
+      "mapping": "world",
+      "maximum_color_error": 0.0,
+      "yaw_degrees": 95.0
+    },
+    {
+      "high_resolution": true,
+      "intensity": 2,
+      "mapping": "world",
+      "maximum_color_error": 0.0,
+      "yaw_degrees": 165.0
+    }
+  ],
+  "passed": 48
+}

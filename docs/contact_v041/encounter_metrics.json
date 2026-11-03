@@ -1,0 +1,30 @@
+{
+  "contact": {
+    "bryan": {
+      "max_step_m": 0.0733340904116631,
+      "near_distance_m": 1.28077387809753,
+      "reveal_distance_m": 1.7676717042923,
+      "rush_resume": true
+    }
+  },
+  "ambush": [
+    {
+      "body_visible": false,
+      "checkpoint_consumed": true,
+      "event": "generator_return",
+      "face_framed": true,
+      "last_rejection": "",
+      "occurred": true,
+      "visible_seconds": 0.866666666666668
+    },
+    {
+      "body_visible": false,
+      "checkpoint_consumed": true,
+      "event": "stock_corner",
+      "face_framed": true,
+      "last_rejection": "",
+      "occurred": true,
+      "visible_seconds": 0.850000000000001
+    }
+  ]
+}

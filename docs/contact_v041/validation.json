@@ -1,0 +1,48 @@
+{
+  "version": "0.41.0",
+  "godot": "4.7",
+  "base_commit": "62479c3696ed546fac1d36b8d9d5bd47c84c3f88",
+  "new_suites": {
+    "contact_scares_integration": 43,
+    "close_encounters_integration": 31
+  },
+  "full_suite_count": 26,
+  "full_expected_checks": 1174,
+  "rendered_psx_expected_checks": 48,
+  "expected_total_checks": 1222,
+  "new_encounters": [
+    "generator_return",
+    "stock_corner"
+  ],
+  "bryan_only_hides_in_stock_boxes": true,
+  "bryan_approach_and_lunge_use_collision_movement": true,
+  "capture_only_after_confirmed_fatal_attack": true,
+  "capture_seconds": 1.04,
+  "active_roots_never_teleported_by_scare": true,
+  "actual_modified_face_positions_used": true,
+  "optional_heads_and_existing_car_encounter_preserved": true,
+  "camera_wheel_third_person_preserved": true,
+  "save_version": 5,
+  "save_during_capture_uses_safe_retry": true,
+  "models_textures_and_animation_libraries_changed": 0,
+  "new_original_synthesized_audio": [
+    "assets/audio/scares/contact_sting.wav"
+  ],
+  "existing_music_and_power_circuits_preserved": true,
+  "new_shadow_lights": 0,
+  "reference": {
+    "file_name": "fears-to-fathom-best-jumpscares-all-games-480-ytshorts.savetube.me.mp4",
+    "duration_seconds": 599.09805,
+    "bytes": 25796174,
+    "sha256": "19d1eb1db56929b3066b523b6192d2e639d1e5972dde106952c9bca7c0994214",
+    "method": "sampled frames and closer temporal sampling of individual encounters",
+    "redistributed_in_project": false
+  },
+  "preview": "docs/contact_v041/sustos_preview.mp4",
+  "preview_actual_game_rendering": true,
+  "preview_campaign_conditions_staged_between_clips": true,
+  "preview_speed": 1,
+  "target_gpu_fps_measured": false,
+  "project_only_no_exe": true,
+  "validation_source": "downloads/project/release_verification.json"
+}

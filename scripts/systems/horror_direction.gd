@@ -5,6 +5,18 @@ var world: ShiftWorld
 var focused_event:=""
 var focus_actor: DepotPlayer
 var door_age:=-1.0
+var focus_skeleton: Skeleton3D
+var focus_face_offset:=.10
+var focus_pose: WatcherLean
+var focus_contact: ContactThreatPose
+var impact_age:=-1.0
+var impact_strength:=0.0
+var impact_red:=0.0
+var capture_age:=-1.0
+var capture_pose: ContactThreatPose
+var capture_killer: KillerAgent
+var capture_hit:=false
+var capture_fade:=0.0
 func _ready() -> void:
 	Session.saving.connect(capture)
 	if bool(state().get("stock_ajar",false)):
@@ -42,15 +54,72 @@ func clear_view(point: Vector3,excluded: Array[RID]=[]) -> bool:
 func focus(id: String,point: Vector3,seconds: float=1.5,radius: float=5.0,excluded: Array[RID]=[]) -> bool:
 	if not ready_for(point,radius) or not clear_view(point,excluded):return false
 	focus_actor=world.player;focused_event=id
-	var lens:=48.0 if id=="bryan_jump" or id.begins_with("watching_") else 52.0 if id=="car_window" else 60.0
-	focus_actor.camera_rig.focus_on(point,seconds,13.0,lens)
+	var lens:=28.0 if id.begins_with("contact_") else 36.0 if id=="bryan_jump" else 52.0 if id=="car_window" else 48.0 if id.begins_with("watching_") else 60.0
+	focus_skeleton=null
+	focus_pose=null
+	focus_contact=null
+	focus_actor.camera_rig.focus_on(point,seconds,48.0 if id.begins_with("contact_") else 38.0 if id=="bryan_jump" else 13.0,lens)
+	focus_actor.camera_rig.focus_hide_body=id=="bryan_jump" or id.begins_with("contact_")
 	state().last_major=Session.world_seconds
 	state().quiet_until=Session.world_seconds+seconds+24.0
 	return true
+func follow_face(skeleton: Skeleton3D,offset: float=.10,pose: WatcherLean=null) -> void:
+	focus_skeleton=skeleton;focus_face_offset=offset;focus_pose=pose;focus_contact=null
+	if is_instance_valid(focus_actor):focus_actor.camera_rig.focus_tracker=tracked_face;focus_actor.camera_rig.process_priority=50
+func follow_contact(skeleton: Skeleton3D,pose: ContactThreatPose,offset: float=.10) -> void:
+	follow_face(skeleton,offset);focus_contact=pose
+func tracked_face() -> Vector3:
+	if not is_instance_valid(focus_skeleton):return focus_actor.camera_rig.focus_target
+	var transform_value:=focus_skeleton.get_global_transform_interpolated()
+	if is_instance_valid(focus_contact) and focus_contact.revision>0:return transform_value*focus_contact.face_in_skeleton
+	if is_instance_valid(focus_pose) and focus_pose.points.has("face"):return transform_value*focus_pose.face_in_skeleton
+	return FaceAnchor.world_point(focus_skeleton)
+func face_point(skeleton: Skeleton3D,offset: float=.10) -> Vector3:
+	return skeleton.global_transform*skeleton.get_bone_global_pose(skeleton.find_bone("head")).origin+Vector3.UP*offset
+func contact_hit(strength: float=1.0,red: float=.5) -> void:
+	if not busy():return
+	impact_age=0.0;impact_strength=clampf(strength,0,1);impact_red=clampf(red,0,1)
+	focus_actor.camera_rig.contact_kick(impact_strength)
+	world.sound.play_contact(impact_strength)
+func impact_weight() -> float:
+	if impact_age<0:return 0.0
+	return impact_strength*(1.0-smoothstep(.08,.78,impact_age))
+func begin_capture(killer: KillerAgent,victim: DepotPlayer) -> bool:
+	if not world.sunday.stopped or world.sunday.caught_identity!=victim.identity:return false
+	if victim!=world.player or not is_instance_valid(killer) or victim.position.distance_to(killer.position)>1.1:return false
+	var point:=FaceAnchor.world_point(killer.motion.skeleton)
+	if not clear_view(point):return false
+	focus_actor=victim;focused_event="killer_capture";capture_age=0;capture_hit=false;capture_fade=0;capture_killer=killer
+	focus_actor.camera_rig.focus_on(point,1.20,48.0,24.0 if focus_actor.camera_rig.target_distance>.8 else 44.0);focus_actor.camera_rig.focus_hide_body=true
+	var toward:=victim.position-killer.position;killer.visual.rotation.y=atan2(toward.x,toward.z)
+	killer.motion.look_at_position(victim.camera_rig.camera.global_position)
+	capture_pose=ContactThreatPose.new();killer.motion.skeleton.add_child(capture_pose)
+	follow_contact(killer.motion.skeleton,capture_pose)
+	return true
+func _process(delta: float) -> void:
+	if impact_age>=0:
+		impact_age+=delta
+		if impact_age>=.80:impact_age=-1
+	if busy() and is_instance_valid(focus_skeleton):
+		if is_instance_valid(focus_contact) and focus_contact.revision>0:
+			focus_actor.camera_rig.focus_target=focus_contact.face_point
+		elif is_instance_valid(focus_pose) and focus_pose.points.has("head"):
+			focus_actor.camera_rig.focus_target=focus_pose.points.get("face",focus_pose.points.head+focus_pose.head_up*focus_face_offset)
+		else:focus_actor.camera_rig.focus_target=face_point(focus_skeleton,focus_face_offset)
+	if capture_age<0:return
+	capture_age+=delta
+	if is_instance_valid(capture_pose):
+		capture_pose.target=focus_actor.camera_rig.camera.global_position
+		capture_pose.amount=smoothstep(0,.16,capture_age)
+	if not capture_hit and capture_age>=.12:capture_hit=true;contact_hit(1.0,.70)
+	capture_fade=smoothstep(.76,1.04,capture_age)
+	if capture_age>=1.04:
+		capture_age=-1;capture_fade=0;impact_age=-1;focus_actor.camera_rig.cancel_focus();focus_skeleton=null
+		world.sunday.finish_caught()
 func calm(seconds: float=24.0) -> void:
 	state().quiet_until=maxf(float(state().quiet_until),Session.world_seconds+seconds)
 func ambient_blocked() -> bool:
-	return busy() or Session.world_seconds<float(state().quiet_until) or world.scary!=null and world.scary.blocks_ambient()
+	return busy() or Session.world_seconds<float(state().quiet_until) or world.scary!=null and world.scary.blocks_ambient() or world.encounters!=null and world.encounters.blocking()
 func _physics_process(delta: float) -> void:
 	if not world.active:return
 	if not busy():focused_event="";focus_actor=null

@@ -1,0 +1,3 @@
+Original synthesized contact-scare sting for A Ultima Venda / Two Brothers Lab.
+Created with tools/make_contact_audio.py (deterministic seed 410).
+CC0 1.0 Universal. Duration 0.84 seconds, mono PCM, 22050 Hz.

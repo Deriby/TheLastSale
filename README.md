@@ -2,9 +2,17 @@
 
 Demonstração jogável em **Godot 4.7 / GDScript / Compatibility**, ambientada em um depósito de bebidas de Franca-SP, com uma primeira versão jogável da campanha de sexta a domingo. Acabamento e ritmo continuam em desenvolvimento.
 
-**[Baixar o projeto 0.40.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.40.0.zip)**
+**[Baixar o projeto 0.41.0 para Godot (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.41.0.zip)**
 
 Extraia o ZIP, importe `project.godot` no Godot **4.7**, aguarde a importação dos modelos e pressione **F5**. O arquivo inclui os modelos animados, cenários, código e recursos usados no jogo. [Conteúdo e instruções do projeto](downloads/project/README.md).
+
+## Revisão 0.41.0 — novas emboscadas e contato próximo
+
+Duas emboscadas novas usam o assassino original por trás de batentes: na volta do gerador, na sexta, e ao sair do estoque depois da tentativa de entrada, no sábado. Os encontros exigem proximidade, passagem aberta e privacidade; o corpo fica encoberto, o rosto aparece de repente e a câmera mostra o ponto real. Aparições silenciosas continuam existindo.
+
+Bryan fica exclusivamente na peça das caixas dos fundos: chega ao esconderijo caminhando, sai depressa e faz um avanço curto até perto de Deryk. A câmera não denuncia o esconderijo antes da revelação. Na fuga, um golpe fatal confirmado recebe um contato breve com o assassino antes da derrota recuperável. Distorção radial, tranco, cor nas bordas e um impacto sonoro original acompanham esses momentos. O foco segue a posição já animada do rosto. Rodinha, circuitos, modelos e bibliotecas de animação permanecem.
+
+[Ver os cinco exemplos no jogo real](docs/contact_v041/sustos_preview.mp4) · [Novos encontros, imagens e validação](docs/contact_v041/README.md).
 
 ## Revisão 0.40.0 — luz e atmosfera do bairro
 
@@ -393,9 +401,9 @@ A reconstrução 0.2 do interior recebeu gôndolas abastecidas por categoria, ge
 
 ## Jogar
 
-**[Baixar o projeto Godot 0.40.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.40.0.zip)**
+**[Baixar o projeto Godot 0.41.0 (ZIP)](https://github.com/Deriby/TheLastSale/raw/refs/heads/main/downloads/project/TheLastSale_Godot_0.41.0.zip)**
 
-O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.7. O menu mostra **0.40.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
+O pacote está em [`downloads/project`](downloads/project), com a verificação SHA-256 ao lado. Extraia em uma pasta nova e abra no editor Godot 4.7. O menu mostra **0.41.0**. Para ver os detalhes em resolução plena, escolha **Configurações → Resolução interna / qualidade → Nítida**. Nítida usa MSAA 2×. O modo **Econômica** reduz a resolução e desliga o relevo fino dos materiais, a oclusão das texturas, as sombras dinâmicas e o halo de câmera.
 
 O download atual é o projeto para o editor. O diretório `downloads/windows` guarda apenas a entrega anterior 0.9.0.
 

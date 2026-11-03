@@ -57,7 +57,7 @@ func run() -> void:
   await ticks(1)
   if world.scary.done("bryan_prank"):break
  check(world.scary.done("bryan_prank") and world.horror.focused_event=="bryan_jump","ver Bryan saindo dispara jumpscare com foco nele")
- await ticks(22);var head:=bryan.position+Vector3.UP*1.03
+ await ticks(22);var head: Vector3=world.scary.pop_pose.face_point
  check(world.scary.can_see(head) and (-world.player.camera_rig.camera.global_basis.z).dot((head-world.player.camera_rig.camera.global_position).normalized())>.99,"rosto de Bryan está visível e central no susto")
  check(world.sound.voices.any(func(v):return v.stream!=null and v.stream.resource_path.ends_with("bryan_pop.ogg")),"impacto do susto vem da posição de Bryan")
  check(JSON.stringify(world.story.familiar_lines("Bryan",world.player,0)).contains("escondido nas caixas"),"reação explica a peça nos fundos")

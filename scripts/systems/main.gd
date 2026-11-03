@@ -36,6 +36,11 @@ func apply_settings() -> void:
 		retro.set_shader_parameter("grain",Preferences.grain);retro.set_shader_parameter("vhs",Preferences.vhs)
 		retro.set_shader_parameter("bloom_strength",.22 if Preferences.pixel_scale<3 else 0.0)
 		retro.set_shader_parameter("posterize",Preferences.pixel_scale>1)
+func _process(_delta: float) -> void:
+	if retro==null or not is_instance_valid(world) or world.horror==null:return
+	retro.set_shader_parameter("scare_amount",world.horror.impact_weight())
+	retro.set_shader_parameter("scare_red",world.horror.impact_red)
+	retro.set_shader_parameter("scare_fade",world.horror.capture_fade)
 func update_render_size() -> void:
 	if screen==null or viewport==null:return
 	var available:=get_viewport().get_visible_rect().size
@@ -57,6 +62,8 @@ func update_render_size() -> void:
 		screen.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	if retro!=null:retro.set_shader_parameter("game_bounds",bounds)
 func build_world() -> void:
+	if retro!=null:
+		retro.set_shader_parameter("scare_amount",0.0);retro.set_shader_parameter("scare_red",0.0);retro.set_shader_parameter("scare_fade",0.0)
 	interface.close_journal(false);interface.close_sunday_desk();interface.close_surveillance();interface.close_checkout()
 	if psx!=null:psx.restore()
 	if world!=null:

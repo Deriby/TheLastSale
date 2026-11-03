@@ -1,13 +1,13 @@
 {
-  "version": "0.40.0",
+  "version": "0.41.0",
   "godot": "4.7",
   "godot_build": "4.7.stable.official.5b4e0cb0f",
   "format": "Godot editor project ZIP",
-  "file": "TheLastSale_Godot_0.40.0.zip",
-  "bytes": 101826783,
-  "sha256": "049b8d584c8d0e1f168d70c0fbf70d3bb746943d6313f17d9fc2897e898cfe94",
+  "file": "TheLastSale_Godot_0.41.0.zip",
+  "bytes": 101883459,
+  "sha256": "2f86cd6e9bd693511c7bc1b6153c27f739dc6454a0b6368e3c70df5799d1042c",
   "crc_verified": true,
-  "files_verified_against_manifest": 1078,
+  "files_verified_against_manifest": 1099,
   "all_packaged_sources_match_repository": true,
   "manifest_files_changed_by_import_or_tests": 0,
   "clean_extraction_import_exit_code": 0,
@@ -37,13 +37,21 @@
       "title_music_integration": 18,
       "horror_direction_integration": 45,
       "panels_integration": 30,
-      "visual_direction_integration": 24
+      "visual_direction_integration": 24,
+      "contact_scares_integration": 43,
+      "close_encounters_integration": 31
     },
-    "passed": 1100,
-    "total": 1100,
-    "suite_count": 24,
+    "passed": 1174,
+    "total": 1174,
+    "suite_count": 26,
     "script_or_shader_errors": 0,
-    "known_audio_shutdown_diagnostics": [],
+    "known_audio_shutdown_diagnostics": [
+      {
+        "suite": "sunday_integration",
+        "resource": "assets/audio/everyday/compressor.ogg::OggPacketSequence_l015c",
+        "after_result": true
+      }
+    ],
     "all_results_executed_from_this_final_archive": true
   },
   "clean_extraction_rendered_psx_motion": {
@@ -51,92 +59,61 @@
     "total": 48,
     "renderer": "Godot 4.7 OpenGL / Mesa llvmpipe software",
     "all_results_executed_from_this_final_archive": true,
-    "measurements": "docs/visual_v040/psx_motion_validation.json"
+    "measurements": "docs/contact_v041/psx_motion_validation.json"
   },
-  "all_check_count": 1148,
-  "validation_resumed_after_environment_restart": true,
-  "completed_suites_reused_after_restart": {
-    "integration": 188,
-    "friday_integration": 48,
-    "saturday_integration": 53,
-    "sunday_integration": 59,
-    "supply_integration": 35,
-    "natural_motion_integration": 67,
-    "locomotion_integration": 45,
-    "protagonist_gait_integration": 30,
-    "psx_integration": 28,
-    "title_integration": 68,
-    "everyday_integration": 45,
-    "friday_story_integration": 36,
-    "scares_integration": 30
-  },
-  "previous_version_commit": "17f96fe6c6a1fa669b4489a5d59f6f227128eeaf",
+  "all_check_count": 1222,
+  "previous_version_commit": "62479c3696ed546fac1d36b8d9d5bd47c84c3f88",
   "previous_asset_files_byte_identical": 467,
-  "asset_credit_updates": [],
   "previous_resource_files_byte_identical": 32,
   "animation_libraries_byte_identical": 11,
   "models_textures_and_animation_data_changed": 0,
-  "import_metadata_changed": 0,
-  "new_original_foley_files": 0,
+  "previous_import_metadata_changed": 0,
+  "new_original_synthesized_audio_files": 1,
   "uploaded_title_mp3_unchanged": true,
   "physics_backend": "GodotPhysics3D",
   "mouse_wheel_third_person_preserved": true,
-  "original_campaign_energy_and_killer_logic_sources_unchanged": true,
+  "original_energy_and_killer_agent_sources_unchanged": true,
+  "sunday_confirmed_capture_handoff_changed": true,
+  "attack_avoidance_window_unchanged": true,
   "camera_focus_is_brief_and_proximity_driven": true,
   "horror_suite_checks": 45,
-  "panels_suite_checks": 30,
-  "visual_suite_checks": 24,
-  "cosmetic_layers_have_no_colliders": true,
+  "contact_suite_checks": 43,
+  "ambush_suite_checks": 31,
+  "new_encounters": [
+    "generator_return",
+    "stock_corner"
+  ],
   "new_shadow_lights": 0,
-  "bounce_lights_follow_existing_circuits": true,
-  "all_other_world_and_shader_sources_unchanged": true,
-  "matched_comparison_images": {
-    "docs/visual_v040/before/salao.png": {
-      "bytes": 1093759,
-      "sha256": "64edb4edcd9985b500ac686283b5b5f9ea147f72817171a2310a65618045a649"
+  "contact_face_light_unshadowed_and_temporary": true,
+  "all_other_published_scene_script_shader_sources_unchanged": true,
+  "preview_images": {
+    "docs/contact_v041/generator_return.png": {
+      "bytes": 945979,
+      "sha256": "34d58a2630d65c3d3a5a865552b07675078d4d8b98aa08e93b3c1f9f7e5e1767"
     },
-    "docs/visual_v040/before/caixa.png": {
-      "bytes": 1123680,
-      "sha256": "9c25b9b1688164d64242fdde9019b247e2ea291e73946e3e0eb7540e917d3b21"
+    "docs/contact_v041/stock_corner.png": {
+      "bytes": 1037804,
+      "sha256": "521b2da347313d22daf61ca318feb5e18d3f27c5984b8e67fbb0fbc440809c0f"
     },
-    "docs/visual_v040/before/estoque.png": {
-      "bytes": 928419,
-      "sha256": "a1085651784fcf0b7db9fa608bd40375d5fa751977b47462fca0d0b0c0e5e0a2"
+    "docs/contact_v041/bryan_boxes.png": {
+      "bytes": 1100198,
+      "sha256": "be399bf35c0b5e941937b42038f33dddebe0b682e08f1652282ba61390b948f7"
     },
-    "docs/visual_v040/before/fachada.png": {
-      "bytes": 1143292,
-      "sha256": "3fe4cac81b557037db01dfc7b89cabb4e019a38dafe16d1451d203f4a2526bc5"
+    "docs/contact_v041/capture_first.png": {
+      "bytes": 1160322,
+      "sha256": "ec33699f257029d1d2767ec5695d91cd614183d5ad5d3cace8c7b1df14b1ca75"
     },
-    "docs/visual_v040/before/rua.png": {
-      "bytes": 1067589,
-      "sha256": "2f4f244ed1bfb859e7a9002071081046d3f43ffa8647158bdd8f68397336467d"
-    },
-    "docs/visual_v040/after/salao.png": {
-      "bytes": 1078170,
-      "sha256": "9ff36a277e71ff93bbd98c22acf006ed35b7b26a9f06af0a5e6bbef91d8d234e"
-    },
-    "docs/visual_v040/after/caixa.png": {
-      "bytes": 1150411,
-      "sha256": "0bd9baca8c418a92f60c2b0a3cc33e0273812f6b87957eee611b623253b6a11a"
-    },
-    "docs/visual_v040/after/estoque.png": {
-      "bytes": 937330,
-      "sha256": "d69de4a6aed9be931baab4d8abc64670bef32b83ed6f1c52740fa954d599540f"
-    },
-    "docs/visual_v040/after/fachada.png": {
-      "bytes": 1136068,
-      "sha256": "d204e6af109e9fdbc3e796464bb63cf69dd0a943597425dca3e97d58d945d0cc"
-    },
-    "docs/visual_v040/after/rua.png": {
-      "bytes": 1067736,
-      "sha256": "d46a2d16fca7ac9a0e780553131057b28d0fab97f1b3371434e6c0524948693b"
+    "docs/contact_v041/capture_third.png": {
+      "bytes": 1147070,
+      "sha256": "a6395f3f08a55da3c320a2224945f6dec67f63432377e6c105484468dba862f3"
     }
   },
-  "notebook_tabs_do_not_mutate_campaign": true,
-  "checkout_button_identity_and_keyboard_focus_preserved": true,
-  "all_published_fonts_reused": true,
-  "bryan_walks_to_rear_hiding_place_with_collisions": true,
+  "bryan_only_hides_in_rear_boxes": true,
+  "bryan_retains_natural_skeleton_animation": true,
+  "bryan_walks_and_lunges_with_collisions": true,
+  "face_anchor_tracks_final_skinned_face_with_interpolated_root": true,
   "save_version": 5,
+  "save_during_capture_uses_safe_retry": true,
   "campaign_route": {
     "max_step_m": 0.0657226368784904,
     "nights": [
@@ -158,44 +135,87 @@
   "executable_exports": 0,
   "below_github_100_mib_limit": true,
   "preview": {
-    "path": "docs/visual_v040/direcao_visual_preview.mp4",
-    "sha256": "678e8d24e6f9df73336bf18e2e2c990a131770c63f9517eefc445ce200ef08ab",
-    "bytes": 4556142,
-    "duration_seconds": 14.2,
+    "path": "docs/contact_v041/sustos_preview.mp4",
+    "sha256": "42a2f64614681e9555a590849c4cdbc5f59a092f58c7c9fafee64aa723d3bd18",
+    "bytes": 3810793,
+    "duration_seconds": 18.333333,
     "width": 1280,
     "height": 720,
     "capture_fps": 15,
     "video_codec": "H.264",
     "audio_codec": "AAC",
-    "actual_gameplay_capture": true,
+    "actual_game_rendering": true,
+    "campaign_conditions_staged_between_clips": true,
     "speed": 1,
-    "fixed_views_and_gentle_camera_pans": true,
     "camera_settings": {
-      "fov": 68.0,
-      "grain": 0.012,
-      "matched_views": true,
-      "native_first_person": true,
-      "pixel_scale": 1,
-      "shots": [
-        "salao",
-        "caixa",
-        "estoque",
-        "fachada",
-        "rua"
+      "actual_game_rendering": true,
+      "campaign_conditions_staged": true,
+      "clips": [
+        {
+          "camera_distance": 0.0,
+          "event": "generator_return",
+          "focus": true,
+          "impact": 0.758625185185185,
+          "new_event": true,
+          "occurred": true,
+          "third_person": false
+        },
+        {
+          "camera_distance": 0.0,
+          "event": "stock_corner",
+          "focus": true,
+          "impact": 0.758625185185185,
+          "new_event": true,
+          "occurred": true,
+          "third_person": false
+        },
+        {
+          "camera_distance": 0.0,
+          "distance_m": 1.28077399730682,
+          "event": "bryan_boxes",
+          "face_screen": [
+            0.502368032932281,
+            0.490045249462128
+          ],
+          "focus": true,
+          "impact": 0.406172361516035,
+          "new_event": false,
+          "occurred": true,
+          "third_person": false
+        },
+        {
+          "camera_distance": 0.0,
+          "event": "capture_first",
+          "focus": true,
+          "impact": 0.921912536443149,
+          "new_event": false,
+          "occurred": true,
+          "third_person": false
+        },
+        {
+          "camera_distance": 1.92,
+          "event": "capture_third",
+          "focus": true,
+          "impact": 0.921912536443149,
+          "new_event": false,
+          "occurred": true,
+          "third_person": true
+        }
       ],
-      "speed": 1,
-      "vhs": 0.045
+      "fov": 68.0,
+      "pixel_scale": 2,
+      "speed": 1
     },
     "scenes": [
-      "salao",
-      "caixa",
-      "estoque",
-      "fachada",
-      "rua"
+      "generator_return",
+      "stock_corner",
+      "bryan_boxes",
+      "capture_first",
+      "capture_third"
     ]
   },
   "target_gpu_fps_measured": false,
-  "report": "docs/visual_v040/validation.json",
-  "clean_extraction_log": "validation_0.40.0.log",
-  "clean_import_log": "clean_import_0.40.0.log"
+  "report": "docs/contact_v041/validation.json",
+  "clean_extraction_log": "validation_0.41.0.log",
+  "clean_import_log": "clean_import_0.41.0.log"
 }

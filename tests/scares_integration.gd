@@ -52,7 +52,8 @@ func run() -> void:
   await ticks(1)
   if world.scary.done("bryan_prank"):break
  check(world.scary.done("bryan_prank") and world.player.camera_rig.focusing(),"Bryan sai das caixas e o jumpscare enquadra a criança")
- check(world.scary.bryan.position.distance_to(FridayScares.BRYAN_REVEAL)<1 and not Dialogue.active,"peça termina nos fundos sem diálogo obrigatório")
+ await ticks(22)
+ check(world.scary.bryan.position.z< -11.6 and world.scary.bryan.position.distance_to(world.player.position)<1.6 and not Dialogue.active,"peça termina perto de Deryk nos fundos sem diálogo obrigatório")
  check(JSON.stringify(world.story.familiar_lines("Bryan",world.player,0)).contains("coração"),"a conversa opcional traz o alívio depois da brincadeira")
  await reload();note_count=Session.campaign.experience.notes.size();await ticks(30)
  check(world.scary.done("bryan_prank") and Session.campaign.experience.notes.size()==note_count,"continuar não repete a batida nem sua anotação")

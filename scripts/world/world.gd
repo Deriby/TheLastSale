@@ -36,6 +36,7 @@ var story: FridayStory
 var scary: FridayScares
 var presence: WatchingPresence
 var horror: HorrorDirection
+var encounters: CloseEncounters
 func _ready() -> void:
 	add_to_group("shift_world")
 	var legacy_carried:=Session.carried_id
@@ -107,6 +108,7 @@ func _ready() -> void:
 	horror=HorrorDirection.new();horror.world=self;add_child(horror)
 	scary=FridayScares.new();scary.world=self;add_child(scary)
 	presence=WatchingPresence.new();presence.world=self;add_child(presence)
+	encounters=CloseEncounters.new();encounters.world=self;add_child(encounters)
 func update_enemy_visibility() -> void:
 	enemy_visual.process_mode=Node.PROCESS_MODE_INHERIT if enemy_visual.is_visible_in_tree() else Node.PROCESS_MODE_DISABLED
 func select_player(identity: String) -> void:

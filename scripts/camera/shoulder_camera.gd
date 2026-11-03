@@ -15,10 +15,19 @@ var focus_remaining:=0.0
 var focus_target:=Vector3.ZERO
 var focus_speed:=13.0
 var focus_fov:=60.0
+var focus_hide_body:=false
+var focus_tracker: Callable
+var kick_age:=-1.0
+var kick_strength:=0.0
 func focusing() -> bool:return focus_remaining>0.0
 func focus_on(point: Vector3,seconds: float=1.5,speed: float=13.0,lens: float=60.0) -> void:
 	focus_target=point;focus_remaining=seconds;focus_speed=speed;focus_fov=minf(Preferences.fov,lens)
-func cancel_focus() -> void:focus_remaining=0.0
+	focus_hide_body=false
+	focus_tracker=Callable();process_priority=0
+func cancel_focus() -> void:
+	focus_remaining=0.0;focus_hide_body=false;focus_tracker=Callable();process_priority=0;kick_age=-1;camera.rotation=Vector3.ZERO
+func contact_kick(strength: float=1.0) -> void:
+	kick_age=0.0;kick_strength=clampf(strength,0,1)
 func _ready() -> void:
 	top_level=true;physics_interpolation_mode=Node.PHYSICS_INTERPOLATION_MODE_OFF
 	position.y=1.58
@@ -45,6 +54,7 @@ func _physics_process(_delta: float) -> void:
 	allowed_shoulder=desired*(maxf(0,result[0]-.06) if result.size()>0 else 1.0)
 func _process(delta: float) -> void:
 	var player: DepotPlayer=get_parent()
+	if focusing() and focus_tracker.is_valid():focus_target=focus_tracker.call()
 	if focusing():
 		var toward:=focus_target-global_position
 		if toward.length()>.1:
@@ -69,13 +79,19 @@ func _process(delta: float) -> void:
 	arm.position.z=-.16*blend
 	arm.spring_length=maxf(0,distance)
 	camera.fov=lerpf(camera.fov,focus_fov if focusing() else Preferences.fov,1-exp(-delta*(14 if focusing() else 8)))
+	if kick_age>=0:
+		kick_age+=delta
+		var envelope:=kick_strength*exp(-kick_age*8.5)
+		camera.rotation=Vector3(sin(kick_age*61)*.018,sin(kick_age*47)*.011,sin(kick_age*53)*.032)*envelope
+		if kick_age>.70:kick_age=-1;camera.rotation=Vector3.ZERO
 	var actual: float=camera.global_position.distance_to(global_position)
 	if not first_person:
 		if actual<.46:occluded=true
 		elif actual>.68:occluded=false
 	else:occluded=false
 	player.visual.visible=true
-	player.motion.set_first_person(first_person,occluded)
+	player.motion.set_first_person(first_person,occluded or focusing() and focus_hide_body and distance>.8)
+	if not focusing() and focus_tracker.is_valid():focus_tracker=Callable();process_priority=0
 
 func reset_follow() -> void:
 	global_position=get_parent().global_position+Vector3.UP*1.55

@@ -1,0 +1,14 @@
+Godot Engine v4.7.stable.official.5b4e0cb0f - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+Movie Maker mode enabled, recording movie in 1280×720 @ 15 FPS...
+CONTACT REVIEW {"actual_game_rendering":true,"campaign_conditions_staged":true,"clips":[{"camera_distance":0.0,"event":"generator_return","focus":true,"impact":0.758625185185185,"new_event":true,"occurred":true,"third_person":false},{"camera_distance":0.0,"event":"stock_corner","focus":true,"impact":0.758625185185185,"new_event":true,"occurred":true,"third_person":false},{"camera_distance":0.0,"distance_m":1.28077399730682,"event":"bryan_boxes","face_screen":[0.502368032932281,0.490045249462128],"focus":true,"impact":0.406172361516035,"new_event":false,"occurred":true,"third_person":false},{"camera_distance":0.0,"event":"capture_first","focus":true,"impact":0.921912536443149,"new_event":false,"occurred":true,"third_person":false},{"camera_distance":1.92,"event":"capture_third","focus":true,"impact":0.921912536443149,"new_event":false,"occurred":true,"third_person":true}],"fov":68.0,"pixel_scale":2,"speed":1}
+--------------------------------------------------------------------------------
+Done recording movie at path: /workspace/work/contact-release-preview.avi
+275 frames at 15 FPS (movie length: 00:00:18:05), recorded in 00:00:56 (32% of real-time speed).
+CPU render time: 14.36 seconds (average: 52.21 ms/frame)
+GPU render time: 11.29 seconds (average: 41.05 ms/frame)
+Encoding time: 3.46 seconds (average: 12.59 ms/frame)
+--------------------------------------------------------------------------------

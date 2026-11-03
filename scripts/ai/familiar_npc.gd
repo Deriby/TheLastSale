@@ -16,9 +16,10 @@ var scare_pose:=""
 var scare_speed:=1.45
 var scare_goal:=Vector3.ZERO
 var scare_blocked:=0.0
-var scare_pop:=-1.0
+var scare_look_at:=Vector3.INF
 func depart(path: PackedVector3Array) -> void:
 	scare_moving=false;scare_pose="";scare_path.clear()
+	scare_look_at=Vector3.INF;motion.attention.pitch_limit=.18;motion.look_at_position(Vector3.ZERO,false)
 	leaving=true;watching=false;exit_path=path
 	interaction.process_mode=Node.PROCESS_MODE_DISABLED
 func _ready() -> void:
@@ -40,23 +41,24 @@ func on_spoken(who: String,_text: String) -> void:
 func on_completed(_id: String) -> void:
 	watching=false
 func _physics_process(delta: float) -> void:
-	if scare_pop>=0:
-		scare_pop+=delta
-		visual.position.y=sin(minf(scare_pop/.22,1.0)*PI)*.095
-		if scare_pop>=.22:scare_pop=-1;visual.position.y=0
 	if scare_moving:
 		while not scare_path.is_empty() and Vector2(scare_path[0].x-position.x,scare_path[0].z-position.z).length()<.13:scare_path.remove_at(0)
 		if scare_path.is_empty():scare_moving=false;velocity=Vector3.ZERO;return
 		var toward: Vector3=((scare_path[0]-position)*Vector3(1,0,1)).normalized()
 		var before:=position;velocity=toward*scare_speed;velocity.y=-2;move_and_slide()
 		actual_speed=Vector2(position.x-before.x,position.z-before.z).length()/maxf(delta,.001)
-		visual.rotation.y=lerp_angle(visual.rotation.y,atan2(toward.x,toward.z),1-exp(-delta*10));motion.locomotion(delta,actual_speed,false,false,false)
+		var face:=scare_look_at-position if scare_look_at.is_finite() else toward
+		visual.rotation.y=lerp_angle(visual.rotation.y,atan2(face.x,face.z),1-exp(-delta*14));motion.locomotion(delta,actual_speed,false,false,false)
 		scare_blocked=scare_blocked+delta if actual_speed<.12 else 0.0
 		if scare_blocked>1.5:
 			var world:=get_tree().get_first_node_in_group("shift_world") as ShiftWorld
 			if world!=null:world.scary.move_bryan(scare_goal,scare_speed)
 		return
-	if not scare_pose.is_empty() and not leaving:motion.play(scare_pose);return
+	if not scare_pose.is_empty() and not leaving:
+		if scare_look_at.is_finite():
+			var face:=scare_look_at-position;visual.rotation.y=lerp_angle(visual.rotation.y,atan2(face.x,face.z),1-exp(-delta*14))
+		motion.filtered_speed=0;motion.detail.speed=0;motion.animator.speed_scale=1
+		motion.play(scare_pose,.10);return
 	if leaving:
 		while not exit_path.is_empty() and Vector2(exit_path[0].x-position.x,exit_path[0].z-position.z).length()<.12:exit_path.remove_at(0)
 		if exit_path.is_empty():queue_free();return

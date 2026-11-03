@@ -5,12 +5,32 @@ uniform float grain = 0.025;
 uniform float vhs = 0.0;
 uniform float bloom_strength = .20;
 uniform bool posterize = false;
+uniform float scare_amount = 0.0;
+uniform float scare_red = 0.0;
+uniform float scare_fade = 0.0;
 uniform vec4 game_bounds = vec4(0.0,0.0,1.0,1.0);
 float hash(vec2 p) { return fract(sin(dot(p, vec2(12.9898,78.233)))*43758.5453); }
 void fragment() {
  vec2 uv=SCREEN_UV;
  uv.x+=sin(uv.y*180.0+TIME*2.0)*vhs*0.0015;
  vec3 color=texture(screen_texture,uv).rgb;
+ if(scare_amount>.001){
+  vec2 center=(game_bounds.xy+game_bounds.zw)*.5;
+  vec2 radial=uv-center;
+  vec2 safe_min=game_bounds.xy+SCREEN_PIXEL_SIZE;
+  vec2 safe_max=game_bounds.zw-SCREEN_PIXEL_SIZE;
+  vec3 streak=vec3(0.);
+  for(int i=1;i<=6;i++){
+   vec2 sample_uv=clamp(uv-radial*float(i)*.015*scare_amount,safe_min,safe_max);
+   streak+=texture(screen_texture,sample_uv).rgb;
+  }
+  float edge=smoothstep(.10,.50,length(radial));
+  color=mix(color,streak/6.,edge*.72*scare_amount);
+  vec2 split=radial*.009*scare_amount*edge;
+  color.r=mix(color.r,texture(screen_texture,clamp(uv+split,safe_min,safe_max)).r,scare_amount*.65);
+  color.b=mix(color.b,texture(screen_texture,clamp(uv-split,safe_min,safe_max)).b,scare_amount*.65);
+  color=mix(color,color*vec3(1.22,.35,.28)+vec3(.035,0.,0.),edge*scare_red*scare_amount*.72);
+ }
  float lightness=dot(color,vec3(.2126,.7152,.0722));
  color=mix(vec3(lightness),color,.95);
  color*=mix(vec3(.955,.985,1.025),vec3(1.045,1.015,.955),smoothstep(.05,.65,lightness));
@@ -32,5 +52,5 @@ void fragment() {
  color*=1.0-vhs*.06*sin(FRAGCOORD.y*3.14);
  vec2 lower=step(game_bounds.xy,SCREEN_UV);
  vec2 upper=step(SCREEN_UV,game_bounds.zw);
- COLOR=vec4(color*lower.x*lower.y*upper.x*upper.y,1.0);
+ COLOR=vec4(color*lower.x*lower.y*upper.x*upper.y*(1.-scare_fade),1.0);
 }
